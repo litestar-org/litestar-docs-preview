@@ -964,7 +964,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="reference/contrib/repository/abc.html">abc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reference/contrib/repository/filters.html">filters</a></li>
@@ -2585,8 +2587,6 @@ document.write(`
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.dependent_schemas">dependent_schemas (litestar.openapi.spec.Schema attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures.html#litestar.datastructures.ResponseHeader.deprecated">deprecated (litestar.datastructures.ResponseHeader attribute)</a>
 
       <ul>
@@ -2599,6 +2599,8 @@ document.write(`
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.deprecated">(litestar.openapi.spec.Schema attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.BaseJWTAuth.description">description (litestar.contrib.jwt.BaseJWTAuth attribute)</a>
 
       <ul>
@@ -2659,9 +2661,13 @@ document.write(`
 </li>
       <li><a href="reference/exceptions.html#litestar.exceptions.HTTPException.detail">detail (litestar.exceptions.HTTPException attribute)</a>
 </li>
-      <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.detect_nested_field">detect_nested_field() (litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.detect_nested_field">detect_nested_field() (litestar.contrib.msgspec.MsgspecDTO class method)</a>
 
       <ul>
+        <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.detect_nested_field">(litestar.contrib.pydantic.PydanticDTO class method)</a>
+</li>
+        <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.detect_nested_field">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+</li>
         <li><a href="reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory.detect_nested_field">(litestar.dto.factory.abc.AbstractDTOFactory class method)</a>
 </li>
         <li><a href="reference/dto/factory/stdlib.html#litestar.dto.factory.stdlib.DataclassDTO.detect_nested_field">(litestar.dto.factory.stdlib.DataclassDTO class method)</a>
@@ -3207,9 +3213,13 @@ document.write(`
       </ul></li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.ResponseSpec.generate_examples">generate_examples (litestar.openapi.ResponseSpec attribute)</a>
 </li>
-      <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.generate_field_definitions">generate_field_definitions() (litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.generate_field_definitions">generate_field_definitions() (litestar.contrib.msgspec.MsgspecDTO class method)</a>
 
       <ul>
+        <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.generate_field_definitions">(litestar.contrib.pydantic.PydanticDTO class method)</a>
+</li>
+        <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.generate_field_definitions">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+</li>
         <li><a href="reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory.generate_field_definitions">(litestar.dto.factory.abc.AbstractDTOFactory class method)</a>
 </li>
         <li><a href="reference/dto/factory/stdlib.html#litestar.dto.factory.stdlib.DataclassDTO.generate_field_definitions">(litestar.dto.factory.stdlib.DataclassDTO class method)</a>
@@ -4053,10 +4063,24 @@ document.write(`
 </li>
       </ul></li>
       <li>
+    litestar.contrib.msgspec
+
+      <ul>
+        <li><a href="reference/contrib/msgspec.html#module-litestar.contrib.msgspec">module</a>
+</li>
+      </ul></li>
+      <li>
     litestar.contrib.opentelemetry
 
       <ul>
         <li><a href="reference/contrib/opentelemetry.html#module-litestar.contrib.opentelemetry">module</a>
+</li>
+      </ul></li>
+      <li>
+    litestar.contrib.pydantic
+
+      <ul>
+        <li><a href="reference/contrib/pydantic.html#module-litestar.contrib.pydantic">module</a>
 </li>
       </ul></li>
       <li>
@@ -4171,6 +4195,8 @@ document.write(`
         <li><a href="reference/dto/factory/index.html#module-litestar.dto.factory">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     litestar.dto.factory.abc
 
@@ -4178,8 +4204,6 @@ document.write(`
         <li><a href="reference/dto/factory/abc.html#module-litestar.dto.factory.abc">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     litestar.dto.factory.stdlib
 
@@ -4700,9 +4724,13 @@ document.write(`
 </li>
       <li><a href="reference/types.html#litestar.types.FileInfo.mode">mode (litestar.types.FileInfo attribute)</a>
 </li>
-      <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractAsyncRepository.model_type">model_type (litestar.contrib.repository.abc.AbstractAsyncRepository attribute)</a>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.model_type">model_type (litestar.contrib.msgspec.MsgspecDTO attribute)</a>
 
       <ul>
+        <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.model_type">(litestar.contrib.pydantic.PydanticDTO attribute)</a>
+</li>
+        <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractAsyncRepository.model_type">(litestar.contrib.repository.abc.AbstractAsyncRepository attribute)</a>
+</li>
         <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractSyncRepository.model_type">(litestar.contrib.repository.abc.AbstractSyncRepository attribute)</a>
 </li>
         <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.model_type">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO attribute)</a>
@@ -4752,7 +4780,11 @@ document.write(`
 </li>
         <li><a href="reference/contrib/mako.html#module-litestar.contrib.mako">litestar.contrib.mako</a>
 </li>
+        <li><a href="reference/contrib/msgspec.html#module-litestar.contrib.msgspec">litestar.contrib.msgspec</a>
+</li>
         <li><a href="reference/contrib/opentelemetry.html#module-litestar.contrib.opentelemetry">litestar.contrib.opentelemetry</a>
+</li>
+        <li><a href="reference/contrib/pydantic.html#module-litestar.contrib.pydantic">litestar.contrib.pydantic</a>
 </li>
         <li><a href="reference/contrib/repository/abc.html#module-litestar.contrib.repository.abc">litestar.contrib.repository.abc</a>
 </li>
@@ -4874,6 +4906,8 @@ document.write(`
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.module">module (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
       <li><a href="reference/connection.html#litestar.connection.Request.msgpack">msgpack() (litestar.connection.Request method)</a>
+</li>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO">MsgspecDTO (class in litestar.contrib.msgspec)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.FileInfo.mtime">mtime (litestar.types.FileInfo attribute)</a>
 </li>
@@ -5301,14 +5335,14 @@ document.write(`
 </li>
       <li><a href="usage/channels.html#term-plugin"><strong>plugin</strong></a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/config.html#litestar.config.app.AppConfig.plugins">plugins (litestar.config.app.AppConfig attribute)</a>
 
       <ul>
         <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.plugins">(litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.pool">pool (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.pool_logging_name">pool_logging_name (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
@@ -5422,6 +5456,8 @@ document.write(`
       <li><a href="reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.put_nowait">put_nowait() (litestar.channels.subscriber.Subscriber method)</a>
 </li>
       <li><a href="reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.put_subscriber_history">put_subscriber_history() (litestar.channels.plugin.ChannelsPlugin method)</a>
+</li>
+      <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO">PydanticDTO (class in litestar.contrib.pydantic)</a>
 </li>
   </ul></td>
 </tr></table>
