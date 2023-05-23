@@ -964,7 +964,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="reference/contrib/repository/abc.html">abc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reference/contrib/repository/filters.html">filters</a></li>
@@ -1009,7 +1011,6 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/middleware/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/compression.html">compression</a></li>
@@ -1038,7 +1039,6 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="reference/response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/router.html">router</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/security/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1156,15 +1156,17 @@ document.write(`
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.__call__">(litestar.handlers.HTTPRouteHandler method)</a>
 </li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware.__call__">(litestar.middleware.AbstractAuthenticationMiddleware method)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AbstractMiddleware.__call__">(litestar.middleware.AbstractMiddleware method)</a>
+</li>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__">(litestar.middleware.authentication.AbstractAuthenticationMiddleware method)</a>
 </li>
-        <li><a href="reference/middleware/base.html#litestar.middleware.base.AbstractMiddleware.__call__">(litestar.middleware.base.AbstractMiddleware method)</a>
-</li>
-        <li><a href="reference/middleware/base.html#litestar.middleware.base.DefineMiddleware.__call__">(litestar.middleware.base.DefineMiddleware method)</a>
-</li>
-        <li><a href="reference/middleware/base.html#litestar.middleware.base.MiddlewareProtocol.__call__">(litestar.middleware.base.MiddlewareProtocol method)</a>
-</li>
         <li><a href="reference/middleware/csrf.html#litestar.middleware.csrf.CSRFMiddleware.__call__">(litestar.middleware.csrf.CSRFMiddleware method)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.DefineMiddleware.__call__">(litestar.middleware.DefineMiddleware method)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.MiddlewareProtocol.__call__">(litestar.middleware.MiddlewareProtocol method)</a>
 </li>
         <li><a href="reference/pagination.html#litestar.pagination.AbstractAsyncClassicPaginator.__call__">(litestar.pagination.AbstractAsyncClassicPaginator method)</a>
 </li>
@@ -1440,17 +1442,17 @@ document.write(`
 </li>
         <li><a href="reference/logging/standard.html#litestar.logging.standard.QueueListenerHandler.__init__">(litestar.logging.standard.QueueListenerHandler method)</a>
 </li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware.__init__">(litestar.middleware.AbstractAuthenticationMiddleware method)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AbstractMiddleware.__init__">(litestar.middleware.AbstractMiddleware method)</a>
+</li>
         <li><a href="reference/middleware/allowed_hosts.html#litestar.middleware.allowed_hosts.AllowedHostsMiddleware.__init__">(litestar.middleware.allowed_hosts.AllowedHostsMiddleware method)</a>
 </li>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__init__">(litestar.middleware.authentication.AbstractAuthenticationMiddleware method)</a>
 </li>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult.__init__">(litestar.middleware.authentication.AuthenticationResult method)</a>
 </li>
-        <li><a href="reference/middleware/base.html#litestar.middleware.base.AbstractMiddleware.__init__">(litestar.middleware.base.AbstractMiddleware method)</a>
-</li>
-        <li><a href="reference/middleware/base.html#litestar.middleware.base.DefineMiddleware.__init__">(litestar.middleware.base.DefineMiddleware method)</a>
-</li>
-        <li><a href="reference/middleware/base.html#litestar.middleware.base.MiddlewareProtocol.__init__">(litestar.middleware.base.MiddlewareProtocol method)</a>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AuthenticationResult.__init__">(litestar.middleware.AuthenticationResult method)</a>
 </li>
         <li><a href="reference/middleware/compression.html#litestar.middleware.compression.CompressionFacade.__init__">(litestar.middleware.compression.CompressionFacade method)</a>
 </li>
@@ -1460,9 +1462,13 @@ document.write(`
 </li>
         <li><a href="reference/middleware/csrf.html#litestar.middleware.csrf.CSRFMiddleware.__init__">(litestar.middleware.csrf.CSRFMiddleware method)</a>
 </li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.DefineMiddleware.__init__">(litestar.middleware.DefineMiddleware method)</a>
+</li>
         <li><a href="reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddleware.__init__">(litestar.middleware.logging.LoggingMiddleware method)</a>
 </li>
         <li><a href="reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddlewareConfig.__init__">(litestar.middleware.logging.LoggingMiddlewareConfig method)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.MiddlewareProtocol.__init__">(litestar.middleware.MiddlewareProtocol method)</a>
 </li>
         <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.CacheObject.__init__">(litestar.middleware.rate_limit.CacheObject method)</a>
 </li>
@@ -1699,13 +1705,17 @@ document.write(`
 </li>
       <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractAsyncRepository">AbstractAsyncRepository (class in litestar.contrib.repository.abc)</a>
 </li>
-      <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware">AbstractAuthenticationMiddleware (class in litestar.middleware.authentication)</a>
+      <li><a href="reference/middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware">AbstractAuthenticationMiddleware (class in litestar.middleware)</a>
+
+      <ul>
+        <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware">(class in litestar.middleware.authentication)</a>
 </li>
+      </ul></li>
       <li><a href="reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory">AbstractDTOFactory (class in litestar.dto.factory.abc)</a>
 </li>
-      <li><a href="reference/middleware/base.html#litestar.middleware.base.AbstractMiddleware">AbstractMiddleware (class in litestar.middleware.base)</a>
+      <li><a href="reference/middleware/index.html#litestar.middleware.AbstractMiddleware">AbstractMiddleware (class in litestar.middleware)</a>
 </li>
-      <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig">AbstractSecurityConfig (class in litestar.security.base)</a>
+      <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig">AbstractSecurityConfig (class in litestar.security)</a>
 </li>
       <li><a href="reference/pagination.html#litestar.pagination.AbstractSyncClassicPaginator">AbstractSyncClassicPaginator (class in litestar.pagination)</a>
 </li>
@@ -1813,8 +1823,6 @@ document.write(`
 </li>
       <li><a href="reference/config.html#litestar.config.cors.CORSConfig.allow_origins">allow_origins (litestar.config.cors.CORSConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures.html#litestar.datastructures.ResponseHeader.allow_reserved">allow_reserved (litestar.datastructures.ResponseHeader attribute)</a>
 
       <ul>
@@ -1825,6 +1833,8 @@ document.write(`
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Parameter.allow_reserved">(litestar.openapi.spec.Parameter attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/config.html#litestar.config.allowed_hosts.AllowedHostsConfig.allowed_hosts">allowed_hosts (litestar.config.allowed_hosts.AllowedHostsConfig attribute)</a>
 
       <ul>
@@ -1888,6 +1898,8 @@ document.write(`
       <ul>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult.auth">(litestar.middleware.authentication.AuthenticationResult attribute)</a>
 </li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AuthenticationResult.auth">(litestar.middleware.AuthenticationResult attribute)</a>
+</li>
       </ul></li>
       <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.BaseJWTAuth.auth_header">auth_header (litestar.contrib.jwt.BaseJWTAuth attribute)</a>
 
@@ -1903,6 +1915,8 @@ document.write(`
 
       <ul>
         <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.JWTCookieAuthenticationMiddleware.authenticate_request">(litestar.contrib.jwt.JWTCookieAuthenticationMiddleware method)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware.authenticate_request">(litestar.middleware.AbstractAuthenticationMiddleware method)</a>
 </li>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request">(litestar.middleware.authentication.AbstractAuthenticationMiddleware method)</a>
 </li>
@@ -1920,13 +1934,17 @@ document.write(`
 </li>
         <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.OAuth2PasswordBearerAuth.authentication_middleware_class">(litestar.contrib.jwt.OAuth2PasswordBearerAuth attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.authentication_middleware_class">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.authentication_middleware_class">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.authentication_middleware_class">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult">AuthenticationResult (class in litestar.middleware.authentication)</a>
+      <li><a href="reference/middleware/index.html#litestar.middleware.AuthenticationResult">AuthenticationResult (class in litestar.middleware)</a>
+
+      <ul>
+        <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult">(class in litestar.middleware.authentication)</a>
 </li>
+      </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OAuthFlows.authorization_code">authorization_code (litestar.openapi.spec.OAuthFlows attribute)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OAuthFlow.authorization_url">authorization_url (litestar.openapi.spec.OAuthFlow attribute)</a>
@@ -2381,7 +2399,7 @@ document.write(`
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.create_registry">create_registry() (in module litestar.contrib.sqlalchemy.base)</a>
 </li>
-      <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.create_response">create_response() (litestar.security.base.AbstractSecurityConfig method)</a>
+      <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.create_response">create_response() (litestar.security.AbstractSecurityConfig method)</a>
 </li>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.create_response_headers">create_response_headers() (litestar.middleware.rate_limit.RateLimitMiddleware method)</a>
 </li>
@@ -2449,7 +2467,7 @@ document.write(`
 </li>
       <li><a href="reference/serialization.html#litestar.serialization.dec_hook">dec_hook() (in module litestar.serialization)</a>
 </li>
-      <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.Token.decode">decode() (litestar.contrib.jwt.Token static method)</a>
+      <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.Token.decode">decode() (litestar.contrib.jwt.Token class method)</a>
 </li>
       <li><a href="reference/serialization.html#litestar.serialization.decode_json">decode_json() (in module litestar.serialization)</a>
 </li>
@@ -2491,7 +2509,7 @@ document.write(`
         <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.OAuth2PasswordBearerAuth.default_token_expiration">(litestar.contrib.jwt.OAuth2PasswordBearerAuth attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/middleware/base.html#litestar.middleware.base.DefineMiddleware">DefineMiddleware (class in litestar.middleware.base)</a>
+      <li><a href="reference/middleware/index.html#litestar.middleware.DefineMiddleware">DefineMiddleware (class in litestar.middleware)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.delete">delete (class in litestar.handlers)</a>
 
@@ -2570,7 +2588,7 @@ document.write(`
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.dependencies">(litestar.openapi.OpenAPIController attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.dependencies">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.dependencies">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.dependencies">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -2585,8 +2603,6 @@ document.write(`
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.dependent_schemas">dependent_schemas (litestar.openapi.spec.Schema attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures.html#litestar.datastructures.ResponseHeader.deprecated">deprecated (litestar.datastructures.ResponseHeader attribute)</a>
 
       <ul>
@@ -2599,6 +2615,8 @@ document.write(`
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.deprecated">(litestar.openapi.spec.Schema attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.BaseJWTAuth.description">description (litestar.contrib.jwt.BaseJWTAuth attribute)</a>
 
       <ul>
@@ -2659,9 +2677,13 @@ document.write(`
 </li>
       <li><a href="reference/exceptions.html#litestar.exceptions.HTTPException.detail">detail (litestar.exceptions.HTTPException attribute)</a>
 </li>
-      <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.detect_nested_field">detect_nested_field() (litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.detect_nested_field">detect_nested_field() (litestar.contrib.msgspec.MsgspecDTO class method)</a>
 
       <ul>
+        <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.detect_nested_field">(litestar.contrib.pydantic.PydanticDTO class method)</a>
+</li>
+        <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.detect_nested_field">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+</li>
         <li><a href="reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory.detect_nested_field">(litestar.dto.factory.abc.AbstractDTOFactory class method)</a>
 </li>
         <li><a href="reference/dto/factory/stdlib.html#litestar.dto.factory.stdlib.DataclassDTO.detect_nested_field">(litestar.dto.factory.stdlib.DataclassDTO class method)</a>
@@ -2922,7 +2944,7 @@ document.write(`
 </li>
         <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionConfig.exclude">(litestar.middleware.session.server_side.ServerSideSessionConfig attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.exclude">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.exclude">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.exclude">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -2954,7 +2976,7 @@ document.write(`
 </li>
         <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionConfig.exclude_opt_key">(litestar.middleware.session.server_side.ServerSideSessionConfig attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.exclude_opt_key">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.exclude_opt_key">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.exclude_opt_key">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -3093,6 +3115,8 @@ document.write(`
 </li>
       <li><a href="reference/data_extractors.html#litestar.data_extractors.ExtractedResponseData">ExtractedResponseData (class in litestar.data_extractors)</a>
 </li>
+      <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.Token.extras">extras (litestar.contrib.jwt.Token attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -3205,9 +3229,13 @@ document.write(`
       </ul></li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.ResponseSpec.generate_examples">generate_examples (litestar.openapi.ResponseSpec attribute)</a>
 </li>
-      <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.generate_field_definitions">generate_field_definitions() (litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.generate_field_definitions">generate_field_definitions() (litestar.contrib.msgspec.MsgspecDTO class method)</a>
 
       <ul>
+        <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.generate_field_definitions">(litestar.contrib.pydantic.PydanticDTO class method)</a>
+</li>
+        <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.generate_field_definitions">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
+</li>
         <li><a href="reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory.generate_field_definitions">(litestar.dto.factory.abc.AbstractDTOFactory class method)</a>
 </li>
         <li><a href="reference/dto/factory/stdlib.html#litestar.dto.factory.stdlib.DataclassDTO.generate_field_definitions">(litestar.dto.factory.stdlib.DataclassDTO class method)</a>
@@ -3390,7 +3418,7 @@ document.write(`
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.guards">(litestar.openapi.OpenAPIController attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.guards">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.guards">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.guards">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -4051,10 +4079,24 @@ document.write(`
 </li>
       </ul></li>
       <li>
+    litestar.contrib.msgspec
+
+      <ul>
+        <li><a href="reference/contrib/msgspec.html#module-litestar.contrib.msgspec">module</a>
+</li>
+      </ul></li>
+      <li>
     litestar.contrib.opentelemetry
 
       <ul>
         <li><a href="reference/contrib/opentelemetry.html#module-litestar.contrib.opentelemetry">module</a>
+</li>
+      </ul></li>
+      <li>
+    litestar.contrib.pydantic
+
+      <ul>
+        <li><a href="reference/contrib/pydantic.html#module-litestar.contrib.pydantic">module</a>
 </li>
       </ul></li>
       <li>
@@ -4169,6 +4211,8 @@ document.write(`
         <li><a href="reference/dto/factory/index.html#module-litestar.dto.factory">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     litestar.dto.factory.abc
 
@@ -4176,8 +4220,6 @@ document.write(`
         <li><a href="reference/dto/factory/abc.html#module-litestar.dto.factory.abc">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     litestar.dto.factory.stdlib
 
@@ -4249,6 +4291,13 @@ document.write(`
 </li>
       </ul></li>
       <li>
+    litestar.middleware
+
+      <ul>
+        <li><a href="reference/middleware/index.html#module-litestar.middleware">module</a>
+</li>
+      </ul></li>
+      <li>
     litestar.middleware.allowed_hosts
 
       <ul>
@@ -4260,13 +4309,6 @@ document.write(`
 
       <ul>
         <li><a href="reference/middleware/authentication.html#module-litestar.middleware.authentication">module</a>
-</li>
-      </ul></li>
-      <li>
-    litestar.middleware.base
-
-      <ul>
-        <li><a href="reference/middleware/base.html#module-litestar.middleware.base">module</a>
 </li>
       </ul></li>
       <li>
@@ -4379,6 +4421,13 @@ document.write(`
 
       <ul>
         <li><a href="reference/router.html#module-litestar.router">module</a>
+</li>
+      </ul></li>
+      <li>
+    litestar.security
+
+      <ul>
+        <li><a href="reference/security/index.html#module-litestar.security">module</a>
 </li>
       </ul></li>
       <li>
@@ -4653,7 +4702,7 @@ document.write(`
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.middleware">(litestar.openapi.OpenAPIController attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.middleware">(litestar.security.base.AbstractSecurityConfig property)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.middleware">(litestar.security.AbstractSecurityConfig property)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.middleware">(litestar.security.session_auth.SessionAuth property)</a>
 </li>
@@ -4668,7 +4717,7 @@ document.write(`
         <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig.middleware_class">(litestar.middleware.rate_limit.RateLimitConfig attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/middleware/base.html#litestar.middleware.base.MiddlewareProtocol">MiddlewareProtocol (class in litestar.middleware.base)</a>
+      <li><a href="reference/middleware/index.html#litestar.middleware.MiddlewareProtocol">MiddlewareProtocol (class in litestar.middleware)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.min_contains">min_contains (litestar.openapi.spec.Schema attribute)</a>
 </li>
@@ -4698,9 +4747,13 @@ document.write(`
 </li>
       <li><a href="reference/types.html#litestar.types.FileInfo.mode">mode (litestar.types.FileInfo attribute)</a>
 </li>
-      <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractAsyncRepository.model_type">model_type (litestar.contrib.repository.abc.AbstractAsyncRepository attribute)</a>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.model_type">model_type (litestar.contrib.msgspec.MsgspecDTO attribute)</a>
 
       <ul>
+        <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.model_type">(litestar.contrib.pydantic.PydanticDTO attribute)</a>
+</li>
+        <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractAsyncRepository.model_type">(litestar.contrib.repository.abc.AbstractAsyncRepository attribute)</a>
+</li>
         <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractSyncRepository.model_type">(litestar.contrib.repository.abc.AbstractSyncRepository attribute)</a>
 </li>
         <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.model_type">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO attribute)</a>
@@ -4750,7 +4803,11 @@ document.write(`
 </li>
         <li><a href="reference/contrib/mako.html#module-litestar.contrib.mako">litestar.contrib.mako</a>
 </li>
+        <li><a href="reference/contrib/msgspec.html#module-litestar.contrib.msgspec">litestar.contrib.msgspec</a>
+</li>
         <li><a href="reference/contrib/opentelemetry.html#module-litestar.contrib.opentelemetry">litestar.contrib.opentelemetry</a>
+</li>
+        <li><a href="reference/contrib/pydantic.html#module-litestar.contrib.pydantic">litestar.contrib.pydantic</a>
 </li>
         <li><a href="reference/contrib/repository/abc.html#module-litestar.contrib.repository.abc">litestar.contrib.repository.abc</a>
 </li>
@@ -4806,11 +4863,11 @@ document.write(`
 </li>
         <li><a href="reference/logging/standard.html#module-litestar.logging.standard">litestar.logging.standard</a>
 </li>
+        <li><a href="reference/middleware/index.html#module-litestar.middleware">litestar.middleware</a>
+</li>
         <li><a href="reference/middleware/allowed_hosts.html#module-litestar.middleware.allowed_hosts">litestar.middleware.allowed_hosts</a>
 </li>
         <li><a href="reference/middleware/authentication.html#module-litestar.middleware.authentication">litestar.middleware.authentication</a>
-</li>
-        <li><a href="reference/middleware/base.html#module-litestar.middleware.base">litestar.middleware.base</a>
 </li>
         <li><a href="reference/middleware/compression.html#module-litestar.middleware.compression">litestar.middleware.compression</a>
 </li>
@@ -4844,6 +4901,8 @@ document.write(`
 </li>
         <li><a href="reference/router.html#module-litestar.router">litestar.router</a>
 </li>
+        <li><a href="reference/security/index.html#module-litestar.security">litestar.security</a>
+</li>
         <li><a href="reference/serialization.html#module-litestar.serialization">litestar.serialization</a>
 </li>
         <li><a href="reference/static_files.html#module-litestar.static_files">litestar.static_files</a>
@@ -4872,6 +4931,8 @@ document.write(`
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.module">module (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
       <li><a href="reference/connection.html#litestar.connection.Request.msgpack">msgpack() (litestar.connection.Request method)</a>
+</li>
+      <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO">MsgspecDTO (class in litestar.contrib.msgspec)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.FileInfo.mtime">mtime (litestar.types.FileInfo attribute)</a>
 </li>
@@ -5008,7 +5069,7 @@ document.write(`
 </li>
         <li><a href="reference/plugins.html#litestar.plugins.InitPluginProtocol.on_app_init">(litestar.plugins.InitPluginProtocol method)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.on_app_init">(litestar.security.base.AbstractSecurityConfig method)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.on_app_init">(litestar.security.AbstractSecurityConfig method)</a>
 </li>
       </ul></li>
       <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.on_disconnect">on_disconnect (litestar.handlers.websocket_listener attribute)</a>
@@ -5078,7 +5139,7 @@ document.write(`
 </li>
         <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.OAuth2PasswordBearerAuth.openapi_components">(litestar.contrib.jwt.OAuth2PasswordBearerAuth property)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.openapi_components">(litestar.security.base.AbstractSecurityConfig property)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.openapi_components">(litestar.security.AbstractSecurityConfig property)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.openapi_components">(litestar.security.session_auth.SessionAuth property)</a>
 </li>
@@ -5299,14 +5360,14 @@ document.write(`
 </li>
       <li><a href="usage/channels.html#term-plugin"><strong>plugin</strong></a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/config.html#litestar.config.app.AppConfig.plugins">plugins (litestar.config.app.AppConfig attribute)</a>
 
       <ul>
         <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.plugins">(litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.pool">pool (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.pool_logging_name">pool_logging_name (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
@@ -5420,6 +5481,8 @@ document.write(`
       <li><a href="reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.put_nowait">put_nowait() (litestar.channels.subscriber.Subscriber method)</a>
 </li>
       <li><a href="reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.put_subscriber_history">put_subscriber_history() (litestar.channels.plugin.ChannelsPlugin method)</a>
+</li>
+      <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO">PydanticDTO (class in litestar.contrib.pydantic)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -5766,7 +5829,7 @@ document.write(`
 </li>
         <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.OAuth2PasswordBearerAuth.retrieve_user_handler">(litestar.contrib.jwt.OAuth2PasswordBearerAuth attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.retrieve_user_handler">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.retrieve_user_handler">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.retrieve_user_handler">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -5823,7 +5886,7 @@ document.write(`
 </li>
         <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.OAuth2PasswordBearerAuth.route_handlers">(litestar.contrib.jwt.OAuth2PasswordBearerAuth attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.route_handlers">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.route_handlers">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.route_handlers">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -5907,7 +5970,7 @@ document.write(`
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OAuthFlow.scopes">(litestar.openapi.spec.OAuthFlow attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.scopes">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.scopes">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.scopes">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -5953,7 +6016,7 @@ document.write(`
       <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.BaseJWTAuth.security_requirement">security_requirement (litestar.contrib.jwt.BaseJWTAuth property)</a>
 
       <ul>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.security_requirement">(litestar.security.base.AbstractSecurityConfig property)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.security_requirement">(litestar.security.AbstractSecurityConfig property)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.security_requirement">(litestar.security.session_auth.SessionAuth property)</a>
 </li>
@@ -6533,7 +6596,7 @@ document.write(`
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.type_encoders">(litestar.openapi.OpenAPIController attribute)</a>
 </li>
-        <li><a href="reference/security/base.html#litestar.security.base.AbstractSecurityConfig.type_encoders">(litestar.security.base.AbstractSecurityConfig attribute)</a>
+        <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.type_encoders">(litestar.security.AbstractSecurityConfig attribute)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.type_encoders">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
@@ -6596,10 +6659,10 @@ document.write(`
       </ul></li>
       <li><a href="reference/app.html#litestar.app.Litestar.update_openapi_schema">update_openapi_schema() (litestar.app.Litestar method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.AuditColumns.updated">updated (litestar.contrib.sqlalchemy.base.AuditColumns attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures.html#litestar.datastructures.UploadFile">UploadFile (class in litestar.datastructures)</a>
 </li>
       <li><a href="reference/contrib/repository/abc.html#litestar.contrib.repository.abc.AbstractAsyncRepository.upsert">upsert() (litestar.contrib.repository.abc.AbstractAsyncRepository method)</a>
@@ -6642,6 +6705,8 @@ document.write(`
 
       <ul>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult.user">(litestar.middleware.authentication.AuthenticationResult attribute)</a>
+</li>
+        <li><a href="reference/middleware/index.html#litestar.middleware.AuthenticationResult.user">(litestar.middleware.AuthenticationResult attribute)</a>
 </li>
       </ul></li>
       <li><a href="reference/datastructures.html#litestar.datastructures.URL.username">username (litestar.datastructures.URL attribute)</a>

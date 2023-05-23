@@ -971,7 +971,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../repository/abc.html">abc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../repository/filters.html">filters</a></li>
@@ -1016,7 +1018,6 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../middleware/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../middleware/compression.html">compression</a></li>
@@ -1045,7 +1046,6 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../router.html">router</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../security/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1156,7 +1156,7 @@ document.write(`
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.contrib.sqlalchemy.types.</span></span><span class="sig-name descname"><span class="pre">GUID</span></span><a class="headerlink" href="#litestar.contrib.sqlalchemy.types.GUID" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.sqlalchemy.org/en/20/core/custom_types.html#sqlalchemy.types.TypeDecorator" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code></a></p>
 <p>Platform-independent GUID type.</p>
-<p>Uses PostgreSQL’s UUID type, otherwise uses
+<p>Uses PostgreSQL’s UUID type, Oracle’s RAW(16) type, otherwise uses
 BINARY(16) or CHAR(32), storing as stringified hex values.</p>
 <p>Will accept stringified UUIDs as a hexstring or an actual UUID</p>
 <dl class="py attribute">
@@ -1387,7 +1387,7 @@ this method in the subclass.  Can be <code class="docutils literal notranslate">
 <dt class="sig sig-object py" id="litestar.contrib.sqlalchemy.types.JSON">
 <span class="sig-prename descclassname"><span class="pre">litestar.contrib.sqlalchemy.types.</span></span><span class="sig-name descname"><span class="pre">JSON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">JSON()</span></em><a class="headerlink" href="#litestar.contrib.sqlalchemy.types.JSON" title="Permalink to this definition">#</a></dt>
 <dd><p>Platform-independent JSON type.</p>
-<p>Uses JSONB type for postgres, otherwise uses the generic JSON data type.</p>
+<p>Uses JSONB type for postgres, BLOB for Oracle, otherwise uses the generic JSON data type.</p>
 </dd></dl>
 
 </section>

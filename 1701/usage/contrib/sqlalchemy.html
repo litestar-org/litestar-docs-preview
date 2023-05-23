@@ -971,7 +971,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/repository/abc.html">abc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/repository/filters.html">filters</a></li>
@@ -1016,7 +1018,6 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/compression.html">compression</a></li>
@@ -1045,7 +1046,6 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/router.html">router</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/security/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1152,8 +1152,8 @@ an optional version with audit columns.</p></li>
 <li><p>Implements optimized methods for bulk inserts, updates, and deletes.</p></li>
 <li><p>Integrated counts, pagination, sorting, filtering with <code class="docutils literal notranslate"><span class="pre">LIKE</span></code>, <code class="docutils literal notranslate"><span class="pre">IN</span></code>, and dates before and/or after.</p></li>
 <li><p>Support for SQLite via <a class="reference external" href="https://aiosqlite.omnilib.dev/en/stable/">aiosqlite</a> or <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">sqlite</a>, Postgres
-via <a class="reference external" href="https://magicstack.github.io/asyncpg/current/">asyncpg</a> or <a class="reference external" href="https://www.psycopg.org/psycopg3/">psycopg3 (async or sync)</a>, and
-MySQL via <a class="reference external" href="https://github.com/long2ice/asyncmy">asyncmy</a>.</p></li>
+via <a class="reference external" href="https://magicstack.github.io/asyncpg/current/">asyncpg</a> or <a class="reference external" href="https://www.psycopg.org/psycopg3/">psycopg3 (async or sync)</a>, MySQL via
+<a class="reference external" href="https://github.com/long2ice/asyncmy">asyncmy</a>, and Oracle via <a class="reference external" href="https://oracle.github.io/python-oracledb/">oracledb</a>.</p></li>
 </ul>
 </section>
 <section id="basic-use">

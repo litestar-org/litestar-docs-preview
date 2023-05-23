@@ -971,7 +971,9 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="jinja.html">jinja</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="repository/abc.html">abc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="repository/filters.html">filters</a></li>
@@ -1016,7 +1018,6 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../middleware/compression.html">compression</a></li>
@@ -1045,7 +1046,6 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../router.html">router</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../security/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1141,7 +1141,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.BaseJWTAuth">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.contrib.jwt.</span></span><span class="sig-name descname"><span class="pre">BaseJWTAuth</span></span><a class="headerlink" href="#litestar.contrib.jwt.BaseJWTAuth" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">UserType</span></code>], <a class="reference internal" href="../security/base.html#litestar.security.base.AbstractSecurityConfig" title="litestar.security.base.AbstractSecurityConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractSecurityConfig</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">UserType</span></code>, <a class="reference internal" href="#litestar.contrib.jwt.Token" title="litestar.contrib.jwt.jwt_token.Token"><code class="xref py py-class docutils literal notranslate"><span class="pre">Token</span></code></a>]</p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">UserType</span></code>], <a class="reference internal" href="../security/index.html#litestar.security.AbstractSecurityConfig" title="litestar.security.base.AbstractSecurityConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractSecurityConfig</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">UserType</span></code>, <a class="reference internal" href="#litestar.contrib.jwt.Token" title="litestar.contrib.jwt.jwt_token.Token"><code class="xref py py-class docutils literal notranslate"><span class="pre">Token</span></code></a>]</p>
 <p>Base class for JWT Auth backends</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.BaseJWTAuth.token_secret">
@@ -1235,12 +1235,12 @@ dictionary.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.BaseJWTAuth.middleware">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.jwt.BaseJWTAuth.middleware" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.jwt.BaseJWTAuth.middleware" title="Permalink to this definition">#</a></dt>
 <dd><p>Create <a class="reference internal" href="#litestar.contrib.jwt.JWTAuthenticationMiddleware" title="litestar.contrib.jwt.JWTAuthenticationMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">JWTAuthenticationMiddleware</span></code></a> wrapped in
-<a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
+<a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An instance of <a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
+<dd class="field-odd"><p>An instance of <a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1659,14 +1659,14 @@ processed.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.JWTCookieAuth.middleware">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.jwt.JWTCookieAuth.middleware" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.jwt.JWTCookieAuth.middleware" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
-<dt>Create <a class="reference internal" href="#litestar.contrib.jwt.JWTCookieAuthenticationMiddleware" title="litestar.contrib.jwt.JWTCookieAuthenticationMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">JWTCookieAuthenticationMiddleware</span></code></a> wrapped in</dt><dd><p><a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
+<dt>Create <a class="reference internal" href="#litestar.contrib.jwt.JWTCookieAuthenticationMiddleware" title="litestar.contrib.jwt.JWTCookieAuthenticationMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">JWTCookieAuthenticationMiddleware</span></code></a> wrapped in</dt><dd><p><a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An instance of <a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
+<dd class="field-odd"><p>An instance of <a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1948,14 +1948,14 @@ processed.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.OAuth2PasswordBearerAuth.middleware">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.jwt.OAuth2PasswordBearerAuth.middleware" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.jwt.OAuth2PasswordBearerAuth.middleware" title="Permalink to this definition">#</a></dt>
 <dd><dl class="simple">
-<dt>Create <code class="docutils literal notranslate"><span class="pre">JWTCookieAuthenticationMiddleware</span></code> wrapped in</dt><dd><p><a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
+<dt>Create <code class="docutils literal notranslate"><span class="pre">JWTCookieAuthenticationMiddleware</span></code> wrapped in</dt><dd><p><a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An instance of <a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
+<dd class="field-odd"><p>An instance of <a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2038,16 +2038,16 @@ Note: if a response body is passed this setting will be ignored.</p></li>
 <dd><p>Issuer - optional unique identifier for the issuer.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.contrib.jwt.Token.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp:</span> <span class="pre">~datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iat:</span> <span class="pre">~datetime.datetime</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iss:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aud:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jti:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.contrib.jwt.Token.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.Token.aud">
 <span class="sig-name descname"><span class="pre">aud</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.contrib.jwt.Token.aud" title="Permalink to this definition">#</a></dt>
 <dd><p>Audience - intended audience.</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.contrib.jwt.Token.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp:</span> <span class="pre">~datetime.datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iat:</span> <span class="pre">~datetime.datetime</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iss:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aud:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jti:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extras:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typing.Any]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.contrib.jwt.Token.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.Token.jti">
@@ -2055,9 +2055,15 @@ Note: if a response body is passed this setting will be ignored.</p></li>
 <dd><p>JWT ID - a unique identifier of the JWT between different issuers.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="litestar.contrib.jwt.Token.extras">
+<span class="sig-name descname"><span class="pre">extras</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.contrib.jwt.Token.extras" title="Permalink to this definition">#</a></dt>
+<dd><p>Extra fields that were found on the JWT token.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.contrib.jwt.Token.decode">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.contrib.jwt.Token" title="litestar.contrib.jwt.jwt_token.Token"><span class="pre">Token</span></a></span></span><a class="headerlink" href="#litestar.contrib.jwt.Token.decode" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoded_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#litestar.contrib.jwt.Token.decode" title="Permalink to this definition">#</a></dt>
 <dd><p>Decode a passed in token string and returns a Token instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2264,9 +2270,10 @@ Note: if a response body is passed this setting will be ignored.</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.sub"><code class="docutils literal notranslate"><span class="pre">Token.sub</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.iat"><code class="docutils literal notranslate"><span class="pre">Token.iat</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.iss"><code class="docutils literal notranslate"><span class="pre">Token.iss</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.__init__"><code class="docutils literal notranslate"><span class="pre">Token.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.aud"><code class="docutils literal notranslate"><span class="pre">Token.aud</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.__init__"><code class="docutils literal notranslate"><span class="pre">Token.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.jti"><code class="docutils literal notranslate"><span class="pre">Token.jti</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.extras"><code class="docutils literal notranslate"><span class="pre">Token.extras</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.decode"><code class="docutils literal notranslate"><span class="pre">Token.decode()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.jwt.Token.encode"><code class="docutils literal notranslate"><span class="pre">Token.encode()</span></code></a></li>
 </ul>
