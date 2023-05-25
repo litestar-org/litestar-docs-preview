@@ -514,6 +514,10 @@ document.write(`
   
 
   
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
 
     </nav>
@@ -1039,6 +1043,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/response.html">response</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/security/session_auth.html">session_auth</a></li>
 </ul>
@@ -1128,22 +1133,591 @@ document.write(`
 <h1>What’s new in 2.0?<a class="headerlink" href="#what-s-new-in-2-0" title="Permalink to this heading">#</a></h1>
 <p>Overview of changes</p>
 <p>TBD: Intro section</p>
-<dl>
-<dt>HTMX support</dt><dd><p>Basic support for HTMX requests and responses.</p>
+<section id="starlite-litestar">
+<h2>Starlite -&gt; Litestar<a class="headerlink" href="#starlite-litestar" title="Permalink to this heading">#</a></h2>
+<p>One of the biggest changes in version 2 is the renaming of the project from <em>Starlite</em>
+to <em>Litestar</em>.</p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">1.51</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">2.x</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ASGIConnection</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection" title="litestar.connection.ASGIConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">connection.ASGIConnection</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Partial</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/partial.html#litestar.partial.Partial" title="litestar.partial.Partial"><code class="xref py py-class docutils literal notranslate"><span class="pre">partial.Partial</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Enums</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.RequestEncodingType</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/enums.html#litestar.enums.RequestEncodingType" title="litestar.enums.RequestEncodingType"><code class="xref py py-class docutils literal notranslate"><span class="pre">enums.RequestEncodingType</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ScopeType</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/enums.html#litestar.enums.ScopeType" title="litestar.enums.ScopeType"><code class="xref py py-class docutils literal notranslate"><span class="pre">enums.ScopeType</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.OpenAPIMediaType</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/enums.html#litestar.enums.OpenAPIMediaType" title="litestar.enums.OpenAPIMediaType"><code class="xref py py-class docutils literal notranslate"><span class="pre">enums.OpenAPIMediaType</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Datastructures</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.BackgroundTask</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTask" title="litestar.background_tasks.BackgroundTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">background_tasks.BackgroundTask</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.BackgroundTasks</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTasks" title="litestar.background_tasks.BackgroundTasks"><code class="xref py py-class docutils literal notranslate"><span class="pre">background_tasks.BackgroundTasks</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.State</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.State" title="litestar.datastructures.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">datastructures.State</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ImmutableState</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.ImmutableState" title="litestar.datastructures.ImmutableState"><code class="xref py py-class docutils literal notranslate"><span class="pre">datastructures.ImmutableState</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Cookie</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">datastructures.Cookie</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.FormMultiDict</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.FormMultiDict" title="litestar.datastructures.FormMultiDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">datastructures.FormMultiDict</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ResponseHeader</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">datastructures.ResponseHeader</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.UploadFile</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.UploadFile" title="litestar.datastructures.UploadFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">datastructures.UploadFile</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Configuration</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AllowedHostsConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/config.html#litestar.config.allowed_hosts.AllowedHostsConfig" title="litestar.config.allowed_hosts.AllowedHostsConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.allowed_hosts.AllowedHostsConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractSecurityConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/security/index.html#litestar.security.AbstractSecurityConfig" title="litestar.security.AbstractSecurityConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">security.AbstractSecurityConfig</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.CacheConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/config.html#litestar.config.response_cache.ResponseCacheConfig" title="litestar.config.response_cache.ResponseCacheConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.response_cache.ResponseCacheConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.CompressionConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig" title="litestar.config.compression.CompressionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.compression.CompressionConfig</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.CORSConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/config.html#litestar.config.cors.CORSConfig" title="litestar.config.cors.CORSConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.cors.CORSConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.CSRFConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.csrf.CSRFConfig</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.OpenAPIConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">openapi.OpenAPIConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.StaticFilesConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.config.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">static_files.config.StaticFilesConfig</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.TemplateConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/template.html#litestar.template.TemplateConfig" title="litestar.template.TemplateConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">template.TemplateConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.BaseLoggingConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/logging/config.html#litestar.logging.config.BaseLoggingConfig" title="litestar.logging.config.BaseLoggingConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.config.BaseLoggingConfig</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.LoggingConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/logging/config.html#litestar.logging.config.LoggingConfig" title="litestar.logging.config.LoggingConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.config.LoggingConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.StructLoggingConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/logging/config.html#litestar.logging.config.StructLoggingConfig" title="litestar.logging.config.StructLoggingConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.config.StructLoggingConfig</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Provide</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.datastructures.Provide</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/di.html#litestar.di.Provide" title="litestar.di.Provide"><code class="xref py py-class docutils literal notranslate"><span class="pre">di.Provide</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Pagination</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractAsyncClassicPaginator</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.AbstractAsyncClassicPaginator" title="litestar.pagination.AbstractAsyncClassicPaginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.AbstractAsyncClassicPaginator</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractAsyncCursorPaginator</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.AbstractAsyncCursorPaginator" title="litestar.pagination.AbstractAsyncCursorPaginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.AbstractAsyncCursorPaginator</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractAsyncOffsetPaginator</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.AbstractAsyncOffsetPaginator" title="litestar.pagination.AbstractAsyncOffsetPaginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.AbstractAsyncOffsetPaginator</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractSyncClassicPaginator</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.AbstractSyncClassicPaginator" title="litestar.pagination.AbstractSyncClassicPaginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.AbstractSyncClassicPaginator</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractSyncCursorPaginator</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.AbstractSyncCursorPaginator" title="litestar.pagination.AbstractSyncCursorPaginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.AbstractSyncCursorPaginator</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractSyncOffsetPaginator</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.AbstractSyncOffsetPaginator" title="litestar.pagination.AbstractSyncOffsetPaginator"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.AbstractSyncOffsetPaginator</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ClassicPagination</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.ClassicPagination" title="litestar.pagination.ClassicPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.ClassicPagination</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.CursorPagination</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.CursorPagination" title="litestar.pagination.CursorPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.CursorPagination</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.OffsetPagination</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/pagination.html#litestar.pagination.OffsetPagination" title="litestar.pagination.OffsetPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">pagination.OffsetPagination</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Response containers</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.File</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.File" title="litestar.response_containers.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">response_containers.File</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Redirect</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.Redirect" title="litestar.response_containers.Redirect"><code class="xref py py-class docutils literal notranslate"><span class="pre">response_containers.Redirect</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ResponseContainer</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.ResponseContainer" title="litestar.response_containers.ResponseContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">response_containers.ResponseContainer</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Stream</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.Stream" title="litestar.response_containers.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">response_containers.Stream</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Template</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.Template" title="litestar.response_containers.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">response_containers.Template</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Exceptions</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.HTTPException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.HTTPException" title="litestar.exceptions.HTTPException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.HTTPException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ImproperlyConfiguredException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ImproperlyConfiguredException" title="litestar.exceptions.ImproperlyConfiguredException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.ImproperlyConfiguredException</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.InternalServerException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.InternalServerException" title="litestar.exceptions.InternalServerException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.InternalServerException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.MissingDependencyException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.MissingDependencyException" title="litestar.exceptions.MissingDependencyException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.MissingDependencyException</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.NoRouteMatchFoundException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.NoRouteMatchFoundException" title="litestar.exceptions.NoRouteMatchFoundException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NoRouteMatchFoundException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.NotAuthorizedException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.NotAuthorizedException" title="litestar.exceptions.NotAuthorizedException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotAuthorizedException</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.NotFoundException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.NotFoundException" title="litestar.exceptions.NotFoundException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotFoundException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.PermissionDeniedException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.PermissionDeniedException" title="litestar.exceptions.PermissionDeniedException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.PermissionDeniedException</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ServiceUnavailableException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ServiceUnavailableException" title="litestar.exceptions.ServiceUnavailableException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.ServiceUnavailableException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.StarliteException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.LitestarException" title="litestar.exceptions.LitestarException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.LitestarException</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.TooManyRequestsException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.TooManyRequestsException" title="litestar.exceptions.TooManyRequestsException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.TooManyRequestsException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ValidationException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ValidationException" title="litestar.exceptions.ValidationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.ValidationException</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.WebSocketException</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.WebSocketException" title="litestar.exceptions.WebSocketException"><code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.WebSocketException</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Testing</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.TestClient</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/testing.html#litestar.testing.TestClient" title="litestar.testing.TestClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">testing.TestClient</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AsyncTestClient</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/testing.html#litestar.testing.AsyncTestClient" title="litestar.testing.AsyncTestClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">testing.AsyncTestClient</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.create_test_client</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/testing.html#litestar.testing.create_test_client" title="litestar.testing.create_test_client"><code class="xref py py-class docutils literal notranslate"><span class="pre">testing.create_test_client</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>OpenAPI</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.OpenAPIController</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIController" title="litestar.openapi.controller.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">openapi.controller.OpenAPIController</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ResponseSpec</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.ResponseSpec" title="litestar.openapi.datastructures.ResponseSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">openapi.datastructures.ResponseSpec</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Middleware</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractAuthenticationMiddleware</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware" title="litestar.middleware.authentication.AbstractAuthenticationMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">middleware.authentication.AbstractAuthenticationMiddleware</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AuthenticationResult</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult" title="litestar.middleware.authentication.AuthenticationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">middleware.authentication.AuthenticationResult</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractMiddleware</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.AbstractMiddleware" title="litestar.middleware.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">middleware.AbstractMiddleware</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.DefineMiddleware</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">middleware.DefineMiddleware</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.MiddlewareProtocol</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.MiddlewareProtocol" title="litestar.middleware.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">middleware.MiddlewareProtocol</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Security</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.AbstractSecurityConfig</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/security/index.html#litestar.security.AbstractSecurityConfig" title="litestar.security.AbstractSecurityConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">security.AbstractSecurityConfig</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Route Handlers</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.handlers.asgi</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#module-litestar.handlers" title="litestar.handlers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">handlers</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.handlers.http</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#module-litestar.handlers" title="litestar.handlers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">handlers</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.handlers.websocket</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#module-litestar.handlers" title="litestar.handlers"><code class="xref py py-class docutils literal notranslate"><span class="pre">handlers</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ASGIRouteHandler</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.ASGIRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">handlers.ASGIRouteHandler</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.BaseRouteHandler</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#litestar.handlers.BaseRouteHandler" title="litestar.handlers.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">handlers.BaseRouteHandler</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.HTTPRouteHandler</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">handlers.HTTPRouteHandler</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.WebsocketRouteHandler</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/handlers.html#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">handlers.WebsocketRouteHandler</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Routes</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ASGIRoute</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/routes.html#litestar.routes.ASGIRoute" title="litestar.routes.ASGIRoute"><code class="xref py py-class docutils literal notranslate"><span class="pre">routes.ASGIRoute</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.BaseRoute</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/routes.html#litestar.routes.BaseRoute" title="litestar.routes.BaseRoute"><code class="xref py py-class docutils literal notranslate"><span class="pre">routes.BaseRoute</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.HTTPRoute</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/routes.html#litestar.routes.HTTPRoute" title="litestar.routes.HTTPRoute"><code class="xref py py-class docutils literal notranslate"><span class="pre">routes.HTTPRoute</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.WebSocketRoute</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/routes.html#litestar.routes.WebSocketRoute" title="litestar.routes.WebSocketRoute"><code class="xref py py-class docutils literal notranslate"><span class="pre">routes.WebSocketRoute</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Parameters</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Body</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/params.html#litestar.params.Body" title="litestar.params.Body"><code class="xref py py-class docutils literal notranslate"><span class="pre">params.Body</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Parameter</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">params.Parameter</span></code></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="response-headers">
+<h2>Response headers<a class="headerlink" href="#response-headers" title="Permalink to this heading">#</a></h2>
+<p>Response header can now be set using either a <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a> of
+<a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.response_header.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>, or by using a
+plain <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">str]</span></code></a>. The typing of
+<a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.response_header.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a> was also
+changed to be more strict and now only allows string values.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">1.51</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">starlite</span> <span class="kn">import</span> <span class="n">ResponseHeader</span><span class="p">,</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="n">response_headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;my-header&quot;</span><span class="p">:</span> <span class="n">ResponseHeader</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;header-value&quot;</span><span class="p">)})</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">ResponseHeader</span><span class="p">,</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="n">response_headers</span><span class="o">=</span><span class="p">[</span><span class="n">ResponseHeader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-header&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;header-value&quot;</span><span class="p">)])</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># or</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="n">response_headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;my-header&quot;</span><span class="p">:</span> <span class="s2">&quot;header-value&quot;</span><span class="p">})</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="response-cookies">
+<h2>Response cookies<a class="headerlink" href="#response-cookies" title="Permalink to this heading">#</a></h2>
+<p>Response cookies might now also be set using a
+<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">str]</span></code></a>, analogous to <a class="reference internal" href="#response-headers">Response headers</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">response_cookies</span><span class="o">=</span><span class="p">[</span><span class="n">Cookie</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)])</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>is equivalent to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">response_cookies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="sqlalchemy-plugin">
+<h2>SQLAlchemy Plugin<a class="headerlink" href="#sqlalchemy-plugin" title="Permalink to this heading">#</a></h2>
+<p>Support for SQLAlchemy 1 has been dropped and the new plugin will now support
+SQLAlchemy 2 only.</p>
+<p>TODO: Migration instructions</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/contrib/sqlalchemy.html"><span class="doc">SQLAlchemy Models &amp; Repository</span></a>
+<a class="reference internal" href="../reference/contrib/sqlalchemy/index.html"><span class="doc">sqlalchemy</span></a></p>
+</div>
+</section>
+<section id="removal-of-pydantic-models">
+<h2>Removal of Pydantic models<a class="headerlink" href="#removal-of-pydantic-models" title="Permalink to this heading">#</a></h2>
+<p>Several Pydantic models used for configuration have been replaced with dataclasses or
+plain classes. If you relied on implicit data conversion from these models or subclassed
+them, you might need to adjust your code accordingly.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="changelog.html#2.0.0alpha1-replace pydantic models with dataclasses"><span class="std std-ref">Change: Replace Pydantic models with dataclasses</span></a></p>
+</div>
+</section>
+<section id="plugin-protocols">
+<h2>Plugin protocols<a class="headerlink" href="#plugin-protocols" title="Permalink to this heading">#</a></h2>
+<p>The plugin protocol has been split into three distinct protocols, covering different use
+cases:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../reference/plugins.html#litestar.plugins.InitPluginProtocol" title="litestar.plugins.InitPluginProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.plugins.InitPluginProtocol</span></code></a></dt><dd><p>Hook into an application’s initialization process</p>
+</dd>
+<dt><a class="reference internal" href="../reference/plugins.html#litestar.plugins.SerializationPluginProtocol" title="litestar.plugins.SerializationPluginProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.plugins.SerializationPluginProtocol</span></code></a></dt><dd><p>Extend the serialization and deserialization capabilities of an application</p>
+</dd>
+<dt><a class="reference internal" href="../reference/plugins.html#litestar.plugins.OpenAPISchemaPluginProtocol" title="litestar.plugins.OpenAPISchemaPluginProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.plugins.OpenAPISchemaPluginProtocol</span></code></a></dt><dd><p>Extend OpenAPI schema generation</p>
+</dd>
+</dl>
+<p>Plugins that made use of all features of the previous API should simply inherit from
+all three base classes.</p>
+</section>
+<section id="remove-2-argument-before-send">
+<h2>Remove 2 argument <code class="docutils literal notranslate"><span class="pre">before_send</span></code><a class="headerlink" href="#remove-2-argument-before-send" title="Permalink to this heading">#</a></h2>
+<p>The 2 argument for of <code class="docutils literal notranslate"><span class="pre">before_send</span></code> hook handlers has been removed. Existing handlers
+should be changed to include an additional <code class="docutils literal notranslate"><span class="pre">scope</span></code> parameter.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">1.51</span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">before_send</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">before_send</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="changelog.html#2.0.0alpha2-remove support for 2 argument form of"><span class="std std-ref">Change: Remove support for 2 argument form of </span></a>
+<a class="reference internal" href="../reference/config.html#litestar.config.app.AppConfig.before_send" title="litestar.config.app.AppConfig.before_send"><span class="xref std std-ref">before_send</span></a></p>
+</div>
+</section>
+<section id="initial-state-application-parameter">
+<h2><code class="docutils literal notranslate"><span class="pre">initial_state</span></code> application parameter<a class="headerlink" href="#initial-state-application-parameter" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">initial_state</span></code> argument to <a class="reference internal" href="../reference/app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> has been replaced
+with a <code class="docutils literal notranslate"><span class="pre">state</span></code> keyword argument, accepting an optional
+<a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.State" title="litestar.datastructures.state.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code></a> instance.</p>
+<p>Existing code using this keyword argument will need to be changed from</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">1.51</span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Starlite</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">initial_state</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<p>to</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">State</span><span class="p">({</span><span class="s2">&quot;some&quot;</span><span class="p">:</span> <span class="s2">&quot;key&quot;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="usage-of-the-stores-for-caching-and-other-integrations">
+<h2>Usage of the <code class="docutils literal notranslate"><span class="pre">stores</span></code> for caching and other integrations<a class="headerlink" href="#usage-of-the-stores-for-caching-and-other-integrations" title="Permalink to this heading">#</a></h2>
+<p>The newly introduced <a class="reference internal" href="../usage/stores.html"><span class="doc">stores</span></a> have superseded the removed
+<code class="docutils literal notranslate"><span class="pre">starlite.cache</span></code> module in various places.</p>
+<p>The following now make use of stores:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/config.html#litestar.config.response_cache.ResponseCacheConfig" title="litestar.config.response_cache.ResponseCacheConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseCacheConfig</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionConfig" title="litestar.middleware.session.server_side.ServerSideSessionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerSideSessionConfig</span></code></a></p></li>
+</ul>
+<p>The following attributes have been renamed to reduce ambiguity:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Starlite.cache_config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Litestar.response_cache_config</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AppConfig.cache_config</span></code> &gt; <a class="reference internal" href="../reference/config.html#litestar.config.app.AppConfig.response_cache_config" title="litestar.config.app.AppConfig.response_cache_config"><code class="xref py py-attr docutils literal notranslate"><span class="pre">response_cache_config</span></code></a></p></li>
+</ul>
+<p>In addition, the <code class="docutils literal notranslate"><span class="pre">ASGIConnection.cache</span></code> property has been removed. It can be replaced
+by accessing the store directly as described in <a class="reference internal" href="../usage/stores.html"><span class="doc">stores</span></a></p>
+</section>
+<section id="dtos">
+<h2>DTOs<a class="headerlink" href="#dtos" title="Permalink to this heading">#</a></h2>
+<p>DTOs are now defined using the <code class="docutils literal notranslate"><span class="pre">dto</span></code> and <code class="docutils literal notranslate"><span class="pre">return_dto</span></code> arguments to
+handlers/controllers/routers and the application.</p>
+<p>A DTO is any type that conforms to the <a class="reference internal" href="../reference/dto/interface.html#litestar.dto.interface.DTOInterface" title="litestar.dto.interface.DTOInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.dto.interface.DTOInterface</span></code></a>
+protocol.</p>
+<p>Litestar provides a suite of factory types that implement the <code class="docutils literal notranslate"><span class="pre">DTOInterface</span></code> protocol
+and can be used to define DTOs:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../reference/dto/factory/stdlib.html#litestar.dto.factory.stdlib.DataclassDTO" title="litestar.dto.factory.stdlib.DataclassDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.dto.factory.stdlib.DataclassDTO</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO" title="litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO" title="litestar.contrib.pydantic.PydanticDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.contrib.pydantic.PydanticDTO</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO" title="litestar.contrib.msgspec.MsgspecDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.contrib.msgspec.MsgspecDTO</span></code></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.piccolo.PiccoloDTO</span></code> (TODO)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.tortoise.TortoiseDTO</span></code> (TODO)</p></li>
+</ul>
+<p>For example, to define a DTO from a dataclass:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory.stdlib</span> <span class="kn">import</span> <span class="n">DataclassDTO</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MyType</span><span class="p">:</span>
+    <span class="n">some_field</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">another_field</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="k">class</span> <span class="nc">MyDTO</span><span class="p">(</span><span class="n">DataclassDTO</span><span class="p">[</span><span class="n">MyType</span><span class="p">]):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;another_field&quot;</span><span class="p">})</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="n">dto</span><span class="o">=</span><span class="n">MyDTO</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">MyType</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">MyType</span><span class="p">(</span><span class="n">some_field</span><span class="o">=</span><span class="s2">&quot;some value&quot;</span><span class="p">,</span> <span class="n">another_field</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/dto/index.html"><span class="doc">Data Transfer Object (DTO)</span></a></p>
+</div>
+</section>
+<section id="application-lifespan-hooks">
+<h2>Application lifespan hooks<a class="headerlink" href="#application-lifespan-hooks" title="Permalink to this heading">#</a></h2>
+<p>All application lifespan hooks have been merged into <code class="docutils literal notranslate"><span class="pre">on_startup</span></code> and <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code>.
+The following hooks have been removed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">before_startup</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">after_startup</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">before_shutdown</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">after_shutdown</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">on_startup</span></code> and <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code> now optionally receive the application instance as
+their first parameter. If your <code class="docutils literal notranslate"><span class="pre">on_startup</span></code> and <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code> hooks made use of the
+application state, they will now have to access it through the provided application
+instance.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">1.51</span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_startup</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">something</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_startup</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Litestar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">something</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="dependencies-without-provide">
+<h2>Dependencies without <code class="docutils literal notranslate"><span class="pre">Provide</span></code><a class="headerlink" href="#dependencies-without-provide" title="Permalink to this heading">#</a></h2>
+<p>Dependencies may now be declared without <a class="reference internal" href="../reference/di.html#litestar.di.Provide" title="litestar.di.Provide"><code class="xref py py-class docutils literal notranslate"><span class="pre">Provide</span></code></a>, by passing the
+callable directly. This can be advantageous in places where the configuration options
+of <a class="reference internal" href="../reference/di.html#litestar.di.Provide" title="litestar.di.Provide"><code class="xref py py-class docutils literal notranslate"><span class="pre">Provide</span></code></a> are not needed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">some_dependency</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">some_dependency</span><span class="p">)})</span>
+</pre></div>
+</div>
+<p>is equivalent to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">some_dependency</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some&quot;</span><span class="p">:</span> <span class="n">some_dependency</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="sync-to-thread">
+<h2><code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code><a class="headerlink" href="#sync-to-thread" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code> option can be use to run a synchronous callable provided to a
+route handler or <a class="reference internal" href="../reference/di.html#litestar.di.Provide" title="litestar.di.Provide"><code class="xref py py-class docutils literal notranslate"><span class="pre">Provide</span></code></a> inside a thread pool. Since synchronous
+functions may block the main thread when not used with <code class="docutils literal notranslate"><span class="pre">sync_to_thread=True</span></code>, a
+warning will be raised in these cases. If the synchronous function should not be run in
+a thread pool, passing <code class="docutils literal notranslate"><span class="pre">sync_to_thread=False</span></code> will also silence the warning.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The warning can be disabled entirely by setting the environment variable
+<code class="docutils literal notranslate"><span class="pre">LITESTAR_WARN_IMPLICIT_SYNC_TO_THREAD=0</span></code></p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">1.51</span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<p>or</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../topics/sync-vs-async.html"><span class="doc">Sync vs. Async</span></a></p>
+</div>
+</section>
+<section id="htmx">
+<h2>HTMX<a class="headerlink" href="#htmx" title="Permalink to this heading">#</a></h2>
+<p>Basic support for HTMX requests and responses.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../usage/contrib/htmx.html"><span class="doc">HTMX Request Class</span></a></p>
 </div>
-</dd>
-<dt>Unified storage interfaces</dt><dd><p>Storage backends for server-side sessions <code class="docutils literal notranslate"><span class="pre">starlite.cache.Cache`</span></code> have been
+</section>
+<section id="unified-storage-interfaces">
+<h2>Unified storage interfaces<a class="headerlink" href="#unified-storage-interfaces" title="Permalink to this heading">#</a></h2>
+<p>Storage backends for server-side sessions <code class="docutils literal notranslate"><span class="pre">starlite.cache.Cache`</span></code> have been
 unified and replaced by the <code class="docutils literal notranslate"><span class="pre">starlite.storages</span></code>, which implements generic
 asynchronous key/values stores backed by memory, the file system or redis.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../usage/stores.html"><span class="doc">Stores</span></a></p>
 </div>
-</dd>
-<dt>Event bus</dt><dd><p>A simple event bus system for Litestar, supporting synchronous and asynchronous
+</section>
+<section id="event-bus">
+<h2>Event bus<a class="headerlink" href="#event-bus" title="Permalink to this heading">#</a></h2>
+<p>A simple event bus system for Litestar, supporting synchronous and asynchronous
 listeners and emitters, providing a similar interface to handlers. It currently
 features a simple in-memory, process-local backend</p>
 <div class="admonition seealso">
@@ -1151,10 +1725,14 @@ features a simple in-memory, process-local backend</p>
 <p><a class="reference internal" href="../usage/events.html"><span class="doc">Event Emitters and Listeners</span></a>
 <a class="reference internal" href="../reference/events.html"><span class="doc">events</span></a></p>
 </div>
-</dd>
-<dt>SQLAlchemy Repository</dt><dd><p>TBD</p>
-</dd>
-<dt>Enhanced WebSocket support</dt><dd><p>A new set of features for handling WebSockets, including automatic connection
+</section>
+<section id="sqlalchemy-repository">
+<h2>SQLAlchemy Repository<a class="headerlink" href="#sqlalchemy-repository" title="Permalink to this heading">#</a></h2>
+<p>TBD</p>
+</section>
+<section id="enhanced-websocket-support">
+<h2>Enhanced WebSocket support<a class="headerlink" href="#enhanced-websocket-support" title="Permalink to this heading">#</a></h2>
+<p>A new set of features for handling WebSockets, including automatic connection
 handling, (de)serialization of incoming and outgoing data analogous to route
 handlers, OOP based event dispatching, data iterators and more.</p>
 <div class="admonition seealso">
@@ -1165,10 +1743,14 @@ handlers, OOP based event dispatching, data iterators and more.</p>
 <a class="reference internal" href="changelog.html#2.0.0alpha6-websockets: data iterators"><span class="std std-ref">Change: WebSockets: Data iterators</span></a>
 <a class="reference internal" href="../usage/websockets.html"><span class="doc">WebSockets</span></a></p>
 </div>
-</dd>
-<dt>Attrs signature modelling</dt><dd><p>TBD</p>
-</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotated</span></code> support in route handler</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotated</span></code> can now be used in route handler and
+</section>
+<section id="attrs-signature-modelling">
+<h2>Attrs signature modelling<a class="headerlink" href="#attrs-signature-modelling" title="Permalink to this heading">#</a></h2>
+<p>TBD</p>
+</section>
+<section id="annotated-support-in-route-handlers">
+<h2><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotated</span></code> support in route handlers<a class="headerlink" href="#annotated-support-in-route-handlers" title="Permalink to this heading">#</a></h2>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotated</span></code> can now be used in route handler and
 dependencies to specify additional information about the fields</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
@@ -1180,20 +1762,21 @@ dependencies to specify additional information about the fields</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-</dd>
-<dt>DTOs</dt><dd><p>TBD</p>
-</dd>
-<dt>Channels</dt><dd><p><a class="reference internal" href="../usage/channels.html"><span class="doc">channels</span></a> are a general purpose event streaming module,
+</section>
+<section id="channels">
+<h2>Channels<a class="headerlink" href="#channels" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../usage/channels.html"><span class="doc">channels</span></a> are a general purpose event streaming module,
 which can for example be used to broadcast messages via WebSockets and includes
 functionalities such as automatically generating WebSocket route handlers to
 broadcast messages</p>
-</dd>
-<dt>Application lifespan context managers</dt><dd><p>A new <code class="docutils literal notranslate"><span class="pre">lifespan</span></code> argument has been added to <a class="reference internal" href="../reference/app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a>,
+</section>
+<section id="application-lifespan-context-managers">
+<h2>Application lifespan context managers<a class="headerlink" href="#application-lifespan-context-managers" title="Permalink to this heading">#</a></h2>
+<p>A new <code class="docutils literal notranslate"><span class="pre">lifespan</span></code> argument has been added to <a class="reference internal" href="../reference/app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a>,
 accepting an asynchronous context manager, wrapping the lifespan of the application.
 It will be entered with the startup phase and exited on shutdown, providing
 functionality equal to the <code class="docutils literal notranslate"><span class="pre">on_startup</span></code> and <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code> hooks.</p>
-</dd>
-</dl>
+</section>
 </section>
 
 
@@ -1216,6 +1799,42 @@ functionality equal to the <code class="docutils literal notranslate"><span clas
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starlite-litestar">Starlite -&gt; Litestar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-headers">Response headers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-cookies">Response cookies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sqlalchemy-plugin">SQLAlchemy Plugin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-pydantic-models">Removal of Pydantic models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plugin-protocols">Plugin protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-2-argument-before-send">Remove 2 argument <code class="docutils literal notranslate"><span class="pre">before_send</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-state-application-parameter"><code class="docutils literal notranslate"><span class="pre">initial_state</span></code> application parameter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-of-the-stores-for-caching-and-other-integrations">Usage of the <code class="docutils literal notranslate"><span class="pre">stores</span></code> for caching and other integrations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dtos">DTOs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-lifespan-hooks">Application lifespan hooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-without-provide">Dependencies without <code class="docutils literal notranslate"><span class="pre">Provide</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sync-to-thread"><code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#htmx">HTMX</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unified-storage-interfaces">Unified storage interfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#event-bus">Event bus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sqlalchemy-repository">SQLAlchemy Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enhanced-websocket-support">Enhanced WebSocket support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attrs-signature-modelling">Attrs signature modelling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annotated-support-in-route-handlers"><code class="xref py py-class docutils literal notranslate"><span class="pre">Annotated</span></code> support in route handlers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#channels">Channels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-lifespan-context-managers">Application lifespan context managers</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

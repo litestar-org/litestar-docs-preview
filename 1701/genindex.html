@@ -1038,6 +1038,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="reference/response.html">response</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/security/session_auth.html">session_auth</a></li>
 </ul>
@@ -1584,6 +1585,14 @@ document.write(`
 </li>
         <li><a href="reference/router.html#litestar.router.Router.__init__">(litestar.router.Router method)</a>
 </li>
+        <li><a href="reference/routes.html#litestar.routes.ASGIRoute.__init__">(litestar.routes.ASGIRoute method)</a>
+</li>
+        <li><a href="reference/routes.html#litestar.routes.BaseRoute.__init__">(litestar.routes.BaseRoute method)</a>
+</li>
+        <li><a href="reference/routes.html#litestar.routes.HTTPRoute.__init__">(litestar.routes.HTTPRoute method)</a>
+</li>
+        <li><a href="reference/routes.html#litestar.routes.WebSocketRoute.__init__">(litestar.routes.WebSocketRoute method)</a>
+</li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.middleware.SessionAuthMiddleware.__init__">(litestar.security.session_auth.middleware.SessionAuthMiddleware method)</a>
 </li>
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.__init__">(litestar.security.session_auth.SessionAuth method)</a>
@@ -1877,6 +1886,8 @@ document.write(`
 </li>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection">ASGIConnection (class in litestar.connection)</a>
 </li>
+      <li><a href="reference/routes.html#litestar.routes.ASGIRoute">ASGIRoute (class in litestar.routes)</a>
+</li>
       <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler">ASGIRouteHandler (class in litestar.handlers)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.ASGIVersion">ASGIVersion (in module litestar.types)</a>
@@ -2016,6 +2027,8 @@ document.write(`
       <li><a href="reference/contrib/jwt.html#litestar.contrib.jwt.BaseJWTAuth">BaseJWTAuth (class in litestar.contrib.jwt)</a>
 </li>
       <li><a href="reference/logging/config.html#litestar.logging.config.BaseLoggingConfig">BaseLoggingConfig (class in litestar.logging.config)</a>
+</li>
+      <li><a href="reference/routes.html#litestar.routes.BaseRoute">BaseRoute (class in litestar.routes)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler">BaseRouteHandler (class in litestar.handlers)</a>
 </li>
@@ -2279,14 +2292,14 @@ document.write(`
         <li><a href="reference/params.html#litestar.params.ParameterKwarg.content_encoding">(litestar.params.ParameterKwarg attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/response.html#litestar.response.FileResponse.content_length">content_length (litestar.response.FileResponse property)</a>
 
       <ul>
         <li><a href="reference/response.html#litestar.response.Response.content_length">(litestar.response.Response property)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.content_media_type">content_media_type (litestar.openapi.spec.Schema attribute)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.content_schema">content_schema (litestar.openapi.spec.Schema attribute)</a>
@@ -2389,6 +2402,10 @@ document.write(`
       </ul></li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.create_examples">create_examples (litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
+      <li><a href="reference/routes.html#litestar.routes.BaseRoute.create_handler_kwargs_model">create_handler_kwargs_model() (litestar.routes.BaseRoute method)</a>
+</li>
+      <li><a href="reference/routes.html#litestar.routes.HTTPRoute.create_handler_map">create_handler_map() (litestar.routes.HTTPRoute method)</a>
+</li>
       <li><a href="reference/dto/factory/index.html#litestar.dto.factory.DTOData.create_instance">create_instance() (litestar.dto.factory.DTOData method)</a>
 </li>
       <li><a href="reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory.create_openapi_schema">create_openapi_schema() (litestar.dto.factory.abc.AbstractDTOFactory class method)</a>
@@ -2397,6 +2414,8 @@ document.write(`
         <li><a href="reference/dto/interface.html#litestar.dto.interface.DTOInterface.create_openapi_schema">(litestar.dto.interface.DTOInterface class method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/routes.html#litestar.routes.HTTPRoute.create_options_handler">create_options_handler() (litestar.routes.HTTPRoute method)</a>
+</li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.create_registry">create_registry() (in module litestar.contrib.sqlalchemy.base)</a>
 </li>
       <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.create_response">create_response() (litestar.security.AbstractSecurityConfig method)</a>
@@ -3435,6 +3454,16 @@ document.write(`
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/routes.html#litestar.routes.ASGIRoute.handle">handle() (litestar.routes.ASGIRoute method)</a>
+
+      <ul>
+        <li><a href="reference/routes.html#litestar.routes.BaseRoute.handle">(litestar.routes.BaseRoute method)</a>
+</li>
+        <li><a href="reference/routes.html#litestar.routes.HTTPRoute.handle">(litestar.routes.HTTPRoute method)</a>
+</li>
+        <li><a href="reference/routes.html#litestar.routes.WebSocketRoute.handle">(litestar.routes.WebSocketRoute method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/app.html#litestar.app.HandlerIndex.handler">handler (litestar.app.HandlerIndex attribute)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.handler_name">handler_name (litestar.handlers.BaseRouteHandler property)</a>
@@ -3551,10 +3580,10 @@ document.write(`
 </li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_307_TEMPORARY_REDIRECT">HTTP_307_TEMPORARY_REDIRECT (in module litestar.status_codes)</a>
 </li>
-      <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_308_PERMANENT_REDIRECT">HTTP_308_PERMANENT_REDIRECT (in module litestar.status_codes)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_308_PERMANENT_REDIRECT">HTTP_308_PERMANENT_REDIRECT (in module litestar.status_codes)</a>
+</li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_400_BAD_REQUEST">HTTP_400_BAD_REQUEST (in module litestar.status_codes)</a>
 </li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_401_UNAUTHORIZED">HTTP_401_UNAUTHORIZED (in module litestar.status_codes)</a>
@@ -3658,6 +3687,8 @@ document.write(`
       <li><a href="reference/types.html#litestar.types.HTTPResponseBodyEvent">HTTPResponseBodyEvent (class in litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.HTTPResponseStartEvent">HTTPResponseStartEvent (class in litestar.types)</a>
+</li>
+      <li><a href="reference/routes.html#litestar.routes.HTTPRoute">HTTPRoute (class in litestar.routes)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler">HTTPRouteHandler (class in litestar.handlers)</a>
 </li>
@@ -4211,8 +4242,6 @@ document.write(`
         <li><a href="reference/dto/factory/index.html#module-litestar.dto.factory">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     litestar.dto.factory.abc
 
@@ -4220,6 +4249,8 @@ document.write(`
         <li><a href="reference/dto/factory/abc.html#module-litestar.dto.factory.abc">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     litestar.dto.factory.stdlib
 
@@ -4421,6 +4452,13 @@ document.write(`
 
       <ul>
         <li><a href="reference/router.html#module-litestar.router">module</a>
+</li>
+      </ul></li>
+      <li>
+    litestar.routes
+
+      <ul>
+        <li><a href="reference/routes.html#module-litestar.routes">module</a>
 </li>
       </ul></li>
       <li>
@@ -4900,6 +4938,8 @@ document.write(`
         <li><a href="reference/response.html#module-litestar.response">litestar.response</a>
 </li>
         <li><a href="reference/router.html#module-litestar.router">litestar.router</a>
+</li>
+        <li><a href="reference/routes.html#module-litestar.routes">litestar.routes</a>
 </li>
         <li><a href="reference/security/index.html#module-litestar.security">litestar.security</a>
 </li>
@@ -6807,6 +6847,8 @@ document.write(`
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketResponseStartEvent">WebSocketResponseStartEvent (class in litestar.types)</a>
 </li>
+      <li><a href="reference/routes.html#litestar.routes.WebSocketRoute">WebSocketRoute (class in litestar.routes)</a>
+</li>
       <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler">WebsocketRouteHandler (class in litestar.handlers)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketScope">WebSocketScope (in module litestar.types)</a>
@@ -6815,10 +6857,10 @@ document.write(`
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketSendMessage">WebSocketSendMessage (in module litestar.types)</a>
 </li>
-      <li><a href="reference/testing.html#litestar.testing.WebSocketTestSession">WebSocketTestSession (class in litestar.testing)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/testing.html#litestar.testing.WebSocketTestSession">WebSocketTestSession (class in litestar.testing)</a>
+</li>
       <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.with_client">with_client() (litestar.stores.redis.RedisStore class method)</a>
 </li>
       <li><a href="reference/stores/base.html#litestar.stores.base.NamespacedStore.with_namespace">with_namespace() (litestar.stores.base.NamespacedStore method)</a>
