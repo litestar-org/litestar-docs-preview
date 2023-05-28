@@ -1172,7 +1172,7 @@ instance, the <code class="docutils literal notranslate"><span class="pre">id</s
 <span class="linenos">32</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">create_person</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>In this adjustment, we add an <code class="docutils literal notranslate"><span class="pre">id</span></code> field the the <code class="docutils literal notranslate"><span class="pre">Person</span></code> model. We also create a new class, <code class="docutils literal notranslate"><span class="pre">WriteDTO</span></code> that is
+<p>In this adjustment, we add an <code class="docutils literal notranslate"><span class="pre">id</span></code> field to the <code class="docutils literal notranslate"><span class="pre">Person</span></code> model. We also create a new class, <code class="docutils literal notranslate"><span class="pre">WriteDTO</span></code> that is
 instructed to ignore the <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">WriteDTO</span></code> class is assigned to the handler via the <code class="docutils literal notranslate"><span class="pre">dto</span></code> kwarg (<code class="docutils literal notranslate"><span class="pre">dto=WriteDTO</span></code>) meaning that the <code class="docutils literal notranslate"><span class="pre">id</span></code> field
 will be ignored from any data received from the client when creating a new <code class="docutils literal notranslate"><span class="pre">Person</span></code> instance.</p>
