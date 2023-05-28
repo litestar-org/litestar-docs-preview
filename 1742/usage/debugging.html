@@ -1201,10 +1201,23 @@ running uvicorn process via <code class="docutils literal notranslate"><span cla
 <section id="id1">
 <h4>Using the CLI<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <ol class="arabic">
-<li><p>Open the debugging configurations via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">configurations</span></code>
-.. image:: /images/debugging/vs-code-config.png</p></li>
 <li><dl>
-<dt>Add the following configuration:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<dt>Add a new debugging configuration via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">configuration</span></code></dt><dd><img alt="../_images/vs-code-add-config.png" class="align-center" src="../_images/vs-code-add-config.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>From the <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">debug</span> <span class="pre">configuration</span></code> dialog, select <code class="docutils literal notranslate"><span class="pre">Module</span></code></dt><dd><img alt="../_images/vs-code-select-config.png" src="../_images/vs-code-select-config.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Enter <code class="docutils literal notranslate"><span class="pre">litestar</span></code> as the module name</dt><dd><img alt="../_images/vs-code-config-litestar.png" src="../_images/vs-code-config-litestar.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>In the opened JSON file, alter the configuration as follows:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Litestar app&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
@@ -1218,7 +1231,7 @@ running uvicorn process via <code class="docutils literal notranslate"><span cla
 </dl>
 </li>
 <li><dl>
-<dt>Run your application via the debugger via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">debugging</span></code></dt><dd><img alt="../_images/vs-code-debug.png" src="../_images/vs-code-debug.png" />
+<dt>Run your application via the debugger via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">debugging</span></code></dt><dd><img alt="../_images/vs-code-debug.png" class="align-center" src="../_images/vs-code-debug.png" />
 </dd>
 </dl>
 </li>
@@ -1228,18 +1241,28 @@ running uvicorn process via <code class="docutils literal notranslate"><span cla
 <h4>Using uvicorn<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <ol class="arabic">
 <li><dl>
-<dt>Open the debugging configurations via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">configurations</span></code></dt><dd><img alt="../_images/vs-code-config.png" src="../_images/vs-code-config.png" />
+<dt>Add a new debugging configuration via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">configuration</span></code></dt><dd><img alt="../_images/vs-code-add-config.png" class="align-center" src="../_images/vs-code-add-config.png" />
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt>Add the following configuration:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Litestar app&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;justMyCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;app:app&quot;</span><span class="p">]</span>
+<dt>From the <code class="docutils literal notranslate"><span class="pre">Select</span> <span class="pre">a</span> <span class="pre">debug</span> <span class="pre">configuration</span></code> dialog, select <code class="docutils literal notranslate"><span class="pre">Module</span></code></dt><dd><img alt="../_images/vs-code-select-config.png" src="../_images/vs-code-select-config.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Enter <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> as the module name</dt><dd><img alt="../_images/vs-code-config-litestar.png" src="../_images/vs-code-config-litestar.png" />
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>In the opened JSON file, alter the configuration as follows:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Litestar app&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;justMyCode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;app:app&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1247,7 +1270,7 @@ running uvicorn process via <code class="docutils literal notranslate"><span cla
 </dl>
 </li>
 <li><dl>
-<dt>Run your application via the debugger via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">debugging</span></code></dt><dd><img alt="../_images/vs-code-debug.png" src="../_images/vs-code-debug.png" />
+<dt>Run your application via the debugger via <code class="docutils literal notranslate"><span class="pre">Run</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">debugging</span></code></dt><dd><img alt="../_images/vs-code-debug.png" class="align-center" src="../_images/vs-code-debug.png" />
 </dd>
 </dl>
 </li>

@@ -1185,6 +1185,13 @@ value injected to represent the inbound client data will be an instance of
 <a class="reference internal" href="../../reference/dto/factory/index.html#litestar.dto.factory.DTOData.create_instance" title="litestar.dto.factory.DTOData.create_instance"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_instance</span></code></a> method of the <code class="docutils literal notranslate"><span class="pre">DTOData</span></code> instance.</p>
 <p>And our app is back to a working state:</p>
 <img alt="../../_images/dto_data.png" class="align-center" src="../../_images/dto_data.png" />
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To provide values for nested attributes you can use the “double-underscore” syntax as a keyword argument to the
+<a class="reference internal" href="../../reference/dto/factory/index.html#litestar.dto.factory.DTOData.create_instance" title="litestar.dto.factory.DTOData.create_instance"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_instance()</span></code></a> method. For example, <code class="docutils literal notranslate"><span class="pre">address__id=1</span></code> will
+set the <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">address</span></code> attribute of the created instance.</p>
+<p>See <a class="reference internal" href="../../usage/dto/1-dto-factory.html#dto-create-instance-nested-data"><span class="std std-ref">Providing values for nested data</span></a> for more information.</p>
+</div>
 <p>The <a class="reference internal" href="../../reference/dto/factory/index.html#litestar.dto.factory.DTOData" title="litestar.dto.factory.DTOData"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOData</span></code></a> type has some other useful methods, and we’ll take a look at those
 in the next section: <a class="reference internal" href="09-updating.html#updating"><span class="std std-ref">Updating instances</span></a>.</p>
 </section>
