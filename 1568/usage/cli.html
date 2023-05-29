@@ -56,7 +56,7 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API reference" href="../reference/index.html" />
+    <link rel="next" title="Debugging" href="debugging.html" />
     <link rel="prev" title="Recap" href="contrib/sqlalchemy/plugins/5-recap.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -945,6 +945,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1248,25 +1249,29 @@ deploy production applications</p>
 <td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_RELOAD</span></code></p></td>
 <td><p>Reload the application when files in its directory are changed</p></td>
 </tr>
-<tr class="row-odd"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
-<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_PORT</span></code></p></td>
-<td><p>Bind the the server to this port [default: 8000]</p></td>
-</tr>
-<tr class="row-even"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">-wc</span></code>, <code class="docutils literal notranslate"><span class="pre">--web-concurrency</span></code></p></td>
-<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">WEB_CONCURRENCY</span></code></p></td>
-<td><p>The number of concurrent web workers to start [default: 1]</p></td>
-</tr>
-<tr class="row-odd"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">--host</span></code></p></td>
-<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_HOST</span></code></p></td>
-<td><p>Bind the server to this host [default: 127.0.0.1]</p></td>
-</tr>
-<tr class="row-even"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">--debug</span></code></p></td>
-<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_DEBUG</span></code></p></td>
-<td><p>Run the application in debug mode</p></td>
-</tr>
 <tr class="row-odd"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">--reload-dir</span></code></p></td>
 <td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_RELOAD_DIRS</span></code></p></td>
 <td><p>Specify directories to watch for reload.</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--port</span></code></p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_PORT</span></code></p></td>
+<td><p>Bind the the server to this port [default: 8000]</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">-wc</span></code>, <code class="docutils literal notranslate"><span class="pre">--web-concurrency</span></code></p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">WEB_CONCURRENCY</span></code></p></td>
+<td><p>The number of concurrent web workers to start [default: 1]</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">--host</span></code></p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_HOST</span></code></p></td>
+<td><p>Bind the server to this host [default: 127.0.0.1]</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">--debug</span></code></p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_DEBUG</span></code></p></td>
+<td><p>Run the application in debug mode</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">--pdb</span></code></p></td>
+<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">LITESTAR_PDB</span></code></p></td>
+<td><p>Drop into the Python debugger when an exception occurs</p></td>
 </tr>
 </tbody>
 </table>
@@ -1431,11 +1436,11 @@ This can be achieved by adding the special <code class="docutils literal notrans
       </div>
     </a>
     <a class="right-next"
-       href="../reference/index.html"
+       href="debugging.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">API reference</p>
+        <p class="prev-next-title">Debugging</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
