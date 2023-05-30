@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>SQLAlchemy Plugins &#8212; Litestar Framework</title>
+    <title>Improving the TODO app with SQLAlchemy &#8212; Litestar Framework</title>
   
   
   
@@ -54,7 +54,7 @@
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Getting Started" href="0-getting-started.html" />
+    <link rel="next" title="Introduction" href="0-introduction.html" />
     <link rel="prev" title="Declaring DTOs on app layers" href="../dto-tutorial/10-layered-dto-declarations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -892,13 +892,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">SQLAlchemy Plugins</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="0-getting-started.html">Getting Started</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1-data-modelling.html">Data Modelling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="2-plugin-configuration.html">Plugin Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="3-defining-routes.html">Defining Routes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="4-configuring-the-application.html">Configuring the Application</a></li>
-<li class="toctree-l3"><a class="reference internal" href="5-recap.html">Recap</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Improving the TODO app with SQLAlchemy</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="0-introduction.html">Introduction</a></li>
 </ul>
 </li>
 </ul>
@@ -1123,7 +1118,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Tutorials</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">SQLAlchemy Plugins</li>
+    <li class="breadcrumb-item active" aria-current="page">Improving the TODO app with SQLAlchemy</li>
   </ul>
 </nav>
 </div>
@@ -1140,21 +1135,28 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="sqlalchemy-plugins">
-<h1>SQLAlchemy Plugins<a class="headerlink" href="#sqlalchemy-plugins" title="Permalink to this heading">#</a></h1>
-<p>We here at Litestar love the SQLAlchemy project. It has stood the test of time, is well documented, has a large
-community, and first-class maintainers. For all of these reasons, is a great choice for any Python project that needs to
-work with a relational database, and we are proud to support it.</p>
-<p>Litestar comes with built-in support for <a class="reference external" href="https://docs.sqlalchemy.org/">SQLAlchemy</a> via
-a suite of <a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html#module-litestar.contrib.sqlalchemy.plugins" title="litestar.contrib.sqlalchemy.plugins"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plugins</span></code></a>.</p>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Managed <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/session.html">sessions</a> (sync and async) including dependency injection</p></li>
-<li><p>Managed <a class="reference external" href="https://docs.sqlalchemy.org/en/20/core/engines.html">engine</a> (sync and async) including dependency injection</p></li>
-<li><p>Typed configuration objects</p></li>
-<li><p>Support for deserializing into, and serializing from, SQLAlchemy models.</p></li>
-</ul>
+  <section id="improving-the-todo-app-with-sqlalchemy">
+<h1>Improving the TODO app with SQLAlchemy<a class="headerlink" href="#improving-the-todo-app-with-sqlalchemy" title="Permalink to this heading">#</a></h1>
+<div class="info admonition">
+<p class="admonition-title">Who is this tutorial for?</p>
+<p>This tutorial is aimed at developers who are already familiar with Litestar’s core concepts such as route
+handlers and dependency injection.</p>
+<p>If you are new to Litestar, it is recommended to first follow the
+<a class="reference external" href="../todo-app">Developing a basic TODO application</a> tutorial.</p>
+</div>
+<section id="install-sqlalchemy">
+<h2>Install SQLAlchemy<a class="headerlink" href="#install-sqlalchemy" title="Permalink to this heading">#</a></h2>
+<p>To follow this tutorial, you will need SQLAlchemy installed. You can install it with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sqlalchemy</span></code>, or let
+Litestar install it for you by installing the <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> extra (e.g., <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[standard,sqlalchemy]</span></code>).</p>
+</section>
+<section id="what-s-in-this-tutorial">
+<h2>What’s in this tutorial?<a class="headerlink" href="#what-s-in-this-tutorial" title="Permalink to this heading">#</a></h2>
+<p>This tutorial builds on the <a class="reference external" href="../todo-app">TODO app tutorial</a> by adding a database backend using
+<a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy</a>.</p>
+<p>We start by comparing a refactor of the TODO app that leverages SQLAlchemy for data persistence to the TODO app from the
+<a class="reference external" href="../todo-app">TODO app tutorial</a>.</p>
+<p>We will then gradually improve on the design of our app by utilising more of Litestar’s features, such as dependency
+injection, lifespan management, plugins, and Data Transfer Objects.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -1181,11 +1183,11 @@ a suite of <a class="reference internal" href="../../reference/contrib/sqlalchem
       </div>
     </a>
     <a class="right-next"
-       href="0-getting-started.html"
+       href="0-introduction.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started</p>
+        <p class="prev-next-title">Introduction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1207,7 +1209,8 @@ a suite of <a class="reference internal" href="../../reference/contrib/sqlalchem
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sqlalchemy">Install SQLAlchemy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-this-tutorial">What’s in this tutorial?</a></li>
 </ul>
   </nav></div>
 
