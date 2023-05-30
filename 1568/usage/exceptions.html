@@ -896,6 +896,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
 </ul>
@@ -1313,7 +1315,7 @@ exceptions that inherit from <code class="docutils literal notranslate"><span cl
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/validation-error
-validation<span class="w"> </span>error:<span class="w"> </span>Missing<span class="w"> </span>required<span class="w"> </span>parameter<span class="w"> </span>some_query_param<span class="w"> </span><span class="k">for</span><span class="w"> </span>url<span class="w"> </span>http://127.0.0.1:9001/validation-error
+validation<span class="w"> </span>error:<span class="w"> </span>Missing<span class="w"> </span>required<span class="w"> </span>parameter<span class="w"> </span>some_query_param<span class="w"> </span><span class="k">for</span><span class="w"> </span>url<span class="w"> </span>http://127.0.0.1:9011/validation-error
 &gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/server-error
 server<span class="w"> </span>error:<span class="w"> </span><span class="m">500</span>:<span class="w"> </span>Internal<span class="w"> </span>Server<span class="w"> </span>Error
 &gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/value-error

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Improving the TODO app with SQLAlchemy &#8212; Litestar Framework</title>
+    <title>Final touches and recap &#8212; Litestar Framework</title>
   
   
   
@@ -49,13 +49,13 @@
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/litestar-theme.js"></script>
     <script src="../../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/sqlalchemy/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/sqlalchemy/4-final-touches-and-recap';</script>
     <script src="../../_static/versioning.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction" href="0-introduction.html" />
-    <link rel="prev" title="Declaring DTOs on app layers" href="../dto-tutorial/10-layered-dto-declarations.html" />
+    <link rel="next" title="Usage" href="../../usage/index.html" />
+    <link rel="prev" title="Using the init plugin" href="3-init-plugin.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -892,12 +892,12 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Improving the TODO app with SQLAlchemy</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Improving the TODO app with SQLAlchemy</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="0-introduction.html">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-provide-session-with-di.html">Providing the session with DI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2-serialization-plugin.html">Using the serialization plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3-init-plugin.html">Using the init plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="4-final-touches-and-recap.html">Final touches and recap</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Final touches and recap</a></li>
 </ul>
 </li>
 </ul>
@@ -1122,7 +1122,10 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Tutorials</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Improving the TODO app with SQLAlchemy</li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Improving the TODO app with SQLAlchemy</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Final touches and recap</li>
   </ul>
 </nav>
 </div>
@@ -1139,39 +1142,356 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="improving-the-todo-app-with-sqlalchemy">
-<h1>Improving the TODO app with SQLAlchemy<a class="headerlink" href="#improving-the-todo-app-with-sqlalchemy" title="Permalink to this heading">#</a></h1>
-<div class="info admonition">
-<p class="admonition-title">Who is this tutorial for?</p>
-<p>This tutorial is aimed at developers who are already familiar with Litestar’s core concepts such as route
-handlers and dependency injection.</p>
-<p>If you are new to Litestar, it is recommended to first follow the
-<a class="reference external" href="../todo-app">Developing a basic TODO application</a> tutorial.</p>
+  <section id="final-touches-and-recap">
+<h1>Final touches and recap<a class="headerlink" href="#final-touches-and-recap" title="Permalink to this heading">#</a></h1>
+<p>There is one more improvement that we can make to our application. Currently, we utilize both the
+<a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> and the
+<a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>, but there
+is a shortcut for this configuration: the
+<a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyPlugin" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemyPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyPlugin</span></code></a> is a combination of the two, so we
+can simplify our configuration by using it instead.</p>
+<p>Here is our final application:</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-0">
+Python 3.8+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+<span class="hll"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.plugins</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyPlugin</span>
+</span><span class="linenos">10</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="o">...</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">class</span> <span class="nc">TodoItem</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">19</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;todo_items&quot;</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="n">done</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="k">async</span> <span class="k">def</span> <span class="nf">provide_transaction</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos">26</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">27</span>        <span class="k">async</span> <span class="k">with</span> <span class="n">db_session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+<span class="linenos">28</span>            <span class="k">yield</span> <span class="n">db_session</span>
+<span class="linenos">29</span>    <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos">30</span>        <span class="k">raise</span> <span class="n">ClientException</span><span class="p">(</span>
+<span class="linenos">31</span>            <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_409_CONFLICT</span><span class="p">,</span>
+<span class="linenos">32</span>            <span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span>
+<span class="linenos">33</span>        <span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_by_title</span><span class="p">(</span><span class="n">todo_name</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">37</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">todo_name</span><span class="p">)</span>
+<span class="linenos">38</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">39</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">40</span>        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one</span><span class="p">()</span>
+<span class="linenos">41</span>    <span class="k">except</span> <span class="n">NoResultFound</span><span class="p">:</span>
+<span class="linenos">42</span>        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;TODO </span><span class="si">{</span><span class="n">todo_name</span><span class="si">!r}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">46</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span>
+<span class="linenos">47</span>    <span class="k">if</span> <span class="n">done</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">48</span>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">done</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="n">done</span><span class="p">))</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">51</span>    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos">55</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_list</span><span class="p">(</span><span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">done</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">56</span>    <span class="k">return</span> <span class="n">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos">60</span><span class="k">async</span> <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">61</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos">62</span>    <span class="k">return</span> <span class="n">data</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
+<span class="linenos">66</span><span class="k">async</span> <span class="k">def</span> <span class="nf">update_item</span><span class="p">(</span><span class="n">item_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">67</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">68</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
+<span class="linenos">69</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">done</span>
+<span class="linenos">70</span>    <span class="k">return</span> <span class="n">todo_item</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span>
+<span class="linenos">73</span><span class="n">db_config</span> <span class="o">=</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">(</span><span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite+aiosqlite:///todo.sqlite&quot;</span><span class="p">)</span>
+<span class="linenos">74</span>
+<span class="linenos">75</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+<span class="linenos">76</span>    <span class="p">[</span><span class="n">get_list</span><span class="p">,</span> <span class="n">add_item</span><span class="p">,</span> <span class="n">update_item</span><span class="p">],</span>
+<span class="linenos">77</span>    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;transaction&quot;</span><span class="p">:</span> <span class="n">provide_transaction</span><span class="p">},</span>
+<span class="hll"><span class="linenos">78</span>    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SQLAlchemyPlugin</span><span class="p">(</span><span class="n">db_config</span><span class="p">)],</span>
+</span><span class="linenos">79</span><span class="p">)</span>
+</pre></div>
 </div>
-<section id="install-sqlalchemy">
-<h2>Install SQLAlchemy<a class="headerlink" href="#install-sqlalchemy" title="Permalink to this heading">#</a></h2>
-<p>To follow this tutorial, you will need SQLAlchemy installed. You can install it with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sqlalchemy</span></code>, or let
-Litestar install it for you by installing the <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> extra (e.g., <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[standard,sqlalchemy]</span></code>).</p>
-</section>
-<section id="what-s-in-this-tutorial">
-<h2>What’s in this tutorial?<a class="headerlink" href="#what-s-in-this-tutorial" title="Permalink to this heading">#</a></h2>
-<p>This tutorial builds on the <a class="reference external" href="../todo-app">TODO app tutorial</a> by adding a database backend using
-<a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy</a>.</p>
-<p>We start by comparing a refactored TODO app that leverages SQLAlchemy for data persistence to the TODO app from the
-<a class="reference external" href="../todo-app">TODO app tutorial</a>.</p>
-<p>We will then gradually improve on the design of our app by utilising more of Litestar’s features, such as dependency
-injection, and plugins.</p>
-</section>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="0-introduction.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1-provide-session-with-di.html">Providing the session with DI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2-serialization-plugin.html">Using the serialization plugin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3-init-plugin.html">Using the init plugin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4-final-touches-and-recap.html">Final touches and recap</a></li>
-</ul>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-1">
+Python 3.9+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+<span class="linenos"> 8</span>
+<span class="hll"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+</span><span class="linenos">10</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.plugins</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyPlugin</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
+<span class="linenos">12</span><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+<span class="linenos">16</span>    <span class="o">...</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">class</span> <span class="nc">TodoItem</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">20</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;todo_items&quot;</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">23</span>    <span class="n">done</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">async</span> <span class="k">def</span> <span class="nf">provide_transaction</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos">27</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">28</span>        <span class="k">async</span> <span class="k">with</span> <span class="n">db_session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+<span class="linenos">29</span>            <span class="k">yield</span> <span class="n">db_session</span>
+<span class="linenos">30</span>    <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos">31</span>        <span class="k">raise</span> <span class="n">ClientException</span><span class="p">(</span>
+<span class="linenos">32</span>            <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_409_CONFLICT</span><span class="p">,</span>
+<span class="linenos">33</span>            <span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span>
+<span class="linenos">34</span>        <span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_by_title</span><span class="p">(</span><span class="n">todo_name</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">38</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">todo_name</span><span class="p">)</span>
+<span class="linenos">39</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">40</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">41</span>        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one</span><span class="p">()</span>
+<span class="linenos">42</span>    <span class="k">except</span> <span class="n">NoResultFound</span><span class="p">:</span>
+<span class="linenos">43</span>        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;TODO </span><span class="si">{</span><span class="n">todo_name</span><span class="si">!r}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">47</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span>
+<span class="linenos">48</span>    <span class="k">if</span> <span class="n">done</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">49</span>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">done</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="n">done</span><span class="p">))</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">52</span>    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos">56</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_list</span><span class="p">(</span><span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">done</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">57</span>    <span class="k">return</span> <span class="n">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos">61</span><span class="k">async</span> <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">62</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos">63</span>    <span class="k">return</span> <span class="n">data</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span>
+<span class="linenos">66</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
+<span class="linenos">67</span><span class="k">async</span> <span class="k">def</span> <span class="nf">update_item</span><span class="p">(</span><span class="n">item_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">68</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">69</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
+<span class="linenos">70</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">done</span>
+<span class="linenos">71</span>    <span class="k">return</span> <span class="n">todo_item</span>
+<span class="linenos">72</span>
+<span class="linenos">73</span>
+<span class="linenos">74</span><span class="n">db_config</span> <span class="o">=</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">(</span><span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite+aiosqlite:///todo.sqlite&quot;</span><span class="p">)</span>
+<span class="linenos">75</span>
+<span class="linenos">76</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+<span class="linenos">77</span>    <span class="p">[</span><span class="n">get_list</span><span class="p">,</span> <span class="n">add_item</span><span class="p">,</span> <span class="n">update_item</span><span class="p">],</span>
+<span class="hll"><span class="linenos">78</span>    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;transaction&quot;</span><span class="p">:</span> <span class="n">provide_transaction</span><span class="p">},</span>
+</span><span class="linenos">79</span>    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SQLAlchemyPlugin</span><span class="p">(</span><span class="n">db_config</span><span class="p">)],</span>
+<span class="linenos">80</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-2">
+Python 3.10+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+<span class="hll"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.plugins</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyPlugin</span>
+</span><span class="linenos">10</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="o">...</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">class</span> <span class="nc">TodoItem</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">19</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;todo_items&quot;</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">22</span>    <span class="n">done</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="k">async</span> <span class="k">def</span> <span class="nf">provide_transaction</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos">26</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">27</span>        <span class="k">async</span> <span class="k">with</span> <span class="n">db_session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+<span class="linenos">28</span>            <span class="k">yield</span> <span class="n">db_session</span>
+<span class="linenos">29</span>    <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos">30</span>        <span class="k">raise</span> <span class="n">ClientException</span><span class="p">(</span>
+<span class="linenos">31</span>            <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_409_CONFLICT</span><span class="p">,</span>
+<span class="linenos">32</span>            <span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span>
+<span class="linenos">33</span>        <span class="p">)</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_by_title</span><span class="p">(</span><span class="n">todo_name</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">37</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">todo_name</span><span class="p">)</span>
+<span class="linenos">38</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">39</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">40</span>        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one</span><span class="p">()</span>
+<span class="linenos">41</span>    <span class="k">except</span> <span class="n">NoResultFound</span><span class="p">:</span>
+<span class="linenos">42</span>        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;TODO </span><span class="si">{</span><span class="n">todo_name</span><span class="si">!r}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">46</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span>
+<span class="linenos">47</span>    <span class="k">if</span> <span class="n">done</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">48</span>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">done</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="n">done</span><span class="p">))</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">51</span>    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos">55</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_list</span><span class="p">(</span><span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">done</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">56</span>    <span class="k">return</span> <span class="n">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span>
+<span class="linenos">59</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos">60</span><span class="k">async</span> <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">61</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos">62</span>    <span class="k">return</span> <span class="n">data</span>
+<span class="linenos">63</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
+<span class="linenos">66</span><span class="k">async</span> <span class="k">def</span> <span class="nf">update_item</span><span class="p">(</span><span class="n">item_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">67</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">68</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
+<span class="linenos">69</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">done</span>
+<span class="linenos">70</span>    <span class="k">return</span> <span class="n">todo_item</span>
+<span class="linenos">71</span>
+<span class="linenos">72</span>
+<span class="linenos">73</span><span class="n">db_config</span> <span class="o">=</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">(</span><span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite+aiosqlite:///todo.sqlite&quot;</span><span class="p">)</span>
+<span class="linenos">74</span>
+<span class="linenos">75</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+<span class="linenos">76</span>    <span class="p">[</span><span class="n">get_list</span><span class="p">,</span> <span class="n">add_item</span><span class="p">,</span> <span class="n">update_item</span><span class="p">],</span>
+<span class="linenos">77</span>    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;transaction&quot;</span><span class="p">:</span> <span class="n">provide_transaction</span><span class="p">},</span>
+<span class="hll"><span class="linenos">78</span>    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SQLAlchemyPlugin</span><span class="p">(</span><span class="n">db_config</span><span class="p">)],</span>
+</span><span class="linenos">79</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="recap">
+<h2>Recap<a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h2>
+<p>In this tutorial, we have learned how to use the SQLAlchemy plugin to create a simple application that uses a database
+to store and retrieve data.</p>
+<p>In the final application <code class="docutils literal notranslate"><span class="pre">TodoItem</span></code> is defined, representing a to-do item. It extends from the
+<a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeBase</span></code></a> class provided by <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="o">...</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="k">class</span> <span class="nc">TodoItem</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">6</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;todo_items&quot;</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span>    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">9</span>    <span class="n">done</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Next, we define a dependency that centralizes our database transaction management and error handling. This dependency
+depends on the <code class="docutils literal notranslate"><span class="pre">db_session</span></code> dependency, which is provided by the SQLAlchemy plugin, and is made available to our
+handlers via the <code class="docutils literal notranslate"><span class="pre">transaction</span></code> argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">async</span> <span class="k">def</span> <span class="nf">provide_transaction</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="linenos">2</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos">3</span>        <span class="k">async</span> <span class="k">with</span> <span class="n">db_session</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+<span class="linenos">4</span>            <span class="k">yield</span> <span class="n">db_session</span>
+<span class="linenos">5</span>    <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="linenos">6</span>        <span class="k">raise</span> <span class="n">ClientException</span><span class="p">(</span>
+<span class="linenos">7</span>            <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_409_CONFLICT</span><span class="p">,</span>
+<span class="linenos">8</span>            <span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span>
+<span class="linenos">9</span>        <span class="p">)</span>
+</pre></div>
+</div>
+<p>We also define a couple of utility functions, that help us to retrieve our to-do items from the database:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_by_title</span><span class="p">(</span><span class="n">todo_name</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos"> 2</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">title</span> <span class="o">==</span> <span class="n">todo_name</span><span class="p">)</span>
+<span class="linenos"> 3</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos"> 4</span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one</span><span class="p">()</span>
+<span class="linenos"> 6</span>    <span class="k">except</span> <span class="n">NoResultFound</span><span class="p">:</span>
+<span class="linenos"> 7</span>        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;TODO </span><span class="si">{</span><span class="n">todo_name</span><span class="si">!r}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos">11</span>    <span class="n">query</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">TodoItem</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="k">if</span> <span class="n">done</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">13</span>        <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">TodoItem</span><span class="o">.</span><span class="n">done</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="n">done</span><span class="p">))</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We define our route handlers, which are the interface through which to-do items can be created, retrieved and updated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_list</span><span class="p">(</span><span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">done</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">]:</span>
+<span class="linenos"> 3</span>    <span class="k">return</span> <span class="n">get_todo_list</span><span class="p">(</span><span class="n">done</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="k">async</span> <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="k">return</span> <span class="n">data</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="k">async</span> <span class="k">def</span> <span class="nf">update_item</span><span class="p">(</span><span class="n">item_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+<span class="linenos">14</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
+<span class="linenos">16</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">done</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">todo_item</span>
+</pre></div>
+</div>
+<p>Finally, we define our application, using the
+<a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyPlugin" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemyPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyPlugin</span></code></a> to configure SQLAlchemy and manage the
+engine and session lifecycle, and register our <code class="docutils literal notranslate"><span class="pre">transaction</span></code> dependency.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+<span class="linenos">2</span>    <span class="p">[</span><span class="n">get_list</span><span class="p">,</span> <span class="n">add_item</span><span class="p">,</span> <span class="n">update_item</span><span class="p">],</span>
+<span class="linenos">3</span>    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;transaction&quot;</span><span class="p">:</span> <span class="n">provide_transaction</span><span class="p">},</span>
+<span class="linenos">4</span>    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SQLAlchemyPlugin</span><span class="p">(</span><span class="n">db_config</span><span class="p">)],</span>
+<span class="linenos">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../../usage/contrib/sqlalchemy/plugins/index.html"><span class="doc">SQLAlchemy Plugins Usage Guide</span></a></p>
 </div>
 </section>
 </section>
@@ -1188,20 +1508,20 @@ injection, and plugins.</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../dto-tutorial/10-layered-dto-declarations.html"
+       href="3-init-plugin.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Declaring DTOs on app layers</p>
+        <p class="prev-next-title">Using the init plugin</p>
       </div>
     </a>
     <a class="right-next"
-       href="0-introduction.html"
+       href="../../usage/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction</p>
+        <p class="prev-next-title">Usage</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1223,9 +1543,7 @@ injection, and plugins.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-sqlalchemy">Install SQLAlchemy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-this-tutorial">What’s in this tutorial?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap</a></li>
 </ul>
   </nav></div>
 

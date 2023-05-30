@@ -896,6 +896,8 @@ document.write(`
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="1-provide-session-with-di.html">Providing the session with DI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
 </ul>
@@ -1142,19 +1144,18 @@ document.write(`
                   
   <section id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
-<p>Here is a full script that shows how you can use SQLAlchemy with Litestar. In this app, we interacting with SQLAlchemy
-in the manner described by the
+<p>We start with a full script that shows how you can use SQLAlchemy with Litestar. In this app, we interact with
+SQLAlchemy in the manner described by the
 <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#synopsis-orm">SQLAlchemy documentation</a>, and so if you
 are looking for more information about any of the SQLAlchemy code, this will be a great place to start.</p>
-<p>Beyond that, we use a couple of Litestar features that we haven’t looked at yet:</p>
+<p>You’ll notice that we use a couple of Litestar features that you may not have encountered yet:</p>
 <ol class="arabic simple">
-<li><p>Management and injection of application state</p></li>
-<li><p>Lifespan context managers</p></li>
+<li><p>Management and injection of <a class="reference internal" href="../../usage/the-litestar-app.html#application-state"><span class="std std-ref">application state</span></a></p></li>
+<li><p>Use of a <a class="reference internal" href="../../usage/the-litestar-app.html#lifespan-context-managers"><span class="std std-ref">Lifespan context manager</span></a></p></li>
 </ol>
 <p>And we will continue to learn about other Litestar features as we work through the tutorial, such as:</p>
 <ol class="arabic simple">
 <li><p>Dependency injection</p></li>
-<li><p>Data Transfer Objects</p></li>
 <li><p>Plugins</p></li>
 </ol>
 <section id="the-full-app">
@@ -1515,8 +1516,8 @@ of it when we are done. This context manager is added to the applicaton’s <cod
 </section>
 <section id="application-state">
 <h3>Application state<a class="headerlink" href="#application-state" title="Permalink to this heading">#</a></h3>
-<p>We see two examples of access and use of application state in this example. The first is in the <code class="docutils literal notranslate"><span class="pre">db_connection()</span></code>
-context manager, where we use the <code class="docutils literal notranslate"><span class="pre">app.state</span></code> object to store the engine.</p>
+<p>We see two examples of access and use of application state. The first is in the <code class="docutils literal notranslate"><span class="pre">db_connection()</span></code> context manager,
+where we use the <code class="docutils literal notranslate"><span class="pre">app.state</span></code> object to store the engine.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nd">@asynccontextmanager</span>
 <span class="linenos"> 2</span><span class="k">async</span> <span class="k">def</span> <span class="nf">db_connection</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Litestar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="hll"><span class="linenos"> 3</span>    <span class="n">engine</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;engine&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>

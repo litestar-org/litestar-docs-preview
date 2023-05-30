@@ -896,6 +896,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../../../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
 </ul>
@@ -1298,6 +1300,24 @@ Sync</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
+<section id="configuring-the-plugins">
+<h3>Configuring the plugins<a class="headerlink" href="#configuring-the-plugins" title="Permalink to this heading">#</a></h3>
+<p>Both the <a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> and the
+<a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> have an <code class="docutils literal notranslate"><span class="pre">engine_config</span></code>
+attribute that is used to configure the engine. The <code class="docutils literal notranslate"><span class="pre">engine_config</span></code> attribute is an instance of
+<a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig" title="litestar.contrib.sqlalchemy.plugins.EngineConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">EngineConfig</span></code></a> and exposes all of the configuration options
+available to the SQLAlchemy engine.</p>
+<p>The <a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> class and the
+<a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> class also have a
+<code class="docutils literal notranslate"><span class="pre">session_config</span></code> attribute that is used to configure the session. This is either an instance of
+<a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig" title="litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSessionConfig</span></code></a> or
+<a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SyncSessionConfig" title="litestar.contrib.sqlalchemy.plugins.SyncSessionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncSessionConfig</span></code></a> depending on the type of config
+object. These classes expose all of the configuration options available to the SQLAlchemy session.</p>
+<p>Finally, the <a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> class and the
+<a class="reference internal" href="../../../../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> class expose configuration
+options to control their behavior.</p>
+<p>Consult the reference documentation for more information.</p>
+</section>
 </section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
@@ -1475,6 +1495,7 @@ Sync</label><div class="sd-tab-content docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-the-dependencies">Renaming the dependencies</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-before-send-handler">Configuring the before send handler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-plugins">Configuring the plugins</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
