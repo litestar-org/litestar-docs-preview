@@ -1202,6 +1202,12 @@ document.write(`
 
 </dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="litestar.contrib.repository.filters.FilterTypes">
+<span class="sig-prename descclassname"><span class="pre">litestar.contrib.repository.filters.</span></span><span class="sig-name descname"><span class="pre">FilterTypes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">TypeAlias</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BeforeAfter</span> <span class="pre">|</span> <span class="pre">CollectionFilter[Any]</span> <span class="pre">|</span> <span class="pre">LimitOffset</span> <span class="pre">|</span> <span class="pre">OrderBy</span> <span class="pre">|</span> <span class="pre">SearchFilter'</span></em><a class="headerlink" href="#litestar.contrib.repository.filters.FilterTypes" title="Permalink to this definition">#</a></dt>
+<dd><p>Aggregate type alias of the types supported for collection filtering.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.contrib.repository.filters.LimitOffset">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.contrib.repository.filters.</span></span><span class="sig-name descname"><span class="pre">LimitOffset</span></span><a class="headerlink" href="#litestar.contrib.repository.filters.LimitOffset" title="Permalink to this definition">#</a></dt>
@@ -1213,16 +1219,16 @@ document.write(`
 <dd><p>Value for <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code> clause of query.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.contrib.repository.filters.LimitOffset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.contrib.repository.filters.LimitOffset.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.contrib.repository.filters.LimitOffset.offset">
 <span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.contrib.repository.filters.LimitOffset.offset" title="Permalink to this definition">#</a></dt>
 <dd><p>Value for <code class="docutils literal notranslate"><span class="pre">OFFSET</span></code> clause of query.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.contrib.repository.filters.LimitOffset.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.contrib.repository.filters.LimitOffset.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -1342,10 +1348,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.CollectionFilter.__init__"><code class="docutils literal notranslate"><span class="pre">CollectionFilter.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.FilterTypes"><code class="docutils literal notranslate"><span class="pre">FilterTypes</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.LimitOffset"><code class="docutils literal notranslate"><span class="pre">LimitOffset</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.LimitOffset.limit"><code class="docutils literal notranslate"><span class="pre">LimitOffset.limit</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.LimitOffset.offset"><code class="docutils literal notranslate"><span class="pre">LimitOffset.offset</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.LimitOffset.__init__"><code class="docutils literal notranslate"><span class="pre">LimitOffset.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.LimitOffset.offset"><code class="docutils literal notranslate"><span class="pre">LimitOffset.offset</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.contrib.repository.filters.OrderBy"><code class="docutils literal notranslate"><span class="pre">OrderBy</span></code></a><ul class="visible nav section-nav flex-column">
