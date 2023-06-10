@@ -374,7 +374,7 @@
     
         <div class="group relative rounded-lg p-2 text-sm hover:bg-gray-50 dark:hover:bg-zinc-800">
             
-    <a href="../../release-notes/migration_guide_2.html"
+    <a href="../../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         2.0 migration guide
         <span class="absolute inset-0"></span>
@@ -774,7 +774,7 @@ document.write(`
     
         <div class="group relative rounded-lg p-2 text-sm hover:bg-gray-50 dark:hover:bg-zinc-800">
             
-    <a href="../../release-notes/migration_guide_2.html"
+    <a href="../../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         2.0 migration guide
         <span class="absolute inset-0"></span>
@@ -1021,7 +1021,6 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/compression.html">compression</a></li>
@@ -1049,8 +1048,8 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/response.html">response</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/security/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1160,12 +1159,12 @@ is <strong>any callable</strong> that takes a kwarg called <code class="docutils
 </pre></div>
 </div>
 <p>While using functions is a perfectly viable approach, you can also use classes to do the same. See the next sections on
-two base classes you can use for this purpose - the <a class="reference internal" href="../../reference/middleware/base.html#litestar.middleware.base.MiddlewareProtocol" title="litestar.middleware.base.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code></a> ,
-which gives a bare-bones type, or the <a class="reference internal" href="../../reference/middleware/base.html#litestar.middleware.base.AbstractMiddleware" title="litestar.middleware.base.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></a> that offers a
+two base classes you can use for this purpose - the <a class="reference internal" href="../../reference/middleware/index.html#litestar.middleware.MiddlewareProtocol" title="litestar.middleware.base.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code></a> ,
+which gives a bare-bones type, or the <a class="reference internal" href="../../reference/middleware/index.html#litestar.middleware.AbstractMiddleware" title="litestar.middleware.base.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></a> that offers a
 base class with some built in functionality.</p>
 <section id="using-middlewareprotocol">
 <h2>Using MiddlewareProtocol<a class="headerlink" href="#using-middlewareprotocol" title="Permalink to this heading">#</a></h2>
-<p>The <a class="reference internal" href="../../reference/middleware/base.html#litestar.middleware.base.MiddlewareProtocol" title="litestar.middleware.base.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code></a> class is a
+<p>The <a class="reference internal" href="../../reference/middleware/index.html#litestar.middleware.MiddlewareProtocol" title="litestar.middleware.base.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code></a> class is a
 <a class="reference external" href="https://peps.python.org/pep-0544/">PEP 544 Protocol</a> that specifies the minimal implementation of a middleware as
 follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Any</span>
@@ -1253,7 +1252,7 @@ handler function but before the actual response message is transmitted, the corr
 special life-cycle hook called <a class="reference internal" href="../lifecycle-hooks.html#after-request"><span class="std std-ref">after_request</span></a>. The instructions in this section are for how to
 modify the ASGI response message itself, which is a step further in the response process.</p>
 </div>
-<p>Using the <a class="reference internal" href="../../reference/middleware/base.html#litestar.middleware.base.MiddlewareProtocol" title="litestar.middleware.base.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code></a> you can intercept and modifying both the
+<p>Using the <a class="reference internal" href="../../reference/middleware/index.html#litestar.middleware.MiddlewareProtocol" title="litestar.middleware.base.MiddlewareProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code></a> you can intercept and modifying both the
 incoming and outgoing data in a request / response cycle by “wrapping” that respective <code class="docutils literal notranslate"><span class="pre">receive</span></code> and <code class="docutils literal notranslate"><span class="pre">send</span></code> ASGI
 functions.</p>
 <p>To demonstrate this, lets say we want to append a header with a timestamp to all outgoing responses. We could achieve
@@ -1291,7 +1290,7 @@ this by doing the following:</p>
 </section>
 <section id="inheriting-abstractmiddleware">
 <h2>Inheriting AbstractMiddleware<a class="headerlink" href="#inheriting-abstractmiddleware" title="Permalink to this heading">#</a></h2>
-<p>Litestar offers an <a class="reference internal" href="../../reference/middleware/base.html#litestar.middleware.base.AbstractMiddleware" title="litestar.middleware.base.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></a> class that can be extended to
+<p>Litestar offers an <a class="reference internal" href="../../reference/middleware/index.html#litestar.middleware.AbstractMiddleware" title="litestar.middleware.base.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></a> class that can be extended to
 create middleware:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
@@ -1509,7 +1508,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <section id="using-definemiddleware-to-pass-arguments">
 <h2>Using DefineMiddleware to pass arguments<a class="headerlink" href="#using-definemiddleware-to-pass-arguments" title="Permalink to this heading">#</a></h2>
 <p>Litestar offers a simple way to pass positional arguments (<code class="docutils literal notranslate"><span class="pre">*args</span></code>) and key-word arguments (<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>) to middleware
-using the <a class="reference internal" href="../../reference/middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a> class. Let’s extend
+using the <a class="reference internal" href="../../reference/middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a> class. Let’s extend
 the factory function used in the examples above to take some args and kwargs and then use <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code> to pass
 these values to our middleware:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.types</span> <span class="kn">import</span> <span class="n">ASGIApp</span><span class="p">,</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">Send</span>

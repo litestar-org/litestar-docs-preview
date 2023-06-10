@@ -374,7 +374,7 @@
     
         <div class="group relative rounded-lg p-2 text-sm hover:bg-gray-50 dark:hover:bg-zinc-800">
             
-    <a href="../../release-notes/migration_guide_2.html"
+    <a href="../../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         2.0 migration guide
         <span class="absolute inset-0"></span>
@@ -774,7 +774,7 @@ document.write(`
     
         <div class="group relative rounded-lg p-2 text-sm hover:bg-gray-50 dark:hover:bg-zinc-800">
             
-    <a href="../../release-notes/migration_guide_2.html"
+    <a href="../../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         2.0 migration guide
         <span class="absolute inset-0"></span>
@@ -1021,7 +1021,6 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../middleware/compression.html">compression</a></li>
@@ -1049,8 +1048,8 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../response.html">response</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../response_containers.html">response_containers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../security/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1236,8 +1235,8 @@ the default being <code class="docutils literal notranslate"><span class="pre">L
 
 <dl class="py property">
 <dt class="sig sig-object py" id="litestar.contrib.opentelemetry.OpenTelemetryConfig.middleware">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.opentelemetry.OpenTelemetryConfig.middleware" title="Permalink to this definition">#</a></dt>
-<dd><p>Create an instance of <a class="reference internal" href="../middleware/base.html#litestar.middleware.base.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a> that wraps with.</p>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">middleware</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><span class="pre">DefineMiddleware</span></a></em><a class="headerlink" href="#litestar.contrib.opentelemetry.OpenTelemetryConfig.middleware" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an instance of <a class="reference internal" href="../middleware/index.html#litestar.middleware.DefineMiddleware" title="litestar.middleware.base.DefineMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefineMiddleware</span></code></a> that wraps with.</p>
 <p>[OpenTelemetry
 InstrumentationMiddleware][litestar.contrib.opentelemetry.OpenTelemetryInstrumentationMiddleware] or a subclass
 of this middleware.</p>
@@ -1253,7 +1252,7 @@ of this middleware.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.contrib.opentelemetry.OpenTelemetryInstrumentationMiddleware">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.contrib.opentelemetry.</span></span><span class="sig-name descname"><span class="pre">OpenTelemetryInstrumentationMiddleware</span></span><a class="headerlink" href="#litestar.contrib.opentelemetry.OpenTelemetryInstrumentationMiddleware" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../middleware/base.html#litestar.middleware.base.AbstractMiddleware" title="litestar.middleware.base.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../middleware/index.html#litestar.middleware.AbstractMiddleware" title="litestar.middleware.base.AbstractMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></a></p>
 <p>OpenTelemetry Middleware.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.contrib.opentelemetry.OpenTelemetryInstrumentationMiddleware.__init__">
