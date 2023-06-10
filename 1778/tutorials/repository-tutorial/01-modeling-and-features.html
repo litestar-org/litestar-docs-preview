@@ -1217,9 +1217,9 @@ simple, our first model will encompass only three fields: <code class="docutils 
 <p>The books entity is not considered a “strong” entity and therefore always requires an
 author to be created.  We need to configure our SQLAlchemy classes so that it is aware
 of this relationship. We will extend the <code class="docutils literal notranslate"><span class="pre">Author</span></code> model by incorporating a <code class="docutils literal notranslate"><span class="pre">Book</span></code>
-relationship. This would allow each <code class="docutils literal notranslate"><span class="pre">Author</span></code> record to possess multiple <code class="docutils literal notranslate"><span class="pre">Book</span></code>
-records. By configuring it this way, SQLAlchemy will automatically include the necessary
-foreign key constraints when using the <code class="docutils literal notranslate"><span class="pre">author_id</span></code> field in each <code class="docutils literal notranslate"><span class="pre">Book</span></code> record.</p>
+relationship. This allows each <code class="docutils literal notranslate"><span class="pre">Author</span></code> record to possess multiple <code class="docutils literal notranslate"><span class="pre">Book</span></code> records.
+By configuring it this way, SQLAlchemy will automatically include the necessary foreign
+key constraints when using the <code class="docutils literal notranslate"><span class="pre">author_id</span></code> field in each <code class="docutils literal notranslate"><span class="pre">Book</span></code> record.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">app.py</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
@@ -1293,7 +1293,11 @@ and base audit model implementations can be found at
 <a class="reference internal" href="../../reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.BigIntAuditBase" title="litestar.contrib.sqlalchemy.base.BigIntAuditBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntBase</span></code></a> and
 <a class="reference internal" href="../../reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase" title="litestar.contrib.sqlalchemy.base.UUIDAuditBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code></a>
 respectively.</p>
-<p><em>Spanner Only</em>: Using monotonically changing primary keys is considered an
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><a class="reference external" href="https://cloud.google.com/spanner">Spanner</a> only:</p>
+<p>Using monotonically changing primary keys is considered an
 anti-pattern in Spanner and leads to performance problems. Additionally, Spanner
 does not currently include an idiom comparable to the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> object.  This
 means the <code class="docutils literal notranslate"><span class="pre">BigIntBase</span></code> and <code class="docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code> are not currently supported for
