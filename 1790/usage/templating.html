@@ -1324,7 +1324,7 @@ mako</label><div class="sd-tab-content docutils">
 </section>
 <section id="template-responses">
 <h2>Template responses<a class="headerlink" href="#template-responses" title="Permalink to this heading">#</a></h2>
-<p>Once you have a template engine registered you can return <a class="reference internal" href="../reference/response/index.html#litestar.response.TemplateResponse" title="litestar.response.TemplateResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">templates</span> <span class="pre">responses</span></code></a> from
+<p>Once you have a template engine registered you can return <a class="reference internal" href="../reference/response/index.html#litestar.response.Template" title="litestar.response.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">templates</span> <span class="pre">responses</span></code></a> from
 your route handlers:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
@@ -1334,13 +1334,13 @@ Jinja</label><div class="sd-tab-content docutils">
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.jinja</span> <span class="kn">import</span> <span class="n">JinjaTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TemplateResponse</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.jinja2&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.jinja2&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1360,13 +1360,13 @@ mako</label><div class="sd-tab-content docutils">
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.mako</span> <span class="kn">import</span> <span class="n">MakoTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TemplateResponse</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.mako&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.mako&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1479,17 +1479,15 @@ back to the server when the form is submitted, and is checked by the CSRF middle
 </section>
 <section id="passing-template-context">
 <h3>Passing template context<a class="headerlink" href="#passing-template-context" title="Permalink to this heading">#</a></h3>
-<p>Passing context to the template is very simple - its one of the kwargs expected by the <a class="reference internal" href="../reference/response/index.html#litestar.response.TemplateResponse" title="litestar.response.TemplateResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></a>
+<p>Passing context to the template is very simple - its one of the kwargs expected by the <a class="reference internal" href="../reference/response/index.html#litestar.response.Template" title="litestar.response.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></a>
 container, so simply pass a string keyed dictionary of values:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/info&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span>
-        <span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;info.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;numbers&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567890&quot;</span><span class="p">}</span>
-    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;info.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;numbers&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567890&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </section>
@@ -1536,7 +1534,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.jinja</span> <span class="kn">import</span> <span class="n">JinjaTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
@@ -1559,8 +1557,8 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TemplateResponse</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.jinja2&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.jinja2&quot;</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1580,7 +1578,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.jinja</span> <span class="kn">import</span> <span class="n">JinjaTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
@@ -1603,8 +1601,8 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TemplateResponse</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.jinja2&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.jinja2&quot;</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1637,7 +1635,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.mako</span> <span class="kn">import</span> <span class="n">MakoTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
@@ -1660,8 +1658,8 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TemplateResponse</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.mako&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.mako&quot;</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1681,7 +1679,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.mako</span> <span class="kn">import</span> <span class="n">MakoTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">TemplateResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
@@ -1704,8 +1702,8 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TemplateResponse</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">TemplateResponse</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.mako&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;index.html.mako&quot;</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>

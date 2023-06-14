@@ -1530,7 +1530,7 @@ be used to dynamically retrieve (i.e. during runtime) a mapping containing the r
 it can be used to build a URL path for that handler:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">NotFoundException</span>
-<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">RedirectResponse</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Redirect</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/abc&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;one&quot;</span><span class="p">)</span>
@@ -1549,7 +1549,7 @@ it can be used to build a URL path for that handler:</p>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/{handler_name:str}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;four&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler_four</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RedirectResponse</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">handler_four</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Redirect</span><span class="p">:</span>
     <span class="n">handler_index</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_handler_index_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">handler_index</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no handler matching the name </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> was found&quot;</span><span class="p">)</span>
@@ -1558,13 +1558,13 @@ it can be used to build a URL path for that handler:</p>
     <span class="c1"># do something with the handler index below, e.g. send a redirect response to the handler, or access</span>
     <span class="c1"># handler.opt and some values stored there etc.</span>
 
-    <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">handler_index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Redirect</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">handler_index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/redirect/{param_value:int}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;five&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">handler_five</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">param_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RedirectResponse</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">handler_five</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">param_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Redirect</span><span class="p">:</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">route_reverse</span><span class="p">(</span><span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">param_value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">RedirectResponse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Redirect</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">handler_one</span><span class="p">,</span> <span class="n">handler_two</span><span class="p">,</span> <span class="n">handler_three</span><span class="p">])</span>

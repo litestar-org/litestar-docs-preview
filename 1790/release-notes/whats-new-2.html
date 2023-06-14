@@ -1306,19 +1306,19 @@ following the last alpha release of Starlite 2.0,
 <tr class="row-even"><td colspan="2"><p><strong>Response Containers</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.File</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.FileResponse" title="litestar.response.FileResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.FileResponse</span></code></a></p></td>
+<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.File" title="litestar.response.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.File</span></code></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Redirect</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.RedirectResponse" title="litestar.response.RedirectResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.RedirectResponse</span></code></a></p></td>
+<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.Redirect" title="litestar.response.Redirect"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.Redirect</span></code></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.ResponseContainer</span></code></p></td>
 <td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.Response</span></code></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Stream</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.StreamingResponse" title="litestar.response.StreamingResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.StreamingResponse</span></code></a></p></td>
+<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.Stream" title="litestar.response.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.Stream</span></code></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">starlite.Template</span></code></p></td>
-<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.TemplateResponse" title="litestar.response.TemplateResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.TemplateResponse</span></code></a></p></td>
+<td><p><a class="reference internal" href="../reference/response/index.html#litestar.response.Template" title="litestar.response.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">response.Template</span></code></a></p></td>
 </tr>
 <tr class="row-even"><td colspan="2"><p><strong>Exceptions</strong></p></td>
 </tr>
@@ -1799,7 +1799,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;e6c88961-e531-4ef8-80bf-c8bbd745931a&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;93f3c7c2-45b4-42ae-9bc6-79ea97572d18&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1984,7 +1984,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;ecec9a2d-3fb9-42f8-926f-d06e8089b878&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;35edef44-762a-4562-b8e8-7570aac841bf&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
