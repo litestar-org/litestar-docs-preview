@@ -1054,17 +1054,23 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/partial.html">partial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins.html">plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/response.html">response</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/response_containers.html">response_containers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/template.html">template</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/routes.html">routes</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/serialization.html">serialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/static_files.html">static_files</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/file.html">file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/memory.html">memory</a></li>
@@ -1079,11 +1085,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/typing.html">typing</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../topics/sync-vs-async.html">Sync vs. Async</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../migration/flask.html">From Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../migration/fastapi.html">From Starlette / FastAPI</a></li>
 </ul>
@@ -1166,7 +1172,7 @@ Litestar take care of the rest:</p>
 </pre></div>
 </div>
 <p>In the example above, the route handler function returns an instance of the <code class="docutils literal notranslate"><span class="pre">Resource</span></code> pydantic class. This value will
-then be used by Litestar to construct an instance of the <a class="reference internal" href="../reference/response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a>
+then be used by Litestar to construct an instance of the <a class="reference internal" href="../reference/response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a>
 class using defaults values: the response status code will be set to <code class="docutils literal notranslate"><span class="pre">200</span></code> and it’s <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header will be set
 to <code class="docutils literal notranslate"><span class="pre">application/json</span></code>. The <code class="docutils literal notranslate"><span class="pre">Resource</span></code> instance will be serialized into JSON and set as the response body.</p>
 <section id="media-type">
@@ -1370,7 +1376,7 @@ extra functionality.</p>
 <h2>Returning responses<a class="headerlink" href="#returning-responses" title="Permalink to this heading">#</a></h2>
 <p>While the default response handling fits most use cases, in some cases you need to be able to return a response instance
 directly.</p>
-<p>Litestar allows you to return any class inheriting from the <a class="reference internal" href="../reference/response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> class. Thus, the below
+<p>Litestar allows you to return any class inheriting from the <a class="reference internal" href="../reference/response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> class. Thus, the below
 example will work perfectly fine:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
@@ -1400,9 +1406,9 @@ example will work perfectly fine:</p>
 </div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>In the case of the builtin <a class="reference internal" href="../reference/response.html#litestar.response.TemplateResponse" title="litestar.response.TemplateResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateResponse</span></code></a>,
-<a class="reference internal" href="../reference/response.html#litestar.response.FileResponse" title="litestar.response.FileResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileResponse</span></code></a>, <a class="reference internal" href="../reference/response.html#litestar.response.StreamingResponse" title="litestar.response.StreamingResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingResponse</span></code></a>, and
-<a class="reference internal" href="../reference/response.html#litestar.response.RedirectResponse" title="litestar.response.RedirectResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectResponse</span></code></a> you should use the response “response containers”, otherwise
+<p>In the case of the builtin <a class="reference internal" href="../reference/response/index.html#litestar.response.Template" title="litestar.response.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></a>,
+<a class="reference internal" href="../reference/response/index.html#litestar.response.File" title="litestar.response.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>, <a class="reference internal" href="../reference/response/index.html#litestar.response.Stream" title="litestar.response.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>, and
+<a class="reference internal" href="../reference/response/index.html#litestar.response.Redirect" title="litestar.response.Redirect"><code class="xref py py-class docutils literal notranslate"><span class="pre">Redirect</span></code></a> you should use the response “response containers”, otherwise
 OpenAPI documentation will not be generated correctly. For more details see the respective documentation sections:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#template-responses">Template responses</a></p></li>
@@ -1413,7 +1419,7 @@ OpenAPI documentation will not be generated correctly. For more details see the 
 </div>
 <section id="annotating-responses">
 <h3>Annotating responses<a class="headerlink" href="#annotating-responses" title="Permalink to this heading">#</a></h3>
-<p>As you can see above, the <a class="reference internal" href="../reference/response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> class accepts a generic argument. This allows Litestar
+<p>As you can see above, the <a class="reference internal" href="../reference/response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> class accepts a generic argument. This allows Litestar
 to infer the response body when generating the OpenAPI docs.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -2139,7 +2145,7 @@ status code in the 30x range.</p>
 <p>In Litestar, a redirect response looks like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_307_TEMPORARY_REDIRECT</span>
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">Redirect</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Redirect</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/some-path&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_307_TEMPORARY_REDIRECT</span><span class="p">)</span>
@@ -2147,27 +2153,22 @@ status code in the 30x range.</p>
     <span class="c1"># do some stuff here</span>
     <span class="c1"># ...</span>
     <span class="c1"># finally return redirect</span>
-    <span class="k">return</span> <span class="n">Redirect</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/other-path&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Redirect</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;/other-path&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To return a redirect response you should do the following:</p>
 <ul class="simple">
 <li><p>set an appropriate status code for the route handler (301, 302, 303, 307, 308)</p></li>
-<li><p>annotate the return value of the route handler as returning <code class="docutils literal notranslate"><span class="pre">Redirect</span></code></p></li>
-<li><p>return an instance of the <code class="docutils literal notranslate"><span class="pre">Redirect</span></code> class with the desired redirect path</p></li>
+<li><p>annotate the return value of the route handler as returning <a class="reference internal" href="../reference/response/index.html#litestar.response.Redirect" title="litestar.response.Redirect"><code class="xref py py-class docutils literal notranslate"><span class="pre">Redirect</span></code></a></p></li>
+<li><p>return an instance of the <a class="reference internal" href="../reference/response/index.html#litestar.response.Redirect" title="litestar.response.Redirect"><code class="xref py py-class docutils literal notranslate"><span class="pre">Redirect</span></code></a> class with the desired redirect path</p></li>
 </ul>
-<section id="the-redirect-class">
-<h3>The Redirect Class<a class="headerlink" href="#the-redirect-class" title="Permalink to this heading">#</a></h3>
-<p><a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.Redirect" title="litestar.response_containers.Redirect"><code class="xref py py-class docutils literal notranslate"><span class="pre">API</span> <span class="pre">Reference</span></code></a> is a container class used to generate redirect responses and
-their respective OpenAPI documentation.</p>
-</section>
 </section>
 <section id="file-responses">
 <h2>File Responses<a class="headerlink" href="#file-responses" title="Permalink to this heading">#</a></h2>
 <p>File responses send a file:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">File</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">File</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/file-download&quot;</span><span class="p">)</span>
@@ -2178,7 +2179,7 @@ their respective OpenAPI documentation.</p>
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.File" title="litestar.response_containers.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> class expects two kwargs:</p>
+<p>The <a class="reference internal" href="../reference/response/index.html#litestar.response.File" title="litestar.response.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a> class expects two kwargs:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: path of the file to download.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: the filename to set in the response
@@ -2187,7 +2188,7 @@ attachment.</p></li>
 </ul>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>When a route handler’s return value is annotated with <a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.File" title="litestar.response_containers.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>, the default
+<p>When a route handler’s return value is annotated with <a class="reference internal" href="../reference/response/index.html#litestar.response.File" title="litestar.response.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>, the default
 <code class="docutils literal notranslate"><span class="pre">media_type</span></code> for the route_handler is switched from <a class="reference internal" href="../reference/enums.html#litestar.enums.MediaType" title="litestar.enums.MediaType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MediaType.JSON</span></code></a> to
 <a class="reference internal" href="../reference/enums.html#litestar.enums.MediaType" title="litestar.enums.MediaType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MediaType.TEXT</span></code></a> (i.e. <code class="docutils literal notranslate"><span class="pre">&quot;text/plain&quot;</span></code>). If the file being sent has an
 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">IANA media type</a>, you should set it
@@ -2196,7 +2197,7 @@ as the value for <code class="docutils literal notranslate"><span class="pre">me
 <p>For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">File</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">File</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/file-download&quot;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/pdf&quot;</span><span class="p">)</span>
@@ -2210,8 +2211,8 @@ as the value for <code class="docutils literal notranslate"><span class="pre">me
 </section>
 <section id="streaming-responses">
 <h2>Streaming Responses<a class="headerlink" href="#streaming-responses" title="Permalink to this heading">#</a></h2>
-<p>To return a streaming response use the <a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.Stream" title="litestar.response_containers.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> class. The Stream class receives a
-single required kwarg - <code class="docutils literal notranslate"><span class="pre">iterator</span></code>:</p>
+<p>To return a streaming response use the <a class="reference internal" href="../reference/response/index.html#litestar.response.Stream" title="litestar.response.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> class. The class
+receives a single positional arg, that must be an iterator delivering the stream:</p>
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-2">
@@ -2221,7 +2222,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">Stream</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Stream</span>
 <span class="kn">from</span> <span class="nn">litestar.serialization</span> <span class="kn">import</span> <span class="n">encode_json</span>
 
 
@@ -2233,7 +2234,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/time&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">stream_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Stream</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Stream</span><span class="p">(</span><span class="n">iterator</span><span class="o">=</span><span class="n">my_generator</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">Stream</span><span class="p">(</span><span class="n">my_generator</span><span class="p">())</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">stream_time</span><span class="p">])</span>
@@ -2248,7 +2249,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">Stream</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Stream</span>
 <span class="kn">from</span> <span class="nn">litestar.serialization</span> <span class="kn">import</span> <span class="n">encode_json</span>
 
 
@@ -2260,7 +2261,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/time&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">stream_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Stream</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Stream</span><span class="p">(</span><span class="n">iterator</span><span class="o">=</span><span class="n">my_generator</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">Stream</span><span class="p">(</span><span class="n">my_generator</span><span class="p">())</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">stream_time</span><span class="p">])</span>
@@ -2270,8 +2271,8 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can use different kinds of values of the <cite>iterator</cite> keyword - it can be a callable returning a sync or async
-generator. The generator itself. A sync or async iterator class, or and instance of this class.</p>
+<p>You can use different kinds of values for the iterator. It can be a callable returning a sync or async generator,
+a generator itself, a sync or async iterator class, or an instance of a sync or async iterator class.</p>
 </div>
 </section>
 <section id="template-responses">
@@ -2280,22 +2281,21 @@ generator. The generator itself. A sync or async iterator class, or and instance
 <a class="reference internal" href="templating.html#registering-a-template-engine"><span class="std std-ref">register a template engine</span></a> on the application level. Once an
 engine is in place, you can use a template response like so:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/info&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;info.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;info.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">})</span>
 </pre></div>
 </div>
-<p>In the above example, <a class="reference internal" href="../reference/response_containers.html#litestar.response_containers.Template" title="litestar.response_containers.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></a> is passed the template name, which is a path
-like value, and a context dictionary that maps string keys into values that will be rendered in the template.</p>
+<p>In the above example, <a class="reference internal" href="../reference/response/index.html#litestar.response.Template" title="litestar.response.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></a> is passed the template name, which is a
+path like value, and a context dictionary that maps string keys into values that will be rendered in the template.</p>
 </section>
 <section id="custom-responses">
 <h2>Custom Responses<a class="headerlink" href="#custom-responses" title="Permalink to this heading">#</a></h2>
-<p>While Litestar supports the serialization of many types by default, sometimes you
-want to return something that’s not supported. In those cases it’s convenient to make
-use of a custom response class.</p>
+<p>While Litestar supports the serialization of many types by default, sometimes you want to return something that’s not
+supported. In those cases it’s convenient to make use of a custom response class.</p>
 <p>The example below illustrates how to deal with <a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.MultiDict" title="litestar.datastructures.MultiDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiDict</span></code></a>
 instances.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">get</span>
@@ -2326,15 +2326,15 @@ instances.</p>
  :class: seealso</p>
 <p>Response classes are part of Litestar’s layered architecture, which means you can
 set a response class on every layer of the application. If you have set a response
-class on multiple layers, the layer closes to the route handler will take precedence.</p>
+class on multiple layers, the layer closest to the route handler will take precedence.</p>
 <p>You can read more about this here: <a class="reference internal" href="the-litestar-app.html#layered-architecture"><span class="std std-ref">Layered architecture</span></a></p>
 </div>
 </section>
 <section id="background-tasks">
 <h2>Background Tasks<a class="headerlink" href="#background-tasks" title="Permalink to this heading">#</a></h2>
-<p>All Litestar responses and response containers (e.g. <code class="docutils literal notranslate"><span class="pre">File</span></code>, <code class="docutils literal notranslate"><span class="pre">Template</span></code>, etc.) allow passing in a <code class="docutils literal notranslate"><span class="pre">background</span></code>
-kwarg. This kwarg accepts either an instance of <a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTask" title="litestar.background_tasks.BackgroundTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTask</span></code></a>
-or an instance of <a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTasks" title="litestar.background_tasks.BackgroundTasks"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTasks</span></code></a>, which wraps an iterable of
+<p>All Litestar responses allow passing in a <code class="docutils literal notranslate"><span class="pre">background</span></code> kwarg. This kwarg accepts either an instance of
+<a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTask" title="litestar.background_tasks.BackgroundTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTask</span></code></a> or an instance of
+<a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTasks" title="litestar.background_tasks.BackgroundTasks"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTasks</span></code></a>, which wraps an iterable of
 <a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTask" title="litestar.background_tasks.BackgroundTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTask</span></code></a> instances.</p>
 <p>A background task is a sync or async callable (function, method, or class that implements the <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#object.__call__" title="(in Python v3.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__call__()</span></code></a>
 dunder method) that will be called after the response finishes sending the data.</p>
@@ -3199,10 +3199,7 @@ the <a class="reference internal" href="../reference/pagination.html#litestar.pa
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redirect-responses">Redirect Responses</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-redirect-class">The Redirect Class</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redirect-responses">Redirect Responses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-responses">File Responses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming-responses">Streaming Responses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#template-responses">Template Responses</a></li>

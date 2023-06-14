@@ -1054,17 +1054,23 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="partial.html">partial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins.html">plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="response.html">response</a></li>
-<li class="toctree-l2"><a class="reference internal" href="response_containers.html">response_containers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/template.html">template</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="routes.html">routes</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="serialization.html">serialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="static_files.html">static_files</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="stores/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stores/file.html">file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stores/memory.html">memory</a></li>
@@ -1079,11 +1085,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="typing.html">typing</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../topics/sync-vs-async.html">Sync vs. Async</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../migration/flask.html">From Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../migration/fastapi.html">From Starlette / FastAPI</a></li>
 </ul>
@@ -1440,7 +1446,7 @@ Media-Type.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or
 <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -1483,12 +1489,12 @@ ValidationException will be added automatically for the schema if any validation
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.handlers.HTTPRouteHandler.resolve_response_class">
-<span class="sig-name descname"><span class="pre">resolve_response_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.base.Response"><span class="pre">litestar.response.base.Response</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler.resolve_response_class" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">resolve_response_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="response/base.html#litestar.response.base.Response" title="litestar.response.base.Response"><span class="pre">litestar.response.base.Response</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler.resolve_response_class" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the closest custom Response class in the owner graph or the default Response class.</p>
 <p>This method is memoized so the computation occurs only once.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The default <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> class for the route handler.</p>
+<dd class="field-odd"><p>The default <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> class for the route handler.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1559,12 +1565,12 @@ This method is memoized so the computation occurs only once.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.handlers.HTTPRouteHandler.to_response">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><span class="pre">Litestar</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><span class="pre">Request</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="types.html#litestar.types.ASGIApp" title="litestar.types.ASGIApp"><span class="pre">ASGIApp</span></a></span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler.to_response" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> from the handler by resolving and calling it.</p>
+<dd><p>Return a <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> from the handler by resolving and calling it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>app</strong> – The <a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> app instance</p></li>
-<li><p><strong>data</strong> – Either an instance of a <a class="reference internal" href="response_containers.html#litestar.response_containers.ResponseContainer" title="litestar.response_containers.ResponseContainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseContainer</span></code></a>,
+<li><p><strong>data</strong> – Either an instance of a <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a>,
 a Response instance or an arbitrary value.</p></li>
 <li><p><strong>request</strong> – A <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> instance</p></li>
 </ul>
@@ -1793,7 +1799,7 @@ valid IANA Media-Type.</p></li>
 <li><p><strong>name</strong> – A string identifying the route handler.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -1877,7 +1883,7 @@ valid IANA Media-Type.</p></li>
 <li><p><strong>name</strong> – A string identifying the route handler.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -1971,7 +1977,7 @@ valid IANA Media-Type.</p></li>
 <li><p><strong>name</strong> – A string identifying the route handler.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -2055,7 +2061,7 @@ valid IANA Media-Type.</p></li>
 <li><p><strong>name</strong> – A string identifying the route handler.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -2139,7 +2145,7 @@ valid IANA Media-Type.</p></li>
 <li><p><strong>name</strong> – A string identifying the route handler.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -2223,7 +2229,7 @@ valid IANA Media-Type.</p></li>
 <li><p><strong>name</strong> – A string identifying the route handler.</p></li>
 <li><p><strong>opt</strong> – A string keyed mapping of arbitrary values that can be accessed in <a class="reference internal" href="types.html#litestar.types.Guard" title="litestar.types.Guard"><code class="xref py py-class docutils literal notranslate"><span class="pre">Guards</span></code></a> or
 wherever you have access to <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> or <a class="reference internal" href="types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGI</span> <span class="pre">Scope</span></code></a>.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as route handler’s
 default response.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
