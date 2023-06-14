@@ -1151,7 +1151,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.handlers.ASGIRouteHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.handlers.</span></span><span class="sig-name descname"><span class="pre">ASGIRouteHandler</span></span><a class="headerlink" href="#litestar.handlers.ASGIRouteHandler" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a>[<a class="reference internal" href="#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.ASGIRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIRouteHandler</span></code></a>]</p>
+<dd><p>Bases: <a class="reference internal" href="#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a></p>
 <p>ASGI Route Handler decorator.</p>
 <p>Use this decorator to decorate ASGI applications.</p>
 <dl class="py method">
@@ -1188,7 +1188,7 @@ are used to deliver static files.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.handlers.BaseRouteHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.handlers.</span></span><span class="sig-name descname"><span class="pre">BaseRouteHandler</span></span><a class="headerlink" href="#litestar.handlers.BaseRouteHandler" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base route handler.</p>
 <p>Serves as a subclass for all route handlers</p>
 <dl class="py method">
@@ -1275,7 +1275,7 @@ modelling.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="litestar.handlers.BaseRouteHandler.ownership_layers">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ownership_layers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="controller.html#litestar.controller.Controller" title="litestar.controller.Controller"><span class="pre">Controller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="router.html#litestar.router.Router" title="litestar.router.Router"><span class="pre">Router</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.handlers.BaseRouteHandler.ownership_layers" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ownership_layers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Self</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="controller.html#litestar.controller.Controller" title="litestar.controller.Controller"><span class="pre">Controller</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="router.html#litestar.router.Router" title="litestar.router.Router"><span class="pre">Router</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.handlers.BaseRouteHandler.ownership_layers" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the handler layers from the app down to the route handler.</p>
 <p><code class="docutils literal notranslate"><span class="pre">app</span> <span class="pre">-&gt;</span> <span class="pre">...</span> <span class="pre">-&gt;</span> <span class="pre">route</span> <span class="pre">handler</span></code></p>
 </dd></dl>
@@ -1395,7 +1395,7 @@ This method is memoized so the computation occurs only once.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.handlers.HTTPRouteHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.handlers.</span></span><span class="sig-name descname"><span class="pre">HTTPRouteHandler</span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a>[<a class="reference internal" href="#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a>]</p>
+<dd><p>Bases: <a class="reference internal" href="#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a></p>
 <p>HTTP Route Decorator.</p>
 <p>Use this decorator to decorate an HTTP handler with multiple methods.</p>
 <dl class="py method">
@@ -1685,8 +1685,14 @@ have access to <a class="reference internal" href="connection.html#litestar.conn
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.handlers.WebsocketListener.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.WebsocketListener.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="router.html#litestar.router.Router" title="litestar.router.Router"><span class="pre">Router</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.WebsocketListener.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Initialize a WebsocketListener instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>owner</strong> – The <a class="reference internal" href="router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> instance that owns this listener.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.handlers.WebsocketListener.on_receive">
@@ -1704,7 +1710,7 @@ according to handler configuration.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.handlers.WebsocketRouteHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.handlers.</span></span><span class="sig-name descname"><span class="pre">WebsocketRouteHandler</span></span><a class="headerlink" href="#litestar.handlers.WebsocketRouteHandler" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a>[<a class="reference internal" href="#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebsocketRouteHandler</span></code></a>]</p>
+<dd><p>Bases: <a class="reference internal" href="#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a></p>
 <p>Websocket route handler decorator.</p>
 <p>Use this decorator to decorate websocket handler functions.</p>
 <dl class="py method">
