@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="routes" href="routes.html" />
-    <link rel="prev" title="response_containers" href="response_containers.html" />
+    <link rel="prev" title="template" href="response/template.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -1054,17 +1054,23 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="partial.html">partial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins.html">plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="response.html">response</a></li>
-<li class="toctree-l2"><a class="reference internal" href="response_containers.html">response_containers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="response/template.html">template</a></li>
+</ul>
+</li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="routes.html">routes</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="serialization.html">serialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="static_files.html">static_files</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="stores/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stores/file.html">file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stores/memory.html">memory</a></li>
@@ -1079,11 +1085,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="typing.html">typing</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../topics/sync-vs-async.html">Sync vs. Async</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../migration/flask.html">From Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../migration/fastapi.html">From Starlette / FastAPI</a></li>
 </ul>
@@ -1186,7 +1192,7 @@ wherever you have access to <a class="reference internal" href="connection.html#
 paths.</p></li>
 <li><p><strong>path</strong> – A path fragment that is prefixed to all route handlers, controllers and other routers associated
 with the router instance.</p></li>
-<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as the default for
+<li><p><strong>response_class</strong> – A custom subclass of <a class="reference internal" href="response/index.html#litestar.response.Response" title="litestar.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> to be used as the default for
 all route handlers, controllers and other routers associated with the router instance.</p></li>
 <li><p><strong>response_cookies</strong> – A sequence of <a class="reference internal" href="datastructures.html#litestar.datastructures.Cookie" title="litestar.datastructures.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances.</p></li>
 <li><p><strong>response_headers</strong> – A string keyed mapping of <a class="reference internal" href="datastructures.html#litestar.datastructures.ResponseHeader" title="litestar.datastructures.ResponseHeader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseHeader</span></code></a>
@@ -1257,12 +1263,12 @@ been decorated by any of the routing decorators, e.g. <a class="reference intern
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="response_containers.html"
+       href="response/template.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">response_containers</p>
+        <p class="prev-next-title">template</p>
       </div>
     </a>
     <a class="right-next"

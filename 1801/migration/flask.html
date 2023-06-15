@@ -1054,17 +1054,23 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/partial.html">partial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins.html">plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/response.html">response</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/response_containers.html">response_containers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/template.html">template</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/routes.html">routes</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/serialization.html">serialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/static_files.html">static_files</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/base.html">base</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/file.html">file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/memory.html">memory</a></li>
@@ -1079,11 +1085,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/typing.html">typing</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../topics/sync-vs-async.html">Sync vs. Async</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Migrating to Litestar</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Migrating to Litestar</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-28"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">From Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fastapi.html">From Starlette / FastAPI</a></li>
 </ul>
@@ -1493,13 +1499,13 @@ Flask</label><div class="sd-tab-content docutils">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.jinja</span> <span class="kn">import</span> <span class="n">JinjaTemplateEngine</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/hello/{name:str}&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">response_name</span><span class="o">=</span><span class="s2">&quot;hello.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1602,7 +1608,7 @@ Flask</label><div class="sd-tab-content docutils">
 </input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-11">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-<span class="kn">from</span> <span class="nn">litestar.response_containers</span> <span class="kn">import</span> <span class="n">Redirect</span>
+<span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Redirect</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
@@ -1612,7 +1618,7 @@ Litestar</label><div class="sd-tab-content docutils">
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/hello&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Redirect</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Redirect</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Redirect</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">hello</span><span class="p">])</span>
