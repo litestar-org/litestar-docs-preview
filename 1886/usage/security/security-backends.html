@@ -1233,13 +1233,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_user_handler</span><span class="p">(</span>
     <span class="n">session</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">connection</span><span class="p">:</span> <span class="s2">&quot;ASGIConnection[Any, Any, Any, Any]&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
-    <span class="c1"># we retrieve the user instance based on session data</span>
-
-    <span class="n">user_id</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">user_id</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">MOCK_DB</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">MOCK_DB</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">user_id</span> <span class="o">:=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">))</span> <span class="k">else</span> <span class="kc">None</span>
 
 
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
@@ -1386,13 +1380,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_user_handler</span><span class="p">(</span>
     <span class="n">session</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">connection</span><span class="p">:</span> <span class="s2">&quot;ASGIConnection[Any, Any, Any, Any]&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
-    <span class="c1"># we retrieve the user instance based on session data</span>
-
-    <span class="n">user_id</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">user_id</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">MOCK_DB</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">MOCK_DB</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">user_id</span> <span class="o">:=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">))</span> <span class="k">else</span> <span class="kc">None</span>
 
 
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
@@ -1539,13 +1527,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_user_handler</span><span class="p">(</span>
     <span class="n">session</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">connection</span><span class="p">:</span> <span class="s2">&quot;ASGIConnection[Any, Any, Any, Any]&quot;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="c1"># we retrieve the user instance based on session data</span>
-
-    <span class="n">user_id</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">user_id</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">MOCK_DB</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">MOCK_DB</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">user_id</span> <span class="o">:=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">))</span> <span class="k">else</span> <span class="kc">None</span>
 
 
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>

@@ -1219,12 +1219,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">jwt_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">jwt_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1307,12 +1304,9 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">jwt_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">jwt_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1395,12 +1389,9 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">jwt_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">jwt_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1492,12 +1483,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[User]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">jwt_cookie_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-    <span class="c1"># you can do whatever you want to update the response instance here</span>
-    <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">jwt_cookie_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1582,12 +1568,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[User]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">jwt_cookie_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-    <span class="c1"># you can do whatever you want to update the response instance here</span>
-    <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">jwt_cookie_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1672,12 +1653,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[User]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">jwt_cookie_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-    <span class="c1"># you can do whatever you want to update the response instance here</span>
-    <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">jwt_cookie_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1770,25 +1746,19 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s2">&quot;Request[Any, Any, Any]&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[OAuth2Login]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
     <span class="c1"># if we do not define a response body, the login process will return a standard OAuth2 login response.  Note the `Response[OAuth2Login]` return type.</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
 
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login_custom&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_custom_response_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[User]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
 
-    <span class="c1"># If you&#39;d like to define a custom response body, use the `response_body` parameter.  Note the `Response[User]` return type.</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1874,25 +1844,19 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s2">&quot;Request[Any, Any, Any]&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[OAuth2Login]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
     <span class="c1"># if we do not define a response body, the login process will return a standard OAuth2 login response.  Note the `Response[OAuth2Login]` return type.</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
 
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login_custom&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_custom_response_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[User]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
 
-    <span class="c1"># If you&#39;d like to define a custom response body, use the `response_body` parameter.  Note the `Response[User]` return type.</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
@@ -1978,25 +1942,19 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s2">&quot;Request[Any, Any, Any]&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[OAuth2Login]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
     <span class="c1"># if we do not define a response body, the login process will return a standard OAuth2 login response.  Note the `Response[OAuth2Login]` return type.</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
 
 
 <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/login_custom&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">login_custom_response_handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Response[User]&quot;</span><span class="p">:</span>
     <span class="n">MOCK_DB</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span>
 
-    <span class="c1"># If you&#39;d like to define a custom response body, use the `response_body` parameter.  Note the `Response[User]` return type.</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
     <span class="c1"># you can do whatever you want to update the response instance here</span>
     <span class="c1"># e.g. response.set_cookie(...)</span>
-
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">return</span> <span class="n">oauth2_auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">id</span><span class="p">),</span> <span class="n">response_body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 
 <span class="c1"># We also have some other routes, for example:</span>
