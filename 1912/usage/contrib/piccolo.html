@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Data Transfer Object Tutorial &#8212; Litestar Framework</title>
+    <title>Piccolo ORM &#8212; Litestar Framework</title>
   
   
   
@@ -49,13 +49,13 @@
     <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/litestar-theme.js"></script>
     <script src="../../_static/design-tabs.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/dto-tutorial/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/contrib/piccolo';</script>
     <script src="../../_static/versioning.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Our first DTO" href="01-simple-dto-exclude.html" />
-    <link rel="prev" title="Final touches and recap" href="../sqlalchemy/4-final-touches-and-recap.html" />
+    <link rel="next" title="SQLAlchemy" href="sqlalchemy/index.html" />
+    <link rel="prev" title="Prometheus Instrumentation" href="prometheus.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -867,98 +867,98 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../todo-app/index.html">Developing a basic TODO application</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../todo-app/0-application-basics.html">Application basics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../todo-app/1-accessing-the-list.html">Accessing the list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/todo-app/index.html">Developing a basic TODO application</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/0-application-basics.html">Application basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/1-accessing-the-list.html">Accessing the list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/0-introduction.html">Introduction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Data Transfer Object Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="01-simple-dto-exclude.html">Our first DTO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02-nested-exclude.html">Excluding from nested models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03-nested-collection-exclude.html">Excluding from collections of nested models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04-max-nested-depth.html">Max nested depth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="05-renaming-fields.html">Renaming fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="06-receiving-data.html">Receiving data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07-read-only-fields.html">Read only fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="08-dto-data.html">Accessing the data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="09-updating.html">Updating instances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/dto-tutorial/index.html">Data Transfer Object Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/01-simple-dto-exclude.html">Our first DTO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/02-nested-exclude.html">Excluding from nested models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/03-nested-collection-exclude.html">Excluding from collections of nested models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/04-max-nested-depth.html">Max nested depth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/05-renaming-fields.html">Renaming fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/06-receiving-data.html">Receiving data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/07-read-only-fields.html">Read only fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/08-dto-data.html">Accessing the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/09-updating.html">Updating instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../repository-tutorial/01-modeling-and-features.html">Introduction to Database Modeling and Repository Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modeling-and-features.html">Introduction to Database Modeling and Repository Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
 
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../usage/index.html">Usage</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/the-litestar-app.html">The Litestar App</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/routing.html">Routing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/route-handlers.html">Route handlers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/parameters.html">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/request-data.html">Request data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/responses.html">Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/dependency-injection.html">Dependency Injection</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/dto/index.html">Data Transfer Object (DTO)</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/dto/0-basic-use.html">Basic Use</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/dto/1-dto-factory.html">DTO Factory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/dto/2-dto-interface.html">DTO Interface</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Usage</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../the-litestar-app.html">The Litestar App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../routing.html">Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../route-handlers.html">Route handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../request-data.html">Request data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../responses.html">Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dependency-injection.html">Dependency Injection</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../dto/index.html">Data Transfer Object (DTO)</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../dto/0-basic-use.html">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto/1-dto-factory.html">DTO Factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto/2-dto-interface.html">DTO Interface</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/websockets.html">WebSockets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/channels.html">Channels</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/middleware/index.html">Middleware</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/middleware/using-middleware.html">Using Middleware</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/middleware/builtin-middleware.html">Built-in middleware</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/middleware/creating-middleware.html">Creating Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../websockets.html">WebSockets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../channels.html">Channels</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../middleware/index.html">Middleware</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../middleware/using-middleware.html">Using Middleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../middleware/builtin-middleware.html">Built-in middleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../middleware/creating-middleware.html">Creating Middleware</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/security/index.html">Security</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/security/abstract-authentication-middleware.html">AbstractAuthenticationMiddleware</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/security/security-backends.html">Security Backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/security/guards.html">Guards</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../security/index.html">Security</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../security/abstract-authentication-middleware.html">AbstractAuthenticationMiddleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/security-backends.html">Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/guards.html">Guards</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/stores.html">Stores</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/testing.html">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/plugins.html">Plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/events.html">Event Emitters and Listeners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/openapi.html">OpenAPI integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/lifecycle-hooks.html">Life Cycle Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/caching.html">Caching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/templating.html">Templates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/exceptions.html">Exceptions and exception handling</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/contrib/htmx.html">HTMX Request Class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/contrib/jwt.html">JWT Security Backends</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/contrib/prometheus.html">Prometheus Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/contrib/piccolo.html">Piccolo ORM</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../usage/contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../usage/contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../usage/contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stores.html">Stores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../events.html">Event Emitters and Listeners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../openapi.html">OpenAPI integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lifecycle-hooks.html">Life Cycle Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../templating.html">Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exceptions.html">Exceptions and exception handling</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Contrib</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Piccolo ORM</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sqlalchemy/plugins/index.html">Plugins</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/cli.html">CLI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging.html">Debugging</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1132,9 +1132,12 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Tutorials</a></li>
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Usage</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Data Transfer Object Tutorial</li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Contrib</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Piccolo ORM</li>
   </ul>
 </nav>
 </div>
@@ -1151,65 +1154,218 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="data-transfer-object-tutorial">
-<h1>Data Transfer Object Tutorial<a class="headerlink" href="#data-transfer-object-tutorial" title="Permalink to this heading">#</a></h1>
-<div class="info admonition">
-<p class="admonition-title">Who is this tutorial for?</p>
-<p>This tutorial is intended to familiarize you with the basic concepts of Litestar’s
-Data Transfer Objects (DTOs). It is assumed that you are already familiar with
-Litestar and fundamental concepts such as route handlers. If not, it is recommended
-to first follow the
-<a class="reference external" href="../todo-app">Developing a basic TODO application</a> tutorial.</p>
-</div>
-<p>In this tutorial, we will walk through the process of modelling a simple data structure, and demonstrate how Litestar’s
-DTO factories can be used to help us build flexible applications. Lets get started!</p>
+  <section id="piccolo-orm">
+<h1>Piccolo ORM<a class="headerlink" href="#piccolo-orm" title="Permalink to this heading">#</a></h1>
+<p>Piccolo ORM is an easy-to-use async ORM and query builder and Litestar includes <a class="reference internal" href="../../reference/contrib/piccolo.html#litestar.contrib.piccolo.PiccoloDTO" title="litestar.contrib.piccolo.PiccoloDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">PiccoloDTO</span></code></a> class
+for data flow control. Example of a small application:</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-0">
+Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">app.py</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
 
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">uvicorn</span>
+<span class="kn">from</span> <span class="nn">piccolo.columns</span> <span class="kn">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">Varchar</span>
+<span class="kn">from</span> <span class="nn">piccolo.table</span> <span class="kn">import</span> <span class="n">Table</span><span class="p">,</span> <span class="n">create_db_tables</span>
 
-<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">MediaType</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span>
+<span class="kn">from</span> <span class="nn">litestar.contrib.piccolo</span> <span class="kn">import</span> <span class="n">PiccoloDTO</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span><span class="p">,</span> <span class="n">DTOData</span>
+<span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">NotFoundException</span>
 
-
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">email</span><span class="p">:</span> <span class="nb">str</span>
-
-
-<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/person/{name:str}&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Person</span><span class="p">:</span>
-    <span class="c1"># Your logic to retrieve the person goes here</span>
-    <span class="c1"># For demonstration purposes, a placeholder Person instance is returned</span>
-    <span class="k">return</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;email_of_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">@example.com&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.piccolo_conf</span> <span class="kn">import</span> <span class="n">DB</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_person</span><span class="p">])</span>
+<span class="k">class</span> <span class="nc">Task</span><span class="p">(</span><span class="n">Table</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">DB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An example table.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Varchar</span><span class="p">()</span>
+    <span class="n">completed</span> <span class="o">=</span> <span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PatchDTO</span><span class="p">(</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allow partial updates.&quot;&quot;&quot;</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">},</span> <span class="n">partial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="nd">@get</span><span class="p">(</span>
+    <span class="s2">&quot;/tasks&quot;</span><span class="p">,</span>
+    <span class="n">return_dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">Task</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="nd">@post</span><span class="p">(</span>
+    <span class="s2">&quot;/tasks&quot;</span><span class="p">,</span>
+    <span class="n">dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">return_dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_task</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Task</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">data</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">await</span> <span class="n">data</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="nd">@patch</span><span class="p">(</span>
+    <span class="s2">&quot;/tasks/{task_id:int}&quot;</span><span class="p">,</span>
+    <span class="n">dto</span><span class="o">=</span><span class="n">PatchDTO</span><span class="p">,</span>
+    <span class="n">return_dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">update_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DTOData</span><span class="p">[</span><span class="n">Task</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Task</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Task</span><span class="o">.</span><span class="n">objects</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="s2">&quot;Task does not exist&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">update_instance</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">result</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="nd">@delete</span><span class="p">(</span><span class="s2">&quot;/tasks/{task_id:int}&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">])</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">delete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Task</span><span class="o">.</span><span class="n">objects</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="s2">&quot;Task does not exist&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">task</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Tables creating</span>
+    <span class="k">await</span> <span class="n">create_db_tables</span><span class="p">(</span><span class="n">Task</span><span class="p">,</span> <span class="n">if_not_exists</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">tasks</span><span class="p">,</span>
+        <span class="n">create_task</span><span class="p">,</span>
+        <span class="n">delete_task</span><span class="p">,</span>
+        <span class="n">update_task</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>In this script, we define a data model, a route handler and an application instance.</p>
-<p>Our data model is a Python <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a> called <code class="docutils literal notranslate"><span class="pre">Person</span></code> which has three attributes:
-<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">age</span></code>, and <code class="docutils literal notranslate"><span class="pre">email</span></code>.</p>
-<p>The function called <code class="docutils literal notranslate"><span class="pre">get_person</span></code> that is decorated with <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.get" title="litestar.handlers.get"><code class="xref py py-class docutils literal notranslate"><span class="pre">&#64;get()</span></code></a> is a route handler
-with path <code class="docutils literal notranslate"><span class="pre">/person/{name:str}</span></code>, that serves <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">GET</a>
-requests. In the path, <code class="docutils literal notranslate"><span class="pre">{name:str}</span></code> represents a path parameter called <code class="docutils literal notranslate"><span class="pre">name</span></code> with a string type. The route handler
-receives the name from the path parameter and returns a <code class="docutils literal notranslate"><span class="pre">Person</span></code> object.</p>
-<p>Finally, we create an application instance and register the route handler with it.</p>
-<p>In Litestar, this pattern works “out-of-the-box” - that is, returning <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a>
-instances from handlers is natively supported. Litestar will take that dataclass instance, and transform it into
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> that can be sent over the network.</p>
-<p>Lets run it and see for ourselves!</p>
-<p>Save the above script as <code class="docutils literal notranslate"><span class="pre">app.py</span></code>, run it using the <code class="docutils literal notranslate"><span class="pre">litestar</span> <span class="pre">run</span></code> command, and then visit
-<a class="reference external" href="http://localhost:8000/person/peter">http://localhost:8000/person/peter</a> in your browser. You should see the
-following:</p>
-<img alt="../../_images/initial_pattern.png" class="align-center" src="../../_images/initial_pattern.png" />
-<p>However, real-world applications are rarely this simple. What if we want to restrict the information about users that we
-expose after they have been created? For example, we may want to hide the user’s email address from the response. This
-is where Data Transfer Objects come in.</p>
-<div class="toctree-wrapper compound">
+</div>
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-1">
+Python 3.9+</label><div class="sd-tab-content docutils">
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">app.py</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">import</span> <span class="nn">uvicorn</span>
+<span class="kn">from</span> <span class="nn">piccolo.columns</span> <span class="kn">import</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">Varchar</span>
+<span class="kn">from</span> <span class="nn">piccolo.table</span> <span class="kn">import</span> <span class="n">Table</span><span class="p">,</span> <span class="n">create_db_tables</span>
+
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">MediaType</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span>
+<span class="kn">from</span> <span class="nn">litestar.contrib.piccolo</span> <span class="kn">import</span> <span class="n">PiccoloDTO</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span><span class="p">,</span> <span class="n">DTOData</span>
+<span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">NotFoundException</span>
+
+<span class="kn">from</span> <span class="nn">.piccolo_conf</span> <span class="kn">import</span> <span class="n">DB</span>
+
+
+<span class="k">class</span> <span class="nc">Task</span><span class="p">(</span><span class="n">Table</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">DB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An example table.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Varchar</span><span class="p">()</span>
+    <span class="n">completed</span> <span class="o">=</span> <span class="n">Boolean</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PatchDTO</span><span class="p">(</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allow partial updates.&quot;&quot;&quot;</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">},</span> <span class="n">partial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="nd">@get</span><span class="p">(</span>
+    <span class="s2">&quot;/tasks&quot;</span><span class="p">,</span>
+    <span class="n">return_dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">Task</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="nd">@post</span><span class="p">(</span>
+    <span class="s2">&quot;/tasks&quot;</span><span class="p">,</span>
+    <span class="n">dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">return_dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_task</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Task</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">data</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">await</span> <span class="n">data</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<span class="nd">@patch</span><span class="p">(</span>
+    <span class="s2">&quot;/tasks/{task_id:int}&quot;</span><span class="p">,</span>
+    <span class="n">dto</span><span class="o">=</span><span class="n">PatchDTO</span><span class="p">,</span>
+    <span class="n">return_dto</span><span class="o">=</span><span class="n">PiccoloDTO</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+    <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">update_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DTOData</span><span class="p">[</span><span class="n">Task</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Task</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Task</span><span class="o">.</span><span class="n">objects</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="s2">&quot;Task does not exist&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">update_instance</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">result</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="nd">@delete</span><span class="p">(</span><span class="s2">&quot;/tasks/{task_id:int}&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Task&quot;</span><span class="p">])</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">delete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Task</span><span class="o">.</span><span class="n">objects</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="s2">&quot;Task does not exist&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">task</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Tables creating</span>
+    <span class="k">await</span> <span class="n">create_db_tables</span><span class="p">(</span><span class="n">Task</span><span class="p">,</span> <span class="n">if_not_exists</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">tasks</span><span class="p">,</span>
+        <span class="n">create_task</span><span class="p">,</span>
+        <span class="n">delete_task</span><span class="p">,</span>
+        <span class="n">update_task</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 
@@ -1225,20 +1381,20 @@ is where Data Transfer Objects come in.</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../sqlalchemy/4-final-touches-and-recap.html"
+       href="prometheus.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Final touches and recap</p>
+        <p class="prev-next-title">Prometheus Instrumentation</p>
       </div>
     </a>
     <a class="right-next"
-       href="01-simple-dto-exclude.html"
+       href="sqlalchemy/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Our first DTO</p>
+        <p class="prev-next-title">SQLAlchemy</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

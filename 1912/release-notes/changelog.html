@@ -951,6 +951,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../usage/contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../usage/contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../usage/contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage/contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -985,6 +986,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../reference/contrib/repository/abc.html">abc</a></li>
@@ -1155,8 +1157,8 @@ document.write(`
 <strong>Released: </strong>2023/06/16<section id="2.0.0beta1-feature">
 <h3>Features<a class="headerlink" href="#2.0.0beta1-feature" title="Permalink to this heading">#</a></h3>
 <dl>
-<dt>Expose <code class="docutils literal notranslate"><span class="pre">ParsedType</span></code> as public API<a class="headerlink reference internal" href="#2.0.0beta1-expose" id="2.0.0beta1-expose">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Expose the previously private <a class="reference internal" href="../reference/typing.html#litestar.typing.ParsedType" title="litestar.typing.ParsedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.typing.ParsedType</span></code></a>. This is
+<dt>Expose <code class="docutils literal notranslate"><span class="pre">FieldDefinition</span></code> as public API<a class="headerlink reference internal" href="#2.0.0beta1-expose" id="2.0.0beta1-expose">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Expose the previously private <a class="reference internal" href="../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.typing.FieldDefinition</span></code></a>. This is
 mainly indented for usage with
 <a class="reference internal" href="../reference/plugins.html#litestar.plugins.SerializationPluginProtocol.supports_type" title="litestar.plugins.SerializationPluginProtocol.supports_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">litestar.plugins.SerializationPluginProtocol.supports_type()</span></code></a></p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/1677,">litestar-org/litestar#1677,</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/1567">litestar-org/litestar#1567</a></span></p>
@@ -1325,9 +1327,9 @@ reusing it on subsequent copies.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/1674">litestar-org/litestar#1674</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/1678">litestar-org/litestar#1678</a></span></p>
 </div>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">ParsedType.is_subclass_of(X)</span></code> <code class="docutils literal notranslate"><span class="pre">True</span></code> for union if all union types are subtypes of <code class="docutils literal notranslate"><span class="pre">X</span></code><a class="headerlink reference internal" href="#2.0.0beta1-parsedtype.is_subclass_of(x)" id="2.0.0beta1-parsedtype.is_subclass_of(x)">#</a></dt><dd><div class="changelog-change docutils container">
-<p>When <a class="reference internal" href="../reference/typing.html#litestar.typing.ParsedType" title="litestar.typing.ParsedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedType</span></code></a> was introduced,
-<a class="reference internal" href="../reference/typing.html#litestar.typing.ParsedType.is_subclass_of" title="litestar.typing.ParsedType.is_subclass_of"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_subclass_of()</span></code></a> any union was deliberately
+<dt><code class="docutils literal notranslate"><span class="pre">FieldDefinition.is_subclass_of(X)</span></code> <code class="docutils literal notranslate"><span class="pre">True</span></code> for union if all union types are subtypes of <code class="docutils literal notranslate"><span class="pre">X</span></code><a class="headerlink reference internal" href="#2.0.0beta1-fielddefinition.is_subclass_of(x)" id="2.0.0beta1-fielddefinition.is_subclass_of(x)">#</a></dt><dd><div class="changelog-change docutils container">
+<p>When <a class="reference internal" href="../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> was introduced,
+<a class="reference internal" href="../reference/typing.html#litestar.typing.FieldDefinition.is_subclass_of" title="litestar.typing.FieldDefinition.is_subclass_of"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_subclass_of()</span></code></a> any union was deliberately
 left to return <code class="docutils literal notranslate"><span class="pre">False</span></code> with the intention of waiting for some use-cases to
 arrive.</p>
 <p>This behaviour was changed to address an issue where a handler may be typed to

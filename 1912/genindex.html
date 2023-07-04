@@ -948,6 +948,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="usage/contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="usage/contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="usage/contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="usage/contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -982,6 +983,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="reference/contrib/repository/abc.html">abc</a></li>
@@ -1666,7 +1668,7 @@ document.write(`
 </li>
         <li><a href="reference/types.html#litestar.types.Logger.__init__">(litestar.types.Logger method)</a>
 </li>
-        <li><a href="reference/typing.html#litestar.typing.ParsedType.__init__">(litestar.typing.ParsedType method)</a>
+        <li><a href="reference/typing.html#litestar.typing.FieldDefinition.__init__">(litestar.typing.FieldDefinition method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1888,7 +1890,7 @@ document.write(`
       <li><a href="reference/params.html#litestar.params.ParameterKwarg.annotation">annotation (litestar.params.ParameterKwarg attribute)</a>
 
       <ul>
-        <li><a href="reference/typing.html#litestar.typing.ParsedType.annotation">(litestar.typing.ParsedType attribute)</a>
+        <li><a href="reference/typing.html#litestar.typing.FieldDefinition.annotation">(litestar.typing.FieldDefinition attribute)</a>
 </li>
       </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.any_of">any_of (litestar.openapi.spec.Schema attribute)</a>
@@ -1909,7 +1911,7 @@ document.write(`
       </ul></li>
       <li><a href="reference/config.html#litestar.config.app.AppConfig">AppConfig (class in litestar.config.app)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.args">args (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.args">args (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/dto/factory/index.html#litestar.dto.factory.DTOData.as_builtins">as_builtins() (litestar.dto.factory.DTOData method)</a>
 </li>
@@ -2512,7 +2514,7 @@ document.write(`
 </li>
         <li><a href="reference/params.html#litestar.params.KwargDefinition.default">(litestar.params.KwargDefinition attribute)</a>
 </li>
-        <li><a href="reference/typing.html#litestar.typing.ParsedType.default">(litestar.typing.ParsedType attribute)</a>
+        <li><a href="reference/typing.html#litestar.typing.FieldDefinition.default">(litestar.typing.FieldDefinition attribute)</a>
 </li>
       </ul></li>
       <li><a href="reference/config.html#litestar.config.response_cache.default_cache_key_builder">default_cache_key_builder() (in module litestar.config.response_cache)</a>
@@ -2631,10 +2633,10 @@ document.write(`
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.dependent_required">dependent_required (litestar.openapi.spec.Schema attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.dependent_schemas">dependent_schemas (litestar.openapi.spec.Schema attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures.html#litestar.datastructures.ResponseHeader.deprecated">deprecated (litestar.datastructures.ResponseHeader attribute)</a>
 
       <ul>
@@ -2708,6 +2710,8 @@ document.write(`
       <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.detect_nested_field">detect_nested_field() (litestar.contrib.msgspec.MsgspecDTO class method)</a>
 
       <ul>
+        <li><a href="reference/contrib/piccolo.html#litestar.contrib.piccolo.PiccoloDTO.detect_nested_field">(litestar.contrib.piccolo.PiccoloDTO class method)</a>
+</li>
         <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.detect_nested_field">(litestar.contrib.pydantic.PydanticDTO class method)</a>
 </li>
         <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.detect_nested_field">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
@@ -3080,7 +3084,7 @@ document.write(`
       <li><a href="reference/exceptions.html#litestar.exceptions.HTTPException.extra">extra (litestar.exceptions.HTTPException attribute)</a>
 
       <ul>
-        <li><a href="reference/typing.html#litestar.typing.ParsedType.extra">(litestar.typing.ParsedType attribute)</a>
+        <li><a href="reference/typing.html#litestar.typing.FieldDefinition.extra">(litestar.typing.FieldDefinition attribute)</a>
 </li>
       </ul></li>
       <li><a href="reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_body">extract_body() (litestar.data_extractors.ConnectionDataExtractor method)</a>
@@ -3147,6 +3151,8 @@ document.write(`
         <li><a href="reference/contrib/repository/filters.html#litestar.contrib.repository.filters.SearchFilter.field_name">(litestar.contrib.repository.filters.SearchFilter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition">FieldDefinition (class in litestar.typing)</a>
+</li>
       <li><a href="reference/response/index.html#litestar.response.File">File (class in litestar.response)</a>
 
       <ul>
@@ -3175,10 +3181,10 @@ document.write(`
 </li>
       <li><a href="reference/contrib/repository/filters.html#litestar.contrib.repository.filters.FilterTypes">FilterTypes (in module litestar.contrib.repository.filters)</a>
 </li>
-      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.SecurityScheme.flows">flows (litestar.openapi.spec.SecurityScheme attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.SecurityScheme.flows">flows (litestar.openapi.spec.SecurityScheme attribute)</a>
+</li>
       <li><a href="reference/channels/backends/redis.html#litestar.channels.backends.redis.RedisChannelsStreamBackend.flush_all">flush_all() (litestar.channels.backends.redis.RedisChannelsStreamBackend method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.fn">fn (litestar.handlers.BaseRouteHandler property)</a>
@@ -3197,7 +3203,7 @@ document.write(`
 </li>
       <li><a href="reference/datastructures.html#litestar.datastructures.URL.fragment">fragment (litestar.datastructures.URL attribute)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.from_annotation">from_annotation() (litestar.typing.ParsedType class method)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.from_annotation">from_annotation() (litestar.typing.FieldDefinition class method)</a>
 </li>
       <li><a href="reference/stores/base.html#litestar.stores.base.StorageObject.from_bytes">from_bytes() (litestar.stores.base.StorageObject class method)</a>
 </li>
@@ -3213,11 +3219,11 @@ document.write(`
         <li><a href="reference/datastructures.html#litestar.datastructures.Header.from_header">(litestar.datastructures.Header class method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.from_kwarg">from_kwarg() (litestar.typing.ParsedType class method)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.from_kwarg">from_kwarg() (litestar.typing.FieldDefinition class method)</a>
 </li>
       <li><a href="reference/datastructures.html#litestar.datastructures.MutableScopeHeaders.from_message">from_message() (litestar.datastructures.MutableScopeHeaders class method)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.from_parameter">from_parameter() (litestar.typing.ParsedType class method)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.from_parameter">from_parameter() (litestar.typing.FieldDefinition class method)</a>
 </li>
       <li><a href="reference/datastructures.html#litestar.datastructures.Headers.from_scope">from_scope() (litestar.datastructures.Headers class method)</a>
 
@@ -3238,6 +3244,8 @@ document.write(`
       <li><a href="reference/contrib/msgspec.html#litestar.contrib.msgspec.MsgspecDTO.generate_field_definitions">generate_field_definitions() (litestar.contrib.msgspec.MsgspecDTO class method)</a>
 
       <ul>
+        <li><a href="reference/contrib/piccolo.html#litestar.contrib.piccolo.PiccoloDTO.generate_field_definitions">(litestar.contrib.piccolo.PiccoloDTO class method)</a>
+</li>
         <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO.generate_field_definitions">(litestar.contrib.pydantic.PydanticDTO class method)</a>
 </li>
         <li><a href="reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO.generate_field_definitions">(litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO class method)</a>
@@ -3457,9 +3465,9 @@ document.write(`
 </li>
       <li><a href="reference/logging/config.html#litestar.logging.config.LoggingConfig.handlers">handlers (litestar.logging.config.LoggingConfig attribute)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.has_default">has_default (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.has_default">has_default (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.has_inner_subclass_of">has_inner_subclass_of() (litestar.typing.ParsedType method)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.has_inner_subclass_of">has_inner_subclass_of() (litestar.typing.FieldDefinition method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.head">head (class in litestar.handlers)</a>
 
@@ -3739,13 +3747,13 @@ document.write(`
       </ul></li>
       <li><a href="reference/plugins.html#litestar.plugins.InitPluginProtocol">InitPluginProtocol (class in litestar.plugins)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.inner_types">inner_types (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.inner_types">inner_types (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.FileInfo.ino">ino (litestar.types.FileInfo attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.insertmanyvalues_page_size">insertmanyvalues_page_size (litestar.contrib.sqlalchemy.plugins.EngineConfig attribute)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.instantiable_origin">instantiable_origin (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.instantiable_origin">instantiable_origin (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/exceptions.html#litestar.exceptions.InternalServerException">InternalServerException</a>
 </li>
@@ -3755,53 +3763,53 @@ document.write(`
 </li>
       <li><a href="reference/config.html#litestar.config.cors.CORSConfig.is_allow_all_origins">is_allow_all_origins (litestar.config.cors.CORSConfig property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_annotated">is_annotated (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_annotated">is_annotated (litestar.typing.FieldDefinition property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_any">is_any (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_any">is_any (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_collection">is_collection (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_collection">is_collection (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_const">is_const (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_const">is_const (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/params.html#litestar.params.KwargDefinition.is_constrained">is_constrained (litestar.params.KwargDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_forward_ref">is_forward_ref (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_forward_ref">is_forward_ref (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_generic">is_generic (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_generic">is_generic (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_literal">is_literal (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_literal">is_literal (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_mapping">is_mapping (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_mapping">is_mapping (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_non_string_collection">is_non_string_collection (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_non_string_collection">is_non_string_collection (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_non_string_iterable">is_non_string_iterable (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_non_string_iterable">is_non_string_iterable (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_non_string_sequence">is_non_string_sequence (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_non_string_sequence">is_non_string_sequence (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_optional">is_optional (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_optional">is_optional (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/config.html#litestar.config.cors.CORSConfig.is_origin_allowed">is_origin_allowed() (litestar.config.cors.CORSConfig method)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_parameter_field">is_parameter_field (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_parameter_field">is_parameter_field (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/plugins.html#litestar.plugins.OpenAPISchemaPluginProtocol.is_plugin_supported_type">is_plugin_supported_type() (litestar.plugins.OpenAPISchemaPluginProtocol static method)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_required">is_required (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_required">is_required (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.is_running">is_running (litestar.channels.subscriber.Subscriber property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_simple_type">is_simple_type (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_simple_type">is_simple_type (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_subclass_of">is_subclass_of() (litestar.typing.ParsedType method)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_subclass_of">is_subclass_of() (litestar.typing.FieldDefinition method)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_tuple">is_tuple (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_tuple">is_tuple (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_type_var">is_type_var (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_type_var">is_type_var (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.is_union">is_union (litestar.typing.ParsedType property)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_union">is_union (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.FileInfo.islink">islink (litestar.types.FileInfo attribute)</a>
 </li>
@@ -3883,7 +3891,7 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/config.html#litestar.config.response_cache.ResponseCacheConfig.key_builder">key_builder() (litestar.config.response_cache.ResponseCacheConfig method)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.kwarg_definition">kwarg_definition (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.kwarg_definition">kwarg_definition (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/params.html#litestar.params.KwargDefinition">KwargDefinition (class in litestar.params)</a>
 </li>
@@ -4114,6 +4122,13 @@ document.write(`
 
       <ul>
         <li><a href="reference/contrib/opentelemetry.html#module-litestar.contrib.opentelemetry">module</a>
+</li>
+      </ul></li>
+      <li>
+    litestar.contrib.piccolo
+
+      <ul>
+        <li><a href="reference/contrib/piccolo.html#module-litestar.contrib.piccolo">module</a>
 </li>
       </ul></li>
       <li>
@@ -4709,7 +4724,7 @@ document.write(`
 </li>
         <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDBase.metadata">(litestar.contrib.sqlalchemy.base.UUIDBase attribute)</a>
 </li>
-        <li><a href="reference/typing.html#litestar.typing.ParsedType.metadata">(litestar.typing.ParsedType attribute)</a>
+        <li><a href="reference/typing.html#litestar.typing.FieldDefinition.metadata">(litestar.typing.FieldDefinition attribute)</a>
 </li>
       </ul></li>
       <li><a href="reference/contrib/opentelemetry.html#litestar.contrib.opentelemetry.OpenTelemetryConfig.meter">meter (litestar.contrib.opentelemetry.OpenTelemetryConfig attribute)</a>
@@ -4847,6 +4862,8 @@ document.write(`
         <li><a href="reference/contrib/msgspec.html#module-litestar.contrib.msgspec">litestar.contrib.msgspec</a>
 </li>
         <li><a href="reference/contrib/opentelemetry.html#module-litestar.contrib.opentelemetry">litestar.contrib.opentelemetry</a>
+</li>
+        <li><a href="reference/contrib/piccolo.html#module-litestar.contrib.piccolo">litestar.contrib.piccolo</a>
 </li>
         <li><a href="reference/contrib/pydantic.html#module-litestar.contrib.pydantic">litestar.contrib.pydantic</a>
 </li>
@@ -5046,7 +5063,7 @@ document.write(`
 </li>
         <li><a href="reference/types.html#litestar.types.FileInfo.name">(litestar.types.FileInfo attribute)</a>
 </li>
-        <li><a href="reference/typing.html#litestar.typing.ParsedType.name">(litestar.typing.ParsedType attribute)</a>
+        <li><a href="reference/typing.html#litestar.typing.FieldDefinition.name">(litestar.typing.FieldDefinition attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -5273,7 +5290,7 @@ document.write(`
 </li>
       <li><a href="reference/contrib/repository/filters.html#litestar.contrib.repository.filters.OrderBy">OrderBy (class in litestar.contrib.repository.filters)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.origin">origin (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.origin">origin (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/controller.html#litestar.controller.Controller.owner">owner (litestar.controller.Controller attribute)</a>
 
@@ -5326,8 +5343,6 @@ document.write(`
       <li><a href="reference/enums.html#litestar.enums.ParamType">ParamType (class in litestar.enums)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.parsed_fn_signature">parsed_fn_signature (litestar.handlers.BaseRouteHandler property)</a>
-</li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType">ParsedType (class in litestar.typing)</a>
 </li>
       <li><a href="reference/partial.html#litestar.partial.Partial">Partial (class in litestar.partial)</a>
 </li>
@@ -5406,6 +5421,8 @@ document.write(`
       <li><a href="reference/config.html#litestar.config.app.AppConfig.pdb_on_exception">pdb_on_exception (litestar.config.app.AppConfig attribute)</a>
 </li>
       <li><a href="reference/exceptions.html#litestar.exceptions.PermissionDeniedException">PermissionDeniedException</a>
+</li>
+      <li><a href="reference/contrib/piccolo.html#litestar.contrib.piccolo.PiccoloDTO">PiccoloDTO (class in litestar.contrib.piccolo)</a>
 </li>
       <li><a href="usage/channels.html#term-plugin"><strong>plugin</strong></a>
 </li>
@@ -5597,7 +5614,7 @@ document.write(`
 </li>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware">RateLimitMiddleware (class in litestar.middleware.rate_limit)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.raw">raw (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.raw">raw (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/datastructures.html#litestar.datastructures.UploadFile.read">read() (litestar.datastructures.UploadFile method)</a>
 </li>
@@ -5962,7 +5979,7 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures.html#litestar.datastructures.CacheControlHeader.s_maxage">s_maxage (litestar.datastructures.CacheControlHeader attribute)</a>
 </li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.safe_generic_origin">safe_generic_origin (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.safe_generic_origin">safe_generic_origin (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/config.html#litestar.config.csrf.CSRFConfig.safe_methods">safe_methods (litestar.config.csrf.CSRFConfig attribute)</a>
 </li>
@@ -6674,7 +6691,7 @@ document.write(`
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.type_encoders">(litestar.security.session_auth.SessionAuth attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/typing.html#litestar.typing.ParsedType.type_wrappers">type_wrappers (litestar.typing.ParsedType attribute)</a>
+      <li><a href="reference/typing.html#litestar.typing.FieldDefinition.type_wrappers">type_wrappers (litestar.typing.FieldDefinition attribute)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.TypeEncodersMap">TypeEncodersMap (in module litestar.types)</a>
 </li>
