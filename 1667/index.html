@@ -375,7 +375,7 @@
             
     <a href="release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -775,7 +775,7 @@ document.write(`
             
     <a href="release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -948,9 +948,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="usage/templating.html">Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/exceptions.html">Exceptions and exception handling</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="usage/contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage/contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/contrib/htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/contrib/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="usage/contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="usage/contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="usage/contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -985,6 +987,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="reference/contrib/repository/abc.html">abc</a></li>
@@ -1010,10 +1013,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="reference/di.html">di</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/dto/interface.html">interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/dto/types.html">types</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="reference/dto/factory/index.html">factory</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="reference/dto/factory/abc.html">abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/dto/factory/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/dto/factory/config.html">config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reference/dto/factory/field.html">field</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reference/dto/factory/stdlib.html">stdlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="reference/dto/factory/types.html">types</a></li>
 </ul>
 </li>
 </ul>
@@ -1156,6 +1161,8 @@ with <a class="reference internal" href="usage/dependency-injection.html"><span 
 </dd>
 <dt><a class="reference internal" href="usage/the-litestar-app.html#using-structlog"><span class="std std-ref">StructLog</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[structlog]</span></code></p>
 </dd>
+<dt><a class="reference internal" href="usage/contrib/prometheus.html"><span class="doc">Prometheus Instrumentation</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[prometheus]</span></code></p>
+</dd>
 <dt><a class="reference internal" href="usage/contrib/open-telemetry.html"><span class="doc">Open Telemetry Instrumentation</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[openetelemetry]</span></code></p>
 </dd>
 <dt><a class="reference internal" href="usage/contrib/sqlalchemy/index.html"><span class="doc">SQLAlchemy</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[sqlalchemy]</span></code></p>
@@ -1164,10 +1171,18 @@ with <a class="reference internal" href="usage/dependency-injection.html"><span 
 </dd>
 <dt><a class="reference internal" href="usage/templating.html"><span class="doc">Jinja Templating</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[jinja]</span></code></p>
 </dd>
-<dt>Attrs</dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[attrs]</span></code></p>
+<dt><a class="reference external" href="https://www.attrs.org">Attrs</a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[attrs]</span></code></p>
 </dd>
 <dt>Standard Installation (includes CLI and Jinja templating):</dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[standard]</span></code></p>
 </dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">litestar[standard]</span></code> includes everything you need to get started with Litestar, including
+an ASGI web server. It has: <code class="docutils literal notranslate"><span class="pre">click</span></code> and <code class="docutils literal notranslate"><span class="pre">rich</span></code> for a great CLI experience, <code class="docutils literal notranslate"><span class="pre">jinja2</span></code> for templating,
+<code class="docutils literal notranslate"><span class="pre">jsbeautifier</span></code> for keeping your Javascript tidy , and <code class="docutils literal notranslate"><span class="pre">uvicorn</span></code> for running your app.</p>
+</div>
+<dl class="simple">
 <dt>All Extras:</dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[full]</span></code></p>
 </dd>
 </dl>
@@ -1175,6 +1190,52 @@ with <a class="reference internal" href="usage/dependency-injection.html"><span 
 </details></section>
 <section id="minimal-example">
 <h2>Minimal Example<a class="headerlink" href="#minimal-example" title="Permalink to this heading">#</a></h2>
+<p>At a minimum, make sure you have installed <code class="docutils literal notranslate"><span class="pre">litestar[standard]</span></code>, which includes <code class="docutils literal notranslate"><span class="pre">litestar</span></code>, the CLI, and uvicorn.</p>
+<p>First, create a file named <code class="docutils literal notranslate"><span class="pre">app.py</span></code> with the following contents:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;Hello, world!&quot;</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/books/{book_id:int}&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">get_book</span><span class="p">(</span><span class="n">book_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;book_id&quot;</span><span class="p">:</span> <span class="n">book_id</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="n">get_book</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Then, run the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>litestar<span class="w"> </span>run
+<span class="c1"># Or you can run Uvicorn directly:</span>
+uvicorn<span class="w"> </span>app:app<span class="w"> </span>--reload
+</pre></div>
+</div>
+<p>You can now visit <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/</span></code> and <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/books/1</span></code> in your browser and
+you should see the JSON responses of your two endpoints:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Hello, world!&quot;</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;book_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also check out the automatically generated OpenAPI-based documentation at:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">http://localhost:8000/schema</span></code> (for <a class="reference external" href="https://redocly.com/redoc">ReDoc</a>),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http://localhost:8000/schema/swagger</span></code> (for <a class="reference external" href="https://swagger.io/">Swagger UI</a>),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">http://localhost:8000/schema/elements</span></code> (for <a class="reference external" href="https://stoplight.io/open-source/elements/">Stoplight Elements</a>)</p></li>
+</ul>
+</div>
+<p>You can check out a more in-depth tutorial in the <a class="reference internal" href="tutorials/todo-app/index.html"><span class="doc">Developing a basic TODO application</span></a> section!</p>
+</section>
+<section id="expanded-example">
+<h2>Expanded Example<a class="headerlink" href="#expanded-example" title="Permalink to this heading">#</a></h2>
 <p><strong>Define your data model</strong> using pydantic or any library based on it (for example ormar, beanie, SQLModel):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">UUID4</span>
 
@@ -1486,6 +1547,7 @@ for testing and POC work.</p></li>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-example">Minimal Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expanded-example">Expanded Example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophy">Philosophy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-comparison-with-similar-frameworks">Feature comparison with similar frameworks</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-applications">Example Applications</a></li>

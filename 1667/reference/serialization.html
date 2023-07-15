@@ -376,7 +376,7 @@
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -776,7 +776,7 @@ document.write(`
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -949,9 +949,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../usage/templating.html">Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/exceptions.html">Exceptions and exception handling</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../usage/contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/contrib/htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../usage/contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../usage/contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage/contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -986,6 +988,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="contrib/repository/abc.html">abc</a></li>
@@ -1011,10 +1014,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="di.html">di</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="dto/interface.html">interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dto/types.html">types</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="dto/factory/index.html">factory</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="dto/factory/abc.html">abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dto/factory/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dto/factory/config.html">config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dto/factory/field.html">field</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dto/factory/stdlib.html">stdlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="dto/factory/types.html">types</a></li>
 </ul>
 </li>
 </ul>
@@ -1173,9 +1178,7 @@ document.write(`
 
 <dl class="py function">
 <dt class="sig sig-object py" id="litestar.serialization.decode_json">
-<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">decode_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span></span><a class="headerlink" href="#litestar.serialization.decode_json" title="Permalink to this definition">#</a></dt>
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">decode_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span></dt>
+<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">decode_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_:</span> <span class="pre">~typing.Any</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'litestar.types.empty.Empty'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span></span><a class="headerlink" href="#litestar.serialization.decode_json" title="Permalink to this definition">#</a></dt>
 <dd><p>Decode a JSON string/bytes into an object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1216,9 +1219,7 @@ document.write(`
 
 <dl class="py function">
 <dt class="sig sig-object py" id="litestar.serialization.decode_msgpack">
-<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">decode_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span></span><a class="headerlink" href="#litestar.serialization.decode_msgpack" title="Permalink to this definition">#</a></dt>
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">decode_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span></dt>
+<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">decode_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw:</span> <span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_:</span> <span class="pre">~typing.Any</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'litestar.types.empty.Empty'&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span></span><a class="headerlink" href="#litestar.serialization.decode_msgpack" title="Permalink to this definition">#</a></dt>
 <dd><p>Decode a MessagePack string/bytes into an object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1258,7 +1259,7 @@ document.write(`
 
 <dl class="py function">
 <dt class="sig sig-object py" id="litestar.serialization.encode_json">
-<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">encode_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">obj:</span> <span class="pre">~typing.Any,</span> <span class="pre">default:</span> <span class="pre">~typing.Optional[~typing.Callable[[~typing.Any],</span> <span class="pre">~typing.Any]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">default_serializer&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a></span></span><a class="headerlink" href="#litestar.serialization.encode_json" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">litestar.serialization.</span></span><span class="sig-name descname"><span class="pre">encode_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a></span></span><a class="headerlink" href="#litestar.serialization.encode_json" title="Permalink to this definition">#</a></dt>
 <dd><p>Encode a value into JSON.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

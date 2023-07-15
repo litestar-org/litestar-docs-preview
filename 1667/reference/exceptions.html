@@ -376,7 +376,7 @@
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -776,7 +776,7 @@ document.write(`
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -949,9 +949,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../usage/templating.html">Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/exceptions.html">Exceptions and exception handling</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../usage/contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/contrib/htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../usage/contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../usage/contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../usage/contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -986,6 +988,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="contrib/repository/abc.html">abc</a></li>
@@ -1011,10 +1014,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="di.html">di</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="dto/interface.html">interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dto/types.html">types</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="dto/factory/index.html">factory</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="dto/factory/abc.html">abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dto/factory/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dto/factory/config.html">config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dto/factory/field.html">field</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dto/factory/stdlib.html">stdlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="dto/factory/types.html">types</a></li>
 </ul>
 </li>
 </ul>
@@ -1168,6 +1173,13 @@ document.write(`
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="litestar.exceptions.DTOFactoryException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.exceptions.</span></span><span class="sig-name descname"><span class="pre">DTOFactoryException</span></span><a class="headerlink" href="#litestar.exceptions.DTOFactoryException" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#litestar.exceptions.LitestarException" title="litestar.exceptions.base_exceptions.LitestarException"><code class="xref py py-class docutils literal notranslate"><span class="pre">LitestarException</span></code></a></p>
+<p>Base DTO exception type.</p>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="litestar.exceptions.HTTPException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.exceptions.</span></span><span class="sig-name descname"><span class="pre">HTTPException</span></span><a class="headerlink" href="#litestar.exceptions.HTTPException" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#litestar.exceptions.LitestarException" title="litestar.exceptions.base_exceptions.LitestarException"><code class="xref py py-class docutils literal notranslate"><span class="pre">LitestarException</span></code></a></p>
@@ -1235,6 +1247,13 @@ document.write(`
 <dd><p>Exception status code.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="litestar.exceptions.InvalidAnnotationException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidAnnotationException</span></span><a class="headerlink" href="#litestar.exceptions.InvalidAnnotationException" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#litestar.exceptions.DTOFactoryException" title="litestar.exceptions.dto_exceptions.DTOFactoryException"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOFactoryException</span></code></a></p>
+<p>Unexpected DTO type argument.</p>
 </dd></dl>
 
 <dl class="py exception">
@@ -1511,6 +1530,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.ClientException.status_code"><code class="docutils literal notranslate"><span class="pre">ClientException.status_code</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.DTOFactoryException"><code class="docutils literal notranslate"><span class="pre">DTOFactoryException</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.HTTPException"><code class="docutils literal notranslate"><span class="pre">HTTPException</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.HTTPException.__init__"><code class="docutils literal notranslate"><span class="pre">HTTPException.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.HTTPException.status_code"><code class="docutils literal notranslate"><span class="pre">HTTPException.status_code</span></code></a></li>
@@ -1524,6 +1544,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.InternalServerException.status_code"><code class="docutils literal notranslate"><span class="pre">InternalServerException.status_code</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.InvalidAnnotationException"><code class="docutils literal notranslate"><span class="pre">InvalidAnnotationException</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.LitestarException"><code class="docutils literal notranslate"><span class="pre">LitestarException</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.exceptions.LitestarException.__init__"><code class="docutils literal notranslate"><span class="pre">LitestarException.__init__()</span></code></a></li>
 </ul>

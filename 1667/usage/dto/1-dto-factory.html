@@ -376,7 +376,7 @@
             
     <a href="../../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -776,7 +776,7 @@ document.write(`
             
     <a href="../../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -949,9 +949,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../templating.html">Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../exceptions.html">Exceptions and exception handling</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contrib/htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contrib/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -986,6 +988,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/repository/abc.html">abc</a></li>
@@ -1011,10 +1014,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/di.html">di</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/dto/interface.html">interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/types.html">types</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/dto/factory/index.html">factory</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../reference/dto/factory/abc.html">abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/dto/factory/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/dto/factory/config.html">config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/dto/factory/field.html">field</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../reference/dto/factory/stdlib.html">stdlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../reference/dto/factory/types.html">types</a></li>
 </ul>
 </li>
 </ul>
@@ -1159,7 +1164,7 @@ document.write(`
 <h1>DTO Factory<a class="headerlink" href="#dto-factory" title="Permalink to this heading">#</a></h1>
 <p>Litestar maintains a suite of DTO factory types that can be used to create DTOs for use with popular data modelling
 libraries, such as ORMs. These take a model type as a generic type argument, and create subtypes of
-<a class="reference internal" href="../../reference/dto/factory/abc.html#litestar.dto.factory.abc.AbstractDTOFactory" title="litestar.dto.factory.abc.AbstractDTOFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractDTOFactory</span></code></a> that support conversion of that model type to
+<a class="reference internal" href="../../reference/dto/factory/base.html#litestar.dto.factory.base.AbstractDTOFactory" title="litestar.dto.factory.base.AbstractDTOFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractDTOFactory</span></code></a> that support conversion of that model type to
 and from raw bytes.</p>
 <p>The following factories are currently available:</p>
 <ul class="simple">
@@ -1205,7 +1210,7 @@ a DTO for use with a SQLAlchemy model:</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;5c2b1e15-ab3b-4fe4-8c74-7b48b93988c2&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;055f1c22-4453-425d-abff-19479896c197&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1262,7 +1267,7 @@ configuration.</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;dac0e423-97af-491d-873f-8fabe7bdec69&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;ab6a3ab7-e0f9-415a-96a1-287b792cdb5c&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1525,7 +1530,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;6cd2b810-d6e2-4325-8410-17479039957c&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;8244bbfd-e058-48ba-8a4e-2929152102da&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1617,7 +1622,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;5f258146-fedc-49b8-a7bf-689ad2985012&quot;</span>,<span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;061d5371-1466-4413-9958-9e3add69c4f9&quot;</span>,<span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1844,7 +1849,7 @@ handler.</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/person<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;status_code&quot;</span>:500,<span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;TypeError(\&quot;Person.__init__() missing 1 required positional argument: &#39;id&#39;\&quot;)&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;status_code&quot;</span>:500,<span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;Internal Server Error&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1891,7 +1896,7 @@ type of the data that it will contain, and provides useful methods for interacti
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/person<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;e1480e9d-b168-4216-93eb-30fcad03b90f&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;a4dcb70d-d411-45ea-8ae8-8b9add2d3612&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -2088,6 +2093,362 @@ parsed from client data, and will not be serialized into return data.</p>
 </div>
 </div>
 </section>
+<section id="wrapping-return-data">
+<h2>Wrapping Return Data<a class="headerlink" href="#wrapping-return-data" title="Permalink to this heading">#</a></h2>
+<p>Litestar’s DTO Factory types are versatile enough to manage your data, even when it’s nested within generic wrappers.</p>
+<p>The following example demonstrates a route handler that returns DTO managed data wrapped in a generic type. The
+wrapper is used to deliver additional metadata about the response - in this case, a count of the number of items
+returned. Read on for an explanation of how to do this yourself.</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-8">
+Python 3.8+</label><div class="sd-tab-content docutils">
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">Enveloping Return Data</span><a class="headerlink" href="#id13" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">.my_lib</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="nd">@dataclass</span>
+<span class="linenos">17</span><span class="k">class</span> <span class="nc">WithCount</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+<span class="linenos">18</span>    <span class="n">count</span><span class="p">:</span> <span class="nb">int</span>
+<span class="linenos">19</span>    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">23</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">24</span>    <span class="n">password</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">25</span>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+<span class="linenos">29</span>    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">33</span><span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">WithCount</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+<span class="linenos">34</span>    <span class="k">return</span> <span class="n">WithCount</span><span class="p">(</span>
+<span class="linenos">35</span>        <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">36</span>        <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">37</span>            <span class="n">User</span><span class="p">(</span>
+<span class="linenos">38</span>                <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">39</span>                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+<span class="linenos">40</span>                <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+<span class="linenos">41</span>                <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+<span class="linenos">42</span>            <span class="p">),</span>
+<span class="linenos">43</span>        <span class="p">],</span>
+<span class="linenos">44</span>    <span class="p">)</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_users</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-9">
+Python 3.9+</label><div class="sd-tab-content docutils">
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">Enveloping Return Data</span><a class="headerlink" href="#id14" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">.my_lib</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="nd">@dataclass</span>
+<span class="linenos">17</span><span class="k">class</span> <span class="nc">WithCount</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+<span class="linenos">18</span>    <span class="n">count</span><span class="p">:</span> <span class="nb">int</span>
+<span class="linenos">19</span>    <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">23</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">24</span>    <span class="n">password</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">25</span>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+<span class="linenos">29</span>    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">33</span><span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">WithCount</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+<span class="linenos">34</span>    <span class="k">return</span> <span class="n">WithCount</span><span class="p">(</span>
+<span class="linenos">35</span>        <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">36</span>        <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">37</span>            <span class="n">User</span><span class="p">(</span>
+<span class="linenos">38</span>                <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">39</span>                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+<span class="linenos">40</span>                <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+<span class="linenos">41</span>                <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+<span class="linenos">42</span>            <span class="p">),</span>
+<span class="linenos">43</span>        <span class="p">],</span>
+<span class="linenos">44</span>    <span class="p">)</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_users</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition">
+<p class="admonition-title">Run it</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users
+<span class="o">{</span><span class="s2">&quot;count&quot;</span>:1,<span class="s2">&quot;data&quot;</span>:<span class="o">[{</span><span class="s2">&quot;id&quot;</span>:1,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}]}</span>
+</pre></div>
+</div>
+</div>
+<p>First, create a generic dataclass to act as your wrapper. This type will contain your data and any additional
+attributes you might need. In this example, we have a <code class="docutils literal notranslate"><span class="pre">WithCount</span></code> dataclass which has a <code class="docutils literal notranslate"><span class="pre">count</span></code> attribute.
+The wrapper must be a python generic type with one or more type parameters, and at least one of those type parameters
+should describe an instance attribute that will be populated with the data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">WithCount</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="n">count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now, create a DTO for your data object and configure it using <code class="docutils literal notranslate"><span class="pre">DTOConfig</span></code>. In this example, we’re excluding
+<code class="docutils literal notranslate"><span class="pre">password</span></code> and <code class="docutils literal notranslate"><span class="pre">created_at</span></code> from the final output.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+
+
+<span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Then, set up your route handler. This example sets up a <code class="docutils literal notranslate"><span class="pre">/users</span></code> endpoint, where a list of <code class="docutils literal notranslate"><span class="pre">User</span></code> objects is
+returned, wrapped in the <code class="docutils literal notranslate"><span class="pre">WithCount</span></code> dataclass.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">WithCount</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">WithCount</span><span class="p">(</span>
+        <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">User</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+                <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+                <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+            <span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>This setup allows the DTO to manage the rendering of <code class="docutils literal notranslate"><span class="pre">User</span></code> objects into the response. The DTO Factory type will find
+the attribute on the wrapper type that holds the data and perform its serialization operations upon it.</p>
+<p>Returning enveloped data is subject to the following constraints:</p>
+<ol class="arabic simple">
+<li><p>The type returned from the handler must be a type that Litestar can natively encode.</p></li>
+<li><p>There can be multiple type arguments to the generic wrapper type, but there must be exactly one type argument to the
+generic wrapper that is a type supported by the DTO.</p></li>
+</ol>
+</section>
+<section id="working-with-litestar-s-pagination-types">
+<h2>Working with Litestar’s Pagination Types<a class="headerlink" href="#working-with-litestar-s-pagination-types" title="Permalink to this heading">#</a></h2>
+<p>Litestar offers paginated response wrapper types, and DTO Factory types can handle this out of the box.</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">Paginated Return Data</span><a class="headerlink" href="#id15" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar.pagination</span> <span class="kn">import</span> <span class="n">ClassicPagination</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="kn">from</span> <span class="nn">.my_lib</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">14</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">15</span>    <span class="n">password</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">16</span>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+<span class="linenos">20</span>    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">24</span><span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ClassicPagination</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+<span class="linenos">25</span>    <span class="k">return</span> <span class="n">ClassicPagination</span><span class="p">(</span>
+<span class="linenos">26</span>        <span class="n">page_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos">27</span>        <span class="n">total_pages</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">28</span>        <span class="n">current_page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">29</span>        <span class="n">items</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">30</span>            <span class="n">User</span><span class="p">(</span>
+<span class="linenos">31</span>                <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">32</span>                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+<span class="linenos">33</span>                <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+<span class="linenos">34</span>                <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+<span class="linenos">35</span>            <span class="p">),</span>
+<span class="linenos">36</span>        <span class="p">],</span>
+<span class="linenos">37</span>    <span class="p">)</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_users</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition">
+<p class="admonition-title">Run it</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users
+<span class="o">{</span><span class="s2">&quot;current_page&quot;</span>:1,<span class="s2">&quot;items&quot;</span>:<span class="o">[{</span><span class="s2">&quot;id&quot;</span>:1,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}]</span>,<span class="s2">&quot;page_size&quot;</span>:10,<span class="s2">&quot;total_pages&quot;</span>:1<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<p>The DTO is defined and configured, in our example, we’re excluding <code class="docutils literal notranslate"><span class="pre">password</span></code> and <code class="docutils literal notranslate"><span class="pre">created_at</span></code> fields from the final
+representation of our users.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+
+
+<span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The example sets up a <code class="docutils literal notranslate"><span class="pre">/users</span></code> endpoint, where a paginated list of <code class="docutils literal notranslate"><span class="pre">User</span></code> objects is returned, wrapped in
+<a class="reference internal" href="../../reference/pagination.html#litestar.pagination.ClassicPagination" title="litestar.pagination.ClassicPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassicPagination</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.pagination</span> <span class="kn">import</span> <span class="n">ClassicPagination</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ClassicPagination</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">ClassicPagination</span><span class="p">(</span>
+        <span class="n">page_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">total_pages</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">current_page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">items</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">User</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+                <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+                <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+            <span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../reference/pagination.html#litestar.pagination.ClassicPagination" title="litestar.pagination.ClassicPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassicPagination</span></code></a> class contains <code class="docutils literal notranslate"><span class="pre">page_size</span></code> (number of items per page),
+<code class="docutils literal notranslate"><span class="pre">total_pages</span></code> (total number of pages), <code class="docutils literal notranslate"><span class="pre">current_page</span></code> (current page number), and <code class="docutils literal notranslate"><span class="pre">items</span></code> (items for the current
+page).</p>
+<p>The DTO operates on the data contained in the <code class="docutils literal notranslate"><span class="pre">items</span></code> attribute, and the pagination wrapper is handled automatically
+by Litestar’s serialization process.</p>
+</section>
+<section id="using-litestar-s-response-type-with-dto-factory">
+<h2>Using Litestar’s Response Type with DTO Factory<a class="headerlink" href="#using-litestar-s-response-type-with-dto-factory" title="Permalink to this heading">#</a></h2>
+<p>Litestar’s DTO (Data Transfer Object) Factory Types can handle data wrapped in a <code class="docutils literal notranslate"><span class="pre">Response</span></code> type.</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">Response Wrapped Return Data</span><a class="headerlink" href="#id16" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">get</span>
+<span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">.my_lib</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="linenos">13</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">14</span>    <span class="n">password</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">15</span>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+<span class="linenos">19</span>    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">23</span><span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+<span class="linenos">24</span>    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+<span class="linenos">25</span>        <span class="n">content</span><span class="o">=</span><span class="n">User</span><span class="p">(</span>
+<span class="linenos">26</span>            <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos">27</span>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+<span class="linenos">28</span>            <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+<span class="linenos">29</span>            <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+<span class="linenos">30</span>        <span class="p">),</span>
+<span class="linenos">31</span>        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;X-Total-Count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">},</span>
+<span class="linenos">32</span>    <span class="p">)</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_users</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition">
+<p class="admonition-title">Run it</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users
+<span class="o">{</span><span class="s2">&quot;id&quot;</span>:1,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<p>We create a DTO for the <code class="docutils literal notranslate"><span class="pre">User</span></code> type and configure it using <code class="docutils literal notranslate"><span class="pre">DTOConfig</span></code> to exclude <code class="docutils literal notranslate"><span class="pre">password</span></code> and <code class="docutils literal notranslate"><span class="pre">created_at</span></code>
+from the serialized output.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.contrib.sqlalchemy.dto</span> <span class="kn">import</span> <span class="n">SQLAlchemyDTO</span>
+<span class="kn">from</span> <span class="nn">litestar.dto.factory</span> <span class="kn">import</span> <span class="n">DTOConfig</span>
+
+
+<span class="k">class</span> <span class="nc">UserDTO</span><span class="p">(</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="s2">&quot;created_at&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The example sets up a <code class="docutils literal notranslate"><span class="pre">/users</span></code> endpoint where a <code class="docutils literal notranslate"><span class="pre">User</span></code> object is returned wrapped in a <code class="docutils literal notranslate"><span class="pre">Response</span></code> type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">Response</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">UserDTO</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">User</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Litestar User&quot;</span><span class="p">,</span>
+            <span class="n">password</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span>
+            <span class="n">created_at</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">),</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;X-Total-Count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Response</span></code> object encapsulates the <code class="docutils literal notranslate"><span class="pre">User</span></code> object in its <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute and allows us to configure the
+response received by the client. In this case, we add a custom header.</p>
+</section>
 </section>
 
 
@@ -2149,6 +2510,9 @@ parsed from client data, and will not be serialized into return data.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dto-factory-and-patch-requests">DTO Factory and PATCH requests</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-private-fields">Implicit Private Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapping-return-data">Wrapping Return Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-litestar-s-pagination-types">Working with Litestar’s Pagination Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-litestar-s-response-type-with-dto-factory">Using Litestar’s Response Type with DTO Factory</a></li>
 </ul>
   </nav></div>
 

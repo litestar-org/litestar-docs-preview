@@ -376,7 +376,7 @@
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -776,7 +776,7 @@ document.write(`
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -949,9 +949,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="templating.html">Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions and exception handling</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -986,6 +988,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../reference/contrib/repository/abc.html">abc</a></li>
@@ -1011,10 +1014,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/di.html">di</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/dto/interface.html">interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/types.html">types</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../reference/dto/factory/index.html">factory</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/abc.html">abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/config.html">config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/field.html">field</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/stdlib.html">stdlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/types.html">types</a></li>
 </ul>
 </li>
 </ul>
@@ -1270,14 +1275,14 @@ function. The modified <a class="reference internal" href="../reference/config.h
 <p>The SerializationPluginProtocol defines a contract for plugins that provide serialization functionality for data types
 that are otherwise unsupported by the framework.</p>
 <p>Implementations of these plugins must define the following methods.</p>
-<section id="supports-type-self-parsed-type-parsedtype-bool">
-<h3><a class="reference internal" href="../reference/plugins.html#litestar.plugins.SerializationPluginProtocol" title="litestar.plugins.SerializationPluginProtocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">parsed_type:</span> <span class="pre">ParsedType)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a><a class="headerlink" href="#supports-type-self-parsed-type-parsedtype-bool" title="Permalink to this heading">#</a></h3>
-<p>The method takes a <a class="reference internal" href="../reference/typing.html#litestar.typing.ParsedType" title="litestar.typing.ParsedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedType</span></code></a> instance as an argument and returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>
+<section id="supports-type-self-field-definition-fielddefinition-bool">
+<h3><a class="reference internal" href="../reference/plugins.html#litestar.plugins.SerializationPluginProtocol" title="litestar.plugins.SerializationPluginProtocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a><a class="headerlink" href="#supports-type-self-field-definition-fielddefinition-bool" title="Permalink to this heading">#</a></h3>
+<p>The method takes a <a class="reference internal" href="../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance as an argument and returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>
 indicating whether the plugin supports serialization for that type.</p>
 </section>
-<section id="create-dto-for-type-self-parsed-type-parsedtype-type-dtointerface">
-<h3><a class="reference internal" href="../reference/plugins.html#litestar.plugins.SerializationPluginProtocol.create_dto_for_type" title="litestar.plugins.SerializationPluginProtocol.create_dto_for_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">parsed_type:</span> <span class="pre">ParsedType)</span> <span class="pre">-&gt;</span> <span class="pre">type[DTOInterface]:</span></code></a><a class="headerlink" href="#create-dto-for-type-self-parsed-type-parsedtype-type-dtointerface" title="Permalink to this heading">#</a></h3>
-<p>This method accepts a <a class="reference internal" href="../reference/typing.html#litestar.typing.ParsedType" title="litestar.typing.ParsedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedType</span></code></a> instance as an argument and must return a
+<section id="create-dto-for-type-self-field-definition-fielddefinition-type-dtointerface">
+<h3><a class="reference internal" href="../reference/plugins.html#litestar.plugins.SerializationPluginProtocol.create_dto_for_type" title="litestar.plugins.SerializationPluginProtocol.create_dto_for_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">type[DTOInterface]:</span></code></a><a class="headerlink" href="#create-dto-for-type-self-field-definition-fielddefinition-type-dtointerface" title="Permalink to this heading">#</a></h3>
+<p>This method accepts a <a class="reference internal" href="../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance as an argument and must return a
 <a class="reference internal" href="../reference/dto/interface.html#litestar.dto.interface.DTOInterface" title="litestar.dto.interface.DTOInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOInterface</span></code></a> implementation that can be used to serialize and deserialize
 the type.</p>
 <p>During application startup, if a data or return annotation is encountered that is not a supported type, is supported by
@@ -1292,7 +1297,7 @@ that annotation.</p>
 <div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">SerializationPluginProtocol</span></code> implementation example</span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
 
 <span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span>
 
@@ -1302,29 +1307,30 @@ that annotation.</p>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_slots_base</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">litestar.typing</span> <span class="kn">import</span> <span class="n">ParsedType</span>
+    <span class="kn">from</span> <span class="nn">litestar.typing</span> <span class="kn">import</span> <span class="n">FieldDefinition</span>
 
 
 <span class="k">class</span> <span class="nc">SQLAlchemySerializationPlugin</span><span class="p">(</span><span class="n">SerializationPluginProtocol</span><span class="p">,</span> <span class="n">_slots_base</span><span class="o">.</span><span class="n">SlotsBase</span><span class="p">):</span>
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_type_dto_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">DeclarativeBase</span><span class="p">],</span> <span class="nb">type</span><span class="p">[</span><span class="n">SQLAlchemyDTO</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_dto_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">DeclarativeBase</span><span class="p">],</span> <span class="nb">type</span><span class="p">[</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">def</span> <span class="nf">supports_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parsed_type</span><span class="p">:</span> <span class="n">ParsedType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">supports_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_definition</span><span class="p">:</span> <span class="n">FieldDefinition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="n">parsed_type</span><span class="o">.</span><span class="n">is_collection</span> <span class="ow">and</span> <span class="n">parsed_type</span><span class="o">.</span><span class="n">has_inner_subclass_of</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">)</span>
-        <span class="p">)</span> <span class="ow">or</span> <span class="n">parsed_type</span><span class="o">.</span><span class="n">is_subclass_of</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">)</span>
+            <span class="n">field_definition</span><span class="o">.</span><span class="n">is_collection</span> <span class="ow">and</span> <span class="n">field_definition</span><span class="o">.</span><span class="n">has_inner_subclass_of</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">)</span>
+        <span class="p">)</span> <span class="ow">or</span> <span class="n">field_definition</span><span class="o">.</span><span class="n">is_subclass_of</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_dto_for_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parsed_type</span><span class="p">:</span> <span class="n">ParsedType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">SQLAlchemyDTO</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">create_dto_for_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_definition</span><span class="p">:</span> <span class="n">FieldDefinition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">SQLAlchemyDTO</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
         <span class="c1"># assumes that the type is a container of SQLAlchemy models or a single SQLAlchemy model</span>
-        <span class="k">for</span> <span class="n">inner_type</span> <span class="ow">in</span> <span class="n">parsed_type</span><span class="o">.</span><span class="n">inner_types</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">inner_type</span><span class="o">.</span><span class="n">is_subclass_of</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
-                <span class="n">annotation</span> <span class="o">=</span> <span class="n">inner_type</span><span class="o">.</span><span class="n">annotation</span>
-                <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">annotation</span> <span class="o">=</span> <span class="n">parsed_type</span><span class="o">.</span><span class="n">annotation</span>
-
+        <span class="n">annotation</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">inner_type</span><span class="o">.</span><span class="n">annotation</span>
+                <span class="k">for</span> <span class="n">inner_type</span> <span class="ow">in</span> <span class="n">field_definition</span><span class="o">.</span><span class="n">inner_types</span>
+                <span class="k">if</span> <span class="n">inner_type</span><span class="o">.</span><span class="n">is_subclass_of</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">field_definition</span><span class="o">.</span><span class="n">annotation</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_dto_map</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_dto_map</span><span class="p">[</span><span class="n">annotation</span><span class="p">]</span>
 
@@ -1334,11 +1340,11 @@ that annotation.</p>
 </pre></div>
 </div>
 </div>
-<p><a class="reference internal" href="../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.supports_type" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.supports_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">parsed_type:</span> <span class="pre">ParsedType)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a>
+<p><a class="reference internal" href="../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.supports_type" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.supports_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a>
 returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> indicating whether the plugin supports serialization for the given type. Specifically, we return
 <code class="docutils literal notranslate"><span class="pre">True</span></code> if the parsed type is either a collection of SQLAlchemy models or a single SQLAlchemy model.</p>
-<p><a class="reference internal" href="../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.create_dto_for_type" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.create_dto_for_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">parsed_type:</span> <span class="pre">ParsedType)</span> <span class="pre">-&gt;</span> <span class="pre">type[DTOInterface]:</span></code></a>
-takes a <a class="reference internal" href="../reference/typing.html#litestar.typing.ParsedType" title="litestar.typing.ParsedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsedType</span></code></a> instance as an argument and returns a
+<p><a class="reference internal" href="../reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.create_dto_for_type" title="litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.create_dto_for_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">type[DTOInterface]:</span></code></a>
+takes a <a class="reference internal" href="../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance as an argument and returns a
 <a class="reference internal" href="../reference/contrib/sqlalchemy/dto.html#litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO" title="litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyDTO</span></code></a> subclass and includes some logic that may be
 interesting to potential serialization plugin authors.</p>
 <p>The first thing the method does is check if the parsed type is a collection of SQLAlchemy models or a single SQLAlchemy
@@ -1405,8 +1411,8 @@ adds it to the <code class="docutils literal notranslate"><span class="pre">_typ
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serializationpluginprotocol">SerializationPluginProtocol</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supports-type-self-parsed-type-parsedtype-bool"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">parsed_type:</span> <span class="pre">ParsedType)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-dto-for-type-self-parsed-type-parsedtype-type-dtointerface"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">parsed_type:</span> <span class="pre">ParsedType)</span> <span class="pre">-&gt;</span> <span class="pre">type[DTOInterface]:</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supports-type-self-field-definition-fielddefinition-bool"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-dto-for-type-self-field-definition-fielddefinition-type-dtointerface"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">type[DTOInterface]:</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
 </ul>
 </li>

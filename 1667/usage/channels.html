@@ -378,7 +378,7 @@
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -778,7 +778,7 @@ document.write(`
             
     <a href="../release-notes/whats-new-2.html"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
-        2.0 migration guide
+        What's new in 2.0
         <span class="absolute inset-0"></span>
     </a>
 
@@ -951,9 +951,11 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="templating.html">Templates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exceptions.html">Exceptions and exception handling</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="contrib/index.html">Contrib</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="contrib/jwt.html">JWT Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contrib/htmx.html">HTMX Request Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/open-telemetry.html">Open Telemetry Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/prometheus.html">Prometheus Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contrib/piccolo.html">Piccolo ORM</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="contrib/sqlalchemy/index.html">SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="contrib/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
 <li class="toctree-l4"><a class="reference internal" href="contrib/sqlalchemy/plugins/index.html">Plugins</a></li>
@@ -988,6 +990,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/msgspec.html">msgspec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/pydantic.html">pydantic</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../reference/contrib/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../reference/contrib/repository/abc.html">abc</a></li>
@@ -1013,10 +1016,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/di.html">di</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/dto/interface.html">interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/types.html">types</a></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../reference/dto/factory/index.html">factory</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/abc.html">abc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/config.html">config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/field.html">field</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/stdlib.html">stdlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../reference/dto/factory/types.html">types</a></li>
 </ul>
 </li>
 </ul>
@@ -1471,11 +1476,10 @@ tasks, such as receiving incoming data from the socket.</p>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="n">ChannelsPlugin</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
-    <span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">with</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">):</span>
-            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
-                <span class="c1"># do something with the message here</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">):</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
+            <span class="c1"># do something with the message here</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
