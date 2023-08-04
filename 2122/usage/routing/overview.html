@@ -1467,7 +1467,7 @@ The following example is identical in principle to the one above, but it uses <a
 </div>
 <div class="admonition-why-litestar-uses-radix-based-routing admonition">
 <p class="admonition-title">Why Litestar uses radix based routing</p>
-<p>The regex matching used by popular frameworks such as Starlette, FastAPI or (formerly) Flask is very good at
+<p>The regex matching used by popular frameworks such as Starlette, FastAPI or Flask is very good at
 resolving path parameters fast, giving it an advantage when a URL has a lot of path parameters - what we can think
 of as <code class="docutils literal notranslate"><span class="pre">vertical</span></code> scaling. On the other hand, it is not good at scaling horizontally - the more routes, the less
 performant it becomes. Thus, there is an inverse relation between performance and application size with this
