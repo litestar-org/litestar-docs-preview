@@ -1750,6 +1750,12 @@ should reference our domain <code class="docutils literal notranslate"><span cla
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">MyController</span><span class="p">],</span> <span class="n">signature_types</span><span class="o">=</span><span class="p">[</span><span class="n">Model</span><span class="p">])</span>
 </pre></div>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to map your type to a name that is different from its <code class="docutils literal notranslate"><span class="pre">__name__</span></code> attribute, you can use the
+<code class="docutils literal notranslate"><span class="pre">signature_namespace</span></code> parameter, e.g. <code class="docutils literal notranslate"><span class="pre">app</span> <span class="pre">=</span> <span class="pre">Litestar(signature_namespace={&quot;FooModel&quot;:</span> <span class="pre">Model})</span></code>.</p>
+<p>This enables import patterns like <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">domain.foo</span> <span class="pre">import</span> <span class="pre">Model</span> <span class="pre">as</span> <span class="pre">FooModel</span></code> inside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">TYPE_CHECKING</span></code> blocks.</p>
+</div>
 <section id="default-signature-namespace">
 <h3>Default signature namespace<a class="headerlink" href="#default-signature-namespace" title="Permalink to this heading">#</a></h3>
 <p>Litestar automatically adds some names to the signature namespace when parsing signature models in order to support
