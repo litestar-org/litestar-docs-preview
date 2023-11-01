@@ -1180,7 +1180,7 @@ document.write(`
   <section id="sqlalchemy-models-repository">
 <h1>SQLAlchemy Models &amp; Repository<a class="headerlink" href="#sqlalchemy-models-repository" title="Permalink to this heading">#</a></h1>
 <p>Litestar comes with a built-in repository class
-(<a class="reference external" href="https://docs.advanced-alchemy.jolt.rs/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in advanced_alchemy v0.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>)
+(<a class="reference external" href="https://docs.advanced-alchemy.jolt.rs/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in advanced_alchemy v0.5.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>)
 for <a class="reference external" href="https://docs.sqlalchemy.org/">SQLAlchemy</a> to make CRUD operations easier.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
@@ -1207,7 +1207,7 @@ an optional version with audit columns.</p></li>
 </section>
 <section id="basic-use">
 <h2>Basic Use<a class="headerlink" href="#basic-use" title="Permalink to this heading">#</a></h2>
-<p>To use the <a class="reference external" href="https://docs.advanced-alchemy.jolt.rs/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in advanced_alchemy v0.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>
+<p>To use the <a class="reference external" href="https://docs.advanced-alchemy.jolt.rs/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in advanced_alchemy v0.5.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>
 repository, you must first define your models using one of the included built-in <code class="docutils literal notranslate"><span class="pre">DeclarativeBase</span></code> ORM base
 implementations:</p>
 <ul class="simple">
@@ -1641,7 +1641,7 @@ your controllers and function based routes.</p>
 <span class="k">class</span> <span class="nc">AuthorController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Author CRUD&quot;&quot;&quot;</span>
 
-    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_authors_repo</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_authors_repo</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)}</span>
 
     <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">list_authors</span><span class="p">(</span>
@@ -1675,7 +1675,7 @@ your controllers and function based routes.</p>
     <span class="c1"># we override the authors_repo to use the version that joins the Books in</span>
     <span class="nd">@get</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors/{author_id:uuid}&quot;</span><span class="p">,</span>
-        <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_author_details_repo</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">True</span><span class="p">)},</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_author_details_repo</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)},</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_author</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1691,7 +1691,7 @@ your controllers and function based routes.</p>
 
     <span class="nd">@patch</span><span class="p">(</span>
         <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors/{author_id:uuid}&quot;</span><span class="p">,</span>
-        <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_author_details_repo</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">True</span><span class="p">)},</span>
+        <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_author_details_repo</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)},</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">update_author</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
