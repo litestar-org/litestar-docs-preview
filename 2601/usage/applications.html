@@ -1359,7 +1359,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </section>
 <section id="order-of-execution">
 <h2>Order of execution<a class="headerlink" href="#order-of-execution" title="Permalink to this heading">#</a></h2>
-<p>When multiple lifespan context managers and <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code> hooks are specified Litestar will invoke the context
+<p>When multiple lifespan context managers and <code class="docutils literal notranslate"><span class="pre">on_shutdown</span></code> hooks are specified, Litestar will invoke the context
 managers in inverse order before the shutdown hooks are invoked.</p>
 <p>Let’s say there are two lifespan context managers <code class="docutils literal notranslate"><span class="pre">ctx_a</span></code> and <code class="docutils literal notranslate"><span class="pre">ctx_b</span></code> as well as two shutdown hooks <code class="docutils literal notranslate"><span class="pre">hook_a</span></code> and
 <code class="docutils literal notranslate"><span class="pre">hook_b</span></code> as shown in the following code:</p>
