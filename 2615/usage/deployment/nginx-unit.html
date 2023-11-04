@@ -1318,7 +1318,7 @@ Ubuntu</label><div class="sd-tab-content docutils">
 </section>
 <section id="configuration-update">
 <h2>Configuration update<a class="headerlink" href="#configuration-update" title="Permalink to this heading">#</a></h2>
-<p>To update the nginx-unit service already running, use <code class="docutils literal notranslate"><span class="pre">PUT</span></code> method to send the <code class="docutils literal notranslate"><span class="pre">unit.json</span></code> file on the <cite>/config</cite> endpoint</p>
+<p>To update the nginx-unit service already running, use <code class="docutils literal notranslate"><span class="pre">PUT</span></code> method to send the <code class="docutils literal notranslate"><span class="pre">unit.json</span></code> file on the <code class="docutils literal notranslate"><span class="pre">/config</span></code> endpoint</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>--data-binary<span class="w"> </span>@unit.json<span class="w"> </span>--unix-socket<span class="w"> </span>/opt/homebrew/var/run/unit/control.sock<span class="w"> </span>http://localhost/config
 </pre></div>
 </div>
