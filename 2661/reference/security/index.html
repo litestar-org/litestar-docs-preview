@@ -269,7 +269,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Learn how we handle security issues in Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Overview of Litestar's security protocols</div>
             </div>
         </div>
     
@@ -366,7 +366,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process for Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process, versioning, and deprecation policy for Litestar</div>
             </div>
         </div>
     
@@ -508,7 +508,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">We are active on Discord with a dedicated help forum</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Dedicated Discord help forum</div>
             </div>
         </div>
     
@@ -538,7 +538,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">You can ask questions and discuss Litestar on GitHub Discussions</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">GitHub Discussions </div>
             </div>
         </div>
     
@@ -819,7 +819,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Learn how we handle security issues in Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Overview of Litestar's security protocols</div>
             </div>
         </div>
     
@@ -916,7 +916,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process for Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process, versioning, and deprecation policy for Litestar</div>
             </div>
         </div>
     
@@ -1058,7 +1058,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">We are active on Discord with a dedicated help forum</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Dedicated Discord help forum</div>
             </div>
         </div>
     
@@ -1088,7 +1088,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">You can ask questions and discuss Litestar on GitHub Discussions</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">GitHub Discussions </div>
             </div>
         </div>
     
@@ -1376,6 +1376,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../topics/sync-vs-async.html">Sync vs. Async</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../topics/deployment/index.html">Deployment</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/nginx-unit.html">NGINX Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
 </ul>
 </li>
 </ul>
@@ -1498,10 +1499,10 @@ document.write(`
 or be manually configured on the router / controller level to provide auth.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.security.AbstractSecurityConfig.authentication_middleware_class">
-<span class="sig-name descname"><span class="pre">authentication_middleware_class</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware" title="litestar.middleware.AbstractAuthenticationMiddleware"><span class="pre">AbstractAuthenticationMiddleware</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.security.AbstractSecurityConfig.authentication_middleware_class" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">authentication_middleware_class</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware" title="litestar.middleware.authentication.AbstractAuthenticationMiddleware"><span class="pre">AbstractAuthenticationMiddleware</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.security.AbstractSecurityConfig.authentication_middleware_class" title="Permalink to this definition">#</a></dt>
 <dd><p>The authentication middleware class to use.</p>
 <p>Must inherit from
-<a class="reference internal" href="../middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware" title="litestar.middleware.authentication.AbstractAuthenticationMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware</span></code></a></p>
+<a class="reference internal" href="../middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware" title="litestar.middleware.authentication.AbstractAuthenticationMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware</span></code></a></p>
 </dd></dl>
 
 <dl class="py attribute">

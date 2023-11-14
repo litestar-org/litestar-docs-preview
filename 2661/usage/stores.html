@@ -269,7 +269,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Learn how we handle security issues in Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Overview of Litestar's security protocols</div>
             </div>
         </div>
     
@@ -366,7 +366,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process for Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process, versioning, and deprecation policy for Litestar</div>
             </div>
         </div>
     
@@ -508,7 +508,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">We are active on Discord with a dedicated help forum</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Dedicated Discord help forum</div>
             </div>
         </div>
     
@@ -538,7 +538,7 @@
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">You can ask questions and discuss Litestar on GitHub Discussions</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">GitHub Discussions </div>
             </div>
         </div>
     
@@ -819,7 +819,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Learn how we handle security issues in Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Overview of Litestar's security protocols</div>
             </div>
         </div>
     
@@ -916,7 +916,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process for Litestar</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Explore the release process, versioning, and deprecation policy for Litestar</div>
             </div>
         </div>
     
@@ -1058,7 +1058,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">We are active on Discord with a dedicated help forum</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">Dedicated Discord help forum</div>
             </div>
         </div>
     
@@ -1088,7 +1088,7 @@ document.write(`
         <span class="absolute inset-0"></span>
     </a>
 
-                <div class="mt-1 text-gray-600 dark:text-gray-300">You can ask questions and discuss Litestar on GitHub Discussions</div>
+                <div class="mt-1 text-gray-600 dark:text-gray-300">GitHub Discussions </div>
             </div>
         </div>
     
@@ -1376,6 +1376,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../topics/sync-vs-async.html">Sync vs. Async</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../topics/deployment/index.html">Deployment</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../topics/deployment/nginx-unit.html">NGINX Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
 </ul>
 </li>
 </ul>
@@ -1501,9 +1502,10 @@ third party integration (for example plugins).</p>
 <section id="built-in-stores">
 <h2>Built-in stores<a class="headerlink" href="#built-in-stores" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
-<dt><a class="reference internal" href="../reference/stores/memory.html#litestar.stores.memory.MemoryStore" title="litestar.stores.memory.MemoryStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryStore</span></code></a></dt><dd><p>A simple in-memory store, using a dictionary to hold data. This store offers no persistence but is suitable for
-basic applications such as caching and has generally the lowest overhead. This is the default store used by Litestar
-internally.</p>
+<dt><a class="reference internal" href="../reference/stores/memory.html#litestar.stores.memory.MemoryStore" title="litestar.stores.memory.MemoryStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryStore</span></code></a></dt><dd><p>A simple in-memory store, using a dictionary to hold data. This store offers no persistence and is not thread or multiprocess safe,
+but it is suitable for basic applications such as caching and has generally the lowest overhead. This is the default store used by
+Litestar internally. If you plan to enable <a class="reference internal" href="cli.html#cli-run-options"><span class="std std-ref">multiple web workers</span></a> and you need inter-process communication
+across multiple worker processes, you should use one of the other non-memory stores instead.</p>
 </dd>
 <dt><a class="reference internal" href="../reference/stores/file.html#litestar.stores.file.FileStore" title="litestar.stores.file.FileStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileStore</span></code></a></dt><dd><p>A store that saves data as files on disk. Persistence is built in, and data is easy to extract and back up.
 It is slower compared to in-memory solutions, and primarily suitable for situations when larger amounts of data
