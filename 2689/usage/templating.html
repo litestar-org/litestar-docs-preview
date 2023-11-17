@@ -1715,6 +1715,7 @@ your route handlers:</p>
 </input><label class="sd-tab-label" data-sync-id="jinja" for="sd-tab-item-11">
 Jinja</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.jinja</span> <span class="kn">import</span> <span class="n">JinjaTemplateEngine</span>
@@ -1723,11 +1724,14 @@ Jinja</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{template_type: str}&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">template_type</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.jinja2&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
     <span class="k">elif</span> <span class="n">template_type</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_str</span><span class="o">=</span><span class="s2">&quot;Hello &lt;strong&gt;Jinja&lt;/strong&gt; using strings&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">template_type</span><span class="p">:</span>
+        <span class="c1"># Return something that should raise an error</span>
+        <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1743,7 +1747,10 @@ Jinja</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-12" name="sd-tab-set-4" type="radio">
 </input><label class="sd-tab-label" data-sync-id="mako" for="sd-tab-item-12">
 Mako</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.mako</span> <span class="kn">import</span> <span class="n">MakoTemplateEngine</span>
@@ -1752,11 +1759,14 @@ Mako</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{template_type: str}&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>  <span class="c1"># noqa: UP007</span>
     <span class="k">if</span> <span class="n">template_type</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.mako&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
     <span class="k">elif</span> <span class="n">template_type</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_str</span><span class="o">=</span><span class="s2">&quot;Hello &lt;strong&gt;Mako&lt;/strong&gt; using strings&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">template_type</span><span class="p">:</span>
+        <span class="c1"># Return something that should raise an error</span>
+        <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
@@ -1772,7 +1782,10 @@ Mako</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-13" name="sd-tab-set-4" type="radio">
 </input><label class="sd-tab-label" data-sync-id="minijinja" for="sd-tab-item-13">
 MiniJinja</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.contrib.minijinja</span> <span class="kn">import</span> <span class="n">MiniJinjaTemplateEngine</span>
@@ -1781,11 +1794,14 @@ MiniJinja</label><div class="sd-tab-content docutils">
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{template_type: str}&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">template_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>  <span class="c1"># noqa: UP007</span>
     <span class="k">if</span> <span class="n">template_type</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;hello.html.minijinja&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
     <span class="k">elif</span> <span class="n">template_type</span> <span class="o">==</span> <span class="s2">&quot;string&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_str</span><span class="o">=</span><span class="s2">&quot;Hello &lt;strong&gt;Minijinja&lt;/strong&gt; using strings&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">template_type</span><span class="p">:</span>
+        <span class="c1"># Return something that should raise an error</span>
+        <span class="k">return</span> <span class="n">Template</span><span class="p">(</span><span class="n">template_str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
