@@ -312,8 +312,8 @@ These requirements are enforced using inspection, and if any of them is unfulfil
 
 .. seealso::
 
-    :class:`WebsocketRouteHandler <litestar.handlers.WebsocketRouteHandler>`
-    :doc:`/usage/websockets`
+    * :class:`WebsocketRouteHandler <litestar.handlers.WebsocketRouteHandler>`
+    * :doc:`/usage/websockets`
 
 
 ASGI route handlers
@@ -425,13 +425,13 @@ it can be used to build a URL path for that handler:
        # do something with the handler index below, e.g. send a redirect response to the handler, or access
        # handler.opt and some values stored there etc.
 
-       return Redirect(url=handler_index[0])
+       return Redirect(path=handler_index[0])
 
 
    @get("/redirect/{param_value:int}", name="five")
    def handler_five(request: Request, param_value: int) -> Redirect:
        path = request.app.route_reverse("three", param=param_value)
-       return Redirect(url=path)
+       return Redirect(path=path)
 
 
    app = Litestar(route_handlers=[handler_one, handler_two, handler_three])
@@ -560,6 +560,7 @@ In this example, Litestar will be unable to generate the signature model because
 the module scope at runtime. We can address this on a case-by-case basis by silencing our linters, for example:
 
 .. code-block:: python
+    :no-upgrade:
 
     from __future__ import annotations
 
@@ -567,9 +568,10 @@ the module scope at runtime. We can address this on a case-by-case basis by sile
 
     from litestar import Controller, post
 
-    from domain import Model  # noqa: TC002
+    # Choose the appropriate noqa directive according to your linter
+    from domain import Model  # noqa: TCH002
 
-However, this approach can get tedious, so as an alternative, Litestar accepts a ``signature_namespace`` mapping at
+However, this approach can get tedious, so as an alternative, Litestar accepts a ``signature_types`` sequence at
 every :ref:`layer <layered-architecture>` of the application. The following is a demonstration of how to use this
 pattern.
 
@@ -589,6 +591,13 @@ should reference our domain ``Model`` type.
 
 .. literalinclude:: /examples/signature_namespace/app.py
     :language: python
+
+.. tip::
+
+    If you want to map your type to a name that is different from its ``__name__`` attribute, you can use the
+    ``signature_namespace`` parameter, e.g. ``app = Litestar(signature_namespace={"FooModel": Model})``.
+
+    This enables import patterns like ``from domain.foo import Model as FooModel`` inside ``if TYPE_CHECKING`` blocks.
 
 Default signature namespace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -517,7 +517,7 @@ Of the two declarations of ``my-cookie`` only the route handler one will be used
 
 .. seealso::
 
-    :class:`Cookie reference <.datastructures.cookie.Cookie>`
+    * :class:`Cookie reference <.datastructures.cookie.Cookie>`
 
 
 
@@ -585,7 +585,7 @@ In Litestar, a redirect response looks like this:
        # do some stuff here
        # ...
        # finally return redirect
-       return Redirect(url="/other-path")
+       return Redirect(path="/other-path")
 
 To return a redirect response you should do the following:
 
@@ -609,7 +609,7 @@ File responses send a file:
    def handle_file_download() -> File:
        return File(
            path=Path(Path(__file__).resolve().parent, "report").with_suffix(".pdf"),
-           filename="repost.pdf",
+           filename="report.pdf",
        )
 
 The :class:`File <.response.File>` class expects two kwargs:
@@ -641,7 +641,7 @@ For example:
    def handle_file_download() -> File:
        return File(
            path=Path(Path(__file__).resolve().parent, "report").with_suffix(".pdf"),
-           filename="repost.pdf",
+           filename="report.pdf",
        )
 
 

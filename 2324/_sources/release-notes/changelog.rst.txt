@@ -3,6 +3,729 @@
 2.x Changelog
 =============
 
+.. changelog:: 2.3.2
+    :date: 2023/11706
+
+    .. change:: Fix recursion error when re-using the path of a route handler for static files
+        :type: bugfix
+        :pr: 2630
+        :issue: 2629
+
+        A regression was fixed that would cause a recursion error when the path of a
+        static files host was reused for a route handler with a different HTTP method.
+
+        .. code-block:: python
+
+            from litestar import Litestar
+            from litestar import post
+            from litestar.static_files import StaticFilesConfig
+
+
+            @post("/uploads")
+            async def handler() -> None:
+                pass
+
+
+            app = Litestar(
+                [handler],
+                static_files_config=[
+                    StaticFilesConfig(directories=["uploads"], path="/uploads"),
+                ],
+            )
+
+
+.. changelog:: 2.3.1
+    :date: 2023/11/04
+
+    .. change:: CLI: Fix not providing SSL certfiles breaks uvicorn command when using reload or multiple workers
+        :type: bugfix
+        :pr: 2616
+        :issue: 2613
+
+        Fix an issue where not providing the ``--ssl-certfile`` and ``--ssl-keyfile``
+        options to the ``litestar run`` command would cause a :exc:`FileNotFoundError`
+        in uvicorn, when used together with the ``--reload``, ``--web-concurrency``
+        options.
+
+
+.. changelog:: 2.3.0
+    :date: 2023/11/02
+
+    .. change:: Python 3.12 support
+        :type: feature
+        :pr: 2396
+        :issue: 1862
+
+        Python 3.12 is now fully supported and tested.
+
+    .. change:: New layered parameter ``signature_types``
+        :type: feature
+        :pr: 2422
+
+        Types in this collection are added to ``signature_namespace`` using the type's
+        ``__name__`` attribute.
+        This provides a nicer interface when adding names to the signature namespace
+        w ithout modifying the type name, e.g.: ``signature_namespace={"Model": Model}``
+        is equivalent to ``signature_types=[Model]``.
+
+        The implementation makes it an error to supply a type in ``signature_types``
+        that has a value for ``__name__`` already in the signature namespace.
+
+        It will also throw an error if an item in ``signature_types`` has no
+        ``__name__`` attribute.
+
+    .. change:: Added RapiDoc for OpenAPI schema visualisation
+        :type: feature
+        :pr: 2522
+
+        Add support for using `RapiDoc <https://github.com/rapi-doc/RapiDoc>`_ for
+        OpenAPI schema visualisation.
+
+    .. change:: Support Pydantic 1 & 2 within the same application
+        :type: feature
+        :pr: 2487
+
+        Added support for Pydantic 1 & 2 within the same application by integrating with
+        Pydantic's backwards compatibility layer:
+
+        .. code-block:: python
+
+            from litestar import get
+            from pydantic.v1 import BaseModel as BaseModelV1
+            from pydantic import BaseModel
+
+
+            class V1Foo(BaseModelV1):
+                bar: str
+
+
+            class V2Foo(BaseModel):
+                bar: str
+
+
+            @get("/1")
+            def foo_v1(data: V1Foo) -> V1Foo:
+                return data
+
+
+            @get("/2")
+            def foo_v2(data: V2Foo) -> V2Foo:
+                return data
+
+    .. change:: Add ``ResponseCacheConfig.cache_response_filter`` to allow filtering responses eligible for caching
+        :type: feature
+        :pr: 2537
+        :issue: 2501
+
+        ``ResponseCacheConfig.cache_response_filter`` is predicate called by the
+        response cache middleware that discriminates whether a response should be
+        cached, or not.
+
+
+    .. change:: SSL support and self-signed certificates for CLI
+        :type: feature
+        :pr: 2554
+        :issue: 2335
+
+        Add support for SSL and generating self-signed certificates to the CLI.
+
+        For this, three new arguments were added to the CLI's ``run`` command:
+
+        - ``--ssl-certfile``
+        - ``--ssl-keyfile``
+        - ``--create-self-signed-cert``
+
+        The ``--ssl-certfile`` and `--ssl-keyfile` flags are passed to uvicorn when
+        using ``litestar run``. Uvicorn requires both to be passed (or neither) but
+        additional validation was added to generate a more user friendly CLI errors.
+
+        The other SSL-related flags (like password or CA) were not added (yet). See
+        `uvicorn CLI docs <https://www.uvicorn.org/#command-line-options>`_
+
+        **Generating of a self-signed certificate**
+
+        One more CLI flag was added (``--create-devcert``) that uses the
+        ``cryptography`` module to generate a self-signed development certificate. Both
+        of the previous flags must be passed when using this flag. Then the following
+        logic is used:
+
+        - If both files already exists, they are used and nothing is generated
+        - If neither file exists, the dev cert and key are generated
+        - If only one file exists, it is ambiguous what to do so an exception is raised
+
+    .. change:: Use custom request class when given during exception handling
+        :type: bugfix
+        :pr: 2444
+        :issue: 2399
+
+        When a custom ``request_class`` is provided, it will now be used while returning
+        an error response
+
+    .. change:: Fix missing OpenAPI schema for generic response type annotations
+        :type: bugfix
+        :pr: 2463
+        :issue: 2383
+
+        OpenAPI schemas are now correctly generated when a response type annotation
+        contains a generic type such as
+
+        .. code-block:: python
+
+            from msgspec import Struct
+            from litestar import Litestar, get, Response
+            from typing import TypeVar, Generic, Optional
+
+            T = TypeVar("T")
+
+
+            class ResponseStruct(Struct, Generic[T]):
+                code: int
+                data: Optional[T]
+
+
+            @get("/")
+            def test_handler() -> Response[ResponseStruct[str]]:
+                return Response(
+                    ResponseStruct(code=200, data="Hello World"),
+                )
+
+    .. change:: Fix rendering of OpenAPI examples
+        :type: bugfix
+        :pr: 2509
+        :issue: 2494
+
+        An issue was fixed where OpenAPI examples would be rendered as
+
+        .. code-block:: json
+
+            {
+              "parameters": [
+                {
+                  "schema": {
+                    "type": "string",
+                    "examples": [
+                      {
+                        "summary": "example summary",
+                        "value": "example value"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+
+        instead of
+
+        .. code-block:: json
+
+            {
+              "parameters": [
+                {
+                  "schema": {
+                    "type": "string"
+                  },
+                  "examples": {
+                    "example1": {
+                      "summary": "example summary"
+                      "value": "example value"
+                    }
+                  }
+                }
+              ]
+            }
+
+    .. change:: Fix non UTF-8 handling when logging requests
+        :type: bugfix
+        :issue: 2529
+        :pr: 2530
+
+        When structlog is not installed, the request body would not get parsed and shown
+        as a byte sequence. Instead, it was serialized into a string with the assumption
+        that it is valid UTF-8. This was fixed by decoding the bytes with
+        ``backslashreplace`` before displaying them.
+
+    .. change:: Fix ``ExceptionHandler`` typing to properly support ``Exception`` subclasses
+        :type: bugfix
+        :issue: 2520
+        :pr: 2533
+
+        Fix the typing for ``ExceptionHandler`` to support subclasses of ``Exception``,
+        such that code like this will type check properly:
+
+        .. code-block:: python
+
+            from litestar import Litestar, Request, Response
+
+
+            class CustomException(Exception):
+                ...
+
+
+            def handle_exc(req: Request, exc: CustomException) -> Response:
+                ...
+
+    .. change:: Fix OpenAPI schema generation for variable length tuples
+        :type: bugfix
+        :issue: 2460
+        :pr: 2552
+
+        Fix a bug where an annotation such as ``tuple[str, ...]`` would cause a
+        ``TypeError: '<' not supported between instances of 'NoneType' and 'OpenAPIType')``.
+
+    .. change:: Fix channels performance issue when polling with no subscribers in ``arbitrary_channels_allowed`` mode
+        :type: bugfix
+        :pr: 2547
+
+        Fix a bug that would cause high CPU loads while idling when using a
+        ``ChannelsPlugin`` with the ``arbitrary_channels_allowed`` enabled and while no
+        subscriptions for any channel were active.
+
+    .. change:: Fix CLI schema export for non-serializable types when using ``create_examples=True``
+        :type: bugfix
+        :pr: 2581
+        :issue: 2575
+
+        When trying to export a schema via the
+        ``litestar schema openapi --output schema.json`` making use of a non-JSON
+        serializable type, would result in an encoding error because the standard
+        library JSON serializer was used. This has been fixed by using Litestar's own
+        JSON encoder, enabling the serialization of all types supplied by the schema.
+
+    .. change:: Fix OpenAPI schema generation for ``Literal`` and ``Enum`` unions with ``None``
+        :type: bugfix
+        :pr: 2550
+        :issue: 2546
+
+        Existing behavior was to make the schema for every type that is a union with
+        ``None`` a ``"one_of"`` schema, that includes ``OpenAPIType.NULL`` in the
+        ``"one_of"`` types.
+
+        When a ``Literal`` or ``Enum`` type is in a union with ``None``, this behavior
+        is not desirable, as we want to have ``null`` available in the list of available
+        options on the type's schema.
+
+        This was fixed by modifying ``Literal`` and ``Enum`` schema generation so that i
+        t can be identified that the types are in a union with ``None``, allowing
+        ``null`` to be included in ``Schema.enum`` values.
+
+    .. change:: Fix cache overrides when using same route with different handlers
+        :type: bugfix
+        :pr: 2592
+        :issue: 2573, 2588
+
+        A bug was fixed that would cause the cache for routes being overwritten by a
+        route handler on that same route with a different HTTP method.
+
+
+
+.. changelog:: 2.2.0
+    :date: 2023/10/12
+
+    .. change:: Fix implicit conversion of objects to ``bool`` in debug response
+        :type: bugfix
+        :pr: 2384
+        :issue: 2381
+
+        The exception handler middleware would, when in debug mode, implicitly call an
+        object's :meth:`__bool__ <object.__bool__>`, which would lead to errors if that
+        object overloaded the operator, for example if the object in question was a
+        SQLAlchemy element.
+
+    .. change:: Correctly re-export filters and exceptions from ``advanced-alchemy``
+        :type: bugfix
+        :pr: 2360
+        :issue: 2358
+
+        Some re-exports of filter and exception types from ``advanced-alchemy`` were
+        missing, causing various issues when ``advanced-alchemy`` was installed, but
+        Litestar would still use its own version of these classes.
+
+    .. change:: Re-add ``create_engine`` method to SQLAlchemy configs
+        :type: bugfix
+        :pr: 2382
+
+        The ``create_engine`` method was removed in an ``advanced-alchemy`` releases.
+        This was addresses by re-adding it to the versions provided by Litestar.
+
+    .. change:: Fix ``before_request`` modifies route handler signature
+        :type: bugfix
+        :pr: 2391
+        :issue: 2368
+
+        The ``before_request`` would modify the return annotation of associated
+        route handlers to conform with its own return type annotation, which would cause
+        issues and unexpected behaviour when that annotation was not compatible with the
+        original one.
+
+        This was fixed by not having the ``before_request`` handler modify the
+        route handler's signature. Users are now expected to ensure that values returned
+        from a ``before_request`` handler conform to the return type annotation of the
+        route handler.
+
+    .. change:: Ensure compression is applied before caching when using compression middleware
+        :type: bugfix
+        :pr: 2393
+        :issue: 1301
+
+        A previous limitation was removed that would apply compression from the
+        :class:`~litestar.middleware.compression.CompressionMiddleware` only *after* a
+        response was restored from the cache, resulting in unnecessary repeated
+        computation and increased size of the stored response.
+
+        This was due to caching being handled on the response layer, where a response
+        object would be pickled, restored upon a cache hit and then re-sent, including
+        all middlewares.
+
+        The new implementation now instead applies caching on the ASGI level; Individual
+        messages sent to the ``send`` callable are cached, and later re-sent. This
+        process ensures that the compression middleware has been applied before, and
+        will be skipped when re-sending a cached response.
+
+        In addition, this increases performance and reduces storage size even in cases
+        where no compression is applied because the slow and inefficient pickle format
+        can be avoided.
+
+    .. change:: Fix implicit JSON parsing of URL encoded data
+        :type: bugfix
+        :pr: 2394
+
+        A process was removed where Litestar would implicitly attempt to parse parts of
+        URL encoded data as JSON. This was originally added to provide some performance
+        boosts when that data was in fact meant to be JSON, but turned out to be too
+        fragile.
+
+        Regular data conversion / validation is unaffected by this.
+
+    .. change:: CLI enabled by default
+        :type: feature
+        :pr: 2346
+        :issue: 2318
+
+        The CLI and all its dependencies are now included by default, to enable a better
+        and more consistent developer experience out of the box.
+
+        The previous ``litestar[cli]`` extra is still available for backwards
+        compatibility, but as of ``2.2.0`` it is without effect.
+
+    .. change:: Customization of Pydantic integration via ``PydanticPlugin``
+        :type: feature
+        :pr: 2404
+        :issue: 2373
+
+        A new :class:`~litestar.contrib.pydantic.PydanticPlugin` has been added, which
+        can be used to configure Pydantic behaviour. Currently it supports setting a
+        ``prefer_alias`` option, which will pass the ``by_alias=True`` flag to Pydantic
+        when exporting models, as well as generate schemas accordingly.
+
+    .. change:: Add ``/schema/openapi.yml`` to the available schema paths
+        :type: feature
+        :pr: 2411
+
+        The YAML version of the OpenAPI schema is now available under
+        ``/schema/openapi.yml`` in addition to ``/schema/openapi.yaml``.
+
+    .. change:: Add experimental DTO codegen backend
+        :type: feature
+        :pr: 2388
+
+        A new DTO backend was introduced which speeds up the transfer process by
+        generating optimized Python code ahead of time. Testing shows that the new
+        backend is between 2.5 and 5 times faster depending on the operation and data
+        provided.
+
+        The new backend can be enabled globally for all DTOs by passing the appropriate
+        feature flag to the Litestar application:
+
+        .. code-block:: python
+
+            from litestar import Litestar
+            from litestar.config.app import ExperimentalFeatures
+
+            app = Litestar(experimental_features=[ExperimentalFeatures.DTO_CODEGEN])
+
+        .. seealso::
+            For more information see
+            :ref:`usage/dto/0-basic-use:Improving performance with the codegen backend`
+
+
+    .. change:: Improved error messages for missing required parameters
+        :type: feature
+        :pr: 2418
+
+        Error messages for missing required parameters will now also contain the source
+        of the expected parameter:
+
+        Before:
+
+        .. code-block:: json
+
+            {
+              "status_code": 400,
+              "detail": "Missing required parameter foo for url http://testerver.local"
+            }
+
+
+        After:
+
+        .. code-block:: json
+
+            {
+              "status_code": 400,
+              "detail": "Missing required header parameter 'foo' for url http://testerver.local"
+            }
+
+
+.. changelog:: 2.1.1
+    :date: 2023/09/24
+
+    .. change:: Fix ``DeprecationWarning`` raised by ``Response.to_asgi_response``
+        :type: bugfix
+        :pr: 2364
+
+        :meth:`~litestar.response.Response.to_asgi_response` was passing a
+        non-:obj:`None` default value (``[]``) to ``ASGIResponse`` for
+        ``encoded_headers``, resulting in a :exc:`DeprecationWarning` being raised.
+        This was fixed by leaving the default value as :obj:`None`.
+
+
+.. changelog:: 2.1.0
+    :date: 2023/09/23
+
+    `View the full changelog <https://github.com/litestar-org/litestar/compare/v2.0.0...v2.1.0x>`_
+
+    .. change:: Make ``302`` the default ``status_code`` for redirect responses
+        :type: feature
+        :pr: 2189
+        :issue: 2138
+
+        Make ``302`` the default ``status_code`` for redirect responses
+
+    .. change:: Add :meth:`include_in_schema` option for all layers
+        :type: feature
+        :pr: 2295
+        :issue: 2267
+
+        Adds the :meth:`include_in_schema` option to all layers, allowing to include/exclude
+        specific routes from the generated OpenAPI schema.
+
+    .. change:: Deprecate parameter ``app`` of ``Response.to_asgi_response``
+        :type: feature
+        :pr: 2268
+        :issue: 2217
+
+        Adds deprecation warning for unused ``app`` parameter of ``to_asgi_response`` as
+        it is unused and redundant due to ``request.app`` being available.
+
+    .. change:: Authentication: Add parameters to set the JWT ``extras`` field
+        :type: feature
+        :pr: 2313
+
+        Adds ``token_extras`` to both :func:`BaseJWTAuth.login` and :meth:`BaseJWTAuth.create_token` methods,
+        to allow the definition of the ``extras`` JWT field.
+
+    .. change:: Templating: Add possibility to customize Jinja environment
+        :type: feature
+        :pr: 2195
+        :issue: 965
+
+        Adds the ability to pass a custom Jinja2 ``Environment`` or Mako ``TemplateLookup`` by providing a
+        dedicated class method.
+
+    .. change:: Add support for `minjinja <https://github.com/mitsuhiko/minijinja>`_
+        :type: feature
+        :pr: 2250
+
+        Adds support for MiniJinja, a minimal Jinja2 implementation.
+
+        .. seealso:: :doc:`/usage/templating`
+
+    .. change:: SQLAlchemy: Exclude implicit fields for SQLAlchemy DTO
+        :type: feature
+        :pr: 2170
+
+        :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>` can now be
+        configured using a separate config object. This can be set using both
+        class inheritance and `Annotated <https://docs.python.org/3/library/typing.html#typing.Annotated>`_:
+
+        .. code-block:: python
+            :caption: :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>` can now be configured using a separate config object using ``config`` object.
+
+            class MyModelDTO(SQLAlchemyDTO[MyModel]):
+                config = SQLAlchemyDTOConfig()
+
+        or
+
+        .. code-block:: python
+            :caption: :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>` can now be configured using a separate config object using ``Annotated``.
+
+             MyModelDTO = SQLAlchemyDTO[Annotated[MyModel, SQLAlchemyDTOConfig()]]
+
+        The new configuration currently accepts a single attribute which is ``include_implicit_fields`` that has
+        a default value of ``True``. If set to to ``False``, all implicitly mapped columns will be hidden
+        from the ``DTO``. If set to ``hybrid-only``, then hybrid properties will be shown but not other
+        implicit columns.
+
+        Finally, implicit columns that are marked with ``Mark.READ_ONLY`` or ``Mark.WRITE_ONLY``
+        will always be shown regardless of the value of ``include_implicit_fields``.
+
+    .. change:: SQLAlchemy: Allow repository functions to be filtered by expressions
+        :type: feature
+        :pr: 2265
+
+        Enhances the SQLALchemy repository so that you can more easily pass in complex ``where`` expressions into the repository functions.
+
+        .. tip:: Without this, you have to override the ``statement`` parameter and it separates the where conditions from the filters and the ``kwargs``.
+
+        Allows usage of this syntax:
+
+        .. code-block:: python
+
+            locations, total_count = await model_service.list_and_count(
+                ST_DWithin(UniqueLocation.location, geog, 1000), account_id=str(account_id)
+            )
+
+        instead of the previous method of overriding the ``statement``:
+
+        .. code-block:: python
+
+            locations, total_count = await model_service.list_and_count(
+                statement=select(Model).where(ST_DWithin(UniqueLocation.location, geog, 1000)),
+                account_id=str(account_id),
+            )
+
+    .. change:: SQLAlchemy: Use :func:`lambda_stmt <sqlalchemy.sql.expression.lambda_stmt>` in the repository
+        :type: feature
+        :pr: 2179
+
+        Converts the repository to use :func:`lambda_stmt <sqlalchemy.sql.expression.lambda_stmt>`
+        instead of the normal ``select``
+
+    .. change:: SQLAlchemy: Swap to the `advanced_alchemy <https://docs.advanced-alchemy.jolt.rs>`_ implementations
+        :type: feature
+        :pr: 2312
+
+        Swaps the internal SQLAlchemy repository to use the external
+        `advanced_alchemy <https://docs.advanced-alchemy.jolt.rs>`_ library implementations
+
+    .. change:: Remove usages of deprecated ``ExceptionHandlerMiddleware`` ``debug`` parameter
+        :type: bugfix
+        :pr: 2192
+
+        Removes leftover usages of deprecated ``ExceptionHandlerMiddleware`` debug parameter.
+
+    .. change:: DTOs: Raise :class:`ValidationException` when Pydantic validation fails
+        :type: bugfix
+        :pr: 2204
+        :issue: 2190
+
+         Ensures that when the Pydantic validation fails in the Pydantic DTO,
+         a :class:`ValidationException` is raised with the extras set to the errors given by Pydantic.
+
+    .. change:: Set the max width of the console to 80
+        :type: bugfix
+        :pr: 2244
+
+        Sets the max width of the console to 80, to prevent the output from being
+        wrapped.
+
+    .. change:: Handling of optional path parameters
+        :type: bugfix
+        :pr: 2224
+        :issue: 2222
+
+        Resolves an issue where optional path parameters caused a 500 error to be raised.
+
+    .. change:: Use os.replace instead of shutil.move for renaming files
+        :type: bugfix
+        :pr: 2223
+
+        Change to using :func:`os.replace` instead of :func:`shutil.move` for renaming files, to
+        ensure atomicity.
+
+    .. change:: Exception detail attribute
+        :type: bugfix
+        :pr: 2231
+
+        Set correctly the detail attribute on :class:`LitestarException` and :class:`HTTPException`
+        regardless of whether it's passed positionally or by name.
+
+    .. change:: Filters not available in ``exists()``
+        :type: bugfix
+        :pr: 2228
+        :issue: 2221
+
+        Fixes :meth:`exists` method for SQLAlchemy sync and async.
+
+    .. change:: Add Pydantic types to SQLAlchemy registry only if Pydantic is installed
+        :type: bugfix
+        :pr: 2252
+
+        Allows importing from ``litestar.contrib.sqlalchemy.base`` even if Pydantic is not installed.
+
+    .. change:: Don't add content type for responses that don't have a body
+        :type: bugfix
+        :pr: 2263
+        :issue: 2106
+
+        Ensures that the ``content-type`` header is not added for responses that do not have a
+        body such as responses with status code ``204 (No Content)``.
+
+    .. change:: ``SQLAlchemyPlugin`` refactored
+        :type: bugfix
+        :pr: 2269
+
+        Changes the way the ``SQLAlchemyPlugin`` to now append the other plugins instead of the
+        inheritance that was previously used. This makes using the ``plugins.get`` function work as expected.
+
+    .. change:: Ensure ``app-dir`` is appended to path during autodiscovery
+        :type: bugfix
+        :pr: 2277
+        :issue: 2266
+
+        Fixes a bug which caused the ``--app-dir`` option to the Litestar CLI to not be propagated during autodiscovery.
+
+    .. change:: Set content length header by default
+        :type: bugfix
+        :pr: 2271
+
+        Sets the ``content-length`` header by default even if the length of the body is ``0``.
+
+    .. change:: Incorrect handling of mutable headers in :class:`ASGIResponse`
+        :type: bugfix
+        :pr: 2308
+        :issue: 2196
+
+        Update :class:`ASGIResponse`, :class:`Response` and friends to address a few issues related to headers:
+
+        - If ``encoded_headers`` were passed in at any point, they were mutated within responses, leading to a growing list of headers with every response
+        - While mutating ``encoded_headers``, the checks performed to assert a value was (not) already present, headers were not treated case-insensitive
+        - Unnecessary work was performed while converting cookies / headers into an encoded headers list
+
+        This was fixed by:
+
+        - Removing the use of and deprecate ``encoded_headers``
+        - Handling headers on :class:`ASGIResponse` with :class:`MutableScopeHeaders`, which allows for case-insensitive membership tests, ``.setdefault`` operations, etc.
+
+    .. change:: Adds missing ORM registry export
+        :type: bugfix
+        :pr: 2316
+
+        Adds an export that was overlooked for the base repo
+
+    .. change:: Discrepancy in ``attrs``, ``msgspec`` and ``Pydantic`` for multi-part forms
+        :type: bugfix
+        :pr: 2280
+        :issue: 2278
+
+        Resolves issue in ``attrs``, ``msgspec`` and Pydantic for multi-part forms
+
+    .. change:: Set proper default for ``exclude_http_methods`` in auth middleware
+        :type: bugfix
+        :pr: 2325
+        :issue: 2205
+
+        Sets ``OPTIONS`` as the default value for ``exclude_http_methods`` in the base authentication middleware class.
+
 .. changelog:: 2.0.0
     :date: 2023/08/19
 
@@ -296,7 +1019,7 @@
 .. changelog:: 2.0.0beta3
     :date: 2023/07/20
 
-    .. change:: SQLAlchemyDTO: column/relationship type inference
+    .. change:: :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>`: column/relationship type inference
         :type: feature
         :pr: 1879
         :issue: 1853
@@ -447,7 +1170,7 @@
         to the :class:`~datetime.datetime` at initialization time, instead of the time
         of the update.
 
-    .. change:: SQLAlchemyDTO: Fix handling of ``Sequence`` with defaults
+    .. change:: :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>`: Fix handling of ``Sequence`` with defaults
         :type: bugfix
         :pr: 1883
         :issue: 1851
@@ -613,7 +1336,7 @@
 
     .. change:: Expose ``ParsedType`` as public API
         :type: feature
-        :pr: 1677, 1567
+        :pr: 1677 1567
 
         Expose the previously private :class:`litestar.typing.ParsedType`. This is
         mainly indented for usage with
@@ -745,12 +1468,13 @@
         .. seealso::
             :ref:`usage/dto/1-abstract-dto:Providing values for nested data`
 
-    .. change:: DTOs: Hybrid properties and association proxies in ``SQLAlchemyDTO``
+    .. change:: DTOs: Hybrid properties and association proxies in
+        :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>`
         :type: feature
-        :pr: 1754, 1776
+        :pr: 1754 1776
 
-        The ``~litestar.contrib.sqlalchemy.dto.SQLAlchemyDTO`` now supports
-        `hybrid attribute <https://docs.sqlalchemy.org/en/20/orm/extensions/hybrid.html>`_
+        The :class:`SQLAlchemyDTO (Advanced Alchemy) <advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO>`
+        now supports `hybrid attribute <https://docs.sqlalchemy.org/en/20/orm/extensions/hybrid.html>`_
         and `associationproxy <https://docs.sqlalchemy.org/en/20/orm/extensions/associationproxy.html>`_.
 
         The generated field will be marked read-only.
@@ -919,7 +1643,7 @@
 
     .. change:: Incorrect ``sync_to_thread`` usage warnings for generator dependencies
         :type: bugfix
-        :pr: 1716, 1740
+        :pr: 1716 1740
         :issue: 1711
 
         A bug was fixed that caused incorrect warnings about missing ``sync_to_thread``
@@ -1112,7 +1836,7 @@
 
     .. change:: Warn about sync callables in route handlers and dependencies without an explicit ``sync_to_thread`` value
         :type: feature
-        :pr: 1648, 1655
+        :pr: 1648 1655
 
         A warning will now be raised when a synchronous callable is being used in an
         :class:`~.handlers.HTTPRouteHandler` or :class:`~.di.Provide`, without setting
@@ -2000,7 +2724,7 @@
 
     .. change:: Fix ``JSON.parse`` error in ReDoc and Swagger OpenAPI handlers
         :type: bugfix
-        :pr: 1363ad
+        :pr: 1363
 
         The HTML generated by the ReDoc and Swagger OpenAPI handlers would cause
         `JSON.parse <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse>`_
@@ -2037,7 +2761,7 @@
     .. change:: Move 3rd party integration plugins to ``contrib``
         :type: misc
         :breaking:
-        :pr: Move 3rd party integration plugins to ``contrib``
+        :pr: 1279 1252
 
         - Move ``plugins.piccolo_orm`` > ``contrib.piccolo_orm``
         - Move ``plugins.tortoise_orm`` > ``contrib.tortoise_orm``
@@ -2362,13 +3086,13 @@
         cookie.
 
 
-    .. change:: Fix https://github.com/litestar-org/starlite/issues/1201: Can not serve static file in ``/`` path
+    .. change:: Fix https://github.com/litestar-org/litestar/issues/1201: Can not serve static file in ``/`` path
         :type: bugfix
         :issue: 1201
 
         A validation error made it impossible to serve static files from the root path ``/`` .
 
-    .. change:: Fix https://github.com/litestar-org/starlite/issues/1149: Middleware not excluding static path
+    .. change:: Fix https://github.com/litestar-org/litestar/issues/1149: Middleware not excluding static path
         :type: bugfix
         :issue: 1149
 
