@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>handlers &#8212; Litestar Framework</title>
+    <title>asyncpg &#8212; Litestar Framework</title>
   
   
   
@@ -46,11 +46,13 @@
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="../../../_static/design-tabs.js?v=36754332"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/contrib/repository/handlers';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/channels/backends/asyncpg';</script>
     <script src="../../../_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="../../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="cli" href="../../cli.html" />
+    <link rel="prev" title="psycopg" href="psycopg.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -669,6 +671,10 @@ document.write(`
   
 
   
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
 
     </nav>
@@ -1171,7 +1177,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../usage/index.html">Usage</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../usage/applications.html">Applications</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../usage/routing/index.html">Routing</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1234,18 +1240,18 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../../usage/websockets.html">WebSockets</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../index.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../app.html">app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../background_tasks.html">background_tasks</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../channels/index.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../channels/plugin.html">plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../channels/subscriber.html">subscriber</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../channels/backends/index.html">backends</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../channels/backends/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../channels/backends/memory.html">memory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../channels/backends/redis.html">redis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../channels/backends/psycopg.html">psycopg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../channels/backends/asyncpg.html">asyncpg</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">channels</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plugin.html">plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../subscriber.html">subscriber</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">backends</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="memory.html">memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="redis.html">redis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="psycopg.html">psycopg</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">asyncpg</a></li>
 </ul>
 </li>
 </ul>
@@ -1253,20 +1259,20 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../connection.html">connection</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../index.html">contrib</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../htmx.html">HTMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../jinja.html">jinja</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../jwt.html">jwt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../piccolo.html">piccolo_orm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../pydantic.html">pydantic</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../sqlalchemy/index.html">sqlalchemy</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../sqlalchemy/plugins.html">plugins</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../sqlalchemy/repository.html">repository</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../sqlalchemy/types.html">types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../sqlalchemy/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../sqlalchemy/dto.html">DTO</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../contrib/index.html">contrib</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/htmx.html">HTMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/jwt.html">jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/piccolo.html">piccolo_orm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contrib/pydantic.html">pydantic</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../contrib/sqlalchemy/index.html">sqlalchemy</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../contrib/sqlalchemy/plugins.html">plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../contrib/sqlalchemy/repository.html">repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../contrib/sqlalchemy/types.html">types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../contrib/sqlalchemy/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../contrib/sqlalchemy/dto.html">DTO</a></li>
 </ul>
 </li>
 </ul>
@@ -1465,6 +1471,8 @@ document.write(`
 
 
 
+
+
 <nav aria-label="Breadcrumb">
   <ul class="bd-breadcrumbs">
     
@@ -1473,7 +1481,16 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">handlers</li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">backends</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">asyncpg</li>
   </ul>
 </nav>
 </div>
@@ -1490,9 +1507,63 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="handlers">
-<h1>handlers<a class="headerlink" href="#handlers" title="Permalink to this heading">#</a></h1>
-<p>This page has moved to <a class="reference internal" href="../../repository/handlers.html"><span class="doc">handlers</span></a></p>
+  <section id="module-litestar.channels.backends.asyncpg">
+<span id="asyncpg"></span><h1>asyncpg<a class="headerlink" href="#module-litestar.channels.backends.asyncpg" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.channels.backends.asyncpg.</span></span><span class="sig-name descname"><span class="pre">AsyncPgChannelsBackend</span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#litestar.channels.backends.base.ChannelsBackend" title="litestar.channels.backends.base.ChannelsBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelsBackend</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dsn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.__init__" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Awaitable" title="(in Python v3.12)"><span class="pre">Awaitable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Connection</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.on_startup">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_startup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.on_startup" title="Permalink to this definition">#</a></dt>
+<dd><p>Called by the plugin on application startup</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.on_shutdown">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_shutdown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.on_shutdown" title="Permalink to this definition">#</a></dt>
+<dd><p>Called by the plugin on application shutdown</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.publish">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.12)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.publish" title="Permalink to this definition">#</a></dt>
+<dd><p>Publish the message <code class="docutils literal notranslate"><span class="pre">data</span></code> to all <code class="docutils literal notranslate"><span class="pre">channels</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.subscribe">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.12)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.subscribe" title="Permalink to this definition">#</a></dt>
+<dd><p>Start listening for events on <code class="docutils literal notranslate"><span class="pre">channels</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.unsubscribe">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unsubscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.12)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.unsubscribe" title="Permalink to this definition">#</a></dt>
+<dd><p>Stop listening for events on <code class="docutils literal notranslate"><span class="pre">channels</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.stream_events">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stream_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.AsyncGenerator" title="(in Python v3.12)"><span class="pre">AsyncGenerator</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.stream_events" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a generator, iterating over events of subscribed channels as they become available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.get_history">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.get_history" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the event history of <code class="docutils literal notranslate"><span class="pre">channel</span></code>, at most <code class="docutils literal notranslate"><span class="pre">limit</span></code> entries</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -1505,12 +1576,54 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="psycopg.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">psycopg</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../cli.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">cli</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.__init__"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.on_startup"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.on_startup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.on_shutdown"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.on_shutdown()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.publish"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.publish()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.subscribe"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.subscribe()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.unsubscribe"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.unsubscribe()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.stream_events"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.stream_events()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend.get_history"><code class="docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend.get_history()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -1250,6 +1250,8 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/base.html">base</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/memory.html">memory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/redis.html">redis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/psycopg.html">psycopg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/asyncpg.html">asyncpg</a></li>
 </ul>
 </li>
 </ul>
@@ -1550,7 +1552,7 @@ a DTO for use with a SQLAlchemy model:</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;7927dee2-f638-4cb7-a3e4-e5ed250abcda&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;a8a6d89a-6457-4ab4-a531-9ea03bbbe320&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1607,7 +1609,7 @@ configuration.</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;215af8b9-44f1-47b7-a559-b1cfd27400b6&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;f05b3982-6d80-453b-aa31-bc4bdcba9ecd&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1870,7 +1872,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;a3577663-d90a-479b-87c7-508acb14d617&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;aeee6808-d329-4eba-bd8e-11a596f06ebd&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1962,7 +1964,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;0f600feb-8b8f-42a8-8921-19872781e7a7&quot;</span>,<span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;2d0d6882-5975-4ba1-9cd4-4659aa02333c&quot;</span>,<span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -2234,7 +2236,7 @@ type of the data that it will contain, and provides useful methods for interacti
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/person<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;d64dedce-e62b-4bc2-8b85-b78119cf5bfc&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;ca307e9b-a296-4029-892e-7736e86a1b4e&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
 </pre></div>
 </div>
 </div>
