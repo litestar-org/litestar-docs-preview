@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>base &#8212; Litestar Framework</title>
+    <title>Docker &#8212; Litestar Framework</title>
   
   
   
@@ -46,13 +46,13 @@
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="../../_static/design-tabs.js?v=36754332"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/stores/base';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'topics/deployment/docker';</script>
     <script src="../../_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="file" href="file.html" />
-    <link rel="prev" title="stores" href="index.html" />
+    <link rel="next" title="Supervisor (linux)" href="supervisor.html" />
+    <link rel="prev" title="Manually with ASGI server" href="manually-with-asgi-server.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -1177,7 +1177,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../usage/index.html">Usage</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/applications.html">Applications</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/routing/index.html">Routing</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1240,110 +1240,110 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../usage/websockets.html">WebSockets</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../app.html">app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../background_tasks.html">background_tasks</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../channels/index.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../channels/plugin.html">plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../channels/subscriber.html">subscriber</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../channels/backends/index.html">backends</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/memory.html">memory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/redis.html">redis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/background_tasks.html">background_tasks</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/channels/index.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/channels/plugin.html">plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/channels/subscriber.html">subscriber</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/channels/backends/index.html">backends</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/memory.html">memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/redis.html">redis</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../cli.html">cli</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config.html">config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../connection.html">connection</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../contrib/index.html">contrib</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/htmx.html">HTMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/jinja.html">jinja</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/jwt.html">jwt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/piccolo.html">piccolo_orm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/pydantic.html">pydantic</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../contrib/sqlalchemy/index.html">sqlalchemy</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/plugins.html">plugins</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/repository.html">repository</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/types.html">types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/dto.html">DTO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/cli.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/connection.html">connection</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/htmx.html">HTMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jwt.html">jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/piccolo.html">piccolo_orm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/pydantic.html">pydantic</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/contrib/sqlalchemy/index.html">sqlalchemy</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html">plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/repository.html">repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/types.html">types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/dto.html">DTO</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_extractors.html">data_extractors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../datastructures.html">datastructures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../di.html">di</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../dto/config.html">config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/data_structures.html">data_structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/field.html">field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/types.html">types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/base_dto.html">base_dto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/msgspec_dto.html">msgspec_dto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/dataclass_dto.html">dataclass_dto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/datastructures.html">datastructures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/di.html">di</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/config.html">config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/data_structures.html">data_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/field.html">field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/base_dto.html">base_dto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/msgspec_dto.html">msgspec_dto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/dataclass_dto.html">dataclass_dto</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../enums.html">enums</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../events.html">events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../exceptions.html">exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../handlers.html">handlers</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../logging/index.html">logging</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../logging/config.html">config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../logging/picologging.html">picologging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../logging/standard.html">standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/enums.html">enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/events.html">events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/exceptions.html">exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/handlers.html">handlers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/logging/index.html">logging</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/logging/config.html">config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/logging/picologging.html">picologging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/logging/standard.html">standard</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/allowed_hosts.html">allowed_hosts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/authentication.html">authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/cors.html">cors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/csrf.html">csrf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/logging.html">logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../middleware/rate_limit.html">rate_limit</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../middleware/session/index.html">session</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../middleware/session/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../middleware/session/client_side.html">client_side</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../middleware/session/server_side.html">server_side</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/authentication.html">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/compression.html">compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/csrf.html">csrf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/rate_limit.html">rate_limit</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/middleware/session/index.html">session</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/middleware/session/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/middleware/session/client_side.html">client_side</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/middleware/session/server_side.html">server_side</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../openapi/index.html">openapi</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../openapi/openapi.html">openapi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openapi/spec.html">spec</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/openapi/index.html">openapi</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../pagination.html">pagination</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../params.html">params</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../plugins.html">plugins</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/handlers.html">handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/plugins.html">plugins</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/abc.html">abc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/filters.html">filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/handlers.html">handlers</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../response/base.html">base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/file.html">file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/redirect.html">redirect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/streaming.html">streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/sse.html">SSE (Server Sent Events)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/template.html">template</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/sse.html">SSE (Server Sent Events)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/template.html">template</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../router.html">router</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../routes.html">routes</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../security/jwt.html"><code class="docutils literal notranslate"><span class="pre">BaseJWTAuth</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/routes.html">routes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/security/jwt.html"><code class="docutils literal notranslate"><span class="pre">BaseJWTAuth</span></code></a></li>
 
 
 
@@ -1351,42 +1351,42 @@ document.write(`
 
 
 
-<li class="toctree-l3"><a class="reference internal" href="../security/session_auth.html">session_auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../serialization.html">serialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../static_files.html">static_files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../status_codes.html">status_code</a></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">stores</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="file.html">file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="memory.html">memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="redis.html">redis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="registry.html">registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/serialization.html">serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/static_files.html">static_files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/status_codes.html">status_code</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/memory.html">memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/redis.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/registry.html">registry</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../template.html">template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing.html">testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../types.html">types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../typing.html">typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/template.html">template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/testing.html">testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/types.html">types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/typing.html">typing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guides</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../migration/flask.html">From Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../migration/fastapi.html">From Starlette / FastAPI</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../topics/sync-vs-async.html">Sync vs. Async</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../topics/deployment/index.html">Deployment</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/nginx-unit.html">NGINX Unit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/docker.html">Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/supervisor.html">Supervisor (linux)</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sync-vs-async.html">Sync vs. Async</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Deployment</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="nginx-unit.html">NGINX Unit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manually-with-asgi-server.html">Manually with ASGI server</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supervisor.html">Supervisor (linux)</a></li>
 
 </ul>
 </li>
@@ -1481,12 +1481,12 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Topics</a></li>
     
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">stores</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Deployment</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">base</li>
+    <li class="breadcrumb-item active" aria-current="page">Docker</li>
   </ul>
 </nav>
 </div>
@@ -1503,144 +1503,38 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-litestar.stores.base">
-<span id="base"></span><h1>base<a class="headerlink" href="#module-litestar.stores.base" title="Permalink to this heading">#</a></h1>
-<dl class="field-list simple">
-<dt class="field-odd">members<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Store, NamespacedStore</p>
-</dd>
-</dl>
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.stores.base.Store">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.stores.base.</span></span><span class="sig-name descname"><span class="pre">Store</span></span><a class="headerlink" href="#litestar.stores.base.Store" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
-<p>Thread and process safe asynchronous key/value store.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.Store.set">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.12)"><span class="pre">timedelta</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.stores.base.Store.set" title="Permalink to this definition">#</a></dt>
-<dd><p>Set a value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>key</strong> – Key to associate the value with</p></li>
-<li><p><strong>value</strong> – Value to store</p></li>
-<li><p><strong>expires_in</strong> – Time in seconds before the key is considered expired</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.Store.get">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">renew_for</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.12)"><span class="pre">timedelta</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.stores.base.Store.get" title="Permalink to this definition">#</a></dt>
-<dd><p>Get a value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>key</strong> – Key associated with the value</p></li>
-<li><p><strong>renew_for</strong> – If given and the value had an initial expiry time set, renew the
-expiry time for <code class="docutils literal notranslate"><span class="pre">renew_for</span></code> seconds. If the value has not been set
-with an expiry time this is a no-op</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The value associated with <code class="docutils literal notranslate"><span class="pre">key</span></code> if it exists and is not expired, else
-<code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.Store.delete">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.stores.base.Store.delete" title="Permalink to this definition">#</a></dt>
-<dd><p>Delete a value.</p>
-<p>If no such key exists, this is a no-op.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>key</strong> – Key of the value to delete</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.Store.delete_all">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.stores.base.Store.delete_all" title="Permalink to this definition">#</a></dt>
-<dd><p>Delete all stored values.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.Store.exists">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#litestar.stores.base.Store.exists" title="Permalink to this definition">#</a></dt>
-<dd><p>Check if a given <code class="docutils literal notranslate"><span class="pre">key</span></code> exists.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.Store.expires_in">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">expires_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.stores.base.Store.expires_in" title="Permalink to this definition">#</a></dt>
-<dd><p>Get the time in seconds <code class="docutils literal notranslate"><span class="pre">key</span></code> expires in. If no such <code class="docutils literal notranslate"><span class="pre">key</span></code> exists or no
-expiry time was set, return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.stores.base.NamespacedStore">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.stores.base.</span></span><span class="sig-name descname"><span class="pre">NamespacedStore</span></span><a class="headerlink" href="#litestar.stores.base.NamespacedStore" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#litestar.stores.base.Store" title="litestar.stores.base.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a></p>
-<p>A subclass of <a class="reference internal" href="#litestar.stores.base.Store" title="litestar.stores.base.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a>, offering hierarchical namespacing.</p>
-<p>Bulk actions on a parent namespace should affect all child namespaces, whereas other operations on all namespaces
-should be isolated.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.NamespacedStore.with_namespace">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_namespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#litestar.stores.base.NamespacedStore.with_namespace" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a new instance of <a class="reference internal" href="#litestar.stores.base.NamespacedStore" title="litestar.stores.base.NamespacedStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamespacedStore</span></code></a>, which exists in a child namespace of the current namespace.
-Bulk actions on the parent namespace should affect all child namespaces, whereas other operations on all
-namespaces should be isolated.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.stores.base.StorageObject">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.stores.base.</span></span><span class="sig-name descname"><span class="pre">StorageObject</span></span><a class="headerlink" href="#litestar.stores.base.StorageObject" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://jcristharif.com/msgspec/api.html#msgspec.Struct" title="(in msgspec)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a></p>
-<p><a class="reference external" href="https://jcristharif.com/msgspec/api.html#msgspec.Struct" title="(in msgspec)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msgspec.Struct</span></code></a> to store serialized data alongside with their expiry time.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.StorageObject.new">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.12)"><span class="pre">timedelta</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.stores.base.StorageObject" title="litestar.stores.base.StorageObject"><span class="pre">StorageObject</span></a></span></span><a class="headerlink" href="#litestar.stores.base.StorageObject.new" title="Permalink to this definition">#</a></dt>
-<dd><p>Construct a new <a class="reference internal" href="#litestar.stores.base.StorageObject" title="litestar.stores.base.StorageObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">StorageObject</span></code></a> instance.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="litestar.stores.base.StorageObject.expired">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">expired</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#litestar.stores.base.StorageObject.expired" title="Permalink to this definition">#</a></dt>
-<dd><p>Return if the <a class="reference internal" href="#litestar.stores.base.StorageObject" title="litestar.stores.base.StorageObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">StorageObject</span></code></a> is expired</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="litestar.stores.base.StorageObject.expires_in">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">expires_in</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.stores.base.StorageObject.expires_in" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the expiry time of this <code class="docutils literal notranslate"><span class="pre">StorageObject</span></code> in seconds. If no expiry time
-was set, return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.StorageObject.to_bytes">
-<span class="sig-name descname"><span class="pre">to_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></span><a class="headerlink" href="#litestar.stores.base.StorageObject.to_bytes" title="Permalink to this definition">#</a></dt>
-<dd><p>Encode the instance to bytes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.stores.base.StorageObject.from_bytes">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.stores.base.StorageObject" title="litestar.stores.base.StorageObject"><span class="pre">StorageObject</span></a></span></span><a class="headerlink" href="#litestar.stores.base.StorageObject.from_bytes" title="Permalink to this definition">#</a></dt>
-<dd><p>Load a previously encoded with <a class="reference internal" href="#litestar.stores.base.StorageObject.to_bytes" title="litestar.stores.base.StorageObject.to_bytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">StorageObject.to_bytes()</span></code></a></p>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="docker">
+<h1>Docker<a class="headerlink" href="#docker" title="Permalink to this heading">#</a></h1>
+<p>This uses the default python container <a class="reference external" href="https://hub.docker.com/_/python">https://hub.docker.com/_/python</a></p>
+<section id="dockerfile">
+<h2>Dockerfile<a class="headerlink" href="#dockerfile" title="Permalink to this heading">#</a></h2>
+<div class="highlight-docker notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/code</span>
+<span class="k">COPY</span><span class="w"> </span>./requirements.txt<span class="w"> </span>/code/requirements.txt
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--upgrade<span class="w"> </span>-r<span class="w"> </span>/code/requirements.txt
+<span class="k">COPY</span><span class="w"> </span>./src<span class="w"> </span>/
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;80&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This copies the <cite>src</cite> folder on your machine to the <cite>/code</cite> in the docker container and runs your app via uvicorn. Adjust according to whichever asgi server you choose.</p>
+<p><a class="reference internal" href="manually-with-asgi-server.html"><span class="doc">Manually with ASGI server</span></a></p>
+</section>
+<section id="docker-compose">
+<h2>Docker-compose<a class="headerlink" href="#docker-compose" title="Permalink to this heading">#</a></h2>
+<p>If you want to run the container as part of a docker-compose setup then you can simply use this compose file</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./</span>
+<span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dockerfile</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;api&quot;</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">database</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -1654,20 +1548,20 @@ was set, return <code class="docutils literal notranslate"><span class="pre">-1<
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="manually-with-asgi-server.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">stores</p>
+        <p class="prev-next-title">Manually with ASGI server</p>
       </div>
     </a>
     <a class="right-next"
-       href="file.html"
+       href="supervisor.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">file</p>
+        <p class="prev-next-title">Supervisor (linux)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1686,27 +1580,8 @@ was set, return <code class="docutils literal notranslate"><span class="pre">-1<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store"><code class="docutils literal notranslate"><span class="pre">Store</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store.set"><code class="docutils literal notranslate"><span class="pre">Store.set()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store.get"><code class="docutils literal notranslate"><span class="pre">Store.get()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store.delete"><code class="docutils literal notranslate"><span class="pre">Store.delete()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store.delete_all"><code class="docutils literal notranslate"><span class="pre">Store.delete_all()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store.exists"><code class="docutils literal notranslate"><span class="pre">Store.exists()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.Store.expires_in"><code class="docutils literal notranslate"><span class="pre">Store.expires_in()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.NamespacedStore"><code class="docutils literal notranslate"><span class="pre">NamespacedStore</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.NamespacedStore.with_namespace"><code class="docutils literal notranslate"><span class="pre">NamespacedStore.with_namespace()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.StorageObject"><code class="docutils literal notranslate"><span class="pre">StorageObject</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.StorageObject.new"><code class="docutils literal notranslate"><span class="pre">StorageObject.new()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.StorageObject.expired"><code class="docutils literal notranslate"><span class="pre">StorageObject.expired</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.StorageObject.expires_in"><code class="docutils literal notranslate"><span class="pre">StorageObject.expires_in</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.StorageObject.to_bytes"><code class="docutils literal notranslate"><span class="pre">StorageObject.to_bytes()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.stores.base.StorageObject.from_bytes"><code class="docutils literal notranslate"><span class="pre">StorageObject.from_bytes()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dockerfile">Dockerfile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-compose">Docker-compose</a></li>
 </ul>
   </nav></div>
 
