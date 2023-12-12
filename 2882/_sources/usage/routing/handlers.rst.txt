@@ -120,7 +120,7 @@ For example:
    async def my_request_handler(
        state: State,
        request: Request,
-       headers: Headers,
+       headers: Dict[str, str],
        query: Dict[str, Any],
        cookies: Dict[str, Any],
    ) -> None:
