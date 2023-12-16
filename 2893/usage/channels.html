@@ -1258,6 +1258,8 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/base.html">base</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/memory.html">memory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/redis.html">redis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/psycopg.html">psycopg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/asyncpg.html">asyncpg</a></li>
 </ul>
 </li>
 </ul>
@@ -1827,15 +1829,15 @@ tasks, such as receiving incoming data from the socket.</p>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="n">ChannelsPlugin</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
-    <span class="k">async</span> <span class="k">with</span> <span class="k">await</span> <span class="n">channels</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">,</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">):</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
-            <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
+            <span class="c1"># do something with the message here</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
     <span class="p">[</span><span class="n">handler</span><span class="p">],</span>
-    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ChannelsPlugin</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">MemoryChannelsBackend</span><span class="p">(),</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])],</span>
+    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ChannelsPlugin</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">MemoryChannelsBackend</span><span class="p">())],</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1910,6 +1912,12 @@ generally recommended if history is not needed</p>
 to deliver messages. It has a slightly higher latency when publishing than the
 Pub/Sub backend, but achieves the same throughput in message fanout. Recommended
 when history is needed</p>
+</dd>
+<dt><a class="reference internal" href="../reference/channels/backends/asyncpg.html#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend" title="litestar.channels.backends.asyncpg.AsyncPgChannelsBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncPgChannelsBackend</span></code></a></dt><dd><p>A postgres backend using the
+<a class="reference external" href="https://magicstack.github.io/asyncpg/current/">asyncpg</a> driver</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">PsycoPgChannelsBackend</span></code></dt><dd><p>A postgres backend using the <a class="reference external" href="https://www.psycopg.org/psycopg3/docs/">psycopg3</a>
+async driver</p>
 </dd>
 </dl>
 </section>
