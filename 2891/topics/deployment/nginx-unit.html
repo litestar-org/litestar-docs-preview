@@ -1639,33 +1639,33 @@ it lists the app’s language and settings, runtime limits, process model, and v
 <td><p>Description</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code> (required)</p></td>
-<td><p><cite>python 3.12</cite></p></td>
-<td><p>Application type: <cite>python</cite> <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;python</span> <span class="pre">3&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;python</span> <span class="pre">3.12&quot;</span></code></p>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">3.12</span></code></p></td>
+<td><p>Application type: <code class="docutils literal notranslate"><span class="pre">python</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;python</span> <span class="pre">3&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;python</span> <span class="pre">3.12&quot;</span></code></p>
 <p>Unit searches its modules and uses the latest matching one, reporting an error if none match.</p>
 </td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">home</span></code></p></td>
-<td><p><cite>venv</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">venv</span></code></p></td>
 <td><p>String; path to the app’s virtual environment. Absolute or relative to <code class="docutils literal notranslate"><span class="pre">working_directory</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
-<td><p><cite>src/app</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src/app</span></code></p></td>
 <td><p>String or an array of strings; additional Python module lookup paths. These values are prepended to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">module</span></code> (required)</p></td>
-<td><p><cite>run</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">run</span></code></p></td>
 <td><p>String; app’s module name. This module is imported by Unit the usual Python way.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">callable</span></code></p></td>
-<td><p><cite>app</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">app</span></code></p></td>
 <td><p>String; name of the module-based callable that Unit runs as the app. The default is <cite>application</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">working_directory</span></code></p></td>
-<td><p>&lt;path_to_project&gt;</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;path_to_project&gt;</span></code></p></td>
 <td><p>String; the app’s working directory. The default is the working directory of Unit’s main process.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stderr</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout</span></code></p></td>
-<td><p><cite>log_error.log</cite></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">log_error.log</span></code></p></td>
 <td><p>Strings; filenames where Unit redirects the application’s output.</p>
 <p>The default is <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code>.</p>
 </td>
@@ -1679,9 +1679,9 @@ it lists the app’s language and settings, runtime limits, process model, and v
 <td><p>String; group name that runs the app process. The default is the <code class="docutils literal notranslate"><span class="pre">user</span></code>’s primary group.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">processes</span></code></p></td>
-<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
 <td><p>Integer or object; integer sets a static number of app processes, and object options <cite>max</cite>, <cite>spare</cite>, and <cite>idle_timeout</cite> enable dynamic management.</p>
-<p>The default is 1.</p>
+<p>The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 </td>
 </tr>
 </tbody>
