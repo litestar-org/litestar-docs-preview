@@ -1329,6 +1329,7 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/openapi/index.html">openapi</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/openapi/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/openapi/plugins.html">plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
@@ -1513,6 +1514,7 @@ document.write(`
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  
 </div>
 <h2 id="Symbols">Symbols</h2>
@@ -2087,6 +2089,18 @@ document.write(`
         <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionConfig.__init__">(litestar.middleware.session.server_side.ServerSideSessionConfig method)</a>
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.__init__">(litestar.openapi.OpenAPIConfig method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.__init__">(litestar.openapi.plugins.OpenAPIRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.RapidocRenderPlugin.__init__">(litestar.openapi.plugins.RapidocRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.RedocRenderPlugin.__init__">(litestar.openapi.plugins.RedocRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.StoplightRenderPlugin.__init__">(litestar.openapi.plugins.StoplightRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.__init__">(litestar.openapi.plugins.SwaggerRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.YamlRenderPlugin.__init__">(litestar.openapi.plugins.YamlRenderPlugin method)</a>
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.ResponseSpec.__init__">(litestar.openapi.ResponseSpec method)</a>
 </li>
@@ -3995,6 +4009,8 @@ document.write(`
 </li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.has_inner_subclass_of">has_inner_subclass_of() (litestar.typing.FieldDefinition method)</a>
 </li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.has_path">has_path() (litestar.openapi.plugins.OpenAPIRenderPlugin method)</a>
+</li>
       <li><a href="reference/handlers.html#litestar.handlers.head">head (class in litestar.handlers)</a>
 
       <ul>
@@ -4089,10 +4105,10 @@ document.write(`
 </li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_308_PERMANENT_REDIRECT">HTTP_308_PERMANENT_REDIRECT (in module litestar.status_codes)</a>
 </li>
-      <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_400_BAD_REQUEST">HTTP_400_BAD_REQUEST (in module litestar.status_codes)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_400_BAD_REQUEST">HTTP_400_BAD_REQUEST (in module litestar.status_codes)</a>
+</li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_401_UNAUTHORIZED">HTTP_401_UNAUTHORIZED (in module litestar.status_codes)</a>
 </li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_402_PAYMENT_REQUIRED">HTTP_402_PAYMENT_REQUIRED (in module litestar.status_codes)</a>
@@ -5025,6 +5041,13 @@ document.write(`
 </li>
       </ul></li>
       <li>
+    litestar.openapi.plugins
+
+      <ul>
+        <li><a href="reference/openapi/plugins.html#module-litestar.openapi.plugins">module</a>
+</li>
+      </ul></li>
+      <li>
     litestar.openapi.spec
 
       <ul>
@@ -5571,6 +5594,8 @@ document.write(`
 </li>
         <li><a href="reference/openapi/openapi.html#module-litestar.openapi">litestar.openapi</a>
 </li>
+        <li><a href="reference/openapi/plugins.html#module-litestar.openapi.plugins">litestar.openapi.plugins</a>
+</li>
         <li><a href="reference/openapi/spec.html#module-litestar.openapi.spec">litestar.openapi.spec</a>
 </li>
         <li><a href="reference/pagination.html#module-litestar.pagination">litestar.pagination</a>
@@ -5834,10 +5859,10 @@ document.write(`
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.SecurityScheme.open_id_connect_url">open_id_connect_url (litestar.openapi.spec.SecurityScheme attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPI">OpenAPI (class in litestar.openapi.spec)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPI.openapi">openapi (litestar.openapi.spec.OpenAPI attribute)</a>
 </li>
       <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.openapi_components">openapi_components (litestar.security.AbstractSecurityConfig property)</a>
@@ -5882,6 +5907,8 @@ document.write(`
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPIMediaType">(class in litestar.openapi.spec)</a>
 </li>
       </ul></li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin">OpenAPIRenderPlugin (class in litestar.openapi.plugins)</a>
+</li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPIResponse">OpenAPIResponse (class in litestar.openapi.spec)</a>
 </li>
       <li><a href="reference/plugins.html#litestar.plugins.OpenAPISchemaPlugin">OpenAPISchemaPlugin (class in litestar.plugins)</a>
@@ -6230,6 +6257,8 @@ document.write(`
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.rapidoc_version">rapidoc_version (litestar.openapi.OpenAPIController attribute)</a>
 </li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.RapidocRenderPlugin">RapidocRenderPlugin (class in litestar.openapi.plugins)</a>
+</li>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig.rate_limit">rate_limit (litestar.middleware.rate_limit.RateLimitConfig attribute)</a>
 </li>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig.rate_limit_limit_header_key">rate_limit_limit_header_key (litestar.middleware.rate_limit.RateLimitConfig attribute)</a>
@@ -6284,6 +6313,12 @@ document.write(`
         <li><a href="reference/testing.html#litestar.testing.WebSocketTestSession.receive_msgpack">(litestar.testing.WebSocketTestSession method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router">receive_router() (litestar.openapi.plugins.OpenAPIRenderPlugin method)</a>
+
+      <ul>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.receive_router">(litestar.openapi.plugins.SwaggerRenderPlugin method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/connection.html#litestar.connection.WebSocket.receive_text">receive_text() (litestar.connection.WebSocket method)</a>
 
       <ul>
@@ -6313,6 +6348,8 @@ document.write(`
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.redoc_js_url">redoc_js_url (litestar.openapi.OpenAPIController attribute)</a>
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.redoc_version">redoc_version (litestar.openapi.OpenAPIController attribute)</a>
+</li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.RedocRenderPlugin">RedocRenderPlugin (class in litestar.openapi.plugins)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.ref">ref (litestar.openapi.spec.PathItem attribute)</a>
 
@@ -6361,6 +6398,18 @@ document.write(`
       <li><a href="reference/contrib/mako.html#litestar.contrib.mako.MakoTemplate.render">render() (litestar.contrib.mako.MakoTemplate method)</a>
 
       <ul>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.render">(litestar.openapi.plugins.OpenAPIRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.RapidocRenderPlugin.render">(litestar.openapi.plugins.RapidocRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.RedocRenderPlugin.render">(litestar.openapi.plugins.RedocRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.StoplightRenderPlugin.render">(litestar.openapi.plugins.StoplightRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.render">(litestar.openapi.plugins.SwaggerRenderPlugin method)</a>
+</li>
+        <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.YamlRenderPlugin.render">(litestar.openapi.plugins.YamlRenderPlugin method)</a>
+</li>
         <li><a href="reference/response/base.html#litestar.response.base.Response.render">(litestar.response.base.Response method)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.render">(litestar.response.Response method)</a>
@@ -6370,7 +6419,11 @@ document.write(`
       </ul></li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.render_404_page">render_404_page() (litestar.openapi.OpenAPIController method)</a>
 </li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.render_json">render_json() (litestar.openapi.plugins.OpenAPIRenderPlugin static method)</a>
+</li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.render_methods_map">render_methods_map (litestar.openapi.OpenAPIController property)</a>
+</li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.render_oauth2_redirect">render_oauth2_redirect() (litestar.openapi.plugins.SwaggerRenderPlugin static method)</a>
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins">render_plugins (litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
@@ -6418,6 +6471,8 @@ document.write(`
 </li>
       <li><a href="reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddlewareConfig.request_log_fields">request_log_fields (litestar.middleware.logging.LoggingMiddlewareConfig attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddlewareConfig.request_log_message">request_log_message (litestar.middleware.logging.LoggingMiddlewareConfig attribute)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.RequestBody">RequestBody (class in litestar.openapi.spec)</a>
@@ -6440,8 +6495,6 @@ document.write(`
         <li><a href="reference/params.html#litestar.params.ParameterKwarg.required">(litestar.params.ParameterKwarg attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_after_response">resolve_after_response() (litestar.handlers.HTTPRouteHandler method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_before_request">resolve_before_request() (litestar.handlers.HTTPRouteHandler method)</a>
@@ -6900,8 +6953,6 @@ document.write(`
 </li>
       <li><a href="reference/middleware/session/base.html#litestar.middleware.session.base.SessionMiddleware">SessionMiddleware (class in litestar.middleware.session.base)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.set">set() (litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
 
       <ul>
@@ -6914,6 +6965,8 @@ document.write(`
         <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.set">(litestar.stores.redis.RedisStore method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.set_cached_history">set_cached_history() (litestar.middleware.rate_limit.RateLimitMiddleware method)</a>
 </li>
       <li><a href="reference/response/base.html#litestar.response.base.Response.set_cookie">set_cookie() (litestar.response.base.Response method)</a>
@@ -7050,6 +7103,8 @@ document.write(`
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.stoplight_elements_version">stoplight_elements_version (litestar.openapi.OpenAPIController attribute)</a>
 </li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.StoplightRenderPlugin">StoplightRenderPlugin (class in litestar.openapi.plugins)</a>
+</li>
       <li><a href="reference/stores/base.html#litestar.stores.base.StorageObject">StorageObject (class in litestar.stores.base)</a>
 </li>
       <li><a href="reference/stores/base.html#litestar.stores.base.Store">Store (class in litestar.stores.base)</a>
@@ -7161,6 +7216,8 @@ document.write(`
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.swagger_ui_standalone_preset_js_url">swagger_ui_standalone_preset_js_url (litestar.openapi.OpenAPIController attribute)</a>
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.swagger_ui_version">swagger_ui_version (litestar.openapi.OpenAPIController attribute)</a>
+</li>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin">SwaggerRenderPlugin (class in litestar.openapi.plugins)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig.sync_session_class">sync_session_class (litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig attribute)</a>
 </li>
@@ -7659,6 +7716,14 @@ document.write(`
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.xml">xml (litestar.openapi.spec.Schema attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.YamlRenderPlugin">YamlRenderPlugin (class in litestar.openapi.plugins)</a>
 </li>
   </ul></td>
 </tr></table>
