@@ -211,8 +211,8 @@ Finally we define the ``render`` method, which is called by Litestar to render t
 
 Inside the ``render`` method, we construct the HTML to render the UI, and return it as a string.
 
-- ``head``: Defines the HTML ``<head>`` section, including the title from openapi_schema, a link to the RapiDoc script
-  (``self.js_url``), and any additional styles (``self.style``).
+- ``head``: Defines the HTML ``<head>`` section, including the title from ``openapi_schema``, a link to the RapiDoc
+  script (``self.js_url``), and any additional styles (``self.style``).
 - ``body``: Constructs the HTML ``<body>``, with a ``<rapi-doc>`` element pointing to the OpenAPI JSON specification
   endpoint.
 - Returns a complete HTML document (as a byte string), combining head and body.

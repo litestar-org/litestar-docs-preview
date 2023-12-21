@@ -2178,8 +2178,8 @@ Litestar. Here’s the finished product:</p>
 <a class="reference internal" href="../../reference/connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> object and the <code class="docutils literal notranslate"><span class="pre">openapi_schema</span></code> as a dictionary.</p>
 <p>Inside the <code class="docutils literal notranslate"><span class="pre">render</span></code> method, we construct the HTML to render the UI, and return it as a string.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>: Defines the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> section, including the title from openapi_schema, a link to the RapiDoc script
-(<code class="docutils literal notranslate"><span class="pre">self.js_url</span></code>), and any additional styles (<code class="docutils literal notranslate"><span class="pre">self.style</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>: Defines the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> section, including the title from <code class="docutils literal notranslate"><span class="pre">openapi_schema</span></code>, a link to the RapiDoc
+script (<code class="docutils literal notranslate"><span class="pre">self.js_url</span></code>), and any additional styles (<code class="docutils literal notranslate"><span class="pre">self.style</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">body</span></code>: Constructs the HTML <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>, with a <code class="docutils literal notranslate"><span class="pre">&lt;rapi-doc&gt;</span></code> element pointing to the OpenAPI JSON specification
 endpoint.</p></li>
 <li><p>Returns a complete HTML document (as a byte string), combining head and body.</p></li>
