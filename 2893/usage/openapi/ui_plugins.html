@@ -1237,6 +1237,10 @@ document.write(`
 
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">OpenAPI UI Plugins</a></li>
 
+
+
+
+
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
@@ -1898,6 +1902,347 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
+<section id="configuring-openapi-ui-plugins">
+<h1>Configuring OpenAPI UI Plugins<a class="headerlink" href="#configuring-openapi-ui-plugins" title="Permalink to this heading">#</a></h1>
+<p>Each plugin can be tailored to meet your unique requirements by passing options at instantiation. For full details on
+each plugins options, see the <a class="reference internal" href="../../reference/openapi/plugins.html"><span class="doc">API Reference</span></a>.</p>
+<p>All plugins support the following options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: Each plugin has its own default, e.g., <code class="docutils literal notranslate"><span class="pre">/rapidoc</span></code> for RapiDoc. This can be overridden to serve the UI at
+a different path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">media_type</span></code>: The default media type for the plugin, typically <code class="docutils literal notranslate"><span class="pre">text/html</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">favicon</span></code>: A string that should be a valid <code class="docutils literal notranslate"><span class="pre">&lt;link&gt;</span></code> tag, e.g.,
+<code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=&quot;icon&quot;</span> <span class="pre">href=&quot;https://example.com/favicon.ico&quot;&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: Default is <code class="docutils literal notranslate"><span class="pre">body</span> <span class="pre">{</span> <span class="pre">margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0;</span> <span class="pre">}</span></code>. This is applied to the <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span></code> tag in the HTML rendered
+by the plugin.</p></li>
+</ul>
+<p>Most plugins support the following additional options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: The version of the UIs JS and (in some cases) CSS bundle to use. We use the <code class="docutils literal notranslate"><span class="pre">version</span></code> to construct the
+URL to retrieve the the bundle from <code class="docutils literal notranslate"><span class="pre">unpkg</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">https://unpkg.com/rapidoc&#64;&lt;version&gt;/dist/rapidoc-min.js</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">js_url</span></code>: The URL to the JS bundle. If provided, this will override the <code class="docutils literal notranslate"><span class="pre">version</span></code> option.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">css_url</span></code>: The URL to the CSS bundle. If provided, this will override the <code class="docutils literal notranslate"><span class="pre">version</span></code> option.</p></li>
+</ul>
+<p>Here’s some examples of configuring the plugins:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-18">
+rapidoc</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
+
+<span class="n">rapidoc_plugin</span> <span class="o">=</span> <span class="n">RapidocRenderPlugin</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;9.3.4&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/rapidoc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-19" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-19">
+redoc</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
+
+<span class="n">redoc_plugin</span> <span class="o">=</span> <span class="n">RedocRenderPlugin</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;next&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">google_fonts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/redoc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-20" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-20">
+stoplight</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
+
+<span class="n">stoplight_plugin</span> <span class="o">=</span> <span class="n">StoplightRenderPlugin</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;7.7.18&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">css_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/elements&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-21" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-21">
+swagger</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+
+<span class="n">swagger_plugin</span> <span class="o">=</span> <span class="n">SwaggerRenderPlugin</span><span class="p">(</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;5.1.3&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">css_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">standalone_preset_js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">init_oauth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/swagger&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="configuring-the-openapi-root-path">
+<h1>Configuring the OpenAPI Root Path<a class="headerlink" href="#configuring-the-openapi-root-path" title="Permalink to this heading">#</a></h1>
+<p>The OpenAPI root path is the path at which the OpenAPI representations are served. By default, this is <code class="docutils literal notranslate"><span class="pre">/schema</span></code>.
+This can be changed by setting the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.path" title="litestar.openapi.OpenAPIConfig.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.path</span></code></a> attribute.</p>
+<p>In the following example, we configure the OpenAPI root path to be <code class="docutils literal notranslate"><span class="pre">/docs</span></code>:</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-22" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-22">
+Python 3.8+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My API&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is the description of my API&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/docs&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-23" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-23">
+Python 3.9+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My API&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is the description of my API&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/docs&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This will result in any of the OpenAPI endpoints being served at <code class="docutils literal notranslate"><span class="pre">/docs</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/schema</span></code>, e.g.,
+<code class="docutils literal notranslate"><span class="pre">/docs/openapi.json</span></code>.</p>
+</section>
+<section id="backward-compatibility">
+<h1>Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permalink to this heading">#</a></h1>
+<p>OpenAPI UI plugins are a new feature introduced in <code class="docutils literal notranslate"><span class="pre">v2.5.0</span></code>.</p>
+<section id="providing-a-subclass-of-openapicontroller">
+<h2>Providing a subclass of OpenAPIController<a class="headerlink" href="#providing-a-subclass-of-openapicontroller" title="Permalink to this heading">#</a></h2>
+<p>The previous method of configuring elements such as the root path and styling was to subclass
+<a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIController" title="litestar.openapi.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code></a>, and set it on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.openapi_controller" title="litestar.openapi.OpenAPIConfig.openapi_controller"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.openapi_controller</span></code></a> attribute. This approach is now
+deprecated and slated for removal in <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, but if you are using it, there should be no change in behavior.</p>
+<p>To maintain backward compatibility with the previous approach, if neither the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.openapi_controller" title="litestar.openapi.OpenAPIConfig.openapi_controller"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.openapi_controller</span></code></a>
+or <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> attributes are set, we will automatically add the plugins to respect the also
+deprecated <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="litestar.openapi.OpenAPIConfig.enabled_endpoints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.enabled_endpoints</span></code></a> attribute. By default, this will result in the following endpoints
+being enabled:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/rapidoc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/elements</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.yml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.yaml</span></code></p></li>
+</ul>
+<p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="litestar.openapi.OpenAPIConfig.enabled_endpoints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.enabled_endpoints</span></code></a> attribute will be removed, and only a single UI plugin will be
+enabled by default, in addition to the <code class="docutils literal notranslate"><span class="pre">openapi.json</span></code> endpoint which will always be enabled.</p>
+</section>
+<section id="backward-compatibility-with-root-schema-site">
+<h2>Backward compatibility with root_schema_site<a class="headerlink" href="#backward-compatibility-with-root-schema-site" title="Permalink to this heading">#</a></h2>
+<p>Litestar has always supported a <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> class. This attribute
+allowed you to elect to serve a UI at the OpenAPI root path, e.g., by default <code class="docutils literal notranslate"><span class="pre">redoc</span></code> would be served at both
+<code class="docutils literal notranslate"><span class="pre">/schema</span></code> and <code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute will be removed, and the first <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a> in the
+<a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> list will be assigned to the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> endpoint.</p>
+<p>As of <code class="docutils literal notranslate"><span class="pre">v2.5.0</span></code>, if you explicitly use the new <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> attribute, you will be
+automatically opted in to the new behavior, and the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute will be ignored.</p>
+</section>
+</section>
+<section id="building-your-own-openapi-ui-plugin">
+<h1>Building your own OpenAPI UI Plugin<a class="headerlink" href="#building-your-own-openapi-ui-plugin" title="Permalink to this heading">#</a></h1>
+<p>If Litestar does not have built-in support for your OpenAPI UI framework of choice, you can easily create your own
+plugin by subclassing <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a> and implementing the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.render" title="litestar.openapi.plugins.OpenAPIRenderPlugin.render"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin.render()</span></code></a> method.</p>
+<p>To demonstrate building a custom plugin, we’ll look at the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.RapidocRenderPlugin" title="litestar.openapi.plugins.RapidocRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code></a> class, that is maintained by
+Litestar. Here’s the finished product:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">litestar.connection</span> <span class="kn">import</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">OpenAPIRenderPlugin</span>
+
+
+<span class="k">class</span> <span class="nc">RapidocRenderPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render an OpenAPI schema using Rapidoc.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;9.3.4&quot;</span><span class="p">,</span>
+        <span class="n">js_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/rapidoc&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the OpenAPI UI render plugin.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            version: Rapidoc version to download from the CDN. If js_url is provided, this is ignored.</span>
+<span class="sd">            js_url: Download url for the RapiDoc JS bundle. If not provided, the version will be used to construct the</span>
+<span class="sd">                url.</span>
+<span class="sd">            path: Path to serve the OpenAPI UI at.</span>
+<span class="sd">            **kwargs: Additional arguments to pass to the base class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://unpkg.com/rapidoc@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/dist/rapidoc-min.js&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render an HTML page for Rapidoc.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            - override this method to customize the template.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request: The request.</span>
+<span class="sd">            openapi_schema: The OpenAPI schema as a dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A rendered html string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">head</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">          &lt;head&gt;</span>
+<span class="s2">            &lt;title&gt;</span><span class="si">{</span><span class="n">openapi_schema</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">favicon</span><span class="si">}</span>
+<span class="s2">            &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
+<span class="s2">            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
+<span class="s2">            &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
+<span class="s2">            &lt;style&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span><span class="s2">&lt;/style&gt;</span>
+<span class="s2">          &lt;/head&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">          &lt;body&gt;</span>
+<span class="s2">            &lt;rapi-doc spec-url=&quot;openapi.json&quot; /&gt;</span>
+<span class="s2">          &lt;/body&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;!DOCTYPE html&gt;</span>
+<span class="s2">            &lt;html&gt;</span>
+<span class="s2">                </span><span class="si">{</span><span class="n">head</span><span class="si">}</span>
+<span class="s2">                </span><span class="si">{</span><span class="n">body</span><span class="si">}</span>
+<span class="s2">            &lt;/html&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="class-definition">
+<h2>Class definition<a class="headerlink" href="#class-definition" title="Permalink to this heading">#</a></h2>
+<p>The class <code class="docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code> inherits from <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RapidocRenderPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
+</pre></div>
+</div>
+</section>
+<section id="init-constructor">
+<h2><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor<a class="headerlink" href="#init-constructor" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;9.3.4&quot;</span><span class="p">,</span>
+        <span class="n">js_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/rapidoc&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>We support configuration via the following arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: Specifies the version of RapiDoc to use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">js_url</span></code>: Custom URL to the RapiDoc JavaScript bundle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: The URL path where the RapiDoc UI will be served.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>: Captures additional arguments to pass to the superclass.</p></li>
+</ul>
+<p>And we construct a url for the RapiDoc JavaScript bundle if it is not provided:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://unpkg.com/rapidoc@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/dist/rapidoc-min.js&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="render">
+<h2>render()<a class="headerlink" href="#render" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Finally we define the <code class="docutils literal notranslate"><span class="pre">render</span></code> method, which is called by Litestar to render the UI. It receives the a
+<a class="reference internal" href="../../reference/connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> object and the <code class="docutils literal notranslate"><span class="pre">openapi_schema</span></code> as a dictionary.</p>
+<p>Inside the <code class="docutils literal notranslate"><span class="pre">render</span></code> method, we construct the HTML to render the UI, and return it as a string.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>: Defines the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> section, including the title from openapi_schema, a link to the RapiDoc script
+(<code class="docutils literal notranslate"><span class="pre">self.js_url</span></code>), and any additional styles (<code class="docutils literal notranslate"><span class="pre">self.style</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code>: Constructs the HTML <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>, with a <code class="docutils literal notranslate"><span class="pre">&lt;rapi-doc&gt;</span></code> element pointing to the OpenAPI JSON specification
+endpoint.</p></li>
+<li><p>Returns a complete HTML document (as a byte string), combining head and body.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">head</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">          &lt;head&gt;</span>
+<span class="s2">            &lt;title&gt;</span><span class="si">{</span><span class="n">openapi_schema</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">favicon</span><span class="si">}</span>
+<span class="s2">            &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
+<span class="s2">            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
+<span class="s2">            &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
+<span class="s2">            &lt;style&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span><span class="s2">&lt;/style&gt;</span>
+<span class="s2">          &lt;/head&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">          &lt;body&gt;</span>
+<span class="s2">            &lt;rapi-doc spec-url=&quot;openapi.json&quot; /&gt;</span>
+<span class="s2">          &lt;/body&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;!DOCTYPE html&gt;</span>
+<span class="s2">            &lt;html&gt;</span>
+<span class="s2">                </span><span class="si">{</span><span class="n">head</span><span class="si">}</span>
+<span class="s2">                </span><span class="si">{</span><span class="n">body</span><span class="si">}</span>
+<span class="s2">            &lt;/html&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="interacting-with-the-router">
+<h2>Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code><a class="headerlink" href="#interacting-with-the-router" title="Permalink to this heading">#</a></h2>
+<p>Internally, an instance of <a class="reference internal" href="../../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> is constructed to serve the OpenAPI endpoints. The <code class="docutils literal notranslate"><span class="pre">Router</span></code> is available
+to plugins via the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router" title="litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin.receive_router()</span></code></a> method.</p>
+<p>This can be used for a variety of purposes, including adding additional routes to the <code class="docutils literal notranslate"><span class="pre">Router</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.enums</span> <span class="kn">import</span> <span class="n">MediaType</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">OpenAPIRenderPlugin</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">litestar.connection</span> <span class="kn">import</span> <span class="n">Request</span>
+    <span class="kn">from</span> <span class="nn">litestar.router</span> <span class="kn">import</span> <span class="n">Router</span>
+
+
+<span class="k">class</span> <span class="nc">MyOpenAPIPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">b</span><span class="s2">&quot;&lt;html&gt;My UI of Choice!&lt;/html&gt;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">receive_router</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">router</span><span class="p">:</span> <span class="n">Router</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/something&quot;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">TEXT</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">something</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Something&quot;</span>
+
+        <span class="n">router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">something</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 
 
                 </article>
@@ -1945,6 +2290,20 @@ Python 3.9+</label><div class="sd-tab-content docutils">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">OpenAPI UI Plugins</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-openapi-ui-plugins">Using OpenAPI UI Plugins</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-openapi-ui-plugins">Configuring OpenAPI UI Plugins</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-openapi-root-path">Configuring the OpenAPI Root Path</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-compatibility">Backward Compatibility</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-a-subclass-of-openapicontroller">Providing a subclass of OpenAPIController</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-compatibility-with-root-schema-site">Backward compatibility with root_schema_site</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-own-openapi-ui-plugin">Building your own OpenAPI UI Plugin</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-definition">Class definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-constructor"><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render">render()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
