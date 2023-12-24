@@ -1691,11 +1691,11 @@ calculate the best matching return media type.</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource
-Hello<span class="w"> </span>World!
+<span class="o">{</span><span class="s2">&quot;status_code&quot;</span>:404,<span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;Not Found&quot;</span><span class="o">}</span>
 &gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource<span class="w"> </span>-H<span class="w"> </span>Accept:<span class="w"> </span>text/html
-&lt;h1&gt;Hello<span class="w"> </span>World!&lt;/h1&gt;
+<span class="o">{</span><span class="s2">&quot;status_code&quot;</span>:404,<span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;Not Found&quot;</span><span class="o">}</span>
 &gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource<span class="w"> </span>-H<span class="w"> </span>Accept:<span class="w"> </span>application/xml
-&lt;xml&gt;&lt;msg&gt;Hello<span class="w"> </span>World!&lt;/msg&gt;&lt;/xml&gt;
+<span class="o">{</span><span class="s2">&quot;status_code&quot;</span>:404,<span class="s2">&quot;detail&quot;</span>:<span class="s2">&quot;Not Found&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
