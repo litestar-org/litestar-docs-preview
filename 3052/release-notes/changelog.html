@@ -1503,7 +1503,7 @@ document.write(`
 <strong>Released: </strong>2024-01-31<section id="2.5.4-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#2.5.4-bugfix" title="Permalink to this heading">#</a></h3>
 <dl>
-<dt>Handle <cite>KeyError</cite> when <cite>root_path</cite> is not present in ASGI scope<a class="headerlink reference internal" href="#2.5.4-handle" id="2.5.4-handle">#</a></dt><dd><div class="changelog-change docutils container">
+<dt>Handle <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> when <cite>root_path</cite> is not present in ASGI scope<a class="headerlink reference internal" href="#2.5.4-handle" id="2.5.4-handle">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Nginx Unit ASGI server does not set “root_path” in the ASGI scope, which is expected as part of the changes done in #3039. This PR fixes the assumption that the key is always present and instead tries to optionally retrieve it.</p>
 <p>Issue originally reported over at [Discord](<a class="reference external" href="https://discord.com/channels/919193495116337154/919193495690936353/1202204676003745792">https://discord.com/channels/919193495116337154/919193495690936353/1202204676003745792</a>)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyError</span> <span class="n">on</span> <span class="n">GET</span> <span class="o">/</span>
@@ -1518,7 +1518,7 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">error</span><span class="p">:</span> <span class="n">Argument</span> <span class="mi">1</span> <span class="n">to</span> <span class="s2">&quot;ServerSentEvent&quot;</span> <span class="n">has</span> <span class="n">incompatible</span> <span class="nb">type</span> <span class="s2">&quot;AsyncIterable[ServerSentEventMessage]&quot;</span><span class="p">;</span> <span class="n">expected</span> <span class="s2">&quot;str | bytes | Iterable[str | bytes] | Iterator[str | bytes] | AsyncIterable[str | bytes] | AsyncIterator[str | bytes]&quot;</span>  <span class="p">[</span><span class="n">arg</span><span class="o">-</span><span class="nb">type</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>inside <cite>test_sse</cite> there was a <cite>Any</cite> I changed to trigger the test then solved it.</p>
+<p>inside <code class="docutils literal notranslate"><span class="pre">test_sse</span></code> there was a <code class="docutils literal notranslate"><span class="pre">Any</span></code> I changed to trigger the test then solved it.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3048">litestar-org/litestar#3048</a></span></p>
 </div>
 </dd>
@@ -2557,8 +2557,8 @@ This was fixed by leaving the default value as <a class="reference external" hre
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/2138">litestar-org/litestar#2138</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/2189">litestar-org/litestar#2189</a></span></p>
 </div>
 </dd>
-<dt>Add <a class="reference internal" href="../reference/controller.html#litestar.controller.Controller.include_in_schema" title="litestar.controller.Controller.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Adds the <a class="reference internal" href="../reference/controller.html#litestar.controller.Controller.include_in_schema" title="litestar.controller.Controller.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
+<dt>Add <a class="reference internal" href="../reference/config.html#litestar.config.app.AppConfig.include_in_schema" title="litestar.config.app.AppConfig.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Adds the <a class="reference internal" href="../reference/config.html#litestar.config.app.AppConfig.include_in_schema" title="litestar.config.app.AppConfig.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
 specific routes from the generated OpenAPI schema.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/2267">litestar-org/litestar#2267</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/2295">litestar-org/litestar#2295</a></span></p>
 </div>
