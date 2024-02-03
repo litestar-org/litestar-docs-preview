@@ -3,6 +3,74 @@
 2.x Changelog
 =============
 
+.. changelog:: 2.5.4
+    :date: 2024-01-31
+
+    .. change:: Handle ``KeyError`` when `root_path` is not present in ASGI scope
+        :type: bugfix
+        :pr: 3051
+
+        Nginx Unit ASGI server does not set "root_path" in the ASGI scope, which is expected as part of the changes done in #3039. This PR fixes the assumption that the key is always present and instead tries to optionally retrieve it.
+
+
+        Issue originally reported over at [Discord](https://discord.com/channels/919193495116337154/919193495690936353/1202204676003745792)
+
+        .. code-block::
+
+            KeyError on GET /
+            'root_path'
+
+    .. change:: ServerSentEvent typing error
+        :type: bugfix
+        :pr: 3048
+
+        fixes small typing error:
+
+        .. code-block::
+
+            error: Argument 1 to "ServerSentEvent" has incompatible type "AsyncIterable[ServerSentEventMessage]"; expected "str | bytes | Iterable[str | bytes] | Iterator[str | bytes] | AsyncIterable[str | bytes] | AsyncIterator[str | bytes]"  [arg-type]
+
+        inside ``test_sse`` there was a ``Any`` I changed to trigger the test then solved it.
+
+
+.. changelog:: 2.5.3
+    :date: 2024/01/29
+
+    .. change:: Handle diverging ASGI ``root_path`` behaviour
+        :type: bugfix
+        :pr: 3039
+        :issue: 3041
+
+        Uvicorn `0.26.0 <https://github.com/encode/uvicorn/releases/tag/0.26.0>`_
+        introduced a breaking change in its handling of the ASGI ``root_path`` behaviour,
+        which, while adhering to the spec, diverges from the interpretation of other
+        ASGI servers of this aspect of the spec (e.g. hypercorn and daphne do not follow
+        uvicorn's interpretation as of today). A fix was introduced that ensures
+        consistent behaviour of applications in any case.
+
+.. changelog:: 2.5.2
+    :date: 2024/01/27
+
+    .. change:: Ensure ``MultiDict`` and ``ImmutableMultiDict`` copy methods return the instance's type
+        :type: bugfix
+        :pr: 3009
+        :issue: 2549
+
+        Ensure :class:`~litestar.datastructures.MultiDict` and
+        :class:`~litestar.datastructures.ImmutableMultiDict` copy methods return a new
+        instance of ``MultiDict`` and ``ImmutableMultiDict``. Previously, these would
+        return a :class:`multidict.MultiDict` instance.
+
+    .. change:: Ensure ``exceptiongroup`` is installed on Python 3.11
+        :type: bugfix
+        :pr: 3035
+        :issue: 3029
+
+        Add the `exceptiongroup <https://github.com/agronholm/exceptiongroup>`_ package
+        as a required dependency on Python ``<3.11`` (previously ``<3.10``) as a
+        backport of `Exception Groups <https://docs.python.org/3/library/exceptions.html#exception-groups>`_
+
+
 .. changelog:: 2.5.1
     :date: 2024/01/18
 
@@ -851,12 +919,10 @@
             from litestar import Litestar, Request, Response
 
 
-            class CustomException(Exception):
-                ...
+            class CustomException(Exception): ...
 
 
-            def handle_exc(req: Request, exc: CustomException) -> Response:
-                ...
+            def handle_exc(req: Request, exc: CustomException) -> Response: ...
 
     .. change:: Fix OpenAPI schema generation for variable length tuples
         :type: bugfix
@@ -2294,15 +2360,15 @@
 
         .. code-block:: python
 
-            async def after_exception_handler(exc: Exception, scope: Scope, state: State) -> None:
-                ...
+            async def after_exception_handler(
+                exc: Exception, scope: Scope, state: State
+            ) -> None: ...
 
         to
 
         .. code-block:: python
 
-            async def after_exception_handler(exc: Exception, scope: Scope) -> None:
-                ...
+            async def after_exception_handler(exc: Exception, scope: Scope) -> None: ...
 
         The state can still be accessed like so:
 
@@ -2318,16 +2384,14 @@
 
             async def before_send_hook_handler(
                 message: Message, state: State, scope: Scope
-            ) -> None:
-                ...
+            ) -> None: ...
 
 
         to
 
         .. code-block:: python
 
-            async def before_send_hook_handler(message: Message, scope: Scope) -> None:
-                ...
+            async def before_send_hook_handler(message: Message, scope: Scope) -> None: ...
 
         where state can be accessed in the same manner:
 
@@ -2967,14 +3031,12 @@
         .. code-block:: python
 
             @get("/")
-            def index(param: int = Parameter(gt=5)) -> dict[str, int]:
-                ...
+            def index(param: int = Parameter(gt=5)) -> dict[str, int]: ...
 
         .. code-block:: python
 
             @get("/")
-            def index(param: Annotated[int, Parameter(gt=5)]) -> dict[str, int]:
-                ...
+            def index(param: Annotated[int, Parameter(gt=5)]) -> dict[str, int]: ...
 
     .. change:: Support ``text/html`` Media-Type in ``Redirect`` response container
         :type: bugfix
@@ -3099,8 +3161,7 @@
 
         .. code-block:: python
 
-            async def provide_user(request: Request[User, Token, Any]) -> User:
-                ...
+            async def provide_user(request: Request[User, Token, Any]) -> User: ...
 
         would result in the error ``'Request' object has no attribute 'dict'``.
 
