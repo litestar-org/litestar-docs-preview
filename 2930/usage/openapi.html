@@ -1256,6 +1256,8 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/base.html">base</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/memory.html">memory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/redis.html">redis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/psycopg.html">psycopg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/asyncpg.html">asyncpg</a></li>
 </ul>
 </li>
 </ul>
@@ -1282,6 +1284,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/datastructures.html">datastructures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/di.html">di</a></li>
@@ -1349,14 +1352,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/security/jwt.html"><code class="docutils literal notranslate"><span class="pre">BaseJWTAuth</span></code></a></li>
-
-
-
-
-
-
-
+<li class="toctree-l3"><a class="reference internal" href="../reference/security/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1551,8 +1547,7 @@ handlers. You can omit a route handler from the schema by setting <code class="d
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/some-path&quot;</span><span class="p">,</span> <span class="n">include_in_schema</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">my_route_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="o">...</span>
+<span class="k">def</span> <span class="nf">my_route_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 </pre></div>
 </div>
 <p>You can also modify the generated schema for the route handler using the following kwargs:</p>
@@ -1604,8 +1599,7 @@ a description and the expected media type. For example:</p>
 <span class="kn">from</span> <span class="nn">litestar.openapi.datastructures</span> <span class="kn">import</span> <span class="n">ResponseSpec</span>
 
 
-<span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="o">...</span>
+<span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span> <span class="o">...</span>
 
 
 <span class="k">class</span> <span class="nc">ItemNotFound</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -1617,12 +1611,11 @@ a description and the expected media type. For example:</p>
     <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/items/{pk:int}&quot;</span><span class="p">,</span>
     <span class="n">responses</span><span class="o">=</span><span class="p">{</span>
         <span class="mi">404</span><span class="p">:</span> <span class="n">ResponseSpec</span><span class="p">(</span>
-            <span class="n">model</span><span class="o">=</span><span class="n">ItemNotFound</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Item was removed or not found&quot;</span>
+            <span class="n">data_container</span><span class="o">=</span><span class="n">ItemNotFound</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Item was removed or not found&quot;</span>
         <span class="p">)</span>
     <span class="p">},</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">retrieve_item</span><span class="p">(</span><span class="n">pk</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span>
-    <span class="o">...</span>
+<span class="k">def</span> <span class="nf">retrieve_item</span><span class="p">(</span><span class="n">pk</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span> <span class="o">...</span>
 </pre></div>
 </div>
 <p>You can also specify <code class="docutils literal notranslate"><span class="pre">security</span></code> and <code class="docutils literal notranslate"><span class="pre">tags</span></code> on higher level of the application, e.g. on a controller, router, or the
@@ -1642,8 +1635,7 @@ app instance itself. For example:</p>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/other&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;internal&quot;</span><span class="p">],</span> <span class="n">security</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;apiKey&quot;</span><span class="p">:</span> <span class="p">[]}])</span>
-<span class="k">def</span> <span class="nf">internal_path_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="o">...</span>
+<span class="k">def</span> <span class="nf">internal_path_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>

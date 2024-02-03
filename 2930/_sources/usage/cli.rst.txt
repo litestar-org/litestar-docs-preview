@@ -185,6 +185,19 @@ The ``routes`` command displays a tree view of the routing table.
 
    litestar routes
 
+Options
+~~~~~~~
+
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Flag            | Description                                                                                                                                               |
++=================+===========================================================================================================================================================+
+| ``--schema``    | Include default auto generated openAPI schema routes                                                                                                      |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``--exclude``   | Exclude endpoints from query with given regex patterns. Multiple excludes allowed. e.g., ``litestar routes  --schema --exclude=routes/.* --exclude=[]``   |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 
 .. image:: /images/cli/litestar_routes.png
    :alt: litestar info
@@ -360,8 +373,7 @@ You can achieve this by adding the special ``app`` parameter to your CLI functio
 
 
    @click.command()
-   def my_command(app: Litestar) -> None:
-       ...
+   def my_command(app: Litestar) -> None: ...
 
 CLI Reference
 -------------
