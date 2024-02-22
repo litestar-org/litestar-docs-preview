@@ -3,6 +3,413 @@
 2.x Changelog
 =============
 
+.. changelog:: 2.6.0
+    :date: 2024/02/06
+
+    .. change:: Enable disabling configuring ``root`` logger within ``LoggingConfig``
+        :type: feature
+        :pr: 2969
+
+        The option :attr:`~litestar.logging.config.LoggingConfig.configure_root_logger` was
+        added to :class:`~litestar.logging.config.LoggingConfig` attribute. It is enabled by
+        default to not implement a breaking change.
+
+        When set to ``False`` the ``root`` logger will not be modified for ``logging``
+        or ``picologging`` loggers.
+
+    .. change:: Simplified static file handling and enhancements
+        :type: feature
+        :pr: 2960
+        :issue: 2629
+
+        Static file serving has been implemented with regular route handlers instead of
+        a specialised ASGI app. At the moment, this is complementary to the usage of
+        :class:`~litestar.static_files.StaticFilesConfig` to maintain backwards
+        compatibility.
+
+        This achieves a few things:
+
+        - Fixes https://github.com/litestar-org/litestar/issues/2629
+        - Circumvents special casing needed in the routing logic for the static files app
+        - Removes the need for a ``static_files_config`` attribute on the app
+        - Removes the need for a special :meth:`~litestar.app.Litestar.url_for_static_asset`
+          method on the app since `route_reverse` can be used instead
+
+        Additionally:
+
+        - Most router options can now be passed to the
+          :func:`~litestar.static_files.create_static_files_router`, allowing further
+          customisation
+        - A new ``resolve_symlinks`` flag has been added, defaulting to ``True`` to keep
+          backwards compatibility
+
+        **Usage**
+
+        Instead of
+
+        .. code-block:: python
+
+            app = Litestar(
+                static_files_config=[StaticFilesConfig(path="/static", directories=["some_dir"])]
+            )
+
+
+        You can now simply use
+
+        .. code-block:: python
+
+            app = Litestar(
+                route_handlers=[
+                    create_static_files_router(path="/static", directories=["some_dir"])
+                ]
+            )
+
+        .. seealso::
+            :doc:`/usage/static-files`
+
+
+    .. change:: Exclude Piccolo ORM columns with ``secret=True`` from ``PydanticDTO`` output
+        :type: feature
+        :pr: 3030
+
+        For Piccolo columns with ``secret=True`` set, corresponding ``PydanticDTO``
+        attributes will be marked as ``WRITE_ONLY`` to prevent the column being included
+        in ``return_dto``
+
+
+    .. change:: Allow discovering registered plugins by their fully qualified name
+        :type: feature
+        :pr: 3027
+
+        `PluginRegistryPluginRegistry`` now supports retrieving a plugin by its fully
+        qualified name.
+
+
+    .. change:: Support externally typed classes as dependency providers
+        :type: feature
+        :pr: 3066
+        :issue: 2979
+
+        - Implement a new :class:`~litestar.plugins.DIPlugin` class that allows the
+          generation of signatures for arbitrary types where their signature cannot be
+          extracted from the type's ``__init__`` method
+        - Implement ``DIPlugin``\ s for Pydantic and Msgspec to allow using their
+          respective modelled types as dependency providers. These plugins will be
+          registered by default
+
+    .. change:: Add structlog plugin
+        :type: feature
+        :pr: 2943
+
+        A Structlog plugin to make it easier to configure structlog in a single place.
+
+        The plugin:
+
+        - Detects if a logger has ``setLevel`` before calling
+        - Set even message name to be init-cap
+        - Add ``set_level`` interface to config
+        - Allows structlog printer to detect if console is TTY enabled. If so, a
+          Struglog color formatter with Rich traceback printer is used
+        - Auto-configures stdlib logger to use the structlog logger
+
+    .. change:: Add reload-include and reload-exclude to CLI run command
+        :type: feature
+        :pr: 2973
+        :issue: 2875
+
+        The options ``reload-exclude`` and ``reload-include`` were added to the CLI
+        ``run`` command to explicitly in-/exclude specific paths from the reloading
+        watcher.
+
+
+.. changelog:: 2.5.5
+    :date: 2024/02/04
+
+    .. change:: Fix scope ``state`` key handling
+        :type: bugfix
+        :pr: 3070
+
+        Fix a regression introduced in #2751 that would wrongfully assume the ``state``
+        key is always present within the ASGI Scope. This is *only* the case when the
+        Litestar root application is invoked first, since we enforce such a key there,
+        but the presence of that key is not actually guaranteed by the ASGI spec and
+        some servers, such as hypercorn, do not provide it.
+
+
+.. changelog:: 2.5.4
+    :date: 2024/01/31
+
+    .. change:: Handle ``KeyError`` when `root_path` is not present in ASGI scope
+        :type: bugfix
+        :pr: 3051
+
+        Nginx Unit ASGI server does not set "root_path" in the ASGI scope, which is
+        expected as part of the changes done in #3039. This PR fixes the assumption that
+        the key is always present and instead tries to optionally retrieve it.
+
+        .. code-block::
+
+            KeyError on GET /
+            'root_path'
+
+    .. change:: ServerSentEvent typing error
+        :type: bugfix
+        :pr: 3048
+
+        fixes small typing error:
+
+        .. code-block::
+
+            error: Argument 1 to "ServerSentEvent" has incompatible type "AsyncIterable[ServerSentEventMessage]"; expected "str | bytes | Iterable[str | bytes] | Iterator[str | bytes] | AsyncIterable[str | bytes] | AsyncIterator[str | bytes]"  [arg-type]
+
+        inside ``test_sse`` there was a ``Any`` I changed to trigger the test then solved it.
+
+
+.. changelog:: 2.5.3
+    :date: 2024/01/29
+
+    .. change:: Handle diverging ASGI ``root_path`` behaviour
+        :type: bugfix
+        :pr: 3039
+        :issue: 3041
+
+        Uvicorn `0.26.0 <https://github.com/encode/uvicorn/releases/tag/0.26.0>`_
+        introduced a breaking change in its handling of the ASGI ``root_path`` behaviour,
+        which, while adhering to the spec, diverges from the interpretation of other
+        ASGI servers of this aspect of the spec (e.g. hypercorn and daphne do not follow
+        uvicorn's interpretation as of today). A fix was introduced that ensures
+        consistent behaviour of applications in any case.
+
+.. changelog:: 2.5.2
+    :date: 2024/01/27
+
+    .. change:: Ensure ``MultiDict`` and ``ImmutableMultiDict`` copy methods return the instance's type
+        :type: bugfix
+        :pr: 3009
+        :issue: 2549
+
+        Ensure :class:`~litestar.datastructures.MultiDict` and
+        :class:`~litestar.datastructures.ImmutableMultiDict` copy methods return a new
+        instance of ``MultiDict`` and ``ImmutableMultiDict``. Previously, these would
+        return a :class:`multidict.MultiDict` instance.
+
+    .. change:: Ensure ``exceptiongroup`` is installed on Python 3.11
+        :type: bugfix
+        :pr: 3035
+        :issue: 3029
+
+        Add the `exceptiongroup <https://github.com/agronholm/exceptiongroup>`_ package
+        as a required dependency on Python ``<3.11`` (previously ``<3.10``) as a
+        backport of `Exception Groups <https://docs.python.org/3/library/exceptions.html#exception-groups>`_
+
+
+.. changelog:: 2.5.1
+    :date: 2024/01/18
+
+    .. change:: Fix OpenAPI schema generation for Union of multiple ``msgspec.Struct``\ s and ``None``
+        :type: bugfix
+        :pr: 2982
+        :issue: 2971
+
+        The following code would raise a :exc:`TypeError`
+
+        .. code-block:: python
+
+            import msgspec
+
+            from litestar import get
+            from litestar.testing import create_test_client
+
+
+            class StructA(msgspec.Struct):
+                pass
+
+
+            class StructB(msgspec.Struct):
+                pass
+
+
+            @get("/")
+            async def handler() -> StructA | StructB | None:
+                return StructA()
+
+
+    .. change:: Fix misleading error message for missing dependencies provide by a package extra
+        :type: bugfix
+        :pr: 2921
+
+        Ensure that :exc:`MissingDependencyException` includes the correct name of the
+        package to install if the package name differs from the Litestar package extra.
+        (e.g. ``pip install litestar[jinja]`` vs ``pip install jinja2``). Previously the
+        exception assumed the same name for both the package and package-extra name.
+
+
+    .. change:: Fix OpenAPI schema file upload schema types for swagger
+        :type: bugfix
+        :pr: 2745
+        :issue: 2628
+
+        - Always set ``format`` as ``binary``
+        - Fix schema for swagger with multiple files, which requires the type of the
+          request body schema to be ``object`` with ``properties`` instead of a schema
+          of type ``array`` and ``items``.
+
+
+
+.. changelog:: 2.5.0
+    :date: 2024/01/06
+
+    .. change:: Fix serialization of custom types in exception responses
+        :type: bugfix
+        :issue: 2867
+        :pr: 2941
+
+        Fix a bug that would lead to a :exc:`SerializationException` when custom types
+        were present in an exception response handled by the built-in exception
+        handlers.
+
+        .. code-block:: python
+
+            class Foo:
+                pass
+
+
+            @get()
+            def handler() -> None:
+                raise ValidationException(extra={"foo": Foo("bar")})
+
+
+            app = Litestar(route_handlers=[handler], type_encoders={Foo: lambda foo: "foo"})
+
+        The cause was that, in examples like the one shown above, ``type_encoders``
+        were not resolved properly from all layers by the exception handling middleware,
+        causing the serializer to throw an exception for an unknown type.
+
+    .. change:: Fix SSE reverting to default ``event_type`` after 1st message
+        :type: bugfix
+        :pr: 2888
+        :issue: 2877
+
+        The ``event_type`` set within an SSE returned from a handler would revert back
+        to a default after the first message sent:
+
+        .. code-block:: python
+
+            @get("/stream")
+            async def stream(self) -> ServerSentEvent:
+                async def gen() -> AsyncGenerator[str, None]:
+                    c = 0
+                    while True:
+                        yield f"<div>{c}</div>\n"
+                        c += 1
+
+                return ServerSentEvent(gen(), event_type="my_event")
+
+        In this example, the event type would only be ``my_event`` for the first
+        message, and fall back to a default afterwards. The implementation has been
+        fixed and will now continue sending the set event type for all messages.
+
+    .. change:: Correctly handle single file upload validation when multiple files are specified
+        :type: bugfix
+        :pr: 2950
+        :issue: 2939
+
+        Uploading a single file when the validation target allowed multiple would cause
+        a :exc:`ValidationException`:
+
+        .. code-block:: python
+
+            class FileUpload(Struct):
+                files: list[UploadFile]
+
+
+            @post(path="/")
+            async def upload_files_object(
+                data: Annotated[FileUpload, Body(media_type=RequestEncodingType.MULTI_PART)]
+            ) -> list[str]:
+                pass
+
+
+        This could would only allow for 2 or more files to be sent, and otherwise throw
+        an exception.
+
+    .. change:: Fix trailing messages after unsubscribe in channels
+        :type: bugfix
+        :pr: 2894
+
+        Fix a bug that would allow some channels backend to receive messages from a
+        channel it just unsubscribed from, for a short period of time, due to how the
+        different brokers handle unsubscribes.
+
+        .. code-block:: python
+
+            await backend.subscribe(["foo", "bar"])  # subscribe to two channels
+            await backend.publish(
+                b"something", ["foo"]
+            )  # publish a message to a channel we're subscribed to
+
+            # start the stream after publishing. Depending on the backend
+            # the previously published message might be in the stream
+            event_generator = backend.stream_events()
+
+            # unsubscribe from the channel we previously published to
+            await backend.unsubscribe(["foo"])
+
+            # this should block, as we expect messages from channels
+            # we unsubscribed from to not appear in the stream anymore
+            print(anext(event_generator))
+
+        Backends affected by this were in-memory, Redis PubSub and asyncpg. The Redis
+        stream and psycopg backends were not affected.
+
+    .. change:: Postgres channels backends
+        :type: feature
+        :pr: 2803
+
+        Two new channel backends were added to bring Postgres support:
+
+        :class:`~litestar.channels.backends.asyncpg.AsyncPgChannelsBackend`, using the
+        `asyncpg <https://magicstack.github.io/asyncpg/current/>`_ driver and
+        :class:`~litestar.channels.backends.psycopg.PsycoPgChannelsBackend` using the
+        `psycopg3 <https://www.psycopg.org/psycopg3/docs/>`_ async driver.
+
+        .. seealso::
+            :doc:`/usage/channels`
+
+
+    .. change:: Add ``--schema`` and ``--exclude`` option to ``litestar route`` CLI command
+        :type: feature
+        :pr: 2886
+
+        Two new options were added to the ``litestar route`` CLI command:
+
+        - ``--schema``, to include the routes serving OpenAPI schema and docs
+        - ``--exclude`` to exclude routes matching a specified pattern
+
+        .. seealso::
+            :ref:`usage/cli:routes`
+
+    .. change:: Improve performance of threaded synchronous execution
+        :type: misc
+        :pr: 2937
+
+        Performance of threaded synchronous code was improved by using the async
+        library's native threading helpers instead of anyio. On asyncio,
+        :meth:`asyncio.loop.run_in_executor` is now used and on trio
+        :func:`trio.to_thread.run_sync`.
+
+        Beneficiaries of these performance improvements are:
+
+        - Synchronous route handlers making use of ``sync_to_thread=True``
+        - Synchronous dependency providers making use of ``sync_to_thread=True``
+        - Synchronous SSE generators
+        - :class:`~litestar.stores.file.FileStore`
+        - Large file uploads where the ``max_spool_size`` is exceeded and the spooled
+          temporary file has been rolled to disk
+        - :class:`~litestar.response.file.File` and
+          :class:`~litestar.response.file.ASGIFileResponse`
+
+
 .. changelog:: 2.4.5
     :date: 2023/12/23
 
@@ -644,12 +1051,10 @@
             from litestar import Litestar, Request, Response
 
 
-            class CustomException(Exception):
-                ...
+            class CustomException(Exception): ...
 
 
-            def handle_exc(req: Request, exc: CustomException) -> Response:
-                ...
+            def handle_exc(req: Request, exc: CustomException) -> Response: ...
 
     .. change:: Fix OpenAPI schema generation for variable length tuples
         :type: bugfix
@@ -2087,15 +2492,15 @@
 
         .. code-block:: python
 
-            async def after_exception_handler(exc: Exception, scope: Scope, state: State) -> None:
-                ...
+            async def after_exception_handler(
+                exc: Exception, scope: Scope, state: State
+            ) -> None: ...
 
         to
 
         .. code-block:: python
 
-            async def after_exception_handler(exc: Exception, scope: Scope) -> None:
-                ...
+            async def after_exception_handler(exc: Exception, scope: Scope) -> None: ...
 
         The state can still be accessed like so:
 
@@ -2111,16 +2516,14 @@
 
             async def before_send_hook_handler(
                 message: Message, state: State, scope: Scope
-            ) -> None:
-                ...
+            ) -> None: ...
 
 
         to
 
         .. code-block:: python
 
-            async def before_send_hook_handler(message: Message, scope: Scope) -> None:
-                ...
+            async def before_send_hook_handler(message: Message, scope: Scope) -> None: ...
 
         where state can be accessed in the same manner:
 
@@ -2760,14 +3163,12 @@
         .. code-block:: python
 
             @get("/")
-            def index(param: int = Parameter(gt=5)) -> dict[str, int]:
-                ...
+            def index(param: int = Parameter(gt=5)) -> dict[str, int]: ...
 
         .. code-block:: python
 
             @get("/")
-            def index(param: Annotated[int, Parameter(gt=5)]) -> dict[str, int]:
-                ...
+            def index(param: Annotated[int, Parameter(gt=5)]) -> dict[str, int]: ...
 
     .. change:: Support ``text/html`` Media-Type in ``Redirect`` response container
         :type: bugfix
@@ -2892,8 +3293,7 @@
 
         .. code-block:: python
 
-            async def provide_user(request: Request[User, Token, Any]) -> User:
-                ...
+            async def provide_user(request: Request[User, Token, Any]) -> User: ...
 
         would result in the error ``'Request' object has no attribute 'dict'``.
 

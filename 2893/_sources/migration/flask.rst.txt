@@ -33,7 +33,7 @@ Routing
             from flask import Flask
 
 
-            app = Flask(_name_)
+            app = Flask(__name__)
 
 
             @app.route("/")
@@ -79,7 +79,7 @@ Path parameters
             from flask import Flask
 
 
-            app = Flask(_name_)
+            app = Flask(__name__)
 
 
             @app.route("/user/<username>")
@@ -148,7 +148,7 @@ the request can be accessed through an optional parameter in the handler functio
             from flask import Flask, request
 
 
-            app = Flask(_name_)
+            app = Flask(__name__)
 
 
             @app.get("/")
@@ -305,7 +305,7 @@ In addition to Jinja, Litestar supports `Mako <https://www.makotemplates.org/>`_
             from flask import Flask, render_template
 
 
-            app = Flask(_name_)
+            app = Flask(__name__)
 
 
             @app.route("/hello/<name>")
@@ -353,7 +353,8 @@ Setting cookies and headers
 
             from flask import Flask, make_response
 
-            app = Flask(_name_)
+
+            app = Flask(__name__)
 
 
             @app.get("/")
@@ -415,7 +416,8 @@ For redirects, instead of ``redirect`` use ``Redirect``:
 
             from flask import Flask, redirect, url_for
 
-            app = Flask(_name_)
+
+            app = Flask(__name__)
 
 
             @app.get("/")
@@ -465,7 +467,8 @@ Instead of using the ``abort`` function, raise an ``HTTPException``:
 
             from flask import Flask, abort
 
-            app = Flask(_name_)
+
+            app = Flask(__name__)
 
 
             @app.get("/")
@@ -509,7 +512,7 @@ Setting status codes
             from flask import Flask
 
 
-            app = Flask(_name_)
+            app = Flask(__name__)
 
 
             @app.get("/")
@@ -555,7 +558,8 @@ the data returned is intended to be serialized into JSON and will do so unless t
 
             from flask import Flask, Response
 
-            app = Flask(_name_)
+
+            app = Flask(__name__)
 
 
             @app.get("/json")
@@ -614,12 +618,11 @@ Error handling
             from werkzeug.exceptions import HTTPException
 
 
-            app = Flask(_name_)
+            app = Flask(__name__)
 
 
             @app.errorhandler(HTTPException)
-            def handle_exception(e):
-                ...
+            def handle_exception(e): ...
 
 
 
@@ -632,8 +635,7 @@ Error handling
             from litestar.exceptions import HTTPException
 
 
-            def handle_exception(request: Request, exception: Exception) -> Response:
-                ...
+            def handle_exception(request: Request, exception: Exception) -> Response: ...
 
 
             app = Litestar([], exception_handlers={HTTPException: handle_exception})

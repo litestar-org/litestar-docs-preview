@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pagination &#8212; Litestar Framework</title>
+    <title>cli &#8212; Litestar Framework</title>
   
   
   
@@ -46,13 +46,13 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pagination';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/concurrency';</script>
     <script src="../_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="params" href="params.html" />
-    <link rel="prev" title="spec" href="openapi/spec.html" />
+    <link rel="next" title="data_extractors" href="data_extractors.html" />
+    <link rel="prev" title="controller" href="controller.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -1297,7 +1297,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concurrency.html">cli</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="datastructures.html">datastructures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="di.html">di</a></li>
@@ -1343,7 +1343,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins.html">plugins</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1498,7 +1498,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">pagination</li>
+    <li class="breadcrumb-item active" aria-current="page">cli</li>
   </ul>
 </nav>
 </div>
@@ -1515,414 +1515,49 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-litestar.pagination">
-<span id="pagination"></span><h1>pagination<a class="headerlink" href="#module-litestar.pagination" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncClassicPaginator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">AbstractAsyncClassicPaginator</span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncClassicPaginator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Base paginator class for async classic pagination.</p>
-<p>Implement this class to return paginated result sets using the classic pagination scheme.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncClassicPaginator.get_total">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_total</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncClassicPaginator.get_total" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the total number of records.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>page_size</strong> – Maximal number of records to return.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An integer.</p>
-</dd>
-</dl>
+  <section id="module-litestar.concurrency">
+<span id="cli"></span><h1>cli<a class="headerlink" href="#module-litestar.concurrency" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.concurrency.sync_to_thread">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.concurrency.</span></span><span class="sig-name descname"><span class="pre">sync_to_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fn:</span> <span class="pre">~typing.Callable[[~P],</span> <span class="pre">~litestar.concurrency.T],</span> <span class="pre">*args:</span> <span class="pre">~typing.~P,</span> <span class="pre">**kwargs:</span> <span class="pre">~typing.~P</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#litestar.concurrency.sync_to_thread" title="Permalink to this definition">#</a></dt>
+<dd><p>Run the synchronous callable <code class="docutils literal notranslate"><span class="pre">fn</span></code> asynchronously in a worker thread.</p>
+<p>When called from asyncio, uses <a class="reference external" href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor" title="(in Python v3.12)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.loop.run_in_executor()</span></code></a> to
+run the callable. No executor is specified by default so the current loop’s executor
+is used. A specific executor can be set using
+<a class="reference internal" href="#litestar.concurrency.set_asyncio_executor" title="litestar.concurrency.set_asyncio_executor"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_asyncio_executor()</span></code></a>. This does not affect the loop’s
+default executor.</p>
+<p>When called from trio, uses <a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync" title="(in Trio v0.24.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">trio.to_thread.run_sync()</span></code></a> to run the callable. No
+capacity limiter is specified by default, but one can be set using
+<a class="reference internal" href="#litestar.concurrency.set_trio_capacity_limiter" title="litestar.concurrency.set_trio_capacity_limiter"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_trio_capacity_limiter()</span></code></a>. This does not affect trio’s
+default capacity limiter.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncClassicPaginator.get_items">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncClassicPaginator.get_items" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a list of items of the given size ‘page_size’ correlating with ‘current_page’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>page_size</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>current_page</strong> – The current page of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of items.</p>
-</dd>
-</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.concurrency.set_asyncio_executor">
+<span class="sig-prename descclassname"><span class="pre">litestar.concurrency.</span></span><span class="sig-name descname"><span class="pre">set_asyncio_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ThreadPoolExecutor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.concurrency.set_asyncio_executor" title="Permalink to this definition">#</a></dt>
+<dd><p>Set the executor in which synchronous callables will be run within an asyncio
+context</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncClassicPaginator.__call__">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.pagination.ClassicPagination" title="litestar.pagination.ClassicPagination"><span class="pre">ClassicPagination</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncClassicPaginator.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a paginated result set.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>page_size</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>current_page</strong> – The current page of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A paginated result set.</p>
-</dd>
-</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.concurrency.get_asyncio_executor">
+<span class="sig-prename descclassname"><span class="pre">litestar.concurrency.</span></span><span class="sig-name descname"><span class="pre">get_asyncio_executor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ThreadPoolExecutor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.concurrency.get_asyncio_executor" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the executor in which synchronous callables will be run within an asyncio
+context</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.concurrency.set_trio_capacity_limiter">
+<span class="sig-prename descclassname"><span class="pre">litestar.concurrency.</span></span><span class="sig-name descname"><span class="pre">set_trio_capacity_limiter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.CapacityLimiter" title="(in Trio v0.24.0)"><span class="pre">trio.CapacityLimiter</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.concurrency.set_trio_capacity_limiter" title="Permalink to this definition">#</a></dt>
+<dd><p>Set the capacity limiter used when running synchronous callable within a trio
+context</p>
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncCursorPaginator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">AbstractAsyncCursorPaginator</span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncCursorPaginator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">C</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Base paginator class for async cursor pagination.</p>
-<p>Implement this class to return paginated result sets using the cursor pagination scheme.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncCursorPaginator.get_items">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">C</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_per_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><span class="pre">C</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncCursorPaginator.get_items" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a list of items of the size ‘results_per_page’ following the given cursor, if any,</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cursor</strong> – A unique identifier that acts as the ‘cursor’ after which results should be given.</p></li>
-<li><p><strong>results_per_page</strong> – A maximal number of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing the result set and a new cursor that marks the last record retrieved.
-The new cursor can be used to ask for the ‘next_cursor’ batch of results.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncCursorPaginator.__call__">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">C</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_per_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.pagination.CursorPagination" title="litestar.pagination.CursorPagination"><span class="pre">CursorPagination</span></a><span class="p"><span class="pre">[</span></span><span class="pre">C</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncCursorPaginator.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a paginated result set given an optional cursor (unique ID) and a maximal number of results to return.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cursor</strong> – A unique identifier that acts as the ‘cursor’ after which results should be given.</p></li>
-<li><p><strong>results_per_page</strong> – A maximal number of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A paginated result set.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncOffsetPaginator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">AbstractAsyncOffsetPaginator</span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncOffsetPaginator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Base paginator class for limit / offset pagination.</p>
-<p>Implement this class to return paginated result sets using the limit / offset pagination scheme.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncOffsetPaginator.get_total">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncOffsetPaginator.get_total" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the total number of records.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncOffsetPaginator.get_items">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncOffsetPaginator.get_items" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a list of items of the given size ‘limit’ starting from position ‘offset’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>limit</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>offset</strong> – Starting position within the result set (assume index 0 as starting position).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of items.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractAsyncOffsetPaginator.__call__">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.pagination.OffsetPagination" title="litestar.pagination.OffsetPagination"><span class="pre">OffsetPagination</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractAsyncOffsetPaginator.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a paginated result set.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>limit</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>offset</strong> – Starting position within the result set (assume index 0 as starting position).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A paginated result set.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncClassicPaginator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">AbstractSyncClassicPaginator</span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncClassicPaginator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Base paginator class for sync classic pagination.</p>
-<p>Implement this class to return paginated result sets using the classic pagination scheme.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncClassicPaginator.get_total">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_total</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncClassicPaginator.get_total" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the total number of records.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>page_size</strong> – Maximal number of records to return.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An integer.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncClassicPaginator.get_items">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncClassicPaginator.get_items" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a list of items of the given size ‘page_size’ correlating with ‘current_page’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>page_size</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>current_page</strong> – The current page of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of items.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncClassicPaginator.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.pagination.ClassicPagination" title="litestar.pagination.ClassicPagination"><span class="pre">ClassicPagination</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncClassicPaginator.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a paginated result set.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>page_size</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>current_page</strong> – The current page of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A paginated result set.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncCursorPaginator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">AbstractSyncCursorPaginator</span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncCursorPaginator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">C</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Base paginator class for sync cursor pagination.</p>
-<p>Implement this class to return paginated result sets using the cursor pagination scheme.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncCursorPaginator.get_items">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">C</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_per_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.12)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><span class="pre">C</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncCursorPaginator.get_items" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a list of items of the size ‘results_per_page’ following the given cursor, if any,</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cursor</strong> – A unique identifier that acts as the ‘cursor’ after which results should be given.</p></li>
-<li><p><strong>results_per_page</strong> – A maximal number of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing the result set and a new cursor that marks the last record retrieved.
-The new cursor can be used to ask for the ‘next_cursor’ batch of results.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncCursorPaginator.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">C</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_per_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.pagination.CursorPagination" title="litestar.pagination.CursorPagination"><span class="pre">CursorPagination</span></a><span class="p"><span class="pre">[</span></span><span class="pre">C</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncCursorPaginator.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a paginated result set given an optional cursor (unique ID) and a maximal number of results to return.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cursor</strong> – A unique identifier that acts as the ‘cursor’ after which results should be given.</p></li>
-<li><p><strong>results_per_page</strong> – A maximal number of results to return.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A paginated result set.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncOffsetPaginator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">AbstractSyncOffsetPaginator</span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncOffsetPaginator" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Base paginator class for limit / offset pagination.</p>
-<p>Implement this class to return paginated result sets using the limit / offset pagination scheme.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncOffsetPaginator.get_total">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_total</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncOffsetPaginator.get_total" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the total number of records.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An integer.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncOffsetPaginator.get_items">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncOffsetPaginator.get_items" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a list of items of the given size ‘limit’ starting from position ‘offset’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>limit</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>offset</strong> – Starting position within the result set (assume index 0 as starting position).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of items.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.AbstractSyncOffsetPaginator.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.pagination.OffsetPagination" title="litestar.pagination.OffsetPagination"><span class="pre">OffsetPagination</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.pagination.AbstractSyncOffsetPaginator.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>Return a paginated result set.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>limit</strong> – Maximal number of records to return.</p></li>
-<li><p><strong>offset</strong> – Starting position within the result set (assume index 0 as starting position).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A paginated result set.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.ClassicPagination">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">ClassicPagination</span></span><a class="headerlink" href="#litestar.pagination.ClassicPagination" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Container for data returned using limit/offset pagination.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.ClassicPagination.items">
-<span class="sig-name descname"><span class="pre">items</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.pagination.ClassicPagination.items" title="Permalink to this definition">#</a></dt>
-<dd><p>List of data being sent as part of the response.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.ClassicPagination.page_size">
-<span class="sig-name descname"><span class="pre">page_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.ClassicPagination.page_size" title="Permalink to this definition">#</a></dt>
-<dd><p>Number of items per page.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.ClassicPagination.current_page">
-<span class="sig-name descname"><span class="pre">current_page</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.ClassicPagination.current_page" title="Permalink to this definition">#</a></dt>
-<dd><p>Current page number.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.ClassicPagination.total_pages">
-<span class="sig-name descname"><span class="pre">total_pages</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.ClassicPagination.total_pages" title="Permalink to this definition">#</a></dt>
-<dd><p>Total number of pages.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.ClassicPagination.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_pages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.pagination.ClassicPagination.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.CursorPagination">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">CursorPagination</span></span><a class="headerlink" href="#litestar.pagination.CursorPagination" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">C</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Container for data returned using cursor pagination.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.CursorPagination.items">
-<span class="sig-name descname"><span class="pre">items</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.pagination.CursorPagination.items" title="Permalink to this definition">#</a></dt>
-<dd><p>List of data being sent as part of the response.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.CursorPagination.results_per_page">
-<span class="sig-name descname"><span class="pre">results_per_page</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.CursorPagination.results_per_page" title="Permalink to this definition">#</a></dt>
-<dd><p>Maximal number of items to send.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.CursorPagination.cursor">
-<span class="sig-name descname"><span class="pre">cursor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">C</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><a class="headerlink" href="#litestar.pagination.CursorPagination.cursor" title="Permalink to this definition">#</a></dt>
-<dd><p>Unique ID, designating the last identifier in the given data set.</p>
-<p>This value can be used to request the “next” batch of records.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.CursorPagination.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_per_page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cursor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">C</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.pagination.CursorPagination.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.pagination.OffsetPagination">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.pagination.</span></span><span class="sig-name descname"><span class="pre">OffsetPagination</span></span><a class="headerlink" href="#litestar.pagination.OffsetPagination" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-<p>Container for data returned using limit/offset pagination.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.OffsetPagination.items">
-<span class="sig-name descname"><span class="pre">items</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.pagination.OffsetPagination.items" title="Permalink to this definition">#</a></dt>
-<dd><p>List of data being sent as part of the response.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.OffsetPagination.limit">
-<span class="sig-name descname"><span class="pre">limit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.OffsetPagination.limit" title="Permalink to this definition">#</a></dt>
-<dd><p>Maximal number of items to send.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.OffsetPagination.offset">
-<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.OffsetPagination.offset" title="Permalink to this definition">#</a></dt>
-<dd><p>Offset from the beginning of the query.</p>
-<p>Identical to an index.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.pagination.OffsetPagination.total">
-<span class="sig-name descname"><span class="pre">total</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#litestar.pagination.OffsetPagination.total" title="Permalink to this definition">#</a></dt>
-<dd><p>Total number of items.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.pagination.OffsetPagination.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.pagination.OffsetPagination.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.concurrency.get_trio_capacity_limiter">
+<span class="sig-prename descclassname"><span class="pre">litestar.concurrency.</span></span><span class="sig-name descname"><span class="pre">get_trio_capacity_limiter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.CapacityLimiter" title="(in Trio v0.24.0)"><span class="pre">trio.CapacityLimiter</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.concurrency.get_trio_capacity_limiter" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the capacity limiter used when running synchronous callable within a trio
+context</p>
 </dd></dl>
 
 </section>
@@ -1938,20 +1573,20 @@ The new cursor can be used to ask for the ‘next_cursor’ batch of results.</p
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="openapi/spec.html"
+       href="controller.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">spec</p>
+        <p class="prev-next-title">controller</p>
       </div>
     </a>
     <a class="right-next"
-       href="params.html"
+       href="data_extractors.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">params</p>
+        <p class="prev-next-title">data_extractors</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1971,63 +1606,11 @@ The new cursor can be used to ask for the ‘next_cursor’ batch of results.</p
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncClassicPaginator"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncClassicPaginator</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncClassicPaginator.get_total"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncClassicPaginator.get_total()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncClassicPaginator.get_items"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncClassicPaginator.get_items()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncClassicPaginator.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncClassicPaginator.__call__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncCursorPaginator"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncCursorPaginator</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncCursorPaginator.get_items"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncCursorPaginator.get_items()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncCursorPaginator.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncCursorPaginator.__call__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncOffsetPaginator"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncOffsetPaginator</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncOffsetPaginator.get_total"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncOffsetPaginator.get_total()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncOffsetPaginator.get_items"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncOffsetPaginator.get_items()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractAsyncOffsetPaginator.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractAsyncOffsetPaginator.__call__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncClassicPaginator"><code class="docutils literal notranslate"><span class="pre">AbstractSyncClassicPaginator</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncClassicPaginator.get_total"><code class="docutils literal notranslate"><span class="pre">AbstractSyncClassicPaginator.get_total()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncClassicPaginator.get_items"><code class="docutils literal notranslate"><span class="pre">AbstractSyncClassicPaginator.get_items()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncClassicPaginator.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractSyncClassicPaginator.__call__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncCursorPaginator"><code class="docutils literal notranslate"><span class="pre">AbstractSyncCursorPaginator</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncCursorPaginator.get_items"><code class="docutils literal notranslate"><span class="pre">AbstractSyncCursorPaginator.get_items()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncCursorPaginator.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractSyncCursorPaginator.__call__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncOffsetPaginator"><code class="docutils literal notranslate"><span class="pre">AbstractSyncOffsetPaginator</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncOffsetPaginator.get_total"><code class="docutils literal notranslate"><span class="pre">AbstractSyncOffsetPaginator.get_total()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncOffsetPaginator.get_items"><code class="docutils literal notranslate"><span class="pre">AbstractSyncOffsetPaginator.get_items()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.AbstractSyncOffsetPaginator.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractSyncOffsetPaginator.__call__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.ClassicPagination"><code class="docutils literal notranslate"><span class="pre">ClassicPagination</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.ClassicPagination.items"><code class="docutils literal notranslate"><span class="pre">ClassicPagination.items</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.ClassicPagination.page_size"><code class="docutils literal notranslate"><span class="pre">ClassicPagination.page_size</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.ClassicPagination.current_page"><code class="docutils literal notranslate"><span class="pre">ClassicPagination.current_page</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.ClassicPagination.total_pages"><code class="docutils literal notranslate"><span class="pre">ClassicPagination.total_pages</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.ClassicPagination.__init__"><code class="docutils literal notranslate"><span class="pre">ClassicPagination.__init__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.CursorPagination"><code class="docutils literal notranslate"><span class="pre">CursorPagination</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.CursorPagination.items"><code class="docutils literal notranslate"><span class="pre">CursorPagination.items</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.CursorPagination.results_per_page"><code class="docutils literal notranslate"><span class="pre">CursorPagination.results_per_page</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.CursorPagination.cursor"><code class="docutils literal notranslate"><span class="pre">CursorPagination.cursor</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.CursorPagination.__init__"><code class="docutils literal notranslate"><span class="pre">CursorPagination.__init__()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.OffsetPagination"><code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.OffsetPagination.items"><code class="docutils literal notranslate"><span class="pre">OffsetPagination.items</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.OffsetPagination.limit"><code class="docutils literal notranslate"><span class="pre">OffsetPagination.limit</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.OffsetPagination.offset"><code class="docutils literal notranslate"><span class="pre">OffsetPagination.offset</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.OffsetPagination.total"><code class="docutils literal notranslate"><span class="pre">OffsetPagination.total</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.pagination.OffsetPagination.__init__"><code class="docutils literal notranslate"><span class="pre">OffsetPagination.__init__()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.concurrency.sync_to_thread"><code class="docutils literal notranslate"><span class="pre">sync_to_thread()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.concurrency.set_asyncio_executor"><code class="docutils literal notranslate"><span class="pre">set_asyncio_executor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.concurrency.get_asyncio_executor"><code class="docutils literal notranslate"><span class="pre">get_asyncio_executor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.concurrency.set_trio_capacity_limiter"><code class="docutils literal notranslate"><span class="pre">set_trio_capacity_limiter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.concurrency.get_trio_capacity_limiter"><code class="docutils literal notranslate"><span class="pre">get_trio_capacity_limiter()</span></code></a></li>
 </ul>
   </nav></div>
 
