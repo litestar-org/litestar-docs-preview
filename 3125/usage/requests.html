@@ -2287,7 +2287,10 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </section>
 <section id="custom-request">
 <h2>Custom Request<a class="headerlink" href="#custom-request" title="Permalink to this heading">#</a></h2>
-<p>Litestar supports custom <code class="docutils literal notranslate"><span class="pre">request_class</span></code> which can enrich default <a class="reference internal" href="../reference/connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a>.
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.7.0.</span></p>
+</div>
+<p>Litestar supports custom <code class="docutils literal notranslate"><span class="pre">request_class</span></code> instances, which can be used to further configure the default <a class="reference internal" href="../reference/connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a>.
 The example below illustrates how to implement custom request class for the whole application.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.connection.base</span> <span class="kn">import</span> <span class="n">empty_receive</span><span class="p">,</span> <span class="n">empty_send</span>
