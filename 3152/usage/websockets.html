@@ -1990,7 +1990,7 @@ Async</label><div class="sd-tab-content docutils">
 The example below illustrates how to implement custom websocket class for the whole application.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-Example of a custom request at the application level<div class="sd-summary-down docutils">
+Example of a custom websocket at the application level<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -2008,12 +2008,12 @@ Example of a custom request at the application level<div class="sd-summary-down 
         <span class="k">return</span> <span class="s2">&quot;Fixed response&quot;</span>
 
 
-<span class="nd">@websocket_listener</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">websocket_class</span><span class="o">=</span><span class="n">CustomWebSocket</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">socket</span><span class="p">:</span> <span class="n">CustomWebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="nd">@websocket_listener</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">data</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">handler</span><span class="p">])</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">handler</span><span class="p">],</span> <span class="n">websocket_class</span><span class="o">=</span><span class="n">CustomWebSocket</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
