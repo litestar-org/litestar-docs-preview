@@ -6484,7 +6484,13 @@ document.write(`
 </li>
       </ul></li>
       <li><a href="reference/config.html#litestar.config.app.AppConfig.request_class">request_class (litestar.config.app.AppConfig attribute)</a>
+
+      <ul>
+        <li><a href="reference/controller.html#litestar.controller.Controller.request_class">(litestar.controller.Controller attribute)</a>
 </li>
+        <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.request_class">(litestar.openapi.OpenAPIController attribute)</a>
+</li>
+      </ul></li>
       <li><a href="reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddlewareConfig.request_cookies_to_obfuscate">request_cookies_to_obfuscate (litestar.middleware.logging.LoggingMiddlewareConfig attribute)</a>
 </li>
       <li><a href="reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddlewareConfig.request_headers_to_obfuscate">request_headers_to_obfuscate (litestar.middleware.logging.LoggingMiddlewareConfig attribute)</a>
@@ -6539,6 +6545,8 @@ document.write(`
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.resolve_opts">resolve_opts() (litestar.handlers.BaseRouteHandler method)</a>
 </li>
+      <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_request_class">resolve_request_class() (litestar.handlers.HTTPRouteHandler method)</a>
+</li>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_response_class">resolve_response_class() (litestar.handlers.HTTPRouteHandler method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_response_cookies">resolve_response_cookies() (litestar.handlers.HTTPRouteHandler method)</a>
@@ -6556,6 +6564,8 @@ document.write(`
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.resolve_type_decoders">resolve_type_decoders() (litestar.handlers.BaseRouteHandler method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.resolve_type_encoders">resolve_type_encoders() (litestar.handlers.BaseRouteHandler method)</a>
+</li>
+      <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler.resolve_websocket_class">resolve_websocket_class() (litestar.handlers.WebsocketRouteHandler method)</a>
 </li>
       <li><a href="reference/response/index.html#litestar.response.Response">Response (class in litestar.response)</a>
 
@@ -7442,6 +7452,8 @@ document.write(`
       <ul>
         <li><a href="reference/controller.html#litestar.controller.Controller.type_decoders">(litestar.controller.Controller attribute)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.type_decoders">(litestar.handlers.WebsocketListener attribute)</a>
+</li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.type_decoders">(litestar.openapi.OpenAPIController attribute)</a>
 </li>
       </ul></li>
@@ -7631,12 +7643,22 @@ document.write(`
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPI.webhooks">(litestar.openapi.spec.OpenAPI attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.weboscket_class">weboscket_class (litestar.handlers.WebsocketListenerRouteHandler attribute)</a>
+</li>
       <li><a href="reference/connection.html#litestar.connection.WebSocket">WebSocket (class in litestar.connection)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.websocket">websocket (in module litestar.handlers)</a>
 </li>
       <li><a href="reference/config.html#litestar.config.app.AppConfig.websocket_class">websocket_class (litestar.config.app.AppConfig attribute)</a>
+
+      <ul>
+        <li><a href="reference/controller.html#litestar.controller.Controller.websocket_class">(litestar.controller.Controller attribute)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.websocket_class">(litestar.handlers.WebsocketListener attribute)</a>
+</li>
+        <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.websocket_class">(litestar.openapi.OpenAPIController attribute)</a>
+</li>
+      </ul></li>
       <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect">websocket_connect() (litestar.testing.TestClient method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.websocket_listener">websocket_listener (in module litestar.handlers)</a>
@@ -7673,12 +7695,12 @@ document.write(`
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketSendEvent">WebSocketSendEvent (class in litestar.types)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/types.html#litestar.types.WebSocketSendMessage">WebSocketSendMessage (in module litestar.types)</a>
 </li>
       <li><a href="reference/testing.html#litestar.testing.WebSocketTestSession">WebSocketTestSession (class in litestar.testing)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.with_client">with_client() (litestar.stores.redis.RedisStore class method)</a>
 </li>
       <li><a href="reference/stores/base.html#litestar.stores.base.NamespacedStore.with_namespace">with_namespace() (litestar.stores.base.NamespacedStore method)</a>
