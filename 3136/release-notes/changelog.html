@@ -1498,6 +1498,205 @@ document.write(`
                   
   <section id="x-changelog">
 <h1>2.x Changelog<a class="headerlink" href="#x-changelog" title="Permalink to this heading">#</a></h1>
+<section id="2.7.0">
+<h2>2.7.0<a class="headerlink" href="#2.7.0" title="Permalink to this heading">#</a></h2>
+<strong>Released: </strong>2024-03-10<section id="2.7.0-feature">
+<h3>Features<a class="headerlink" href="#2.7.0-feature" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt>Support <code class="docutils literal notranslate"><span class="pre">ResponseSpec(...,</span> <span class="pre">examples=[...])</span></code><a class="headerlink reference internal" href="#2.7.0-support" id="2.7.0-support">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Allow defining custom examples for the responses via <code class="docutils literal notranslate"><span class="pre">ResponseSpec</span></code>.
+The examples set this way are always generated locally, for each response:
+Examples that go within the schema definition cannot be set by this.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="nt">&quot;paths&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;/&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;get&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;responses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;200&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;application/json&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="nt">&quot;examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">}}</span>
+<span class="w">            </span><span class="p">}}</span>
+<span class="w">        </span><span class="p">}}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3068">litestar-org/litestar#3068</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3100">litestar-org/litestar#3100</a></span></p>
+</div>
+</dd>
+<dt>support “+json”-suffixed response media types<a class="headerlink reference internal" href="#2.7.0-support &quot;+json&quot;-suffixed response media types" id="2.7.0-support &quot;+json&quot;-suffixed response media types">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Automatically encode responses with media type of the form “application/&lt;something&gt;+json” as json.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3088">litestar-org/litestar#3088</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3096">litestar-org/litestar#3096</a></span></p>
+</div>
+</dd>
+<dt>Allow reusable <code class="docutils literal notranslate"><span class="pre">Router</span></code> instances<a class="headerlink reference internal" href="#2.7.0-allow reusable" id="2.7.0-allow reusable">#</a></dt><dd><div class="changelog-change docutils container">
+<p>It was not possible to re-attach a router instance once it was attached. This
+makes that possible.</p>
+<p>The router instance now gets deecopied when it’s registered to another router.</p>
+<p>The application startup performance gets a hit here, but the same approach is
+already used for controllers and handlers, so this only harmonizes the
+implementation.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3012">litestar-org/litestar#3012</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3103">litestar-org/litestar#3103</a></span></p>
+</div>
+</dd>
+<dt>only display path in <code class="docutils literal notranslate"><span class="pre">ValidationException</span></code>s<a class="headerlink reference internal" href="#2.7.0-only display path in" id="2.7.0-only display path in">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix an issue where <code class="docutils literal notranslate"><span class="pre">ValidationException</span></code> exposes the full URL in the error response, leaking internal IP(s) or other similar infra related information.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3061">litestar-org/litestar#3061</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3064">litestar-org/litestar#3064</a></span></p>
+</div>
+</dd>
+<dt>expose <code class="docutils literal notranslate"><span class="pre">request_class</span></code> to other layers<a class="headerlink reference internal" href="#2.7.0-expose" id="2.7.0-expose">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Expose <code class="docutils literal notranslate"><span class="pre">request_class</span></code> to other layers</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3125">litestar-org/litestar#3125</a></span></p>
+</div>
+</dd>
+<dt>expose <code class="docutils literal notranslate"><span class="pre">websocket_class</span></code><a class="headerlink reference internal" href="#2.7.0-expose" id="2.7.0-expose">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Expose <code class="docutils literal notranslate"><span class="pre">websocket_class</span></code> to other layers</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3152">litestar-org/litestar#3152</a></span></p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> to Router and route handlers<a class="headerlink reference internal" href="#2.7.0-add" id="2.7.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method for handler, routers and decorators to keep consistency with <code class="docutils literal notranslate"><span class="pre">type_encoders</span></code> parameter</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3153">litestar-org/litestar#3153</a></span></p>
+</div>
+</dd>
+<dt>Pass <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> in <code class="docutils literal notranslate"><span class="pre">WebsocketListenerRouteHandler</span></code><a class="headerlink reference internal" href="#2.7.0-pass" id="2.7.0-pass">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Pass <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> to parent’s <code class="docutils literal notranslate"><span class="pre">__init__</span></code> in <code class="docutils literal notranslate"><span class="pre">WebsocketListenerRouteHandler</span></code> init, otherwise <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> will be <code class="docutils literal notranslate"><span class="pre">None</span></code>
+replace params order in docs, <code class="docutils literal notranslate"><span class="pre">__init__</span></code> (<cite>decoders</cite> before <cite>encoders</cite>)</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3162">litestar-org/litestar#3162</a></span></p>
+</div>
+</dd>
+<dt>3116 enhancement session middleware<a class="headerlink reference internal" href="#2.7.0-3116 enhancement session middleware" id="2.7.0-3116 enhancement session middleware">#</a></dt><dd><div class="changelog-change docutils container">
+<p>For server side sessions, the session id is now generated before the route handler. Thus, on first visit, a session id will be available inside the route handler’s scope instead of afterwards
+A new abstract method <code class="docutils literal notranslate"><span class="pre">get_session_id</span></code> was added to <code class="docutils literal notranslate"><span class="pre">BaseSessionBackend</span></code> since this method will be called for both ClientSideSessions and ServerSideSessions. Only for ServerSideSessions it will return an actual id.
+Using <code class="docutils literal notranslate"><span class="pre">request.set_session(...)</span></code> will return the session id for ServerSideSessions and None for ClientSideSessions
+The session auth MiddlewareWrapper now refers to the Session Middleware via the configured backend, instead of it being hardcoded</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3116">litestar-org/litestar#3116</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3127">litestar-org/litestar#3127</a></span></p>
+</div>
+</dd>
+<dt>make random seed for openapi example generation configurable<a class="headerlink reference internal" href="#2.7.0-make random seed for openapi example generation configurable" id="2.7.0-make random seed for openapi example generation configurable">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Allow random seed used for generating the examples in the OpenAPI schema (when <code class="docutils literal notranslate"><span class="pre">create_examples</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>) to be configured by the user.
+This is related to <a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3059">litestar-org/litestar#3059</a> however whether this change is enough to close that issue or not is not confirmed.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3166">litestar-org/litestar#3166</a></span></p>
+</div>
+</dd>
+<dt>generate openapi components schemas in a deterministic order<a class="headerlink reference internal" href="#2.7.0-generate openapi components schemas in a deterministic order" id="2.7.0-generate openapi components schemas in a deterministic order">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Ensure that the insertion into the <code class="docutils literal notranslate"><span class="pre">Components.schemas</span></code> dictionary of the OpenAPI spec will be in alphabetical order (based on the normalized name of the <code class="docutils literal notranslate"><span class="pre">Schema</span></code>).</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3172">litestar-org/litestar#3172</a></span></p>
+</div>
+</dd>
+</dl>
+</section>
+<section id="2.7.0-bugfix">
+<h3>Bugfixes<a class="headerlink" href="#2.7.0-bugfix" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt>missing cors headers in response<a class="headerlink reference internal" href="#2.7.0-missing cors headers in response" id="2.7.0-missing cors headers in response">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Set CORS Middleware headers as per spec.
+Addresses issues outlined on <a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3178">litestar-org/litestar#3178</a></p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3178">litestar-org/litestar#3178</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3179">litestar-org/litestar#3179</a></span></p>
+</div>
+</dd>
+<dt>sending empty data in sse in js client<a class="headerlink reference internal" href="#2.7.0-sending empty data in sse in js client" id="2.7.0-sending empty data in sse in js client">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix an issue with SSE where JavaScript clients fail to receive an event without data.
+The <a class="reference external" href="https://html.spec.whatwg.org/multipage/server-sent-events.html#parsing-an-event-stream">spec</a> is not clear in whether or not an event without data is ok.
+Considering the EventSource “client” is not ok with it, and that it’s so easy DX-wise to make the mistake not explicitly sending it, this change fixes it by defaulting to the empty-string</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3176">litestar-org/litestar#3176</a></span></p>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="2.6.3">
+<h2>2.6.3<a class="headerlink" href="#2.6.3" title="Permalink to this heading">#</a></h2>
+<strong>Released: </strong>2024-03-04<section id="2.6.3-bugfix">
+<h3>Bugfixes<a class="headerlink" href="#2.6.3-bugfix" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt>Pydantic V1 schema generation for PrivateAttr in GenericModel<a class="headerlink reference internal" href="#2.6.3-pydantic v1 schema generation for privateattr in genericmodel" id="2.6.3-pydantic v1 schema generation for privateattr in genericmodel">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fixes a bug that caused a <code class="docutils literal notranslate"><span class="pre">NameError</span></code> when a Pydantic V1 <code class="docutils literal notranslate"><span class="pre">GenericModel</span></code> has a private attribute of which the type annotation cannot be resolved at the time of schema generation.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3150">litestar-org/litestar#3150</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3161">litestar-org/litestar#3161</a></span></p>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="2.6.2">
+<h2>2.6.2<a class="headerlink" href="#2.6.2" title="Permalink to this heading">#</a></h2>
+<strong>Released: </strong>2024/03/02<section id="2.6.2-bugfix">
+<h3>Bugfixes<a class="headerlink" href="#2.6.2-bugfix" title="Permalink to this heading">#</a></h3>
+<dl>
+<dt>DTO msgspec meta constraints not being included in transfer model<a class="headerlink reference internal" href="#2.6.2-dto msgspec meta constraints not being included in transfer model" id="2.6.2-dto msgspec meta constraints not being included in transfer model">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix an issue where msgspec constraints set in <code class="docutils literal notranslate"><span class="pre">msgspec.Meta</span></code> would not be
+honoured by the DTO.</p>
+<p>In the given example, the <code class="docutils literal notranslate"><span class="pre">min_length=3</span></code> constraint would be ignored by the
+model generated by <code class="docutils literal notranslate"><span class="pre">MsgspecDTO</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
+
+<span class="kn">import</span> <span class="nn">msgspec</span>
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">post</span>
+<span class="kn">from</span> <span class="nn">litestar.dto</span> <span class="kn">import</span> <span class="n">MsgspecDTO</span>
+
+<span class="k">class</span> <span class="nc">Request</span><span class="p">(</span><span class="n">msgspec</span><span class="o">.</span><span class="n">Struct</span><span class="p">):</span>
+    <span class="n">foo</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">msgspec</span><span class="o">.</span><span class="n">Meta</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
+
+<span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/example/&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">MsgspecDTO</span><span class="p">[</span><span class="n">Request</span><span class="p">])</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">example</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Request</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>Constraints like these are now transferred.</p>
+<p>Two things to note are:</p>
+<ul class="simple">
+<li><p>For DTOs with <code class="docutils literal notranslate"><span class="pre">DTOConfig(partial=True)</span></code> we cannot transfer the length
+constraints as they are only supported on fields that as subtypes of <code class="docutils literal notranslate"><span class="pre">str</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bytes</span></code> or a collection type, but <code class="docutils literal notranslate"><span class="pre">partial=True</span></code> sets all fields as
+<code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">|</span> <span class="pre">UNSET</span></code></p></li>
+<li><p>For the <code class="docutils literal notranslate"><span class="pre">PiccoloDTO</span></code>, fields which are not required will also drop the
+length constraints. A warning about this will be raised here.</p></li>
+</ul>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3026">litestar-org/litestar#3026</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3113">litestar-org/litestar#3113</a></span></p>
+</div>
+</dd>
+<dt>Missing control header for static files<a class="headerlink reference internal" href="#2.6.2-missing control header for static files" id="2.6.2-missing control header for static files">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix an issue where a <code class="docutils literal notranslate"><span class="pre">cache_control</span></code> that is set on a router created by
+<code class="docutils literal notranslate"><span class="pre">create_static_files_router</span></code> wasn’t passed to the generated handler</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3129">litestar-org/litestar#3129</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3131">litestar-org/litestar#3131</a></span></p>
+</div>
+</dd>
+<dt>Fix OpenAPI schema generation for Pydantic v2 constrained <code class="docutils literal notranslate"><span class="pre">Secret</span></code> types<a class="headerlink reference internal" href="#2.6.2-fix openapi schema generation for pydantic v2 constrained" id="2.6.2-fix openapi schema generation for pydantic v2 constrained">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix schema generation for <code class="docutils literal notranslate"><span class="pre">pydantic.SecretStr</span></code> and <code class="docutils literal notranslate"><span class="pre">pydantic.SecretBytes</span></code>
+which, when constrained, would not be recognised as such with Pydantic V2 since
+they’re not subtypes of their respective bases anymore.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3148">litestar-org/litestar#3148</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3149">litestar-org/litestar#3149</a></span></p>
+</div>
+</dd>
+<dt>Fix OpenAPI schema generation for Pydantic private attributes<a class="headerlink reference internal" href="#2.6.2-fix openapi schema generation for pydantic private attributes" id="2.6.2-fix openapi schema generation for pydantic private attributes">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that caused a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> when trying to resolve forward
+references in Pydantic private fields.</p>
+<p>Although private fields were respected excluded from the schema, it was still
+attempted to extract their type annotation. This was fixed by not relying on
+<code class="docutils literal notranslate"><span class="pre">typing.get_type_hints</span></code> to get the type information, but instead using
+Pydantic’s own APIs, allowing us to only extract information about the types of
+relevant fields.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3150">litestar-org/litestar#3150</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3151">litestar-org/litestar#3151</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI description not set for UUID based path parameters in OpenAPI<a class="headerlink reference internal" href="#2.6.2-openapi description not set for uuid based path parameters in openapi" id="2.6.2-openapi description not set for uuid based path parameters in openapi">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Resolved a bug where the description was not set for UUID-based path
+parameters in OpenAPI due to the reason mentioned in the issue.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/2967">litestar-org/litestar#2967</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3118">litestar-org/litestar#3118</a></span></p>
+</div>
+</dd>
+<dt>Fix <code class="docutils literal notranslate"><span class="pre">RedisStore</span></code> client created with <code class="docutils literal notranslate"><span class="pre">with_client</span></code> unclosed<a class="headerlink reference internal" href="#2.6.2-fix" id="2.6.2-fix">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug where, when a <a class="reference internal" href="../reference/stores/redis.html#litestar.stores.redis.RedisStore" title="litestar.stores.redis.RedisStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedisStore</span></code></a> was created
+with the <a class="reference internal" href="../reference/stores/redis.html#litestar.stores.redis.RedisStore.with_client" title="litestar.stores.redis.RedisStore.with_client"><code class="xref py py-meth docutils literal notranslate"><span class="pre">with_client()</span></code></a> method, that
+client wasn’t closed explicitly</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3083">litestar-org/litestar#3083</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3111">litestar-org/litestar#3111</a></span></p>
+</div>
+</dd>
+</dl>
+</section>
+</section>
 <section id="2.6.1">
 <h2>2.6.1<a class="headerlink" href="#2.6.1" title="Permalink to this heading">#</a></h2>
 <strong>Released: </strong>2024/02/14<section id="2.6.1-bugfix">
@@ -5228,6 +5427,19 @@ the time it takes to <code class="docutils literal notranslate"><span class="pre
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.7.0">2.7.0</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.7.0-feature">Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.7.0-bugfix">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.6.3">2.6.3</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.6.3-bugfix">Bugfixes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.6.2">2.6.2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.6.2-bugfix">Bugfixes</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.6.1">2.6.1</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.6.1-bugfix">Bugfixes</a></li>
 </ul>
