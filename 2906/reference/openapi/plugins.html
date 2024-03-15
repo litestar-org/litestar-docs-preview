@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>plugins &#8212; Litestar Framework</title>
   
@@ -1241,6 +1241,7 @@ document.write(`
 
 
 
+
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/plugins.html">Plugins</a></li>
@@ -1252,7 +1253,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../usage/security/jwt.html">JWT Security Backends</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../usage/static-files.html">Static Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/static-files.html">Static files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/testing.html">Testing</a></li>
@@ -1297,6 +1298,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concurrency.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../datastructures.html">datastructures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../di.html">di</a></li>
@@ -1365,14 +1367,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../security/jwt.html"><code class="docutils literal notranslate"><span class="pre">BaseJWTAuth</span></code></a></li>
-
-
-
-
-
-
-
+<li class="toctree-l3"><a class="reference internal" href="../security/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1408,8 +1403,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/nginx-unit.html">NGINX Unit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/docker.html">Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/supervisor.html">Supervisor (linux)</a></li>
-
+<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/supervisor.html">Supervisor (Linux)</a></li>
 </ul>
 </li>
 </ul>
@@ -1534,7 +1528,7 @@ document.write(`
 <p>Base class for OpenAPI UI render plugins.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.openapi.plugins.OpenAPIRenderPlugin.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.12)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../enums.html#litestar.enums.MediaType" title="litestar.enums.MediaType"><span class="pre">MediaType</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../enums.html#litestar.enums.OpenAPIMediaType" title="litestar.enums.OpenAPIMediaType"><span class="pre">OpenAPIMediaType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MediaType.HTML</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">favicon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&quot;&lt;link</span> <span class="pre">rel='icon'</span> <span class="pre">type='image/png'</span> <span class="pre">href='https://raw.githubusercontent.com/litestar-org/branding/main/assets/Branding%20-%20PNG%20-%20Transparent/Badge%20-%20Blue%20and%20Yellow.png'&gt;&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'body</span> <span class="pre">{</span> <span class="pre">margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0</span> <span class="pre">}'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.openapi.plugins.OpenAPIRenderPlugin.__init__" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.12)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">media_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../enums.html#litestar.enums.MediaType" title="litestar.enums.MediaType"><span class="pre">MediaType</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../enums.html#litestar.enums.OpenAPIMediaType" title="litestar.enums.OpenAPIMediaType"><span class="pre">OpenAPIMediaType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MediaType.HTML</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">favicon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&quot;&lt;link</span> <span class="pre">rel='icon'</span> <span class="pre">type='image/png'</span> <span class="pre">href='https://raw.githubusercontent.com/litestar-org/branding/main/assets/Branding%20-%20PNG%20-%20Transparent/Badge%20-%20Blue%20and%20Yellow.png'&gt;&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'&lt;style&gt;body</span> <span class="pre">{</span> <span class="pre">margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0</span> <span class="pre">}&lt;/style&gt;'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.openapi.plugins.OpenAPIRenderPlugin.__init__" title="Permalink to this definition">#</a></dt>
 <dd><p>Initialize the OpenAPI UI render plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1848,12 +1842,9 @@ the url.</p></li>
 the url.</p></li>
 <li><p><strong>standalone_preset_js_url</strong> – Download url for the Swagger Standalone Preset JS bundle. If not provided, the
 version will be used to construct the url.</p></li>
-<li><p><strong>init_oauth</strong> – <p>JSON to initialize Swagger UI OAuth2 by calling the <cite>initOAuth</cite> method.
-Refer to the following URL for details:</p>
-<blockquote>
-<div><p><a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">Swagger-UI</a>.</p>
-</div></blockquote>
-</p></li>
+<li><p><strong>init_oauth</strong> – JSON to initialize Swagger UI OAuth2 by calling the <cite>initOAuth</cite> method.
+Refer to the following URL for details:
+<a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">Swagger-UI</a>.</p></li>
 <li><p><strong>path</strong> – Path to serve the OpenAPI UI at.</p></li>
 <li><p><strong>**kwargs</strong> – Additional arguments to pass to the base class.</p></li>
 </ul>

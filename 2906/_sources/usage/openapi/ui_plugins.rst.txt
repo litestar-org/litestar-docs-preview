@@ -8,6 +8,7 @@ to understand and interact with the API.
 In addition to serving a default JSON representation of the OpenAPI specification, built-in UI Plugins are available to
 support a range of popular OpenAPI documentation tools, including:
 
+- `Scalar <https://scalar.com/>`_
 - `RapiDoc <https://rapidocweb.com/>`_
 - `ReDoc <https://redocly.com/>`_
 - `Stoplight Elements <https://stoplight.io/open-source/elements>`_
@@ -24,6 +25,11 @@ Using OpenAPI UI Plugins
 Using OpenAPI UI Plugins is as simple as importing the plugin, instantiating it, and adding it to the OpenAPIConfig.
 
 .. tab-set::
+
+    .. tab-item:: scalar
+
+        .. literalinclude:: /examples/openapi/plugins/scalar_simple.py
+            :language: python
 
     .. tab-item:: rapidoc
 
@@ -60,7 +66,7 @@ Configuring OpenAPI UI Plugins
 ------------------------------
 
 Each plugin can be tailored to meet your unique requirements by passing options at instantiation. For full details on
-each plugins options, see the :doc:`API Reference </reference/openapi/plugins>`.
+each plugin's options, see the :doc:`API Reference </reference/openapi/plugins>`.
 
 All plugins support the following options:
 
@@ -82,6 +88,11 @@ Most plugins support the following additional options:
 Here's some examples of configuring the plugins:
 
 .. tab-set::
+
+    .. tab-item:: scalar
+
+        .. literalinclude:: /examples/openapi/plugins/scalar_config.py
+            :language: python
 
     .. tab-item:: rapidoc
 
@@ -136,6 +147,7 @@ being enabled:
 
 - ``/schema/openapi.json``
 - ``/schema/redoc``
+- ``/schema/scalar``
 - ``/schema/rapidoc``
 - ``/schema/elements``
 - ``/schema/swagger``
@@ -143,10 +155,11 @@ being enabled:
 - ``/schema/openapi.yaml``
 
 In ``v3.0.0``, the :attr:`OpenAPIConfig.enabled_endpoints` attribute will be removed, and only a single UI plugin will be
-enabled by default, in addition to the ``openapi.json`` endpoint which will always be enabled.
+enabled by default, in addition to the ``openapi.json`` endpoint which will always be enabled. ``Scalar`` will also
+become the default UI plugin in ``v3.0.0``.
 
-Backward compatibility with root_schema_site
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Backward compatibility with ``root_schema_site``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Litestar has always supported a ``root_schema_site`` attribute on the :class:`OpenAPIConfig` class. This attribute
 allowed you to elect to serve a UI at the OpenAPI root path, e.g., by default ``redoc`` would be served at both
@@ -199,8 +212,8 @@ And we construct a url for the RapiDoc JavaScript bundle if it is not provided:
     :language: python
     :lines: 30
 
-render()
-~~~~~~~~
+``render()``
+~~~~~~~~~~~~
 
 .. literalinclude:: /examples/openapi/plugins/custom_plugin.py
     :language: python
@@ -231,3 +244,25 @@ This can be used for a variety of purposes, including adding additional routes t
 
 .. literalinclude:: /examples/openapi/plugins/receive_router.py
     :language: python
+
+OAuth2 in Swagger UI
+~~~~~~~~~~~~~~~~~~~~
+
+When using Swagger, OAuth2 settings can be configured via :attr:`swagger_ui_init_oauth <litestar.openapi.controller.OpenAPIController.swagger_ui_init_oauth>`, which can be set to a dictionary containing the parameters described in the Swagger UI documentation for OAuth2 `here <https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/>`_.
+
+We that you can preset your clientId or enable PKCE support.
+
+.. literalinclude:: /examples/openapi/plugins/swagger_ui_oauth.py
+    :language: python
+
+Customizing the OpenAPI UI
+--------------------------
+
+Currently, the ``Scalar`` OpenAPI UI plugin supports customization of its style and behavior by
+overriding the default ``css_url`` and ``js_url`` attributes on its render plugin class.
+
+.. literalinclude:: /examples/openapi/plugins/scalar_customized.py
+            :language: python
+
+To learn more about customizing the ``Scalar`` UI,
+see the `Scalar documentation <https://docs.scalar.com/>`_.

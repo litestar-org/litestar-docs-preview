@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Responses &#8212; Litestar Framework</title>
   
@@ -1241,6 +1241,7 @@ document.write(`
 
 
 
+
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
@@ -1252,7 +1253,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="security/jwt.html">JWT Security Backends</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="static-files.html">Static Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static-files.html">Static files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
@@ -1297,6 +1298,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/datastructures.html">datastructures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/di.html">di</a></li>
@@ -1365,14 +1367,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/security/jwt.html"><code class="docutils literal notranslate"><span class="pre">BaseJWTAuth</span></code></a></li>
-
-
-
-
-
-
-
+<li class="toctree-l3"><a class="reference internal" href="../reference/security/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1408,8 +1403,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../topics/deployment/nginx-unit.html">NGINX Unit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../topics/deployment/docker.html">Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../topics/deployment/supervisor.html">Supervisor (linux)</a></li>
-
+<li class="toctree-l3"><a class="reference internal" href="../topics/deployment/supervisor.html">Supervisor (Linux)</a></li>
 </ul>
 </li>
 </ul>
@@ -1587,6 +1581,59 @@ the value in the route handler function.</p>
 </ul>
 <p>If you need to return other values and would like to extend serialization you can do
 this <a class="reference internal" href="#custom-responses"><span class="std std-ref">custom responses</span></a>.</p>
+<p>You can also set an application media type string with the <code class="docutils literal notranslate"><span class="pre">+json</span></code> suffix
+defined in <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc6839#section-3.1">RFC 6839</a>
+as the <code class="docutils literal notranslate"><span class="pre">media_type</span></code> and it will be recognized and serialized as json.
+For example, you can use <code class="docutils literal notranslate"><span class="pre">application/problem+json</span></code>
+(see <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7807#section-6.1">RFC 7807</a>)
+and it will work just like json but have the appropriate content-type header
+and show up in the generated OpenAPI schema.</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-0">
+Python 3.8+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">litestar.status_codes</span>
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/resources&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">litestar</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_418_IM_A_TEAPOT</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/problem+json&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_resource</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Server thinks it is a teapot&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Server delusion&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">litestar</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_418_IM_A_TEAPOT</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">retrieve_resource</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-1">
+Python 3.10+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">import</span> <span class="nn">litestar.status_codes</span>
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/resources&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">litestar</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_418_IM_A_TEAPOT</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;application/problem+json&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_resource</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Server thinks it is a teapot&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Server delusion&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">litestar</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_418_IM_A_TEAPOT</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">retrieve_resource</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="messagepack-responses">
 <h3>MessagePack responses<a class="headerlink" href="#messagepack-responses" title="Permalink to this heading">#</a></h3>
@@ -1595,8 +1642,8 @@ format which can be a time and space efficient alternative to JSON.</p>
 <p>It supports all the same types as JSON serialization. To send a <code class="docutils literal notranslate"><span class="pre">MessagePack</span></code> response,
 simply specify the media type as <code class="docutils literal notranslate"><span class="pre">MediaType.MESSAGEPACK</span></code>:</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-0">
+<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-2">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">MediaType</span>
@@ -1608,9 +1655,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-1">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-3">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">MediaType</span>
 
 
@@ -1807,8 +1854,7 @@ to type this argument even when returning an empty or <code class="docutils lite
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">my_asgi_app</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="o">...</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">my_asgi_app</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 
     <span class="k">return</span> <span class="n">my_asgi_app</span>
 </pre></div>
@@ -1941,8 +1987,7 @@ a special class that allows to add OpenAPI attributes such as <cite>description<
 If you don’t need those, you can optionally define <cite>response_headers</cite> using a mapping - such as a dictionary -
 as well:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="n">response_headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;my-header&quot;</span><span class="p">:</span> <span class="s2">&quot;header-value&quot;</span><span class="p">})</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="o">...</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -2339,8 +2384,7 @@ e.g.:</p>
 <p>If all you need for your cookies are key and value, you can supply them using a <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping[str,</span> <span class="pre">str]</span></code></a>
 - like a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> - instead:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="n">response_cookies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;my-cookie&quot;</span><span class="p">:</span> <span class="s2">&quot;cookie-value&quot;</span><span class="p">})</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="o">...</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -2587,8 +2631,8 @@ as the value for <code class="docutils literal notranslate"><span class="pre">me
 <p>To return a streaming response use the <a class="reference internal" href="../reference/response/index.html#litestar.response.Stream" title="litestar.response.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> class. The class
 receives a single positional arg, that must be an iterator delivering the stream:</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-2">
+<input id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-4">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -2614,8 +2658,8 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-3">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-5">
 Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -2655,8 +2699,8 @@ class. The class receives a content arg. You can additionally specify <code clas
 name of the event as declared in the browser, the <code class="docutils literal notranslate"><span class="pre">event_id</span></code>, which sets the event source property, <code class="docutils literal notranslate"><span class="pre">comment_message</span></code>,
 which is used in for sending pings, and <code class="docutils literal notranslate"><span class="pre">retry_duration</span></code>, which dictates the duration for retrying.</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-4">
+<input id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-6">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
@@ -2682,8 +2726,8 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-5">
+<input checked="checked" id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-7">
 Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">sleep</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
@@ -2781,8 +2825,8 @@ class on multiple layers, the layer closest to the route handler will take prece
 dunder method) that will be called after the response finishes sending the data.</p>
 <p>Thus, in the following example the passed in background task will be executed after the response sends:</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-6">
+<input id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-8">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Background Task Passed into Response</span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
@@ -2812,9 +2856,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-7">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-9">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Background Task Passed into Response</span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -2854,8 +2898,8 @@ enabling correct type checking for arguments and keyword arguments passed to it.
 </div>
 <p>Route decorators (e.g. <code class="docutils literal notranslate"><span class="pre">&#64;get</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;post</span></code>, etc.) also allow passing in a background task with the <code class="docutils literal notranslate"><span class="pre">background</span></code> kwarg:</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-8">
+<input id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-10">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">Background Task Passed into Decorator</span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
@@ -2882,9 +2926,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-9">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-11">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Background Task Passed into Decorator</span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -2919,8 +2963,8 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <p>You can also use the <a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTasks" title="litestar.background_tasks.BackgroundTasks"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTasks</span></code></a> class and pass to it an iterable
 (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>, etc.) of <a class="reference internal" href="../reference/background_tasks.html#litestar.background_tasks.BackgroundTask" title="litestar.background_tasks.BackgroundTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTask</span></code></a> instances:</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-10">
+<input id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-12">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">Multiple Background Tasks</span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
@@ -2960,9 +3004,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-11">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-13">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Multiple Background Tasks</span><a class="headerlink" href="#id12" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
@@ -3024,8 +3068,8 @@ of the box:</p>
 <h3>Classic Pagination<a class="headerlink" href="#classic-pagination" title="Permalink to this heading">#</a></h3>
 <p>In classic pagination the dataset is divided into pages of a specific size and the consumer then requests a specific page.</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-12">
+<input id="sd-tab-item-14" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-14">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Classic Pagination</span><a class="headerlink" href="#id13" title="Permalink to this code">#</a></div>
@@ -3077,9 +3121,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-13">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-15">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">Classic Pagination</span><a class="headerlink" href="#id14" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">polyfactory.factories.pydantic_factory</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
@@ -3141,8 +3185,8 @@ the <a class="reference internal" href="../reference/pagination.html#litestar.pa
 <p>In offset pagination the consumer requests a number of items specified by <code class="docutils literal notranslate"><span class="pre">limit</span></code> and the <code class="docutils literal notranslate"><span class="pre">offset</span></code> from the beginning of the dataset.
 For example, given a list of 50 items, you could request <code class="docutils literal notranslate"><span class="pre">limit=10</span></code>, <code class="docutils literal notranslate"><span class="pre">offset=39</span></code> to request items 40-50.</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-14" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-14">
+<input id="sd-tab-item-16" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-16">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Offset Pagination</span><a class="headerlink" href="#id15" title="Permalink to this code">#</a></div>
@@ -3195,9 +3239,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-15">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-17">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">Offset Pagination</span><a class="headerlink" href="#id16" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
@@ -3260,8 +3304,8 @@ the <a class="reference internal" href="../reference/pagination.html#litestar.pa
 <p>When retrieving paginated data from the database using SQLAlchemy, the Paginator instance requires an SQLAlchemy session
 instance to make queries. This can be achieved with <a class="reference internal" href="dependency-injection.html"><span class="doc">Dependency Injection</span></a></p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-16" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-16">
+<input id="sd-tab-item-18" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-18">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id17">
 <div class="code-block-caption"><span class="caption-text">Offset Pagination With SQLAlchemy</span><a class="headerlink" href="#id17" title="Permalink to this code">#</a></div>
@@ -3321,9 +3365,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-17">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-19">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id18">
 <div class="code-block-caption"><span class="caption-text">Offset Pagination With SQLAlchemy</span><a class="headerlink" href="#id18" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span>
@@ -3391,8 +3435,8 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <p>In cursor pagination the consumer requests a number of items specified by <code class="docutils literal notranslate"><span class="pre">results_per_page</span></code> and a <code class="docutils literal notranslate"><span class="pre">cursor</span></code> after which results are given.
 Cursor is unique identifier within the dataset that serves as a way to point the starting position.</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-18" name="sd-tab-set-9" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-18">
+<input id="sd-tab-item-20" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-20">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id19">
 <div class="code-block-caption"><span class="caption-text">Cursor Pagination</span><a class="headerlink" href="#id19" title="Permalink to this code">#</a></div>
@@ -3441,14 +3485,12 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-19">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-21">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id20">
 <div class="code-block-caption"><span class="caption-text">Cursor Pagination</span><a class="headerlink" href="#id20" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
-
-<span class="kn">from</span> <span class="nn">polyfactory.factories.pydantic_factory</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">polyfactory.factories.pydantic_factory</span> <span class="kn">import</span> <span class="n">ModelFactory</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
@@ -3471,7 +3513,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">],</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="n">results_per_page</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
 
@@ -3482,7 +3524,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="c1"># we now create a regular handler. The handler will receive a single query parameter - &#39;cursor&#39;, which</span>
 <span class="c1"># we will pass to the paginator.</span>
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">people_handler</span><span class="p">(</span><span class="n">cursor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CursorPagination</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">people_handler</span><span class="p">(</span><span class="n">cursor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CursorPagination</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]:</span>
     <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">)</span>
 
 

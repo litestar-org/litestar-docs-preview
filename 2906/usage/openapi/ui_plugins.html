@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>OpenAPI UI Plugins &#8212; Litestar Framework</title>
   
@@ -1241,6 +1241,7 @@ document.write(`
 
 
 
+
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins.html">Plugins</a></li>
@@ -1252,7 +1253,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../security/jwt.html">JWT Security Backends</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../static-files.html">Static Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../static-files.html">Static files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../testing.html">Testing</a></li>
@@ -1297,6 +1298,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/datastructures.html">datastructures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/di.html">di</a></li>
@@ -1365,14 +1367,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/router.html">router</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/routes.html">routes</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/security/jwt.html"><code class="docutils literal notranslate"><span class="pre">BaseJWTAuth</span></code></a></li>
-
-
-
-
-
-
-
+<li class="toctree-l3"><a class="reference internal" href="../../reference/security/jwt.html">jwt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
@@ -1408,8 +1403,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/nginx-unit.html">NGINX Unit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/docker.html">Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/supervisor.html">Supervisor (linux)</a></li>
-
+<li class="toctree-l3"><a class="reference internal" href="../../topics/deployment/supervisor.html">Supervisor (Linux)</a></li>
 </ul>
 </li>
 </ul>
@@ -1533,6 +1527,7 @@ to understand and interact with the API.</p>
 <p>In addition to serving a default JSON representation of the OpenAPI specification, built-in UI Plugins are available to
 support a range of popular OpenAPI documentation tools, including:</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://scalar.com/">Scalar</a></p></li>
 <li><p><a class="reference external" href="https://rapidocweb.com/">RapiDoc</a></p></li>
 <li><p><a class="reference external" href="https://redocly.com/">ReDoc</a></p></li>
 <li><p><a class="reference external" href="https://stoplight.io/open-source/elements">Stoplight Elements</a></p></li>
@@ -1548,16 +1543,16 @@ resources.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-0">
-rapidoc</label><div class="sd-tab-content docutils">
+scalar</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-6" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-6">
+<input id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-7">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">ScalarRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1569,20 +1564,20 @@ Python 3.8+</label><div class="sd-tab-content docutils">
     <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
     <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of Litestar with Scalar OpenAPI docs&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RapidocRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ScalarRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-7">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-8">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">ScalarRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1594,9 +1589,9 @@ Python 3.9+</label><div class="sd-tab-content docutils">
     <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
     <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of Litestar with Scalar OpenAPI docs&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RapidocRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ScalarRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -1606,16 +1601,16 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-1">
-redoc</label><div class="sd-tab-content docutils">
+rapidoc</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-8">
+<input id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-9">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1629,18 +1624,18 @@ Python 3.8+</label><div class="sd-tab-content docutils">
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RedocRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RapidocRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-9">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-10">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1654,7 +1649,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RedocRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RapidocRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -1664,16 +1659,16 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 <input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-2">
-stoplight</label><div class="sd-tab-content docutils">
+redoc</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-10" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-10">
+<input id="sd-tab-item-11" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-11">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1687,18 +1682,18 @@ Python 3.8+</label><div class="sd-tab-content docutils">
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">StoplightRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RedocRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-11" name="sd-tab-set-3" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-11">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-12">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1712,7 +1707,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">StoplightRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">RedocRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -1722,16 +1717,16 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 <input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-3">
-swagger</label><div class="sd-tab-content docutils">
+stoplight</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-12" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-12">
+<input id="sd-tab-item-13" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-13">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1745,18 +1740,18 @@ Python 3.8+</label><div class="sd-tab-content docutils">
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SwaggerRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">StoplightRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-4" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-13">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-14" name="sd-tab-set-4" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-14">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
-<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
 
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1770,7 +1765,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SwaggerRenderPlugin</span><span class="p">()],</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">StoplightRenderPlugin</span><span class="p">()],</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -1780,10 +1775,68 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 <input id="sd-tab-item-4" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-4">
+swagger</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-15" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-15">
+Python 3.8+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SwaggerRenderPlugin</span><span class="p">()],</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-16" name="sd-tab-set-5" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-16">
+Python 3.10+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SwaggerRenderPlugin</span><span class="p">()],</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
 yaml</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-14" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-14">
+<input id="sd-tab-item-17" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-17">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
@@ -1809,9 +1862,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-5" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-15">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-18">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">YamlRenderPlugin</span>
@@ -1836,12 +1889,12 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input id="sd-tab-item-5" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
+<input id="sd-tab-item-6" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-6">
 multiple</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-16" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-16">
+<input id="sd-tab-item-19" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-19">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Any combination of UIs can be served.</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
@@ -1870,9 +1923,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-17">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-20" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-20">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Any combination of UIs can be served.</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
@@ -1905,7 +1958,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <section id="configuring-openapi-ui-plugins">
 <h1>Configuring OpenAPI UI Plugins<a class="headerlink" href="#configuring-openapi-ui-plugins" title="Permalink to this heading">#</a></h1>
 <p>Each plugin can be tailored to meet your unique requirements by passing options at instantiation. For full details on
-each plugins options, see the <a class="reference internal" href="../../reference/openapi/plugins.html"><span class="doc">API Reference</span></a>.</p>
+each plugin’s options, see the <a class="reference internal" href="../../reference/openapi/plugins.html"><span class="doc">API Reference</span></a>.</p>
 <p>All plugins support the following options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: Each plugin has its own default, e.g., <code class="docutils literal notranslate"><span class="pre">/rapidoc</span></code> for RapiDoc. This can be overridden to serve the UI at
@@ -1925,8 +1978,17 @@ URL to retrieve the the bundle from <code class="docutils literal notranslate"><
 </ul>
 <p>Here’s some examples of configuring the plugins:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-18">
+<input checked="checked" id="sd-tab-item-21" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-21">
+scalar</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">ScalarRenderPlugin</span>
+
+<span class="n">scalar_plugin</span> <span class="o">=</span> <span class="n">ScalarRenderPlugin</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.8.0&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/scalar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-22" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-22">
 rapidoc</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
 
@@ -1934,8 +1996,8 @@ rapidoc</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-19" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-19">
+<input id="sd-tab-item-23" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-23">
 redoc</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
 
@@ -1943,8 +2005,8 @@ redoc</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-20" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-20">
+<input id="sd-tab-item-24" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-24">
 stoplight</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
 
@@ -1952,8 +2014,8 @@ stoplight</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-21" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-21">
+<input id="sd-tab-item-25" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-25">
 swagger</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
 
@@ -1971,8 +2033,8 @@ swagger</label><div class="sd-tab-content docutils">
 This can be changed by setting the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.path" title="litestar.openapi.OpenAPIConfig.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.path</span></code></a> attribute.</p>
 <p>In the following example, we configure the OpenAPI root path to be <code class="docutils literal notranslate"><span class="pre">/docs</span></code>:</p>
 <div class="sd-tab-set docutils">
-<input id="sd-tab-item-22" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-22">
+<input id="sd-tab-item-26" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-26">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
@@ -1997,9 +2059,9 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input checked="checked" id="sd-tab-item-23" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-23">
-Python 3.9+</label><div class="sd-tab-content docutils">
+<input checked="checked" id="sd-tab-item-27" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-27">
+Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
 
@@ -2040,6 +2102,7 @@ being enabled:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.json</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/schema/scalar</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/rapidoc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/elements</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code></p></li>
@@ -2047,10 +2110,11 @@ being enabled:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.yaml</span></code></p></li>
 </ul>
 <p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="litestar.openapi.OpenAPIConfig.enabled_endpoints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.enabled_endpoints</span></code></a> attribute will be removed, and only a single UI plugin will be
-enabled by default, in addition to the <code class="docutils literal notranslate"><span class="pre">openapi.json</span></code> endpoint which will always be enabled.</p>
+enabled by default, in addition to the <code class="docutils literal notranslate"><span class="pre">openapi.json</span></code> endpoint which will always be enabled. <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> will also
+become the default UI plugin in <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>.</p>
 </section>
 <section id="backward-compatibility-with-root-schema-site">
-<h2>Backward compatibility with root_schema_site<a class="headerlink" href="#backward-compatibility-with-root-schema-site" title="Permalink to this heading">#</a></h2>
+<h2>Backward compatibility with <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code><a class="headerlink" href="#backward-compatibility-with-root-schema-site" title="Permalink to this heading">#</a></h2>
 <p>Litestar has always supported a <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> class. This attribute
 allowed you to elect to serve a UI at the OpenAPI root path, e.g., by default <code class="docutils literal notranslate"><span class="pre">redoc</span></code> would be served at both
 <code class="docutils literal notranslate"><span class="pre">/schema</span></code> and <code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code>.</p>
@@ -2119,7 +2183,7 @@ Litestar. Here’s the finished product:</p>
 <span class="s2">            &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
 <span class="s2">            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
 <span class="s2">            &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
-<span class="s2">            &lt;style&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span><span class="s2">&lt;/style&gt;</span>
+<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span>
 <span class="s2">          &lt;/head&gt;</span>
 <span class="s2">        &quot;&quot;&quot;</span>
 
@@ -2170,7 +2234,7 @@ Litestar. Here’s the finished product:</p>
 </div>
 </section>
 <section id="render">
-<h2>render()<a class="headerlink" href="#render" title="Permalink to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">render()</span></code><a class="headerlink" href="#render" title="Permalink to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
 </pre></div>
 </div>
@@ -2191,7 +2255,7 @@ endpoint.</p></li>
 <span class="s2">            &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
 <span class="s2">            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
 <span class="s2">            &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
-<span class="s2">            &lt;style&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span><span class="s2">&lt;/style&gt;</span>
+<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span>
 <span class="s2">          &lt;/head&gt;</span>
 <span class="s2">        &quot;&quot;&quot;</span>
 
@@ -2242,6 +2306,104 @@ to plugins via the <a class="reference internal" href="../../reference/openapi/p
 </pre></div>
 </div>
 </section>
+<section id="oauth2-in-swagger-ui">
+<h2>OAuth2 in Swagger UI<a class="headerlink" href="#oauth2-in-swagger-ui" title="Permalink to this heading">#</a></h2>
+<p>When using Swagger, OAuth2 settings can be configured via <code class="xref py py-attr docutils literal notranslate"><span class="pre">swagger_ui_init_oauth</span></code>, which can be set to a dictionary containing the parameters described in the Swagger UI documentation for OAuth2 <a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">here</a>.</p>
+<p>We that you can preset your clientId or enable PKCE support.</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-28" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-28">
+Python 3.8+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">SwaggerRenderPlugin</span><span class="p">(</span>
+                <span class="n">init_oauth</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;clientId&quot;</span><span class="p">:</span> <span class="s2">&quot;your-client-id&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;appName&quot;</span><span class="p">:</span> <span class="s2">&quot;your-app-name&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;scopeSeparator&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;scopes&quot;</span><span class="p">:</span> <span class="s2">&quot;openid profile&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;useBasicAuthenticationWithAccessCodeGrant&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;usePkceWithAuthorizationCodeGrant&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-29" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" data-sync-id="3.10" for="sd-tab-item-29">
+Python 3.10+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.config</span> <span class="kn">import</span> <span class="n">OpenAPIConfig</span>
+<span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">}</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of litestar&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">SwaggerRenderPlugin</span><span class="p">(</span>
+                <span class="n">init_oauth</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;clientId&quot;</span><span class="p">:</span> <span class="s2">&quot;your-client-id&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;appName&quot;</span><span class="p">:</span> <span class="s2">&quot;your-app-name&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;scopeSeparator&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;scopes&quot;</span><span class="p">:</span> <span class="s2">&quot;openid profile&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;useBasicAuthenticationWithAccessCodeGrant&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;usePkceWithAuthorizationCodeGrant&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="customizing-the-openapi-ui">
+<h1>Customizing the OpenAPI UI<a class="headerlink" href="#customizing-the-openapi-ui" title="Permalink to this heading">#</a></h1>
+<p>Currently, the <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> OpenAPI UI plugin supports customization of its style and behavior by
+overriding the default <code class="docutils literal notranslate"><span class="pre">css_url</span></code> and <code class="docutils literal notranslate"><span class="pre">js_url</span></code> attributes on its render plugin class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">ScalarRenderPlugin</span>
+
+<span class="n">scalar_plugin</span> <span class="o">=</span> <span class="n">ScalarRenderPlugin</span><span class="p">(</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.8.0&quot;</span><span class="p">,</span>
+    <span class="n">js_url</span><span class="o">=</span><span class="s2">&quot;https://example.com/my-custom-scalar.js&quot;</span><span class="p">,</span>
+    <span class="n">css_url</span><span class="o">=</span><span class="s2">&quot;https://example.com/my-custom-scalar.css&quot;</span><span class="p">,</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/scalar&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>To learn more about customizing the <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> UI,
+see the <a class="reference external" href="https://docs.scalar.com/">Scalar documentation</a>.</p>
 </section>
 
 
@@ -2294,16 +2456,18 @@ to plugins via the <a class="reference internal" href="../../reference/openapi/p
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-openapi-root-path">Configuring the OpenAPI Root Path</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-compatibility">Backward Compatibility</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-a-subclass-of-openapicontroller">Providing a subclass of OpenAPIController</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-compatibility-with-root-schema-site">Backward compatibility with root_schema_site</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-compatibility-with-root-schema-site">Backward compatibility with <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-own-openapi-ui-plugin">Building your own OpenAPI UI Plugin</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-definition">Class definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-constructor"><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render">render()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render"><code class="docutils literal notranslate"><span class="pre">render()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oauth2-in-swagger-ui">OAuth2 in Swagger UI</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-openapi-ui">Customizing the OpenAPI UI</a></li>
 </ul>
 
   </nav></div>
