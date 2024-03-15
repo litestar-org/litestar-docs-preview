@@ -2071,11 +2071,10 @@ handlers under the controller.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.openapi.OpenAPIConfig.openapi_router">
 <span class="sig-name descname"><span class="pre">openapi_router</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../router.html#litestar.router.Router" title="litestar.router.Router"><span class="pre">Router</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.openapi_router" title="Permalink to this definition">#</a></dt>
-<dd><p>A router for serving OpenAPI documentation and schema files.</p>
+<dd><p>An optional router for serving OpenAPI documentation and schema files.</p>
 <p>If provided, <code class="docutils literal notranslate"><span class="pre">path</span></code> is ignored.</p>
-<p>Ignored if the deprecated <code class="docutils literal notranslate"><span class="pre">openapi_controller</span></code> is provided.</p>
-<p>Not required, however may be passed to customize the configuration of the router used to serve
-the documentation endpoints. For example, to add middleware or guards to the router.</p>
+<p>This parameter is also ignored if the deprecated <a class="reference internal" href="#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> <code class="docutils literal notranslate"><span class="pre">openapi_controller</span></code> kwarg is provided.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">openapi_router</span></code> is not required, but it can be passed to customize the configuration of the router used to serve the documentation endpoints. For example, you can add middleware or guards to the router.</p>
 <p>Handlers to serve the OpenAPI schema and documentation sites are added to this router according
 to the <code class="docutils literal notranslate"><span class="pre">render_plugins</span></code> attribute, so routes shouldn’t be added that conflict with these.</p>
 </dd></dl>
@@ -2090,7 +2089,7 @@ to the <code class="docutils literal notranslate"><span class="pre">render_plugi
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.openapi.OpenAPIConfig.root_schema_site">
 <span class="sig-name descname"><span class="pre">root_schema_site</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'redoc'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'swagger'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'elements'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'rapidoc'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.root_schema_site" title="Permalink to this definition">#</a></dt>
-<dd><p>The static schema generator to use for the “root” path of <cite>/schema/</cite>.</p>
+<dd><p>The static schema generator to use for the “root” path of <code class="docutils literal notranslate"><span class="pre">/schema/</span></code>.</p>
 </dd></dl>
 
 <dl class="py attribute">
