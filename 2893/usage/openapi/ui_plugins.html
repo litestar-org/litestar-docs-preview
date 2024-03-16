@@ -1242,6 +1242,9 @@ document.write(`
 
 
 
+
+
+
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1527,18 +1530,20 @@ document.write(`
                   
   <section id="openapi-ui-plugins">
 <h1>OpenAPI UI Plugins<a class="headerlink" href="#openapi-ui-plugins" title="Permalink to this heading">#</a></h1>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.8.0.</span></p>
+</div>
 <p>OpenAPI UI Plugins are designed to allow easy integration with your OpenAPI UI framework of choice. These plugins
 facilitate the creation of interactive, user-friendly API documentation, making it easier for developers and end-users
-to understand and interact with the API.</p>
-<p>In addition to serving a default JSON representation of the OpenAPI specification, built-in UI Plugins are available to
-support a range of popular OpenAPI documentation tools, including:</p>
+to understand and interact with your API.</p>
+<p>Litestar maintains and ships with UI plugins for a range of popular popular OpenAPI documentation tools:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/scalar/scalar/">Scalar</a></p></li>
 <li><p><a class="reference external" href="https://rapidocweb.com/">RapiDoc</a></p></li>
 <li><p><a class="reference external" href="https://redocly.com/">ReDoc</a></p></li>
 <li><p><a class="reference external" href="https://stoplight.io/open-source/elements">Stoplight Elements</a></p></li>
 <li><p><a class="reference external" href="https://swagger.io/tools/swagger-ui/yy">Swagger UI</a></p></li>
-<li><p><a class="reference external" href="https://yaml.org/">YAML</a> (OK, not a UI framework, but configured the same way!)</p></li>
+<li><p><a class="reference external" href="https://yaml.org/">YAML</a></p></li>
 </ul>
 <p>Each plugin is easily configurable, allowing developers to customize aspects like version, paths, CSS and JavaScript
 resources.</p>
@@ -1548,7 +1553,7 @@ resources.</p>
 <p>Using OpenAPI UI Plugins is as simple as importing the plugin, instantiating it, and adding it to the OpenAPIConfig.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
+</input><label class="sd-tab-label" data-sync-id="scalar" for="sd-tab-item-0">
 scalar</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
@@ -1606,7 +1611,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
+</input><label class="sd-tab-label" data-sync-id="rapidoc" for="sd-tab-item-1">
 rapidoc</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-9" name="sd-tab-set-2" type="radio">
@@ -1664,7 +1669,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
+</input><label class="sd-tab-label" data-sync-id="redoc" for="sd-tab-item-2">
 redoc</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-11" name="sd-tab-set-3" type="radio">
@@ -1722,7 +1727,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
+</input><label class="sd-tab-label" data-sync-id="stoplight" for="sd-tab-item-3">
 stoplight</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-13" name="sd-tab-set-4" type="radio">
@@ -1780,7 +1785,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-4" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-4">
+</input><label class="sd-tab-label" data-sync-id="swagger" for="sd-tab-item-4">
 swagger</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-15" name="sd-tab-set-5" type="radio">
@@ -1838,7 +1843,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-5" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-5">
+</input><label class="sd-tab-label" data-sync-id="yaml" for="sd-tab-item-5">
 yaml</label><div class="sd-tab-content docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-17" name="sd-tab-set-6" type="radio">
@@ -1965,15 +1970,14 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <h1>Configuring OpenAPI UI Plugins<a class="headerlink" href="#configuring-openapi-ui-plugins" title="Permalink to this heading">#</a></h1>
 <p>Each plugin can be tailored to meet your unique requirements by passing options at instantiation. For full details on
 each plugin’s options, see the <a class="reference internal" href="../../reference/openapi/plugins.html"><span class="doc">API Reference</span></a>.</p>
-<p>All plugins support the following options:</p>
+<p>All plugins support:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: Each plugin has its own default, e.g., <code class="docutils literal notranslate"><span class="pre">/rapidoc</span></code> for RapiDoc. This can be overridden to serve the UI at
 a different path.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">media_type</span></code>: The default media type for the plugin, typically <code class="docutils literal notranslate"><span class="pre">text/html</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">media_type</span></code>: The default media type for the plugin, typically the default is <code class="docutils literal notranslate"><span class="pre">text/html</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">favicon</span></code>: A string that should be a valid <code class="docutils literal notranslate"><span class="pre">&lt;link&gt;</span></code> tag, e.g.,
 <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=&quot;icon&quot;</span> <span class="pre">href=&quot;https://example.com/favicon.ico&quot;&gt;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: Default is <code class="docutils literal notranslate"><span class="pre">body</span> <span class="pre">{</span> <span class="pre">margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0;</span> <span class="pre">}</span></code>. This is applied to the <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span></code> tag in the HTML rendered
-by the plugin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: A string that should be a valid <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span></code> tag, e.g., <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;body</span> <span class="pre">{</span> <span class="pre">margin:</span> <span class="pre">0;</span> <span class="pre">padding:</span> <span class="pre">0;</span> <span class="pre">}``&lt;/style&gt;.</span></code></p></li>
 </ul>
 <p>Most plugins support the following additional options:</p>
 <ul class="simple">
@@ -1982,19 +1986,19 @@ URL to retrieve the the bundle from <code class="docutils literal notranslate"><
 <li><p><code class="docutils literal notranslate"><span class="pre">js_url</span></code>: The URL to the JS bundle. If provided, this will override the <code class="docutils literal notranslate"><span class="pre">version</span></code> option.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">css_url</span></code>: The URL to the CSS bundle. If provided, this will override the <code class="docutils literal notranslate"><span class="pre">version</span></code> option.</p></li>
 </ul>
-<p>Here’s some examples of configuring the plugins:</p>
+<p>Here’s some example plugin configurations:</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-21" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-21">
+</input><label class="sd-tab-label" data-sync-id="scalar" for="sd-tab-item-21">
 scalar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">ScalarRenderPlugin</span>
 
-<span class="n">scalar_plugin</span> <span class="o">=</span> <span class="n">ScalarRenderPlugin</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.8.0&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/scalar&quot;</span><span class="p">)</span>
+<span class="n">scalar_plugin</span> <span class="o">=</span> <span class="n">ScalarRenderPlugin</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.19.5&quot;</span><span class="p">,</span> <span class="n">js_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/scalar&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <input id="sd-tab-item-22" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-22">
+</input><label class="sd-tab-label" data-sync-id="rapidoc" for="sd-tab-item-22">
 rapidoc</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RapidocRenderPlugin</span>
 
@@ -2003,7 +2007,7 @@ rapidoc</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-23" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-23">
+</input><label class="sd-tab-label" data-sync-id="redoc" for="sd-tab-item-23">
 redoc</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">RedocRenderPlugin</span>
 
@@ -2012,7 +2016,7 @@ redoc</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-24" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-24">
+</input><label class="sd-tab-label" data-sync-id="stoplight" for="sd-tab-item-24">
 stoplight</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">StoplightRenderPlugin</span>
 
@@ -2021,7 +2025,7 @@ stoplight</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <input id="sd-tab-item-25" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-25">
+</input><label class="sd-tab-label" data-sync-id="swagger" for="sd-tab-item-25">
 swagger</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
 
@@ -2095,9 +2099,12 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </section>
 <section id="backward-compatibility">
 <h1>Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permalink to this heading">#</a></h1>
-<p>OpenAPI UI plugins are a new feature introduced in <code class="docutils literal notranslate"><span class="pre">v2.5.0</span></code>.</p>
+<p>OpenAPI UI plugins are a new feature introduced in <code class="docutils literal notranslate"><span class="pre">v2.8.0</span></code>.</p>
 <section id="providing-a-subclass-of-openapicontroller">
 <h2>Providing a subclass of OpenAPIController<a class="headerlink" href="#providing-a-subclass-of-openapicontroller" title="Permalink to this heading">#</a></h2>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version v2.8.0.</span></p>
+</div>
 <p>The previous method of configuring elements such as the root path and styling was to subclass
 <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIController" title="litestar.openapi.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code></a>, and set it on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.openapi_controller" title="litestar.openapi.OpenAPIConfig.openapi_controller"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.openapi_controller</span></code></a> attribute. This approach is now
 deprecated and slated for removal in <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, but if you are using it, there should be no change in behavior.</p>
@@ -2108,7 +2115,6 @@ being enabled:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.json</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/scalar</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/rapidoc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/elements</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code></p></li>
@@ -2118,15 +2124,28 @@ being enabled:</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="litestar.openapi.OpenAPIConfig.enabled_endpoints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.enabled_endpoints</span></code></a> attribute will be removed, and only a single UI plugin will be
 enabled by default, in addition to the <code class="docutils literal notranslate"><span class="pre">openapi.json</span></code> endpoint which will always be enabled. <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> will also
 become the default UI plugin in <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>.</p>
+<p>To adopt the future behavior, explicitly set the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> field an instance of
+<a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.ScalarRenderPlugin" title="litestar.openapi.plugins.ScalarRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarRenderPlugin</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
+    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of Litestar with Scalar OpenAPI docs&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ScalarRenderPlugin</span><span class="p">()],</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="backward-compatibility-with-root-schema-site">
 <h2>Backward compatibility with <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code><a class="headerlink" href="#backward-compatibility-with-root-schema-site" title="Permalink to this heading">#</a></h2>
 <p>Litestar has always supported a <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> class. This attribute
-allowed you to elect to serve a UI at the OpenAPI root path, e.g., by default <code class="docutils literal notranslate"><span class="pre">redoc</span></code> would be served at both
+allows you to elect to serve a UI at the OpenAPI root path, e.g., by default <code class="docutils literal notranslate"><span class="pre">redoc</span></code> would be served at both
 <code class="docutils literal notranslate"><span class="pre">/schema</span></code> and <code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code>.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute will be removed, and the first <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a> in the
 <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> list will be assigned to the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> endpoint.</p>
-<p>As of <code class="docutils literal notranslate"><span class="pre">v2.5.0</span></code>, if you explicitly use the new <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> attribute, you will be
+<p>As of <code class="docutils literal notranslate"><span class="pre">v2.8.0</span></code>, if you explicitly use the new <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> attribute, you will be
 automatically opted in to the new behavior, and the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute will be ignored.</p>
 </section>
 </section>
@@ -2134,8 +2153,8 @@ automatically opted in to the new behavior, and the <code class="docutils litera
 <h1>Building your own OpenAPI UI Plugin<a class="headerlink" href="#building-your-own-openapi-ui-plugin" title="Permalink to this heading">#</a></h1>
 <p>If Litestar does not have built-in support for your OpenAPI UI framework of choice, you can easily create your own
 plugin by subclassing <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a> and implementing the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.render" title="litestar.openapi.plugins.OpenAPIRenderPlugin.render"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin.render()</span></code></a> method.</p>
-<p>To demonstrate building a custom plugin, we’ll look at the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.RapidocRenderPlugin" title="litestar.openapi.plugins.RapidocRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code></a> class, that is maintained by
-Litestar. Here’s the finished product:</p>
+<p>To demonstrate building a custom plugin, we’ll look at a plugin very similar to the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.ScalarRenderPlugin" title="litestar.openapi.plugins.ScalarRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarRenderPlugin</span></code></a> that is
+maintained by Litestar. Here’s the finished product:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
@@ -2145,144 +2164,137 @@ Litestar. Here’s the finished product:</p>
 <span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">OpenAPIRenderPlugin</span>
 
 
-<span class="k">class</span> <span class="nc">RapidocRenderPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render an OpenAPI schema using Rapidoc.&quot;&quot;&quot;</span>
-
+<span class="k">class</span> <span class="nc">ScalarRenderPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;9.3.4&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.19.5&quot;</span><span class="p">,</span>
         <span class="n">js_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/rapidoc&quot;</span><span class="p">,</span>
+        <span class="n">css_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/scalar&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the OpenAPI UI render plugin.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            version: Rapidoc version to download from the CDN. If js_url is provided, this is ignored.</span>
-<span class="sd">            js_url: Download url for the RapiDoc JS bundle. If not provided, the version will be used to construct the</span>
-<span class="sd">                url.</span>
-<span class="sd">            path: Path to serve the OpenAPI UI at.</span>
-<span class="sd">            **kwargs: Additional arguments to pass to the base class.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://unpkg.com/rapidoc@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/dist/rapidoc-min.js&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://cdn.jsdelivr.net/npm/@scalar/api-reference@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="o">=</span> <span class="n">css_url</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render an HTML page for Rapidoc.</span>
-
-<span class="sd">        Notes:</span>
-<span class="sd">            - override this method to customize the template.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            request: The request.</span>
-<span class="sd">            openapi_schema: The OpenAPI schema as a dictionary.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            A rendered html string.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="n">style_sheet_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_url</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
         <span class="n">head</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">          &lt;head&gt;</span>
-<span class="s2">            &lt;title&gt;</span><span class="si">{</span><span class="n">openapi_schema</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
-<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">favicon</span><span class="si">}</span>
-<span class="s2">            &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
-<span class="s2">            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
-<span class="s2">            &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
-<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span>
-<span class="s2">          &lt;/head&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span>
+<span class="s2">                  &lt;head&gt;</span>
+<span class="s2">                    &lt;title&gt;</span><span class="si">{</span><span class="n">openapi_schema</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">                    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span>
+<span class="s2">                    &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
+<span class="s2">                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
+<span class="s2">                    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">favicon</span><span class="si">}</span>
+<span class="s2">                    </span><span class="si">{</span><span class="n">style_sheet_link</span><span class="si">}</span>
+<span class="s2">                  &lt;/head&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
 
-        <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">          &lt;body&gt;</span>
-<span class="s2">            &lt;rapi-doc spec-url=&quot;openapi.json&quot; /&gt;</span>
-<span class="s2">          &lt;/body&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                &lt;script</span>
+<span class="s2">                  id=&quot;api-reference&quot;</span>
+<span class="s2">                  data-url=&quot;openapi.json&quot;&gt;</span>
+<span class="s2">                &lt;/script&gt;</span>
+<span class="s2">                &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        &lt;!DOCTYPE html&gt;</span>
-<span class="s2">            &lt;html&gt;</span>
-<span class="s2">                </span><span class="si">{</span><span class="n">head</span><span class="si">}</span>
-<span class="s2">                </span><span class="si">{</span><span class="n">body</span><span class="si">}</span>
-<span class="s2">            &lt;/html&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<span class="s2">                &lt;!DOCTYPE html&gt;</span>
+<span class="s2">                    &lt;html&gt;</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">head</span><span class="si">}</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">body</span><span class="si">}</span>
+<span class="s2">                    &lt;/html&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
 </pre></div>
 </div>
 <section id="class-definition">
 <h2>Class definition<a class="headerlink" href="#class-definition" title="Permalink to this heading">#</a></h2>
-<p>The class <code class="docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code> inherits from <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RapidocRenderPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
+<p>The class <code class="docutils literal notranslate"><span class="pre">ScalarRenderPlugin</span></code> inherits from <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ScalarRenderPlugin</span><span class="p">(</span><span class="n">OpenAPIRenderPlugin</span><span class="p">):</span>
 </pre></div>
 </div>
 </section>
 <section id="init-constructor">
 <h2><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor<a class="headerlink" href="#init-constructor" title="Permalink to this heading">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;9.3.4&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.19.5&quot;</span><span class="p">,</span>
         <span class="n">js_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/rapidoc&quot;</span><span class="p">,</span>
+        <span class="n">css_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/scalar&quot;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://cdn.jsdelivr.net/npm/@scalar/api-reference@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="o">=</span> <span class="n">css_url</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We support configuration via the following arguments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: Specifies the version of RapiDoc to use.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">js_url</span></code>: Custom URL to the RapiDoc JavaScript bundle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">css_url</span></code>: Custom URL to the RapiDoc CSS bundle.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>: The URL path where the RapiDoc UI will be served.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>: Captures additional arguments to pass to the superclass.</p></li>
 </ul>
-<p>And we construct a url for the RapiDoc JavaScript bundle if it is not provided:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://unpkg.com/rapidoc@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/dist/rapidoc-min.js&quot;</span>
+<p>And we construct a url for the Scalar JavaScript bundle if one is not provided:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="o">=</span> <span class="n">css_url</span>
 </pre></div>
 </div>
 </section>
 <section id="render">
 <h2><code class="docutils literal notranslate"><span class="pre">render()</span></code><a class="headerlink" href="#render" title="Permalink to this heading">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">style_sheet_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_url</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
 </pre></div>
 </div>
 <p>Finally we define the <code class="docutils literal notranslate"><span class="pre">render</span></code> method, which is called by Litestar to render the UI. It receives the a
 <a class="reference internal" href="../../reference/connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> object and the <code class="docutils literal notranslate"><span class="pre">openapi_schema</span></code> as a dictionary.</p>
 <p>Inside the <code class="docutils literal notranslate"><span class="pre">render</span></code> method, we construct the HTML to render the UI, and return it as a string.</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>: Defines the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> section, including the title from <code class="docutils literal notranslate"><span class="pre">openapi_schema</span></code>, a link to the RapiDoc
-script (<code class="docutils literal notranslate"><span class="pre">self.js_url</span></code>), and any additional styles (<code class="docutils literal notranslate"><span class="pre">self.style</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code>: Constructs the HTML <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>, with a <code class="docutils literal notranslate"><span class="pre">&lt;rapi-doc&gt;</span></code> element pointing to the OpenAPI JSON specification
-endpoint.</p></li>
-<li><p>Returns a complete HTML document (as a byte string), combining head and body.</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">head</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">          &lt;head&gt;</span>
-<span class="s2">            &lt;title&gt;</span><span class="si">{</span><span class="n">openapi_schema</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
-<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">favicon</span><span class="si">}</span>
-<span class="s2">            &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
-<span class="s2">            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
-<span class="s2">            &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
-<span class="s2">            </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span>
-<span class="s2">          &lt;/head&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-
-        <span class="n">body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">          &lt;body&gt;</span>
-<span class="s2">            &lt;rapi-doc spec-url=&quot;openapi.json&quot; /&gt;</span>
-<span class="s2">          &lt;/body&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        &lt;!DOCTYPE html&gt;</span>
-<span class="s2">            &lt;html&gt;</span>
-<span class="s2">                </span><span class="si">{</span><span class="n">head</span><span class="si">}</span>
-<span class="s2">                </span><span class="si">{</span><span class="n">body</span><span class="si">}</span>
-<span class="s2">            &lt;/html&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>: Defines the HTML <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> section, including the title from <code class="docutils literal notranslate"><span class="pre">openapi_schema</span></code>, any additional styles
+(<code class="docutils literal notranslate"><span class="pre">self.style</span></code>), the favicon and custom style sheet if one is provided:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">style_sheet_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_url</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                  &lt;head&gt;</span>
+<span class="s2">                    &lt;title&gt;</span><span class="si">{</span><span class="n">openapi_schema</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">                    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="si">}</span>
+<span class="s2">                    &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
+<span class="s2">                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
+<span class="s2">                    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">favicon</span><span class="si">}</span>
+<span class="s2">                    </span><span class="si">{</span><span class="n">style_sheet_link</span><span class="si">}</span>
+<span class="s2">                  &lt;/head&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
 </pre></div>
 </div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code>: Constructs the HTML <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>, including a link to the OpenAPI JSON, and the JavaScript bundle:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                &lt;script</span>
+<span class="s2">                  id=&quot;api-reference&quot;</span>
+<span class="s2">                  data-url=&quot;openapi.json&quot;&gt;</span>
+<span class="s2">                &lt;/script&gt;</span>
+<span class="s2">                &lt;script src=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">js_url</span><span class="si">}</span><span class="s2">&quot; crossorigin&gt;&lt;/script&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finally, returns a complete HTML document (as a byte string), combining head and body.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                &lt;!DOCTYPE html&gt;</span>
+<span class="s2">                    &lt;html&gt;</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">head</span><span class="si">}</span>
+<span class="s2">                        </span><span class="si">{</span><span class="n">body</span><span class="si">}</span>
+<span class="s2">                    &lt;/html&gt;</span>
+<span class="s2">                &quot;&quot;&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
 </section>
 <section id="interacting-with-the-router">
-<h2>Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code><a class="headerlink" href="#interacting-with-the-router" title="Permalink to this heading">#</a></h2>
+<h1>Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code><a class="headerlink" href="#interacting-with-the-router" title="Permalink to this heading">#</a></h1>
 <p>Internally, an instance of <a class="reference internal" href="../../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> is constructed to serve the OpenAPI endpoints. The <code class="docutils literal notranslate"><span class="pre">Router</span></code> is available
 to plugins via the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router" title="litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin.receive_router()</span></code></a> method.</p>
 <p>This can be used for a variety of purposes, including adding additional routes to the <code class="docutils literal notranslate"><span class="pre">Router</span></code>.</p>
@@ -2313,7 +2325,7 @@ to plugins via the <a class="reference internal" href="../../reference/openapi/p
 </div>
 </section>
 <section id="oauth2-in-swagger-ui">
-<h2>OAuth2 in Swagger UI<a class="headerlink" href="#oauth2-in-swagger-ui" title="Permalink to this heading">#</a></h2>
+<h1>OAuth2 in Swagger UI<a class="headerlink" href="#oauth2-in-swagger-ui" title="Permalink to this heading">#</a></h1>
 <p>When using Swagger, OAuth2 settings can be configured via <code class="xref py py-attr docutils literal notranslate"><span class="pre">swagger_ui_init_oauth</span></code>, which can be set to a dictionary containing the parameters described in the Swagger UI documentation for OAuth2 <a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">here</a>.</p>
 <p>We that you can preset your clientId or enable PKCE support.</p>
 <div class="sd-tab-set docutils">
@@ -2393,11 +2405,10 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
-</section>
 <section id="customizing-the-openapi-ui">
 <h1>Customizing the OpenAPI UI<a class="headerlink" href="#customizing-the-openapi-ui" title="Permalink to this heading">#</a></h1>
-<p>Currently, the <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> OpenAPI UI plugin supports customization of its style and behavior by
-overriding the default <code class="docutils literal notranslate"><span class="pre">css_url</span></code> and <code class="docutils literal notranslate"><span class="pre">js_url</span></code> attributes on its render plugin class.</p>
+<p>Style and behavior of the OpenAPI UI can be customized by overriding the default <code class="docutils literal notranslate"><span class="pre">css_url</span></code> and <code class="docutils literal notranslate"><span class="pre">js_url</span></code> attributes
+on the render plugin class, for example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.openapi.plugins</span> <span class="kn">import</span> <span class="n">ScalarRenderPlugin</span>
 
 <span class="n">scalar_plugin</span> <span class="o">=</span> <span class="n">ScalarRenderPlugin</span><span class="p">(</span>
@@ -2408,8 +2419,12 @@ overriding the default <code class="docutils literal notranslate"><span class="p
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>To learn more about customizing the <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> UI,
-see the <a class="reference external" href="https://docs.scalar.com/">Scalar documentation</a>.</p>
+<p>To learn more about customizing the <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> UI, see the <a class="reference external" href="https://docs.scalar.com/">Scalar documentation</a>.</p>
+</section>
+<section id="cdn-and-offline-file-support">
+<h1>CDN and offline file support<a class="headerlink" href="#cdn-and-offline-file-support" title="Permalink to this heading">#</a></h1>
+<p>Each plugin supports <code class="docutils literal notranslate"><span class="pre">js_url</span></code> and <code class="docutils literal notranslate"><span class="pre">css_url</span></code> attributes, which can be used to specify a custom URL to the JavaScript.
+These can be used to serve the JavaScript and CSS from a CDN, or to serve the files from a local directory.</p>
 </section>
 
 
@@ -2469,11 +2484,12 @@ see the <a class="reference external" href="https://docs.scalar.com/">Scalar doc
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-definition">Class definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-constructor"><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render"><code class="docutils literal notranslate"><span class="pre">render()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oauth2-in-swagger-ui">OAuth2 in Swagger UI</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#oauth2-in-swagger-ui">OAuth2 in Swagger UI</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-openapi-ui">Customizing the OpenAPI UI</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cdn-and-offline-file-support">CDN and offline file support</a></li>
 </ul>
 
   </nav></div>
