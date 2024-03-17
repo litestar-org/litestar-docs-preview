@@ -1700,10 +1700,12 @@ the <code class="docutils literal notranslate"><span class="pre">delete()</span>
 </section>
 <section id="improving-performance-with-the-codegen-backend">
 <h2>Improving performance with the codegen backend<a class="headerlink" href="#improving-performance-with-the-codegen-backend" title="Permalink to this heading">#</a></h2>
-<div class="danger admonition">
-<p class="admonition-title">Experimental feature</p>
-<p>This is an experimental feature and should be approached with caution. It may
-behave unexpectedly, contain bugs and may disappear again in a future version.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This feature was introduced in <code class="docutils literal notranslate"><span class="pre">2.2.0</span></code> and hidden behind the <code class="docutils literal notranslate"><span class="pre">DTO_CODEGEN</span></code>
+feature flag. As of <code class="docutils literal notranslate"><span class="pre">2.8.0</span></code> it is considered stable and enabled by default. It can
+still be disabled selectively by using the
+<code class="docutils literal notranslate"><span class="pre">DTOConfig(experimental_codegen_backend=True)</span></code> override.</p>
 </div>
 <p>The DTO backend is the part that does the heavy lifting for all the DTO features. It
 is responsible for the transforming, parsing, validation and parsing. Because of this,
