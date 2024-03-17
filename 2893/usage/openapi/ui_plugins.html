@@ -2294,8 +2294,8 @@ maintained by Litestar. Here’s the finished product:</p>
 </section>
 <section id="interacting-with-the-router">
 <h1>Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code><a class="headerlink" href="#interacting-with-the-router" title="Permalink to this heading">#</a></h1>
-<p>Internally, an instance of <a class="reference internal" href="../../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> is constructed to serve the OpenAPI endpoints. The <code class="docutils literal notranslate"><span class="pre">Router</span></code> is available
-to plugins via the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router" title="litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin.receive_router()</span></code></a> method.</p>
+<p>An instance of <a class="reference internal" href="../../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> is used to serve the OpenAPI endpoints and is made available to plugins via the
+<a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router" title="litestar.openapi.plugins.OpenAPIRenderPlugin.receive_router"><code class="xref py py-meth docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin.receive_router()</span></code></a> method.</p>
 <p>This can be used for a variety of purposes, including adding additional routes to the <code class="docutils literal notranslate"><span class="pre">Router</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
@@ -2325,8 +2325,11 @@ to plugins via the <a class="reference internal" href="../../reference/openapi/p
 </section>
 <section id="oauth2-in-swagger-ui">
 <h1>OAuth2 in Swagger UI<a class="headerlink" href="#oauth2-in-swagger-ui" title="Permalink to this heading">#</a></h1>
-<p>When using Swagger, OAuth2 settings can be configured via <code class="xref py py-attr docutils literal notranslate"><span class="pre">swagger_ui_init_oauth</span></code>, which can be set to a dictionary containing the parameters described in the Swagger UI documentation for OAuth2 <a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">here</a>.</p>
-<p>We that you can preset your clientId or enable PKCE support.</p>
+<p>When using Swagger, OAuth2 settings can be configured via
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">swagger_ui_init_oauth</span></code>, which can be set to
+a dictionary containing the parameters described in the Swagger UI documentation for OAuth2
+<a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">here</a>.</p>
+<p>With that, you can preset your clientId or enable PKCE support.</p>
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-28" name="sd-tab-set-10" type="radio">
 </input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-28">
