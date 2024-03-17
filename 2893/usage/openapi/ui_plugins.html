@@ -2215,7 +2215,8 @@ maintained by Litestar. Here’s the finished product:</p>
 </section>
 <section id="init-constructor">
 <h2><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor<a class="headerlink" href="#init-constructor" title="Permalink to this heading">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="p">,</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.19.5&quot;</span><span class="p">,</span>
         <span class="n">js_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2237,13 +2238,13 @@ maintained by Litestar. Here’s the finished product:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>: Captures additional arguments to pass to the superclass.</p></li>
 </ul>
 <p>And we construct a url for the Scalar JavaScript bundle if one is not provided:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="o">=</span> <span class="n">css_url</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="bp">self</span><span class="o">.</span><span class="n">js_url</span> <span class="o">=</span> <span class="n">js_url</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;https://cdn.jsdelivr.net/npm/@scalar/api-reference@</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="render">
 <h2><code class="docutils literal notranslate"><span class="pre">render()</span></code><a class="headerlink" href="#render" title="Permalink to this heading">#</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">style_sheet_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">css_url</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">css_url</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">openapi_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
 </pre></div>
 </div>
 <p>Finally we define the <code class="docutils literal notranslate"><span class="pre">render</span></code> method, which is called by Litestar to render the UI. It receives the a
