@@ -3436,10 +3436,18 @@ discouraged, and later versions of this specification may remove it.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.openapi.spec.Schema.extra">
 <span class="sig-name descname"><span class="pre">extra</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.spec.Schema.extra" title="Permalink to this definition">#</a></dt>
-<dd><p>Container for extensions to the generated JSON schema. This can be used to store local extensions/customizations,
-e.g. <cite>json_schema_extra</cite> from Pydantic modes and fields.</p>
+<dd><p>Container for extras to the generated JSON schema. This can be used to carry local extension or overrides,
+e.g. <code class="docutils literal notranslate"><span class="pre">json_schema_extra</span></code> from Pydantic models and fields, to the generated JSON schema.</p>
 <p>The values are applied to the generated JSON schema after dumping it into mapping type. Values are merged over in a
 non-recursive manner.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This field is <strong>not</strong> part of JSON schema specification but is used as an internal transport mechanism,
+for carrying extensions/overrides to the final output.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.8.0.</span></p>
+</div>
 </dd></dl>
 
 </dd></dl>
