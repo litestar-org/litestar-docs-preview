@@ -2064,7 +2064,7 @@ handlers under the controller.</p>
 <span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.path" title="Permalink to this definition">#</a></dt>
 <dd><p>Base path for the OpenAPI documentation endpoints.</p>
 <p>If no path is provided the default is <code class="docutils literal notranslate"><span class="pre">/schema</span></code>.</p>
-<p>Ignored if <code class="docutils literal notranslate"><span class="pre">openapi_router</span></code> is provided.</p>
+<p>Ignored if <a class="reference internal" href="#litestar.openapi.OpenAPIConfig.openapi_router" title="litestar.openapi.OpenAPIConfig.openapi_router"><code class="xref py py-attr docutils literal notranslate"><span class="pre">openapi_router</span></code></a> is provided.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2078,10 +2078,12 @@ handlers under the controller.</p>
 <span class="sig-name descname"><span class="pre">openapi_router</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../router.html#litestar.router.Router" title="litestar.router.Router"><span class="pre">Router</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.openapi_router" title="Permalink to this definition">#</a></dt>
 <dd><p>An optional router for serving OpenAPI documentation and schema files.</p>
 <p>If provided, <code class="docutils literal notranslate"><span class="pre">path</span></code> is ignored.</p>
-<p>This parameter is also ignored if the deprecated <a class="reference internal" href="#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> <code class="docutils literal notranslate"><span class="pre">openapi_controller</span></code> kwarg is provided.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">openapi_router</span></code> is not required, but it can be passed to customize the configuration of the router used to serve the documentation endpoints. For example, you can add middleware or guards to the router.</p>
-<p>Handlers to serve the OpenAPI schema and documentation sites are added to this router according
-to the <code class="docutils literal notranslate"><span class="pre">render_plugins</span></code> attribute, so routes shouldn’t be added that conflict with these.</p>
+<p>This parameter is also ignored if the deprecated <a class="reference internal" href="#litestar.openapi.OpenAPIConfig.openapi_controller" title="litestar.openapi.OpenAPIConfig.openapi_controller"><code class="xref py py-attr docutils literal notranslate"><span class="pre">openapi_router</span></code></a>
+kwarg is provided.</p>
+<p><a class="reference internal" href="#litestar.openapi.OpenAPIConfig.openapi_router" title="litestar.openapi.OpenAPIConfig.openapi_router"><code class="xref py py-attr docutils literal notranslate"><span class="pre">openapi_router</span></code></a> is not required, but it can be passed to customize the configuration of the router used to
+serve the documentation endpoints. For example, you can add middleware or guards to the router.</p>
+<p>Handlers to serve the OpenAPI schema and documentation sites are added to this router according to
+<a class="reference internal" href="#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">render_plugins</span></code></a>, so routes shouldn’t be added that conflict with these.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2089,18 +2091,27 @@ to the <code class="docutils literal notranslate"><span class="pre">render_plugi
 <span class="sig-name descname"><span class="pre">openapi_controller</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#litestar.openapi.OpenAPIController" title="litestar.openapi.OpenAPIController"><span class="pre">OpenAPIController</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.openapi_controller" title="Permalink to this definition">#</a></dt>
 <dd><p>Controller for generating OpenAPI routes.</p>
 <p>Must be subclass of <a class="reference internal" href="#litestar.openapi.OpenAPIController" title="litestar.openapi.controller.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code></a>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version v2.8.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.openapi.OpenAPIConfig.root_schema_site">
 <span class="sig-name descname"><span class="pre">root_schema_site</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'redoc'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'swagger'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'elements'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'rapidoc'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.root_schema_site" title="Permalink to this definition">#</a></dt>
 <dd><p>The static schema generator to use for the “root” path of <code class="docutils literal notranslate"><span class="pre">/schema/</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version v2.8.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.openapi.OpenAPIConfig.enabled_endpoints">
 <span class="sig-name descname"><span class="pre">enabled_endpoints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.12)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="Permalink to this definition">#</a></dt>
 <dd><p>A set of the enabled documentation sites and schema download endpoints.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version v2.8.0.</span></p>
+</div>
 </dd></dl>
 
 <dl class="py method">
