@@ -1573,8 +1573,7 @@ amount=1000usd&amp;to=attacker@evil.com
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csrf_config</span> <span class="o">=</span> <span class="n">CSRFConfig</span><span class="p">(</span><span class="n">secret</span><span class="o">=</span><span class="s2">&quot;my-secret&quot;</span><span class="p">,</span> <span class="n">cookie_name</span><span class="o">=</span><span class="s1">&#39;some-cookie-name&#39;</span><span class="p">,</span> <span class="n">header_name</span><span class="o">=</span><span class="s1">&#39;some-header-name&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A CSRF protected route can be accessed by any client that can make a request with either the header or form-data key.
-Both of which can be configured in <a class="reference internal" href="../../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a> as show above.</p>
+<p>A CSRF protected route can be accessed by any client that can make a request with either the header or form-data key.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The form-data key can not be currently configured. It should only be passed via the key “_csrf_token”</p>
