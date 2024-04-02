@@ -1256,6 +1256,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../security/abstract-authentication-middleware.html">AbstractAuthenticationMiddleware</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../security/security-backends.html">Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../security/guards.html">Guards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../security/excluding-and-including-endpoints.html">Excluding and including endpoints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../security/jwt.html">JWT Security Backends</a></li>
 </ul>
 </li>
@@ -1710,7 +1711,7 @@ still be disabled selectively by using the
 <code class="docutils literal notranslate"><span class="pre">DTOConfig(experimental_codegen_backend=True)</span></code> override.</p>
 </div>
 <p>The DTO backend is the part that does the heavy lifting for all the DTO features. It
-is responsible for the transforming, parsing, validation and parsing. Because of this,
+is responsible for the transforming, validation and parsing. Because of this,
 it is also the part with the most significant performance impact. To reduce the overhead
 introduced by the DTOs, the DTO codegen backend was introduced; A DTO backend that
 increases efficiency by generating optimized Python code at runtime to perform all the
