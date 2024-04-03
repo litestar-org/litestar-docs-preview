@@ -1536,7 +1536,7 @@ document.write(`
 <h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h1>
 <section id="path-parameters">
 <h2>Path Parameters<a class="headerlink" href="#path-parameters" title="Permalink to this heading">#</a></h2>
-<p>Path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> are <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> declared as part of the <code class="docutils literal notranslate"><span class="pre">path</span></code> component of
+<p>Path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> are parameters declared as part of the <code class="docutils literal notranslate"><span class="pre">path</span></code> component of
 the URL. They are declared using a simple syntax <code class="docutils literal notranslate"><span class="pre">{param_name:param_type}</span></code> :</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Defining a path parameter in a route handler</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
@@ -1564,11 +1564,11 @@ the URL. They are declared using a simple syntax <code class="docutils literal n
 <p>In the above there are two components:</p>
 <ol class="arabic simple">
 <li><p>The path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> is defined in the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.get" title="litestar.handlers.get"><code class="xref py py-class docutils literal notranslate"><span class="pre">&#64;get()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a>, which declares both
-the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a>’s name (<code class="docutils literal notranslate"><span class="pre">user_id</span></code>) and type (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>).</p></li>
-<li><p>The <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorated</span></a> function <code class="docutils literal notranslate"><span class="pre">get_user</span></code> defines a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> with the same name as the
-<a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> defined in the <code class="docutils literal notranslate"><span class="pre">path</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a>.</p></li>
+the parameter’s name (<code class="docutils literal notranslate"><span class="pre">user_id</span></code>) and type (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>).</p></li>
+<li><p>The <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorated</span></a> function <code class="docutils literal notranslate"><span class="pre">get_user</span></code> defines a parameter with the same name as the
+parameter defined in the <code class="docutils literal notranslate"><span class="pre">path</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a>.</p></li>
 </ol>
-<p>The correlation of <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> name ensures that the value of the path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> will be injected into
+<p>The correlation of parameter name ensures that the value of the path parameter will be injected into
 the function when it is called.</p>
 <section id="supported-path-parameter-types">
 <h3>Supported Path Parameter Types<a class="headerlink" href="#supported-path-parameter-types" title="Permalink to this heading">#</a></h3>
@@ -1584,9 +1584,13 @@ the function when it is called.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>: Accepts time strings with optional timezone compatible with pydantic formats.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">timedelta</span></code>: Accepts duration strings compatible with the pydantic formats.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uuid</span></code>: Accepts all uuid values.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>: Accepts ints and floats.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>: Accepts ints and floats.</p></li>
+<li><p><a class="reference internal" href="../../reference/handlers.html#litestar.handlers.WebsocketListener.path" title="litestar.handlers.WebsocketListener.path"><code class="xref py py-class docutils literal notranslate"><span class="pre">path</span></code></a>: Accepts valid POSIX paths.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>: Accepts all string values.</p></li>
 </ul>
 <p>The types declared in the path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> and the function do not need to match 1:1 - as long as
-<a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> inside the function declaration is typed with a “higher” type to which the lower type can be coerced,
+parameter inside the function declaration is typed with a “higher” type to which the lower type can be coerced,
 this is fine. For example, consider this:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Coercing path parameters into different types</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
@@ -1621,15 +1625,15 @@ this is fine. For example, consider this:</p>
 </div>
 </div>
 <p>The <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> defined inside the <code class="docutils literal notranslate"><span class="pre">path</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a> is typed as <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> , because the value
-passed as part of the request will be a timestamp in milliseconds without any decimals. The <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> in
+passed as part of the request will be a timestamp in milliseconds without any decimals. The parameter in
 the function declaration though is typed as <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a>.</p>
 <p>This works because the int value will be passed to a pydantic model representing the function signature, which will
 coerce the <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> into a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>.</p>
-<p>Thus, when the function is called it will be called with a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>-typed <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a>.</p>
+<p>Thus, when the function is called it will be called with a <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>-typed parameter.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You only need to define the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> in the function declaration if it is actually used inside the
-function. If the path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> is part of the path, but the function does not use it, it is fine to omit
+function. If the path parameter is part of the path, but the function does not use it, it is fine to omit
 it. It will still be validated and added to the OpenAPI schema correctly.</p>
 </div>
 </section>
@@ -1723,7 +1727,7 @@ Every <a class="reference external" href="https://docs.python.org/3/glossary.htm
 <div class="info admonition">
 <p class="admonition-title">Technical details</p>
 <p>These <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> will be parsed from the function signature and used to generate a Pydantic model.
-This model in turn will be used to validate the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> and generate the OpenAPI schema.</p>
+This model in turn will be used to validate the parameters and generate the OpenAPI schema.</p>
 <p>This means that you can also use any pydantic type in the signature, and it will
 follow the same kind of validation and parsing as you would get from pydantic.</p>
 </div>
@@ -1733,7 +1737,7 @@ follow the same kind of validation and parsing as you would get from pydantic.</
 <li><p>Required with a default value</p></li>
 <li><p>Optional with a default value</p></li>
 </ul>
-<p>Query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> are <strong>required</strong> by default. If one such a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> has no value,
+<p>Query parameters are <strong>required</strong> by default. If one such a parameter has no value,
 a <a class="reference internal" href="../../reference/exceptions.html#litestar.exceptions.ValidationException" title="litestar.exceptions.http_exceptions.ValidationException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValidationException</span></code></a> will be raised.</p>
 <section id="default-values">
 <h3>Default values<a class="headerlink" href="#default-values" title="Permalink to this heading">#</a></h3>
@@ -1769,7 +1773,7 @@ def<span class="w"> </span>index<span class="o">(</span>param:<span class="w"> <
 <h3>Optional <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a><a class="headerlink" href="#optional-parameters" title="Permalink to this heading">#</a></h3>
 <p>Instead of only setting a default value, it is also possible to make a query parameter entirely optional.</p>
 <p>Here, we give a default value of <code class="docutils literal notranslate"><span class="pre">None</span></code> , but still declare the type of the query parameter
-to be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a>. This means that this <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> is not required.</p>
+to be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a>. This means that this parameter is not required.</p>
 <p>If it is given, it has to be a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a>.
 If it is not given, it will have a default value of <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 <div class="literal-block-wrapper docutils container" id="id6">
@@ -1803,7 +1807,7 @@ def<span class="w"> </span>index<span class="o">(</span>param:<span class="w"> <
 <h2>Type coercion<a class="headerlink" href="#type-coercion" title="Permalink to this heading">#</a></h2>
 <p>It is possible to coerce query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> into different types.
 A query starts out as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a>, but its values can be parsed into all kinds of types.</p>
-<p>Since this is done by Pydantic, everything that works there will work for query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> as well.</p>
+<p>Since this is done by Pydantic, everything that works there will work for query parameters as well.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Coercing query parameters into different types</span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>datetime<span class="w"> </span>import<span class="w"> </span>datetime,<span class="w"> </span>timedelta
@@ -1891,7 +1895,7 @@ def<span class="w"> </span>index<span class="o">(</span>param:<span class="w"> <
 </section>
 <section id="header-and-cookie-parameters">
 <h2>Header and Cookie Parameters<a class="headerlink" href="#header-and-cookie-parameters" title="Permalink to this heading">#</a></h2>
-<p>Unlike <em>Query</em> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a>, <em>Header</em> and <em>Cookie</em> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> have to be
+<p>Unlike <em>Query</em> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a>, <em>Header</em> and <em>Cookie</em> parameters have to be
 declared using <a class="reference internal" href="#the-parameter-function">the parameter function</a> , for example:</p>
 <div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Defining header and cookie parameters</span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
@@ -1933,9 +1937,9 @@ async<span class="w"> </span>def<span class="w"> </span>get_user<span class="o">
 </pre></div>
 </div>
 </div>
-<p>As you can see in the above, header <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> are declared using the <code class="docutils literal notranslate"><span class="pre">header</span></code>
-<a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwargs</span></a> and cookie <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> using the <code class="docutils literal notranslate"><span class="pre">cookie</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a>.
-Aside form this difference they work the same as query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a>.</p>
+<p>As you can see in the above, header parameters are declared using the <code class="docutils literal notranslate"><span class="pre">header</span></code>
+<a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwargs</span></a> and cookie parameters using the <code class="docutils literal notranslate"><span class="pre">cookie</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a>.
+Aside form this difference they work the same as query parameters.</p>
 </section>
 <section id="layered-parameters">
 <h2>Layered Parameters<a class="headerlink" href="#layered-parameters" title="Permalink to this heading">#</a></h2>
@@ -1995,14 +1999,14 @@ class<span class="w"> </span>MyController<span class="o">(</span>Controller<span
 <a class="reference internal" href="../../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">router</span></code></a>, and <a class="reference internal" href="../../reference/controller.html#litestar.controller.Controller" title="litestar.controller.Controller"><code class="xref py py-class docutils literal notranslate"><span class="pre">controller</span></code></a> layers in addition to those
 declared in the route handler. Now, examine these more closely.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">app_param</span></code> is a cookie <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> with the key <code class="docutils literal notranslate"><span class="pre">special-cookie</span></code>. We type it as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> by passing
+<li><p><code class="docutils literal notranslate"><span class="pre">app_param</span></code> is a cookie parameter with the key <code class="docutils literal notranslate"><span class="pre">special-cookie</span></code>. We type it as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> by passing
 this as an arg to the <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a> function. This is required for us to get typing in the OpenAPI doc.
-Additionally, this <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> is assumed to be required because it is not explicitly set as <code class="docutils literal notranslate"><span class="pre">False</span></code> on
+Additionally, this parameter is assumed to be required because it is not explicitly set as <code class="docutils literal notranslate"><span class="pre">False</span></code> on
 <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.required" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">required</span></code></a>.</p>
-<p>This is important because the route handler function does not declare a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> called <code class="docutils literal notranslate"><span class="pre">app_param</span></code> at all,
+<p>This is important because the route handler function does not declare a parameter called <code class="docutils literal notranslate"><span class="pre">app_param</span></code> at all,
 but it will still require this param to be sent as part of the request of validation will fail.</p>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">router_param</span></code> is a header <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> with the key <code class="docutils literal notranslate"><span class="pre">MyHeader</span></code>. Because it is set as <code class="docutils literal notranslate"><span class="pre">False</span></code> on
+<li><p><code class="docutils literal notranslate"><span class="pre">router_param</span></code> is a header parameter with the key <code class="docutils literal notranslate"><span class="pre">MyHeader</span></code>. Because it is set as <code class="docutils literal notranslate"><span class="pre">False</span></code> on
 <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.required" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">required</span></code></a>, it will not fail validation if not present unless explicitly declared by a
 route handler - and in this case it is.</p>
 <p>Thus, it is actually required for the router handler function that declares it as an <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> and not an
@@ -2019,7 +2023,7 @@ which means for the route handler this value must be less than 50.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You cannot declare path <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> in different application layers. The reason for this
-is to ensure simplicity - otherwise <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a> resolution becomes very difficult to do correctly.</p>
+is to ensure simplicity - otherwise parameter resolution becomes very difficult to do correctly.</p>
 </div>
 </section>
 </section>
