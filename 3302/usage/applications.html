@@ -1783,8 +1783,7 @@ from outside the application context. To do this, st <a class="reference interna
 <section id="injecting-application-state-into-route-handlers-and-dependencies">
 <h3>Injecting Application State into Route Handlers and Dependencies<a class="headerlink" href="#injecting-application-state-into-route-handlers-and-dependencies" title="Permalink to this heading">#</a></h3>
 <p>As seen in the above example, Litestar offers an easy way to inject state into route handlers and dependencies - simply
-by specifying <code class="docutils literal notranslate"><span class="pre">state</span></code> as a kwarg to the handler function. In other words, you can simply do this in handler function
-or dependency to access the application state:</p>
+by specifying <code class="docutils literal notranslate"><span class="pre">state</span></code> as a kwarg to the handler or dependency function. For example:</p>
 <div class="literal-block-wrapper docutils container" id="id10">
 <div class="code-block-caption"><span class="caption-text">Accessing application <a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.State" title="litestar.datastructures.state.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code></a> in a handler function</span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
@@ -1798,7 +1797,7 @@ or dependency to access the application state:</p>
 </div>
 <p>When using this pattern you can specify the class to use for the state object. This type is not merely for type
 checkers, rather Litestar will instantiate a new <code class="docutils literal notranslate"><span class="pre">state</span></code> instance based on the type you set there.
-This allows users to use custom classes for <a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.State" title="litestar.datastructures.state.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code></a>, e.g.:</p>
+This allows users to use custom classes for <a class="reference internal" href="../reference/datastructures.html#litestar.datastructures.State" title="litestar.datastructures.state.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code></a>.</p>
 <p>While this is very powerful, it might encourage users to follow anti-patterns: it is important to emphasize that using
 state can lead to code that is hard to reason about and bugs that are difficult to understand, due to changes in
 different ASGI contexts. As such, this pattern should be used only when it is the best choice and in a limited fashion.
