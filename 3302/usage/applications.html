@@ -1190,7 +1190,7 @@ document.write(`
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Usage</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Applications</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="routing/index.html">Routing</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="routing/overview.html">Routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="routing/overview.html">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="routing/handlers.html">Route handlers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="routing/parameters.html">Parameters</a></li>
 </ul>
@@ -1682,7 +1682,7 @@ On the other hand, the shutdown hooks are invoked in their specified order.</p>
 </section>
 <section id="using-application-state">
 <span id="application-state"></span><h2>Using Application State<a class="headerlink" href="#using-application-state" title="Permalink to this heading">#</a></h2>
-<p>As seen in the examples for the <cite>on_startup / on_shutdown &lt;Startup and Shutdown&gt;</cite>, <a class="reference external" href="https://docs.python.org/3/glossary.html#term-callable" title="(in Python v3.12)"><span class="xref std std-term">callables</span></a>
+<p>As seen in the examples for the <a class="reference external" href="#startup-and-shutdown">on_startup / on_shutdown</a>, <a class="reference external" href="https://docs.python.org/3/glossary.html#term-callable" title="(in Python v3.12)"><span class="xref std std-term">callables</span></a>
 passed to these hooks can receive an optional <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a> called <code class="docutils literal notranslate"><span class="pre">app</span></code>, through which the application’s
 state object and other properties can be accessed. The advantage of using application <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.state" title="litestar.app.Litestar"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">state</span></code></a>,
 is that it can be accessed during multiple stages of the connection, and it can be injected into dependencies and
@@ -1982,8 +1982,8 @@ def<span class="w"> </span>receive_app_config<span class="o">(</span>app_config:
 <ol class="arabic simple">
 <li><p>The application object <a class="reference internal" href="../reference/app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">The</span> <span class="pre">application</span> <span class="pre">object</span></code></a></p></li>
 <li><p><a class="reference internal" href="../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Routers</span></code></a></p></li>
-<li><p><cite>Controllers &lt;.controller.Controller&gt;</cite></p></li>
-<li><p><cite>Handlers &lt;.handlers.BaseRouteHandler&gt;</cite></p></li>
+<li><p><a class="reference internal" href="../reference/controller.html#litestar.controller.Controller" title="litestar.controller.Controller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Controllers</span></code></a></p></li>
+<li><p><a class="reference internal" href="../reference/handlers.html#litestar.handlers.BaseRouteHandler" title="litestar.handlers.BaseRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handlers</span></code></a></p></li>
 </ol>
 <p>There are many <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> that can be defined on every layer, in which case the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameter</span></a>
 defined on the layer <strong>closest to the handler</strong> takes precedence. This allows for maximum
