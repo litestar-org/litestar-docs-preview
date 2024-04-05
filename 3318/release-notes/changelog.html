@@ -1532,60 +1532,59 @@ document.write(`
 <h3>Features<a class="headerlink" href="#2.8.0-feature" title="Permalink to this heading">#</a></h3>
 <dl>
 <dt>Allow for console output to be silenced<a class="headerlink reference internal" href="#2.8.0-allow for console output to be silenced" id="2.8.0-allow for console output to be silenced">#</a></dt><dd><div class="changelog-change docutils container">
-<p>This change introduces optional environment variables that allow customizing the “Application” name displayed
+<p>Introduces optional environment variables that allow customizing the “Application” name displayed
 in the console output and suppressing the initial <code class="docutils literal notranslate"><span class="pre">from_env</span></code> or the <code class="docutils literal notranslate"><span class="pre">Rich</span></code> info table at startup.</p>
-<p>This provides flexibility in tailoring the console output to better integrate Litestar into larger applications
+<p>Provides flexibility in tailoring the console output to better integrate Litestar into larger applications
 or CLIs.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3180">litestar-org/litestar#3180</a></span></p>
 </div>
 </dd>
 <dt>Add flash plugin<a class="headerlink reference internal" href="#2.8.0-add flash plugin" id="2.8.0-add flash plugin">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Added a flash plugin akin to Django or Flask that uses the request state</p>
+<p>Adds a flash plugin akin to Django or Flask that uses the request state</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/1455">litestar-org/litestar#1455</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3145">litestar-org/litestar#3145</a></span></p>
 </div>
 </dd>
 <dt>Use memoized <a class="reference internal" href="../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.request_class" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">request_class</span></code></a> and <a class="reference internal" href="../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.response_class" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">response_class</span></code></a> values<a class="headerlink reference internal" href="#2.8.0-use memoized" id="2.8.0-use memoized">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Use memoized <code class="docutils literal notranslate"><span class="pre">request_class</span></code> and <code class="docutils literal notranslate"><span class="pre">response_class</span></code> values</p>
+<p>Uses memoized <code class="docutils literal notranslate"><span class="pre">request_class</span></code> and <code class="docutils literal notranslate"><span class="pre">response_class</span></code> values</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3205">litestar-org/litestar#3205</a></span></p>
 </div>
 </dd>
 <dt>Enable codegen backend by default<a class="headerlink reference internal" href="#2.8.0-enable codegen backend by default" id="2.8.0-enable codegen backend by default">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Enable the codegen backend for DTOs introduced in <a class="github reference external" href="https://github.com/litestar-org/litestar/pull/2388">litestar-org/litestar#2388</a> by default.</p>
+<p>Enables the codegen backend for DTOs introduced in <a class="github reference external" href="https://github.com/litestar-org/litestar/pull/2388">litestar-org/litestar#2388</a> by default.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3215">litestar-org/litestar#3215</a></span></p>
 </div>
 </dd>
 <dt>Added precedence of CLI parameters over envs<a class="headerlink reference internal" href="#2.8.0-added precedence of cli parameters over envs" id="2.8.0-added precedence of cli parameters over envs">#</a></dt><dd><div class="changelog-change docutils container">
-<ul class="simple">
-<li><p>Added precedence of CLI parameters over envs</p></li>
-</ul>
+<p>Adds precedence of CLI parameters over environment variables.
+Before this change, environment variables would take precedence over CLI parameters.</p>
+<p>Since CLI parameters are more explicit and are set by the user,
+they should take precedence over environment variables.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3188">litestar-org/litestar#3188</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3190">litestar-org/litestar#3190</a></span></p>
 </div>
 </dd>
 <dt>Only print when terminal is <code class="docutils literal notranslate"><span class="pre">TTY</span></code> enabled<a class="headerlink reference internal" href="#2.8.0-only print when terminal is" id="2.8.0-only print when terminal is">#</a></dt><dd><div class="changelog-change docutils container">
-<p>This PR sets the <code class="docutils literal notranslate"><span class="pre">LITESTAR_QUIET_CONSOLE</span></code> and <code class="docutils literal notranslate"><span class="pre">LITESTAR_APP_NAME</span></code> in the autodiscovery function.
-It also prevents the tabular console output from printing when the terminal is not TTY</p>
+<p>Sets <code class="docutils literal notranslate"><span class="pre">LITESTAR_QUIET_CONSOLE</span></code> and <code class="docutils literal notranslate"><span class="pre">LITESTAR_APP_NAME</span></code> in the autodiscovery function.
+Also prevents the tabular console output from printing when the terminal is not <code class="docutils literal notranslate"><span class="pre">TTY</span></code></p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3219">litestar-org/litestar#3219</a></span></p>
 </div>
 </dd>
 <dt>Support <code class="docutils literal notranslate"><span class="pre">schema_extra</span></code> in <a class="reference internal" href="../reference/openapi/spec.html#litestar.openapi.spec.Parameter" title="litestar.openapi.spec.parameter.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a> and <cite>Body</cite><a class="headerlink reference internal" href="#2.8.0-support" id="2.8.0-support">#</a></dt><dd><div class="changelog-change docutils container">
-<p>This change introduces a way to modify the generated OpenAPI spec by adding a <code class="docutils literal notranslate"><span class="pre">schema_extra</span></code> parameter to the
+<p>Introduces a way to modify the generated OpenAPI spec by adding a <code class="docutils literal notranslate"><span class="pre">schema_extra</span></code> parameter to the
 Parameter and Body classes. The <code class="docutils literal notranslate"><span class="pre">schema_extra</span></code> parameter accepts a <code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code> where the keys correspond
 to the keyword parameter names in Schema, and the values are used to override items in the
 generated Schema object.</p>
-<p>This provides a convenient way to customize the OpenAPI documentation for inbound parameters.</p>
+<p>Provides a convenient way to customize the OpenAPI documentation for inbound parameters.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3204">litestar-org/litestar#3204</a></span></p>
 </div>
 </dd>
 <dt>Add <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.TypeVar</span></code></a> expansion<a class="headerlink reference internal" href="#2.8.0-add" id="2.8.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Add a method for TypeVar expansion on registration
+<p>Adds a method for TypeVar expansion on registration
 This allows the use of generic route handler and generic controller without relying on forward references.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3242">litestar-org/litestar#3242</a></span></p>
 </div>
 </dd>
 <dt>Add <code class="docutils literal notranslate"><span class="pre">LITESTAR_</span></code> prefix before <code class="docutils literal notranslate"><span class="pre">WEB_CONCURRENCY</span></code> env option<a class="headerlink reference internal" href="#2.8.0-add" id="2.8.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<ul class="simple">
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">LITESTAR_</span></code> prefix before <code class="docutils literal notranslate"><span class="pre">WEB_CONCURRENCY</span></code> env option</p></li>
-</ul>
+<p>Adds <code class="docutils literal notranslate"><span class="pre">LITESTAR_</span></code> prefix before the <code class="docutils literal notranslate"><span class="pre">WEB_CONCURRENCY</span></code> environment option</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3227">litestar-org/litestar#3227</a></span></p>
 </div>
 </dd>
@@ -1610,12 +1609,12 @@ we want to warn about, and eventually disallow specifying parameter defaults in 
 </div>
 </dd>
 <dt>Add “TRACE” to HttpMethod enum<a class="headerlink reference internal" href="#2.8.0-add &quot;trace&quot; to httpmethod enum" id="2.8.0-add &quot;trace&quot; to httpmethod enum">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Add the <code class="docutils literal notranslate"><span class="pre">TRACE</span></code> HTTP method to <a class="reference internal" href="../reference/enums.html#litestar.enums.HttpMethod" title="litestar.enums.HttpMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpMethod</span></code></a> enum</p>
+<p>Adds the <code class="docutils literal notranslate"><span class="pre">TRACE</span></code> HTTP method to <a class="reference internal" href="../reference/enums.html#litestar.enums.HttpMethod" title="litestar.enums.HttpMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpMethod</span></code></a> enum</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3294">litestar-org/litestar#3294</a></span></p>
 </div>
 </dd>
 <dt>Pydantic DTO non-instantiable types<a class="headerlink reference internal" href="#2.8.0-pydantic dto non-instantiable types" id="2.8.0-pydantic dto non-instantiable types">#</a></dt><dd><div class="changelog-change docutils container">
-<p>This change simplifies the type that is applied to DTO transfer models for certain Pydantic field types.
+<p>Simplifies the type that is applied to DTO transfer models for certain Pydantic field types.
 It addresses <code class="docutils literal notranslate"><span class="pre">JsonValue</span></code>, <code class="docutils literal notranslate"><span class="pre">EmailStr</span></code>, <code class="docutils literal notranslate"><span class="pre">IPvAnyAddress</span></code>/<code class="docutils literal notranslate"><span class="pre">IPvAnyNetwork</span></code>/<code class="docutils literal notranslate"><span class="pre">IPvAnyInterface</span></code> types by
 using appropriate <a class="reference external" href="https://docs.python.org/3/glossary.html#term-annotation" title="(in Python v3.12)"><span class="xref std std-term">type annotations</span></a> on the transfer models to ensure compatibility with
 <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span>msgspec</span></a> serialization and deserialization.</p>
@@ -1653,26 +1652,26 @@ default value.</p>
 </div>
 </dd>
 <dt>Custom types cause serialisation error in exception response with non-JSON media-type<a class="headerlink reference internal" href="#2.8.0-custom types cause serialisation error in exception response with non-json media-type" id="2.8.0-custom types cause serialisation error in exception response with non-json media-type">#</a></dt><dd><div class="changelog-change docutils container">
-<p>When using a non-JSON media type (e.g., <code class="docutils literal notranslate"><span class="pre">text/plain</span></code>),
+<p>Fixes a bug when using a non-JSON media type (e.g., <code class="docutils literal notranslate"><span class="pre">text/plain</span></code>),
 <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ValidationException" title="litestar.exceptions.http_exceptions.ValidationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValidationException</span></code></a>’s would not get serialized properly because they
 would ignore custom <code class="docutils literal notranslate"><span class="pre">type_encoders</span></code>.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3192">litestar-org/litestar#3192</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3284">litestar-org/litestar#3284</a></span></p>
 </div>
 </dd>
 <dt>Ensure default values are always represented in schema for dataclasses and <a class="reference external" href="https://jcristharif.com/msgspec/api.html#msgspec.Struct" title="(in msgspec)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msgspec.Struct</span></code></a>s<a class="headerlink reference internal" href="#2.8.0-ensure default values are always represented in schema for dataclasses and" id="2.8.0-ensure default values are always represented in schema for dataclasses and">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fix a bug that would prevent default values for dataclasses and <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> s to be included in the
+<p>Fixes a bug that would prevent default values for dataclasses and <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> s to be included in the
 OpenAPI schema.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3201">litestar-org/litestar#3201</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3285">litestar-org/litestar#3285</a></span></p>
 </div>
 </dd>
 <dt>Pydantic v2 error handling/serialization when for non-Pydantic exceptions<a class="headerlink reference internal" href="#2.8.0-pydantic v2 error handling/serialization when for non-pydantic exceptions" id="2.8.0-pydantic v2 error handling/serialization when for non-pydantic exceptions">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fix a bug that would cause a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> when non-Pydantic errors are raised during Pydantic’s
+<p>Fixes a bug that would cause a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> when non-Pydantic errors are raised during Pydantic’s
 validation process while using DTOs.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/2365">litestar-org/litestar#2365</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3286">litestar-org/litestar#3286</a></span></p>
 </div>
 </dd>
 <dt>Fix OpenAPI schema generation for paths with path parameters of different types on the same path<a class="headerlink reference internal" href="#2.8.0-fix openapi schema generation for paths with path parameters of different types on the same path" id="2.8.0-fix openapi schema generation for paths with path parameters of different types on the same path">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fix a bug that would cause no OpenAPI schema to be generated for paths with path
+<p>Fixes a bug that would cause no OpenAPI schema to be generated for paths with path
 parameters that only differ on the path parameter type, such as <code class="docutils literal notranslate"><span class="pre">/{param:int}</span></code>
 and <code class="docutils literal notranslate"><span class="pre">/{param:str}</span></code>. This was caused by an internal representation issue in
 Litestar’s routing system.</p>
@@ -1680,8 +1679,8 @@ Litestar’s routing system.</p>
 </div>
 </dd>
 <dt>Document unconsumed path parameters<a class="headerlink reference internal" href="#2.8.0-document unconsumed path parameters" id="2.8.0-document unconsumed path parameters">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fix a bug where path parameters not consumed by route handlers would not be included in the OpenAPI schema.</p>
-<p>This could would not include the <code class="docutils literal notranslate"><span class="pre">{param}</span></code> in the schema, yet it is still required to be passed
+<p>Fixes a bug where path parameters not consumed by route handlers would not be included in the OpenAPI schema.</p>
+<p>This could/would not include the <code class="docutils literal notranslate"><span class="pre">{param}</span></code> in the schema, yet it is still required to be passed
 when calling the path.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3290">litestar-org/litestar#3290</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3295">litestar-org/litestar#3295</a></span></p>
 </div>
