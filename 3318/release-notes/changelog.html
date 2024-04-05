@@ -1531,6 +1531,11 @@ document.write(`
 <strong>Released: </strong>2024-04-05<section id="2.8.0-feature">
 <h3>Features<a class="headerlink" href="#2.8.0-feature" title="Permalink to this heading">#</a></h3>
 <dl>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">path</span></code> parameter to Litestar application class<a class="headerlink reference internal" href="#2.8.0-add" id="2.8.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Exposes <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.parameter" title="litestar.app.Litestar"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">parameter</span></code></a> at <a class="reference internal" href="../reference/app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> application class level</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3314">litestar-org/litestar#3314</a></span></p>
+</div>
+</dd>
 <dt>Allow for console output to be silenced<a class="headerlink reference internal" href="#2.8.0-allow for console output to be silenced" id="2.8.0-allow for console output to be silenced">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Introduces optional environment variables that allow customizing the “Application” name displayed
 in the console output and suppressing the initial <code class="docutils literal notranslate"><span class="pre">from_env</span></code> or the <code class="docutils literal notranslate"><span class="pre">Rich</span></code> info table at startup.</p>
@@ -1626,6 +1631,13 @@ using appropriate <a class="reference external" href="https://docs.python.org/3/
 <section id="2.8.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#2.8.0-bugfix" title="Permalink to this heading">#</a></h3>
 <dl>
+<dt>Unique schema names for nested models (#3134)<a class="headerlink reference internal" href="#2.8.0-unique schema names for nested models (#3134)" id="2.8.0-unique schema names for nested models (#3134)">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fixes an issue where nested models beyond the <code class="docutils literal notranslate"><span class="pre">max_nested_depth</span></code> would not have
+unique schema names in the OpenAPI documentation. The fix appends the nested
+model’s name to the <code class="docutils literal notranslate"><span class="pre">unique_name</span></code> to differentiate it from the parent model.</p>
+<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/3134">litestar-org/litestar#3134</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3136">litestar-org/litestar#3136</a></span></p>
+</div>
+</dd>
 <dt>Remove duplicate <code class="docutils literal notranslate"><span class="pre">rich-click</span></code> config options<a class="headerlink reference internal" href="#2.8.0-remove duplicate" id="2.8.0-remove duplicate">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Removes duplicate config options from click cli</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/3274">litestar-org/litestar#3274</a></span></p>
