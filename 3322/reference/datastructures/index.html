@@ -1259,6 +1259,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../usage/security/guards.html">Guards</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../usage/security/excluding-and-including-endpoints.html">Excluding and including endpoints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../usage/security/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/security/secret-datastructures.html">Handling Secrets</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/static-files.html">Static files</a></li>
@@ -2512,6 +2513,20 @@ the example MUST follow the prescribed serialization strategy for the parameter.
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.datastructures.</span></span><span class="sig-name descname"><span class="pre">SecretBytes</span></span><a class="headerlink" href="#litestar.datastructures.SecretBytes" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="secret_values.html#litestar.datastructures.secret_values.SecretValue" title="litestar.datastructures.secret_values.SecretValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecretValue</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>]</p>
 <p>Represents a secret bytes value.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.datastructures.SecretBytes.get_obscured">
+<span class="sig-name descname"><span class="pre">get_obscured</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></span><a class="headerlink" href="#litestar.datastructures.SecretBytes.get_obscured" title="Permalink to this definition">#</a></dt>
+<dd><p>Overrides the base class method to return the hidden bytes value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The hidden bytes representation of the secret value.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -2519,6 +2534,20 @@ the example MUST follow the prescribed serialization strategy for the parameter.
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.datastructures.</span></span><span class="sig-name descname"><span class="pre">SecretString</span></span><a class="headerlink" href="#litestar.datastructures.SecretString" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="secret_values.html#litestar.datastructures.secret_values.SecretValue" title="litestar.datastructures.secret_values.SecretValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecretValue</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 <p>Represents a secret string value.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.datastructures.SecretString.get_obscured">
+<span class="sig-name descname"><span class="pre">get_obscured</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#litestar.datastructures.SecretString.get_obscured" title="Permalink to this definition">#</a></dt>
+<dd><p>Overrides the base class method to return the hidden string value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The hidden string representation of the secret value.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -3095,8 +3124,14 @@ multidict and pass them back to <a class="reference internal" href="#litestar.da
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.ResponseHeader.__post_init__"><code class="docutils literal notranslate"><span class="pre">ResponseHeader.__post_init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.SecretBytes"><code class="docutils literal notranslate"><span class="pre">SecretBytes</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.SecretString"><code class="docutils literal notranslate"><span class="pre">SecretString</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.SecretBytes"><code class="docutils literal notranslate"><span class="pre">SecretBytes</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.SecretBytes.get_obscured"><code class="docutils literal notranslate"><span class="pre">SecretBytes.get_obscured()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.SecretString"><code class="docutils literal notranslate"><span class="pre">SecretString</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.SecretString.get_obscured"><code class="docutils literal notranslate"><span class="pre">SecretString.get_obscured()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.State.__init__"><code class="docutils literal notranslate"><span class="pre">State.__init__()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.datastructures.State.__delitem__"><code class="docutils literal notranslate"><span class="pre">State.__delitem__()</span></code></a></li>

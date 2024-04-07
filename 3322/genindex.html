@@ -1254,6 +1254,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="usage/security/guards.html">Guards</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/security/excluding-and-including-endpoints.html">Excluding and including endpoints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/security/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/security/secret-datastructures.html">Handling Secrets</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage/static-files.html">Static files</a></li>
@@ -2046,11 +2047,7 @@ document.write(`
 </li>
       </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Cookie.__eq__">__eq__() (litestar.datastructures.Cookie method)</a>
-
-      <ul>
-        <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretValue.__eq__">(litestar.datastructures.secret_values.SecretValue method)</a>
 </li>
-      </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.ImmutableState.__get_validators__">__get_validators__() (litestar.datastructures.ImmutableState class method)</a>
 </li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.ImmutableState.__getattr__">__getattr__() (litestar.datastructures.ImmutableState method)</a>
@@ -2061,11 +2058,9 @@ document.write(`
         <li><a href="reference/datastructures/index.html#litestar.datastructures.MutableScopeHeaders.__getitem__">(litestar.datastructures.MutableScopeHeaders method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretValue.__hash__">__hash__() (litestar.datastructures.secret_values.SecretValue method)</a>
+      <li><a href="reference/params.html#litestar.params.BodyKwarg.__hash__">__hash__() (litestar.params.BodyKwarg method)</a>
 
       <ul>
-        <li><a href="reference/params.html#litestar.params.BodyKwarg.__hash__">(litestar.params.BodyKwarg method)</a>
-</li>
         <li><a href="reference/params.html#litestar.params.DependencyKwarg.__hash__">(litestar.params.DependencyKwarg method)</a>
 </li>
         <li><a href="reference/params.html#litestar.params.ParameterKwarg.__hash__">(litestar.params.ParameterKwarg method)</a>
@@ -2568,8 +2563,6 @@ document.write(`
       <ul>
         <li><a href="reference/datastructures/index.html#litestar.datastructures.MutableScopeHeaders.__len__">(litestar.datastructures.MutableScopeHeaders method)</a>
 </li>
-        <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretValue.__len__">(litestar.datastructures.secret_values.SecretValue method)</a>
-</li>
       </ul></li>
       <li><a href="reference/config.html#litestar.config.app.ExperimentalFeatures.__new__">__new__() (litestar.config.app.ExperimentalFeatures method)</a>
 
@@ -3055,6 +3048,8 @@ document.write(`
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.auth">(litestar.testing.AsyncTestClient.put parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.auth">(litestar.testing.AsyncTestClient.request parameter)</a>
+</li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.auth">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.delete.params.auth">(litestar.testing.RequestFactory.delete parameter)</a>
 </li>
@@ -4055,6 +4050,8 @@ document.write(`
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.cookies">(litestar.testing.AsyncTestClient.put parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.cookies">(litestar.testing.AsyncTestClient.request parameter)</a>
+</li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.cookies">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.BaseTestClient.cookies">(litestar.testing.BaseTestClient attribute)</a>
 </li>
@@ -5422,6 +5419,8 @@ document.write(`
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.extensions">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.extensions">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
+</li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.extensions">(litestar.testing.TestClient.delete parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.extensions">(litestar.testing.TestClient.get parameter)</a>
@@ -5746,6 +5745,8 @@ document.write(`
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.follow_redirects">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.follow_redirects">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
+</li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.follow_redirects">(litestar.testing.TestClient.delete parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.follow_redirects">(litestar.testing.TestClient.get parameter)</a>
@@ -5939,6 +5940,18 @@ document.write(`
       </ul></li>
       <li><a href="reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.get_model_type_hints">get_model_type_hints() (litestar.dto.base_dto.AbstractDTO static method)</a>
 </li>
+      <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretBytes.get_obscured">get_obscured() (litestar.datastructures.secret_values.SecretBytes method)</a>
+
+      <ul>
+        <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretString.get_obscured">(litestar.datastructures.secret_values.SecretString method)</a>
+</li>
+        <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretValue.get_obscured">(litestar.datastructures.secret_values.SecretValue method)</a>
+</li>
+        <li><a href="reference/datastructures/index.html#litestar.datastructures.SecretBytes.get_obscured">(litestar.datastructures.SecretBytes method)</a>
+</li>
+        <li><a href="reference/datastructures/index.html#litestar.datastructures.SecretString.get_obscured">(litestar.datastructures.SecretString method)</a>
+</li>
+      </ul></li>
       <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.get_one">get_one() (litestar.repository.abc.AbstractAsyncRepository method)</a>
 
       <ul>
@@ -5959,12 +5972,12 @@ document.write(`
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractSyncRepository.get_or_create">(litestar.repository.abc.AbstractSyncRepository method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.get_response_handler">get_response_handler() (litestar.handlers.HTTPRouteHandler method)</a>
 </li>
       <li><a href="reference/router.html#litestar.router.Router.get_route_handler_map">get_route_handler_map() (litestar.router.Router class method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/controller.html#litestar.controller.Controller.get_route_handlers">get_route_handlers() (litestar.controller.Controller method)</a>
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.get_schema_from_request">get_schema_from_request() (litestar.openapi.OpenAPIController static method)</a>
@@ -6274,6 +6287,8 @@ document.write(`
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.headers">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.headers">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
+</li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.delete.params.headers">(litestar.testing.RequestFactory.delete parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.get.params.headers">(litestar.testing.RequestFactory.get parameter)</a>
@@ -6319,14 +6334,14 @@ document.write(`
 </li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.URL.hostname">hostname (litestar.datastructures.URL attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/static_files.html#litestar.static_files.create_static_files_router.params.html_mode">html_mode (litestar.static_files.create_static_files_router parameter)</a>
 
       <ul>
         <li><a href="reference/static_files.html#litestar.static_files.StaticFilesConfig.html_mode">(litestar.static_files.StaticFilesConfig attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/htmx.html#litestar.contrib.htmx.request.HTMXDetails">HTMXDetails (class in litestar.contrib.htmx.request)</a>
 </li>
       <li><a href="reference/contrib/htmx.html#litestar.contrib.htmx.request.HTMXRequest">HTMXRequest (class in litestar.contrib.htmx.request)</a>
@@ -9065,11 +9080,7 @@ document.write(`
 </li>
       </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Cookie.__eq__.params.other">other (litestar.datastructures.Cookie.__eq__ parameter)</a>
-
-      <ul>
-        <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretValue.__eq__.params.other">(litestar.datastructures.secret_values.SecretValue.__eq__ parameter)</a>
 </li>
-      </ul></li>
       <li><a href="reference/controller.html#litestar.controller.Controller.owner">owner (litestar.controller.Controller attribute)</a>
 
       <ul>
@@ -9162,6 +9173,8 @@ document.write(`
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.params">(litestar.testing.AsyncTestClient.put parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.params">(litestar.testing.AsyncTestClient.request parameter)</a>
+</li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.params">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.params">(litestar.testing.TestClient.delete parameter)</a>
 </li>
@@ -11070,10 +11083,10 @@ document.write(`
       </ul></li>
       <li><a href="reference/concurrency.html#litestar.concurrency.set_asyncio_executor">set_asyncio_executor() (in module litestar.concurrency)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.set_cached_history">set_cached_history() (litestar.middleware.rate_limit.RateLimitMiddleware method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/response/base.html#litestar.response.base.Response.set_cookie">set_cookie() (litestar.response.base.Response method)</a>
 
       <ul>
@@ -11523,6 +11536,8 @@ document.write(`
       <li><a href="reference/connection.html#litestar.connection.WebSocket.accept.params.subprotocols">subprotocols (litestar.connection.WebSocket.accept parameter)</a>
 
       <ul>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.subprotocols">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
+</li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.subprotocols">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
       </ul></li>
@@ -11789,6 +11804,8 @@ document.write(`
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.timeout">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.timeout">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
+</li>
         <li><a href="reference/testing.html#litestar.testing.create_async_test_client.params.timeout">(litestar.testing.create_async_test_client parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.create_test_client.params.timeout">(litestar.testing.create_test_client parameter)</a>
@@ -11892,10 +11909,10 @@ document.write(`
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.BaseSchemaObject.to_schema">to_schema() (litestar.openapi.spec.BaseSchemaObject method)</a>
 </li>
-      <li><a href="reference/static_files.html#litestar.static_files.StaticFilesConfig.to_static_files_app">to_static_files_app() (litestar.static_files.StaticFilesConfig method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/static_files.html#litestar.static_files.StaticFilesConfig.to_static_files_app">to_static_files_app() (litestar.static_files.StaticFilesConfig method)</a>
+</li>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.Token">Token (class in litestar.security.jwt)</a>
 </li>
       <li><a href="reference/middleware/csrf.html#litestar.middleware.csrf.CSRFMiddleware.create_send_wrapper.params.token">token (litestar.middleware.csrf.CSRFMiddleware.create_send_wrapper parameter)</a>
@@ -12245,6 +12262,8 @@ document.write(`
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.url">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
+        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.url">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
+</li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.url">(litestar.testing.TestClient.delete parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.url">(litestar.testing.TestClient.get parameter)</a>
@@ -12462,8 +12481,12 @@ document.write(`
         <li><a href="reference/testing.html#litestar.testing.create_test_client.params.websocket_class">(litestar.testing.create_test_client parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect">websocket_connect() (litestar.testing.TestClient method)</a>
+      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect">websocket_connect() (litestar.testing.AsyncTestClient method)</a>
+
+      <ul>
+        <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect">(litestar.testing.TestClient method)</a>
 </li>
+      </ul></li>
       <li><a href="reference/handlers.html#litestar.handlers.websocket_listener">websocket_listener (in module litestar.handlers)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketAcceptEvent">WebSocketAcceptEvent (class in litestar.types)</a>
@@ -12494,10 +12517,10 @@ document.write(`
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler">WebsocketRouteHandler (class in litestar.handlers)</a>
 </li>
-      <li><a href="reference/types.html#litestar.types.WebSocketScope">WebSocketScope (in module litestar.types)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/types.html#litestar.types.WebSocketScope">WebSocketScope (in module litestar.types)</a>
+</li>
       <li><a href="reference/types.html#litestar.types.WebSocketSendEvent">WebSocketSendEvent (class in litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketSendMessage">WebSocketSendMessage (in module litestar.types)</a>
