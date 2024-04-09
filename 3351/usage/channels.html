@@ -1804,17 +1804,14 @@ be used to fetch this <a class="reference internal" href="#term-history"><span c
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The publication of the <a class="reference internal" href="#term-history"><span class="xref std std-term">history</span></a> happens sequentially, one <a class="reference internal" href="#term-channel"><span class="xref std std-term">channel</span></a> and one
-<a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> at a time. This is done to ensure the correct ordering of events and to avoid
+<dl class="simple">
+<dt>The publication of the <a class="reference internal" href="#term-history"><span class="xref std std-term">history</span></a> happens sequentially, one <a class="reference internal" href="#term-channel"><span class="xref std std-term">channel</span></a> and one</dt><dd><p><a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> at a time. This is done to ensure the correct ordering of events and to avoid
 filling up a <a class="reference internal" href="#term-subscriber"><span class="xref std std-term">subscriber</span></a>’s backlog, which would result in dropped <a class="reference internal" href="#term-history"><span class="xref std std-term">history</span></a> entries. Should the
 amount of entries exceed the maximum backlog size, the execution will wait until
 previous events have been processed.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#managing-backpressure">Managing backpressure</a></p></li>
-</ul>
-</div>
+</dd>
+</dl>
+<p>Read more: <a class="reference internal" href="#managing-backpressure">Managing backpressure</a></p>
 </div>
 </section>
 </section>
