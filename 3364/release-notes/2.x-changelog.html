@@ -1099,14 +1099,14 @@ or <code class="docutils literal notranslate"><span class="pre">picologging</spa
 <dt>Simplified static file handling and enhancements<a class="headerlink reference internal" href="#2.6.0-simplified static file handling and enhancements" id="2.6.0-simplified static file handling and enhancements">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Static file serving has been implemented with regular route handlers instead of
 a specialised ASGI app. At the moment, this is complementary to the usage of
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> to maintain backwards
+<cite>litestar.static_files.StaticFilesConfig`</cite> to maintain backwards
 compatibility.</p>
 <p>This achieves a few things:</p>
 <ul class="simple">
 <li><p>Fixes <a class="reference external" href="https://github.com/litestar-org/litestar/issues/2629">https://github.com/litestar-org/litestar/issues/2629</a></p></li>
 <li><p>Circumvents special casing needed in the routing logic for the static files app</p></li>
 <li><p>Removes the need for a <code class="docutils literal notranslate"><span class="pre">static_files_config</span></code> attribute on the app</p></li>
-<li><p>Removes the need for a special <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.url_for_static_asset" title="litestar.app.Litestar.url_for_static_asset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">url_for_static_asset()</span></code></a>
+<li><p>Removes the need for a special <code class="docutils literal notranslate"><span class="pre">litestar.app.Litestar.url_for_static_asset</span></code>
 method on the app since <cite>route_reverse</cite> can be used instead</p></li>
 </ul>
 <p>Additionally:</p>
@@ -2294,8 +2294,8 @@ This was fixed by leaving the default value as <a class="reference external" hre
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2138">https://github.com/litestar-org/litestar/issues/2138</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2189">https://github.com/litestar-org/litestar/pull/2189</a></span></p>
 </div>
 </dd>
-<dt>Add <a class="reference internal" href="../reference/controller.html#litestar.controller.Controller.include_in_schema" title="litestar.controller.Controller.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Adds the <a class="reference internal" href="../reference/controller.html#litestar.controller.Controller.include_in_schema" title="litestar.controller.Controller.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
+<dt>Add <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Adds the <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
 specific routes from the generated OpenAPI schema.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2267">https://github.com/litestar-org/litestar/issues/2267</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2295">https://github.com/litestar-org/litestar/pull/2295</a></span></p>
 </div>
@@ -2515,7 +2515,7 @@ using the initial debug value.</p>
 </dd>
 <dt>Static files not being served if a route handler with the same base path was registered<a class="headerlink reference internal" href="#2.0.0-static files not being served if a route handler with the same base path was registered" id="2.0.0-static files not being served if a route handler with the same base path was registered">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fixed a bug that would result in a <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">-</span> <span class="pre">Not</span> <span class="pre">Found</span></code> when requesting a static
-file where the <a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig.path" title="litestar.static_files.StaticFilesConfig.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> was also
+file where the <code class="docutils literal notranslate"><span class="pre">litestar.static_files.StaticFilesConfig.path</span></code> was also
 used by a route handler.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2154">https://github.com/litestar-org/litestar/pull/2154</a></span></p>
 </div>

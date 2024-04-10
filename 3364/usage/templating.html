@@ -1090,8 +1090,8 @@ can be found <a class="reference internal" href="routing/handlers.html#route-han
 if you wish to insert the <code class="docutils literal notranslate"><span class="pre">csrf_token</span></code> into non-HTML based templates, or insert it into HTML templates not using a hidden input field but
 by some other means, for example inside a special <code class="docutils literal notranslate"><span class="pre">&lt;meta&gt;</span></code> tag.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">url_for_static_asset</span></code></dt><dd><p>URLs for static files can be created using the <code class="docutils literal notranslate"><span class="pre">url_for_static_asset</span></code> function. It’s signature and behaviour are identical to
-<a class="reference internal" href="../reference/app.html#litestar.app.Litestar.url_for_static_asset" title="litestar.app.Litestar.url_for_static_asset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">app.url_for_static_asset</span></code></a>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">url_for</span></code> for static files</dt><dd><p>For static file serving as provided by <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a>,
+<code class="docutils literal notranslate"><span class="pre">url_for</span></code> can be used with the <code class="docutils literal notranslate"><span class="pre">static</span></code> handler name: <code class="docutils literal notranslate"><span class="pre">url_for(&quot;static&quot;,</span> <span class="pre">file_name=&quot;style.css&quot;)</span></code></p>
 </dd>
 </dl>
 </section>

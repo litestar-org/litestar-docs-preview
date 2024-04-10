@@ -494,6 +494,7 @@
     <h3>On this page</h3>
     <ul>
 <li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#removal-of-staticfileconfig">Removal of <code class="docutils literal notranslate"><span class="pre">StaticFileConfig</span></code></a></li>
 <li><a class="reference internal" href="#other-changes">Other Changes</a></li>
 </ul>
 
@@ -584,6 +585,20 @@ For a detailed list of all changes, including changes between versions leading u
 </tbody>
 </table>
 </div>
+</section>
+<section id="removal-of-staticfileconfig">
+<h2>Removal of <code class="docutils literal notranslate"><span class="pre">StaticFileConfig</span></code><a class="headerlink" href="#removal-of-staticfileconfig" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code> has been removed, alongside these related parameters and
+functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Litestar.static_files_config</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Litestar.url_for_static_asset</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Request.url_for_static_asset</span></code></p></li>
+</ul>
+<p><a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a> is a drop-in replacement for <code class="docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code>,
+and can simply be added to the <code class="docutils literal notranslate"><span class="pre">route_handlers</span></code> like any other regular handler.</p>
+<p>Usage of <code class="docutils literal notranslate"><span class="pre">url_for_static_assets</span></code> should be replaced with a <code class="docutils literal notranslate"><span class="pre">url_for(&quot;static&quot;,</span> <span class="pre">...)</span></code>
+call.</p>
 </section>
 <section id="other-changes">
 <h2>Other Changes<a class="headerlink" href="#other-changes" title="Permalink to this heading">¶</a></h2>
