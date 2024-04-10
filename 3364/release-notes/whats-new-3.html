@@ -495,7 +495,7 @@
     <ul>
 <li><a class="reference internal" href="#imports">Imports</a></li>
 <li><a class="reference internal" href="#removal-of-staticfileconfig">Removal of <code class="docutils literal notranslate"><span class="pre">StaticFileConfig</span></code></a></li>
-<li><a class="reference internal" href="#other-changes">Other Changes</a></li>
+<li><a class="reference internal" href="#implicit-optional-default-parameters">Implicit Optional Default Parameters</a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
@@ -600,9 +600,24 @@ and can simply be added to the <code class="docutils literal notranslate"><span 
 <p>Usage of <code class="docutils literal notranslate"><span class="pre">url_for_static_assets</span></code> should be replaced with a <code class="docutils literal notranslate"><span class="pre">url_for(&quot;static&quot;,</span> <span class="pre">...)</span></code>
 call.</p>
 </section>
-<section id="other-changes">
-<h2>Other Changes<a class="headerlink" href="#other-changes" title="Permalink to this heading">¶</a></h2>
-<p>Make more sections as they are appropriate :)</p>
+<section id="implicit-optional-default-parameters">
+<h2>Implicit Optional Default Parameters<a class="headerlink" href="#implicit-optional-default-parameters" title="Permalink to this heading">¶</a></h2>
+<p>In v2, if a handler was typed with an optional parameter it would be implicitly given a default value of <code class="docutils literal notranslate"><span class="pre">None</span></code>. For
+example, if the following handler is called with no query parameter, the value <code class="docutils literal notranslate"><span class="pre">None</span></code> would be passed in to the
+handler for the <code class="docutils literal notranslate"><span class="pre">param</span></code> parameter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">def</span> <span class="nf">my_handler</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">...</span><span class="p">:</span>
+</span><span data-line="3">    <span class="o">...</span>
+</span></pre></div>
+</div>
+<p>This legacy behavior originates from our history of using Pydantic v1 models to represent handler signatures. In v3, we
+no longer make this implicit conversion. If you want to have a default value of <code class="docutils literal notranslate"><span class="pre">None</span></code> for an optional parameter, you
+must explicitly set it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">def</span> <span class="nf">my_handler</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">...</span><span class="p">:</span>
+</span><span data-line="3">    <span class="o">...</span>
+</span></pre></div>
+</div>
 </section>
 </section>
 
