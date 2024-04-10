@@ -514,7 +514,6 @@
 <li><a class="reference internal" href="#litestar.connection.ASGIConnection.set_session"><code class="docutils literal notranslate"><span class="pre">ASGIConnection.set_session()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.connection.ASGIConnection.clear_session"><code class="docutils literal notranslate"><span class="pre">ASGIConnection.clear_session()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.connection.ASGIConnection.url_for"><code class="docutils literal notranslate"><span class="pre">ASGIConnection.url_for()</span></code></a></li>
-<li><a class="reference internal" href="#litestar.connection.ASGIConnection.url_for_static_asset"><code class="docutils literal notranslate"><span class="pre">ASGIConnection.url_for_static_asset()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#litestar.connection.Request"><code class="docutils literal notranslate"><span class="pre">Request</span></code></a><ul>
@@ -897,26 +896,6 @@ the session data to be cleared.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A string representing the absolute url of the route handler.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.connection.ASGIConnection.url_for_static_asset">
-<span class="sig-name descname"><span class="pre">url_for_static_asset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#litestar.connection.ASGIConnection.url_for_static_asset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Receives a static files handler name, an asset file path and returns resolved absolute url to the asset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="litestar.connection.ASGIConnection.url_for_static_asset.params.name"></span><strong>name</strong><a class="paramlink headerlink reference internal" href="#litestar.connection.ASGIConnection.url_for_static_asset.params.name">¶</a> – A static handler unique name.</p></li>
-<li><p><span class="target" id="litestar.connection.ASGIConnection.url_for_static_asset.params.file_path"></span><strong>file_path</strong><a class="paramlink headerlink reference internal" href="#litestar.connection.ASGIConnection.url_for_static_asset.params.file_path">¶</a> – a string containing path to an asset.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="exceptions.html#litestar.exceptions.NoRouteMatchFoundException" title="litestar.exceptions.NoRouteMatchFoundException"><strong>NoRouteMatchFoundException</strong></a> – If static files handler with <code class="docutils literal notranslate"><span class="pre">name</span></code> does not exist.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A string representing absolute url to the asset.</p>
 </dd>
 </dl>
 </dd></dl>

@@ -498,7 +498,6 @@
 <li><a class="reference internal" href="#using-a-custom-router-class">Using a custom router class</a></li>
 <li><a class="reference internal" href="#retrieving-paths-to-static-files">Retrieving paths to static files</a></li>
 <li><a class="reference internal" href="#remote-file-systems">(Remote) file systems</a></li>
-<li><a class="reference internal" href="#upgrading-from-legacy-staticfilesconfig">Upgrading from legacy StaticFilesConfig</a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
@@ -799,42 +798,6 @@ with support for popular cloud providers available via 3rd party implementations
 </span><span data-line="12"><span class="w">        </span><span class="o">)</span>,
 </span><span data-line="13"><span class="w">    </span><span class="o">]</span>
 </span><span data-line="14"><span class="o">)</span>
-</span></pre></div>
-</div>
-</div>
-</section>
-<section id="upgrading-from-legacy-staticfilesconfig">
-<h2>Upgrading from legacy StaticFilesConfig<a class="headerlink" href="#upgrading-from-legacy-staticfilesconfig" title="Permalink to this heading">¶</a></h2>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version v3.0: </span><a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> is deprecated and will be removed in Litestar 3.0</p>
-</div>
-<p>Existing code can be upgraded to <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a> by replacing
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> instances with this function call and passing the result to
-<code class="docutils literal notranslate"><span class="pre">route_handlers</span></code> instead of <code class="docutils literal notranslate"><span class="pre">static_files_config</span></code>:</p>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">Using the deprecated <a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.config.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a></span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-</span><span data-line="2">from<span class="w"> </span>litestar.static_files.config<span class="w"> </span>import<span class="w"> </span>StaticFilesConfig
-</span><span data-line="3">
-</span><span data-line="4"><span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-</span><span data-line="5"><span class="w">    </span><span class="nv">static_files_config</span><span class="o">=[</span>
-</span><span data-line="6"><span class="w">        </span>StaticFilesConfig<span class="o">(</span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="o">)</span>,
-</span><span data-line="7"><span class="w">    </span><span class="o">]</span>,
-</span><span data-line="8"><span class="o">)</span>
-</span></pre></div>
-</div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Upgrading from <a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.config.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> to
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-</span><span data-line="2">from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-</span><span data-line="3">
-</span><span data-line="4"><span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-</span><span data-line="5"><span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-</span><span data-line="6"><span class="w">        </span>create_static_files_router<span class="o">(</span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="o">)</span>,
-</span><span data-line="7"><span class="w">    </span><span class="o">]</span>,
-</span><span data-line="8"><span class="o">)</span>
 </span></pre></div>
 </div>
 </div>
