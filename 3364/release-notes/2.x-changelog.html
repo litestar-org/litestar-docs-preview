@@ -241,7 +241,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#using-openapi-ui-plugins">Using OpenAPI UI Plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#configuring-openapi-ui-plugins">Configuring OpenAPI UI Plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#configuring-the-openapi-root-path">Configuring the OpenAPI Root Path</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#backward-compatibility">Backward Compatibility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#building-your-own-openapi-ui-plugin">Building your own OpenAPI UI Plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#oauth2-in-swagger-ui">OAuth2 in Swagger UI</a></li>
@@ -2294,8 +2293,8 @@ This was fixed by leaving the default value as <a class="reference external" hre
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2138">https://github.com/litestar-org/litestar/issues/2138</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2189">https://github.com/litestar-org/litestar/pull/2189</a></span></p>
 </div>
 </dd>
-<dt>Add <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Adds the <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
+<dt>Add <a class="reference internal" href="../reference/controller.html#litestar.controller.Controller.include_in_schema" title="litestar.controller.Controller.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Adds the <a class="reference internal" href="../reference/controller.html#litestar.controller.Controller.include_in_schema" title="litestar.controller.Controller.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
 specific routes from the generated OpenAPI schema.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2267">https://github.com/litestar-org/litestar/issues/2267</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2295">https://github.com/litestar-org/litestar/pull/2295</a></span></p>
 </div>
@@ -2801,10 +2800,10 @@ foreign key columns are nullable.</p>
 </dd>
 <dt>OpenAPI: Allow setting <code class="docutils literal notranslate"><span class="pre">OpenAPIController.path</span></code> from <code class="docutils literal notranslate"><span class="pre">`OpenAPIConfig</span></code><a class="headerlink reference internal" href="#2.0.0beta3-openapi: allow setting" id="2.0.0beta3-openapi: allow setting">#</a></dt><dd><div class="changelog-change docutils container">
 <p><a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.path" title="litestar.openapi.OpenAPIConfig.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a> has been added, which can be used
-to set the <code class="docutils literal notranslate"><span class="pre">path</span></code> for <a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIController" title="litestar.openapi.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code></a> directly,
+to set the <code class="docutils literal notranslate"><span class="pre">path</span></code> for <code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code> directly,
 without needing to create a custom instance of it.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">path</span></code> is set in both <a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> and
-<a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIController" title="litestar.openapi.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code></a>, the path set on the controller
+<code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code>, the path set on the controller
 will take precedence.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1886">https://github.com/litestar-org/litestar/pull/1886</a></span></p>
 </div>

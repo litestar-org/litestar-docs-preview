@@ -241,7 +241,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#using-openapi-ui-plugins">Using OpenAPI UI Plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-openapi-ui-plugins">Configuring OpenAPI UI Plugins</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-the-openapi-root-path">Configuring the OpenAPI Root Path</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#backward-compatibility">Backward Compatibility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#building-your-own-openapi-ui-plugin">Building your own OpenAPI UI Plugin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#oauth2-in-swagger-ui">OAuth2 in Swagger UI</a></li>
@@ -497,11 +496,6 @@
 <li><a class="reference internal" href="#using-openapi-ui-plugins">Using OpenAPI UI Plugins</a></li>
 <li><a class="reference internal" href="#configuring-openapi-ui-plugins">Configuring OpenAPI UI Plugins</a></li>
 <li><a class="reference internal" href="#configuring-the-openapi-root-path">Configuring the OpenAPI Root Path</a></li>
-<li><a class="reference internal" href="#backward-compatibility">Backward Compatibility</a><ul>
-<li><a class="reference internal" href="#providing-a-subclass-of-openapicontroller">Providing a subclass of OpenAPIController</a></li>
-<li><a class="reference internal" href="#backward-compatibility-with-root-schema-site">Backward compatibility with <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#building-your-own-openapi-ui-plugin">Building your own OpenAPI UI Plugin</a><ul>
 <li><a class="reference internal" href="#class-definition">Class definition</a></li>
 <li><a class="reference internal" href="#init-constructor"><code class="docutils literal notranslate"><span class="pre">__init__</span></code> Constructor</a></li>
@@ -1152,58 +1146,6 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <p>This will result in any of the OpenAPI endpoints being served at <code class="docutils literal notranslate"><span class="pre">/docs</span></code> instead of <code class="docutils literal notranslate"><span class="pre">/schema</span></code>, e.g.,
 <code class="docutils literal notranslate"><span class="pre">/docs/openapi.json</span></code>.</p>
 </section>
-<section id="backward-compatibility">
-<h1>Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permalink to this heading">¶</a></h1>
-<p>OpenAPI UI plugins are a new feature introduced in <code class="docutils literal notranslate"><span class="pre">v2.8.0</span></code>.</p>
-<section id="providing-a-subclass-of-openapicontroller">
-<h2>Providing a subclass of OpenAPIController<a class="headerlink" href="#providing-a-subclass-of-openapicontroller" title="Permalink to this heading">¶</a></h2>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version v2.8.0.</span></p>
-</div>
-<p>The previous method of configuring elements such as the root path and styling was to subclass
-<a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIController" title="litestar.openapi.OpenAPIController"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIController</span></code></a>, and set it on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.openapi_controller" title="litestar.openapi.OpenAPIConfig.openapi_controller"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.openapi_controller</span></code></a> attribute. This approach is now
-deprecated and slated for removal in <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, but if you are using it, there should be no change in behavior.</p>
-<p>To maintain backward compatibility with the previous approach, if neither the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.openapi_controller" title="litestar.openapi.OpenAPIConfig.openapi_controller"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.openapi_controller</span></code></a>
-or <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> attributes are set, we will automatically add the plugins to respect the also
-deprecated <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="litestar.openapi.OpenAPIConfig.enabled_endpoints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.enabled_endpoints</span></code></a> attribute. By default, this will result in the following endpoints
-being enabled:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.json</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/rapidoc</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/elements</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.yml</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">/schema/openapi.yaml</span></code></p></li>
-</ul>
-<p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.enabled_endpoints" title="litestar.openapi.OpenAPIConfig.enabled_endpoints"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.enabled_endpoints</span></code></a> attribute will be removed, and only a single UI plugin will be
-enabled by default, in addition to the <code class="docutils literal notranslate"><span class="pre">openapi.json</span></code> endpoint which will always be enabled. <code class="docutils literal notranslate"><span class="pre">Scalar</span></code> will also
-become the default UI plugin in <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>.</p>
-<p>To adopt the future behavior, explicitly set the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> field to an instance of
-<a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.ScalarRenderPlugin" title="litestar.openapi.plugins.ScalarRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarRenderPlugin</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="2">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">hello_world</span><span class="p">],</span>
-</span><span data-line="3">    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
-</span><span data-line="4">        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Litestar Example&quot;</span><span class="p">,</span>
-</span><span data-line="5">        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example of Litestar with Scalar OpenAPI docs&quot;</span><span class="p">,</span>
-</span><span data-line="6">        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-</span><span data-line="7">        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ScalarRenderPlugin</span><span class="p">()],</span>
-</span><span data-line="8">    <span class="p">),</span>
-</span><span data-line="9"><span class="p">)</span>
-</span></pre></div>
-</div>
-</section>
-<section id="backward-compatibility-with-root-schema-site">
-<h2>Backward compatibility with <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code><a class="headerlink" href="#backward-compatibility-with-root-schema-site" title="Permalink to this heading">¶</a></h2>
-<p>Litestar has always supported a <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute on the <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig" title="litestar.openapi.OpenAPIConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a> class. This attribute
-allows you to elect to serve a UI at the OpenAPI root path, e.g., by default <code class="docutils literal notranslate"><span class="pre">redoc</span></code> would be served at both
-<code class="docutils literal notranslate"><span class="pre">/schema</span></code> and <code class="docutils literal notranslate"><span class="pre">/schema/redoc</span></code>.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">v3.0.0</span></code>, the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute will be removed, and the first <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin" title="litestar.openapi.plugins.OpenAPIRenderPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenAPIRenderPlugin</span></code></a> in the
-<a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> list will be assigned to the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> endpoint.</p>
-<p>As of <code class="docutils literal notranslate"><span class="pre">v2.8.0</span></code>, if you explicitly use the new <a class="reference internal" href="../../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a> attribute, you will be
-automatically opted in to the new behavior, and the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute will be ignored.</p>
-</section>
-</section>
 <section id="building-your-own-openapi-ui-plugin">
 <h1>Building your own OpenAPI UI Plugin<a class="headerlink" href="#building-your-own-openapi-ui-plugin" title="Permalink to this heading">¶</a></h1>
 <p>If Litestar does not have built-in support for your OpenAPI UI framework of choice, you can easily create your own
@@ -1382,9 +1324,9 @@ maintained by Litestar. Here’s the finished product:</p>
 </section>
 <section id="oauth2-in-swagger-ui">
 <h1>OAuth2 in Swagger UI<a class="headerlink" href="#oauth2-in-swagger-ui" title="Permalink to this heading">¶</a></h1>
-<p>When using Swagger, OAuth2 settings can be configured via
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">swagger_ui_init_oauth</span></code>, which can be set to
-a dictionary containing the parameters described in the Swagger UI documentation for OAuth2
+<p>When using Swagger, OAuth2 settings can be configured via the <a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.params.init_oauth" title="litestar.openapi.plugins.SwaggerRenderPlugin"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">init_oauth</span></code></a> param of
+<a class="reference internal" href="../../reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.__init__" title="litestar.openapi.plugins.SwaggerRenderPlugin.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SwaggerRenderPlugin</span></code></a>, which can be set to a dictionary
+containing the parameters described in the Swagger UI documentation for OAuth2
 <a class="reference external" href="https://swagger.io/docs/open-source-tools/swagger-ui/usage/oauth2/">here</a>.</p>
 <p>With that, you can preset your clientId or enable PKCE support.</p>
 <div class="sd-tab-set docutils">
