@@ -1619,18 +1619,35 @@ encoding the response data ourselves, and so we explicitly declare the <code cla
 <h2>Defining DTOs on layers<a class="headerlink" href="#defining-dtos-on-layers" title="Permalink to this heading">#</a></h2>
 <p>DTOs can be defined on any <a class="reference internal" href="../applications.html#layered-architecture"><span class="std std-ref">Layer</span></a> of the application. The DTO type applied is the one
 defined in the ownership chain, closest to the handler in question.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Example of defining DTOs on layers<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
 </input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-0">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">Controller defined DTOs</span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">uuid4</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Controller</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+<span class="kn">from</span> <span class="nn">litestar.dto</span> <span class="kn">import</span> <span class="n">DataclassDTO</span>
 
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">UserDTO</span><span class="p">,</span> <span class="n">UserReturnDTO</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">UUID</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="n">UserDTO</span> <span class="o">=</span> <span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
+<span class="n">UserReturnDTO</span> <span class="o">=</span> <span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">UserController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
@@ -1665,11 +1682,21 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">Controller defined DTOs</span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">uuid4</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">uuid4</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Controller</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+<span class="kn">from</span> <span class="nn">litestar.dto</span> <span class="kn">import</span> <span class="n">DataclassDTO</span>
 
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">UserDTO</span><span class="p">,</span> <span class="n">UserReturnDTO</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="n">UUID</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="n">UserDTO</span> <span class="o">=</span> <span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
+<span class="n">UserReturnDTO</span> <span class="o">=</span> <span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">UserController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
@@ -1700,7 +1727,8 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<p>In this example, the <code class="docutils literal notranslate"><span class="pre">User</span></code> instance received by any handler that declares a <code class="docutils literal notranslate"><span class="pre">data</span></code> kwarg, is converted by the
+</div>
+</details><p>In this example, the <code class="docutils literal notranslate"><span class="pre">User</span></code> instance received by any handler that declares a <code class="docutils literal notranslate"><span class="pre">data</span></code> kwarg, is converted by the
 <code class="docutils literal notranslate"><span class="pre">UserDTO</span></code> type, and all handler return values are converted into an encodable type by <code class="docutils literal notranslate"><span class="pre">UserReturnDTO</span></code> (except for
 the <code class="docutils literal notranslate"><span class="pre">delete()</span></code> route, which has the <code class="docutils literal notranslate"><span class="pre">return_dto</span></code> disabled).</p>
 <p>DTOs can similarly be defined on <a class="reference internal" href="../../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Routers</span></code></a> and
