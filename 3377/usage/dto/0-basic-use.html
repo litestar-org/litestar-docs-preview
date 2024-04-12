@@ -1656,18 +1656,18 @@ Python 3.8+</label><div class="sd-tab-content docutils">
     <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">})</span>
 
 
-<span class="n">UserReadDTO</span> <span class="o">=</span> <span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
+<span class="k">class</span> <span class="nc">UserReadDTO</span><span class="p">(</span><span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span> <span class="o">...</span>
 
 
 <span class="k">class</span> <span class="nc">UserController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
     <span class="n">dto</span> <span class="o">=</span> <span class="n">UserWriteDTO</span>
     <span class="n">return_dto</span> <span class="o">=</span> <span class="n">UserReadDTO</span>
 
-    <span class="nd">@post</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">data</span>
 
-    <span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mr Sunglass&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;mr.sunglass@example.com&quot;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">)]</span>
 
@@ -1717,18 +1717,18 @@ Python 3.10+</label><div class="sd-tab-content docutils">
     <span class="n">config</span> <span class="o">=</span> <span class="n">DTOConfig</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">})</span>
 
 
-<span class="n">UserReadDTO</span> <span class="o">=</span> <span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
+<span class="k">class</span> <span class="nc">UserReadDTO</span><span class="p">(</span><span class="n">DataclassDTO</span><span class="p">[</span><span class="n">User</span><span class="p">]):</span> <span class="o">...</span>
 
 
 <span class="k">class</span> <span class="nc">UserController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
     <span class="n">dto</span> <span class="o">=</span> <span class="n">UserWriteDTO</span>
     <span class="n">return_dto</span> <span class="o">=</span> <span class="n">UserReadDTO</span>
 
-    <span class="nd">@post</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">data</span>
 
-    <span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mr Sunglass&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;mr.sunglass@example.com&quot;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">)]</span>
 
