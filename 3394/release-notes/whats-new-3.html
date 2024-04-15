@@ -502,7 +502,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate"><span class="pre">Response.to_asgi_response</span></code> has been removed</a></li>
-<li><a class="reference internal" href="#deprecated-scope-state-utilities">Deprecated scope state utilities</a></li>
+<li><a class="reference internal" href="#deprecated-scope-state-utilities-removed">Deprecated scope state utilities removed</a></li>
 <li><a class="reference internal" href="#deprecated-utility">Deprecated utility</a></li>
 </ul>
 
@@ -668,8 +668,8 @@ be served at the <code class="docutils literal notranslate"><span class="pre">/s
 If you need access to the app instance inside a custom <code class="docutils literal notranslate"><span class="pre">to_asgi_response</span></code> method,
 replace the usages of <code class="docutils literal notranslate"><span class="pre">app</span></code> with <code class="docutils literal notranslate"><span class="pre">request.app</span></code>.</p>
 </section>
-<section id="deprecated-scope-state-utilities">
-<h2>Deprecated scope state utilities<a class="headerlink" href="#deprecated-scope-state-utilities" title="Permalink to this heading">¶</a></h2>
+<section id="deprecated-scope-state-utilities-removed">
+<h2>Deprecated scope state utilities removed<a class="headerlink" href="#deprecated-scope-state-utilities-removed" title="Permalink to this heading">¶</a></h2>
 <p>Litestar has previously made available utilities for storing and retrieving data in the ASGI scope state. These
 utilities have been removed in version 3.0.0. If you need to store data in the ASGI scope state, you should use do so
 using a namespace that is unique to your application and unlikely to conflict with other applications.</p>
