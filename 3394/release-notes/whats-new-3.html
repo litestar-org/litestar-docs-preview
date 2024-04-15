@@ -503,7 +503,7 @@
 </li>
 <li><a class="reference internal" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate"><span class="pre">Response.to_asgi_response</span></code> has been removed</a></li>
 <li><a class="reference internal" href="#deprecated-scope-state-utilities-removed">Deprecated scope state utilities removed</a></li>
-<li><a class="reference internal" href="#deprecated-utility">Deprecated utility</a></li>
+<li><a class="reference internal" href="#deprecated-utility-function-is-sync-or-async-generator-removed">Deprecated utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> removed</a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
@@ -680,8 +680,8 @@ using a namespace that is unique to your application and unlikely to conflict wi
 <li><p><code class="docutils literal notranslate"><span class="pre">delete_litestar_scope_state</span></code></p></li>
 </ul>
 </section>
-<section id="deprecated-utility">
-<h2>Deprecated utility<a class="headerlink" href="#deprecated-utility" title="Permalink to this heading">¶</a></h2>
+<section id="deprecated-utility-function-is-sync-or-async-generator-removed">
+<h2>Deprecated utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> removed<a class="headerlink" href="#deprecated-utility-function-is-sync-or-async-generator-removed" title="Permalink to this heading">¶</a></h2>
 <p>The utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> has been removed as it is no longer used internally.</p>
 <p>If you were relying on this utility, you can define it yourself as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">isasyncgenfunction</span><span class="p">,</span> <span class="n">isgeneratorfunction</span>
