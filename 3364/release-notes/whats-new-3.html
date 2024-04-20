@@ -101,7 +101,7 @@
             <i class="i-icon chevron"></i>
           </button>
         <ul>
-          <li><a href="https://discord.gg/litestar-919193495116337154">
+          <li><a href="https://discord.gg/litestar">
                 <span>Discord Help Forum</span>
                 <small>Dedicated Discord help forum</small>
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
@@ -501,6 +501,9 @@
 <li><a class="reference internal" href="#modification-to-root-schema-site-handling">Modification to <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> Handling</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate"><span class="pre">Response.to_asgi_response</span></code> has been removed</a></li>
+<li><a class="reference internal" href="#deprecated-scope-state-utilities-removed">Deprecated scope state utilities removed</a></li>
+<li><a class="reference internal" href="#deprecated-utility-function-is-sync-or-async-generator-removed">Deprecated utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> removed</a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
@@ -658,6 +661,35 @@ the root path (<code class="docutils literal notranslate"><span class="pre">/</s
 <p>For those previously using the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute, the migration involves ensuring that the UI intended to
 be served at the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> endpoint is the first plugin listed in the <a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a>.</p>
 </section>
+</section>
+<section id="deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">
+<h2>Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate"><span class="pre">Response.to_asgi_response</span></code> has been removed<a class="headerlink" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed" title="Permalink to this heading">¶</a></h2>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">app</span></code> for <a class="reference internal" href="../reference/response/index.html#litestar.response.Response.to_asgi_response" title="litestar.response.Response.to_asgi_response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_asgi_response()</span></code></a> has been removed.
+If you need access to the app instance inside a custom <code class="docutils literal notranslate"><span class="pre">to_asgi_response</span></code> method,
+replace the usages of <code class="docutils literal notranslate"><span class="pre">app</span></code> with <code class="docutils literal notranslate"><span class="pre">request.app</span></code>.</p>
+</section>
+<section id="deprecated-scope-state-utilities-removed">
+<h2>Deprecated scope state utilities removed<a class="headerlink" href="#deprecated-scope-state-utilities-removed" title="Permalink to this heading">¶</a></h2>
+<p>Litestar has previously made available utilities for storing and retrieving data in the ASGI scope state. These
+utilities have been removed in version 3.0.0. If you need to store data in the ASGI scope state, you should use do so
+using a namespace that is unique to your application and unlikely to conflict with other applications.</p>
+<p>The following utilities have been removed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_litestar_scope_state</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_litestar_scope_state</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delete_litestar_scope_state</span></code></p></li>
+</ul>
+</section>
+<section id="deprecated-utility-function-is-sync-or-async-generator-removed">
+<h2>Deprecated utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> removed<a class="headerlink" href="#deprecated-utility-function-is-sync-or-async-generator-removed" title="Permalink to this heading">¶</a></h2>
+<p>The utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> has been removed as it is no longer used internally.</p>
+<p>If you were relying on this utility, you can define it yourself as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">isasyncgenfunction</span><span class="p">,</span> <span class="n">isgeneratorfunction</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="k">def</span> <span class="nf">is_sync_or_async_generator</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="4">    <span class="k">return</span> <span class="n">isgeneratorfunction</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">or</span> <span class="n">isasyncgenfunction</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span></pre></div>
+</div>
 </section>
 </section>
 
