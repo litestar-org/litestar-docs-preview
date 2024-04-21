@@ -494,6 +494,7 @@
     <ul>
 <li><a class="reference internal" href="#litestar.handlers.ASGIRouteHandler"><code class="docutils literal notranslate"><span class="pre">ASGIRouteHandler</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.handlers.ASGIRouteHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ASGIRouteHandler.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#litestar.handlers.ASGIRouteHandler.handle"><code class="docutils literal notranslate"><span class="pre">ASGIRouteHandler.handle()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#litestar.handlers.BaseRouteHandler"><code class="docutils literal notranslate"><span class="pre">BaseRouteHandler</span></code></a><ul>
@@ -522,7 +523,6 @@
 <li><a class="reference internal" href="#litestar.handlers.BaseRouteHandler.authorize_connection"><code class="docutils literal notranslate"><span class="pre">BaseRouteHandler.authorize_connection()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.handlers.BaseRouteHandler.on_registration"><code class="docutils literal notranslate"><span class="pre">BaseRouteHandler.on_registration()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.handlers.BaseRouteHandler.__str__"><code class="docutils literal notranslate"><span class="pre">BaseRouteHandler.__str__()</span></code></a></li>
-<li><a class="reference internal" href="#litestar.handlers.BaseRouteHandler.create_kwargs_model"><code class="docutils literal notranslate"><span class="pre">BaseRouteHandler.create_kwargs_model()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#litestar.handlers.HTTPRouteHandler"><code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a><ul>
@@ -540,6 +540,7 @@
 <li><a class="reference internal" href="#litestar.handlers.HTTPRouteHandler.get_response_handler"><code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler.get_response_handler()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.handlers.HTTPRouteHandler.to_response"><code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler.to_response()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.handlers.HTTPRouteHandler.on_registration"><code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler.on_registration()</span></code></a></li>
+<li><a class="reference internal" href="#litestar.handlers.HTTPRouteHandler.handle"><code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler.handle()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#litestar.handlers.WebsocketListener"><code class="docutils literal notranslate"><span class="pre">WebsocketListener</span></code></a><ul>
@@ -567,6 +568,8 @@
 <li><a class="reference internal" href="#litestar.handlers.WebsocketRouteHandler"><code class="docutils literal notranslate"><span class="pre">WebsocketRouteHandler</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.handlers.WebsocketRouteHandler.__init__"><code class="docutils literal notranslate"><span class="pre">WebsocketRouteHandler.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.handlers.WebsocketRouteHandler.resolve_websocket_class"><code class="docutils literal notranslate"><span class="pre">WebsocketRouteHandler.resolve_websocket_class()</span></code></a></li>
+<li><a class="reference internal" href="#litestar.handlers.WebsocketRouteHandler.on_registration"><code class="docutils literal notranslate"><span class="pre">WebsocketRouteHandler.on_registration()</span></code></a></li>
+<li><a class="reference internal" href="#litestar.handlers.WebsocketRouteHandler.handle"><code class="docutils literal notranslate"><span class="pre">WebsocketRouteHandler.handle()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#litestar.handlers.WebsocketListenerRouteHandler"><code class="docutils literal notranslate"><span class="pre">WebsocketListenerRouteHandler</span></code></a><ul>
@@ -704,6 +707,20 @@ accept any arbitrary paths that begin with the defined prefixed path. For exampl
 <li><p><span class="target" id="litestar.handlers.ASGIRouteHandler.params.type_encoders"></span><strong>type_encoders</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.ASGIRouteHandler.params.type_encoders">¶</a> – A mapping of types to callables that transform them into types supported for serialization.</p></li>
 <li><p><span class="target" id="litestar.handlers.ASGIRouteHandler.params.**kwargs"></span><strong>**kwargs</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.ASGIRouteHandler.params.**kwargs">¶</a> – Any additional kwarg - will be set in the opt dictionary.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.handlers.ASGIRouteHandler.handle">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="connection.html#litestar.connection.ASGIConnection" title="litestar.connection.ASGIConnection"><span class="pre">ASGIConnection</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.ASGIRouteHandler"><span class="pre">ASGIRouteHandler</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.ASGIRouteHandler.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>ASGI app that authorizes the connection and then awaits the handler function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="litestar.handlers.ASGIRouteHandler.handle.params.connection"></span><strong>connection</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.ASGIRouteHandler.handle.params.connection">¶</a> – The ASGI connection</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -954,11 +971,14 @@ This method is memoized so the computation occurs only once.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.handlers.BaseRouteHandler.on_registration">
-<span class="sig-name descname"><span class="pre">on_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><span class="pre">Litestar</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.BaseRouteHandler.on_registration" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">on_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><span class="pre">Litestar</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="routes.html#litestar.routes.BaseRoute" title="litestar.routes.BaseRoute"><span class="pre">BaseRoute</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.BaseRouteHandler.on_registration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called once per handler when the app object is instantiated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="target" id="litestar.handlers.BaseRouteHandler.on_registration.params.app"></span><strong>app</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.BaseRouteHandler.on_registration.params.app">¶</a> – The <a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> app object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="litestar.handlers.BaseRouteHandler.on_registration.params.app"></span><strong>app</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.BaseRouteHandler.on_registration.params.app">¶</a> – The <a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> app object.</p></li>
+<li><p><span class="target" id="litestar.handlers.BaseRouteHandler.on_registration.params.route"></span><strong>route</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.BaseRouteHandler.on_registration.params.route">¶</a> – The route this handler is being registered on</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -975,12 +995,6 @@ This method is memoized so the computation occurs only once.</p>
 <dd class="field-odd"><p>A string</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.handlers.BaseRouteHandler.create_kwargs_model">
-<span class="sig-name descname"><span class="pre">create_kwargs_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathParameterDefinition</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">KwargsModel</span></span></span><a class="headerlink" href="#litestar.handlers.BaseRouteHandler.create_kwargs_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <cite>KwargsModel</cite> for a given route handler.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1231,11 +1245,31 @@ a Response instance or an arbitrary value.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.handlers.HTTPRouteHandler.on_registration">
-<span class="sig-name descname"><span class="pre">on_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><span class="pre">Litestar</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler.on_registration" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">on_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><span class="pre">Litestar</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="routes.html#litestar.routes.BaseRoute" title="litestar.routes.BaseRoute"><span class="pre">BaseRoute</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler.on_registration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called once per handler when the app object is instantiated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="target" id="litestar.handlers.HTTPRouteHandler.on_registration.params.app"></span><strong>app</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.HTTPRouteHandler.on_registration.params.app">¶</a> – The <a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> app object.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="litestar.handlers.HTTPRouteHandler.on_registration.params.app"></span><strong>app</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.HTTPRouteHandler.on_registration.params.app">¶</a> – The <a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> app object.</p></li>
+<li><p><span class="target" id="litestar.handlers.HTTPRouteHandler.on_registration.params.route"></span><strong>route</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.HTTPRouteHandler.on_registration.params.route">¶</a> – The route this handler is being registered on</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.handlers.HTTPRouteHandler.handle">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><span class="pre">Request</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.HTTPRouteHandler.handle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>ASGI app that creates a <a class="reference internal" href="connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a> from the passed in args, determines which handler function to call and then</dt><dd><p>handles the call.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="litestar.handlers.HTTPRouteHandler.handle.params.connection"></span><strong>connection</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.HTTPRouteHandler.handle.params.connection">¶</a> – The request</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -1434,6 +1468,37 @@ default websocket class.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The default <a class="reference internal" href="connection.html#litestar.connection.WebSocket" title="litestar.connection.WebSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebSocket</span></code></a> class for the route handler.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.handlers.WebsocketRouteHandler.on_registration">
+<span class="sig-name descname"><span class="pre">on_registration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><span class="pre">Litestar</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="routes.html#litestar.routes.BaseRoute" title="litestar.routes.BaseRoute"><span class="pre">BaseRoute</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.WebsocketRouteHandler.on_registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called once per handler when the app object is instantiated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="litestar.handlers.WebsocketRouteHandler.on_registration.params.app"></span><strong>app</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.WebsocketRouteHandler.on_registration.params.app">¶</a> – The <a class="reference internal" href="app.html#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a> app object.</p></li>
+<li><p><span class="target" id="litestar.handlers.WebsocketRouteHandler.on_registration.params.route"></span><strong>route</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.WebsocketRouteHandler.on_registration.params.route">¶</a> – The route this handler is being registered on</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.handlers.WebsocketRouteHandler.handle">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="connection.html#litestar.connection.WebSocket" title="litestar.connection.websocket.WebSocket"><span class="pre">WebSocket</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.handlers.WebsocketRouteHandler.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>ASGI app that creates a WebSocket from the passed in args, and then awaits the handler function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="litestar.handlers.WebsocketRouteHandler.handle.params.connection"></span><strong>connection</strong><a class="paramlink headerlink reference internal" href="#litestar.handlers.WebsocketRouteHandler.handle.params.connection">¶</a> – WebSocket connection</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
