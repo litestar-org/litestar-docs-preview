@@ -2720,13 +2720,13 @@ which is used in for sending pings, and <code class="docutils literal notranslat
 </input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-6">
 Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">sleep</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">AsyncGenerator</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">ServerSentEvent</span><span class="p">,</span> <span class="n">ServerSentEventMessage</span>
 
 
-<span class="k">async</span> <span class="k">def</span> <span class="nf">my_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ServerSentEventMessage</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
         <span class="k">await</span> <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
@@ -2759,13 +2759,14 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 </input><label class="sd-tab-label" data-sync-id="3.9" for="sd-tab-item-7">
 Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
 
 <span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">ServerSentEvent</span><span class="p">,</span> <span class="n">ServerSentEventMessage</span>
 
 
-<span class="k">async</span> <span class="k">def</span> <span class="nf">my_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ServerSentEventMessage</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
         <span class="k">await</span> <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
