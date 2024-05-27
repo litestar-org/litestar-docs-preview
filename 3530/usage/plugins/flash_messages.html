@@ -1560,7 +1560,6 @@ Jinja2</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">litestar.contrib.jinja</span> <span class="kn">import</span> <span class="n">JinjaTemplateEngine</span>
 <span class="kn">from</span> <span class="nn">litestar.middleware.session.server_side</span> <span class="kn">import</span> <span class="n">ServerSideSessionConfig</span>
 <span class="kn">from</span> <span class="nn">litestar.plugins.flash</span> <span class="kn">import</span> <span class="n">FlashConfig</span><span class="p">,</span> <span class="n">FlashPlugin</span>
-<span class="kn">from</span> <span class="nn">litestar.stores.memory</span> <span class="kn">import</span> <span class="n">MemoryStore</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 <span class="n">template_config</span> <span class="o">=</span> <span class="n">TemplateConfig</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">JinjaTemplateEngine</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;templates&quot;</span><span class="p">)</span>
@@ -1569,7 +1568,6 @@ Jinja2</label><div class="sd-tab-content docutils">
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
     <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">flash_plugin</span><span class="p">],</span>
     <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">ServerSideSessionConfig</span><span class="p">()</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
-    <span class="n">stores</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sessions&quot;</span><span class="p">:</span> <span class="n">MemoryStore</span><span class="p">()},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1584,7 +1582,6 @@ Mako</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">litestar.contrib.mako</span> <span class="kn">import</span> <span class="n">MakoTemplateEngine</span>
 <span class="kn">from</span> <span class="nn">litestar.middleware.session.server_side</span> <span class="kn">import</span> <span class="n">ServerSideSessionConfig</span>
 <span class="kn">from</span> <span class="nn">litestar.plugins.flash</span> <span class="kn">import</span> <span class="n">FlashConfig</span><span class="p">,</span> <span class="n">FlashPlugin</span>
-<span class="kn">from</span> <span class="nn">litestar.stores.memory</span> <span class="kn">import</span> <span class="n">MemoryStore</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 <span class="n">template_config</span> <span class="o">=</span> <span class="n">TemplateConfig</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">MakoTemplateEngine</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;templates&quot;</span><span class="p">)</span>
@@ -1593,7 +1590,6 @@ Mako</label><div class="sd-tab-content docutils">
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
     <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">flash_plugin</span><span class="p">],</span>
     <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">ServerSideSessionConfig</span><span class="p">()</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
-    <span class="n">stores</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sessions&quot;</span><span class="p">:</span> <span class="n">MemoryStore</span><span class="p">()},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1608,7 +1604,6 @@ MiniJinja</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">litestar.contrib.minijinja</span> <span class="kn">import</span> <span class="n">MiniJinjaTemplateEngine</span>
 <span class="kn">from</span> <span class="nn">litestar.middleware.session.server_side</span> <span class="kn">import</span> <span class="n">ServerSideSessionConfig</span>
 <span class="kn">from</span> <span class="nn">litestar.plugins.flash</span> <span class="kn">import</span> <span class="n">FlashConfig</span><span class="p">,</span> <span class="n">FlashPlugin</span>
-<span class="kn">from</span> <span class="nn">litestar.stores.memory</span> <span class="kn">import</span> <span class="n">MemoryStore</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 <span class="n">template_config</span> <span class="o">=</span> <span class="n">TemplateConfig</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">MiniJinjaTemplateEngine</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;templates&quot;</span><span class="p">)</span>
@@ -1617,7 +1612,6 @@ MiniJinja</label><div class="sd-tab-content docutils">
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
     <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">flash_plugin</span><span class="p">],</span>
     <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">ServerSideSessionConfig</span><span class="p">()</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
-    <span class="n">stores</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sessions&quot;</span><span class="p">:</span> <span class="n">MemoryStore</span><span class="p">()},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1638,7 +1632,6 @@ The same approach applies to Mako and MiniJinja engines as well.</p>
 <span class="kn">from</span> <span class="nn">litestar.middleware.session.server_side</span> <span class="kn">import</span> <span class="n">ServerSideSessionConfig</span>
 <span class="kn">from</span> <span class="nn">litestar.plugins.flash</span> <span class="kn">import</span> <span class="n">FlashConfig</span><span class="p">,</span> <span class="n">FlashPlugin</span><span class="p">,</span> <span class="n">flash</span>
 <span class="kn">from</span> <span class="nn">litestar.response</span> <span class="kn">import</span> <span class="n">Template</span>
-<span class="kn">from</span> <span class="nn">litestar.stores.memory</span> <span class="kn">import</span> <span class="n">MemoryStore</span>
 <span class="kn">from</span> <span class="nn">litestar.template.config</span> <span class="kn">import</span> <span class="n">TemplateConfig</span>
 
 <span class="n">template_config</span> <span class="o">=</span> <span class="n">TemplateConfig</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">JinjaTemplateEngine</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;templates&quot;</span><span class="p">)</span>
@@ -1665,7 +1658,6 @@ The same approach applies to Mako and MiniJinja engines as well.</p>
     <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
     <span class="n">template_config</span><span class="o">=</span><span class="n">template_config</span><span class="p">,</span>
     <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">ServerSideSessionConfig</span><span class="p">()</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
-    <span class="n">stores</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sessions&quot;</span><span class="p">:</span> <span class="n">MemoryStore</span><span class="p">()},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1674,7 +1666,7 @@ The same approach applies to Mako and MiniJinja engines as well.</p>
 <h3>Breakdown<a class="headerlink" href="#breakdown" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Here we import the requires classes and functions from the Litestar package and related plugins.</p></li>
-<li><p>Flash messages requires a valid session configuration, so we create a basic <code class="docutils literal notranslate"><span class="pre">MemoryStore</span></code> store and enabled the <code class="docutils literal notranslate"><span class="pre">ServerSideSession</span></code> middleware.</p></li>
+<li><p>Flash messages requires a valid session configuration, so we create and enable the <code class="docutils literal notranslate"><span class="pre">ServerSideSession</span></code> middleware.</p></li>
 <li><p>We then create our <code class="docutils literal notranslate"><span class="pre">TemplateConfig</span></code> and <code class="docutils literal notranslate"><span class="pre">FlashConfig</span></code> instances, each setting up the configuration for
 the template engine and flash messages, respectively.</p></li>
 <li><p>A single route handler named <code class="docutils literal notranslate"><span class="pre">index</span></code> is defined using the <code class="docutils literal notranslate"><span class="pre">&#64;get()</span></code> decorator.</p>
