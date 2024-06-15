@@ -11,14 +11,14 @@
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(sessionStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=aecf457f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=aa21bc99" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=bb1fd5f2" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=10936375" />
-    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=9fce248e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=9989272a" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,21 +30,21 @@
 </style>
     <meta property="og:type" content="website"/><meta property="og:title" content="Route handlers"/>
 <meta name="twitter:card" content="summary"/>
-<meta property="og:image" content="_static/logo-light.svg"/>
+<meta property="og:image" content="_static/logo-light.png"/>
   </head>
 <body><div class="document"><div class="announcement">
     <div class="announcement-inner">
       <p>You are viewing the <bold>local</bold> version of the documentation. Click here to go to the latest version.</p>
       <button class="announcement-close" aria-label="Close announcement">
-        <i class="i-icon close"></i>
+        <i class="i-lucide close"></i>
       </button>
     </div>
   </div><div class="sy-head">
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="../../_static/logo-light.svg" alt="Litestar" height="28" />
-      <img class="dark-logo" src="../../_static/logo-dark.svg" alt="Litestar" height="28" />
+      <img class="light-logo" src="../../_static/logo-light.png" alt="Litestar" height="28" />
+      <img class="dark-logo" src="../../_static/logo-dark.png" alt="Litestar" height="28" />
       <strong>Litestar</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
@@ -53,7 +53,7 @@
 <ul><li class="link"><a href="../../index.html">Home</a></li>
       <li class="link"><button type="button">
             <span>Community</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="../../contribution-guide.html">
@@ -69,7 +69,7 @@
       </li>
       <li class="link"><button type="button">
             <span>About</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="https://litestar.dev/about/organization">
@@ -82,7 +82,7 @@
       </li>
       <li class="link"><button type="button">
             <span>Release notes</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="../../release-notes/whats-new-3.html">
@@ -98,7 +98,7 @@
       </li>
       <li class="link"><button type="button">
             <span>Help</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="https://discord.gg/litestar">
@@ -128,26 +128,29 @@
     <button type="button" aria-label="Versions">
       <span class="md:hidden">Versions</span>
       <span class="hidden md:inline">latest</span>
-      <i class="i-icon chevron"></i>
+      <i class="i-lucide chevron-down"></i>
     </button>
     <div class="nav-versions-choices">
       <ul><li><a href="/latest">latest</a></li><li><a href="/main">development</a></li><li><a href="/3-dev">v3</a></li><li><a href="/2">v2</a></li><li><a href="/1">v1</a></li></ul></div>
   </div>
         
-        <div class="sy-head-social flex items-center">
-            <a class="flex items-center" href="https://discord.gg/litestar-919193495116337154" aria-label="Discord">
-              <i class="i-icon discord"></i>
-            </a>
-        </div>
+        <div class="sy-head-socials flex items-center">
+  <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)">
+    <i class="i-simpleicons x-twitter"></i>
+  </a>
+    <a href="https://discord.gg/litestar" aria-label="Discord">
+      <i class="i-simpleicons discord"></i>
+    </a>
+</div>
       </div>
     </div>
     <div class="sy-head-actions flex items-center shrink-0 print:hidden">
       <button class="js-theme theme-switch flex items-center"
-        data-aria-auto="Switch to light color mode"
-        data-aria-light="Switch to dark color mode"
-        data-aria-dark="Switch to auto color mode">
-        <i class="i-icon theme-icon"></i>
-      </button>
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button>
       <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
@@ -178,7 +181,7 @@
   </ul>
 </div>
 
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Usage</a><ul class="current">
@@ -307,7 +310,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/datastructures/index.html">datastructures</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/datastructures/secret_values.html">secret_values</a></li>
@@ -407,7 +410,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../migration/index.html">Migrating to Litestar</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../migration/flask.html">From Flask</a></li>
@@ -471,7 +474,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Contributing</span></p>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Contributing</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../contribution-guide.html">Contribution Guide</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
@@ -486,7 +489,7 @@
   <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
   <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
-      <i class="i-icon close"></i>
+      <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
   <div class="localtoc">
@@ -501,7 +504,7 @@
 </li>
 <li><a class="reference internal" href="#websocket-route-handlers">Websocket route handlers</a></li>
 <li><a class="reference internal" href="#asgi-route-handlers">ASGI route handlers</a><ul>
-<li><a class="reference internal" href="#limitations-of-asgi-route-handlers">Limitations of ASGI route handlers</a></li>
+<li><a class="reference internal" href="#asgi-route-handler-considerations">ASGI route handler considerations</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#route-handler-indexing">Route handler indexing</a></li>
@@ -515,17 +518,17 @@
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
   data-type="github" data-user="litestar-org" data-repo="litestar">
   <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
-    <i class="i-icon github"></i>
+    <i class="i-simpleicons github"></i>
   </span>
   <span class="flex-grow px-2">
     <span>litestar-org/litestar</span>
     <span class="flex text-sm repo-stats-count">
       <span class="flex items-center pr-3">
-        <i class="i-icon star"></i>
+        <i class="i-lucide star"></i>
         <strong class="js-repo-stars ml-1">0</strong>
       </span>
       <span class="flex items-center">
-        <i class="i-icon git-fork"></i>
+        <i class="i-lucide git-fork"></i>
         <strong class="js-repo-forks ml-1">0</strong>
       </span>
     </span>
@@ -541,7 +544,7 @@
   <div class="sy-breadcrumbs-inner flex items-center">
     <div class="md:hidden mr-3">
       <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
-        <i class="i-icon menu"></i>
+        <i class="i-lucide menu"></i>
       </button>
     </div>
     <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -575,7 +578,7 @@
     <div class="xl:hidden ml-1">
       <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
         aria-expanded="false">
-        <i class="i-icon outdent"></i>
+        <i class="i-lucide outdent"></i>
       </button>
     </div>
   </div>
@@ -589,7 +592,7 @@
 handler <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorators</span></a> exported from Litestar.</p>
 <p>For example:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Defining a route handler by decorating a function with the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.get" title="litestar.handlers.get"><code class="xref py py-class docutils literal notranslate"><span class="pre">&#64;get()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">Defining a route handler by decorating a function with the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.get" title="litestar.handlers.get"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;get()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
 </span><span data-line="2">
 </span><span data-line="3">
@@ -765,11 +768,10 @@ application boot-up process.</p>
 </section>
 <section id="http-route-handlers">
 <h2>HTTP route handlers<a class="headerlink" href="#http-route-handlers" title="Permalink to this heading">¶</a></h2>
-<p>The most commonly used route handlers are those that handle HTTP requests and responses.
-These route handlers all inherit from the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a> class, which is aliased as the
-<a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a> called <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">route()</span></code></a>:</p>
+<p>The <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a> is used to handle HTTP requests, and can be
+created with the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">route()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a>:</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Defining a route handler by decorating a function with the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-class docutils literal notranslate"><span class="pre">&#64;route()</span></code></a>
+<div class="code-block-caption"><span class="caption-text">Defining a route handler by decorating a function with the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;route()</span></code></a>
 <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a></span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">HttpMethod</span><span class="p">,</span> <span class="n">route</span>
 </span><span data-line="2">
@@ -779,17 +781,21 @@ These route handlers all inherit from the <a class="reference internal" href="..
 </span></pre></div>
 </div>
 </div>
-<p>As mentioned above, <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;route()</span></code></a> is merely an alias for <code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code>,
-thus the below code is equivalent to the one above:</p>
+<p>The same can be achieved without a decorator, by using <code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code> directly:</p>
 <div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text">Defining a route handler by decorating a function with the
-<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a> class</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">Defining a route handler creating an instance of
+<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a></span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">HttpMethod</span>
 </span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.handlers.http_handlers</span> <span class="kn">import</span> <span class="n">HTTPRouteHandler</span>
 </span><span data-line="3">
 </span><span data-line="4">
-</span><span data-line="5"><span class="nd">@HTTPRouteHandler</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/some-path&quot;</span><span class="p">,</span> <span class="n">http_method</span><span class="o">=</span><span class="p">[</span><span class="n">HttpMethod</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="o">.</span><span class="n">POST</span><span class="p">])</span>
-</span><span data-line="6"><span class="k">async</span> <span class="k">def</span> <span class="nf">my_endpoint</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span> <span class="nf">my_endpoint</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="n">handler</span> <span class="o">=</span> <span class="n">HTTPRouteHandler</span><span class="p">(</span>
+</span><span data-line="8">    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/some-path&quot;</span><span class="p">,</span>
+</span><span data-line="9">    <span class="n">http_method</span><span class="o">=</span><span class="p">[</span><span class="n">HttpMethod</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">HttpMethod</span><span class="o">.</span><span class="n">POST</span><span class="p">],</span>
+</span><span data-line="10">    <span class="n">fn</span><span class="o">=</span><span class="n">my_endpoint</span>
+</span><span data-line="11"><span class="p">)</span>
 </span></pre></div>
 </div>
 </div>
@@ -806,8 +812,8 @@ which correlates with their name:</p>
 <li><p><a class="reference internal" href="../../reference/handlers.html#litestar.handlers.post" title="litestar.handlers.post"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;post()</span></code></a></p></li>
 <li><p><a class="reference internal" href="../../reference/handlers.html#litestar.handlers.put" title="litestar.handlers.put"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;put()</span></code></a></p></li>
 </ul>
-<p>These are used exactly like <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;route()</span></code></a> with the sole exception that you cannot configure the
-<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.http_method" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">http_method</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a>:</p>
+<p>These are used exactly like <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;route()</span></code></a> with the sole exception that you don’t need to configure
+the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.http_method" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">http_method</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwarg</span></a>:</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Click to see the predefined route handlers<div class="sd-summary-down docutils">
@@ -863,11 +869,7 @@ Click to see the predefined route handlers<div class="sd-summary-down docutils">
 </div>
 </div>
 </div>
-</details><p>Although these <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorators</span></a> are merely subclasses of <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code></a> that pre-set
-the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.http_method" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">http_method</span></code></a>, using <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.get" title="litestar.handlers.get"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;get()</span></code></a>,
-<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.patch" title="litestar.handlers.patch"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;patch()</span></code></a>, <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.put" title="litestar.handlers.put"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;put()</span></code></a>, <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.delete" title="litestar.handlers.delete"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;delete()</span></code></a>, or
-<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.post" title="litestar.handlers.post"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;post()</span></code></a> instead of <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.route" title="litestar.handlers.route"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;route()</span></code></a> makes the code clearer and simpler.</p>
-<p>Furthermore, in the OpenAPI specification each unique combination of HTTP verb (e.g. <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, etc.) and path
+</details><p>Furthermore, in the OpenAPI specification each unique combination of HTTP verb (e.g. <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, etc.) and path
 is regarded as a distinct <a class="reference external" href="https://spec.openapis.org/oas/latest.html#operation-object">operation</a>, and each
 operation should be distinguished by a unique <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.operation_id" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">operation_id</span></code></a> and optimally
 also have a <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.summary" title="litestar.handlers.HTTPRouteHandler"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">summary</span></code></a> and
@@ -899,19 +901,22 @@ and dealing with keeping it open, exceptions, client disconnects, and content ne
 </span></pre></div>
 </div>
 </div>
-<p>The <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;websocket()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a> is an alias of the
-<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebsocketRouteHandler</span></code></a> class. Thus, the below code is equivalent to the one above:</p>
+<p>The <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;websocket()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a> can be used to create an instance of
+<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebsocketRouteHandler</span></code></a>. Therefore, the below code is equivalent to the one above:</p>
 <div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Using the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.WebsocketRouteHandler" title="litestar.handlers.WebsocketRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebsocketRouteHandler</span></code></a> class directly</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">WebSocket</span>
 </span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.handlers.websocket_handlers</span> <span class="kn">import</span> <span class="n">WebsocketRouteHandler</span>
 </span><span data-line="3">
-</span><span data-line="4">
-</span><span data-line="5"><span class="nd">@WebsocketRouteHandler</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/socket&quot;</span><span class="p">)</span>
-</span><span data-line="6"><span class="k">async</span> <span class="k">def</span> <span class="nf">my_websocket_handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="7">   <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-</span><span data-line="8">   <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
-</span><span data-line="9">   <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="4"><span class="k">async</span> <span class="k">def</span> <span class="nf">my_websocket_handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="5">   <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span><span data-line="6">   <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
+</span><span data-line="7">   <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="n">my_websocket_handler</span> <span class="o">=</span> <span class="n">WebsocketRouteHandler</span><span class="p">(</span>
+</span><span data-line="10">    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/socket&quot;</span><span class="p">,</span>
+</span><span data-line="11">    <span class="n">fn</span><span class="o">=</span><span class="n">my_websocket_handler</span><span class="p">,</span>
+</span><span data-line="12"><span class="p">)</span>
 </span></pre></div>
 </div>
 </div>
@@ -956,8 +961,8 @@ will be raised.</p>
 </span></pre></div>
 </div>
 </div>
-<p>Like other route handlers, the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;asgi()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a> is an alias of the
-<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.ASGIRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIRouteHandler</span></code></a> class. Thus, the code below is equivalent to the one above:</p>
+<p><a class="reference internal" href="../../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;asgi()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.12)"><span class="xref std std-term">decorator</span></a> can be used to create an instance of
+<a class="reference internal" href="../../reference/handlers.html#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.ASGIRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIRouteHandler</span></code></a>. Therefore, the code below is equivalent to the one above:</p>
 <div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">Using the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.ASGIRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIRouteHandler</span></code></a> class directly</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Response</span>
@@ -965,23 +970,23 @@ will be raised.</p>
 </span><span data-line="3"><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_400_BAD_REQUEST</span>
 </span><span data-line="4"><span class="kn">from</span> <span class="nn">litestar.types</span> <span class="kn">import</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">Send</span>
 </span><span data-line="5">
-</span><span data-line="6">
-</span><span data-line="7"><span class="nd">@ASGIRouteHandler</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/my-asgi-app&quot;</span><span class="p">)</span>
-</span><span data-line="8"><span class="k">async</span> <span class="k">def</span> <span class="nf">my_asgi_app</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="9">   <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
-</span><span data-line="10">       <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
-</span><span data-line="11">           <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
-</span><span data-line="12">           <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="o">=</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">)</span>
-</span><span data-line="13">       <span class="k">return</span>
-</span><span data-line="14">   <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span>
-</span><span data-line="15">       <span class="p">{</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;unsupported request&quot;</span><span class="p">},</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_400_BAD_REQUEST</span>
-</span><span data-line="16">   <span class="p">)</span>
-</span><span data-line="17">   <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="o">=</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">)</span>
+</span><span data-line="6"><span class="k">async</span> <span class="k">def</span> <span class="nf">my_asgi_app</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="7">   <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
+</span><span data-line="8">       <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
+</span><span data-line="9">           <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+</span><span data-line="10">           <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="o">=</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">)</span>
+</span><span data-line="11">       <span class="k">return</span>
+</span><span data-line="12">   <span class="n">response</span> <span class="o">=</span> <span class="n">Response</span><span class="p">(</span>
+</span><span data-line="13">       <span class="p">{</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;unsupported request&quot;</span><span class="p">},</span> <span class="n">status_code</span><span class="o">=</span><span class="n">HTTP_400_BAD_REQUEST</span>
+</span><span data-line="14">   <span class="p">)</span>
+</span><span data-line="15">   <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="o">=</span><span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">)</span>
+</span><span data-line="16">
+</span><span data-line="17"><span class="n">my_asgi_app</span> <span class="o">=</span> <span class="n">ASGIRouteHandler</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/my-asgi-app&quot;</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="n">my_asgi_app</span><span class="p">)</span>
 </span></pre></div>
 </div>
 </div>
-<section id="limitations-of-asgi-route-handlers">
-<h3>Limitations of ASGI route handlers<a class="headerlink" href="#limitations-of-asgi-route-handlers" title="Permalink to this heading">¶</a></h3>
+<section id="asgi-route-handler-considerations">
+<h3>ASGI route handler considerations<a class="headerlink" href="#asgi-route-handler-considerations" title="Permalink to this heading">¶</a></h3>
 <p>In difference to the other route handlers, the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;asgi()</span></code></a> route handler accepts only three
 <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.12)"><span class="xref std std-term">kwargs</span></a> that <strong>must</strong> be defined:</p>
 <ul class="simple">
@@ -1270,7 +1275,7 @@ required.</p>
         <div class="navigation flex print:hidden">
   <div class="navigation-prev">
     <a href="overview.html">
-      <i class="i-icon chevron"></i>
+      <i class="i-lucide chevron-left"></i>
       <div class="page-info">
         <span>Previous</span>
         
@@ -1285,7 +1290,7 @@ required.</p>
         <span>Next</span>
         <div class="title">Parameters</div>
       </div>
-      <i class="i-icon chevron"></i>
+      <i class="i-lucide chevron-right"></i>
     </a>
   </div>
 </div>
@@ -1299,20 +1304,20 @@ required.</p>
     
     <div class="sy-foot-reserved md:flex justify-between items-center">
       <div class="sy-foot-copyright"><p>2024, Litestar Organization</p>
-        
-        <p>
-          Made with
-          
-          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
-          
-          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
-        </p>
-      </div>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
       <div class="sy-foot-socials">
-          <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
-          <a href="https://discord.gg/litestar-919193495116337154" aria-label="Discord"><i class="i-icon discord"></i></a>
-          <a href="https://www.reddit.com/r/LitestarAPI" aria-label="Reddit"><i class="i-icon reddit"></i></a>
-      </div>
+  <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)"><i class="i-simpleicons x-twitter"></i></a>
+  <a href="https://discord.gg/litestar" aria-label="Discord"><i class="i-simpleicons discord"></i></a>
+  <a href="https://www.reddit.com/r/LitestarAPI" aria-label="Reddit"><i class="i-simpleicons reddit"></i></a>
+</div>
     </div>
   </div>
 </footer></div>
@@ -1328,7 +1333,7 @@ required.</p>
       <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
       <script src="../../_static/design-tabs.js?v=36754332"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="../../_static/shibuya.js?v=9aab5f5b"></script>
+      <script src="../../_static/shibuya.js?v=5f0e4c24"></script>
       <script src="../../_static/versioning.js?v=bc681eff"></script>
     
 </body>

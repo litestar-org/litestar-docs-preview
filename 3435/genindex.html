@@ -10,14 +10,14 @@
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(sessionStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=aecf457f" />
-    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=aa21bc99" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=bb1fd5f2" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="_static/style.css?v=10936375" />
-    <link rel="stylesheet" type="text/css" href="_static/litestar-sphinx-theme.css?v=9fce248e" />
+    <link rel="stylesheet" type="text/css" href="_static/litestar-sphinx-theme.css?v=9989272a" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,15 +32,15 @@
     <div class="announcement-inner">
       <p>You are viewing the <bold>local</bold> version of the documentation. Click here to go to the latest version.</p>
       <button class="announcement-close" aria-label="Close announcement">
-        <i class="i-icon close"></i>
+        <i class="i-lucide close"></i>
       </button>
     </div>
   </div><div class="sy-head">
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="_static/logo-light.svg" alt="Litestar" height="28" />
-      <img class="dark-logo" src="_static/logo-dark.svg" alt="Litestar" height="28" />
+      <img class="light-logo" src="_static/logo-light.png" alt="Litestar" height="28" />
+      <img class="dark-logo" src="_static/logo-dark.png" alt="Litestar" height="28" />
       <strong>Litestar</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
@@ -49,7 +49,7 @@
 <ul><li class="link"><a href="index.html">Home</a></li>
       <li class="link"><button type="button">
             <span>Community</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="contribution-guide.html">
@@ -65,7 +65,7 @@
       </li>
       <li class="link"><button type="button">
             <span>About</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="https://litestar.dev/about/organization">
@@ -78,7 +78,7 @@
       </li>
       <li class="link"><button type="button">
             <span>Release notes</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="release-notes/whats-new-3.html">
@@ -94,7 +94,7 @@
       </li>
       <li class="link"><button type="button">
             <span>Help</span>
-            <i class="i-icon chevron"></i>
+            <i class="i-lucide chevron-down"></i>
           </button>
         <ul>
           <li><a href="https://discord.gg/litestar">
@@ -124,26 +124,29 @@
     <button type="button" aria-label="Versions">
       <span class="md:hidden">Versions</span>
       <span class="hidden md:inline">latest</span>
-      <i class="i-icon chevron"></i>
+      <i class="i-lucide chevron-down"></i>
     </button>
     <div class="nav-versions-choices">
       <ul><li><a href="/latest">latest</a></li><li><a href="/main">development</a></li><li><a href="/3-dev">v3</a></li><li><a href="/2">v2</a></li><li><a href="/1">v1</a></li></ul></div>
   </div>
         
-        <div class="sy-head-social flex items-center">
-            <a class="flex items-center" href="https://discord.gg/litestar-919193495116337154" aria-label="Discord">
-              <i class="i-icon discord"></i>
-            </a>
-        </div>
+        <div class="sy-head-socials flex items-center">
+  <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)">
+    <i class="i-simpleicons x-twitter"></i>
+  </a>
+    <a href="https://discord.gg/litestar" aria-label="Discord">
+      <i class="i-simpleicons discord"></i>
+    </a>
+</div>
       </div>
     </div>
     <div class="sy-head-actions flex items-center shrink-0 print:hidden">
       <button class="js-theme theme-switch flex items-center"
-        data-aria-auto="Switch to light color mode"
-        data-aria-light="Switch to dark color mode"
-        data-aria-dark="Switch to auto color mode">
-        <i class="i-icon theme-icon"></i>
-      </button>
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button>
       <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
@@ -208,6 +211,8 @@
 </li>
         <li><a href="reference/events.html#litestar.events.SimpleEventEmitter.emit.params.**kwargs">(litestar.events.SimpleEventEmitter.emit parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.**kwargs">(litestar.handlers.asgi parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.**kwargs">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.**kwargs">(litestar.handlers.BaseRouteHandler parameter)</a>
@@ -225,6 +230,12 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.**kwargs">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.**kwargs">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.**kwargs">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.**kwargs">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.**kwargs">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.**kwargs">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
 </li>
@@ -661,10 +672,6 @@
 </li>
         <li><a href="reference/events.html#litestar.events.EventListener.__call__">(litestar.events.EventListener method)</a>
 </li>
-        <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.__call__">(litestar.handlers.BaseRouteHandler method)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.__call__">(litestar.handlers.HTTPRouteHandler method)</a>
-</li>
         <li><a href="reference/middleware/index.html#litestar.middleware.AbstractAuthenticationMiddleware.__call__">(litestar.middleware.AbstractAuthenticationMiddleware method)</a>
 </li>
         <li><a href="reference/middleware/index.html#litestar.middleware.AbstractMiddleware.__call__">(litestar.middleware.AbstractMiddleware method)</a>
@@ -897,19 +904,7 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.__init__">(litestar.handlers.BaseRouteHandler method)</a>
 </li>
-        <li><a href="reference/handlers.html#litestar.handlers.delete.__init__">(litestar.handlers.delete method)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.get.__init__">(litestar.handlers.get method)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.head.__init__">(litestar.handlers.head method)</a>
-</li>
         <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.__init__">(litestar.handlers.HTTPRouteHandler method)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.patch.__init__">(litestar.handlers.patch method)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.post.__init__">(litestar.handlers.post method)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.put.__init__">(litestar.handlers.put method)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.__init__">(litestar.handlers.WebsocketListener method)</a>
 </li>
@@ -1068,34 +1063,6 @@
         <li><a href="reference/plugins/index.html#litestar.plugins.OpenAPISchemaPluginProtocol.__init__">(litestar.plugins.OpenAPISchemaPluginProtocol method)</a>
 </li>
         <li><a href="reference/plugins/index.html#litestar.plugins.SerializationPluginProtocol.__init__">(litestar.plugins.SerializationPluginProtocol method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AlembicAsyncConfig.__init__">(litestar.plugins.sqlalchemy.AlembicAsyncConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AlembicSyncConfig.__init__">(litestar.plugins.sqlalchemy.AlembicSyncConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AsyncSessionConfig.__init__">(litestar.plugins.sqlalchemy.AsyncSessionConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntAuditBase.__init__">(litestar.plugins.sqlalchemy.BigIntAuditBase method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntBase.__init__">(litestar.plugins.sqlalchemy.BigIntBase method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.EngineConfig.__init__">(litestar.plugins.sqlalchemy.EngineConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.__init__">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTOConfig.__init__">(litestar.plugins.sqlalchemy.SQLAlchemyDTOConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.__init__">(litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyPlugin.__init__">(litestar.plugins.sqlalchemy.SQLAlchemyPlugin method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.__init__">(litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.__init__">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase.__init__">(litestar.plugins.sqlalchemy.UUIDAuditBase method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDBase.__init__">(litestar.plugins.sqlalchemy.UUIDBase method)</a>
 </li>
         <li><a href="reference/plugins/structlog.html#litestar.plugins.structlog.StructlogConfig.__init__">(litestar.plugins.structlog.StructlogConfig method)</a>
 </li>
@@ -1369,6 +1336,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.after_request">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.after_request">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/router.html#litestar.router.Router.params.after_request">(litestar.router.Router parameter)</a>
 </li>
         <li><a href="reference/static_files.html#litestar.static_files.create_static_files_router.params.after_request">(litestar.static_files.create_static_files_router parameter)</a>
@@ -1399,6 +1368,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.after_response">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.after_response">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/router.html#litestar.router.Router.params.after_response">(litestar.router.Router parameter)</a>
 </li>
         <li><a href="reference/static_files.html#litestar.static_files.create_static_files_router.params.after_response">(litestar.static_files.create_static_files_router parameter)</a>
@@ -1415,10 +1386,6 @@
       <li><a href="reference/types.html#litestar.types.AfterRequestHookHandler">AfterRequestHookHandler (in module litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.AfterResponseHookHandler">AfterResponseHookHandler (in module litestar.types)</a>
-</li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AlembicAsyncConfig">AlembicAsyncConfig (class in litestar.plugins.sqlalchemy)</a>
-</li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AlembicSyncConfig">AlembicSyncConfig (class in litestar.plugins.sqlalchemy)</a>
 </li>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.BaseJWTAuth.algorithm">algorithm (litestar.security.jwt.BaseJWTAuth attribute)</a>
 
@@ -1500,6 +1467,8 @@
         <li><a href="reference/typing.html#litestar.typing.FieldDefinition.from_kwarg.params.annotation">(litestar.typing.FieldDefinition.from_kwarg parameter)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.any_of">any_of (litestar.openapi.spec.Schema attribute)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.AnyCallable">AnyCallable (in module litestar.types)</a>
@@ -1537,12 +1506,6 @@
 </li>
         <li><a href="reference/middleware/session/base.html#litestar.middleware.session.base.SessionMiddleware.params.app">(litestar.middleware.session.base.SessionMiddleware parameter)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.create_all_metadata.params.app">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.create_all_metadata parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.create_all_metadata.params.app">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.create_all_metadata parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.update_app_state.params.app">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.update_app_state parameter)</a>
-</li>
         <li><a href="reference/response/file.html#litestar.response.file.File.to_asgi_response.params.app">(litestar.response.file.File.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.File.to_asgi_response.params.app">(litestar.response.File.to_asgi_response parameter)</a>
@@ -1568,8 +1531,6 @@
         <li><a href="reference/testing.html#litestar.testing.TestClient.params.app">(litestar.testing.TestClient parameter)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticInitPlugin.on_app_init.params.app_config">app_config (litestar.contrib.pydantic.PydanticInitPlugin.on_app_init parameter)</a>
 
       <ul>
@@ -1582,10 +1543,6 @@
         <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.FlashPlugin.on_app_init.params.app_config">(litestar.plugins.flash.FlashPlugin.on_app_init parameter)</a>
 </li>
         <li><a href="reference/plugins/index.html#litestar.plugins.InitPluginProtocol.on_app_init.params.app_config">(litestar.plugins.InitPluginProtocol.on_app_init parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.on_app_init.params.app_config">(litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.on_app_init parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyPlugin.on_app_init.params.app_config">(litestar.plugins.sqlalchemy.SQLAlchemyPlugin.on_app_init parameter)</a>
 </li>
         <li><a href="reference/plugins/structlog.html#litestar.plugins.structlog.StructlogPlugin.on_app_init.params.app_config">(litestar.plugins.structlog.StructlogPlugin.on_app_init parameter)</a>
 </li>
@@ -1610,7 +1567,7 @@
       </ul></li>
       <li><a href="reference/dto/data_structures.html#litestar.dto.data_structures.DTOData.as_builtins">as_builtins() (litestar.dto.data_structures.DTOData method)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.asgi">asgi (in module litestar.handlers)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.asgi">asgi() (in module litestar.handlers)</a>
 </li>
       <li><a href="reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.params.asgi_connection">asgi_connection (litestar.dto.base_dto.AbstractDTO parameter)</a>
 </li>
@@ -1639,11 +1596,7 @@
       <li><a href="reference/channels/backends/asyncpg.html#litestar.channels.backends.asyncpg.AsyncPgChannelsBackend">AsyncPgChannelsBackend (class in litestar.channels.backends.asyncpg)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig">AsyncSessionConfig (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AsyncSessionConfig">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/testing.html#litestar.testing.AsyncTestClient">AsyncTestClient (class in litestar.testing)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.XML.attribute">attribute (litestar.openapi.spec.XML attribute)</a>
@@ -1651,33 +1604,13 @@
       <li><a href="reference/security/jwt.html#litestar.security.jwt.Token.aud">aud (litestar.security.jwt.Token attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.AuditColumns">AuditColumns (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AuditColumns">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection.auth">auth (litestar.connection.ASGIConnection property)</a>
 
       <ul>
         <li><a href="reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult.auth">(litestar.middleware.authentication.AuthenticationResult attribute)</a>
 </li>
         <li><a href="reference/middleware/index.html#litestar.middleware.AuthenticationResult.auth">(litestar.middleware.AuthenticationResult attribute)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.auth">(litestar.testing.AsyncTestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.auth">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.auth">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.auth">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.auth">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.auth">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.auth">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.auth">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.auth">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
@@ -1690,22 +1623,6 @@
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.post.params.auth">(litestar.testing.RequestFactory.post parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.put.params.auth">(litestar.testing.RequestFactory.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.auth">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.auth">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.auth">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.auth">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.auth">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.auth">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.auth">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.auth">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.auth">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
@@ -1835,6 +1752,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.background">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.background">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/response/base.html#litestar.response.base.ASGIResponse.params.background">(litestar.response.base.ASGIResponse parameter)</a>
 </li>
         <li><a href="reference/response/base.html#litestar.response.base.Response.params.background">(litestar.response.base.Response parameter)</a>
@@ -1910,10 +1829,10 @@
         <li><a href="reference/testing.html#litestar.testing.TestClient.params.base_url">(litestar.testing.TestClient parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/middleware/session/base.html#litestar.middleware.session.base.BaseBackendConfig">BaseBackendConfig (class in litestar.middleware.session.base)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/middleware/session/base.html#litestar.middleware.session.base.BaseBackendConfig">BaseBackendConfig (class in litestar.middleware.session.base)</a>
+</li>
       <li><a href="reference/events.html#litestar.events.BaseEventEmitterBackend">BaseEventEmitterBackend (class in litestar.events)</a>
 </li>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.BaseJWTAuth">BaseJWTAuth (class in litestar.security.jwt)</a>
@@ -1955,6 +1874,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.before_request">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.before_request">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/router.html#litestar.router.Router.params.before_request">(litestar.router.Router parameter)</a>
 </li>
         <li><a href="reference/static_files.html#litestar.static_files.create_static_files_router.params.before_request">(litestar.static_files.create_static_files_router parameter)</a>
@@ -1974,12 +1895,6 @@
         <li><a href="reference/testing.html#litestar.testing.create_test_client.params.before_send">(litestar.testing.create_test_client parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.before_send_handler">before_send_handler() (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.before_send_handler">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/types.html#litestar.types.BeforeMessageSendHookHandler">BeforeMessageSendHookHandler (in module litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.BeforeRequestHookHandler">BeforeRequestHookHandler (in module litestar.types)</a>
@@ -1987,23 +1902,11 @@
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Accept.best_match">best_match() (litestar.datastructures.Accept method)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.BigIntAuditBase">BigIntAuditBase (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntAuditBase">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.BigIntBase">BigIntBase (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntBase">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.BigIntPrimaryKey">BigIntPrimaryKey (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntPrimaryKey">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSessionConfig.bind">bind (litestar.contrib.sqlalchemy.plugins.GenericSessionConfig attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSessionConfig.binds">binds (litestar.contrib.sqlalchemy.plugins.GenericSessionConfig attribute)</a>
@@ -2079,6 +1982,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.cache">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.cache">(litestar.handlers.route parameter)</a>
+</li>
       </ul></li>
       <li><a href="reference/app.html#litestar.app.Litestar.params.cache_control">cache_control (litestar.app.Litestar parameter)</a>
 
@@ -2100,6 +2005,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.cache_control">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.cache_control">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.cache_control">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/router.html#litestar.router.Router.params.cache_control">(litestar.router.Router parameter)</a>
 </li>
@@ -2126,6 +2033,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.cache_key_builder">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.cache_key_builder">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.cache_key_builder">(litestar.handlers.route parameter)</a>
 </li>
       </ul></li>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.cache_key_from_request">cache_key_from_request() (litestar.middleware.rate_limit.RateLimitMiddleware method)</a>
@@ -2155,8 +2064,6 @@
 </li>
       </ul></li>
       <li><a href="reference/channels/backends/redis.html#litestar.channels.backends.redis.RedisChannelsStreamBackend.params.cap_streams_approximate">cap_streams_approximate (litestar.channels.backends.redis.RedisChannelsStreamBackend parameter)</a>
-</li>
-      <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.flash.params.category">category (litestar.plugins.flash.flash parameter)</a>
 </li>
       <li><a href="reference/channels/backends/memory.html#litestar.channels.backends.memory.MemoryChannelsBackend.publish.params.channels">channels (litestar.channels.backends.memory.MemoryChannelsBackend.publish parameter)</a>
 
@@ -2209,11 +2116,7 @@
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin.on_cli_init.params.cli">cli (litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin.on_cli_init parameter)</a>
 
       <ul>
-        <li><a href="reference/plugins/index.html#litestar.plugins.CLIPlugin.on_cli_init.params.cli">(litestar.plugins.CLIPlugin.on_cli_init parameter)</a>
-</li>
         <li><a href="reference/plugins/index.html#litestar.plugins.CLIPluginProtocol.on_cli_init.params.cli">(litestar.plugins.CLIPluginProtocol.on_cli_init parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.on_cli_init.params.cli">(litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.on_cli_init parameter)</a>
 </li>
       </ul></li>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection.client">client (litestar.connection.ASGIConnection property)</a>
@@ -2273,11 +2176,7 @@
 </li>
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.CommonTableAttributes">CommonTableAttributes (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.CommonTableAttributes">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Components">Components (class in litestar.openapi.spec)</a>
 </li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.components">components (litestar.openapi.OpenAPIConfig attribute)</a>
@@ -2343,12 +2242,6 @@
 </li>
         <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.FlashPlugin.params.config">(litestar.plugins.flash.FlashPlugin parameter)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTO.config">(litestar.plugins.sqlalchemy.SQLAlchemyDTO attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.params.config">(litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyPlugin.params.config">(litestar.plugins.sqlalchemy.SQLAlchemyPlugin parameter)</a>
-</li>
       </ul></li>
       <li><a href="reference/logging/config.html#litestar.logging.config.BaseLoggingConfig.configure">configure() (litestar.logging.config.BaseLoggingConfig method)</a>
 
@@ -2413,8 +2306,6 @@
 </li>
         <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.store_in_message.params.connection">(litestar.middleware.session.server_side.ServerSideSessionBackend.store_in_message parameter)</a>
 </li>
-        <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.flash.params.connection">(litestar.plugins.flash.flash parameter)</a>
-</li>
         <li><a href="reference/security/jwt.html#litestar.security.jwt.JWTAuthenticationMiddleware.authenticate_request.params.connection">(litestar.security.jwt.JWTAuthenticationMiddleware.authenticate_request parameter)</a>
 </li>
         <li><a href="reference/security/jwt.html#litestar.security.jwt.JWTAuthenticationMiddleware.authenticate_token.params.connection">(litestar.security.jwt.JWTAuthenticationMiddleware.authenticate_token parameter)</a>
@@ -2424,14 +2315,20 @@
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.middleware.SessionAuthMiddleware.authenticate_request.params.connection">(litestar.security.session_auth.middleware.SessionAuthMiddleware.authenticate_request parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.connection_accept_handler">connection_accept_handler (litestar.handlers.WebsocketListenerRouteHandler attribute)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.connection_accept_handler">connection_accept_handler (litestar.handlers.websocket_listener parameter)</a>
 
       <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.connection_accept_handler">(litestar.handlers.WebsocketListenerRouteHandler attribute)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.connection_accept_handler">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.connection_lifespan">connection_lifespan (litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.connection_lifespan">connection_lifespan (litestar.handlers.websocket_listener parameter)</a>
+
+      <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.connection_lifespan">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
 </li>
+      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.connection_string">connection_string (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
 </li>
       <li><a href="reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor">ConnectionDataExtractor (class in litestar.data_extractors)</a>
@@ -2454,6 +2351,8 @@
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Info.contact">(litestar.openapi.spec.Info attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.contains">contains (litestar.openapi.spec.Schema attribute)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPIHeader.content">content (litestar.openapi.spec.OpenAPIHeader attribute)</a>
@@ -2479,25 +2378,7 @@
 </li>
         <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.create_response.params.content">(litestar.security.AbstractSecurityConfig.create_response parameter)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.content">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.content">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.content">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.content">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.content">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.content">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.content">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.content">(litestar.testing.TestClient.request parameter)</a>
-</li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/response/index.html#litestar.response.File.params.content_disposition_type">content_disposition_type (litestar.response.File parameter)</a>
 
       <ul>
@@ -2520,6 +2401,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.content_encoding">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.content_encoding">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.content_encoding">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.content_encoding">(litestar.openapi.spec.Schema attribute)</a>
 </li>
@@ -2555,6 +2438,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.content_media_type">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.content_media_type">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.content_media_type">(litestar.openapi.spec.Schema attribute)</a>
 </li>
       </ul></li>
@@ -2572,8 +2457,6 @@
 
       <ul>
         <li><a href="reference/contrib/mako.html#litestar.contrib.mako.MakoTemplateEngine.render_string.params.context">(litestar.contrib.mako.MakoTemplateEngine.render_string parameter)</a>
-</li>
-        <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.get_flashes.params.context">(litestar.plugins.flash.get_flashes parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Template.params.context">(litestar.response.Template parameter)</a>
 </li>
@@ -2669,22 +2552,6 @@
 </li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.params.cookies">(litestar.testing.AsyncTestClient parameter)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.cookies">(litestar.testing.AsyncTestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.cookies">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.cookies">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.cookies">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.cookies">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.cookies">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.cookies">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.cookies">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.cookies">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.BaseTestClient.cookies">(litestar.testing.BaseTestClient attribute)</a>
@@ -2702,22 +2569,6 @@
         <li><a href="reference/testing.html#litestar.testing.TestClient.cookies">(litestar.testing.TestClient attribute)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.params.cookies">(litestar.testing.TestClient parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.cookies">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.cookies">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.cookies">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.cookies">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.cookies">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.cookies">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.cookies">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.cookies">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.cookies">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
@@ -2750,30 +2601,22 @@
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.create_all">create_all (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.create_all_metadata">create_all_metadata() (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.create_all_metadata">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-      </ul></li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.create_app_state_items">create_app_state_items() (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.create_app_state_items">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/testing.html#litestar.testing.create_async_test_client">create_async_test_client() (in module litestar.testing)</a>
 </li>
       <li><a href="reference/middleware/compression.html#litestar.middleware.compression.CompressionMiddleware.create_compression_send_wrapper">create_compression_send_wrapper() (litestar.middleware.compression.CompressionMiddleware method)</a>
 </li>
       <li><a href="reference/exceptions.html#litestar.exceptions.responses.create_debug_response">create_debug_response() (in module litestar.exceptions.responses)</a>
 </li>
+      <li><a href="reference/stores/file.html#litestar.stores.file.FileStore.create_directories">create_directories (litestar.stores.file.FileStore attribute)</a>
+
+      <ul>
+        <li><a href="reference/stores/file.html#litestar.stores.file.FileStore.params.create_directories">(litestar.stores.file.FileStore parameter)</a>
+</li>
+      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin.create_dto_for_type">create_dto_for_type() (litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin method)</a>
 
       <ul>
         <li><a href="reference/plugins/index.html#litestar.plugins.SerializationPluginProtocol.create_dto_for_type">(litestar.plugins.SerializationPluginProtocol method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.create_dto_for_type">(litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin method)</a>
 </li>
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.create_engine_callable">create_engine_callable (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
@@ -2809,13 +2652,7 @@
 </li>
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.create_session_maker">create_session_maker() (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.create_session_maker">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.create_session_maker">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/static_files.html#litestar.static_files.create_static_files_router">create_static_files_router() (in module litestar.static_files)</a>
 </li>
       <li><a href="reference/response/index.html#litestar.response.Template.create_template_context">create_template_context() (litestar.response.Template method)</a>
@@ -2833,11 +2670,7 @@
       <li><a href="reference/types.html#litestar.types.FileInfo.created">created (litestar.types.FileInfo attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.AuditColumns.created_at">created_at (litestar.contrib.sqlalchemy.base.AuditColumns attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AuditColumns.created_at">(litestar.plugins.sqlalchemy.AuditColumns attribute)</a>
 </li>
-      </ul></li>
       <li><a href="reference/types.html#litestar.types.Logger.critical">critical() (litestar.types.Logger method)</a>
 </li>
       <li><a href="reference/app.html#litestar.app.Litestar.params.csrf_config">csrf_config (litestar.app.Litestar parameter)</a>
@@ -2951,14 +2784,6 @@
 </li>
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractSyncRepository.upsert_many.params.data">(litestar.repository.abc.AbstractSyncRepository.upsert_many parameter)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.data">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.data">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.data">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.data">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.set_session_data.params.data">(litestar.testing.AsyncTestClient.set_session_data parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.patch.params.data">(litestar.testing.RequestFactory.patch parameter)</a>
@@ -2966,14 +2791,6 @@
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.post.params.data">(litestar.testing.RequestFactory.post parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.put.params.data">(litestar.testing.RequestFactory.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.data">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.data">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.data">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.data">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.set_session_data.params.data">(litestar.testing.TestClient.set_session_data parameter)</a>
 </li>
@@ -3090,15 +2907,13 @@
       </ul></li>
       <li><a href="reference/middleware/index.html#litestar.middleware.DefineMiddleware">DefineMiddleware (class in litestar.middleware)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.delete">delete (class in litestar.handlers)</a>
-
-      <ul>
-        <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.delete">(litestar.openapi.spec.PathItem attribute)</a>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.delete">delete (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.delete">delete() (litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.delete">delete() (in module litestar.handlers)</a>
 
       <ul>
+        <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.delete">(litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
+</li>
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.delete">(litestar.repository.abc.AbstractAsyncRepository method)</a>
 </li>
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractSyncRepository.delete">(litestar.repository.abc.AbstractSyncRepository method)</a>
@@ -3111,11 +2926,7 @@
 </li>
         <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.delete">(litestar.stores.redis.RedisStore method)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete">(litestar.testing.AsyncTestClient method)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.delete">(litestar.testing.RequestFactory method)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete">(litestar.testing.TestClient method)</a>
 </li>
       </ul></li>
       <li><a href="reference/stores/base.html#litestar.stores.base.Store.delete_all">delete_all() (litestar.stores.base.Store method)</a>
@@ -3171,6 +2982,12 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.dependencies">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.dependencies">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.dependencies">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.dependencies">(litestar.handlers.websocket_listener parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.dependencies">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.dependencies">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
@@ -3225,6 +3042,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.deprecated">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.deprecated">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPIHeader.deprecated">(litestar.openapi.spec.OpenAPIHeader attribute)</a>
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Operation.deprecated">(litestar.openapi.spec.Operation attribute)</a>
@@ -3252,6 +3071,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.description">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.description">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.description">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.description">(litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
@@ -3334,8 +3155,6 @@
         <li><a href="reference/dto/dataclass_dto.html#litestar.dto.dataclass_dto.DataclassDTO.detect_nested_field">(litestar.dto.dataclass_dto.DataclassDTO class method)</a>
 </li>
         <li><a href="reference/dto/msgspec_dto.html#litestar.dto.msgspec_dto.MsgspecDTO.detect_nested_field">(litestar.dto.msgspec_dto.MsgspecDTO class method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTO.detect_nested_field">(litestar.plugins.sqlalchemy.SQLAlchemyDTO class method)</a>
 </li>
       </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Cookie.dict">dict (litestar.datastructures.Cookie property)</a>
@@ -3420,6 +3239,10 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.dto">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.dto">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.dto">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.dto">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.dto">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -3584,30 +3407,12 @@
       </ul></li>
       <li><a href="reference/template.html#litestar.template.TemplateConfig.engine">engine (litestar.template.TemplateConfig attribute)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.engine_app_state_key">engine_app_state_key (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.engine_app_state_key">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig attribute)</a>
-</li>
-      </ul></li>
       <li><a href="reference/template.html#litestar.template.TemplateConfig.engine_callback">engine_callback (litestar.template.TemplateConfig attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.engine_config">engine_config (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.engine_config">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig attribute)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.engine_config">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig attribute)</a>
-</li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.engine_config_dict">engine_config_dict (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig property)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.engine_dependency_key">engine_dependency_key (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.engine_dependency_key">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig attribute)</a>
-</li>
-      </ul></li>
       <li><a href="reference/contrib/jinja.html#litestar.contrib.jinja.JinjaTemplateEngine.params.engine_instance">engine_instance (litestar.contrib.jinja.JinjaTemplateEngine parameter)</a>
 
       <ul>
@@ -3621,11 +3426,7 @@
 </li>
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig">EngineConfig (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.EngineConfig">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.enum">enum (litestar.openapi.spec.Schema attribute)</a>
 
       <ul>
@@ -3658,6 +3459,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.etag">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.etag">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.etag">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/response/base.html#litestar.response.base.Response.set_etag.params.etag">(litestar.response.base.Response.set_etag parameter)</a>
 </li>
@@ -3779,6 +3582,8 @@
 </li>
         <li><a href="reference/controller.html#litestar.controller.Controller.exception_handlers">(litestar.controller.Controller attribute)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.exception_handlers">(litestar.handlers.asgi parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.exception_handlers">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.exception_handlers">(litestar.handlers.BaseRouteHandler parameter)</a>
@@ -3797,6 +3602,12 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.exception_handlers">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.exception_handlers">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.exception_handlers">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.exception_handlers">(litestar.handlers.websocket_listener parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.exception_handlers">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.exception_handlers">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
@@ -3812,6 +3623,8 @@
         <li><a href="reference/testing.html#litestar.testing.create_test_client.params.exception_handlers">(litestar.testing.create_test_client parameter)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/logging/config.html#litestar.logging.config.BaseLoggingConfig.exception_logging_handler">exception_logging_handler (litestar.logging.config.BaseLoggingConfig attribute)</a>
 
       <ul>
@@ -3820,8 +3633,6 @@
         <li><a href="reference/logging/config.html#litestar.logging.config.StructLoggingConfig.exception_logging_handler">(litestar.logging.config.StructLoggingConfig attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/types.html#litestar.types.ExceptionHandler">ExceptionHandler (in module litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.ExceptionHandlersMap">ExceptionHandlersMap (in module litestar.types)</a>
@@ -4024,41 +3835,9 @@
 </li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.MutableScopeHeaders.extend_header_value">extend_header_value() (litestar.datastructures.MutableScopeHeaders method)</a>
 </li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.extensions">extensions (litestar.testing.AsyncTestClient.delete parameter)</a>
+      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.extensions">extensions (litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 
       <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.extensions">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.extensions">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.extensions">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.extensions">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.extensions">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.extensions">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.extensions">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.extensions">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.extensions">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.extensions">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.extensions">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.extensions">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.extensions">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.extensions">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.extensions">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.extensions">(litestar.testing.TestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.extensions">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
       </ul></li>
@@ -4227,12 +4006,6 @@
 </li>
         <li><a href="reference/plugins/index.html#litestar.plugins.SerializationPluginProtocol.supports_type.params.field_definition">(litestar.plugins.SerializationPluginProtocol.supports_type parameter)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTO.detect_nested_field.params.field_definition">(litestar.plugins.sqlalchemy.SQLAlchemyDTO.detect_nested_field parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.create_dto_for_type.params.field_definition">(litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.create_dto_for_type parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.supports_type.params.field_definition">(litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.supports_type parameter)</a>
-</li>
       </ul></li>
       <li><a href="reference/dto/field.html#litestar.dto.field.extract_dto_field.params.field_info_mapping">field_info_mapping (litestar.dto.field.extract_dto_field parameter)</a>
 </li>
@@ -4284,28 +4057,10 @@
         <li><a href="reference/response/file.html#litestar.response.file.File.params.filename">(litestar.response.file.File parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.files">files (litestar.testing.AsyncTestClient.patch parameter)</a>
-
-      <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.files">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.files">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.files">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.files">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.files">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.files">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.files">(litestar.testing.TestClient.request parameter)</a>
-</li>
-      </ul></li>
-      <li><a href="reference/stores/file.html#litestar.stores.file.FileStore">FileStore (class in litestar.stores.file)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/stores/file.html#litestar.stores.file.FileStore">FileStore (class in litestar.stores.file)</a>
+</li>
       <li><a href="reference/types.html#litestar.types.FileSystemProtocol">FileSystemProtocol (class in litestar.types)</a>
 </li>
       <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.filter_collection_by_kwargs">filter_collection_by_kwargs() (litestar.repository.abc.AbstractAsyncRepository method)</a>
@@ -4315,8 +4070,6 @@
 </li>
       </ul></li>
       <li><a href="reference/logging/config.html#litestar.logging.config.LoggingConfig.filters">filters (litestar.logging.config.LoggingConfig attribute)</a>
-</li>
-      <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.flash">flash() (in module litestar.plugins.flash)</a>
 </li>
       <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.FlashConfig">FlashConfig (class in litestar.plugins.flash)</a>
 </li>
@@ -4333,46 +4086,22 @@
 </li>
         <li><a href="reference/events.html#litestar.events.EventListener.wrap_in_error_handler.params.fn">(litestar.events.EventListener.wrap_in_error_handler parameter)</a>
 </li>
-        <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.fn">(litestar.handlers.BaseRouteHandler property)</a>
+        <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.fn">(litestar.handlers.ASGIRouteHandler parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.fn">(litestar.handlers.BaseRouteHandler parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.fn">(litestar.handlers.HTTPRouteHandler parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.fn">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler.params.fn">(litestar.handlers.WebsocketRouteHandler parameter)</a>
 </li>
       </ul></li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.from_parameter.params.fn_type_hints">fn_type_hints (litestar.typing.FieldDefinition.from_parameter parameter)</a>
 </li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.follow_redirects">follow_redirects (litestar.testing.AsyncTestClient.delete parameter)</a>
+      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.follow_redirects">follow_redirects (litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 
       <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.follow_redirects">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.follow_redirects">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.follow_redirects">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.follow_redirects">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.follow_redirects">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.follow_redirects">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.follow_redirects">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.follow_redirects">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.follow_redirects">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.follow_redirects">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.follow_redirects">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.follow_redirects">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.follow_redirects">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.follow_redirects">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.follow_redirects">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.follow_redirects">(litestar.testing.TestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.follow_redirects">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
       </ul></li>
@@ -4459,8 +4188,6 @@
 </li>
         <li><a href="reference/dto/msgspec_dto.html#litestar.dto.msgspec_dto.MsgspecDTO.generate_field_definitions">(litestar.dto.msgspec_dto.MsgspecDTO class method)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTO.generate_field_definitions">(litestar.plugins.sqlalchemy.SQLAlchemyDTO class method)</a>
-</li>
       </ul></li>
       <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.generate_session_id">generate_session_id() (litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
 </li>
@@ -4470,15 +4197,13 @@
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig">GenericSQLAlchemyConfig (class in litestar.contrib.sqlalchemy.plugins)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.get">get (class in litestar.handlers)</a>
-
-      <ul>
-        <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.get">(litestar.openapi.spec.PathItem attribute)</a>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.get">get (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.get">get() (litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.get">get() (in module litestar.handlers)</a>
 
       <ul>
+        <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.get">(litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
+</li>
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.get">(litestar.repository.abc.AbstractAsyncRepository method)</a>
 </li>
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractSyncRepository.get">(litestar.repository.abc.AbstractSyncRepository method)</a>
@@ -4493,11 +4218,7 @@
 </li>
         <li><a href="reference/stores/registry.html#litestar.stores.registry.StoreRegistry.get">(litestar.stores.registry.StoreRegistry method)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get">(litestar.testing.AsyncTestClient method)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.get">(litestar.testing.RequestFactory method)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get">(litestar.testing.TestClient method)</a>
 </li>
       </ul></li>
       <li><a href="reference/concurrency.html#litestar.concurrency.get_asyncio_executor">get_asyncio_executor() (in module litestar.concurrency)</a>
@@ -4509,8 +4230,6 @@
       <li><a href="reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.get_dto_config_from_annotated_type">get_dto_config_from_annotated_type() (litestar.dto.base_dto.AbstractDTO static method)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.get_engine">get_engine() (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig method)</a>
-</li>
-      <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.get_flashes">get_flashes() (in module litestar.plugins.flash)</a>
 </li>
       <li><a href="reference/app.html#litestar.app.Litestar.get_handler_index_by_name">get_handler_index_by_name() (litestar.app.Litestar method)</a>
 </li>
@@ -4576,8 +4295,6 @@
       </ul></li>
       <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.get_openapi_json_route">get_openapi_json_route() (litestar.openapi.plugins.OpenAPIRenderPlugin static method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.get_or_create">get_or_create() (litestar.repository.abc.AbstractAsyncRepository method)</a>
 
       <ul>
@@ -4588,6 +4305,8 @@
 </li>
       <li><a href="reference/router.html#litestar.router.Router.get_route_handler_map">get_route_handler_map() (litestar.router.Router class method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/controller.html#litestar.controller.Controller.get_route_handlers">get_route_handlers() (litestar.controller.Controller method)</a>
 </li>
       <li><a href="reference/datastructures/secret_values.html#litestar.datastructures.secret_values.SecretValue.get_secret">get_secret() (litestar.datastructures.secret_values.SecretValue method)</a>
@@ -4667,6 +4386,8 @@
 </li>
         <li><a href="reference/controller.html#litestar.controller.Controller.guards">(litestar.controller.Controller attribute)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.guards">(litestar.handlers.asgi parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.guards">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.guards">(litestar.handlers.BaseRouteHandler parameter)</a>
@@ -4684,6 +4405,12 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.guards">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.guards">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.guards">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.guards">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.guards">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.guards">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -4740,6 +4467,26 @@
 </li>
       <li><a href="reference/app.html#litestar.app.HandlerIndex.handler">handler (litestar.app.HandlerIndex attribute)</a>
 </li>
+      <li><a href="reference/handlers.html#litestar.handlers.asgi.params.handler_class">handler_class (litestar.handlers.asgi parameter)</a>
+
+      <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.delete.params.handler_class">(litestar.handlers.delete parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.get.params.handler_class">(litestar.handlers.get parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.head.params.handler_class">(litestar.handlers.head parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.patch.params.handler_class">(litestar.handlers.patch parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.post.params.handler_class">(litestar.handlers.post parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.put.params.handler_class">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.handler_class">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.handler_class">(litestar.handlers.websocket parameter)</a>
+</li>
+      </ul></li>
       <li><a href="reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.handler_id">handler_id (litestar.dto.base_dto.AbstractDTO.create_for_field_definition parameter)</a>
 
       <ul>
@@ -4778,18 +4525,10 @@
         <li><a href="reference/plugins/index.html#litestar.plugins.DIPlugin.has_typed_init">(litestar.plugins.DIPlugin method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.head">head (class in litestar.handlers)</a>
-
-      <ul>
-        <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.head">(litestar.openapi.spec.PathItem attribute)</a>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.head">head (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head">head() (litestar.testing.AsyncTestClient method)</a>
-
-      <ul>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head">(litestar.testing.TestClient method)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.head">head() (in module litestar.handlers)</a>
 </li>
-      </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Header">Header (class in litestar.datastructures)</a>
 </li>
       <li><a href="reference/params.html#litestar.params.Parameter.params.header">header (litestar.params.Parameter parameter)</a>
@@ -4879,22 +4618,6 @@
 </li>
         <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.create_response.params.headers">(litestar.security.AbstractSecurityConfig.create_response parameter)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.headers">(litestar.testing.AsyncTestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.headers">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.headers">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.headers">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.headers">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.headers">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.headers">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.headers">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.headers">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.delete.params.headers">(litestar.testing.RequestFactory.delete parameter)</a>
@@ -4906,22 +4629,6 @@
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.post.params.headers">(litestar.testing.RequestFactory.post parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.put.params.headers">(litestar.testing.RequestFactory.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.headers">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.headers">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.headers">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.headers">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.headers">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.headers">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.headers">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.headers">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.headers">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
@@ -4940,12 +4647,12 @@
 </li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Address.host">host (litestar.datastructures.Address attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.URL.hostname">hostname (litestar.datastructures.URL attribute)</a>
 </li>
       <li><a href="reference/static_files.html#litestar.static_files.create_static_files_router.params.html_mode">html_mode (litestar.static_files.create_static_files_router parameter)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/contrib/htmx.html#litestar.contrib.htmx.request.HTMXDetails">HTMXDetails (class in litestar.contrib.htmx.request)</a>
 </li>
       <li><a href="reference/contrib/htmx.html#litestar.contrib.htmx.request.HTMXRequest">HTMXRequest (class in litestar.contrib.htmx.request)</a>
@@ -5078,20 +4785,10 @@
 </li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_511_NETWORK_AUTHENTICATION_REQUIRED">HTTP_511_NETWORK_AUTHENTICATION_REQUIRED (in module litestar.status_codes)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.delete.params.http_method">http_method (litestar.handlers.delete parameter)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.http_method">http_method (litestar.handlers.HTTPRouteHandler parameter)</a>
 
       <ul>
-        <li><a href="reference/handlers.html#litestar.handlers.get.params.http_method">(litestar.handlers.get parameter)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.head.params.http_method">(litestar.handlers.head parameter)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.params.http_method">(litestar.handlers.HTTPRouteHandler parameter)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.patch.params.http_method">(litestar.handlers.patch parameter)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.post.params.http_method">(litestar.handlers.post parameter)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.put.params.http_method">(litestar.handlers.put parameter)</a>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.http_method">(litestar.handlers.route parameter)</a>
 </li>
       </ul></li>
       <li><a href="reference/testing.html#litestar.testing.RequestFactory.delete.params.http_version">http_version (litestar.testing.RequestFactory.delete parameter)</a>
@@ -5161,10 +4858,6 @@
       <ul>
         <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDPrimaryKey.id">(litestar.contrib.sqlalchemy.base.UUIDPrimaryKey attribute)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntPrimaryKey.id">(litestar.plugins.sqlalchemy.BigIntPrimaryKey attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDPrimaryKey.id">(litestar.plugins.sqlalchemy.UUIDPrimaryKey attribute)</a>
-</li>
       </ul></li>
       <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.id_attribute">id_attribute (litestar.repository.abc.AbstractAsyncRepository attribute)</a>
 
@@ -5216,8 +4909,6 @@
 </li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Header.to_header.params.include_header_name">include_header_name (litestar.datastructures.Header.to_header parameter)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTOConfig.include_implicit_fields">include_implicit_fields (litestar.plugins.sqlalchemy.SQLAlchemyDTOConfig attribute)</a>
-</li>
       <li><a href="reference/app.html#litestar.app.Litestar.params.include_in_schema">include_in_schema (litestar.app.Litestar parameter)</a>
 
       <ul>
@@ -5238,6 +4929,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.include_in_schema">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.include_in_schema">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.include_in_schema">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/router.html#litestar.router.Router.params.include_in_schema">(litestar.router.Router parameter)</a>
 </li>
@@ -5312,10 +5005,10 @@
         <li><a href="reference/plugins/index.html#litestar.plugins.OpenAPISchemaPlugin.is_constrained_field">(litestar.plugins.OpenAPISchemaPlugin static method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_dataclass_type">is_dataclass_type (litestar.typing.FieldDefinition property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_forward_ref">is_forward_ref (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_generic">is_generic (litestar.typing.FieldDefinition property)</a>
@@ -5354,8 +5047,12 @@
 </li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_mapping">is_mapping (litestar.typing.FieldDefinition property)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.is_mount">is_mount (litestar.handlers.ASGIRouteHandler parameter)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.asgi.params.is_mount">is_mount (litestar.handlers.asgi parameter)</a>
+
+      <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.is_mount">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
+      </ul></li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_non_string_collection">is_non_string_collection (litestar.typing.FieldDefinition property)</a>
 </li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_non_string_iterable">is_non_string_iterable (litestar.typing.FieldDefinition property)</a>
@@ -5498,42 +5195,16 @@
         <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.params.js_url">(litestar.openapi.plugins.SwaggerRenderPlugin parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.json">json (litestar.testing.AsyncTestClient.patch parameter)</a>
-
-      <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.json">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.json">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.json">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.json">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.json">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.json">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.json">(litestar.testing.TestClient.request parameter)</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/connection.html#litestar.connection.Request.json">json() (litestar.connection.Request method)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.json_deserializer">json_deserializer() (litestar.contrib.sqlalchemy.plugins.EngineConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.EngineConfig.json_deserializer">(litestar.plugins.sqlalchemy.EngineConfig method)</a>
 </li>
-      </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPI.json_schema_dialect">json_schema_dialect (litestar.openapi.spec.OpenAPI attribute)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.EngineConfig.json_serializer">json_serializer() (litestar.contrib.sqlalchemy.plugins.EngineConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.EngineConfig.json_serializer">(litestar.plugins.sqlalchemy.EngineConfig method)</a>
 </li>
-      </ul></li>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.Token.jti">jti (litestar.security.jwt.Token attribute)</a>
 </li>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.JWTAuth">JWTAuth (class in litestar.security.jwt)</a>
@@ -6688,6 +6359,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.media_type">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.media_type">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.OpenAPIRenderPlugin.params.media_type">(litestar.openapi.plugins.OpenAPIRenderPlugin parameter)</a>
 </li>
         <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.YamlRenderPlugin.params.media_type">(litestar.openapi.plugins.YamlRenderPlugin parameter)</a>
@@ -6766,8 +6439,6 @@
 </li>
         <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.store_in_message.params.message">(litestar.middleware.session.server_side.ServerSideSessionBackend.store_in_message parameter)</a>
 </li>
-        <li><a href="reference/plugins/flash_messages.html#litestar.plugins.flash.flash.params.message">(litestar.plugins.flash.flash parameter)</a>
-</li>
       </ul></li>
       <li><a href="reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.__call__.params.messages">messages (litestar.data_extractors.ResponseDataExtractor.__call__ parameter)</a>
 
@@ -6792,14 +6463,6 @@
 </li>
         <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.metadata">(litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntAuditBase.metadata">(litestar.plugins.sqlalchemy.BigIntAuditBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntBase.metadata">(litestar.plugins.sqlalchemy.BigIntBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase.metadata">(litestar.plugins.sqlalchemy.UUIDAuditBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDBase.metadata">(litestar.plugins.sqlalchemy.UUIDBase attribute)</a>
-</li>
         <li><a href="reference/typing.html#litestar.typing.FieldDefinition.metadata">(litestar.typing.FieldDefinition attribute)</a>
 </li>
       </ul></li>
@@ -6810,13 +6473,7 @@
       <li><a href="reference/types.html#litestar.types.Method">Method (in module litestar.types)</a>
 </li>
       <li><a href="reference/connection.html#litestar.connection.Request.method">method (litestar.connection.Request property)</a>
-
-      <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.method">(litestar.testing.AsyncTestClient.request parameter)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.method">(litestar.testing.TestClient.request parameter)</a>
-</li>
-      </ul></li>
       <li><a href="reference/exceptions.html#litestar.exceptions.MethodNotAllowedException">MethodNotAllowedException</a>
 </li>
       <li><a href="reference/types.html#litestar.types.Middleware">Middleware (in module litestar.types)</a>
@@ -6845,6 +6502,12 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.middleware">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.middleware">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.middleware">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.middleware">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.middleware">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.middleware">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -6905,8 +6568,6 @@
         <li><a href="reference/params.html#litestar.params.Parameter.params.min_items">(litestar.params.Parameter parameter)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.min_length">min_length (litestar.openapi.spec.Schema attribute)</a>
 
       <ul>
@@ -6917,6 +6578,8 @@
         <li><a href="reference/params.html#litestar.params.Parameter.params.min_length">(litestar.params.Parameter parameter)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.min_properties">min_properties (litestar.openapi.spec.Schema attribute)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.minimum">minimum (litestar.openapi.spec.Schema attribute)</a>
@@ -7217,6 +6880,8 @@
 </li>
         <li><a href="reference/datastructures/index.html#litestar.datastructures.ResponseHeader.name">(litestar.datastructures.ResponseHeader attribute)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.name">(litestar.handlers.asgi parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.name">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.name">(litestar.handlers.BaseRouteHandler parameter)</a>
@@ -7234,6 +6899,12 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.name">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.name">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.name">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.name">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.name">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.name">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -7352,9 +7023,11 @@
       </ul></li>
       <li><a href="reference/pagination.html#litestar.pagination.OffsetPagination">OffsetPagination (class in litestar.pagination)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.on_accept">on_accept (litestar.handlers.WebsocketListener attribute)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.on_accept">on_accept (litestar.handlers.websocket_listener parameter)</a>
 
       <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.on_accept">(litestar.handlers.WebsocketListener attribute)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.on_accept">(litestar.handlers.WebsocketListenerRouteHandler attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.on_accept">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
@@ -7387,10 +7060,6 @@
 </li>
         <li><a href="reference/plugins/index.html#litestar.plugins.InitPluginProtocol.on_app_init">(litestar.plugins.InitPluginProtocol method)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.on_app_init">(litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin method)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyPlugin.on_app_init">(litestar.plugins.sqlalchemy.SQLAlchemyPlugin method)</a>
-</li>
         <li><a href="reference/plugins/structlog.html#litestar.plugins.structlog.StructlogPlugin.on_app_init">(litestar.plugins.structlog.StructlogPlugin method)</a>
 </li>
         <li><a href="reference/security/index.html#litestar.security.AbstractSecurityConfig.on_app_init">(litestar.security.AbstractSecurityConfig method)</a>
@@ -7399,16 +7068,14 @@
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin.on_cli_init">on_cli_init() (litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin method)</a>
 
       <ul>
-        <li><a href="reference/plugins/index.html#litestar.plugins.CLIPlugin.on_cli_init">(litestar.plugins.CLIPlugin method)</a>
-</li>
         <li><a href="reference/plugins/index.html#litestar.plugins.CLIPluginProtocol.on_cli_init">(litestar.plugins.CLIPluginProtocol method)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin.on_cli_init">(litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin method)</a>
-</li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.on_disconnect">on_disconnect (litestar.handlers.WebsocketListener attribute)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.on_disconnect">on_disconnect (litestar.handlers.websocket_listener parameter)</a>
 
       <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.on_disconnect">(litestar.handlers.WebsocketListener attribute)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.on_disconnect">(litestar.handlers.WebsocketListenerRouteHandler attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.on_disconnect">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
@@ -7500,8 +7167,6 @@
         <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth.openapi_components">(litestar.security.session_auth.SessionAuth property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/app.html#litestar.app.Litestar.params.openapi_config">openapi_config (litestar.app.Litestar parameter)</a>
 
       <ul>
@@ -7512,6 +7177,8 @@
         <li><a href="reference/testing.html#litestar.testing.create_test_client.params.openapi_config">(litestar.testing.create_test_client parameter)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.openapi_router">openapi_router (litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
       <li><a href="reference/app.html#litestar.app.Litestar.openapi_schema">openapi_schema (litestar.app.Litestar property)</a>
@@ -7589,6 +7256,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.operation_class">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.operation_class">(litestar.handlers.route parameter)</a>
+</li>
       </ul></li>
       <li><a href="reference/handlers.html#litestar.handlers.delete.params.operation_id">operation_id (litestar.handlers.delete parameter)</a>
 
@@ -7605,6 +7274,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.operation_id">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.operation_id">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Link.operation_id">(litestar.openapi.spec.Link attribute)</a>
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Operation.operation_id">(litestar.openapi.spec.Operation attribute)</a>
@@ -7620,6 +7291,8 @@
         <li><a href="reference/config.html#litestar.config.app.AppConfig.opt">(litestar.config.app.AppConfig attribute)</a>
 </li>
         <li><a href="reference/controller.html#litestar.controller.Controller.opt">(litestar.controller.Controller attribute)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.opt">(litestar.handlers.asgi parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.opt">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
@@ -7638,6 +7311,12 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.opt">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.opt">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.opt">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.opt">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.opt">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.opt">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -7658,12 +7337,6 @@
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.options">options (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options">options() (litestar.testing.AsyncTestClient method)</a>
-
-      <ul>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options">(litestar.testing.TestClient method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/config.html#litestar.config.cors.CORSConfig.is_origin_allowed.params.origin">origin (litestar.config.cors.CORSConfig.is_origin_allowed parameter)</a>
 
       <ul>
@@ -7745,39 +7418,7 @@
       <li><a href="reference/contrib/htmx.html#litestar.contrib.htmx.response.HTMXTemplate.params.params">params (litestar.contrib.htmx.response.HTMXTemplate parameter)</a>
 
       <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.params">(litestar.testing.AsyncTestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.params">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.params">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.params">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.params">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.params">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.params">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.params">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.params">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.params">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.params">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.params">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.params">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.params">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.params">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.params">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.params">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.params">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
@@ -7802,18 +7443,12 @@
         <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.with_client.params.password">(litestar.stores.redis.RedisStore.with_client parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.patch">patch (class in litestar.handlers)</a>
-
-      <ul>
-        <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.patch">(litestar.openapi.spec.PathItem attribute)</a>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.patch">patch (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch">patch() (litestar.testing.AsyncTestClient method)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.patch">patch() (in module litestar.handlers)</a>
 
       <ul>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.patch">(litestar.testing.RequestFactory method)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch">(litestar.testing.TestClient method)</a>
 </li>
       </ul></li>
       <li><a href="reference/app.html#litestar.app.Litestar.params.path">path (litestar.app.Litestar parameter)</a>
@@ -7833,6 +7468,8 @@
 </li>
         <li><a href="reference/datastructures/index.html#litestar.datastructures.URL.with_replacements.params.path">(litestar.datastructures.URL.with_replacements parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.path">(litestar.handlers.asgi parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.path">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.path">(litestar.handlers.BaseRouteHandler parameter)</a>
@@ -7850,6 +7487,12 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.path">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.path">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.path">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.path">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.path">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.path">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -8034,18 +7677,12 @@
       </ul></li>
       <li><a href="reference/testing.html#litestar.testing.BaseTestClient.portal">portal() (litestar.testing.BaseTestClient method)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.post">post (class in litestar.handlers)</a>
-
-      <ul>
-        <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.post">(litestar.openapi.spec.PathItem attribute)</a>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.post">post (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post">post() (litestar.testing.AsyncTestClient method)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.post">post() (in module litestar.handlers)</a>
 
       <ul>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.post">(litestar.testing.RequestFactory method)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post">(litestar.testing.TestClient method)</a>
 </li>
       </ul></li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.match_predicate_recursively.params.predicate">predicate (litestar.typing.FieldDefinition.match_predicate_recursively parameter)</a>
@@ -8080,18 +7717,6 @@
 </li>
       <li><a href="reference/di.html#litestar.di.Provide">Provide (class in litestar.di)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_engine">provide_engine() (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_engine">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-      </ul></li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_session">provide_session() (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig method)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_session">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Accept.best_match.params.provided_types">provided_types (litestar.datastructures.Accept.best_match parameter)</a>
 </li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.CacheControlHeader.proxy_revalidate">proxy_revalidate (litestar.datastructures.CacheControlHeader attribute)</a>
@@ -8120,18 +7745,12 @@
 </li>
       <li><a href="reference/contrib/htmx.html#litestar.contrib.htmx.response.PushUrl">PushUrl (class in litestar.contrib.htmx.response)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.put">put (class in litestar.handlers)</a>
-
-      <ul>
-        <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.put">(litestar.openapi.spec.PathItem attribute)</a>
+      <li><a href="reference/openapi/spec.html#litestar.openapi.spec.PathItem.put">put (litestar.openapi.spec.PathItem attribute)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put">put() (litestar.testing.AsyncTestClient method)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.put">put() (in module litestar.handlers)</a>
 
       <ul>
         <li><a href="reference/testing.html#litestar.testing.RequestFactory.put">(litestar.testing.RequestFactory method)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put">(litestar.testing.TestClient method)</a>
 </li>
       </ul></li>
       <li><a href="reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.put_nowait">put_nowait() (litestar.channels.subscriber.Subscriber method)</a>
@@ -8228,6 +7847,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.raises">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.raises">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.raises">(litestar.handlers.route parameter)</a>
 </li>
       </ul></li>
       <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.random_seed">random_seed (litestar.openapi.OpenAPIConfig attribute)</a>
@@ -8326,9 +7947,11 @@
         <li><a href="reference/testing.html#litestar.testing.WebSocketTestSession.receive_json">(litestar.testing.WebSocketTestSession method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.receive_mode">receive_mode (litestar.handlers.WebsocketListener attribute)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.receive_mode">receive_mode (litestar.handlers.websocket_listener parameter)</a>
 
       <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.receive_mode">(litestar.handlers.WebsocketListener attribute)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.receive_mode">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
 </li>
       </ul></li>
@@ -8416,14 +8039,6 @@
         <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase.registry">(litestar.contrib.sqlalchemy.base.UUIDAuditBase attribute)</a>
 </li>
         <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDBase.registry">(litestar.contrib.sqlalchemy.base.UUIDBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntAuditBase.registry">(litestar.plugins.sqlalchemy.BigIntAuditBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntBase.registry">(litestar.plugins.sqlalchemy.BigIntBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase.registry">(litestar.plugins.sqlalchemy.UUIDAuditBase attribute)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDBase.registry">(litestar.plugins.sqlalchemy.UUIDBase attribute)</a>
 </li>
       </ul></li>
       <li><a href="reference/dto/config.html#litestar.dto.config.DTOConfig.rename_fields">rename_fields (litestar.dto.config.DTOConfig attribute)</a>
@@ -8548,12 +8163,6 @@
         <li><a href="reference/response/index.html#litestar.response.Template.to_asgi_response.params.request">(litestar.response.Template.to_asgi_response parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request">request() (litestar.testing.AsyncTestClient method)</a>
-
-      <ul>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request">(litestar.testing.TestClient method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Components.request_bodies">request_bodies (litestar.openapi.spec.Components attribute)</a>
 </li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Link.request_body">request_body (litestar.openapi.spec.Link attribute)</a>
@@ -8582,6 +8191,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.request_class">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.request_class">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.request_class">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/router.html#litestar.router.Router.params.request_class">(litestar.router.Router parameter)</a>
 </li>
@@ -8630,8 +8241,6 @@
       </ul></li>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_after_response">resolve_after_response() (litestar.handlers.HTTPRouteHandler method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.resolve_before_request">resolve_before_request() (litestar.handlers.HTTPRouteHandler method)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.resolve_data_dto">resolve_data_dto() (litestar.handlers.BaseRouteHandler method)</a>
@@ -8642,6 +8251,8 @@
 </li>
       <li><a href="reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.resolve_generic_wrapper_type">resolve_generic_wrapper_type() (litestar.dto.base_dto.AbstractDTO class method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.get_type_hints.params.resolve_generics">resolve_generics (litestar.typing.FieldDefinition.get_type_hints parameter)</a>
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.resolve_guards">resolve_guards() (litestar.handlers.BaseRouteHandler method)</a>
@@ -8727,6 +8338,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.response_class">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.response_class">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/router.html#litestar.router.Router.params.response_class">(litestar.router.Router parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.create_async_test_client.params.response_class">(litestar.testing.create_async_test_client parameter)</a>
@@ -8755,6 +8368,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.response_cookies">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.response_cookies">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/router.html#litestar.router.Router.params.response_cookies">(litestar.router.Router parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.create_async_test_client.params.response_cookies">(litestar.testing.create_async_test_client parameter)</a>
@@ -8779,6 +8394,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.response_description">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.response_description">(litestar.handlers.route parameter)</a>
+</li>
       </ul></li>
       <li><a href="reference/app.html#litestar.app.Litestar.params.response_headers">response_headers (litestar.app.Litestar parameter)</a>
 
@@ -8800,6 +8417,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.response_headers">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.response_headers">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.response_headers">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/router.html#litestar.router.Router.params.response_headers">(litestar.router.Router parameter)</a>
 </li>
@@ -8854,6 +8473,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.responses">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.responses">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.responses">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Components.responses">(litestar.openapi.spec.Components attribute)</a>
 </li>
@@ -8929,6 +8550,10 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.return_dto">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.return_dto">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.return_dto">(litestar.handlers.websocket_listener parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.return_dto">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.return_dto">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
@@ -8977,16 +8602,16 @@
         <li><a href="reference/testing.html#litestar.testing.TestClient.params.root_path">(litestar.testing.TestClient parameter)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.route">route (in module litestar.handlers)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.on_registration.params.route">route (litestar.handlers.BaseRouteHandler.on_registration parameter)</a>
 
       <ul>
-        <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.on_registration.params.route">(litestar.handlers.BaseRouteHandler.on_registration parameter)</a>
-</li>
         <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.on_registration.params.route">(litestar.handlers.HTTPRouteHandler.on_registration parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler.on_registration.params.route">(litestar.handlers.WebsocketRouteHandler.on_registration parameter)</a>
 </li>
       </ul></li>
+      <li><a href="reference/handlers.html#litestar.handlers.route">route() (in module litestar.handlers)</a>
+</li>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection.route_handler">route_handler (litestar.connection.ASGIConnection property)</a>
 
       <ul>
@@ -9176,10 +8801,6 @@
 </li>
         <li><a href="reference/middleware/session/client_side.html#litestar.middleware.session.client_side.ClientSideSessionBackend.dump_data.params.scope">(litestar.middleware.session.client_side.ClientSideSessionBackend.dump_data parameter)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_session.params.scope">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_session parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_session.params.scope">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_session parameter)</a>
-</li>
         <li><a href="reference/response/base.html#litestar.response.base.ASGIResponse.__call__.params.scope">(litestar.response.base.ASGIResponse.__call__ parameter)</a>
 </li>
         <li><a href="reference/routes.html#litestar.routes.ASGIRoute.handle.params.scope">(litestar.routes.ASGIRoute.handle parameter)</a>
@@ -9304,6 +8925,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.security">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.security">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.security">(litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.OpenAPI.security">(litestar.openapi.spec.OpenAPI attribute)</a>
@@ -9417,9 +9040,11 @@
         <li><a href="reference/testing.html#litestar.testing.WebSocketTestSession.send_json">(litestar.testing.WebSocketTestSession method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.send_mode">send_mode (litestar.handlers.WebsocketListener attribute)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.send_mode">send_mode (litestar.handlers.websocket_listener parameter)</a>
 
       <ul>
+        <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.send_mode">(litestar.handlers.WebsocketListener attribute)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.send_mode">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
 </li>
       </ul></li>
@@ -9553,12 +9178,6 @@
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.session_config_dict">session_config_dict (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig property)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.session_dependency_key">session_dependency_key (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.session_dependency_key">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig attribute)</a>
-</li>
-      </ul></li>
       <li>
     SESSION_ID
 
@@ -9578,12 +9197,6 @@
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.session_maker">session_maker (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
 </li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.session_maker_app_state_key">session_maker_app_state_key (litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.session_maker_app_state_key">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig attribute)</a>
-</li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig.session_maker_class">session_maker_class (litestar.contrib.sqlalchemy.plugins.GenericSQLAlchemyConfig attribute)</a>
 </li>
       <li><a href="reference/security/session_auth.html#litestar.security.session_auth.SessionAuth">SessionAuth (class in litestar.security.session_auth)</a>
@@ -9592,6 +9205,8 @@
 </li>
       <li><a href="reference/middleware/session/base.html#litestar.middleware.session.base.SessionMiddleware">SessionMiddleware (class in litestar.middleware.session.base)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionBackend.set">set() (litestar.middleware.session.server_side.ServerSideSessionBackend method)</a>
 
       <ul>
@@ -9604,8 +9219,6 @@
         <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.set">(litestar.stores.redis.RedisStore method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/concurrency.html#litestar.concurrency.set_asyncio_executor">set_asyncio_executor() (in module litestar.concurrency)</a>
 </li>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.set_cached_history">set_cached_history() (litestar.middleware.rate_limit.RateLimitMiddleware method)</a>
@@ -9671,6 +9284,8 @@
 </li>
         <li><a href="reference/controller.html#litestar.controller.Controller.signature_namespace">(litestar.controller.Controller attribute)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.asgi.params.signature_namespace">(litestar.handlers.asgi parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler.params.signature_namespace">(litestar.handlers.ASGIRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.BaseRouteHandler.params.signature_namespace">(litestar.handlers.BaseRouteHandler parameter)</a>
@@ -9689,15 +9304,17 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.signature_namespace">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.signature_namespace">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.signature_namespace">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.signature_namespace">(litestar.handlers.websocket_listener parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.signature_namespace">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.signature_namespace">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler.params.signature_namespace">(litestar.handlers.WebsocketRouteHandler parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.signature_namespace">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig property)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.signature_namespace">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig property)</a>
 </li>
         <li><a href="reference/router.html#litestar.router.Router.params.signature_namespace">(litestar.router.Router parameter)</a>
 </li>
@@ -9745,39 +9362,15 @@
       <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.default_connection_lifespan.params.socket">socket (litestar.handlers.WebsocketListenerRouteHandler.default_connection_lifespan parameter)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyAsyncConfig">SQLAlchemyAsyncConfig (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig">(class in litestar.plugins.sqlalchemy)</a>
-</li>
-      </ul></li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTO">SQLAlchemyDTO (class in litestar.plugins.sqlalchemy)</a>
-</li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyDTOConfig">SQLAlchemyDTOConfig (class in litestar.plugins.sqlalchemy)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin">SQLAlchemyInitPlugin (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemyPlugin">SQLAlchemyPlugin (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyPlugin">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySerializationPlugin">SQLAlchemySerializationPlugin (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SQLAlchemySyncConfig">SQLAlchemySyncConfig (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.CacheControlHeader.stale_while_revalidate">stale_while_revalidate (litestar.datastructures.CacheControlHeader attribute)</a>
 </li>
       <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.params.standalone_preset_js_url">standalone_preset_js_url (litestar.openapi.plugins.SwaggerRenderPlugin parameter)</a>
@@ -9812,14 +9405,6 @@
         <li><a href="reference/datastructures/index.html#litestar.datastructures.ImmutableState.params.state">(litestar.datastructures.ImmutableState parameter)</a>
 </li>
         <li><a href="reference/datastructures/index.html#litestar.datastructures.State.params.state">(litestar.datastructures.State parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_engine.params.state">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_engine parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_session.params.state">(litestar.plugins.sqlalchemy.SQLAlchemyAsyncConfig.provide_session parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_engine.params.state">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_engine parameter)</a>
-</li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_session.params.state">(litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.provide_session parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.create_async_test_client.params.state">(litestar.testing.create_async_test_client parameter)</a>
 </li>
@@ -9872,6 +9457,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.status_code">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.status_code">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.status_code">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/response/base.html#litestar.response.base.ASGIResponse.params.status_code">(litestar.response.base.ASGIResponse parameter)</a>
 </li>
@@ -10083,6 +9670,8 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.summary">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.summary">(litestar.handlers.route parameter)</a>
+</li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.summary">(litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
         <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Example.summary">(litestar.openapi.spec.Example attribute)</a>
@@ -10101,17 +9690,11 @@
       <ul>
         <li><a href="reference/plugins/index.html#litestar.plugins.SerializationPluginProtocol.supports_type">(litestar.plugins.SerializationPluginProtocol method)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin.supports_type">(litestar.plugins.sqlalchemy.SQLAlchemySerializationPlugin method)</a>
-</li>
       </ul></li>
       <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin">SwaggerRenderPlugin (class in litestar.openapi.plugins)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig.sync_session_class">sync_session_class (litestar.contrib.sqlalchemy.plugins.AsyncSessionConfig attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AsyncSessionConfig.sync_session_class">(litestar.plugins.sqlalchemy.AsyncSessionConfig attribute)</a>
 </li>
-      </ul></li>
       <li><a href="reference/di.html#litestar.di.Provide.params.sync_to_thread">sync_to_thread (litestar.di.Provide parameter)</a>
 
       <ul>
@@ -10129,17 +9712,15 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.sync_to_thread">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.sync_to_thread">(litestar.handlers.route parameter)</a>
+</li>
       </ul></li>
       <li><a href="reference/concurrency.html#litestar.concurrency.sync_to_thread">sync_to_thread() (in module litestar.concurrency)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.SyncOrAsyncUnion">SyncOrAsyncUnion (in module litestar.types)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/plugins.html#litestar.contrib.sqlalchemy.plugins.SyncSessionConfig">SyncSessionConfig (class in litestar.contrib.sqlalchemy.plugins)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SyncSessionConfig">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -10168,6 +9749,8 @@
         <li><a href="reference/handlers.html#litestar.handlers.post.params.tags">(litestar.handlers.post parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.tags">(litestar.handlers.put parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.tags">(litestar.handlers.route parameter)</a>
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.tags">(litestar.openapi.OpenAPIConfig attribute)</a>
 </li>
@@ -10275,22 +9858,6 @@
       <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.params.timeout">timeout (litestar.testing.AsyncTestClient parameter)</a>
 
       <ul>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.timeout">(litestar.testing.AsyncTestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.timeout">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.timeout">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.timeout">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.timeout">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.timeout">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.timeout">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.timeout">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.timeout">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.create_async_test_client.params.timeout">(litestar.testing.create_async_test_client parameter)</a>
@@ -10298,22 +9865,6 @@
         <li><a href="reference/testing.html#litestar.testing.create_test_client.params.timeout">(litestar.testing.create_test_client parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.params.timeout">(litestar.testing.TestClient parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.timeout">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.timeout">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.timeout">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.timeout">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.timeout">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.timeout">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.timeout">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.timeout">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.timeout">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
@@ -10364,14 +9915,8 @@
       </ul></li>
       <li><a href="reference/stores/base.html#litestar.stores.base.StorageObject.to_bytes">to_bytes() (litestar.stores.base.StorageObject method)</a>
 </li>
-      <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.CommonTableAttributes.to_dict">to_dict() (litestar.contrib.sqlalchemy.base.CommonTableAttributes method)</a>
-
-      <ul>
-        <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.ModelProtocol.to_dict">(litestar.contrib.sqlalchemy.base.ModelProtocol method)</a>
+      <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.ModelProtocol.to_dict">to_dict() (litestar.contrib.sqlalchemy.base.ModelProtocol method)</a>
 </li>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.CommonTableAttributes.to_dict">(litestar.plugins.sqlalchemy.CommonTableAttributes method)</a>
-</li>
-      </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.Cookie.to_encoded_header">to_encoded_header() (litestar.datastructures.Cookie method)</a>
 </li>
       <li><a href="reference/template.html#litestar.template.TemplateConfig.to_engine">to_engine() (litestar.template.TemplateConfig method)</a>
@@ -10398,8 +9943,6 @@
         <li><a href="reference/handlers.html#litestar.handlers.HTTPRouteHandler.to_response">(litestar.handlers.HTTPRouteHandler method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.BaseSchemaObject.to_schema">to_schema() (litestar.openapi.spec.BaseSchemaObject method)</a>
 </li>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.Token">Token (class in litestar.security.jwt)</a>
@@ -10426,6 +9969,8 @@
         <li><a href="reference/security/jwt.html#litestar.security.jwt.OAuth2PasswordBearerAuth.login.params.token_expiration">(litestar.security.jwt.OAuth2PasswordBearerAuth.login parameter)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/security/jwt.html#litestar.security.jwt.BaseJWTAuth.create_token.params.token_extras">token_extras (litestar.security.jwt.BaseJWTAuth.create_token parameter)</a>
 
       <ul>
@@ -10543,6 +10088,10 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.type_decoders">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.type_decoders">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.type_decoders">(litestar.handlers.websocket_listener parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.type_decoders">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.type_decoders">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
@@ -10583,11 +10132,13 @@
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.put.params.type_encoders">(litestar.handlers.put parameter)</a>
 </li>
+        <li><a href="reference/handlers.html#litestar.handlers.route.params.type_encoders">(litestar.handlers.route parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.type_encoders">(litestar.handlers.websocket_listener parameter)</a>
+</li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.type_encoders">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.params.type_encoders">(litestar.handlers.WebsocketListenerRouteHandler parameter)</a>
-</li>
-        <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler.params.type_encoders">(litestar.handlers.WebsocketRouteHandler parameter)</a>
 </li>
         <li><a href="reference/response/base.html#litestar.response.base.Response.params.type_encoders">(litestar.response.base.Response parameter)</a>
 </li>
@@ -10680,8 +10231,6 @@
         <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractSyncRepository.update">(litestar.repository.abc.AbstractSyncRepository method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemySyncConfig.update_app_state">update_app_state() (litestar.plugins.sqlalchemy.SQLAlchemySyncConfig method)</a>
-</li>
       <li><a href="reference/dto/data_structures.html#litestar.dto.data_structures.DTOData.update_instance">update_instance() (litestar.dto.data_structures.DTOData method)</a>
 </li>
       <li><a href="reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.update_many">update_many() (litestar.repository.abc.AbstractAsyncRepository method)</a>
@@ -10693,11 +10242,7 @@
       <li><a href="reference/app.html#litestar.app.Litestar.update_openapi_schema">update_openapi_schema() (litestar.app.Litestar method)</a>
 </li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.AuditColumns.updated_at">updated_at (litestar.contrib.sqlalchemy.base.AuditColumns attribute)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.AuditColumns.updated_at">(litestar.plugins.sqlalchemy.AuditColumns attribute)</a>
 </li>
-      </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.UploadFile">UploadFile (class in litestar.datastructures)</a>
 </li>
       <li><a href="reference/params.html#litestar.params.KwargDefinition.upper_case">upper_case (litestar.params.KwargDefinition attribute)</a>
@@ -10716,6 +10261,8 @@
       </ul></li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.URL">URL (class in litestar.datastructures)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection.url">url (litestar.connection.ASGIConnection property)</a>
 
       <ul>
@@ -10731,45 +10278,11 @@
 </li>
         <li><a href="reference/stores/redis.html#litestar.stores.redis.RedisStore.with_client.params.url">(litestar.stores.redis.RedisStore.with_client parameter)</a>
 </li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.delete.params.url">(litestar.testing.AsyncTestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.get.params.url">(litestar.testing.AsyncTestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.head.params.url">(litestar.testing.AsyncTestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.options.params.url">(litestar.testing.AsyncTestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.patch.params.url">(litestar.testing.AsyncTestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.post.params.url">(litestar.testing.AsyncTestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.put.params.url">(litestar.testing.AsyncTestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.request.params.url">(litestar.testing.AsyncTestClient.request parameter)</a>
-</li>
         <li><a href="reference/testing.html#litestar.testing.AsyncTestClient.websocket_connect.params.url">(litestar.testing.AsyncTestClient.websocket_connect parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.delete.params.url">(litestar.testing.TestClient.delete parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.get.params.url">(litestar.testing.TestClient.get parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.head.params.url">(litestar.testing.TestClient.head parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.options.params.url">(litestar.testing.TestClient.options parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.patch.params.url">(litestar.testing.TestClient.patch parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.post.params.url">(litestar.testing.TestClient.post parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.put.params.url">(litestar.testing.TestClient.put parameter)</a>
-</li>
-        <li><a href="reference/testing.html#litestar.testing.TestClient.request.params.url">(litestar.testing.TestClient.request parameter)</a>
 </li>
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect.params.url">(litestar.testing.TestClient.websocket_connect parameter)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection.url_for">url_for() (litestar.connection.ASGIConnection method)</a>
 </li>
       <li><a href="reference/di.html#litestar.di.Provide.params.use_cache">use_cache (litestar.di.Provide parameter)</a>
@@ -10803,23 +10316,11 @@
 </li>
       </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase">UUIDAuditBase (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDBase">UUIDBase (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDBase">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
       <li><a href="reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDPrimaryKey">UUIDPrimaryKey (class in litestar.contrib.sqlalchemy.base)</a>
-
-      <ul>
-        <li><a href="reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDPrimaryKey">(class in litestar.plugins.sqlalchemy)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -10936,7 +10437,7 @@
       </ul></li>
       <li><a href="reference/connection.html#litestar.connection.WebSocket">WebSocket (class in litestar.connection)</a>
 </li>
-      <li><a href="reference/handlers.html#litestar.handlers.websocket">websocket (in module litestar.handlers)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket">websocket() (in module litestar.handlers)</a>
 </li>
       <li><a href="reference/app.html#litestar.app.Litestar.params.websocket_class">websocket_class (litestar.app.Litestar parameter)</a>
 
@@ -10944,6 +10445,10 @@
         <li><a href="reference/config.html#litestar.config.app.AppConfig.websocket_class">(litestar.config.app.AppConfig attribute)</a>
 </li>
         <li><a href="reference/controller.html#litestar.controller.Controller.websocket_class">(litestar.controller.Controller attribute)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket.params.websocket_class">(litestar.handlers.websocket parameter)</a>
+</li>
+        <li><a href="reference/handlers.html#litestar.handlers.websocket_listener.params.websocket_class">(litestar.handlers.websocket_listener parameter)</a>
 </li>
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListener.websocket_class">(litestar.handlers.WebsocketListener attribute)</a>
 </li>
@@ -10964,7 +10469,7 @@
         <li><a href="reference/testing.html#litestar.testing.TestClient.websocket_connect">(litestar.testing.TestClient method)</a>
 </li>
       </ul></li>
-      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener">websocket_listener (in module litestar.handlers)</a>
+      <li><a href="reference/handlers.html#litestar.handlers.websocket_listener">websocket_listener() (in module litestar.handlers)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketAcceptEvent">WebSocketAcceptEvent (class in litestar.types)</a>
 </li>
@@ -10994,10 +10499,10 @@
 </li>
       <li><a href="reference/handlers.html#litestar.handlers.WebsocketRouteHandler">WebsocketRouteHandler (class in litestar.handlers)</a>
 </li>
-      <li><a href="reference/types.html#litestar.types.WebSocketScope">WebSocketScope (in module litestar.types)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/types.html#litestar.types.WebSocketScope">WebSocketScope (in module litestar.types)</a>
+</li>
       <li><a href="reference/types.html#litestar.types.WebSocketSendEvent">WebSocketSendEvent (class in litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.WebSocketSendMessage">WebSocketSendMessage (in module litestar.types)</a>
@@ -11103,20 +10608,20 @@
     
     <div class="sy-foot-reserved md:flex justify-between items-center">
       <div class="sy-foot-copyright"><p>2024, Litestar Organization</p>
-        
-        <p>
-          Made with
-          
-          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
-          
-          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
-        </p>
-      </div>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
       <div class="sy-foot-socials">
-          <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
-          <a href="https://discord.gg/litestar-919193495116337154" aria-label="Discord"><i class="i-icon discord"></i></a>
-          <a href="https://www.reddit.com/r/LitestarAPI" aria-label="Reddit"><i class="i-icon reddit"></i></a>
-      </div>
+  <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)"><i class="i-simpleicons x-twitter"></i></a>
+  <a href="https://discord.gg/litestar" aria-label="Discord"><i class="i-simpleicons discord"></i></a>
+  <a href="https://www.reddit.com/r/LitestarAPI" aria-label="Reddit"><i class="i-simpleicons reddit"></i></a>
+</div>
     </div>
   </div>
 </footer></div>
@@ -11132,7 +10637,7 @@
       <script src="_static/togglebutton.js?v=4a39c7ea"></script>
       <script src="_static/design-tabs.js?v=36754332"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="_static/shibuya.js?v=9aab5f5b"></script>
+      <script src="_static/shibuya.js?v=5f0e4c24"></script>
       <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
       <script>mermaid.initialize({startOnLoad:true});</script>
       <script src="_static/versioning.js?v=bc681eff"></script>
