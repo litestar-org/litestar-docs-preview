@@ -1533,7 +1533,7 @@ document.write(`
   <section id="custom-types">
 <h1>Custom types<a class="headerlink" href="#custom-types" title="Permalink to this heading">#</a></h1>
 <p>Data serialization / deserialization (encoding / decoding) and validation are important parts of any API framework.</p>
-<p>Among others, litestar supports Python’s builtin dataclasses, Pydantic and msgspec for these tasks, defaulting to msgspec with json as serialization protocol.</p>
+<p>Among others, Litestar supports Python’s built-in dataclasses, Pydantic, and msgspec for these tasks, defaulting to msgspec with JSON as the serialization protocol.</p>
 <p>While msgspec supports <a class="reference external" href="https://jcristharif.com/msgspec/supported-types.html">a lot of types</a>, sometimes you may need to employ a custom type. Msgspec provides an <a class="reference external" href="https://jcristharif.com/msgspec/extending.html#mapping-to-from-native-types">extension mechanism</a> where you provide encoding and decoding hook functions which translate your type in a type that msgspec knows.</p>
 <p>Litestar supports this mechanism via <code class="docutils literal notranslate"><span class="pre">type_encoders</span></code> and <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> which can be defined on every layer. For example see the <a class="reference internal" href="../reference/app.html"><span class="doc">litestar app reference</span></a>.</p>
 <div class="admonition-layered-architecture admonition">
