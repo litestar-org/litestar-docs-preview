@@ -1475,7 +1475,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../contribution-guide.html">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1559,7 +1559,7 @@ the URL. They are declared using a simple syntax <code class="docutils literal n
 
 <span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/user/{user_id:int}&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">User</span><span class="o">.</span><span class="n">parse_obj</span><span class="p">(</span><span class="n">USER_DB</span><span class="p">[</span><span class="n">user_id</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">User</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">USER_DB</span><span class="p">[</span><span class="n">user_id</span><span class="p">])</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_user</span><span class="p">])</span>
@@ -1931,7 +1931,7 @@ async<span class="w"> </span>def<span class="w"> </span>get_user<span class="o">
 <span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>User:
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>token<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>VALID_TOKEN<span class="w"> </span>or<span class="w"> </span>cookie<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>VALID_COOKIE_VALUE:
 <span class="w">        </span>raise<span class="w"> </span>NotAuthorizedException
-<span class="w">    </span><span class="k">return</span><span class="w"> </span>User.parse_obj<span class="o">(</span>USER_DB<span class="o">[</span>user_id<span class="o">])</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>User.model_validate<span class="o">(</span>USER_DB<span class="o">[</span>user_id<span class="o">])</span>
 
 
 <span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span><span class="nv">route_handlers</span><span class="o">=[</span>get_user<span class="o">])</span>
@@ -2015,7 +2015,7 @@ route handler - and in this case it is.</p>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">controller_param</span></code> is a query param with the key <code class="docutils literal notranslate"><span class="pre">controller_param</span></code>. It has an <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.lt" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">lt</span></code></a>
 set to <code class="docutils literal notranslate"><span class="pre">100</span></code> defined on the controller, which means the provided value must be less than 100.</p>
-<p>Yet the route handler re-declares it with an <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.lt" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">lt</span></code></a> set to <code class="docutils literal notranslate"><span class="pre">50</span></code>,
+<p>Yet the route handler redeclares it with an <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.lt" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">lt</span></code></a> set to <code class="docutils literal notranslate"><span class="pre">50</span></code>,
 which means for the route handler this value must be less than 50.</p>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">local_param</span></code> is a route handler local <a class="reference internal" href="#query-parameters"><span class="std std-ref">query parameter</span></a>, and
