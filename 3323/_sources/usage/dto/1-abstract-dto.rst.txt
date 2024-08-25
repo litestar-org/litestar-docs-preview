@@ -162,6 +162,20 @@ We then add a ``B`` instance to the data (line 39), which includes a reference b
 return data can see that ``b`` is included in the response data, however ``b.a`` is not, due to the default
 ``max_nested_depth`` of ``1``.
 
+Handling unknown fields
+-----------------------
+
+By default, DTOs will silently ignore unknown fields in the source data. This behaviour
+can be configured using the ``forbid_unknown_fields`` parameter of the
+:class:`DTOConfig <litestar.dto.config.DTOConfig>`. When set to ``True`` a validation
+error response will be returned if the data contains a field not defined on the model:
+
+.. literalinclude:: /examples/data_transfer_objects/factory/unknown_fields.py
+    :caption: Type checking
+    :language: python
+    :linenos:
+
+
 DTO Data
 --------
 
@@ -176,7 +190,7 @@ handler.
 
 .. literalinclude:: /examples/data_transfer_objects/factory/dto_data_problem_statement.py
     :language: python
-    :emphasize-lines: 18,19,20,21,27
+    :emphasize-lines: 19,20,21,22,28
     :linenos:
 
 Notice that we get a ``500`` response from the handler - this is because the DTO has attempted to convert the request
