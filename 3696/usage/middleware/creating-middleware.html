@@ -1263,6 +1263,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../testing.html">Testing</a></li>
@@ -1897,6 +1898,11 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">/</span></code> as an exclude pattern, will disable this middleware for all routes,
+since, as a regex, it matches <em>every</em> path</p>
 </div>
 </section>
 <section id="using-definemiddleware-to-pass-arguments">
