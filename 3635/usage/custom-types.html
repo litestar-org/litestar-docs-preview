@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Static files &#8212; Litestar Framework</title>
+    <title>Custom types &#8212; Litestar Framework</title>
   
   
   
@@ -47,13 +47,13 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/static-files';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usage/custom-types';</script>
     <script src="../_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Custom types" href="custom-types.html" />
-    <link rel="prev" title="Handling Secrets" href="security/secret-datastructures.html" />
+    <link rel="next" title="Stores" href="stores.html" />
+    <link rel="prev" title="Static files" href="static-files.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -1262,8 +1262,8 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="security/secret-datastructures.html">Handling Secrets</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Static files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom-types.html">Custom types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static-files.html">Static files</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
@@ -1517,7 +1517,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Usage</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Static files</li>
+    <li class="breadcrumb-item active" aria-current="page">Custom types</li>
   </ul>
 </nav>
 </div>
@@ -1534,275 +1534,185 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="static-files">
-<h1>Static files<a class="headerlink" href="#static-files" title="Permalink to this heading">#</a></h1>
-<p>To serve static files (i.e., serve arbitrary files from a given directory), the
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a> can be used to create a
-<a class="reference internal" href="../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> to handle this task.</p>
+  <section id="custom-types">
+<h1>Custom types<a class="headerlink" href="#custom-types" title="Permalink to this heading">#</a></h1>
+<p>Data serialization / deserialization (encoding / decoding) and validation are important parts of any API framework.</p>
+<p>In addition to being capable to encode / decode and validate many standard types, litestar supports Python’s builtin dataclasses and libraries like Pydantic and msgspec.</p>
+<p>However, sometimes you may need to employ a custom type.</p>
+<section id="using-type-encoders-decoders">
+<h2>Using type encoders / decoders<a class="headerlink" href="#using-type-encoders-decoders" title="Permalink to this heading">#</a></h2>
+<p>Litestar supports a mechanism where you provide encoding and decoding hook functions which translate your type in / to a type that it knows. You can provide them via the <code class="docutils literal notranslate"><span class="pre">type_encoders</span></code> and <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.12)"><span class="xref std std-term">parameters</span></a> which can be defined on every layer. For example see the <a class="reference internal" href="../reference/app.html"><span class="doc">litestar app reference</span></a>.</p>
+<div class="admonition-layered-architecture admonition">
+<p class="admonition-title">Layered architecture</p>
+<p><code class="docutils literal notranslate"><span class="pre">type_encoders</span></code> and <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> are part of Litestar’s layered architecture, which means you can set them on every layer of the application. If you set them on multiple layers,
+the layer closest to the route handler will take precedence.</p>
+<p>You can read more about this here:
+<a class="reference internal" href="applications.html#layered-architecture"><span class="std std-ref">Layered architecture</span></a></p>
+</div>
+<p>Here is an example:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Serving static files using <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router</span></code></a></span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="code-block-caption"><span class="caption-text">Tell Litestar how to encode and decode a custom type</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
 
-<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
-<span class="kn">from</span> <span class="nn">litestar.static_files</span> <span class="kn">import</span> <span class="n">create_static_files_router</span>
+<span class="kn">from</span> <span class="nn">msgspec</span> <span class="kn">import</span> <span class="n">Struct</span>
 
-<span class="n">ASSETS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;assets&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
 
 
-<span class="k">def</span> <span class="nf">on_startup</span><span class="p">():</span>
-    <span class="n">ASSETS_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ASSETS_DIR</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TenantUser</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom Type that represents a user associated to a tenant</span>
+
+<span class="sd">    Parsed from / serialized to a combined tenant + user id string of the form</span>
+
+<span class="sd">        TENANTPREFIX_USERID</span>
+
+<span class="sd">    i.e. separated by underscore.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tenant_prefix</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tenant_prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tenant_prefix</span> <span class="o">=</span> <span class="n">tenant_prefix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user_id</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TenantUser&quot;</span><span class="p">:</span>
+        <span class="n">splits</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splits</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Could not split up tenant user id string. &quot;</span>
+                <span class="s2">&quot;Expecting underscore for separation of tenant prefix and user id.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">tenant_prefix</span><span class="o">=</span><span class="n">splits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">user_id</span><span class="o">=</span><span class="n">splits</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">to_combined_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tenant_prefix</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span>
+
+
+<span class="k">def</span> <span class="nf">tenant_user_type_predicate</span><span class="p">(</span><span class="nb">type</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">type</span> <span class="ow">is</span> <span class="n">TenantUser</span>
+
+
+<span class="k">def</span> <span class="nf">tenant_user_enc_hook</span><span class="p">(</span><span class="n">u</span><span class="p">:</span> <span class="n">TenantUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">u</span><span class="o">.</span><span class="n">to_combined_str</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">tenant_user_dec_hook</span><span class="p">(</span><span class="n">tenant_user_id_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TenantUser</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">TenantUser</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">tenant_user_id_str</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">general_dec_hook</span><span class="p">(</span><span class="nb">type</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">tenant_user_type_predicate</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tenant_user_dec_hook</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encountered unknown type during decoding: </span><span class="si">{</span><span class="nb">type</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">UserAsset</span><span class="p">(</span><span class="n">Struct</span><span class="p">):</span>
+    <span class="n">user</span><span class="p">:</span> <span class="n">TenantUser</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/asset&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">create_asset</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">UserAsset</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserAsset</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">TenantUser</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">create_static_files_router</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="p">,</span> <span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;assets&quot;</span><span class="p">]),</span>
-    <span class="p">],</span>
-    <span class="n">on_startup</span><span class="o">=</span><span class="p">[</span><span class="n">on_startup</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">create_asset</span><span class="p">],</span>
+    <span class="n">type_encoders</span><span class="o">=</span><span class="p">{</span><span class="n">TenantUser</span><span class="p">:</span> <span class="n">tenant_user_enc_hook</span><span class="p">},</span>  <span class="c1"># tell litestar how to encode TenantUser</span>
+    <span class="n">type_decoders</span><span class="o">=</span><span class="p">[(</span><span class="n">tenant_user_type_predicate</span><span class="p">,</span> <span class="n">general_dec_hook</span><span class="p">)],</span>  <span class="c1"># tell litestar how to decode TenantUser</span>
 <span class="p">)</span>
-
 </pre></div>
 </div>
 </div>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/static/hello.txt
-Hello,<span class="w"> </span>world!
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/asset<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;SomeAsset&quot;</span>,<span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;TenantA_Somebody&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;TenantA_Somebody&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;SomeAsset&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
-<p>In this example, files from the directory <code class="docutils literal notranslate"><span class="pre">assets</span></code> will be served on the path
-<code class="docutils literal notranslate"><span class="pre">/static</span></code>. A file <code class="docutils literal notranslate"><span class="pre">assets/hello.txt</span></code> would now be available on <code class="docutils literal notranslate"><span class="pre">/static/hello.txt</span></code></p>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>Directories are interpreted as relative to the working directory from which the
-application is started</p>
-</div>
-<section id="sending-files-as-attachments">
-<h2>Sending files as attachments<a class="headerlink" href="#sending-files-as-attachments" title="Permalink to this heading">#</a></h2>
-<p>By default, files are sent “inline”, meaning they will have a
-<code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">inline</span></code> header.</p>
-<p>Setting <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router.params.send_as_attachment" title="litestar.static_files.create_static_files_router.params.send_as_attachment"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">send_as_attachment</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will send
-them with a <code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">attachment</span></code> instead:</p>
+</section>
+<section id="custom-pydantic-types">
+<h2>Custom Pydantic types<a class="headerlink" href="#custom-pydantic-types" title="Permalink to this heading">#</a></h2>
+<p>If you use a custom Pydantic type you can use it directly:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Sending files as attachments using the the
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router.params.send_as_attachment" title="litestar.static_files.create_static_files_router.params.send_as_attachment"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">send_as_attachment</span></code></a> parameter
-of <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
+<div class="code-block-caption"><span class="caption-text">Tell Litestar how to encode and decode a custom Pydantic type</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>pydantic<span class="w"> </span>import<span class="w"> </span>BaseModel,<span class="w"> </span>BeforeValidator,<span class="w"> </span>ConfigDict,<span class="w"> </span>PlainSerializer,<span class="w"> </span>WithJsonSchema
+from<span class="w"> </span>typing_extensions<span class="w"> </span>import<span class="w"> </span>Annotated
+
+from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar,<span class="w"> </span>post
+
+
+class<span class="w"> </span>TenantUser:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Custom Type that represents a user associated to a tenant</span>
+
+<span class="s2">    Parsed from / serialized to a combined tenant + user id string of the form</span>
+
+<span class="s2">        TENANTPREFIX_USERID</span>
+
+<span class="s2">    i.e. separated by underscore.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+<span class="w">    </span>tenant_prefix:<span class="w"> </span>str
+<span class="w">    </span>user_id:<span class="w"> </span>str
+
+<span class="w">    </span>def<span class="w"> </span>__init__<span class="o">(</span>self,<span class="w"> </span>tenant_prefix:<span class="w"> </span>str,<span class="w"> </span>user_id:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>None:
+<span class="w">        </span>self.tenant_prefix<span class="w"> </span><span class="o">=</span><span class="w"> </span>tenant_prefix
+<span class="w">        </span>self.user_id<span class="w"> </span><span class="o">=</span><span class="w"> </span>user_id
+
+<span class="w">    </span>@classmethod
+<span class="w">    </span>def<span class="w"> </span>from_string<span class="o">(</span>cls,<span class="w"> </span>s:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span><span class="s2">&quot;TenantUser&quot;</span>:
+<span class="w">        </span><span class="nv">splits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>s.split<span class="o">(</span><span class="s2">&quot;_&quot;</span>,<span class="w"> </span><span class="nv">maxsplit</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>splits<span class="o">)</span><span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span>:
+<span class="w">            </span>raise<span class="w"> </span>ValueError<span class="o">(</span>
+<span class="w">                </span><span class="s2">&quot;Could not split up tenant user id string. &quot;</span>
+<span class="w">                </span><span class="s2">&quot;Expecting underscore for separation of tenant prefix and user id.&quot;</span>
+<span class="w">            </span><span class="o">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>cls<span class="o">(</span><span class="nv">tenant_prefix</span><span class="o">=</span>splits<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span><span class="nv">user_id</span><span class="o">=</span>splits<span class="o">[</span><span class="m">1</span><span class="o">])</span>
+
+<span class="w">    </span>def<span class="w"> </span>to_combined_str<span class="o">(</span>self<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>str:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>self.tenant_prefix<span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="w"> </span>+<span class="w"> </span>self.user_id
+
+
+<span class="nv">PydAnnotatedTenantUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Annotated<span class="o">[</span>
+<span class="w">    </span>TenantUser,
+<span class="w">    </span>BeforeValidator<span class="o">(</span>lambda<span class="w"> </span>x:<span class="w"> </span>TenantUser.from_string<span class="o">(</span>x<span class="o">))</span>,
+<span class="w">    </span>PlainSerializer<span class="o">(</span>lambda<span class="w"> </span>x:<span class="w"> </span>x.to_combined_str<span class="o">()</span>,<span class="w"> </span><span class="nv">return_type</span><span class="o">=</span>str<span class="o">)</span>,
+<span class="w">    </span>WithJsonSchema<span class="o">({</span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="o">}</span>,<span class="w"> </span><span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;serialization&quot;</span><span class="o">)</span>,
+<span class="o">]</span>
+
+
+class<span class="w"> </span>UserAsset<span class="o">(</span>BaseModel<span class="o">)</span>:
+<span class="w">    </span><span class="nv">model_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ConfigDict<span class="o">(</span><span class="nv">arbitrary_types_allowed</span><span class="o">=</span>True<span class="o">)</span>
+
+<span class="w">    </span>user:<span class="w"> </span>PydAnnotatedTenantUser
+<span class="w">    </span>name:<span class="w"> </span>str
+
+
+@post<span class="o">(</span><span class="s2">&quot;/asset&quot;</span>,<span class="w"> </span><span class="nv">sync_to_thread</span><span class="o">=</span>False<span class="o">)</span>
+def<span class="w"> </span>create_asset<span class="o">(</span>
+<span class="w">    </span>data:<span class="w"> </span>UserAsset,
+<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>UserAsset:
+<span class="w">    </span>assert<span class="w"> </span>isinstance<span class="o">(</span>data.user,<span class="w"> </span>TenantUser<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>data
+
 
 <span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span>
-<span class="w">            </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span>,
-<span class="w">            </span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">send_as_attachment</span><span class="o">=</span>True,
-<span class="w">        </span><span class="o">)</span>
-<span class="w">    </span><span class="o">]</span>
-<span class="o">)</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="html-mode">
-<h2>HTML mode<a class="headerlink" href="#html-mode" title="Permalink to this heading">#</a></h2>
-<p>“HTML mode” can be enabled by setting <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router.params.html_mode" title="litestar.static_files.create_static_files_router.params.html_mode"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">html_mode</span></code></a>
-to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>This will:</p>
-<ul class="simple">
-<li><p>Serve and <code class="docutils literal notranslate"><span class="pre">/index.html</span></code> when the path <code class="docutils literal notranslate"><span class="pre">/</span></code> is requested</p></li>
-<li><p>Attempt to serve <code class="docutils literal notranslate"><span class="pre">/404.html</span></code> when a requested file is not found</p></li>
-</ul>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">Serving HTML files using the <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router.params.html_mode" title="litestar.static_files.create_static_files_router.params.html_mode"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">html_mode</span></code></a>
-parameter of <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>pathlib<span class="w"> </span>import<span class="w"> </span>Path
-
-from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-
-<span class="nv">HTML_DIR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Path<span class="o">(</span><span class="s2">&quot;html&quot;</span><span class="o">)</span>
-
-
-def<span class="w"> </span>on_startup<span class="o">()</span><span class="w"> </span>-&gt;<span class="w"> </span>None:
-<span class="w">    </span>HTML_DIR.mkdir<span class="o">(</span><span class="nv">exist_ok</span><span class="o">=</span>True<span class="o">)</span>
-<span class="w">    </span>HTML_DIR.joinpath<span class="o">(</span><span class="s2">&quot;index.html&quot;</span><span class="o">)</span>.write_text<span class="o">(</span><span class="s2">&quot;&lt;strong&gt;Hello, world!&lt;/strong&gt;&quot;</span><span class="o">)</span>
-<span class="w">    </span>HTML_DIR.joinpath<span class="o">(</span><span class="s2">&quot;404.html&quot;</span><span class="o">)</span>.write_text<span class="o">(</span><span class="s2">&quot;&lt;h1&gt;Not found&lt;/h1&gt;&quot;</span><span class="o">)</span>
-
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span>
-<span class="w">            </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span>,
-<span class="w">            </span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;html&quot;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">html_mode</span><span class="o">=</span>True,
-<span class="w">        </span><span class="o">)</span>
-<span class="w">    </span><span class="o">]</span>,
-<span class="w">    </span><span class="nv">on_startup</span><span class="o">=[</span>on_startup<span class="o">]</span>,
+<span class="w">    </span><span class="o">[</span>create_asset<span class="o">]</span>,
 <span class="o">)</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/
-&lt;strong&gt;Hello,<span class="w"> </span>world!&lt;/strong&gt;
-&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/index.html
-&lt;strong&gt;Hello,<span class="w"> </span>world!&lt;/strong&gt;
-&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/something
-&lt;h1&gt;Not<span class="w"> </span>found&lt;/h1&gt;
-</pre></div>
-</div>
-</div>
-</section>
-<section id="passing-options-to-the-generated-router">
-<h2>Passing options to the generated router<a class="headerlink" href="#passing-options-to-the-generated-router" title="Permalink to this heading">#</a></h2>
-<p>Options available on <a class="reference internal" href="../reference/router.html#litestar.router.Router" title="litestar.router.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a> can be passed to directly
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a>:</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">Passing options to the router generated by
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span>
-<span class="w">            </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span>,
-<span class="w">            </span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">opt</span><span class="o">={</span><span class="s2">&quot;some&quot;</span>:<span class="w"> </span>True<span class="o">}</span>,
-<span class="w">            </span><span class="nv">include_in_schema</span><span class="o">=</span>False,
-<span class="w">            </span><span class="nv">tags</span><span class="o">=[</span><span class="s2">&quot;static&quot;</span><span class="o">]</span>,
-<span class="w">        </span><span class="o">)</span>
-<span class="w">    </span><span class="o">]</span>
-<span class="o">)</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="using-a-custom-router-class">
-<h2>Using a custom router class<a class="headerlink" href="#using-a-custom-router-class" title="Permalink to this heading">#</a></h2>
-<p>The router class used can be customized with the
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router.params.router_class" title="litestar.static_files.create_static_files_router.params.router_class"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">router_class</span></code></a> parameter:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">Using a custom router class with
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.router<span class="w"> </span>import<span class="w"> </span>Router
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-
-
-class<span class="w"> </span>MyRouter<span class="o">(</span>Router<span class="o">)</span>:
-<span class="w">    </span>pass
-
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span>
-<span class="w">            </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span>,
-<span class="w">            </span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">router_class</span><span class="o">=</span>MyRouter,
-<span class="w">        </span><span class="o">)</span>
-<span class="w">    </span><span class="o">]</span>
-<span class="o">)</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="retrieving-paths-to-static-files">
-<h2>Retrieving paths to static files<a class="headerlink" href="#retrieving-paths-to-static-files" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="../reference/app.html#litestar.app.Litestar.route_reverse" title="litestar.app.Litestar.route_reverse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">route_reverse()</span></code></a> and
-<a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection.url_for" title="litestar.connection.ASGIConnection.url_for"><code class="xref py py-meth docutils literal notranslate"><span class="pre">url_for()</span></code></a> can be used to retrieve the path
-under which a specific file will be available:</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Retrieving paths to static files using <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.route_reverse" title="litestar.app.Litestar.route_reverse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">route_reverse()</span></code></a></span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span>,<span class="w"> </span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">])</span>,
-<span class="w">    </span><span class="o">]</span>
-<span class="o">)</span>
-
-
-print<span class="o">(</span>app.route_reverse<span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;static&quot;</span>,<span class="w"> </span><span class="nv">file_path</span><span class="o">=</span><span class="s2">&quot;/some_file.txt&quot;</span><span class="o">))</span><span class="w">  </span><span class="c1"># /static/some_file.txt</span>
-</pre></div>
-</div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter has to match the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter passed to
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a>, which defaults to <code class="docutils literal notranslate"><span class="pre">static</span></code>.</p>
-</div>
-</section>
-<section id="remote-file-systems">
-<h2>(Remote) file systems<a class="headerlink" href="#remote-file-systems" title="Permalink to this heading">#</a></h2>
-<p>To customize how Litestar interacts with the file system, a class implementing the
-<a class="reference internal" href="../reference/types.html#litestar.types.FileSystemProtocol" title="litestar.types.FileSystemProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSystemProtocol</span></code></a> can be passed to <code class="docutils literal notranslate"><span class="pre">file_system</span></code>. An example
-of this are the file systems provided by
-<a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/">fsspec</a>, which includes support
-for FTP, SFTP, Hadoop, SMB, GitHub and
-<a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/api.html#implementations">many more</a>,
-with support for popular cloud providers available via 3rd party implementations such as</p>
-<ul class="simple">
-<li><p>S3 via <a class="reference external" href="https://s3fs.readthedocs.io/en/latest/">S3FS</a></p></li>
-<li><p>Google Cloud Storage via <a class="reference external" href="https://gcsfs.readthedocs.io/en/latest/">GCFS</a></p></li>
-<li><p>Azure Blob Storage via <a class="reference external" href="https://github.com/fsspec/adlfs">adlfs</a></p></li>
-</ul>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">Using a custom file system with
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>fsspec.implementations.ftp<span class="w"> </span>import<span class="w"> </span>FTPFileSystem
-
-from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span>
-<span class="w">            </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span>,
-<span class="w">            </span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">file_system</span><span class="o">=</span>FTPFileSystem<span class="o">(</span><span class="nv">host</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="o">)</span>,
-<span class="w">        </span><span class="o">)</span>,
-<span class="w">    </span><span class="o">]</span>
-<span class="o">)</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="upgrading-from-legacy-staticfilesconfig">
-<h2>Upgrading from legacy StaticFilesConfig<a class="headerlink" href="#upgrading-from-legacy-staticfilesconfig" title="Permalink to this heading">#</a></h2>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version v3.0: </span><a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> is deprecated and will be removed in Litestar 3.0</p>
-</div>
-<p>Existing code can be upgraded to <a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a> by replacing
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> instances with this function call and passing the result to
-<code class="docutils literal notranslate"><span class="pre">route_handlers</span></code> instead of <code class="docutils literal notranslate"><span class="pre">static_files_config</span></code>:</p>
-<div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">Using the deprecated <a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.config.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a></span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files.config<span class="w"> </span>import<span class="w"> </span>StaticFilesConfig
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">static_files_config</span><span class="o">=[</span>
-<span class="w">        </span>StaticFilesConfig<span class="o">(</span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="o">)</span>,
-<span class="w">    </span><span class="o">]</span>,
-<span class="o">)</span>
-</pre></div>
-</div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Upgrading from <a class="reference internal" href="../reference/static_files.html#litestar.static_files.StaticFilesConfig" title="litestar.static_files.config.StaticFilesConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticFilesConfig</span></code></a> to
-<a class="reference internal" href="../reference/static_files.html#litestar.static_files.create_static_files_router" title="litestar.static_files.create_static_files_router"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_static_files_router()</span></code></a></span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>from<span class="w"> </span>litestar<span class="w"> </span>import<span class="w"> </span>Litestar
-from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<span class="w"> </span>create_static_files_router
-
-<span class="nv">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Litestar<span class="o">(</span>
-<span class="w">    </span><span class="nv">route_handlers</span><span class="o">=[</span>
-<span class="w">        </span>create_static_files_router<span class="o">(</span><span class="nv">directories</span><span class="o">=[</span><span class="s2">&quot;assets&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="o">)</span>,
-<span class="w">    </span><span class="o">]</span>,
-<span class="o">)</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/asset<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;SomeAsset&quot;</span>,<span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;TenantA_Somebody&quot;</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;user&quot;</span>:<span class="s2">&quot;TenantA_Somebody&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;SomeAsset&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -1820,20 +1730,20 @@ from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="security/secret-datastructures.html"
+       href="static-files.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Handling Secrets</p>
+        <p class="prev-next-title">Static files</p>
       </div>
     </a>
     <a class="right-next"
-       href="custom-types.html"
+       href="stores.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Custom types</p>
+        <p class="prev-next-title">Stores</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1853,13 +1763,8 @@ from<span class="w"> </span>litestar.static_files<span class="w"> </span>import<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-files-as-attachments">Sending files as attachments</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#html-mode">HTML mode</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-options-to-the-generated-router">Passing options to the generated router</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-custom-router-class">Using a custom router class</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-paths-to-static-files">Retrieving paths to static files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-file-systems">(Remote) file systems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-from-legacy-staticfilesconfig">Upgrading from legacy StaticFilesConfig</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-type-encoders-decoders">Using type encoders / decoders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-pydantic-types">Custom Pydantic types</a></li>
 </ul>
   </nav></div>
 
