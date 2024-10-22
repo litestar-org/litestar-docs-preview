@@ -1607,8 +1607,7 @@ into a JSON response of the following schema:</p>
 </tr>
 </tbody>
 </table>
-<p>When a value fails <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> validation, the result will be a <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ValidationException" title="litestar.exceptions.http_exceptions.ValidationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValidationException</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">extra</span></code> key set to the
-<code class="docutils literal notranslate"><span class="pre">pydantic</span></code> validation error message.</p>
+<p>When a value fails validation, the result will be a <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ValidationException" title="litestar.exceptions.http_exceptions.ValidationException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValidationException</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">extra</span></code> key set to the validation error message.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>All validation error messages will be made available for the API consumers by default.
@@ -1742,8 +1741,7 @@ exceptions are handled correctly:</p>
 and <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> are handled only by exception handlers defined on the app layer. Thus, if you want to affect
 these exceptions, you will need to pass the exception handlers for them to the Litestar constructor and cannot use other
 layers for this purpose.</p>
-<p>While it does not make much sense to have different functions with a top-level exception handling,
-Litestar supports defining exception handlers on all layers of the app, with the lower layers overriding layer above
+<p>Litestar supports defining exception handlers on all layers of the app, with the lower layers overriding layer above
 them. In the following example, the exception handler for the route handler function will only handle
 the <code class="docutils literal notranslate"><span class="pre">ValidationException</span></code> occurring within that route handler:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">get</span>
