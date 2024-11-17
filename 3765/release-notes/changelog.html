@@ -1360,7 +1360,9 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/htmx.html">htmx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1663,7 +1665,7 @@ constrained string field would raise a <a class="reference internal" href="../re
 <dt>OpenAPI/DTO: Fix missing Pydantic 2 computed fields<a class="headerlink reference internal" href="#2.12.0-openapi/dto: fix missing pydantic 2 computed fields" id="2.12.0-openapi/dto: fix missing pydantic 2 computed fields">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that would lead to Pydantic computed fields to be ignored during
 schema generation when the model was using a
-<a class="reference internal" href="../reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO" title="litestar.contrib.pydantic.PydanticDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticDTO</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticDTO</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="id9">
 <div class="code-block-caption"><span class="caption-text">Only the <code class="docutils literal notranslate"><span class="pre">foo</span></code> field would be included in the schema</span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -3394,7 +3396,7 @@ stream and psycopg backends were not affected.</p>
 <p>Performance of threaded synchronous code was improved by using the async
 library’s native threading helpers instead of anyio. On asyncio,
 <a class="reference external" href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor" title="(in Python v3.13)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.loop.run_in_executor()</span></code></a> is now used and on trio
-<a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync" title="(in Trio v0.26.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">trio.to_thread.run_sync()</span></code></a>.</p>
+<a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync" title="(in Trio v0.27.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">trio.to_thread.run_sync()</span></code></a>.</p>
 <p>Beneficiaries of these performance improvements are:</p>
 <ul class="simple">
 <li><p>Synchronous route handlers making use of <code class="docutils literal notranslate"><span class="pre">sync_to_thread=True</span></code></p></li>
@@ -4084,7 +4086,7 @@ compatibility, but as of <code class="docutils literal notranslate"><span class=
 </div>
 </dd>
 <dt>Customization of Pydantic integration via <code class="docutils literal notranslate"><span class="pre">PydanticPlugin</span></code><a class="headerlink reference internal" href="#2.2.0-customization of pydantic integration via" id="2.2.0-customization of pydantic integration via">#</a></dt><dd><div class="changelog-change docutils container">
-<p>A new <a class="reference internal" href="../reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticPlugin" title="litestar.contrib.pydantic.PydanticPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticPlugin</span></code></a> has been added, which
+<p>A new <code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticPlugin</span></code> has been added, which
 can be used to configure Pydantic behaviour. Currently it supports setting a
 <code class="docutils literal notranslate"><span class="pre">prefer_alias</span></code> option, which will pass the <code class="docutils literal notranslate"><span class="pre">by_alias=True</span></code> flag to Pydantic
 when exporting models, as well as generate schemas accordingly.</p>
@@ -4461,7 +4463,7 @@ used by a route handler.</p>
 </dd>
 <dt>HTMX: Missing default values for <code class="docutils literal notranslate"><span class="pre">receive</span></code> and <code class="docutils literal notranslate"><span class="pre">send</span></code> parameters of <code class="docutils literal notranslate"><span class="pre">HTMXRequest</span></code><a class="headerlink reference internal" href="#2.0.0-htmx: missing default values for" id="2.0.0-htmx: missing default values for">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Add missing default values for the <code class="docutils literal notranslate"><span class="pre">receive</span></code> and <code class="docutils literal notranslate"><span class="pre">send</span></code> parameters of
-<a class="reference internal" href="../reference/contrib/htmx.html#litestar.contrib.htmx.request.HTMXRequest" title="litestar.contrib.htmx.request.HTMXRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTMXRequest</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">HTMXRequest</span></code>.</p>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/2145">litestar-org/litestar#2145</a></span></p>
 </div>
 </dd>
@@ -5159,7 +5161,7 @@ value, which defaults to <code class="docutils literal notranslate"><span class=
 <a class="reference external" href="https://docs.pydantic.dev/latest/">Pydantic</a> have been added:</p>
 <ul class="simple">
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MsgspecDTO</span></code></p></li>
-<li><p><a class="reference internal" href="../reference/contrib/pydantic.html#litestar.contrib.pydantic.PydanticDTO" title="litestar.contrib.pydantic.PydanticDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticDTO</span></code></a></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticDTO</span></code></p></li>
 </ul>
 <p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/1531,">litestar-org/litestar#1531,</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/issues/1532">litestar-org/litestar#1532</a></span>, <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/1712">litestar-org/litestar#1712</a></span></p>
 </div>
