@@ -1246,6 +1246,7 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/problem_details.html">Problem Details</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../responses.html">Responses</a></li>
@@ -1259,6 +1260,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../testing.html">Testing</a></li>
@@ -1303,7 +1305,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/datastructures/secret_values.html">secret_values</a></li>
@@ -1355,7 +1357,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1470,7 +1477,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../contribution-guide.html">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1536,13 +1543,17 @@ document.write(`
 <li><p>Automatic <a class="reference external" href="https://spec.openapis.org/oas/v3.1.0">OpenAPI 3.1.0 Schema</a> generation, which is available as both YAML
 and JSON.</p></li>
 <li><p>Builtin support for static documentation site generation using several different libraries.</p></li>
-<li><p>Simple configuration using pydantic based classes.</p></li>
+<li><p>Full configuration using pre-defined type-safe dataclasses.</p></li>
 </ul>
 <p>Litestar includes a complete implementation of the <a class="reference external" href="https://spec.openapis.org/oas/latest.html">latest version of the OpenAPI specification</a>
-using Python dataclasses. This implementation is used as a basis for generating OpenAPI specs, supporting builtins including
-<code class="docutils literal notranslate"><span class="pre">dataclasses</span></code> and <code class="docutils literal notranslate"><span class="pre">TypedDict</span></code>, as well as Pydantic models and any 3rd party entities for which a plugin is implemented.</p>
+using Python dataclasses. This implementation is used as a basis for generating OpenAPI specs,
+supporting <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a>,
+as well as Pydantic and msgspec models, and any 3rd party entities
+for which a <a class="reference internal" href="../plugins/index.html#plugins"><span class="std std-ref">plugin</span></a> is implemented.</p>
 <p>This is also highly configurable - and users can customize the OpenAPI spec in a variety of ways - ranging from passing
-configuration globally, to settings specific kwargs on route handler decorators.</p>
+configuration globally to setting
+<a class="reference internal" href="schema_generation.html#configuring-schema-generation-on-a-route-handler"><span class="std std-ref">specific kwargs on route</span></a>
+handler decorators.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="schema_generation.html">Configuring schema generation</a><ul>
@@ -1634,7 +1645,7 @@ configuration globally, to settings specific kwargs on route handler decorators.
 
   <p class="copyright">
     
-      © Copyright 2023, Litestar-Org.
+      © Copyright 2024, Litestar-Org.
       <br/>
     
   </p>

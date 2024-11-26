@@ -1250,6 +1250,7 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../usage/plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../usage/plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/plugins/problem_details.html">Problem Details</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/responses.html">Responses</a></li>
@@ -1263,6 +1264,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/testing.html">Testing</a></li>
@@ -1307,7 +1309,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="datastructures/secret_values.html">secret_values</a></li>
@@ -1359,7 +1361,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1474,7 +1481,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../contribution-guide.html">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1538,7 +1545,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.CompressionEncoding">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">CompressionEncoding</span></span><a class="headerlink" href="#litestar.enums.CompressionEncoding" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for supported compression encodings.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.enums.CompressionEncoding.__new__">
@@ -1550,7 +1557,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.HttpMethod">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">HttpMethod</span></span><a class="headerlink" href="#litestar.enums.HttpMethod" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for HTTP methods.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.enums.HttpMethod.__new__">
@@ -1562,7 +1569,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.MediaType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">MediaType</span></span><a class="headerlink" href="#litestar.enums.MediaType" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header values.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.enums.MediaType.__new__">
@@ -1574,7 +1581,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.OpenAPIMediaType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">OpenAPIMediaType</span></span><a class="headerlink" href="#litestar.enums.OpenAPIMediaType" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for OpenAPI specific response <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header values.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.enums.OpenAPIMediaType.__new__">
@@ -1586,7 +1593,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.ParamType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">ParamType</span></span><a class="headerlink" href="#litestar.enums.ParamType" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for the types of parameters a request can receive.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.enums.ParamType.__new__">
@@ -1598,7 +1605,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.RequestEncodingType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">RequestEncodingType</span></span><a class="headerlink" href="#litestar.enums.RequestEncodingType" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for request <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code> header values designating encoding formats.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.enums.RequestEncodingType.__new__">
@@ -1610,7 +1617,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.enums.ScopeType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.enums.</span></span><span class="sig-name descname"><span class="pre">ScopeType</span></span><a class="headerlink" href="#litestar.enums.ScopeType" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
 <p>An Enum for the ‘http’ key stored under Scope.</p>
 <div class="admonition-notes admonition">
 <p class="admonition-title">Notes</p>
@@ -1727,7 +1734,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023, Litestar-Org.
+      © Copyright 2024, Litestar-Org.
       <br/>
     
   </p>

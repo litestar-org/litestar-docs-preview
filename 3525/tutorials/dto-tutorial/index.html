@@ -1246,6 +1246,7 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../usage/plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/plugins/problem_details.html">Problem Details</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/responses.html">Responses</a></li>
@@ -1259,6 +1260,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/testing.html">Testing</a></li>
@@ -1303,7 +1305,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/datastructures/secret_values.html">secret_values</a></li>
@@ -1355,7 +1357,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1470,7 +1477,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../contribution-guide.html">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1569,16 +1576,16 @@ DTO factories can be used to help us build flexible applications. Lets get start
 </div>
 </div>
 <p>In this script, we define a data model, a route handler and an application instance.</p>
-<p>Our data model is a Python <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a> called <code class="docutils literal notranslate"><span class="pre">Person</span></code> which has three attributes:
+<p>Our data model is a Python <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a> called <code class="docutils literal notranslate"><span class="pre">Person</span></code> which has three attributes:
 <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">age</span></code>, and <code class="docutils literal notranslate"><span class="pre">email</span></code>.</p>
 <p>The function called <code class="docutils literal notranslate"><span class="pre">get_person</span></code> that is decorated with <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.get" title="litestar.handlers.get"><code class="xref py py-class docutils literal notranslate"><span class="pre">&#64;get()</span></code></a> is a route handler
 with path <code class="docutils literal notranslate"><span class="pre">/person/{name:str}</span></code>, that serves <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">GET</a>
 requests. In the path, <code class="docutils literal notranslate"><span class="pre">{name:str}</span></code> represents a path parameter called <code class="docutils literal notranslate"><span class="pre">name</span></code> with a string type. The route handler
 receives the name from the path parameter and returns a <code class="docutils literal notranslate"><span class="pre">Person</span></code> object.</p>
 <p>Finally, we create an application instance and register the route handler with it.</p>
-<p>In Litestar, this pattern works “out-of-the-box” - that is, returning <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a>
+<p>In Litestar, this pattern works “out-of-the-box” - that is, returning <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html#dataclasses.dataclass" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass</span></code></a>
 instances from handlers is natively supported. Litestar will take that dataclass instance, and transform it into
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> that can be sent over the network.</p>
+<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> that can be sent over the network.</p>
 <p>Lets run it and see for ourselves!</p>
 <p>Save the above script as <code class="docutils literal notranslate"><span class="pre">app.py</span></code>, run it using the <code class="docutils literal notranslate"><span class="pre">litestar</span> <span class="pre">run</span></code> command, and then visit
 <a class="reference external" href="http://localhost:8000/person/peter">http://localhost:8000/person/peter</a> in your browser. You should see the
@@ -1649,7 +1656,7 @@ is where Data Transfer Objects come in.</p>
 
   <p class="copyright">
     
-      © Copyright 2023, Litestar-Org.
+      © Copyright 2024, Litestar-Org.
       <br/>
     
   </p>

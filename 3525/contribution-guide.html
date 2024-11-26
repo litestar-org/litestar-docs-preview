@@ -1249,6 +1249,7 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="usage/plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="usage/plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/plugins/problem_details.html">Problem Details</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage/responses.html">Responses</a></li>
@@ -1262,6 +1263,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage/static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/testing.html">Testing</a></li>
@@ -1306,7 +1308,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/datastructures/secret_values.html">secret_values</a></li>
@@ -1358,7 +1360,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1473,7 +1480,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1697,9 +1704,9 @@ indicating what it changes. The style of the PR title should also follow
 <ul>
 <li><p>When requiring complex types, use a <a class="reference external" href="https://docs.python.org/3/library/typing.html#type-aliases">type alias</a>.
 Check <a class="reference internal" href="reference/types.html"><span class="doc">types</span></a> if a type alias for your use case already exists</p></li>
-<li><p>If something cannot be typed correctly due to a limitation of the type checkers, you may use <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.cast" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.cast()</span></code></a>
+<li><p>If something cannot be typed correctly due to a limitation of the type checkers, you may use <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.cast" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.cast()</span></code></a>
 to rectify the situation. However, you should only use this as a last resort if you’ve exhausted all other options
-of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/library/functions.html#isinstance" title="(in Python v3.12)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
+of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/library/functions.html#isinstance" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
 and <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeGuard">type guards</a>.</p></li>
 <li><p>You may use a properly scoped <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">ignore</span></code> if you ensured that a line is correct, but mypy / pyright has
 issues with it.</p>
@@ -1802,12 +1809,13 @@ to test them alongside the rest of the test suite, ensuring they do not become s
 <p>Please follow the next guidelines when adding a new example:</p>
 <ul class="simple">
 <li><p>Add the example in the corresponding module directory in <code class="docutils literal notranslate"><span class="pre">/docs/examples</span></code> or create a new one if necessary</p></li>
-<li><p>Create a suite for the module in <code class="docutils literal notranslate"><span class="pre">/docs/examples/tests</span></code> that tests the aspects of the example that it demonstrates</p></li>
+<li><p>Create a suite for the module in <code class="docutils literal notranslate"><span class="pre">/tests/examples</span></code> that tests the aspects of the example that it demonstrates</p></li>
 <li><p>Reference the example in the rst file with an external reference code block, e.g.</p></li>
 </ul>
 <div class="literal-block-wrapper docutils container" id="id16">
 <div class="code-block-caption"><span class="caption-text">An example of how to use literal includes of external files</span><a class="headerlink" href="#id16" title="Permalink to this code">#</a></div>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">literalinclude</span><span class="p">::</span> /examples/test_thing.py
+   <span class="nc">:language:</span> python
    <span class="nc">:caption:</span> All includes should have a descriptive caption
 </pre></div>
 </div>
@@ -2034,7 +2042,7 @@ the release workflow if necessary.</p></li>
 
   <p class="copyright">
     
-      © Copyright 2023, Litestar-Org.
+      © Copyright 2024, Litestar-Org.
       <br/>
     
   </p>
