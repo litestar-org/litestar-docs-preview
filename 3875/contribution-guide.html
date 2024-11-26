@@ -1583,7 +1583,7 @@ for you automatically.
 If your IDE / editor does not offer this functionality, then you will need to manually activate the virtualenv
 yourself. Otherwise you may encounter errors or unexpected behaviour when trying to run the commands referenced
 within this document.</p>
-<p>To activate the virtualenv manually, please consult PDM’s documentation on
+<p>To activate the virtualenv manually, please consult uv’s documentation on
 <a class="reference external" href="https://docs.astral.sh/uv/pip/environments/">working with virtual environments</a>.</p>
 <p>The rest of this document will assume this environment is active wherever commands are referenced.</p>
 </div>
@@ -1687,17 +1687,17 @@ as a first step.</p>
 </section>
 <section id="running-the-docs-locally">
 <h3>Running the docs locally<a class="headerlink" href="#running-the-docs-locally" title="Permalink to this heading">#</a></h3>
-<p>To run or build the docs locally, you need to first install the required dependencies:</p>
+<p>You can serve the documentation locally with</p>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Installing the documentation dependencies</span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pdm<span class="w"> </span>install<span class="w"> </span>-G:docs
+<div class="code-block-caption"><span class="caption-text">Serving the documentation locally</span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs-serve
 </pre></div>
 </div>
 </div>
-<p>Then you can serve the documentation with our helpful Makefile targets:</p>
+<p>or build it with</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">Serving the documentation locally</span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs-serve
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs
 </pre></div>
 </div>
 </div>
