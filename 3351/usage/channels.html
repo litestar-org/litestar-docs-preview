@@ -47,8 +47,14 @@
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'usage/channels';</script>
     <script src="../_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="../_static/favicon.png"/>
@@ -506,7 +512,7 @@
             </div>
             <div class="flex-auto">
                 
-    <a href="https://discord.gg/litestar-919193495116337154"
+    <a href="https://discord.gg/litestar"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         Discord Help Forum
         <span class="absolute inset-0"></span>
@@ -643,7 +649,7 @@ document.write(`
           
           
           
-          <a href="https://discord.gg/litestar-919193495116337154" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
+          <a href="https://discord.gg/litestar" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
             <span class="sr-only">Discord</span></a>
         </li>
 </ul></div>
@@ -1060,7 +1066,7 @@ document.write(`
             </div>
             <div class="flex-auto">
                 
-    <a href="https://discord.gg/litestar-919193495116337154"
+    <a href="https://discord.gg/litestar"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         Discord Help Forum
         <span class="absolute inset-0"></span>
@@ -1171,7 +1177,7 @@ document.write(`
           
           
           
-          <a href="https://discord.gg/litestar-919193495116337154" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
+          <a href="https://discord.gg/litestar" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
             <span class="sr-only">Discord</span></a>
         </li>
 </ul></div>
@@ -1252,11 +1258,12 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/problem_details.html">Problem Details</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="responses.html">Responses</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="security/index.html">Security</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="security/abstract-authentication-middleware.html">AbstractAuthenticationMiddleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security/abstract-authentication-middleware.html">Implementing Custom Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="security/security-backends.html">Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="security/guards.html">Guards</a></li>
 <li class="toctree-l3"><a class="reference internal" href="security/excluding-and-including-endpoints.html">Excluding and including endpoints</a></li>
@@ -1265,6 +1272,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
@@ -1309,7 +1317,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/datastructures/secret_values.html">secret_values</a></li>
@@ -1361,7 +1369,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1399,6 +1412,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/memory.html">memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/redis.html">redis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/stores/registry.html">registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/valkey.html">valkey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/template.html">template</a></li>
@@ -1476,7 +1490,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../contribution-guide.html">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1624,20 +1638,20 @@ Click to expand flowcharts<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <figure class="align-center" id="id1">
-<div class="mermaid">
-            flowchart LR
+<pre  class="mermaid">
+        flowchart LR
     Backend(Backend) --&gt; Broker[(Broker)]
 
     Plugin{{Plugin}} --&gt; Backend
 
     Application[[Application]] --&gt; Plugin
-        </div><figcaption>
+    </pre><figcaption>
 <p><span class="caption-text">Publishing flow from the application to the <a class="reference internal" href="#term-broker"><span class="xref std std-term">broker</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="id2">
-<div class="mermaid">
-            flowchart TD
+<pre  class="mermaid">
+        flowchart TD
     Broker[(Broker)]
 
     Broker --&gt; Backend_1(Backend)
@@ -1653,7 +1667,7 @@ Click to expand flowcharts<div class="sd-summary-down docutils">
     Plugin_2 --&gt; Subscriber_4[Subscriber]
     Plugin_2 --&gt; Subscriber_5[Subscriber]
     Plugin_2 --&gt; Subscriber_6[Subscriber]
-        </div><figcaption>
+    </pre><figcaption>
 <p><span class="caption-text">Fanout flow of data from the <a class="reference internal" href="#term-broker"><span class="xref std std-term">broker</span></a> to the sockets, showing multiple plugin instances</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1733,7 +1747,7 @@ different approaches exist:</p>
 which can be used to interact with the streams of events subscribed to.</p>
 <p>The context manager should be preferred, since it ensures that channels are being unsubscribed.
 Using the <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.subscribe" title="litestar.channels.plugin.ChannelsPlugin.subscribe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subscribe()</span></code></a> and <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.unsubscribe" title="litestar.channels.plugin.ChannelsPlugin.unsubscribe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unsubscribe()</span></code></a> methods directly should only be
-one when a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.12)"><span class="xref std std-term">context manager</span></a> cannot be used, e.g., when the <a class="reference internal" href="#term-subscription"><span class="xref std std-term">subscription</span></a>
+one when a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.13)"><span class="xref std std-term">context manager</span></a> cannot be used, e.g., when the <a class="reference internal" href="#term-subscription"><span class="xref std std-term">subscription</span></a>
 would span different contexts.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Calling the <a class="reference internal" href="#term-subscription"><span class="xref std std-term">subscription</span></a> methods manually</span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
@@ -1746,7 +1760,7 @@ would span different contexts.</p>
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.12)"><span class="xref std std-term">async context manager</span></a></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.13)"><span class="xref std std-term">async context manager</span></a></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">([</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
     <span class="o">...</span>  <span class="c1"># do some stuff here</span>
 </pre></div>
@@ -1757,14 +1771,16 @@ would span different contexts.</p>
 <div class="literal-block-wrapper docutils container" id="id8">
 <div class="code-block-caption"><span class="caption-text">Unsubscribing from a channel manually</span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">subscriber</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channels</span><span class="o">.</span><span class="n">subscribe</span><span class="p">([</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">])</span>
-<span class="o">...</span>  <span class="c1"># do some stuff here</span>
-<span class="k">await</span> <span class="n">channels</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">])</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="o">...</span>  <span class="c1"># do some stuff here</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">channels</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <p>Or, using the context manager</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.12)"><span class="xref std std-term">async context manager</span></a> to unsubscribe from a
+<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.13)"><span class="xref std std-term">async context manager</span></a> to unsubscribe from a
 <a class="reference internal" href="#term-channel"><span class="xref std std-term">channel</span></a></span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">([</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
     <span class="o">...</span>  <span class="c1"># do some stuff here</span>
@@ -1825,11 +1841,11 @@ backend into the appropriate subscriber’s streams.</p>
 <p>In addition to being an abstraction of an <a class="reference internal" href="#term-event-stream"><span class="xref std std-term">event stream</span></a>, the <a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber" title="litestar.channels.subscriber.Subscriber"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscriber</span></code></a>
 provides two methods to handle this stream:</p>
 <dl>
-<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a></dt><dd><p>An <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-generator" title="(in Python v3.12)"><span class="xref std std-term">asynchronous generator</span></a>, producing one event from the stream at a time, waiting
+<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a></dt><dd><p>An <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-generator" title="(in Python v3.13)"><span class="xref std std-term">asynchronous generator</span></a>, producing one event from the stream at a time, waiting
 until the next one becomes available</p>
 </dd>
-<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.run_in_background" title="litestar.channels.subscriber.Subscriber.run_in_background"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_in_background</span></code></a></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.12)"><span class="xref std std-term">context manager</span></a>, wrapping an <a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html#asyncio.Task" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a>,
-consuming events yielded by <a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a>, invoking a provided <a class="reference external" href="https://docs.python.org/3/glossary.html#term-callback" title="(in Python v3.12)"><span class="xref std std-term">callback</span></a>
+<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.run_in_background" title="litestar.channels.subscriber.Subscriber.run_in_background"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_in_background</span></code></a></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.13)"><span class="xref std std-term">context manager</span></a>, wrapping an <a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html#asyncio.Task" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a>,
+consuming events yielded by <a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a>, invoking a provided <a class="reference external" href="https://docs.python.org/3/glossary.html#term-callback" title="(in Python v3.13)"><span class="xref std std-term">callback</span></a>
 for each of them. Upon exit, it will attempt a graceful shutdown of the running task, waiting
 for all currently enqueued events in the stream to be processed.
 If the context exits with an error, the task will be cancelled instead.</p>
@@ -1997,9 +2013,8 @@ when <a class="reference internal" href="#term-history"><span class="xref std st
 <p>A common pattern is to create a route handler per <a class="reference internal" href="#term-channel"><span class="xref std std-term">channel</span></a>, sending data to the connected
 client from that channel. This can be fully automated, using the plugin to create these route handlers.</p>
 <div class="literal-block-wrapper docutils container" id="id15">
-<div class="code-block-caption"><span class="caption-text">Setting <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.params.create_ws_route_handlers" title="litestar.channels.plugin.ChannelsPlugin"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">create_ws_route_handlers</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>
-will create route handlers for all <a class="reference internal" href="#term-channel"><span class="xref std std-term">channels</span></a></span><a class="headerlink" href="#id15" title="Permalink to this code">#</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
+<div class="code-block-caption"><span class="caption-text">Setting <code class="docutils literal notranslate"><span class="pre">create_ws_route_handlers=True</span></code> will create route handlers for all <code class="docutils literal notranslate"><span class="pre">channels</span></code></span><a class="headerlink" href="#id15" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
 <span class="kn">from</span> <span class="nn">litestar.channels</span> <span class="kn">import</span> <span class="n">ChannelsPlugin</span>
 <span class="kn">from</span> <span class="nn">litestar.channels.backends.memory</span> <span class="kn">import</span> <span class="n">MemoryChannelsBackend</span>
 
@@ -2137,7 +2152,7 @@ on the <a class="reference internal" href="../reference/channels/plugin.html#lit
 
   <p class="copyright">
     
-      © Copyright 2023, Litestar-Org.
+      © Copyright 2024, Litestar-Org.
       <br/>
     
   </p>

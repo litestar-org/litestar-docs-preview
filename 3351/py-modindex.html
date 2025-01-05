@@ -46,8 +46,14 @@
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'py-modindex';</script>
     <script src="_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="_static/favicon.png"/>
@@ -506,7 +512,7 @@
             </div>
             <div class="flex-auto">
                 
-    <a href="https://discord.gg/litestar-919193495116337154"
+    <a href="https://discord.gg/litestar"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         Discord Help Forum
         <span class="absolute inset-0"></span>
@@ -643,7 +649,7 @@ document.write(`
           
           
           
-          <a href="https://discord.gg/litestar-919193495116337154" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
+          <a href="https://discord.gg/litestar" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
             <span class="sr-only">Discord</span></a>
         </li>
 </ul></div>
@@ -1056,7 +1062,7 @@ document.write(`
             </div>
             <div class="flex-auto">
                 
-    <a href="https://discord.gg/litestar-919193495116337154"
+    <a href="https://discord.gg/litestar"
        class="block font-semibold text-gray-900 dark:text-gray-200 hover:text-litestar-gold dark:hover:text-litestar-gold !no-underline select-none cursor-pointer">
         Discord Help Forum
         <span class="absolute inset-0"></span>
@@ -1167,7 +1173,7 @@ document.write(`
           
           
           
-          <a href="https://discord.gg/litestar-919193495116337154" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
+          <a href="https://discord.gg/litestar" title="Discord" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i></span>
             <span class="sr-only">Discord</span></a>
         </li>
 </ul></div>
@@ -1248,11 +1254,12 @@ document.write(`
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="usage/plugins/index.html">Plugins</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="usage/plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/plugins/problem_details.html">Problem Details</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage/responses.html">Responses</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="usage/security/index.html">Security</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage/security/abstract-authentication-middleware.html">AbstractAuthenticationMiddleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage/security/abstract-authentication-middleware.html">Implementing Custom Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/security/security-backends.html">Security Backends</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/security/guards.html">Guards</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage/security/excluding-and-including-endpoints.html">Excluding and including endpoints</a></li>
@@ -1261,6 +1268,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage/static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/custom-types.html">Custom types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/stores.html">Stores</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/templating.html">Templating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/testing.html">Testing</a></li>
@@ -1305,7 +1313,7 @@ document.write(`
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/concurrency.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/data_extractors.html">data_extractors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/datastructures/secret_values.html">secret_values</a></li>
@@ -1357,7 +1365,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1395,6 +1408,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="reference/stores/memory.html">memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/stores/redis.html">redis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/stores/registry.html">registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/stores/valkey.html">valkey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/template.html">template</a></li>
@@ -1472,7 +1486,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contributing</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="contribution-guide.html">Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues">Available Issues</a></li>
 
 </ul>
 </div>
@@ -1722,6 +1736,11 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="reference/exceptions.html#module-litestar.exceptions.responses"><code class="xref">litestar.exceptions.responses</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="reference/handlers.html#module-litestar.handlers"><code class="xref">litestar.handlers</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
@@ -1827,7 +1846,32 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="reference/plugins/attrs.html#module-litestar.plugins.attrs"><code class="xref">litestar.plugins.attrs</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="reference/plugins/flash_messages.html#module-litestar.plugins.flash"><code class="xref">litestar.plugins.flash</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/plugins/htmx.html#module-litestar.plugins.htmx"><code class="xref">litestar.plugins.htmx</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/plugins/problem_details.html#module-litestar.plugins.problem_details"><code class="xref">litestar.plugins.problem_details</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/plugins/prometheus.html#module-litestar.plugins.prometheus"><code class="xref">litestar.plugins.prometheus</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/plugins/pydantic.html#module-litestar.plugins.pydantic"><code class="xref">litestar.plugins.pydantic</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -1952,12 +1996,22 @@ document.write(`
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="reference/stores/valkey.html#module-litestar.stores.valkey"><code class="xref">litestar.stores.valkey</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="reference/template.html#module-litestar.template"><code class="xref">litestar.template</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
        <td>&#160;&#160;&#160;
        <a href="reference/testing.html#module-litestar.testing"><code class="xref">litestar.testing</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="reference/types.html#module-litestar.types"><code class="xref">litestar.types</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-1">
        <td></td>
@@ -2006,7 +2060,7 @@ document.write(`
 
   <p class="copyright">
     
-      © Copyright 2023, Litestar-Org.
+      © Copyright 2024, Litestar-Org.
       <br/>
     
   </p>
