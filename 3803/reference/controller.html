@@ -1361,8 +1361,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/htmx.html">htmx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1400,6 +1404,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="stores/memory.html">memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stores/redis.html">redis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="stores/registry.html">registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stores/valkey.html">valkey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="template.html">template</a></li>
@@ -1702,6 +1707,13 @@ data.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="litestar.controller.Controller.request_max_body_size">
+<span class="sig-name descname"><span class="pre">request_max_body_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">EmptyType</span></em><a class="headerlink" href="#litestar.controller.Controller.request_max_body_size" title="Permalink to this definition">#</a></dt>
+<dd><p>Maximum allowed size of the request body in bytes. If this size is exceeded, a ‘413 - Request Entity Too Large’
+error response is returned.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.controller.Controller.signature_namespace">
 <span class="sig-name descname"><span class="pre">signature_namespace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#litestar.controller.Controller.signature_namespace" title="Permalink to this definition">#</a></dt>
 <dd><p>A mapping of names to types for use in forward reference resolution during signature modeling.</p>
@@ -1833,6 +1845,7 @@ data.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.dto"><code class="docutils literal notranslate"><span class="pre">Controller.dto</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.return_dto"><code class="docutils literal notranslate"><span class="pre">Controller.return_dto</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.include_in_schema"><code class="docutils literal notranslate"><span class="pre">Controller.include_in_schema</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.request_max_body_size"><code class="docutils literal notranslate"><span class="pre">Controller.request_max_body_size</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.signature_namespace"><code class="docutils literal notranslate"><span class="pre">Controller.signature_namespace</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.response_cookies"><code class="docutils literal notranslate"><span class="pre">Controller.response_cookies</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.controller.Controller.response_headers"><code class="docutils literal notranslate"><span class="pre">Controller.response_headers</span></code></a></li>

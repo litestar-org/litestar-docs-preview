@@ -1361,8 +1361,12 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/htmx.html">htmx</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/structlog.html">structlog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
@@ -1400,6 +1404,7 @@ document.write(`
 <li class="toctree-l3"><a class="reference internal" href="../../reference/stores/memory.html">memory</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/stores/redis.html">redis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/stores/registry.html">registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/valkey.html">valkey</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/template.html">template</a></li>
@@ -1565,8 +1570,10 @@ this is that using a synchronous function which perform blocking operations, suc
 as I/O or computationally intensive tasks, can potentially block the main thread
 running the event loop, and in turn block the whole application.</p>
 <p>To mitigate this, the <code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code> parameter can be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, which
-will result in the function being run in a thread pool. Should the function be
-non-blocking, <code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">False</span></code> instead.</p>
+will result in the function being run in a thread pool.</p>
+<p>If a synchronous function is non-blocking, setting <code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>
+will tell Litestar that the user is sure about its behavior
+and the function can be treated as non-blocking.</p>
 <p>If a synchronous function is passed, without setting an explicit <code class="docutils literal notranslate"><span class="pre">sync_to_thread</span></code>
 value, a warning will be raised.</p>
 <div class="admonition seealso">
@@ -1775,7 +1782,7 @@ Click to see the predefined route handlers<div class="sd-summary-down docutils">
 <div class="code-block-caption"><span class="caption-text">Predefined <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.13)"><span class="xref std std-term">decorators</span></a> for HTTP route handlers</span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">delete</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">head</span>
 <span class="kn">from</span> <span class="nn">litestar.dto</span> <span class="kn">import</span> <span class="n">DTOConfig</span><span class="p">,</span> <span class="n">DTOData</span>
-<span class="kn">from</span> <span class="nn">litestar.contrib.pydantic</span> <span class="kn">import</span> <span class="n">PydanticDTO</span>
+<span class="kn">from</span> <span class="nn">litestar.plugins.pydantic</span> <span class="kn">import</span> <span class="n">PydanticDTO</span>
 
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 
