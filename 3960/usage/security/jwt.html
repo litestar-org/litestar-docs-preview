@@ -2834,7 +2834,7 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <span class="k">def</span> <span class="nf">some_route_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s2">&quot;Request[User, Token, Any]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="c1"># request.user is set to the instance of user returned by the middleware</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">User</span><span class="p">)</span>
-    <span class="c1"># request.auth is the instance of &#39;litestar_jwt.Token&#39; created from the data encoded in the auth header</span>
+    <span class="c1"># request.auth is the instance of &#39;litestar.security.jwt.Token&#39; created from the data encoded in the auth header</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span> <span class="n">Token</span><span class="p">)</span>
     <span class="c1"># do stuff ...</span>
 
@@ -2945,7 +2945,7 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 <span class="k">def</span> <span class="nf">some_route_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s2">&quot;Request[User, Token, Any]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="c1"># request.user is set to the instance of user returned by the middleware</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">User</span><span class="p">)</span>
-    <span class="c1"># request.auth is the instance of &#39;litestar_jwt.Token&#39; created from the data encoded in the auth header</span>
+    <span class="c1"># request.auth is the instance of &#39;litestar.security.jwt.Token&#39; created from the data encoded in the auth header</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span> <span class="n">Token</span><span class="p">)</span>
     <span class="c1"># do stuff ...</span>
 
@@ -3056,7 +3056,7 @@ Python 3.10+</label><div class="sd-tab-content docutils">
 <span class="k">def</span> <span class="nf">some_route_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="s2">&quot;Request[User, Token, Any]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="c1"># request.user is set to the instance of user returned by the middleware</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">User</span><span class="p">)</span>
-    <span class="c1"># request.auth is the instance of &#39;litestar_jwt.Token&#39; created from the data encoded in the auth header</span>
+    <span class="c1"># request.auth is the instance of &#39;litestar.security.jwt.Token&#39; created from the data encoded in the auth header</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span> <span class="n">Token</span><span class="p">)</span>
     <span class="c1"># do stuff ...</span>
 
