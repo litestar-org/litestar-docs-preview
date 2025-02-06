@@ -1942,7 +1942,7 @@ Litestar</label><div class="sd-tab-content docutils">
 </section>
 <section id="exceptions-signature">
 <h2>Exceptions signature<a class="headerlink" href="#exceptions-signature" title="Permalink to this heading">#</a></h2>
-<p>In FastAPI, you can pass arguments directly to <cite>HTTPException</cite>. In Litestar, you need to use keyword arguments, including <cite>status_code</cite>.
+<p>In FastAPI, status code and exception details can be passed to <cite>HTTPException</cite> as positional arguments, while in Litestar they are set with keywords arguments, e.g. <cite>status_code</cite>. Positional arguments to <cite>HTTPException</cite> in Litestar will be added to the exception detail.
 If migrating you just change your HTTPException import this will break.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
