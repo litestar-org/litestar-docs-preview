@@ -1885,7 +1885,7 @@ Litestar</label><div class="sd-tab-content docutils">
 </section>
 <section id="default-handler-names">
 <h2>Default handler names<a class="headerlink" href="#default-handler-names" title="Permalink to this heading">#</a></h2>
-<p>In FastAPI, the <cite>url_for</cite> function automatically gets the endpoint name. In Litestar, you need to explicitly declare the <cite>name</cite> parameter in the route decorator.</p>
+<p>In FastAPI, the handler name defaults to the local name of the function. In Litestar, you need to explicitly declare the <cite>name</cite> parameter in the route decorator. This is important when using e.g. <cite>url_for</cite>.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
 </input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-17">
@@ -1916,7 +1916,7 @@ Litestar</label><div class="sd-tab-content docutils">
 <section id="uploads">
 <h2>Uploads<a class="headerlink" href="#uploads" title="Permalink to this heading">#</a></h2>
 <p>In FastAPI, you use the <cite>File</cite> class to handle file uploads. In Litestar, you use the <cite>data</cite> keyword argument with <cite>Body</cite> and specify the <cite>media_type</cite> as <cite>RequestEncodingType.MULTI_PART</cite>.
-So Litestar is more verbose but less magic let you understand quicker what you are doing.</p>
+While this is more verbose, it’s also more explicit and communicates the intent more clearly.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
 </input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-19">
