@@ -1794,7 +1794,7 @@ Litestar</label><div class="sd-tab-content docutils">
 </section>
 <section id="post-json">
 <h2>Post json<a class="headerlink" href="#post-json" title="Permalink to this heading">#</a></h2>
-<p>In FastAPI, you pass the JSON object directly as a parameter to the endpoint, you are forced to use pydantic. In Litestar, you use the <cite>data</cite> keyword argument and can pass whatever library supported.</p>
+<p>In FastAPI, you pass the JSON object directly as a parameter to the endpoint, which will then be validated by Pydantic. In Litestar, you use the <cite>data</cite> keyword argument. The data will be parsed and validated by the associated modelling library.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
 </input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-11">
