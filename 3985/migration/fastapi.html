@@ -1742,7 +1742,14 @@ Litestar</label><div class="sd-tab-content docutils">
 </div>
 <section id="cookies">
 <h3>Cookies<a class="headerlink" href="#cookies" title="Permalink to this heading">#</a></h3>
-<p>While with FastAPI you usually set cookies on the response <cite>Response</cite> object, in Litestar it will be set at the decorator level.</p>
+<p>While with FastAPI you usually set cookies on the response <cite>Response</cite> object, in Litestar it will be set at the decorator level using the <cite>response_cookies</cite> keyword argument.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can also set cookies in the handler itself also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../usage/responses.html#setting-cookies-dynamically"><span class="std std-ref">Setting Cookies dynamically</span></a></p></li>
+</ul>
+</div>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
 </input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-7">
@@ -1768,7 +1775,8 @@ Litestar</label><div class="sd-tab-content docutils">
 </section>
 <section id="dependencies-parameters">
 <h2>Dependencies parameters<a class="headerlink" href="#dependencies-parameters" title="Permalink to this heading">#</a></h2>
-<p>The way dependencies parameters are passed differs between FastAPI and Litestar, note the <cite>state: State</cite> parameter in the Litestar example.</p>
+<p>The way dependencies parameters are passed differs between FastAPI and Litestar, note the <cite>state: State</cite> parameter in the Litestar example.
+You can get the state either with the state kwarg in the handler or request.state but those are different from the app.state, in fact request.state just inherits from app.state.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
 </input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-9">
@@ -1825,31 +1833,6 @@ Litestar</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </section>
-<section id="media-type">
-<h2>Media type<a class="headerlink" href="#media-type" title="Permalink to this heading">#</a></h2>
-<p>In FastAPI, you specify the response type using <cite>-&gt; HTMLResponse</cite> for instance. In Litestar, you use the <cite>media_type</cite> parameter in the decorator.</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-13">
-FastAPI</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/page&quot;</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_page</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HTMLResponse</span><span class="p">:</span>
-</pre></div>
-</div>
-</div>
-<input id="sd-tab-item-14" name="sd-tab-set-6" type="radio">
-</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-14">
-Litestar</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar.enums</span> <span class="kn">import</span> <span class="n">MediaType</span>
-
-<span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/page&quot;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">HTML</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span> <span class="nf">get_page</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s2">&quot;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="default-status-codes">
 <h2>Default status codes<a class="headerlink" href="#default-status-codes" title="Permalink to this heading">#</a></h2>
 <p>Post defaults to 200 in FastApi and 201 in Litestar.</p>
@@ -1859,8 +1842,8 @@ Litestar</label><div class="sd-tab-content docutils">
 <p>In FastAPI, you use <cite>TemplateResponse</cite> to render templates. In Litestar, you use the <cite>Template</cite> class.
 Also FastAPI let you pass a dictionary while in Litestar you need to explicitly pass the context kwarg.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-15">
+<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-13">
 FastAPI</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/uploads&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_uploads</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span>
@@ -1870,8 +1853,8 @@ FastAPI</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-16" name="sd-tab-set-7" type="radio">
-</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-16">
+<input id="sd-tab-item-14" name="sd-tab-set-6" type="radio">
+</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-14">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/uploads&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">get_uploads</span><span class="p">(</span><span class="n">app_settings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Template</span><span class="p">:</span>
@@ -1887,8 +1870,8 @@ Litestar</label><div class="sd-tab-content docutils">
 <h2>Default handler names<a class="headerlink" href="#default-handler-names" title="Permalink to this heading">#</a></h2>
 <p>In FastAPI, the handler name defaults to the local name of the function. In Litestar, you need to explicitly declare the <cite>name</cite> parameter in the route decorator. This is important when using e.g. <cite>url_for</cite>.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-17">
+<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-15">
 FastAPI</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/blabla&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">blabla</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -1899,8 +1882,8 @@ FastAPI</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-18" name="sd-tab-set-8" type="radio">
-</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-18">
+<input id="sd-tab-item-16" name="sd-tab-set-7" type="radio">
+</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-16">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/blabla&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;blabla&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">blabla</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -1918,8 +1901,8 @@ Litestar</label><div class="sd-tab-content docutils">
 <p>In FastAPI, you use the <cite>File</cite> class to handle file uploads. In Litestar, you use the <cite>data</cite> keyword argument with <cite>Body</cite> and specify the <cite>media_type</cite> as <cite>RequestEncodingType.MULTI_PART</cite>.
 While this is more verbose, it’s also more explicit and communicates the intent more clearly.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
-</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-19">
+<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-17">
 FastAPI</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/upload/&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">UploadFile</span><span class="p">]</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="o">...</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
@@ -1927,8 +1910,8 @@ FastAPI</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-20" name="sd-tab-set-9" type="radio">
-</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-20">
+<input id="sd-tab-item-18" name="sd-tab-set-8" type="radio">
+</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-18">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/upload/&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">UploadFile</span><span class="p">],</span> <span class="n">Body</span><span class="p">(</span><span class="n">media_type</span><span class="o">=</span><span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">MULTI_PART</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
@@ -1945,8 +1928,8 @@ Litestar</label><div class="sd-tab-content docutils">
 <p>In FastAPI, status code and exception details can be passed to <cite>HTTPException</cite> as positional arguments, while in Litestar they are set with keywords arguments, e.g. <cite>status_code</cite>. Positional arguments to <cite>HTTPException</cite> in Litestar will be added to the exception detail.
 If migrating you just change your HTTPException import this will break.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
-</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-21">
+<input checked="checked" id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-19">
 FastAPI</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
 
@@ -1961,8 +1944,8 @@ FastAPI</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-22" name="sd-tab-set-10" type="radio">
-</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-22">
+<input id="sd-tab-item-20" name="sd-tab-set-9" type="radio">
+</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-20">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 <span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">HTTPException</span>
@@ -1985,8 +1968,8 @@ Litestar</label><div class="sd-tab-content docutils">
 <p>FastAPI promotes a pattern of using dependency injection for authentication. You can do the same in Litestar, but the
 preferred way of handling this is extending <a class="reference internal" href="../usage/security/abstract-authentication-middleware.html"><span class="doc">Implementing Custom Authentication</span></a>.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-23" name="sd-tab-set-11" type="radio">
-</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-23">
+<input checked="checked" id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" data-sync-id="fastapi" for="sd-tab-item-21">
 FastAPI</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Depends</span><span class="p">,</span> <span class="n">Request</span>
 
@@ -2002,8 +1985,8 @@ FastAPI</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-24" name="sd-tab-set-11" type="radio">
-</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-24">
+<input id="sd-tab-item-22" name="sd-tab-set-10" type="radio">
+</input><label class="sd-tab-label" data-sync-id="litestar" for="sd-tab-item-22">
 Litestar</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">ASGIConnection</span><span class="p">,</span> <span class="n">BaseRouteHandler</span>
 
@@ -2110,7 +2093,6 @@ but can be easily replaced by <a class="reference internal" href="../usage/middl
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-parameters">Dependencies parameters</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-json">Post json</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media-type">Media type</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-status-codes">Default status codes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#templates">Templates</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-handler-names">Default handler names</a></li>

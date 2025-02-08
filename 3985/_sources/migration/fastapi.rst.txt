@@ -213,7 +213,13 @@ If you're using an async context manager and pass parameters to it, most likely 
 Cookies
 ~~~~~~~
 
-While with FastAPI you usually set cookies on the response `Response` object, in Litestar it will be set at the decorator level.
+While with FastAPI you usually set cookies on the response `Response` object, in Litestar it will be set at the decorator level using the `response_cookies` keyword argument.
+
+.. seealso::
+
+    You can also set cookies in the handler itself also
+
+    * :ref:`Setting Cookies dynamically <usage/responses:setting cookies dynamically>`
 
 .. tab-set::
 
@@ -240,6 +246,7 @@ While with FastAPI you usually set cookies on the response `Response` object, in
 Dependencies parameters
 ~~~~~~~~~~~~~~~~~~~~~~~
 The way dependencies parameters are passed differs between FastAPI and Litestar, note the `state: State` parameter in the Litestar example.
+You can get the state either with the state kwarg in the handler or request.state but those are different from the app.state, in fact request.state just inherits from app.state.
 
 .. tab-set::
 
@@ -296,32 +303,6 @@ In FastAPI, you pass the JSON object directly as a parameter to the endpoint, wh
             @post("/items/")
             async def create_item(data: ObjectType) -> dict[str, str]:
                 return {"name": data.name}
-
-
-Media type
-~~~~~~~~~~
-In FastAPI, you specify the response type using `-> HTMLResponse` for instance. In Litestar, you use the `media_type` parameter in the decorator.
-
-.. tab-set::
-
-    .. tab-item:: FastAPI
-        :sync: fastapi
-
-        .. code-block:: python
-
-            @app.get("/page")
-            async def get_page() -> HTMLResponse:
-
-    .. tab-item:: Litestar
-        :sync: litestar
-
-        .. code-block:: python
-
-            from litestar.enums import MediaType
-
-            @get(path="/page", media_type=MediaType.HTML)
-            async def get_page() -> str:
-                return "<html><body><h1>Hello, World!</h1></body></html>"
 
 
 Default status codes
