@@ -1790,7 +1790,14 @@ data.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.plugins.prometheus.PrometheusController.security">
 <span class="sig-name descname"><span class="pre">security</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../openapi/spec.html#litestar.openapi.spec.SecurityRequirement" title="litestar.openapi.spec.SecurityRequirement"><span class="pre">SecurityRequirement</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#litestar.plugins.prometheus.PrometheusController.security" title="Permalink to this definition">#</a></dt>
-<dd><p>A sequence of dictionaries that to the schema of all route handlers under the controller.</p>
+<dd><p>A sequence of security requirement dictionaries to be set on all route handlers under the controller.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="litestar.plugins.prometheus.PrometheusController.security_override">
+<span class="sig-name descname"><span class="pre">security_override</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../openapi/spec.html#litestar.openapi.spec.SecurityRequirement" title="litestar.openapi.spec.SecurityRequirement"><span class="pre">SecurityRequirement</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#litestar.plugins.prometheus.PrometheusController.security_override" title="Permalink to this definition">#</a></dt>
+<dd><p>A sequence of security requirement dictionaries to be set on all route handlers under the controller,
+overriding the security requirements set on the previous layers.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1946,6 +1953,7 @@ handlers under the controller.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.response_headers"><code class="docutils literal notranslate"><span class="pre">PrometheusController.response_headers</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.return_dto"><code class="docutils literal notranslate"><span class="pre">PrometheusController.return_dto</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.security"><code class="docutils literal notranslate"><span class="pre">PrometheusController.security</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.security_override"><code class="docutils literal notranslate"><span class="pre">PrometheusController.security_override</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.signature_namespace"><code class="docutils literal notranslate"><span class="pre">PrometheusController.signature_namespace</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.signature_types"><code class="docutils literal notranslate"><span class="pre">PrometheusController.signature_types</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.plugins.prometheus.PrometheusController.tags"><code class="docutils literal notranslate"><span class="pre">PrometheusController.tags</span></code></a></li>
