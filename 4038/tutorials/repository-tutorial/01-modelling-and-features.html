@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>authentication &#8212; Litestar Framework</title>
+    <title>Introduction to Database Modelling and Repository Features &#8212; Litestar Framework</title>
   
   
   
@@ -47,13 +47,13 @@
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/litestar-theme.js?v=ab2dcc9e"></script>
     <script src="../../_static/design-tabs.js?v=36754332"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/middleware/authentication';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/repository-tutorial/01-modelling-and-features';</script>
     <script src="../../_static/versioning.js?v=68b42869"></script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="compression" href="compression.html" />
-    <link rel="prev" title="allowed_hosts" href="allowed_hosts.html" />
+    <link rel="next" title="Interacting with repositories" href="02-repository-introduction.html" />
+    <link rel="prev" title="SQLAlchemy Repository Tutorial" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -1184,7 +1184,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../usage/index.html">Usage</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/applications.html">Applications</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../usage/routing/index.html">Routing</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -1271,152 +1271,152 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../../usage/websockets.html">WebSockets</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../app.html">app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../background_tasks.html">background_tasks</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../channels/index.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../channels/plugin.html">plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../channels/subscriber.html">subscriber</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../channels/backends/index.html">backends</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/memory.html">memory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/redis.html">redis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/psycopg.html">psycopg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../channels/backends/asyncpg.html">asyncpg</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reference/index.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/background_tasks.html">background_tasks</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/channels/index.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/channels/plugin.html">plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/channels/subscriber.html">subscriber</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/channels/backends/index.html">backends</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/memory.html">memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/redis.html">redis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/psycopg.html">psycopg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/channels/backends/asyncpg.html">asyncpg</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../cli.html">cli</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../config.html">config</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../connection.html">connection</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../contrib/index.html">contrib</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/htmx.html">HTMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/jinja.html">jinja</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/jwt.html">jwt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/piccolo.html">piccolo_orm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/pydantic.html">pydantic</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../contrib/sqlalchemy/index.html">sqlalchemy</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/plugins.html">plugins</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/repository.html">repository</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/types.html">types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../contrib/sqlalchemy/dto.html">DTO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/cli.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/connection.html">connection</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/htmx.html">HTMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jwt.html">jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/piccolo.html">piccolo_orm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/pydantic.html">pydantic</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/contrib/sqlalchemy/index.html">sqlalchemy</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/plugins.html">plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/repository.html">repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/types.html">types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/contrib/sqlalchemy/dto.html">DTO</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../controller.html">controller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../concurrency.html">concurrency</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../data_extractors.html">data_extractors</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../datastructures/secret_values.html">secret_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/datastructures/index.html">datastructures</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/datastructures/secret_values.html">secret_values</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../di.html">di</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../dto/config.html">config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/data_structures.html">data_structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/field.html">field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/types.html">types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/base_dto.html">base_dto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/msgspec_dto.html">msgspec_dto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../dto/dataclass_dto.html">dataclass_dto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/di.html">di</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/dto/index.html">dto</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/config.html">config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/data_structures.html">data_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/field.html">field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/base_dto.html">base_dto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/msgspec_dto.html">msgspec_dto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/dto/dataclass_dto.html">dataclass_dto</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../enums.html">enums</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../events.html">events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../exceptions.html">exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../handlers.html">handlers</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../logging/index.html">logging</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../logging/config.html">config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../logging/picologging.html">picologging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../logging/standard.html">standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/enums.html">enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/events.html">events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/exceptions.html">exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/handlers.html">handlers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/logging/index.html">logging</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/logging/config.html">config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/logging/picologging.html">picologging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/logging/standard.html">standard</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">middleware</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="allowed_hosts.html">allowed_hosts</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cors.html">cors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csrf.html">csrf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="logging.html">logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rate_limit.html">rate_limit</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="session/index.html">session</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="session/base.html">base</a></li>
-<li class="toctree-l4"><a class="reference internal" href="session/client_side.html">client_side</a></li>
-<li class="toctree-l4"><a class="reference internal" href="session/server_side.html">server_side</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/middleware/index.html">middleware</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/authentication.html">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/compression.html">compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/csrf.html">csrf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/rate_limit.html">rate_limit</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../reference/middleware/session/index.html">session</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/middleware/session/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/middleware/session/client_side.html">client_side</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../reference/middleware/session/server_side.html">server_side</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../openapi/index.html">openapi</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../openapi/openapi.html">openapi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openapi/plugins.html">plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../openapi/spec.html">spec</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/openapi/index.html">openapi</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/plugins.html">plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../pagination.html">pagination</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../params.html">params</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/attrs.html">attrs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/flash_messages.html">flash</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/htmx.html">htmx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/problem_details.html">problem details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/prometheus.html">prometheus</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/pydantic.html">pydantic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/structlog.html">structlog</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/sqlalchemy.html">sqlalchemy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/pydantic.html">pydantic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/structlog.html">structlog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/handlers.html">handlers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/repository/index.html">repository</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/abc.html">abc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/filters.html">filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/repository/handlers.html">handlers</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../response/base.html">base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/file.html">file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/redirect.html">redirect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/streaming.html">streaming</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/sse.html">SSE (Server Sent Events)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../response/template.html">template</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/response/index.html">response</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/sse.html">SSE (Server Sent Events)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/response/template.html">template</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../router.html">router</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../routes.html">routes</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../security/jwt.html">jwt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../security/session_auth.html">session_auth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/routes.html">routes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/security/index.html">security</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/security/jwt.html">jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/security/session_auth.html">session_auth</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../serialization.html">serialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../static_files.html">static_files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../status_codes.html">status_code</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../stores/base.html">base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stores/file.html">file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stores/memory.html">memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stores/redis.html">redis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stores/registry.html">registry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stores/valkey.html">valkey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/serialization.html">serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/static_files.html">static_files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/status_codes.html">status_code</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../reference/stores/index.html">stores</a><input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-26"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/memory.html">memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/redis.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/registry.html">registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/stores/valkey.html">valkey</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../template.html">template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing.html">testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../types.html">types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../typing.html">typing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/template.html">template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/testing.html">testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/types.html">types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/typing.html">typing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks.html">Benchmarks</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guides</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../migration/index.html">Migrating to Litestar</a><input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-27"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../migration/flask.html">From Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../migration/fastapi.html">From Starlette / FastAPI</a></li>
@@ -1433,45 +1433,45 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-30"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/todo-app/index.html">Developing a basic TODO application</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-31"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/0-application-basics.html">Application basics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/1-accessing-the-list.html">Accessing the list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-30"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../todo-app/index.html">Developing a basic TODO application</a><input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-31"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../todo-app/0-application-basics.html">Application basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../todo-app/1-accessing-the-list.html">Accessing the list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-32"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-32"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/0-introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/dto-tutorial/index.html">Data Transfer Object Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-33"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/01-simple-dto-exclude.html">Our first DTO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/02-nested-exclude.html">Excluding from nested models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/03-nested-collection-exclude.html">Excluding from collections of nested models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/04-max-nested-depth.html">Max nested depth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/05-renaming-fields.html">Renaming fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/06-receiving-data.html">Receiving data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/07-read-only-fields.html">Read only fields</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/08-dto-data.html">Accessing the data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/09-updating.html">Updating instances</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../dto-tutorial/index.html">Data Transfer Object Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-33"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/01-simple-dto-exclude.html">Our first DTO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/02-nested-exclude.html">Excluding from nested models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/03-nested-collection-exclude.html">Excluding from collections of nested models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/04-max-nested-depth.html">Max nested depth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/05-renaming-fields.html">Renaming fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/06-receiving-data.html">Receiving data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/07-read-only-fields.html">Read only fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/08-dto-data.html">Accessing the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/09-updating.html">Updating instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-34"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">SQLAlchemy Repository Tutorial</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-34"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Introduction to Database Modelling and Repository Features</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02-repository-introduction.html">Interacting with repositories</a></li>
 
 
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03-repository-controller.html">Working with Controllers and Repositories</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04-repository-other.html">Adding Additional Features to the Repository</a></li>
 
 
 </ul>
@@ -1522,12 +1522,12 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Tutorials</a></li>
     
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">middleware</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">SQLAlchemy Repository Tutorial</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">authentication</li>
+    <li class="breadcrumb-item active" aria-current="page">Introduction...</li>
   </ul>
 </nav>
 </div>
@@ -1544,99 +1544,172 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-litestar.middleware.authentication">
-<span id="authentication"></span><h1>authentication<a class="headerlink" href="#module-litestar.middleware.authentication" title="Permalink to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.middleware.authentication.</span></span><span class="sig-name descname"><span class="pre">AbstractAuthenticationMiddleware</span></span><a class="headerlink" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
-<p>Abstract AuthenticationMiddleware that allows users to create their own AuthenticationMiddleware by extending it
-and overriding <a class="reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request" title="litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request"><code class="xref py py-meth docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware.authenticate_request()</span></code></a>.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../types.html#litestar.types.ASGIApp" title="litestar.types.ASGIApp"><span class="pre">ASGIApp</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_from_auth_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'exclude_from_auth'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_http_methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../types.html#litestar.types.Method" title="litestar.types.Method"><span class="pre">Method</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scopes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../types.html#litestar.types.Scopes" title="litestar.types.Scopes"><span class="pre">Scopes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Initialize <code class="docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.app"></span><strong>app</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.app">¶</a> – An ASGIApp, this value is the next ASGI handler to call in the middleware stack.</p></li>
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.exclude"></span><strong>exclude</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.exclude">¶</a> – A pattern or list of patterns to skip in the authentication middleware.</p></li>
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.exclude_from_auth_key"></span><strong>exclude_from_auth_key</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.exclude_from_auth_key">¶</a> – An identifier to use on routes to disable authentication for a particular route.</p></li>
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.exclude_http_methods"></span><strong>exclude_http_methods</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.exclude_http_methods">¶</a> – A sequence of http methods that do not require authentication.</p></li>
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.scopes"></span><strong>scopes</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.params.scopes">¶</a> – ASGI scopes processed by the authentication middleware.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../types.html#litestar.types.Scope" title="litestar.types.Scope"><span class="pre">Scope</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">receive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../types.html#litestar.types.Receive" title="litestar.types.Receive"><span class="pre">Receive</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">send</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../types.html#litestar.types.Send" title="litestar.types.Send"><span class="pre">Send</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__" title="Permalink to this definition">#</a></dt>
-<dd><p>ASGI callable.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__.params.scope"></span><strong>scope</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__.params.scope">¶</a> – The ASGI connection scope.</p></li>
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__.params.receive"></span><strong>receive</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__.params.receive">¶</a> – The ASGI receive function.</p></li>
-<li><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__.params.send"></span><strong>send</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__.params.send">¶</a> – The ASGI send function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authenticate_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../connection.html#litestar.connection.ASGIConnection" title="litestar.connection.base.ASGIConnection"><span class="pre">ASGIConnection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.middleware.authentication.AuthenticationResult" title="litestar.middleware.authentication.AuthenticationResult"><span class="pre">AuthenticationResult</span></a></span></span><a class="headerlink" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request" title="Permalink to this definition">#</a></dt>
-<dd><p>Receive the http connection and return an <a class="reference internal" href="#litestar.middleware.authentication.AuthenticationResult" title="litestar.middleware.authentication.AuthenticationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthenticationResult</span></code></a>.</p>
-<div class="admonition-notes admonition">
-<p class="admonition-title">Notes</p>
-<ul class="simple">
-<li><p>This method must be overridden by subclasses.</p></li>
-</ul>
+  <section id="introduction-to-database-modelling-and-repository-features">
+<h1>Introduction to Database Modelling and Repository Features<a class="headerlink" href="#introduction-to-database-modelling-and-repository-features" title="Permalink to this heading">#</a></h1>
+<p>In this tutorial, we will cover the integrated repository features in Litestar, starting
+with database modelling using the included SQLAlchemy declarative model helpers. These
+are a series of classes and mixins that incorporate commonly used functions/column types
+to make working with models easier.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The full code for this tutorial can be found below in the <a class="reference internal" href="#repo-full-code"><span class="std std-ref">Full Code</span></a> section.</p>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="target" id="litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request.params.connection"></span><strong>connection</strong><a class="paramlink headerlink reference internal" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request.params.connection">¶</a> – An <a class="reference internal" href="../connection.html#litestar.connection.ASGIConnection" title="litestar.connection.ASGIConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIConnection</span></code></a> instance.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#litestar.exceptions.NotAuthorizedException" title="litestar.exceptions.NotAuthorizedException"><strong>NotAuthorizedException</strong></a><strong> | </strong><a class="reference internal" href="../exceptions.html#litestar.exceptions.PermissionDeniedException" title="litestar.exceptions.PermissionDeniedException"><strong>PermissionDeniedException</strong></a> – if authentication fails.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>An instance of <a class="reference internal" href="#litestar.middleware.authentication.AuthenticationResult" title="litestar.middleware.authentication.AuthenticationResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthenticationResult</span></code></a>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AuthenticationResult">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.middleware.authentication.</span></span><span class="sig-name descname"><span class="pre">AuthenticationResult</span></span><a class="headerlink" href="#litestar.middleware.authentication.AuthenticationResult" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Dataclass for authentication result.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AuthenticationResult.user">
-<span class="sig-name descname"><span class="pre">user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#litestar.middleware.authentication.AuthenticationResult.user" title="Permalink to this definition">#</a></dt>
-<dd><p>The user model, this can be any value corresponding to a user of the API.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AuthenticationResult.auth">
-<span class="sig-name descname"><span class="pre">auth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#litestar.middleware.authentication.AuthenticationResult.auth" title="Permalink to this definition">#</a></dt>
-<dd><p>The auth value, this can for example be a JWT token.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.middleware.authentication.AuthenticationResult.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.middleware.authentication.AuthenticationResult.__init__" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </section>
+<section id="modelling">
+<h1>Modelling<a class="headerlink" href="#modelling" title="Permalink to this heading">#</a></h1>
+<p>We’ll begin by modelling the entities and relationships between authors and books.
+We’ll start by creating the <code class="docutils literal notranslate"><span class="pre">Author</span></code> table, utilizing the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code> class. To keep things
+simple, our first model will encompass only three fields: <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, and <code class="docutils literal notranslate"><span class="pre">dob</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">app.py</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">UUIDBase</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;author&quot;</span>
+<span class="linenos">3</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The book entity is not considered a “strong” entity and therefore always requires an
+author to be created.  We need to configure our SQLAlchemy classes so that it is aware
+of this relationship. We will extend the <code class="docutils literal notranslate"><span class="pre">Author</span></code> model by incorporating a <code class="docutils literal notranslate"><span class="pre">Book</span></code>
+relationship. This allows each <code class="docutils literal notranslate"><span class="pre">Author</span></code> record to possess multiple <code class="docutils literal notranslate"><span class="pre">Book</span></code> records.
+By configuring it this way, SQLAlchemy will automatically include the necessary foreign
+key constraints when using the <code class="docutils literal notranslate"><span class="pre">author_id</span></code> field in each <code class="docutils literal notranslate"><span class="pre">Book</span></code> record.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">app.py</span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">UUIDBase</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;author&quot;</span>
+<span class="linenos">3</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="linenos">4</span>    <span class="n">dob</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
+<span class="linenos">5</span>    <span class="n">books</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Book</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;selectin&quot;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="c1"># record created, and `updated_at` is the last time the record was modified.</span>
+<span class="linenos">7</span><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+<span class="linenos">8</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;book&quot;</span>
+<span class="linenos">9</span>    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>By using the audit model, we can automatically record the time a record was created and
+last updated.</p>
+<p>To implement this, we will define a new <code class="docutils literal notranslate"><span class="pre">Book</span></code> model via the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code> class. Observe
+that the only modification here is the parent class from which we inherit. This minor
+change endows the <cite>book</cite> table with automatic timestamp columns
+(<cite>created</cite> and <cite>updated</cite>) upon deployment!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your application requires integer-based primary keys, equivalent base model
+and base audit model implementations can be found at
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntBase</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code>
+respectively.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><a class="reference external" href="https://cloud.google.com/spanner">Spanner</a> only:</p>
+<p>Using monotonically changing primary keys is considered an
+anti-pattern in Spanner and leads to performance problems. Additionally, Spanner
+does not currently include an idiom comparable to the <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> object.  This
+means the <code class="docutils literal notranslate"><span class="pre">BigIntBase</span></code> and <code class="docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code> are not currently supported for
+Spanner.</p>
+</div>
+<p>Additional features provided by the built-in base models include:</p>
+<ul class="simple">
+<li><p>Synchronous and Asynchronous repository implementations have been tried and tested
+with various popular database engines. As of now, six database engines are supported:
+Postgres, SQLite, MySQL, DuckDB, Oracle, and Spanner.</p></li>
+<li><p>Automatic table name deduction from model name. For instance, a model named
+<code class="docutils literal notranslate"><span class="pre">EventLog</span></code> would correspond to the <code class="docutils literal notranslate"><span class="pre">event_log</span></code> database table.</p></li>
+<li><p>A <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/types.html#advanced_alchemy.types.GUID" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">GUID</span></code></a> database type that
+establishes a native UUID in supported engines or a <code class="docutils literal notranslate"><span class="pre">Binary(16)</span></code> as a fallback.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">BigInteger</span></code> variant
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntIdentity</span></code> that
+reverts to an <code class="docutils literal notranslate"><span class="pre">Integer</span></code> for unsupported variants.</p></li>
+<li><p>A custom <code class="xref py py-class docutils literal notranslate"><span class="pre">JsonB</span></code> type that uses
+native <code class="docutils literal notranslate"><span class="pre">JSONB</span></code> where possible and <code class="docutils literal notranslate"><span class="pre">Binary</span></code> or <code class="docutils literal notranslate"><span class="pre">Blob</span></code> as an alternative.</p></li>
+<li><p>A custom <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/types.html#advanced_alchemy.types.EncryptedString" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">EncryptedString</span></code></a> encrypted string that supports multiple cryptography backends.</p></li>
+</ul>
+<p>Let’s build on this as we look at the repository classes.</p>
+</section>
+<section id="full-code">
+<span id="repo-full-code"></span><h1>Full Code<a class="headerlink" href="#full-code" title="Permalink to this heading">#</a></h1>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Full Code (click to toggle)<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">app.py</span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">select</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">AsyncSession</span>
+<span class="hll"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span>
+</span><span class="linenos">10</span>
+<span class="linenos">11</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<span class="linenos">12</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">AsyncSessionConfig</span><span class="p">,</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyPlugin</span><span class="p">,</span> <span class="n">base</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># The SQLAlchemy base includes a declarative model for you to use in your models.</span>
+<span class="linenos">16</span><span class="c1"># The `UUIDBase` class includes a `UUID` based primary key (`id`)</span>
+<span class="linenos">17</span><span class="k">class</span> <span class="nc">Author</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">UUIDBase</span><span class="p">):</span>
+<span class="hll"><span class="linenos">18</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;author&quot;</span>
+</span><span class="hll"><span class="linenos">19</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span class="hll"><span class="linenos">20</span>    <span class="n">dob</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
+</span><span class="hll"><span class="linenos">21</span>    <span class="n">books</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Book</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;selectin&quot;</span><span class="p">)</span>
+</span><span class="linenos">22</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="c1"># The `UUIDAuditBase` class includes the same UUID` based primary key (`id`) and 2</span>
+<span class="linenos">25</span><span class="c1"># additional columns: `created_at` and `updated_at`. `created_at` is a timestamp of when the</span>
+<span class="linenos">26</span><span class="c1"># record created, and `updated_at` is the last time the record was modified.</span>
+<span class="hll"><span class="linenos">27</span><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">28</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;book&quot;</span>
+</span><span class="hll"><span class="linenos">29</span>    <span class="n">title</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span class="hll"><span class="linenos">30</span>    <span class="n">author_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;author.id&quot;</span><span class="p">))</span>
+</span><span class="linenos">31</span>    <span class="n">author</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Author</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;joined&quot;</span><span class="p">,</span> <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">viewonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="n">session_config</span> <span class="o">=</span> <span class="n">AsyncSessionConfig</span><span class="p">(</span><span class="n">expire_on_commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">35</span><span class="n">sqlalchemy_config</span> <span class="o">=</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">(</span>
+<span class="linenos">36</span>    <span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite+aiosqlite:///test.sqlite&quot;</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span><span class="p">,</span> <span class="n">create_all</span><span class="o">=</span><span class="kc">True</span>
+<span class="linenos">37</span><span class="p">)</span>  <span class="c1"># Create &#39;async_session&#39; dependency.</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_startup</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Litestar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">41</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds some dummy data if no data is present.&quot;&quot;&quot;</span>
+<span class="linenos">42</span>    <span class="k">async</span> <span class="k">with</span> <span class="n">sqlalchemy_config</span><span class="o">.</span><span class="n">get_session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+<span class="linenos">43</span>        <span class="n">statement</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">())</span><span class="o">.</span><span class="n">select_from</span><span class="p">(</span><span class="n">Author</span><span class="p">)</span>
+<span class="linenos">44</span>        <span class="n">count</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+<span class="linenos">45</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">count</span><span class="o">.</span><span class="n">scalar</span><span class="p">():</span>
+<span class="linenos">46</span>            <span class="n">author_id</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+<span class="linenos">47</span>            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Author</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Stephen King&quot;</span><span class="p">,</span> <span class="n">dob</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">1954</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="n">author_id</span><span class="p">))</span>
+<span class="linenos">48</span>            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Book</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;It&quot;</span><span class="p">,</span> <span class="n">author_id</span><span class="o">=</span><span class="n">author_id</span><span class="p">))</span>
+<span class="linenos">49</span>            <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors&quot;</span><span class="p">)</span>
+<span class="linenos">53</span><span class="k">async</span> <span class="k">def</span> <span class="nf">get_authors</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">db_engine</span><span class="p">:</span> <span class="n">AsyncEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Author</span><span class="p">]:</span>
+<span class="linenos">54</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Interact with SQLAlchemy engine and session.&quot;&quot;&quot;</span>
+<span class="linenos">55</span>    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="k">await</span> <span class="n">db_session</span><span class="o">.</span><span class="n">scalars</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">Author</span><span class="p">)))</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span>
+<span class="linenos">58</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+<span class="linenos">59</span>    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_authors</span><span class="p">],</span>
+<span class="linenos">60</span>    <span class="n">on_startup</span><span class="o">=</span><span class="p">[</span><span class="n">on_startup</span><span class="p">],</span>
+<span class="linenos">61</span>    <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos">62</span>    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SQLAlchemyPlugin</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">sqlalchemy_config</span><span class="p">)],</span>
+<span class="linenos">63</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</details></section>
 
 
                 </article>
@@ -1649,20 +1722,20 @@ and overriding <a class="reference internal" href="#litestar.middleware.authenti
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="allowed_hosts.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">allowed_hosts</p>
+        <p class="prev-next-title">SQLAlchemy Repository Tutorial</p>
       </div>
     </a>
     <a class="right-next"
-       href="compression.html"
+       href="02-repository-introduction.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">compression</p>
+        <p class="prev-next-title">Interacting with repositories</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1682,19 +1755,11 @@ and overriding <a class="reference internal" href="#litestar.middleware.authenti
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware"><code class="docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__"><code class="docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware.__call__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request"><code class="docutils literal notranslate"><span class="pre">AbstractAuthenticationMiddleware.authenticate_request()</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#full-code">Full Code</a></li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AuthenticationResult"><code class="docutils literal notranslate"><span class="pre">AuthenticationResult</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AuthenticationResult.user"><code class="docutils literal notranslate"><span class="pre">AuthenticationResult.user</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AuthenticationResult.auth"><code class="docutils literal notranslate"><span class="pre">AuthenticationResult.auth</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#litestar.middleware.authentication.AuthenticationResult.__init__"><code class="docutils literal notranslate"><span class="pre">AuthenticationResult.__init__()</span></code></a></li>
-</ul>
-</li>
-</ul>
+
   </nav></div>
 
 </div></div>
