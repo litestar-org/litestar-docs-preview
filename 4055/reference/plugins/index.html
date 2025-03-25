@@ -487,6 +487,7 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#litestar.plugins.InitPlugin"><code class="docutils literal notranslate"><span class="pre">InitPlugin</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.plugins.InitPlugin.on_app_init"><code class="docutils literal notranslate">on_app_init()</span></code></a></li>
+<li><a class="reference internal" href="#litestar.plugins.InitPlugin.configure_openapi"><code class="docutils literal notranslate">configure_openapi()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#litestar.plugins.InitPluginProtocol"><code class="docutils literal notranslate"><span class="pre">InitPluginProtocol</span></code></a><ul>
@@ -664,6 +665,20 @@ method.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The app config object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="litestar.plugins.InitPlugin.configure_openapi">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">configure_openapi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../config.html#litestar.config.app.AppConfig" title="litestar.config.app.AppConfig"><span class="pre">AppConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../security/session_auth.html#litestar.security.session_auth.SessionAuth" title="litestar.security.session_auth.SessionAuth"><span class="pre">SessionAuth</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../security/jwt.html#litestar.security.jwt.JWTAuth" title="litestar.security.jwt.JWTAuth"><span class="pre">JWTAuth</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.plugins.InitPlugin.configure_openapi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure OpenAPI schema generation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="litestar.plugins.InitPlugin.configure_openapi.params.app_config"></span><strong>app_config</strong><a class="paramlink headerlink reference internal" href="#litestar.plugins.InitPlugin.configure_openapi.params.app_config">¶</a> – The <a class="reference internal" href="../config.html#litestar.config.app.AppConfig" title="litestar.config.app.AppConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></a> instance.</p></li>
+<li><p><span class="target" id="litestar.plugins.InitPlugin.configure_openapi.params.config"></span><strong>config</strong><a class="paramlink headerlink reference internal" href="#litestar.plugins.InitPlugin.configure_openapi.params.config">¶</a> – The security configuration.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
