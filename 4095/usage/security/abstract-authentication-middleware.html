@@ -1603,21 +1603,7 @@ For the sake of the example here let us say it is a dataclass:</p>
 <p>We can now create our authentication middleware:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">authentication_middleware.py</span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">docs.examples.security.using_abstract_authentication_middleware.main</span> <span class="kn">import</span> <span class="n">MyToken</span><span class="p">,</span> <span class="n">MyUser</span>
-
-<span class="kn">from</span> <span class="nn">litestar.connection</span> <span class="kn">import</span> <span class="n">ASGIConnection</span>
-<span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">NotAuthorizedException</span>
-<span class="kn">from</span> <span class="nn">litestar.middleware</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">AbstractAuthenticationMiddleware</span><span class="p">,</span>
-    <span class="n">AuthenticationResult</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">API_KEY_HEADER</span> <span class="o">=</span> <span class="s2">&quot;X-API-KEY&quot;</span>
-
-<span class="n">TOKEN_USER_DATABASE</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;user_authorized&quot;</span><span class="p">}</span>
-
-
-<span class="k">class</span> <span class="nc">CustomAuthenticationMiddleware</span><span class="p">(</span><span class="n">AbstractAuthenticationMiddleware</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CustomAuthenticationMiddleware</span><span class="p">(</span><span class="n">AbstractAuthenticationMiddleware</span><span class="p">):</span>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">authenticate_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthenticationResult</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Given a request, parse the request api key stored in the header and retrieve the user correlating to the token from the DB&quot;&quot;&quot;</span>
 
@@ -1643,6 +1629,10 @@ For the sake of the example here let us say it is a dataclass:</p>
 <span class="n">auth_mw</span> <span class="o">=</span> <span class="n">DefineMiddleware</span><span class="p">(</span><span class="n">CustomAuthenticationMiddleware</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="s2">&quot;schema&quot;</span><span class="p">)</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">site_index</span><span class="p">,</span> <span class="n">my_http_handler</span><span class="p">,</span> <span class="n">my_ws_handler</span><span class="p">],</span>
+    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">auth_mw</span><span class="p">],</span>
+    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_dependency&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">my_dependency</span><span class="p">)},</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
