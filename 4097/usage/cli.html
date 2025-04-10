@@ -1685,9 +1685,8 @@ You can achieve this by adding the special <code class="docutils literal notrans
 </section>
 <section id="using-the-server-lifespan-hook">
 <h3>Using the <cite>server_lifespan</cite> hook<a class="headerlink" href="#using-the-server-lifespan-hook" title="Permalink to this heading">#</a></h3>
-<p>Server lifespan hooks are a powerful way to run code before and after the server starts and stops.
-It is useful when running the underlying asgi server with multiple workers, as it allows you to
-run code before the server starts and after it stops, regardless of the number of workers.</p>
+<p>Server lifespan hooks provide a way to run code before and after the <em>server</em> starts and stops. In contrast to the regular <cite>lifespan</cite> hooks, they only run once, even when a server starts multiple workers, whereas <cite>lifespan</cite> hooks would run for each individual worker.</p>
+<p>This makes them suitable for tasks that should happen exactly once, like initializing a database.</p>
 <div class="sd-tab-set docutils">
 <input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
 </input><label class="sd-tab-label" data-sync-id="3.8" for="sd-tab-item-3">
