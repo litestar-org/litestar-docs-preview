@@ -1590,7 +1590,7 @@ handler function:</p>
 </pre></div>
 </div>
 </div>
-<p>Here the <code class="docutils literal notranslate"><span class="pre">admin_user_guard</span></code> guard checks if the user is an admin.</p>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">admin_user_guard</span></code> guard checks if the user is an admin.</p>
 <p>The connection has a <cite>user</cite> object attached to it thanks to the JWT middleware, see <a class="reference internal" href="jwt.html"><span class="doc">authentication</span></a>
 and in particular the <a class="reference internal" href="../../reference/security/jwt.html#litestar.security.jwt.JWTAuth.retrieve_user_handler" title="litestar.security.jwt.JWTAuth.retrieve_user_handler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">JWTAuth.retrieve_user_handler()</span></code></a> method.</p>
 <p>Thus, only an admin user would be able to send a post request to the <code class="docutils literal notranslate"><span class="pre">create_user</span></code> handler.</p>
