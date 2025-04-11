@@ -2762,12 +2762,25 @@ Python 3.8+</label><div class="sd-tab-content docutils">
         <span class="k">yield</span> <span class="n">ServerSentEventMessage</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s2">&quot;something-with-comment&quot;</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;some comment&quot;</span><span class="p">)</span>
 
 
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_slow_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">SSEData</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">yield</span> <span class="n">ServerSentEventMessage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="s2">&quot;message&quot;</span><span class="p">)</span>
+
+
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/count&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sse_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ServerSentEvent</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">my_generator</span><span class="p">())</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">sse_handler</span><span class="p">])</span>
+<span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/with_ping&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sse_handler_with_ping_events</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ServerSentEvent</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">my_slow_generator</span><span class="p">(),</span> <span class="n">ping_interval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">sse_handler</span><span class="p">,</span> <span class="n">sse_handler_with_ping_events</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -2802,12 +2815,25 @@ Python 3.9+</label><div class="sd-tab-content docutils">
         <span class="k">yield</span> <span class="n">ServerSentEventMessage</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s2">&quot;something-with-comment&quot;</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;some comment&quot;</span><span class="p">)</span>
 
 
+<span class="k">async</span> <span class="k">def</span> <span class="nf">my_slow_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">SSEData</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">yield</span> <span class="n">ServerSentEventMessage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="s2">&quot;message&quot;</span><span class="p">)</span>
+
+
 <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/count&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sse_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ServerSentEvent</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">my_generator</span><span class="p">())</span>
 
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">sse_handler</span><span class="p">])</span>
+<span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/with_ping&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sse_handler_with_ping_events</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ServerSentEvent</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">my_slow_generator</span><span class="p">(),</span> <span class="n">ping_interval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">sse_handler</span><span class="p">,</span> <span class="n">sse_handler_with_ping_events</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
