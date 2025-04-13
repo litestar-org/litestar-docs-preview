@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=50ea2f63" />
-    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=9a8390f1" />
+    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=f8f74789" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -330,7 +330,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/attrs.html">attrs</a></li>
@@ -340,14 +339,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plugins/structlog.html">structlog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="repository/index.html">repository</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="repository/handlers.html">handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="response/index.html">response</a><ul>
@@ -679,23 +671,28 @@ route handlers.</p></li>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="n">MemoryBackendConfig</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="3">    <span class="n">MemoryBackendConfig</span><span class="p">,</span>
+</span><span data-line="4"><span class="p">)</span>
 </span><span data-line="5">
-</span><span data-line="6">
-</span><span data-line="7"><span class="nd">@post</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
-</span><span data-line="8"><span class="k">def</span> <span class="nf">set_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="9">    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span>
-</span><span data-line="10">
-</span><span data-line="11">
-</span><span data-line="12"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="13">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">set_session_data</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">]</span>
-</span><span data-line="14"><span class="p">)</span>
-</span><span data-line="15">
-</span><span data-line="16"><span class="k">async</span> <span class="k">with</span> <span class="n">AsyncTestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span data-line="17">    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
-</span><span data-line="18">    <span class="k">assert</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get_session_data</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
+</span><span data-line="6"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="nd">@post</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="k">def</span> <span class="nf">set_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="11">    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span>
+</span><span data-line="12">
+</span><span data-line="13">
+</span><span data-line="14"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="15">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">set_session_data</span><span class="p">],</span>
+</span><span data-line="16">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
+</span><span data-line="17"><span class="p">)</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="k">async</span> <span class="k">with</span> <span class="n">AsyncTestClient</span><span class="p">(</span>
+</span><span data-line="20">    <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span>
+</span><span data-line="21"><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="22">    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</span><span data-line="23">    <span class="k">assert</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get_session_data</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -716,23 +713,30 @@ route handlers.</p></li>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="n">MemoryBackendConfig</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="3">    <span class="n">MemoryBackendConfig</span><span class="p">,</span>
+</span><span data-line="4"><span class="p">)</span>
 </span><span data-line="5">
-</span><span data-line="6">
-</span><span data-line="7"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
-</span><span data-line="8"><span class="k">def</span> <span class="nf">get_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="9">    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span>
-</span><span data-line="10">
-</span><span data-line="11">
-</span><span data-line="12"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="13">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_session_data</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">]</span>
-</span><span data-line="14"><span class="p">)</span>
-</span><span data-line="15">
-</span><span data-line="16"><span class="k">async</span> <span class="k">with</span> <span class="n">AsyncTestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span data-line="17">    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">set_session_data</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})</span>
-</span><span data-line="18">    <span class="k">assert</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
+</span><span data-line="6"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="k">def</span> <span class="nf">get_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="11">    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span>
+</span><span data-line="12">
+</span><span data-line="13">
+</span><span data-line="14"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="15">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_session_data</span><span class="p">],</span>
+</span><span data-line="16">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
+</span><span data-line="17"><span class="p">)</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="k">async</span> <span class="k">with</span> <span class="n">AsyncTestClient</span><span class="p">(</span>
+</span><span data-line="20">    <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span>
+</span><span data-line="21"><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="22">    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">set_session_data</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})</span>
+</span><span data-line="23">    <span class="k">assert</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
+</span><span data-line="24">        <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span>
+</span><span data-line="25">    <span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -866,26 +870,30 @@ route handlers.</p></li>
 </span><span data-line="9">
 </span><span data-line="10"><span class="c1"># Create a GET request</span>
 </span><span data-line="11"><span class="n">query_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-</span><span data-line="12"><span class="n">get_user_request</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-</span><span data-line="13">    <span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">query_params</span><span class="o">=</span><span class="n">query_params</span>
-</span><span data-line="14"><span class="p">)</span>
+</span><span data-line="12"><span class="n">get_user_request</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span>
+</span><span data-line="13">    <span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span>
+</span><span data-line="14"><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">query_params</span><span class="o">=</span><span class="n">query_params</span><span class="p">)</span>
 </span><span data-line="15">
 </span><span data-line="16"><span class="c1"># Create a POST request</span>
 </span><span data-line="17"><span class="n">new_person</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-</span><span data-line="18"><span class="n">create_user_request</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span><span class="p">)</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-</span><span data-line="19">    <span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">person</span>
-</span><span data-line="20"><span class="p">)</span>
+</span><span data-line="18"><span class="n">create_user_request</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span>
+</span><span data-line="19">    <span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span>
+</span><span data-line="20"><span class="p">)</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">person</span><span class="p">)</span>
 </span><span data-line="21">
 </span><span data-line="22"><span class="c1"># Create a request with a special header</span>
 </span><span data-line="23"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;header1&quot;</span><span class="p">:</span> <span class="s2">&quot;value1&quot;</span><span class="p">}</span>
-</span><span data-line="24"><span class="n">request_with_header</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-</span><span data-line="25">    <span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">query_params</span><span class="o">=</span><span class="n">query_params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
-</span><span data-line="26"><span class="p">)</span>
+</span><span data-line="24"><span class="n">request_with_header</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span>
+</span><span data-line="25">    <span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span>
+</span><span data-line="26"><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">query_params</span><span class="o">=</span><span class="n">query_params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 </span><span data-line="27">
 </span><span data-line="28"><span class="c1"># Create a request with a media type</span>
-</span><span data-line="29"><span class="n">request_with_media_type</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span><span class="p">)</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-</span><span data-line="30">    <span class="s2">&quot;/person&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">person</span><span class="p">,</span> <span class="n">request_media_type</span><span class="o">=</span><span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">MULTI_PART</span>
-</span><span data-line="31"><span class="p">)</span>
+</span><span data-line="29"><span class="n">request_with_media_type</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">(</span>
+</span><span data-line="30">    <span class="n">app</span><span class="o">=</span><span class="n">my_app</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="n">my_server</span>
+</span><span data-line="31"><span class="p">)</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span data-line="32">    <span class="s2">&quot;/person&quot;</span><span class="p">,</span>
+</span><span data-line="33">    <span class="n">data</span><span class="o">=</span><span class="n">person</span><span class="p">,</span>
+</span><span data-line="34">    <span class="n">request_media_type</span><span class="o">=</span><span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">MULTI_PART</span><span class="p">,</span>
+</span><span data-line="35"><span class="p">)</span>
 </span></pre></div>
 </div>
 </div>
@@ -1145,23 +1153,28 @@ route handlers.</p></li>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="n">MemoryBackendConfig</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="3">    <span class="n">MemoryBackendConfig</span><span class="p">,</span>
+</span><span data-line="4"><span class="p">)</span>
 </span><span data-line="5">
-</span><span data-line="6">
-</span><span data-line="7"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
-</span><span data-line="8"><span class="k">def</span> <span class="nf">get_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="9">    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span>
-</span><span data-line="10">
-</span><span data-line="11">
-</span><span data-line="12"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="13">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_session_data</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">]</span>
-</span><span data-line="14"><span class="p">)</span>
-</span><span data-line="15">
-</span><span data-line="16"><span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span data-line="17">    <span class="n">client</span><span class="o">.</span><span class="n">set_session_data</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})</span>
-</span><span data-line="18">    <span class="k">assert</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
+</span><span data-line="6"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="k">def</span> <span class="nf">get_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="11">    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span>
+</span><span data-line="12">
+</span><span data-line="13">
+</span><span data-line="14"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="15">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">get_session_data</span><span class="p">],</span>
+</span><span data-line="16">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
+</span><span data-line="17"><span class="p">)</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span>
+</span><span data-line="20">    <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span>
+</span><span data-line="21"><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="22">    <span class="n">client</span><span class="o">.</span><span class="n">set_session_data</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})</span>
+</span><span data-line="23">    <span class="k">assert</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -1179,23 +1192,28 @@ route handlers.</p></li>
 <div class="admonition-examples admonition">
 <p class="admonition-title">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="n">MemoryBackendConfig</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="2"><span class="kn">from</span> <span class="nn">litestar.middleware.session.memory_backend</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="3">    <span class="n">MemoryBackendConfig</span><span class="p">,</span>
+</span><span data-line="4"><span class="p">)</span>
 </span><span data-line="5">
-</span><span data-line="6">
-</span><span data-line="7"><span class="nd">@post</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
-</span><span data-line="8"><span class="k">def</span> <span class="nf">set_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="9">    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span>
-</span><span data-line="10">
-</span><span data-line="11">
-</span><span data-line="12"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="13">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">set_session_data</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">]</span>
-</span><span data-line="14"><span class="p">)</span>
-</span><span data-line="15">
-</span><span data-line="16"><span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span data-line="17">    <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
-</span><span data-line="18">    <span class="k">assert</span> <span class="n">client</span><span class="o">.</span><span class="n">get_session_data</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
+</span><span data-line="6"><span class="n">session_config</span> <span class="o">=</span> <span class="n">MemoryBackendConfig</span><span class="p">()</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="nd">@post</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="k">def</span> <span class="nf">set_session_data</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="11">    <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;bar&quot;</span>
+</span><span data-line="12">
+</span><span data-line="13">
+</span><span data-line="14"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="15">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">set_session_data</span><span class="p">],</span>
+</span><span data-line="16">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
+</span><span data-line="17"><span class="p">)</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span>
+</span><span data-line="20">    <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">session_config</span><span class="o">=</span><span class="n">session_config</span>
+</span><span data-line="21"><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="22">    <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">)</span>
+</span><span data-line="23">    <span class="k">assert</span> <span class="n">client</span><span class="o">.</span><span class="n">get_session_data</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -1461,9 +1479,11 @@ route handlers.</p></li>
 </span><span data-line="8">
 </span><span data-line="9">
 </span><span data-line="10"><span class="k">async</span> <span class="k">def</span> <span class="nf">test_my_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="11">    <span class="k">async</span> <span class="k">with</span> <span class="n">create_async_test_client</span><span class="p">(</span><span class="n">my_handler</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span data-line="12">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/some-path&quot;</span><span class="p">)</span>
-</span><span data-line="13">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
+</span><span data-line="11">    <span class="k">async</span> <span class="k">with</span> <span class="n">create_async_test_client</span><span class="p">(</span>
+</span><span data-line="12">        <span class="n">my_handler</span>
+</span><span data-line="13">    <span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="14">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/some-path&quot;</span><span class="p">)</span>
+</span><span data-line="15">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
 </span></pre></div>
 </div>
 </div>

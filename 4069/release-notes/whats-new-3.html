@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=50ea2f63" />
-    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=9a8390f1" />
+    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=f8f74789" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -330,7 +330,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
@@ -340,14 +339,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/structlog.html">structlog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/repository/index.html">repository</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/handlers.html">handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/response/index.html">response</a><ul>
@@ -495,6 +487,9 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#litestar-htmx-package-removed-from-default-dependencies"><code class="docutils literal notranslate"><span class="pre">litestar-htmx</span></code> package removed from default dependencies</a></li>
 <li><a class="reference internal" href="#improved-file-system-handling-fsspec-integration">Improved file system handling / fsspec integration</a></li>
 <li><a class="reference internal" href="#removal-of-resolve-symlinks-parameter-to-create-static-files-router">Removal of <code class="docutils literal notranslate"><span class="pre">resolve_symlinks</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">create_static_files_router</span></code></a></li>
+<li><a class="reference internal" href="#removal-of-sqlalchemy-module-from-litestar-contrib">Removal of <cite>sqlalchemy</cite> module from <cite>litestar.contrib</cite></a></li>
+<li><a class="reference internal" href="#removal-of-litestar-repository-module">Removal of <cite>litestar.repository</cite> module</a></li>
+<li><a class="reference internal" href="#removal-of-litestar-pagination-module">Removal of <cite>litestar.pagination</cite> module</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
   data-type="github" data-user="litestar-org" data-repo="litestar">
@@ -820,6 +815,18 @@ parameter.</p>
 <p>This has been intentionally made a breaking change because the new parameter has
 slightly different behaviour and defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code> instead of <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </div>
+</section>
+<section id="removal-of-sqlalchemy-module-from-litestar-contrib">
+<h2>Removal of <cite>sqlalchemy</cite> module from <cite>litestar.contrib</cite><a class="headerlink" href="#removal-of-sqlalchemy-module-from-litestar-contrib" title="Permalink to this heading">¶</a></h2>
+<p>The <cite>litestar.contrib.sqlalchemy</cite> module has been removed in favour of the <cite>litestar.plugins.sqlalchemy</cite> module.</p>
+</section>
+<section id="removal-of-litestar-repository-module">
+<h2>Removal of <cite>litestar.repository</cite> module<a class="headerlink" href="#removal-of-litestar-repository-module" title="Permalink to this heading">¶</a></h2>
+<p>The <cite>litestar.repository</cite> module has been removed in favour of the <cite>litestar.plugins.sqlalchemy.repository</cite> module.</p>
+</section>
+<section id="removal-of-litestar-pagination-module">
+<h2>Removal of <cite>litestar.pagination</cite> module<a class="headerlink" href="#removal-of-litestar-pagination-module" title="Permalink to this heading">¶</a></h2>
+<p>The <cite>litestar.pagination</cite> module has been removed in favour of the backend specific pagination plugins such as <cite>litestar.plugins.sqlalchemy.filters.LimitOffset</cite>.</p>
 </section>
 </section>
 

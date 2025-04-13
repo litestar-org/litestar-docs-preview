@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=50ea2f63" />
-    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=9a8390f1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=f8f74789" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -330,7 +330,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../params.html">params</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">plugins</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="attrs.html">attrs</a></li>
@@ -340,14 +339,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="structlog.html">structlog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../repository/index.html">repository</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/handlers.html">handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../response/index.html">response</a><ul>
@@ -641,13 +633,15 @@ the handler for <code class="docutils literal notranslate"><span class="pre">HTT
 </span><span data-line="13">
 </span><span data-line="14">
 </span><span data-line="15"><span class="k">class</span> <span class="nc">MyPlugin</span><span class="p">(</span><span class="n">InitPluginProtocol</span><span class="p">):</span>
-</span><span data-line="16">    <span class="k">def</span> <span class="nf">on_app_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_config</span><span class="p">:</span> <span class="n">AppConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
-</span><span data-line="17">        <span class="n">app_config</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Provide</span><span class="p">(</span><span class="n">get_name</span><span class="p">)</span>
-</span><span data-line="18">        <span class="n">app_config</span><span class="o">.</span><span class="n">route_handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_route_handler</span><span class="p">)</span>
-</span><span data-line="19">        <span class="k">return</span> <span class="n">app_config</span>
-</span><span data-line="20">
-</span><span data-line="21">
-</span><span data-line="22"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">MyPlugin</span><span class="p">()])</span>
+</span><span data-line="16">    <span class="k">def</span> <span class="nf">on_app_init</span><span class="p">(</span>
+</span><span data-line="17">        <span class="bp">self</span><span class="p">,</span> <span class="n">app_config</span><span class="p">:</span> <span class="n">AppConfig</span>
+</span><span data-line="18">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
+</span><span data-line="19">        <span class="n">app_config</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Provide</span><span class="p">(</span><span class="n">get_name</span><span class="p">)</span>
+</span><span data-line="20">        <span class="n">app_config</span><span class="o">.</span><span class="n">route_handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_route_handler</span><span class="p">)</span>
+</span><span data-line="21">        <span class="k">return</span> <span class="n">app_config</span>
+</span><span data-line="22">
+</span><span data-line="23">
+</span><span data-line="24"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">MyPlugin</span><span class="p">()])</span>
 </span></pre></div>
 </div>
 </div>

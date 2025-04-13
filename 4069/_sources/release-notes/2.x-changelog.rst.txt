@@ -2050,15 +2050,15 @@
         The following methods now accept an ``id_attribute`` argument, allowing to
         specify an alternative value to the models primary key:
 
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update``
 
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update``
 
     .. change:: SQLAlchemy repository: New ``upsert_many`` method
         :type: feature
@@ -2069,8 +2069,8 @@
         model instances.
 
         .. seealso::
-            ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.upsert_many``
-            ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.upsert_many``
+            ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.upsert_many``
+            ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.upsert_many``
 
     .. change:: SQLAlchemy repository: New filters: ``OnBeforeAfter``, ``NotInCollectionFilter`` and ``NotInSearchFilter``
         :type: feature
@@ -2108,15 +2108,15 @@
         ``id_attribute``, and the following methods:
 
 
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update``
 
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get``
-        - ``litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get``
+        - ``~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update``
 
     .. change:: OpenAPI: Support callable ``operation_id`` on route handlers
         :type: feature
@@ -2344,7 +2344,7 @@
 
 
         The ``_sentinel`` column of
-        ``litestar.contrib.sqlalchemy.base.UUIDPrimaryKey`` has been renamed to
+        litestar.contrib.sqlalchemy.base.UUIDPrimaryKey has been renamed to
         ``sa_orm_sentinel``, to support Spanner, which does not support tables starting
         with ``_``.
 
@@ -2353,8 +2353,8 @@
         :pr: 1894
 
         A bug was fixed where
-        ``litestar.contrib.sqlalchemy.base.AuditColumns.created_at`` and
-        ``litestar.contrib.sqlalchemy.base.AuditColumns.updated_at`` would default
+        litestar.contrib.sqlalchemy.base.AuditColumns.created_at and
+        litestar.contrib.sqlalchemy.base.AuditColumns.updated_at would default
         to the :class:`~datetime.datetime` at initialization time, instead of the time
         of the update.
 
@@ -2638,7 +2638,7 @@
         :pr: 1802
 
         When exporting models using the
-        ``litestar.contrib.sqlalchemy.base.CommonTableAttributes.to_dict`` method,
+        ``~litestar.contrib.sqlalchemy.base.CommonTableAttributes.to_dict`` method,
         unloaded columns will now always be excluded. This prevents implicit I/O via
         lazy loading, and errors when using an asynchronous session.
 
@@ -2871,7 +2871,7 @@
         :pr: 1676
 
         Migrations generated for models with a
-        ``litestar.contrib.sqlalchemy.types.GUID`` type would erroneously add a
+        ``~litestar.contrib.sqlalchemy.types.GUID`` type would erroneously add a
         ``length=16`` on the input.  Since this parameter is not defined in the type's
         the ``__init__`` method. This was fixed by adding the appropriate parameter to
         the type's signature.
@@ -3101,7 +3101,7 @@
         :type: feature
         :pr: 1657
 
-        ``litestar.contrib.sqlalchemy.base.BigIntPrimaryKey`` mixin, providing a
+        ``~litestar.contrib.sqlalchemy.base.BigIntPrimaryKey`` mixin, providing a
         ``BigInt`` primary key column, with a fallback to ``Integer`` for sqlite.
 
     .. change:: SQLAlchemy repository: Store GUIDs as binary on databases that don't have a native GUID type
@@ -3109,7 +3109,7 @@
         :pr: 1657
 
         On databases without native support for GUIDs,
-        ``litestar.contrib.sqlalchemy.types.GUID`` will now fall back to
+        ``~litestar.contrib.sqlalchemy.types.GUID`` will now fall back to
         ``BINARY(16)``.
 
     .. change:: Application lifespan context managers
@@ -3610,7 +3610,7 @@
         :type: feature
         :pr: 1395
 
-        A ``litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin`` was added,
+        A ``SQLAlchemyInitPlugin <`litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin`` was added,
         providing support for managed synchronous and asynchronous sessions.
 
         .. seealso::

@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=50ea2f63" />
-    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=9a8390f1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=f8f74789" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -330,7 +330,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/attrs.html">attrs</a></li>
@@ -340,14 +339,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/structlog.html">structlog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../repository/index.html">repository</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/handlers.html">handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../response/index.html">response</a><ul>
@@ -642,21 +634,27 @@ processed.</p>
 </span><span data-line="5"><span class="kn">from</span> <span class="nn">litestar_session</span> <span class="kn">import</span> <span class="n">SessionAuth</span>
 </span><span data-line="6">
 </span><span data-line="7">
-</span><span data-line="8"><span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_user_from_session</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="9">    <span class="c1"># implement logic here to retrieve a ``user`` datum given the session dictionary</span>
-</span><span data-line="10">    <span class="o">...</span>
-</span><span data-line="11">
-</span><span data-line="12">
-</span><span data-line="13"><span class="n">session_auth_config</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">(</span>
-</span><span data-line="14">    <span class="n">secret</span><span class="o">=</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_from_session</span>
-</span><span data-line="15"><span class="p">)</span>
-</span><span data-line="16">
-</span><span data-line="17">
-</span><span data-line="18"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span data-line="19"><span class="k">def</span> <span class="nf">my_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="8"><span class="k">async</span> <span class="k">def</span> <span class="nf">retrieve_user_from_session</span><span class="p">(</span>
+</span><span data-line="9">    <span class="n">session</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+</span><span data-line="10"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="11">    <span class="c1"># implement logic here to retrieve a ``user`` datum given the session dictionary</span>
+</span><span data-line="12">    <span class="o">...</span>
+</span><span data-line="13">
+</span><span data-line="14">
+</span><span data-line="15"><span class="n">session_auth_config</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">(</span>
+</span><span data-line="16">    <span class="n">secret</span><span class="o">=</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+</span><span data-line="17">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_from_session</span><span class="p">,</span>
+</span><span data-line="18"><span class="p">)</span>
+</span><span data-line="19">
 </span><span data-line="20">
-</span><span data-line="21">
-</span><span data-line="22"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">my_handler</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_auth_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">])</span>
+</span><span data-line="21"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="22"><span class="k">def</span> <span class="nf">my_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="23">
+</span><span data-line="24">
+</span><span data-line="25"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="26">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">my_handler</span><span class="p">],</span>
+</span><span data-line="27">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">session_auth_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">],</span>
+</span><span data-line="28"><span class="p">)</span>
 </span></pre></div>
 </div>
 </div>

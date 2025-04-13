@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=50ea2f63" />
-    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=9a8390f1" />
+    <link rel="stylesheet" type="text/css" href="../../_static/litestar-sphinx-theme.css?v=f8f74789" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -330,7 +330,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/attrs.html">attrs</a></li>
@@ -340,14 +339,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/structlog.html">structlog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../repository/index.html">repository</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../repository/handlers.html">handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../response/index.html">response</a><ul>
@@ -581,14 +573,24 @@ requests, and - most likely - bugs.</p>
 </span><span data-line="7">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
 </span><span data-line="8">
 </span><span data-line="9">    <span class="k">async</span> <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span>
-</span><span data-line="10">        <span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span>
-</span><span data-line="11">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="12">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Received request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
-</span><span data-line="13">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</span><span data-line="14">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Processed request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
-</span><span data-line="15">
-</span><span data-line="16">
-</span><span data-line="17"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">MyMiddleware</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">my_logger</span><span class="p">)])</span>
+</span><span data-line="10">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="11">        <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span>
+</span><span data-line="12">        <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span>
+</span><span data-line="13">        <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span>
+</span><span data-line="14">        <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">,</span>
+</span><span data-line="15">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="16">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+</span><span data-line="17">            <span class="s2">&quot;Received request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
+</span><span data-line="18">        <span class="p">)</span>
+</span><span data-line="19">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</span><span data-line="20">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+</span><span data-line="21">            <span class="s2">&quot;Processed request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
+</span><span data-line="22">        <span class="p">)</span>
+</span><span data-line="23">
+</span><span data-line="24">
+</span><span data-line="25"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="26">    <span class="o">...</span><span class="p">,</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">MyMiddleware</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">my_logger</span><span class="p">)]</span>
+</span><span data-line="27"><span class="p">)</span>
 </span></pre></div>
 </div>
 <div class="versionadded">

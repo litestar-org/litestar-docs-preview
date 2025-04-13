@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css?v=50ea2f63" />
-    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=9a8390f1" />
+    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=f8f74789" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -330,7 +330,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
@@ -340,14 +339,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/structlog.html">structlog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/repository/index.html">repository</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/abc.html">abc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/filters.html">filters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/exceptions.html">exceptions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/testing.html">testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/repository/handlers.html">handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/sqlalchemy.html">sqlalchemy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/response/index.html">response</a><ul>
@@ -1222,7 +1214,7 @@ consistent behaviour of applications in any case.</p>
 <p>Ensure <a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.MultiDict" title="litestar.datastructures.MultiDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiDict</span></code></a> and
 <a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.ImmutableMultiDict" title="litestar.datastructures.ImmutableMultiDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImmutableMultiDict</span></code></a> copy methods return a new
 instance of <code class="docutils literal notranslate"><span class="pre">MultiDict</span></code> and <code class="docutils literal notranslate"><span class="pre">ImmutableMultiDict</span></code>. Previously, these would
-return a <a class="reference external" href="https://multidict.aio-libs.org/en/stable/multidict/#multidict.MultiDict" title="(in multidict v6.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multidict.MultiDict</span></code></a> instance.</p>
+return a <a class="reference external" href="https://multidict.aio-libs.org/en/stable/multidict/#multidict.MultiDict" title="(in multidict v6.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">multidict.MultiDict</span></code></a> instance.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2549">https://github.com/litestar-org/litestar/issues/2549</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/3009">https://github.com/litestar-org/litestar/pull/3009</a></span></p>
 </div>
 </dd>
@@ -2388,7 +2380,7 @@ regardless of whether it’s passed positionally or by name.</p>
 </div>
 </dd>
 <dt>Filters not available in <code class="docutils literal notranslate"><span class="pre">exists()</span></code><a class="headerlink reference internal" href="#2.1.0-filters not available in" id="2.1.0-filters not available in">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fixes <a class="reference internal" href="../reference/repository/abc.html#litestar.repository.abc.AbstractAsyncRepository.exists" title="litestar.repository.abc.AbstractAsyncRepository.exists"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exists()</span></code></a> method for SQLAlchemy sync and async.</p>
+<p>Fixes <a class="reference internal" href="../reference/stores/base.html#litestar.stores.base.Store.exists" title="litestar.stores.base.Store.exists"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exists()</span></code></a> method for SQLAlchemy sync and async.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2221">https://github.com/litestar-org/litestar/issues/2221</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2228">https://github.com/litestar-org/litestar/pull/2228</a></span></p>
 </div>
 </dd>
@@ -2573,14 +2565,14 @@ added with the <a class="reference internal" href="../reference/response/index.h
 <p>The following methods now accept an <code class="docutils literal notranslate"><span class="pre">id_attribute</span></code> argument, allowing to
 specify an alternative value to the models primary key:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update</span></code></p></li>
 </ul>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2052">https://github.com/litestar-org/litestar/pull/2052</a></span></p>
 </div>
@@ -2591,8 +2583,8 @@ providing equivalent functionality to the <code class="docutils literal notransl
 model instances.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.upsert_many</span></code>
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.upsert_many</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.upsert_many</span></code>
+<code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.upsert_many</span></code></p>
 </div>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2056">https://github.com/litestar-org/litestar/pull/2056</a></span></p>
 </div>
@@ -2625,14 +2617,14 @@ amount of parameters in an <code class="docutils literal notranslate"><span clas
 <p>Support <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.InstrumentedAttribute" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">InstrumentedAttribute</span></code></a> for in the repository’s
 <code class="docutils literal notranslate"><span class="pre">id_attribute</span></code>, and the following methods:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.delete_many</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.get</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemyAsyncRepository.update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.delete_many</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.get</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.repository.SQLAlchemySyncRepository.update</span></code></p></li>
 </ul>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2054">https://github.com/litestar-org/litestar/pull/2054</a></span></p>
 </div>
@@ -2847,8 +2839,8 @@ included.</p>
 <dl>
 <dt>SQLAlchemy repository: Fix audit columns defaulting to app startup time<a class="headerlink reference internal" href="#2.0.0beta3-sqlalchemy repository: fix audit columns defaulting to app startup time" id="2.0.0beta3-sqlalchemy repository: fix audit columns defaulting to app startup time">#</a></dt><dd><div class="changelog-change docutils container">
 <p>A bug was fixed where
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.base.AuditColumns.created_at</span></code> and
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.base.AuditColumns.updated_at</span></code> would default
+litestar.contrib.sqlalchemy.base.AuditColumns.created_at and
+litestar.contrib.sqlalchemy.base.AuditColumns.updated_at would default
 to the <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> at initialization time, instead of the time
 of the update.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1894">https://github.com/litestar-org/litestar/pull/1894</a></span></p>
@@ -2891,7 +2883,7 @@ DTOs.</p>
 </dd>
 <dt>SQLAlchemy repository: Rename <code class="docutils literal notranslate"><span class="pre">_sentinel</span></code> column to <code class="docutils literal notranslate"><span class="pre">sa_orm_sentinel</span></code><a class="headerlink reference internal" href="#2.0.0beta3-sqlalchemy repository: rename" id="2.0.0beta3-sqlalchemy repository: rename">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>The <code class="docutils literal notranslate"><span class="pre">_sentinel</span></code> column of
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.base.UUIDPrimaryKey</span></code> has been renamed to
+litestar.contrib.sqlalchemy.base.UUIDPrimaryKey has been renamed to
 <code class="docutils literal notranslate"><span class="pre">sa_orm_sentinel</span></code>, to support Spanner, which does not support tables starting
 with <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1933">https://github.com/litestar-org/litestar/pull/1933</a></span></p>
@@ -3123,7 +3115,7 @@ has been added, which enforces UTC timestamps stored in the database.</p>
 </dd>
 <dt>SQLAlchemy repository: Exclude unloaded columns in <code class="docutils literal notranslate"><span class="pre">to_dict</span></code><a class="headerlink reference internal" href="#2.0.0beta1-sqlalchemy repository: exclude unloaded columns in" id="2.0.0beta1-sqlalchemy repository: exclude unloaded columns in">#</a></dt><dd><div class="changelog-change docutils container">
 <p>When exporting models using the
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.base.CommonTableAttributes.to_dict</span></code> method,
+<code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.base.CommonTableAttributes.to_dict</span></code> method,
 unloaded columns will now always be excluded. This prevents implicit I/O via
 lazy loading, and errors when using an asynchronous session.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1802">https://github.com/litestar-org/litestar/pull/1802</a></span></p>
@@ -3268,7 +3260,7 @@ never called, ignoring the <code class="docutils literal notranslate"><span clas
 </dd>
 <dt>SQLAlchemy repository: Fix alembic migrations generated for models using <code class="docutils literal notranslate"><span class="pre">GUID</span></code><a class="headerlink reference internal" href="#2.0.0beta1-sqlalchemy repository: fix alembic migrations generated for models using" id="2.0.0beta1-sqlalchemy repository: fix alembic migrations generated for models using">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Migrations generated for models with a
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.types.GUID</span></code> type would erroneously add a
+<code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.types.GUID</span></code> type would erroneously add a
 <code class="docutils literal notranslate"><span class="pre">length=16</span></code> on the input.  Since this parameter is not defined in the type’s
 the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method. This was fixed by adding the appropriate parameter to
 the type’s signature.</p>
@@ -3569,14 +3561,14 @@ tested for the SQLAlchemy repository.</p>
 </div>
 </dd>
 <dt>SQLAlchemy repository: <code class="docutils literal notranslate"><span class="pre">BigIntPrimaryKey</span></code> mixin<a class="headerlink reference internal" href="#2.0.0alpha7-sqlalchemy repository:" id="2.0.0alpha7-sqlalchemy repository:">#</a></dt><dd><div class="changelog-change docutils container">
-<p><code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.base.BigIntPrimaryKey</span></code> mixin, providing a
+<p><code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.base.BigIntPrimaryKey</span></code> mixin, providing a
 <code class="docutils literal notranslate"><span class="pre">BigInt</span></code> primary key column, with a fallback to <code class="docutils literal notranslate"><span class="pre">Integer</span></code> for sqlite.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1657">https://github.com/litestar-org/litestar/pull/1657</a></span></p>
 </div>
 </dd>
 <dt>SQLAlchemy repository: Store GUIDs as binary on databases that don’t have a native GUID type<a class="headerlink reference internal" href="#2.0.0alpha7-sqlalchemy repository: store guids as binary on databases that don't have a native guid type" id="2.0.0alpha7-sqlalchemy repository: store guids as binary on databases that don't have a native guid type">#</a></dt><dd><div class="changelog-change docutils container">
 <p>On databases without native support for GUIDs,
-<code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.types.GUID</span></code> will now fall back to
+<code class="docutils literal notranslate"><span class="pre">~litestar.contrib.sqlalchemy.types.GUID</span></code> will now fall back to
 <code class="docutils literal notranslate"><span class="pre">BINARY(16)</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1657">https://github.com/litestar-org/litestar/pull/1657</a></span></p>
 </div>
@@ -4036,7 +4028,7 @@ desired affect, as loggers would still be on the <code class="docutils literal n
 <h3>Features<a class="headerlink" href="#2.0.0alpha3-feature" title="Permalink to this heading">¶</a></h3>
 <dl>
 <dt>SQLAlchemy 2.0 Plugin<a class="headerlink reference internal" href="#2.0.0alpha3-sqlalchemy 2.0 plugin" id="2.0.0alpha3-sqlalchemy 2.0 plugin">#</a></dt><dd><div class="changelog-change docutils container">
-<p>A <code class="docutils literal notranslate"><span class="pre">litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin</span></code> was added,
+<p>A <code class="docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span> <span class="pre">&lt;`litestar.contrib.sqlalchemy.plugins.SQLAlchemyInitPlugin</span></code> was added,
 providing support for managed synchronous and asynchronous sessions.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
