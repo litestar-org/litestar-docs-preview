@@ -633,15 +633,13 @@ the handler for <code class="docutils literal notranslate"><span class="pre">HTT
 </span><span data-line="13">
 </span><span data-line="14">
 </span><span data-line="15"><span class="k">class</span> <span class="nc">MyPlugin</span><span class="p">(</span><span class="n">InitPluginProtocol</span><span class="p">):</span>
-</span><span data-line="16">    <span class="k">def</span> <span class="nf">on_app_init</span><span class="p">(</span>
-</span><span data-line="17">        <span class="bp">self</span><span class="p">,</span> <span class="n">app_config</span><span class="p">:</span> <span class="n">AppConfig</span>
-</span><span data-line="18">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
-</span><span data-line="19">        <span class="n">app_config</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Provide</span><span class="p">(</span><span class="n">get_name</span><span class="p">)</span>
-</span><span data-line="20">        <span class="n">app_config</span><span class="o">.</span><span class="n">route_handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_route_handler</span><span class="p">)</span>
-</span><span data-line="21">        <span class="k">return</span> <span class="n">app_config</span>
-</span><span data-line="22">
-</span><span data-line="23">
-</span><span data-line="24"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">MyPlugin</span><span class="p">()])</span>
+</span><span data-line="16">    <span class="k">def</span> <span class="nf">on_app_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_config</span><span class="p">:</span> <span class="n">AppConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AppConfig</span><span class="p">:</span>
+</span><span data-line="17">        <span class="n">app_config</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Provide</span><span class="p">(</span><span class="n">get_name</span><span class="p">)</span>
+</span><span data-line="18">        <span class="n">app_config</span><span class="o">.</span><span class="n">route_handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">my_route_handler</span><span class="p">)</span>
+</span><span data-line="19">        <span class="k">return</span> <span class="n">app_config</span>
+</span><span data-line="20">
+</span><span data-line="21">
+</span><span data-line="22"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">MyPlugin</span><span class="p">()])</span>
 </span></pre></div>
 </div>
 </div>

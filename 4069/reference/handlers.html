@@ -2050,22 +2050,20 @@ hook for deserialization.</p></li>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
 <p>Sending the current time to the connected client every 0.5 seconds:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">def</span> <span class="nf">stream_current_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span>
-</span><span data-line="2">    <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span>
-</span><span data-line="3"><span class="p">]:</span>
-</span><span data-line="4">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span data-line="5">        <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
-</span><span data-line="6">        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-</span><span data-line="7">
-</span><span data-line="8">
-</span><span data-line="9"><span class="nd">@websocket</span><span class="p">(</span><span class="s2">&quot;/time&quot;</span><span class="p">)</span>
-</span><span data-line="10"><span class="k">async</span> <span class="k">def</span> <span class="nf">time_handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="11">    <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-</span><span data-line="12">    <span class="k">await</span> <span class="n">send_websocket_stream</span><span class="p">(</span>
-</span><span data-line="13">        <span class="n">socket</span><span class="p">,</span>
-</span><span data-line="14">        <span class="n">stream_current_time</span><span class="p">(),</span>
-</span><span data-line="15">        <span class="n">listen_for_disconnect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span data-line="16">    <span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">def</span> <span class="nf">stream_current_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span data-line="2">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span data-line="3">        <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+</span><span data-line="4">        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span data-line="5">
+</span><span data-line="6">
+</span><span data-line="7"><span class="nd">@websocket</span><span class="p">(</span><span class="s2">&quot;/time&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="k">async</span> <span class="k">def</span> <span class="nf">time_handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="9">    <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span><span data-line="10">    <span class="k">await</span> <span class="n">send_websocket_stream</span><span class="p">(</span>
+</span><span data-line="11">        <span class="n">socket</span><span class="p">,</span>
+</span><span data-line="12">        <span class="n">stream_current_time</span><span class="p">(),</span>
+</span><span data-line="13">        <span class="n">listen_for_disconnect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span data-line="14">    <span class="p">)</span>
 </span></pre></div>
 </div>
 </div>

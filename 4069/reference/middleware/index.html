@@ -579,18 +579,12 @@ requests, and - most likely - bugs.</p>
 </span><span data-line="13">        <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span>
 </span><span data-line="14">        <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">,</span>
 </span><span data-line="15">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="16">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-</span><span data-line="17">            <span class="s2">&quot;Received request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
-</span><span data-line="18">        <span class="p">)</span>
-</span><span data-line="19">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</span><span data-line="20">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-</span><span data-line="21">            <span class="s2">&quot;Processed request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span>
-</span><span data-line="22">        <span class="p">)</span>
-</span><span data-line="23">
-</span><span data-line="24">
-</span><span data-line="25"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="26">    <span class="o">...</span><span class="p">,</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">MyMiddleware</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">my_logger</span><span class="p">)]</span>
-</span><span data-line="27"><span class="p">)</span>
+</span><span data-line="16">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Received request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+</span><span data-line="17">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</span><span data-line="18">        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Processed request for path </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+</span><span data-line="19">
+</span><span data-line="20">
+</span><span data-line="21"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">MyMiddleware</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">my_logger</span><span class="p">)])</span>
 </span></pre></div>
 </div>
 <div class="versionadded">
