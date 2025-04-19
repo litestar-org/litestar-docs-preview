@@ -1625,13 +1625,13 @@ If this is not your intent, adjust the exception contents.</p>
 <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.HTTPException" title="litestar.exceptions.http_exceptions.HTTPException"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPException</span></code></a>, the responses will include the appropriate <code class="docutils literal notranslate"><span class="pre">status_code</span></code>.
 Otherwise, the responses will default to <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">&quot;Internal</span> <span class="pre">Server</span> <span class="pre">Error&quot;</span></code>.</p>
 <p>The following handler for instance will default to <code class="docutils literal notranslate"><span class="pre">MediaType.TEXT</span></code> so the exception will be raised as text.</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Example of a handler that returns a text response</span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">get</span>
+
+
+<span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span>
 </pre></div>
-</div>
 </div>
 <p>You can customize exception handling by passing a dictionary, mapping either status codes
 or exception classes to callables. For example, if you would like to replace the default
@@ -1745,10 +1745,10 @@ specific needs.</p>
 <p>Since Litestar allows users to define both exception handlers and middlewares in a layered fashion, i.e. on individual
 route handlers, controllers, routers, or the app layer, multiple layers of exception handlers are required to ensure that
 exceptions are handled correctly:</p>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/exception-handlers.jpg"><img alt="../_images/exception-handlers.jpg" src="../_images/exception-handlers.jpg" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Exception Handlers</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Exception Handlers</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As a result of the above structure, the exceptions raised by the ASGI Router itself, namely <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code>
