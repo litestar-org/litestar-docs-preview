@@ -648,8 +648,12 @@ data-aria-dark="Switch to auto color mode">
 <li><p><span class="target" id="litestar.exceptions.HTTPException.params.*args"></span><strong>*args</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.*args">¶</a> – if <code class="docutils literal notranslate"><span class="pre">detail</span></code> kwarg not provided, first arg should be error detail.</p></li>
 <li><p><span class="target" id="litestar.exceptions.HTTPException.params.detail"></span><strong>detail</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.detail">¶</a> – Exception details or message. Will default to args[0] if not provided.</p></li>
 <li><p><span class="target" id="litestar.exceptions.HTTPException.params.status_code"></span><strong>status_code</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.status_code">¶</a> – Exception HTTP status code.</p></li>
-<li><p><span class="target" id="litestar.exceptions.HTTPException.params.headers"></span><strong>headers</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.headers">¶</a> – Headers to set on the response.</p></li>
-<li><p><span class="target" id="litestar.exceptions.HTTPException.params.extra"></span><strong>extra</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.extra">¶</a> – An extra mapping to attach to the exception.</p></li>
+<li><p><span class="target" id="litestar.exceptions.HTTPException.params.headers"></span><strong>headers</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.headers">¶</a> – Headers to set on the response.
+Defaults to the class’s <code class="docutils literal notranslate"><span class="pre">headers</span></code> if not provided.
+Set to <code class="docutils literal notranslate"><span class="pre">None</span></code> explicitly to unset the default.</p></li>
+<li><p><span class="target" id="litestar.exceptions.HTTPException.params.extra"></span><strong>extra</strong><a class="paramlink headerlink reference internal" href="#litestar.exceptions.HTTPException.params.extra">¶</a> – An extra mapping to attach to the exception.
+Defaults to the class’s <code class="docutils literal notranslate"><span class="pre">extra</span></code> if not provided.
+Set to <code class="docutils literal notranslate"><span class="pre">None</span></code> explicitly to unset the default.</p></li>
 </ul>
 </dd>
 </dl>
