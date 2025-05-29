@@ -2457,9 +2457,13 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.ServerSentEventMessage.__init__">(litestar.response.ServerSentEventMessage method)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.__init__">(litestar.response.sse.ASGIStreamingSSEResponse method)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.__init__">(litestar.response.sse.ServerSentEvent method)</a>
 </li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEventMessage.__init__">(litestar.response.sse.ServerSentEventMessage method)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.__init__">(litestar.response.sse.SSEStream method)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.__init__">(litestar.response.Stream method)</a>
 </li>
@@ -2868,10 +2872,10 @@ document.write(`
 </li>
       <li><a href="reference/types.html#litestar.types.AnyCallable">AnyCallable (in module litestar.types)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/types.html#litestar.types.AnyIOBackend">AnyIOBackend (in module litestar.types)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/connection.html#litestar.connection.ASGIConnection.app">app (litestar.connection.ASGIConnection property)</a>
 
       <ul>
@@ -2918,6 +2922,8 @@ document.write(`
         <li><a href="reference/response/index.html#litestar.response.Redirect.to_asgi_response.params.app">(litestar.response.Redirect.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response.params.app">(litestar.response.Response.to_asgi_response parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.app">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response.params.app">(litestar.response.Stream.to_asgi_response parameter)</a>
 </li>
@@ -3015,6 +3021,8 @@ document.write(`
       <li><a href="reference/handlers.html#litestar.handlers.ASGIRouteHandler">ASGIRouteHandler (class in litestar.handlers)</a>
 </li>
       <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse">ASGIStreamingResponse (class in litestar.response.streaming)</a>
+</li>
+      <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse">ASGIStreamingSSEResponse (class in litestar.response.sse)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.ASGIVersion">ASGIVersion (class in litestar.types)</a>
 </li>
@@ -3211,7 +3219,13 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.ServerSentEvent.params.background">(litestar.response.ServerSentEvent parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.background">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.background">(litestar.response.sse.ServerSentEvent parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.background">(litestar.response.sse.SSEStream parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.background">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.background">(litestar.response.Stream parameter)</a>
 </li>
@@ -3352,6 +3366,8 @@ document.write(`
         <li><a href="reference/response/file.html#litestar.response.file.ASGIFileResponse.params.body">(litestar.response.file.ASGIFileResponse parameter)</a>
 </li>
         <li><a href="reference/response/redirect.html#litestar.response.redirect.ASGIRedirectResponse.params.body">(litestar.response.redirect.ASGIRedirectResponse parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.body">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
 </li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.params.body">(litestar.response.streaming.ASGIStreamingResponse parameter)</a>
 </li>
@@ -3771,6 +3787,8 @@ document.write(`
 </li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.content">(litestar.response.sse.ServerSentEvent parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.content">(litestar.response.sse.SSEStream parameter)</a>
+</li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.content">(litestar.response.Stream parameter)</a>
 </li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.Stream.params.content">(litestar.response.streaming.Stream parameter)</a>
@@ -3818,6 +3836,8 @@ document.write(`
         <li><a href="reference/response/file.html#litestar.response.file.ASGIFileResponse.params.content_length">(litestar.response.file.ASGIFileResponse parameter)</a>
 </li>
         <li><a href="reference/response/redirect.html#litestar.response.redirect.ASGIRedirectResponse.params.content_length">(litestar.response.redirect.ASGIRedirectResponse parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.content_length">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
 </li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.params.content_length">(litestar.response.streaming.ASGIStreamingResponse parameter)</a>
 </li>
@@ -3923,7 +3943,13 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.ServerSentEvent.params.cookies">(litestar.response.ServerSentEvent parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.cookies">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.cookies">(litestar.response.sse.ServerSentEvent parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.cookies">(litestar.response.sse.SSEStream parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.cookies">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.cookies">(litestar.response.Stream parameter)</a>
 </li>
@@ -4753,6 +4779,10 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response.params.encoded_headers">(litestar.response.Response.to_asgi_response parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.encoded_headers">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.encoded_headers">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
+</li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response.params.encoded_headers">(litestar.response.Stream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.params.encoded_headers">(litestar.response.streaming.ASGIStreamingResponse parameter)</a>
@@ -4809,7 +4839,11 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.ServerSentEvent.params.encoding">(litestar.response.ServerSentEvent parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.encoding">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.encoding">(litestar.response.sse.ServerSentEvent parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.encoding">(litestar.response.sse.SSEStream parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.encoding">(litestar.response.Stream parameter)</a>
 </li>
@@ -5052,10 +5086,10 @@ document.write(`
         <li><a href="reference/logging/config.html#litestar.logging.config.StructLoggingConfig.exception_logging_handler">(litestar.logging.config.StructLoggingConfig attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/plugins/problem_details.html#litestar.plugins.problem_details.ProblemDetailsConfig.exception_to_problem_detail_map">exception_to_problem_detail_map (litestar.plugins.problem_details.ProblemDetailsConfig attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/plugins/problem_details.html#litestar.plugins.problem_details.ProblemDetailsConfig.exception_to_problem_detail_map">exception_to_problem_detail_map (litestar.plugins.problem_details.ProblemDetailsConfig attribute)</a>
+</li>
       <li><a href="reference/types.html#litestar.types.ExceptionHandler">ExceptionHandler (in module litestar.types)</a>
 </li>
       <li><a href="reference/types.html#litestar.types.ExceptionHandlersMap">ExceptionHandlersMap (in module litestar.types)</a>
@@ -6075,7 +6109,13 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.ServerSentEvent.params.headers">(litestar.response.ServerSentEvent parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.headers">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.headers">(litestar.response.sse.ServerSentEvent parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.headers">(litestar.response.sse.SSEStream parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.headers">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.headers">(litestar.response.Stream parameter)</a>
 </li>
@@ -6148,10 +6188,10 @@ document.write(`
 </li>
       <li><a href="reference/plugins/htmx.html#litestar.plugins.htmx.HTMXRequest">HTMXRequest (class in litestar.plugins.htmx)</a>
 </li>
-      <li><a href="reference/plugins/htmx.html#litestar.plugins.htmx.HTMXTemplate">HTMXTemplate (class in litestar.plugins.htmx)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/plugins/htmx.html#litestar.plugins.htmx.HTMXTemplate">HTMXTemplate (class in litestar.plugins.htmx)</a>
+</li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_100_CONTINUE">HTTP_100_CONTINUE (in module litestar.status_codes)</a>
 </li>
       <li><a href="reference/status_codes.html#litestar.status_codes.HTTP_101_SWITCHING_PROTOCOLS">HTTP_101_SWITCHING_PROTOCOLS (in module litestar.status_codes)</a>
@@ -6437,6 +6477,10 @@ document.write(`
 </li>
         <li><a href="reference/openapi/openapi.html#litestar.openapi.OpenAPIController.include_in_schema">(litestar.openapi.OpenAPIController attribute)</a>
 </li>
+        <li><a href="reference/params.html#litestar.params.KwargDefinition.include_in_schema">(litestar.params.KwargDefinition attribute)</a>
+</li>
+        <li><a href="reference/params.html#litestar.params.Parameter.params.include_in_schema">(litestar.params.Parameter parameter)</a>
+</li>
         <li><a href="reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusController.include_in_schema">(litestar.plugins.prometheus.PrometheusController attribute)</a>
 </li>
         <li><a href="reference/router.html#litestar.router.Router.params.include_in_schema">(litestar.router.Router parameter)</a>
@@ -6512,6 +6556,8 @@ document.write(`
         <li><a href="reference/plugins/pydantic.html#litestar.plugins.pydantic.PydanticSchemaPlugin.is_constrained_field">(litestar.plugins.pydantic.PydanticSchemaPlugin static method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.is_content_end">is_content_end (litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
       <li><a href="reference/typing.html#litestar.typing.FieldDefinition.is_dataclass_type">is_dataclass_type (litestar.typing.FieldDefinition property)</a>
 </li>
   </ul></td>
@@ -6538,6 +6584,10 @@ document.write(`
         <li><a href="reference/response/index.html#litestar.response.Redirect.to_asgi_response.params.is_head_response">(litestar.response.Redirect.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response.params.is_head_response">(litestar.response.Response.to_asgi_response parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.is_head_response">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.is_head_response">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response.params.is_head_response">(litestar.response.Stream.to_asgi_response parameter)</a>
 </li>
@@ -6674,8 +6724,12 @@ document.write(`
 </li>
       <li><a href="reference/connection.html#litestar.connection.WebSocket.iter_msgpack">iter_msgpack() (litestar.connection.WebSocket method)</a>
 </li>
-      <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.params.iterator">iterator (litestar.response.streaming.ASGIStreamingResponse parameter)</a>
+      <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.iterator">iterator (litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+
+      <ul>
+        <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.params.iterator">(litestar.response.streaming.ASGIStreamingResponse parameter)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -7963,6 +8017,12 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response.params.media_type">(litestar.response.Response.to_asgi_response parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.media_type">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.media_type">(litestar.response.sse.SSEStream parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.media_type">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
+</li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.media_type">(litestar.response.Stream parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response.params.media_type">(litestar.response.Stream.to_asgi_response parameter)</a>
@@ -8136,12 +8196,12 @@ document.write(`
       </ul></li>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.min_properties">min_properties (litestar.openapi.spec.Schema attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/openapi/spec.html#litestar.openapi.spec.Schema.minimum">minimum (litestar.openapi.spec.Schema attribute)</a>
 </li>
       <li><a href="reference/config.html#litestar.config.compression.CompressionConfig.minimum_size">minimum_size (litestar.config.compression.CompressionConfig attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/exceptions.html#litestar.exceptions.MissingDependencyException">MissingDependencyException</a>
 </li>
       <li><a href="reference/connection.html#litestar.connection.WebSocket.iter_data.params.mode">mode (litestar.connection.WebSocket.iter_data parameter)</a>
@@ -9230,11 +9290,11 @@ document.write(`
       <li><a href="reference/response/index.html#litestar.response.ServerSentEvent.params.ping_interval">ping_interval (litestar.response.ServerSentEvent parameter)</a>
 
       <ul>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.ping_interval">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.ping_interval">(litestar.response.sse.ServerSentEvent parameter)</a>
 </li>
-        <li><a href="reference/response/index.html#litestar.response.Stream.params.ping_interval">(litestar.response.Stream parameter)</a>
-</li>
-        <li><a href="reference/response/streaming.html#litestar.response.streaming.Stream.params.ping_interval">(litestar.response.streaming.Stream parameter)</a>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.ping_interval">(litestar.response.sse.SSEStream parameter)</a>
 </li>
       </ul></li>
       <li><a href="usage/channels.html#term-plugin"><strong>plugin</strong></a>
@@ -9532,6 +9592,8 @@ document.write(`
 </li>
         <li><a href="reference/response/file.html#litestar.response.file.ASGIFileResponse.send_body.params.receive">(litestar.response.file.ASGIFileResponse.send_body parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.send_body.params.receive">(litestar.response.sse.ASGIStreamingSSEResponse.send_body parameter)</a>
+</li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.send_body.params.receive">(litestar.response.streaming.ASGIStreamingResponse.send_body parameter)</a>
 </li>
         <li><a href="reference/routes.html#litestar.routes.ASGIRoute.handle.params.receive">(litestar.routes.ASGIRoute.handle parameter)</a>
@@ -9785,6 +9847,8 @@ document.write(`
         <li><a href="reference/response/index.html#litestar.response.Redirect.to_asgi_response.params.request">(litestar.response.Redirect.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response.params.request">(litestar.response.Response.to_asgi_response parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.request">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response.params.request">(litestar.response.Stream.to_asgi_response parameter)</a>
 </li>
@@ -10717,6 +10781,8 @@ document.write(`
 </li>
         <li><a href="reference/response/file.html#litestar.response.file.ASGIFileResponse.start_response.params.send">(litestar.response.file.ASGIFileResponse.start_response parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.send_body.params.send">(litestar.response.sse.ASGIStreamingSSEResponse.send_body parameter)</a>
+</li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.send_body.params.send">(litestar.response.streaming.ASGIStreamingResponse.send_body parameter)</a>
 </li>
         <li><a href="reference/routes.html#litestar.routes.ASGIRoute.handle.params.send">(litestar.routes.ASGIRoute.handle parameter)</a>
@@ -10744,6 +10810,8 @@ document.write(`
 
       <ul>
         <li><a href="reference/response/file.html#litestar.response.file.ASGIFileResponse.send_body">(litestar.response.file.ASGIFileResponse method)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.send_body">(litestar.response.sse.ASGIStreamingSSEResponse method)</a>
 </li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.ASGIStreamingResponse.send_body">(litestar.response.streaming.ASGIStreamingResponse method)</a>
 </li>
@@ -10937,10 +11005,10 @@ document.write(`
       </ul></li>
       <li><a href="reference/concurrency.html#litestar.concurrency.set_asyncio_executor">set_asyncio_executor() (in module litestar.concurrency)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.set_cached_history">set_cached_history() (litestar.middleware.rate_limit.RateLimitMiddleware method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/response/base.html#litestar.response.base.Response.set_cookie">set_cookie() (litestar.response.base.Response method)</a>
 
       <ul>
@@ -11089,6 +11157,8 @@ document.write(`
         <li><a href="reference/handlers.html#litestar.handlers.WebsocketListenerRouteHandler.default_connection_lifespan.params.socket">(litestar.handlers.WebsocketListenerRouteHandler.default_connection_lifespan parameter)</a>
 </li>
       </ul></li>
+      <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream">SSEStream (class in litestar.response.sse)</a>
+</li>
       <li><a href="reference/datastructures/index.html#litestar.datastructures.CacheControlHeader.stale_while_revalidate">stale_while_revalidate (litestar.datastructures.CacheControlHeader attribute)</a>
 </li>
       <li><a href="reference/openapi/plugins.html#litestar.openapi.plugins.SwaggerRenderPlugin.params.standalone_preset_js_url">standalone_preset_js_url (litestar.openapi.plugins.SwaggerRenderPlugin parameter)</a>
@@ -11224,7 +11294,13 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.ServerSentEvent.params.status_code">(litestar.response.ServerSentEvent parameter)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.ASGIStreamingSSEResponse.params.status_code">(litestar.response.sse.ASGIStreamingSSEResponse parameter)</a>
+</li>
         <li><a href="reference/response/sse.html#litestar.response.sse.ServerSentEvent.params.status_code">(litestar.response.sse.ServerSentEvent parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.params.status_code">(litestar.response.sse.SSEStream parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.status_code">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.params.status_code">(litestar.response.Stream parameter)</a>
 </li>
@@ -11680,6 +11756,8 @@ document.write(`
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response">(litestar.response.Response method)</a>
 </li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response">(litestar.response.sse.SSEStream method)</a>
+</li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response">(litestar.response.Stream method)</a>
 </li>
         <li><a href="reference/response/streaming.html#litestar.response.streaming.Stream.to_asgi_response">(litestar.response.streaming.Stream method)</a>
@@ -11967,6 +12045,8 @@ document.write(`
         <li><a href="reference/response/index.html#litestar.response.Response.params.type_encoders">(litestar.response.Response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Response.to_asgi_response.params.type_encoders">(litestar.response.Response.to_asgi_response parameter)</a>
+</li>
+        <li><a href="reference/response/sse.html#litestar.response.sse.SSEStream.to_asgi_response.params.type_encoders">(litestar.response.sse.SSEStream.to_asgi_response parameter)</a>
 </li>
         <li><a href="reference/response/index.html#litestar.response.Stream.to_asgi_response.params.type_encoders">(litestar.response.Stream.to_asgi_response parameter)</a>
 </li>
