@@ -20,7 +20,7 @@ commonly used optional dependencies.
 .. code-block:: shell
     :caption: Install the standard group
 
-    pip install 'litestar[standard]'
+    pip install litestar[standard]
 
 Once you have installed ``standard``, you will have access to the ``litestar run`` command.
 
@@ -78,7 +78,7 @@ Extending the CLI
 
 Litestar's CLI is built with `click <https://click.palletsprojects.com/>`_ and can be extended by making use of
 `entry points <https://packaging.python.org/en/latest/specifications/entry-points/>`_,
-or by creating a plugin that conforms to the :class:`~.plugins.CLIPluginProtocol`.
+or by creating a plugin inheriting from :class:`~.plugins.CLIPlugin`.
 
 Using entry points
 ^^^^^^^^^^^^^^^^^^
@@ -116,45 +116,37 @@ entries should point to a :class:`click.Command` or :class:`click.Group`:
             [project.entry-points."litestar.commands"]
             my_command = "my_litestar_plugin.cli:main"
 
-    .. tab-item:: poetry
+    .. tab-item:: Poetry
 
         .. code-block:: toml
-            :caption: Using `poetry <https://python-poetry.org/>`_
+            :caption: Using `Poetry <https://python-poetry.org/>`_
 
             [tool.poetry.plugins."litestar.commands"]
-            my_command = "my_litestar_plugin.cli:main"
-
-    .. tab-item:: uv
-
-        .. code-block:: toml
-            :caption: Using `uv <https://docs.astral.sh/uv/>`_
-
-            [project.scripts]
             my_command = "my_litestar_plugin.cli:main"
 
 Using a plugin
 ^^^^^^^^^^^^^^
 
-A plugin extending the CLI can be created using the :class:`~.plugins.CLIPluginProtocol`.
-Its :meth:`~.plugins.CLIPluginProtocol.on_cli_init` will be called during the initialization of the CLI,
+A plugin extending the CLI can be created using the :class:`~.plugins.CLIPlugin`.
+Its :meth:`~.plugins.CLIPlugin.on_cli_init` will be called during the initialization of the CLI,
 and receive the root :class:`click.Group` as its first argument, which can then be used to add or override commands:
 
 .. code-block:: python
     :caption: Creating a CLI plugin
 
     from litestar import Litestar
-    from litestar.plugins import CLIPluginProtocol
+    from litestar.plugins import CLIPlugin
     from click import Group
 
 
-    class CLIPlugin(CLIPluginProtocol):
+    class MyPlugin(CLIPlugin):
         def on_cli_init(self, cli: Group) -> None:
             @cli.command()
             def is_debug_mode(app: Litestar):
                 print(app.debug)
 
 
-    app = Litestar(plugins=[CLIPlugin()])
+    app = Litestar(plugins=[MyPlugin()])
 
 Accessing the app instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
