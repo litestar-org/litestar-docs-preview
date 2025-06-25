@@ -2586,11 +2586,13 @@ pydantic models and dataclasses based on type annotations. With it, we could rew
     <span class="k">return</span> <span class="n">service</span><span class="o">.</span><span class="n">get_one</span><span class="p">()</span>
 
 
-<span class="nd">@register_fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;item&quot;</span><span class="p">)</span>
+<span class="nd">@register_fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;item_factory&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ItemFactory</span><span class="p">(</span><span class="n">ModelFactory</span><span class="p">[</span><span class="n">Item</span><span class="p">]):</span> <span class="o">...</span>
 
 
-<span class="k">def</span> <span class="nf">test_get_item</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="n">ItemFactory</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">test_get_item</span><span class="p">(</span><span class="n">item_factory</span><span class="p">:</span> <span class="n">ItemFactory</span><span class="p">):</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">item_factory</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
     <span class="k">class</span> <span class="nc">MyService</span><span class="p">(</span><span class="n">Service</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">get_one</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Item</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">item</span>
@@ -2601,7 +2603,7 @@ pydantic models and dataclasses based on type annotations. With it, we could rew
         <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/item&quot;</span><span class="p">)</span>
 
         <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">HTTP_200_OK</span>
-        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">build</span><span class="p">()</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="n">item</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
