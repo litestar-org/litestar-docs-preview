@@ -544,12 +544,12 @@ to make working with models easier.</p>
 <h1>Modelling<a class="headerlink" href="#modelling" title="Permalink to this heading">¶</a></h1>
 <p>We’ll begin by modelling the entities and relationships between authors and books.
 We’ll start by creating the <code class="docutils literal notranslate"><span class="pre">Author</span></code> table, utilizing the
-<a class="reference internal" href="../../reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDBase" title="advanced_alchemy.base.UUIDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code></a> class. To keep things
+<code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code> class. To keep things
 simple, our first model will encompass only three fields: <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, and <code class="docutils literal notranslate"><span class="pre">dob</span></code>.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">app.py</span></code></span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos">1</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span>
-</span><span data-line="2"><span class="linenos">2</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos">1</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">AsyncSession</span>
+</span><span data-line="2"><span class="linenos">2</span>
 </span><span data-line="3"><span class="linenos">3</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;author&quot;</span>
 </span><span data-line="4"><span class="linenos">4</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </span><span data-line="5"><span class="linenos">5</span>    <span class="n">dob</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
@@ -564,8 +564,8 @@ By configuring it this way, SQLAlchemy will automatically include the necessary 
 key constraints when using the <code class="docutils literal notranslate"><span class="pre">author_id</span></code> field in each <code class="docutils literal notranslate"><span class="pre">Book</span></code> record.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">app.py</span></code></span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span>
-</span><span data-line="2"><span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">AsyncSession</span>
+</span><span data-line="2"><span class="linenos"> 2</span>
 </span><span data-line="3"><span class="linenos"> 3</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;author&quot;</span>
 </span><span data-line="4"><span class="linenos"> 4</span>    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 </span><span data-line="5"><span class="linenos"> 5</span>    <span class="n">dob</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
@@ -581,7 +581,7 @@ key constraints when using the <code class="docutils literal notranslate"><span 
 <p>By using the audit model, we can automatically record the time a record was created and
 last updated.</p>
 <p>To implement this, we will define a new <code class="docutils literal notranslate"><span class="pre">Book</span></code> model via the
-<a class="reference internal" href="../../reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="advanced_alchemy.base.UUIDAuditBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a> class. Observe
+<code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code> class. Observe
 that the only modification here is the parent class from which we inherit. This minor
 change endows the <cite>book</cite> table with automatic timestamp columns
 (<cite>created</cite> and <cite>updated</cite>) upon deployment!</p>
@@ -589,8 +589,8 @@ change endows the <cite>book</cite> table with automatic timestamp columns
 <p class="admonition-title">Note</p>
 <p>If your application requires integer-based primary keys, equivalent base model
 and base audit model implementations can be found at
-<a class="reference internal" href="../../reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.BigIntAuditBase" title="advanced_alchemy.base.BigIntAuditBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntBase</span></code></a> and
-<a class="reference internal" href="../../reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="advanced_alchemy.base.UUIDAuditBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code></a>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntBase</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code>
 respectively.</p>
 </div>
 <div class="admonition important">
@@ -637,12 +637,12 @@ Full Code (click to toggle)<div class="sd-summary-down docutils">
 </span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
 </span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
 </span><span data-line="6"><span class="linenos"> 6</span>
-</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">select</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">AsyncSession</span>
-</span><span data-line="9"><span class="hll"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span>
-</span></span><span data-line="10"><span class="linenos">10</span>
-</span><span data-line="11"><span class="linenos">11</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="12"><span class="linenos">12</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">AsyncSessionConfig</span><span class="p">,</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyPlugin</span><span class="p">,</span> <span class="n">base</span>
+</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="n">AsyncSessionConfig</span><span class="p">,</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyPlugin</span><span class="p">,</span> <span class="n">base</span>
+</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">select</span>
+</span><span data-line="9"><span class="hll"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">AsyncSession</span>
+</span></span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span>
+</span><span data-line="11"><span class="linenos">11</span>
+</span><span data-line="12"><span class="linenos">12</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 </span><span data-line="13"><span class="linenos">13</span>
 </span><span data-line="14"><span class="linenos">14</span>
 </span><span data-line="15"><span class="linenos">15</span><span class="c1"># The SQLAlchemy base includes a declarative model for you to use in your models.</span>

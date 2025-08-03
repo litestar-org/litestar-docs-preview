@@ -531,7 +531,7 @@ data-aria-dark="Switch to auto color mode">
 <h1>Using the init plugin<a class="headerlink" href="#using-the-init-plugin" title="Permalink to this heading">¶</a></h1>
 <p>In our example application, we’ve seen that we need to manage the database engine within the scope of the application’s
 lifespan, and the session within the scope of a request. This is a common pattern, and the
-<a class="reference internal" href="../../reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin" title="litestar.plugins.sqlalchemy.SQLAlchemyInitPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> plugin provides assistance for
+<a class="reference internal" href="../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyInitPlugin" title="advanced_alchemy.extensions.litestar.SQLAlchemyInitPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> plugin provides assistance for
 this.</p>
 <p>In our latest update, we leverage two features of the plugin:</p>
 <ol class="arabic simple">
@@ -548,18 +548,18 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
 </span><span data-line="2"><span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 </span><span data-line="3"><span class="linenos"> 3</span>
-</span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
-</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
-</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
-</span><span data-line="8"><span class="linenos"> 8</span>
-</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
-</span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
-</span><span data-line="11"><span class="linenos">11</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span data-line="12"><span class="hll"><span class="linenos">12</span>    <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span>
-</span></span><span data-line="13"><span class="linenos">13</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
-</span><span data-line="14"><span class="linenos">14</span>    <span class="n">SQLAlchemySerializationPlugin</span><span class="p">,</span>
-</span><span data-line="15"><span class="linenos">15</span><span class="p">)</span>
+</span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="5"><span class="linenos"> 5</span>    <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span>
+</span><span data-line="6"><span class="linenos"> 6</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
+</span><span data-line="7"><span class="linenos"> 7</span>    <span class="n">SQLAlchemySerializationPlugin</span><span class="p">,</span>
+</span><span data-line="8"><span class="linenos"> 8</span><span class="p">)</span>
+</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
+</span><span data-line="11"><span class="linenos">11</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
+</span><span data-line="12"><span class="hll"><span class="linenos">12</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+</span></span><span data-line="13"><span class="linenos">13</span>
+</span><span data-line="14"><span class="linenos">14</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+</span><span data-line="15"><span class="linenos">15</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
 </span><span data-line="16"><span class="linenos">16</span><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
 </span><span data-line="17"><span class="linenos">17</span>
 </span><span data-line="18"><span class="linenos">18</span>
@@ -641,18 +641,18 @@ Python 3.8+</label><div class="sd-tab-content docutils">
 Python 3.10+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">AsyncGenerator</span>
 </span><span data-line="2"><span class="linenos"> 2</span>
-</span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
-</span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
-</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
-</span><span data-line="7"><span class="linenos"> 7</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
-</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
-</span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span data-line="11"><span class="linenos">11</span>    <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span>
-</span><span data-line="12"><span class="hll"><span class="linenos">12</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
-</span></span><span data-line="13"><span class="linenos">13</span>    <span class="n">SQLAlchemySerializationPlugin</span><span class="p">,</span>
-</span><span data-line="14"><span class="linenos">14</span><span class="p">)</span>
+</span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="4"><span class="linenos"> 4</span>    <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span>
+</span><span data-line="5"><span class="linenos"> 5</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
+</span><span data-line="6"><span class="linenos"> 6</span>    <span class="n">SQLAlchemySerializationPlugin</span><span class="p">,</span>
+</span><span data-line="7"><span class="linenos"> 7</span><span class="p">)</span>
+</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="kn">import</span> <span class="n">IntegrityError</span><span class="p">,</span> <span class="n">NoResultFound</span>
+</span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncSession</span>
+</span><span data-line="11"><span class="linenos">11</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+</span><span data-line="12"><span class="hll"><span class="linenos">12</span>
+</span></span><span data-line="13"><span class="linenos">13</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
+</span><span data-line="14"><span class="linenos">14</span><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
 </span><span data-line="15"><span class="linenos">15</span><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
 </span><span data-line="16"><span class="linenos">16</span>
 </span><span data-line="17"><span class="linenos">17</span>

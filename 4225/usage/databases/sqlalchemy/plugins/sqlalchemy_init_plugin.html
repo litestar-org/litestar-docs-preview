@@ -543,7 +543,7 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="sqlalchemy-init-plugin">
 <h1>SQLAlchemy Init Plugin<a class="headerlink" href="#sqlalchemy-init-plugin" title="Permalink to this heading">¶</a></h1>
-<p>The <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyInitPlugin" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> adds functionality to the
+<p>The <a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyInitPlugin" title="advanced_alchemy.extensions.litestar.SQLAlchemyInitPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> adds functionality to the
 application that supports using Litestar with <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a>.</p>
 <p>The plugin:</p>
 <ul class="simple">
@@ -565,10 +565,10 @@ Async</label><div class="sd-tab-content docutils">
 </span><span data-line="2"><span class="linenos"> 2</span>
 </span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 </span><span data-line="4"><span class="linenos"> 4</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
-</span><span data-line="6"><span class="linenos"> 6</span>
-</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyInitPlugin</span>
+</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyInitPlugin</span>
+</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</span><span data-line="7"><span class="linenos"> 7</span>
+</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
 </span><span data-line="9"><span class="linenos"> 9</span>
 </span><span data-line="10"><span class="linenos">10</span><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
 </span><span data-line="11"><span class="linenos">11</span>    <span class="kn">from</span> <span class="nn">sqlalchemy.ext.asyncio</span> <span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">AsyncSession</span>
@@ -600,10 +600,10 @@ Sync</label><div class="sd-tab-content docutils">
 </span><span data-line="2"><span class="linenos"> 2</span>
 </span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 </span><span data-line="4"><span class="linenos"> 4</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
-</span><span data-line="6"><span class="linenos"> 6</span>
-</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span> <span class="n">SQLAlchemySyncConfig</span>
+</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span> <span class="n">SQLAlchemySyncConfig</span>
+</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</span><span data-line="7"><span class="linenos"> 7</span>
+</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
 </span><span data-line="9"><span class="linenos"> 9</span>
 </span><span data-line="10"><span class="linenos">10</span><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
 </span><span data-line="11"><span class="linenos">11</span>    <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Engine</span>
@@ -633,8 +633,8 @@ can also be injected into other dependency functions.</p>
 <section id="renaming-the-dependencies">
 <h3>Renaming the dependencies<a class="headerlink" href="#renaming-the-dependencies" title="Permalink to this heading">¶</a></h3>
 <p>You can change the name that the engine and session are bound to by setting the
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.engine_dependency_key" title="(in advanced_alchemy)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">engine_dependency_key</span></code></a>
-and <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.session_dependency_key" title="(in advanced_alchemy)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">session_dependency_key</span></code></a>
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.engine_dependency_key" title="advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.engine_dependency_key"><code class="xref py py-attr docutils literal notranslate"><span class="pre">engine_dependency_key</span></code></a>
+and <a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.session_dependency_key" title="advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.session_dependency_key"><code class="xref py py-attr docutils literal notranslate"><span class="pre">session_dependency_key</span></code></a>
 attributes on the plugin configuration.</p>
 </section>
 <section id="configuring-the-before-send-handler">
@@ -642,7 +642,7 @@ attributes on the plugin configuration.</p>
 <p>The plugin configures a <code class="docutils literal notranslate"><span class="pre">before_send</span></code> handler that is called before sending a response. The default handler closes the
 session and removes it from the connection scope.</p>
 <p>You can change the handler by setting the
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.before_send_handler" title="(in advanced_alchemy)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">before_send_handler</span></code></a>
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.before_send_handler" title="advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig.before_send_handler"><code class="xref py py-attr docutils literal notranslate"><span class="pre">before_send_handler</span></code></a>
 attribute on the configuration object. For example, an alternate handler is available that will also commit the session
 on success and rollback upon failure.</p>
 <div class="sd-tab-set docutils">
@@ -653,19 +653,20 @@ Async</label><div class="sd-tab-content docutils">
 <div class="code-block-caption"><span class="caption-text">SQLAlchemy Async Before Send Handler</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 </span><span data-line="2"><span class="linenos"> 2</span>
-</span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
-</span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span data-line="5"><span class="linenos"> 5</span>    <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span>
-</span><span data-line="6"><span class="linenos"> 6</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
-</span><span data-line="7"><span class="linenos"> 7</span>    <span class="n">async_autocommit_before_send_handler</span><span class="p">,</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="p">)</span>
-</span><span data-line="9"><span class="linenos"> 9</span>
-</span><span data-line="10"><span class="linenos">10</span><span class="n">config</span> <span class="o">=</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">(</span>
-</span><span data-line="11"><span class="linenos">11</span>    <span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite+aiosqlite:///:memory:&quot;</span><span class="p">,</span> <span class="n">before_send_handler</span><span class="o">=</span><span class="n">async_autocommit_before_send_handler</span>
-</span><span data-line="12"><span class="linenos">12</span><span class="p">)</span>
-</span><span data-line="13"><span class="linenos">13</span><span class="n">plugin</span> <span class="o">=</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-</span><span data-line="14"><span class="linenos">14</span>
-</span><span data-line="15"><span class="linenos">15</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[],</span> <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">plugin</span><span class="p">])</span>
+</span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="4"><span class="linenos"> 4</span>    <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span>
+</span><span data-line="5"><span class="linenos"> 5</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
+</span><span data-line="6"><span class="linenos"> 6</span>    <span class="n">async_autocommit_before_send_handler</span><span class="p">,</span>
+</span><span data-line="7"><span class="linenos"> 7</span><span class="p">)</span>
+</span><span data-line="8"><span class="linenos"> 8</span>
+</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
+</span><span data-line="10"><span class="linenos">10</span>
+</span><span data-line="11"><span class="linenos">11</span><span class="n">config</span> <span class="o">=</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">(</span>
+</span><span data-line="12"><span class="linenos">12</span>    <span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite+aiosqlite:///:memory:&quot;</span><span class="p">,</span> <span class="n">before_send_handler</span><span class="o">=</span><span class="n">async_autocommit_before_send_handler</span>
+</span><span data-line="13"><span class="linenos">13</span><span class="p">)</span>
+</span><span data-line="14"><span class="linenos">14</span><span class="n">plugin</span> <span class="o">=</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="15"><span class="linenos">15</span>
+</span><span data-line="16"><span class="linenos">16</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[],</span> <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">plugin</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
@@ -677,16 +678,21 @@ Sync</label><div class="sd-tab-content docutils">
 <div class="code-block-caption"><span class="caption-text">SQLAlchemy Sync Before Send Handler</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 </span><span data-line="2"><span class="linenos"> 2</span>
-</span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
-</span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span> <span class="n">SQLAlchemySyncConfig</span><span class="p">,</span> <span class="n">sync_autocommit_before_send_handler</span>
-</span><span data-line="5"><span class="linenos"> 5</span>
-</span><span data-line="6"><span class="linenos"> 6</span><span class="n">config</span> <span class="o">=</span> <span class="n">SQLAlchemySyncConfig</span><span class="p">(</span>
-</span><span data-line="7"><span class="linenos"> 7</span>    <span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite:///:memory:&quot;</span><span class="p">,</span>
-</span><span data-line="8"><span class="linenos"> 8</span>    <span class="n">before_send_handler</span><span class="o">=</span><span class="n">sync_autocommit_before_send_handler</span><span class="p">,</span>
-</span><span data-line="9"><span class="linenos"> 9</span><span class="p">)</span>
-</span><span data-line="10"><span class="linenos">10</span><span class="n">plugin</span> <span class="o">=</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-</span><span data-line="11"><span class="linenos">11</span>
-</span><span data-line="12"><span class="linenos">12</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[],</span> <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">plugin</span><span class="p">])</span>
+</span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="4"><span class="linenos"> 4</span>    <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span>
+</span><span data-line="5"><span class="linenos"> 5</span>    <span class="n">SQLAlchemySyncConfig</span><span class="p">,</span>
+</span><span data-line="6"><span class="linenos"> 6</span>    <span class="n">sync_autocommit_before_send_handler</span><span class="p">,</span>
+</span><span data-line="7"><span class="linenos"> 7</span><span class="p">)</span>
+</span><span data-line="8"><span class="linenos"> 8</span>
+</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span>
+</span><span data-line="10"><span class="linenos">10</span>
+</span><span data-line="11"><span class="linenos">11</span><span class="n">config</span> <span class="o">=</span> <span class="n">SQLAlchemySyncConfig</span><span class="p">(</span>
+</span><span data-line="12"><span class="linenos">12</span>    <span class="n">connection_string</span><span class="o">=</span><span class="s2">&quot;sqlite:///:memory:&quot;</span><span class="p">,</span>
+</span><span data-line="13"><span class="linenos">13</span>    <span class="n">before_send_handler</span><span class="o">=</span><span class="n">sync_autocommit_before_send_handler</span><span class="p">,</span>
+</span><span data-line="14"><span class="linenos">14</span><span class="p">)</span>
+</span><span data-line="15"><span class="linenos">15</span><span class="n">plugin</span> <span class="o">=</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="16"><span class="linenos">16</span>
+</span><span data-line="17"><span class="linenos">17</span><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[],</span> <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">plugin</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
@@ -695,19 +701,19 @@ Sync</label><div class="sd-tab-content docutils">
 </section>
 <section id="configuring-the-plugins">
 <h3>Configuring the plugins<a class="headerlink" href="#configuring-the-plugins" title="Permalink to this heading">¶</a></h3>
-<p>Both the <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> and the
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> have an <code class="docutils literal notranslate"><span class="pre">engine_config</span></code>
+<p>Both the <a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig" title="advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> and the
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig" title="advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> have an <code class="docutils literal notranslate"><span class="pre">engine_config</span></code>
 attribute that is used to configure the engine. The <code class="docutils literal notranslate"><span class="pre">engine_config</span></code> attribute is an instance of
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.EngineConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">EngineConfig</span></code></a> and exposes all of the configuration options
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.EngineConfig" title="advanced_alchemy.extensions.litestar.EngineConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">EngineConfig</span></code></a> and exposes all of the configuration options
 available to the SQLAlchemy engine.</p>
-<p>The <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> class and the
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> class also have a
+<p>The <a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig" title="advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> class and the
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig" title="advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> class also have a
 <code class="docutils literal notranslate"><span class="pre">session_config</span></code> attribute that is used to configure the session. This is either an instance of
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.AsyncSessionConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSessionConfig</span></code></a> or
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SyncSessionConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncSessionConfig</span></code></a> depending on the type of config
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.AsyncSessionConfig" title="advanced_alchemy.extensions.litestar.AsyncSessionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSessionConfig</span></code></a> or
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SyncSessionConfig" title="advanced_alchemy.extensions.litestar.SyncSessionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SyncSessionConfig</span></code></a> depending on the type of config
 object. These classes expose all of the configuration options available to the SQLAlchemy session.</p>
-<p>Finally, the <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> class and the
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> class expose configuration
+<p>Finally, the <a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig" title="advanced_alchemy.extensions.litestar.SQLAlchemyAsyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncConfig</span></code></a> class and the
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig" title="advanced_alchemy.extensions.litestar.SQLAlchemySyncConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySyncConfig</span></code></a> class expose configuration
 options to control their behavior.</p>
 <p>Consult the reference documentation for more information.</p>
 </section>
@@ -717,7 +723,7 @@ options to control their behavior.</p>
 <p>The below example is a complete demonstration of use of the init plugin. Readers who are familiar with the prior section
 may note the additional complexity involved in managing the conversion to and from SQLAlchemy objects within the
 handlers. Read on to see how this increased complexity is efficiently handled by the
-<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemySerializationPlugin" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>.</p>
+<a class="reference internal" href="../../../../reference/plugins/sqlalchemy.html#advanced_alchemy.extensions.litestar.SQLAlchemySerializationPlugin" title="advanced_alchemy.extensions.litestar.SQLAlchemySerializationPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>.</p>
 <div class="sd-tab-set docutils">
 <input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
 </input><label class="sd-tab-label" for="sd-tab-item-4">
@@ -728,11 +734,11 @@ Async</label><div class="sd-tab-content docutils">
 </span><span data-line="2"><span class="linenos"> 2</span>
 </span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 </span><span data-line="4"><span class="linenos"> 4</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
-</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
-</span><span data-line="7"><span class="linenos"> 7</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyInitPlugin</span>
+</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="n">SQLAlchemyAsyncConfig</span><span class="p">,</span> <span class="n">SQLAlchemyInitPlugin</span>
+</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+</span><span data-line="8"><span class="linenos"> 8</span>
+</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
 </span><span data-line="10"><span class="linenos">10</span>
 </span><span data-line="11"><span class="linenos">11</span><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
 </span><span data-line="12"><span class="linenos">12</span>    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
@@ -784,11 +790,11 @@ Sync</label><div class="sd-tab-content docutils">
 </span><span data-line="2"><span class="linenos"> 2</span>
 </span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 </span><span data-line="4"><span class="linenos"> 4</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
-</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
-</span><span data-line="7"><span class="linenos"> 7</span>
-</span><span data-line="8"><span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar.plugins.sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span> <span class="n">SQLAlchemySyncConfig</span>
+</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">advanced_alchemy.extensions.litestar</span> <span class="kn">import</span> <span class="n">SQLAlchemyInitPlugin</span><span class="p">,</span> <span class="n">SQLAlchemySyncConfig</span>
+</span><span data-line="6"><span class="linenos"> 6</span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+</span><span data-line="7"><span class="linenos"> 7</span><span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">DeclarativeBase</span><span class="p">,</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+</span><span data-line="8"><span class="linenos"> 8</span>
+</span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">litestar</span> <span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">post</span>
 </span><span data-line="10"><span class="linenos">10</span>
 </span><span data-line="11"><span class="linenos">11</span><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
 </span><span data-line="12"><span class="linenos">12</span>    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
