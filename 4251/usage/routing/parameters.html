@@ -110,10 +110,10 @@
 </form><div class="nav-versions">
     <button type="button" aria-label="Versions">
       <span class="md:hidden">Versions</span>
-      <span class="hidden md:inline">latest</span>
+      <span class="hidden md:inline">3</span>
       <i class="i-lucide chevron-down"></i>
     </button>
-    <div class="nav-versions-choices"><ul><li><a href="/latest">latest</a></li><li><a href="/main">development</a></li><li><a href="/3-dev">v3</a></li><li><a href="/2">v2</a></li><li><a href="/1">v1</a></li></ul></div>
+    <div class="nav-versions-choices"><ul><li><a href="/latest">latest</a></li><li><a href="/main">v3 (development)</a></li><li><a href="/2">v2</a></li><li><a href="/1">v1</a></li></ul></div>
   </div><div class="sy-head-socials">
 <a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)">
   <iconify-icon icon="prime:twitter"></iconify-icon>
@@ -965,7 +965,7 @@ will be used for the value of the <code class="docutils literal notranslate"><sp
 <p>Using <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a> to modify the OpenAPI schema generated for query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.13)"><span class="xref std std-term">parameters</span></a> that
 are enums can have surprising results. Since only one schema is generated per enum, calling <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a>
 multiple times with distinct <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.description" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">description</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.13)"><span class="xref std std-term">arguments</span></a> for the same enum
-causes descriptions to be overwritten. This can be avoided by making use of the
+causes descriptions to be overwritten. This can be avoided by using the
 <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.schema_component_key" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">schema_component_key</span></code></a> parameter so that separate schemas are generated:</p>
 <div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Query parameters with the same enum type and different descriptions</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
@@ -985,18 +985,22 @@ causes descriptions to be overwritten. This can be avoided by making use of the
 </span><span data-line="14">
 </span><span data-line="15"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 </span><span data-line="16"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span>
-</span><span data-line="17">    <span class="n">q1</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">MyEnum</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is q1&quot;</span><span class="p">,</span> <span class="n">schema_component_key</span><span class="o">=</span><span class="s2">&quot;q1&quot;</span><span class="p">)],</span> <span class="n">q2</span><span class="p">:</span> <span class="n">MyEnum</span>
-</span><span data-line="18"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-</span><span data-line="19">
-</span><span data-line="20">
-</span><span data-line="21"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">])</span>
+</span><span data-line="17">    <span class="n">q1</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">MyEnum</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is q1&quot;</span><span class="p">,</span> <span class="n">schema_component_key</span><span class="o">=</span><span class="s2">&quot;q1&quot;</span><span class="p">)],</span>
+</span><span data-line="18">    <span class="n">q2</span><span class="p">:</span> <span class="n">MyEnum</span><span class="p">,</span>
+</span><span data-line="19">    <span class="n">q3</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">MyEnum</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is q3&quot;</span><span class="p">,</span> <span class="n">schema_component_key</span><span class="o">=</span><span class="s2">&quot;q3&quot;</span><span class="p">)],</span>
+</span><span data-line="20"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="21">
+</span><span data-line="22">
+</span><span data-line="23"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
 <p>In the above example, the schema for the <code class="docutils literal notranslate"><span class="pre">q1</span></code> query parameter references a “q1” schema component with a description of
 “This is q1”. The schema for the <code class="docutils literal notranslate"><span class="pre">q2</span></code> query parameter references a “MyEnum” schema component with a description of “My
-enum accepts two values”. If we did not pass a <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.schema_component_key" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">schema_component_key</span></code></a> argument for
-<a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a>, then both schemas for <code class="docutils literal notranslate"><span class="pre">q1</span></code> and <code class="docutils literal notranslate"><span class="pre">q2</span></code> would reference the same “MyEnum” schema component
+enum accepts two values”. The schema for the <code class="docutils literal notranslate"><span class="pre">q3</span></code> query parameter references a “q3” schema component with a
+description of “This is q3”.</p>
+<p>If we did not pass <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.schema_component_key" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">schema_component_key</span></code></a> arguments for <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a> for
+<code class="docutils literal notranslate"><span class="pre">q1</span></code> and <code class="docutils literal notranslate"><span class="pre">q3</span></code>, then the schemas for all three query parameters would reference the same “MyEnum” schema component
 with the description “This is q1”.</p>
 </section>
 <section id="header-and-cookie-parameters">
@@ -1252,5 +1256,5 @@ is to ensure simplicity - otherwise parameter resolution becomes very difficult 
       <script src="../../_static/design-tabs.js?v=f930bc37"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
       <script src="../../_static/shibuya.js?v=c477d091"></script>
-      <script src="../../_static/versioning.js?v=bc681eff"></script></body>
+      <script src="../../_static/versioning.js?v=9ab184b9"></script></body>
 </html>
