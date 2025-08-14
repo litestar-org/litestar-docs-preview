@@ -487,7 +487,7 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#type-coercion">Type coercion</a></li>
 <li><a class="reference internal" href="#alternative-names-and-constraints">Alternative names and constraints</a></li>
-<li><a class="reference internal" href="#documentation-for-enum-query-parameters">Documentation for enum query parameters</a></li>
+<li><a class="reference internal" href="#documenting-enum-query-parameters">Documenting enum query parameters</a></li>
 <li><a class="reference internal" href="#header-and-cookie-parameters">Header and Cookie Parameters</a></li>
 <li><a class="reference internal" href="#layered-parameters">Layered Parameters</a></li>
 </ul>
@@ -960,12 +960,12 @@ will be used for the value of the <code class="docutils literal notranslate"><sp
 </div>
 <p>In this case, <code class="docutils literal notranslate"><span class="pre">param</span></code> is validated to be an <em>integer larger than 5</em>.</p>
 </section>
-<section id="documentation-for-enum-query-parameters">
-<h2>Documentation for enum query parameters<a class="headerlink" href="#documentation-for-enum-query-parameters" title="Link to this heading">¶</a></h2>
-<p>Using <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a> to modify the OpenAPI schema generated for query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.13)"><span class="xref std std-term">parameters</span></a> that
-are enums can have surprising results. Since only one schema is generated per enum, calling <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter" title="litestar.params.Parameter"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameter()</span></code></a>
-multiple times with distinct <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.description" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">description</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.13)"><span class="xref std std-term">arguments</span></a> for the same enum
-causes descriptions to be overwritten. This can be avoided by using the
+<section id="documenting-enum-query-parameters">
+<h2>Documenting enum query parameters<a class="headerlink" href="#documenting-enum-query-parameters" title="Link to this heading">¶</a></h2>
+<p>By default, the OpenAPI schema generated for enum query <a class="reference external" href="https://docs.python.org/3/glossary.html#term-parameter" title="(in Python v3.13)"><span class="xref std std-term">parameters</span></a> uses the enum’s docstring for the
+description section of the schema. The description can be changed with the <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.description" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">description</span></code></a>
+parameter of the <a class="reference internal" href="#the-parameter-function">the parameter function</a>, but doing so can overwrite the descriptions of other query parameters of the
+same enum because only one schema is generated per enum. This can be avoided by using the
 <a class="reference internal" href="../../reference/params.html#litestar.params.Parameter.params.schema_component_key" title="litestar.params.Parameter"><code class="xref py py-paramref docutils literal notranslate"><span class="pre">schema_component_key</span></code></a> parameter so that separate schemas are generated:</p>
 <div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Query parameters with the same enum type and different descriptions</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
