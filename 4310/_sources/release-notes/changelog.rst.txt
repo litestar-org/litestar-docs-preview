@@ -83,3 +83,34 @@
         - :meth:`~litestar.response.Template.to_asgi_response`
 
         Existing code still using ``encoded_headers`` should be migrated to using the ``headers`` parameter instead.
+
+    .. change:: Remove deprecated ``LitestarType``
+        :type: feature
+        :pr: 4312
+        :breaking:
+
+        Remove the deprecated ``litestar.types.internal_types.LitestarType`` type alias. In its stead,
+        ``type[Litestar]`` can be used.
+
+    .. change:: Remove deprecated ``TemplateContext``
+        :type: feature
+        :pr: 4313
+        :breaking:
+
+        Remove the deprecated ``litestar.template.base.TemplateContext`` type. Its usages should be replaced with
+        :class:`collections.abc.Mapping`.
+
+    .. change:: Remove deprecated ``ASGIResponse.encoded_headers`` property
+        :type: feature
+        :pr: 4314
+        :breaking:
+
+        Remove the deprecated ``ASGIResponse.encoded_headers`` property. Instead,
+        :meth:`~litestar.response.base.ASGIResponse.encode_headers` should be used.
+
+    .. change:: Remove deprecated ``pydantic_get_unwrapped_annotation_and_type_hints``
+        :type: feature
+        :pr: 4315
+        :breaking:
+
+        Remove the deprecated ``pydantic_get_unwrapped_annotation_and_type_hints`` function.
