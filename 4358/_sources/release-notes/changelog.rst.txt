@@ -162,6 +162,14 @@
         Remove the deprecated ``litestar.contrib.pydantic`` module. Code still using imports
         from this module should switch to using ``litestar.plugins.pydantic``.
 
+    .. change:: Remove deprecated file ``litestar/contrib/minijnja.py``
+        :type: feature
+        :breaking:
+        :pr: 4358
+        :issue: 4358
+
+        Remove the deprecated file ``litestar/contrib/minijnja.py``.
+
     .. change:: Add ``round_trip`` parameter to ``PydanticPlugin``
         :type: feature
         :pr: 4350
