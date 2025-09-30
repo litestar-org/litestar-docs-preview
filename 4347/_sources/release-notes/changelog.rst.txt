@@ -188,3 +188,11 @@
 
         Remove the deprecated ``litestar.contrib.minijinja.minijinja_from_state`` function.
         Instead use a callable that receives the minijinja ``State`` object as first argument.
+
+    .. change:: Change ``Optional`` to ``NotRequired`` for pydantic fields with ``default_factory``
+        :type: bugfix
+        :pr: 4347
+        :issue: 4294
+
+        Now ``pydantic`` fields with ``default_factory`` displayed as not nullable and not required.
+        Before it was nullable and not required.
