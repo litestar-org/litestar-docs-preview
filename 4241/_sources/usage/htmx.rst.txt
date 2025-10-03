@@ -8,10 +8,13 @@ HTMX is a JavaScript library that gives you access to AJAX, CSS Transitions, Web
 This section assumes that you have prior knowledge of HTMX.
 If you want to learn HTMX, we recommend consulting their `official tutorial <https://htmx.org/docs>`_.
 
+
 HTMXPlugin
 ------------
 
 a Litestar plugin ``HTMXPlugin`` is available to easily configure the default request class for all Litestar routes.
+
+It can be installed via the ``litestar[htmx]`` package extra.
 
 .. code-block:: python
 
@@ -112,7 +115,7 @@ an :class:`~litestar.plugins.htmx.HTMXTemplate` response:
 
 .. note::
     - Return type is litestar's ``Template`` and not ``HTMXTemplate``.
-    - ``trigger_event``, ``params``, and ``after parameters`` are linked to one another.
+    - ``trigger_event``, ``params``, and ``after`` parameters are linked to one another.
     - If you are triggering an event then ``after`` is required and it must be one of ``receive``, ``settle``, or ``swap``.
 
 HTMX provides two types of responses - one that doesn't allow changes to the DOM and one that does.
