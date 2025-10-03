@@ -269,7 +269,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/piccolo.html">piccolo_orm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/sqlalchemy/index.html">sqlalchemy</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../reference/contrib/sqlalchemy/plugins.html">plugins</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../reference/contrib/sqlalchemy/repository.html">repository</a></li>
@@ -471,6 +470,7 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
 <li><a class="reference internal" href="#3.0.0">3.0.0</a><ul>
 <li><a class="reference internal" href="#3.0.0-feature">Features</a></li>
+<li><a class="reference internal" href="#3.0.0-bugfix">Bugfixes</a></li>
 </ul>
 </li>
 </ul>
@@ -658,6 +658,70 @@ from this module should switch to using <code class="docutils literal notranslat
 <p>Remove the deprecated <code class="docutils literal notranslate"><span class="pre">litestar.contrib.pydantic</span></code> module. Code still using imports
 from this module should switch to using <code class="docutils literal notranslate"><span class="pre">litestar.plugins.pydantic</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4306">https://github.com/litestar-org/litestar/issues/4306</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4339">https://github.com/litestar-org/litestar/pull/4339</a></span></p>
+</div>
+</dd>
+<dt>Remove deprecated module <code class="docutils literal notranslate"><span class="pre">litestar/contrib/minijnja</span></code><a class="headerlink reference internal" href="#3.0.0-remove deprecated module" id="3.0.0-remove deprecated module">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Remove the deprecated module <code class="docutils literal notranslate"><span class="pre">litestar.contrib.minijnja</span></code>. This module was created with a typo in its name
+(<cite>minijnja</cite> instead of <cite>minijinja</cite>). Instead <code class="docutils literal notranslate"><span class="pre">litestar.contrib.minijinja</span></code> should be used.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4357">https://github.com/litestar-org/litestar/issues/4357</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4357">https://github.com/litestar-org/litestar/pull/4357</a></span></p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">round_trip</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">PydanticPlugin</span></code><a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>New <code class="docutils literal notranslate"><span class="pre">round_trip:</span> <span class="pre">bool</span></code> parameter
+to <code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticPlugin</span></code> allows
+serializing types like <code class="docutils literal notranslate"><span class="pre">pydanctic.Json</span></code> correctly.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4349">https://github.com/litestar-org/litestar/issues/4349</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4350">https://github.com/litestar-org/litestar/pull/4350</a></span></p>
+</div>
+</dd>
+<dt>Remove deprecated <code class="docutils literal notranslate"><span class="pre">litestar.contrib.minijinja.minijinja_from_state</span></code> function<a class="headerlink reference internal" href="#3.0.0-remove deprecated" id="3.0.0-remove deprecated">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Remove the deprecated <code class="docutils literal notranslate"><span class="pre">litestar.contrib.minijinja.minijinja_from_state</span></code> function.
+Instead use a callable that receives the minijinja <code class="docutils literal notranslate"><span class="pre">State</span></code> object as first argument.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4356">https://github.com/litestar-org/litestar/issues/4356</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4355">https://github.com/litestar-org/litestar/pull/4355</a></span></p>
+</div>
+</dd>
+<dt>Remove deprecated <code class="docutils literal notranslate"><span class="pre">litestar.contrib.piccolo</span></code> module<a class="headerlink reference internal" href="#3.0.0-remove deprecated" id="3.0.0-remove deprecated">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Use <code class="docutils literal notranslate"><span class="pre">litestar[piccolo]</span></code> extra installation target
+and <code class="docutils literal notranslate"><span class="pre">litestar_piccolo</span></code> plugin instead:
+<a class="reference external" href="https://github.com/litestar-org/litestar-piccolo">https://github.com/litestar-org/litestar-piccolo</a></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4364">https://github.com/litestar-org/litestar/issues/4364</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4363">https://github.com/litestar-org/litestar/pull/4363</a></span></p>
+</div>
+</dd>
+<dt>Zero cost excluded middlewares<a class="headerlink reference internal" href="#3.0.0-zero cost excluded middlewares" id="3.0.0-zero cost excluded middlewares">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Middlewares inheriting from <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.base.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>
+will now have zero runtime cost when they are excluded e.g. via the <code class="docutils literal notranslate"><span class="pre">scope</span></code> or
+<code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> options.</p>
+<p>Previously, the base middleware was always being invoked for every request,
+evaluating the exclusion criteria, and then calling the user defined middleware
+functions. If a middleware had defined <code class="docutils literal notranslate"><span class="pre">scopes</span> <span class="pre">=</span> <span class="pre">(ScopeType.HTTP,)</span></code>, it would
+still be called for <em>every</em> request, regardless of the scope type. Only for
+requests with the type <code class="docutils literal notranslate"><span class="pre">HTTP</span></code>, it would then call the user’s function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This behaviour is still true for the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code></p>
+</div>
+<p>With <em>zero cost exclusion</em>, the exclusion is being evaluated statically. At app
+creation time, when route handlers are registered and their middleware stacks
+are being built, a middleware that is to be excluded will simply not be included
+in the stack.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even though this change is marked as breaking, no runtime behaviour
+difference is expected. Some test cases may break though if they relied on
+the fact that the middleware wrapper created by <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code> was
+always being called</p>
+</div>
+<p>References: </p>
+</div>
+</dd>
+</dl>
+</section>
+<section id="3.0.0-bugfix">
+<h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
+<dl>
+<dt>Change <code class="docutils literal notranslate"><span class="pre">Optional</span></code> to <code class="docutils literal notranslate"><span class="pre">NotRequired</span></code> for pydantic fields with <code class="docutils literal notranslate"><span class="pre">default_factory</span></code><a class="headerlink reference internal" href="#3.0.0-change" id="3.0.0-change">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Now, in the OpenAPI schema, <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> fields with <code class="docutils literal notranslate"><span class="pre">default_factory</span></code> are displayed as non-null and not required.
+Previously, this fields was nullable and not required.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4294">https://github.com/litestar-org/litestar/issues/4294</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4347">https://github.com/litestar-org/litestar/pull/4347</a></span></p>
 </div>
 </dd>
 </dl>
