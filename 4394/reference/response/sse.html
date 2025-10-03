@@ -467,6 +467,7 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#litestar.response.sse.async_iterator_to_generator"><code class="docutils literal notranslate"><span class="pre">async_iterator_to_generator()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.response.sse.ServerSentEventMessage"><code class="docutils literal notranslate"><span class="pre">ServerSentEventMessage</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.response.sse.ServerSentEventMessage.__init__"><code class="docutils literal notranslate">__init__()</span></code></a></li>
 </ul>
@@ -535,6 +536,20 @@ data-aria-dark="Switch to auto color mode">
         <article class="yue" role="main">
           <section id="module-litestar.response.sse">
 <span id="sse-server-sent-events"></span><h1>SSE (Server Sent Events)<a class="headerlink" href="#module-litestar.response.sse" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.response.sse.async_iterator_to_generator">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.response.sse.</span></span><span class="sig-name descname"><span class="pre">async_iterator_to_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">async_iterator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.AsyncIterator" title="(in Python v3.13)"><span class="pre">AsyncIterator</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.AsyncIterable" title="(in Python v3.13)"><span class="pre">AsyncIterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.AsyncGenerator" title="(in Python v3.13)"><span class="pre">AsyncGenerator</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.response.sse.async_iterator_to_generator" title="Link to this definition">¶</a></dt>
+<dd><p>Convert an async iterator or iterable to an async generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="target" id="litestar.response.sse.async_iterator_to_generator.params.async_iterator"></span><strong>async_iterator</strong><a class="paramlink headerlink reference internal" href="#litestar.response.sse.async_iterator_to_generator.params.async_iterator">¶</a> – An async iterator or iterable.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An async generator.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.response.sse.ServerSentEventMessage">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.response.sse.</span></span><span class="sig-name descname"><span class="pre">ServerSentEventMessage</span></span><a class="headerlink" href="#litestar.response.sse.ServerSentEventMessage" title="Link to this definition">¶</a></dt>
