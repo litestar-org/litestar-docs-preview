@@ -260,11 +260,9 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/connection.html">connection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/contrib/index.html">contrib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/contrib/htmx.html">HTMX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/contrib/opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/contrib/piccolo.html">piccolo_orm</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/controller.html">controller</a></li>
@@ -400,6 +398,14 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="tutorials/todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/dto-tutorial/index.html">Data Transfer Object Tutorial</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tutorials/dto-tutorial/01-simple-dto-exclude.html">Our first DTO</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorials/dto-tutorial/02-nested-exclude.html">Excluding from nested models</a></li>
@@ -514,8 +520,8 @@ data-aria-dark="Switch to auto color mode">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
 <section id="supported-python-versions">
 <h3>Supported Python Versions<a class="headerlink" href="#supported-python-versions" title="Link to this heading">¶</a></h3>
-<p>The lowest currently supported version is Python 3.8.
-At a minimum you will need Python 3.8 for code changes and 3.12 if you plan on doing documentation building / changes.</p>
+<p>The lowest currently supported version is Python 3.9.
+At a minimum you will need Python 3.9 for code changes and 3.13 if you plan on doing documentation building / changes.</p>
 <p>You can use various tools to manage multiple Python versions on your system including:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> and <a class="reference external" href="https://github.com/pyenv-win/pyenv-win">pyenv-win for Windows</a></p></li>
@@ -640,7 +646,7 @@ enforce type safety. You can run them with:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">type-check</span></code> to run both</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">lint</span></code> to run pre-commit hooks and type checkers.</p></li>
 </ul>
-<p>Our type checkers are run on Python 3.8 in CI, so you should make sure to run them on the same version locally as well.</p>
+<p>Our type checkers are run on Python 3.9 in CI, so you should make sure to run them on the same version locally as well.</p>
 </section>
 </section>
 <section id="project-documentation">

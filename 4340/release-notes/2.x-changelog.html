@@ -260,11 +260,9 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/connection.html">connection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/htmx.html">HTMX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/piccolo.html">piccolo_orm</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
@@ -398,6 +396,14 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/1-accessing-the-list.html">Accessing the list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/dto-tutorial/index.html">Data Transfer Object Tutorial</a><ul>
@@ -2470,7 +2476,7 @@ used by a route handler.</p>
 </dd>
 <dt>HTMX: Missing default values for <code class="docutils literal notranslate"><span class="pre">receive</span></code> and <code class="docutils literal notranslate"><span class="pre">send</span></code> parameters of <code class="docutils literal notranslate"><span class="pre">HTMXRequest</span></code><a class="headerlink reference internal" href="#2.0.0-htmx: missing default values for" id="2.0.0-htmx: missing default values for">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Add missing default values for the <code class="docutils literal notranslate"><span class="pre">receive</span></code> and <code class="docutils literal notranslate"><span class="pre">send</span></code> parameters of
-<code class="xref py py-class docutils literal notranslate"><span class="pre">HTMXRequest</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">litestar.contrib.htmx.request.HTMXRequest</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2145">https://github.com/litestar-org/litestar/pull/2145</a></span></p>
 </div>
 </dd>
@@ -2743,7 +2749,7 @@ foreign key columns are nullable.</p>
 </dd>
 <dt>DTO: Piccolo ORM<a class="headerlink reference internal" href="#2.0.0beta3-dto: piccolo orm" id="2.0.0beta3-dto: piccolo orm">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Add support for piccolo ORM with the
-<a class="reference internal" href="../reference/contrib/piccolo.html#litestar.contrib.piccolo.PiccoloDTO" title="litestar.contrib.piccolo.PiccoloDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">PiccoloDTO</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">litestar.contrib.piccolo.PiccoloDTO</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1896">https://github.com/litestar-org/litestar/pull/1896</a></span></p>
 </div>
 </dd>
@@ -3815,8 +3821,8 @@ in a <code class="docutils literal notranslate"><span class="pre">Controller</sp
 <h3>Features<a class="headerlink" href="#2.0.0alpha5-feature" title="Link to this heading">¶</a></h3>
 <dl>
 <dt>Pass template context to HTMX template response<a class="headerlink reference internal" href="#2.0.0alpha5-pass template context to htmx template response" id="2.0.0alpha5-pass template context to htmx template response">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Pass the template context to the <code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code> returned by
-<a class="reference internal" href="../reference/contrib/htmx.html#module-litestar.contrib.htmx.response" title="litestar.contrib.htmx.response"><code class="xref py py-class docutils literal notranslate"><span class="pre">htmx.Response</span></code></a>.</p>
+<p>Pass the template context to the <code class="docutils literal notranslate"><span class="pre">Template</span></code> returned by
+<code class="docutils literal notranslate"><span class="pre">htmx.Response</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1488">https://github.com/litestar-org/litestar/pull/1488</a></span></p>
 </div>
 </dd>
@@ -4073,7 +4079,7 @@ desired affect, as loggers would still be on the <code class="docutils literal n
 providing support for managed synchronous and asynchronous sessions.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>SQLAlchemy documentation was available in v2 but SQLAlchemy support was removed in v3.</p>
+<p>SQLAlchemy documentation was available in v2 but SQLAlchemy support was moved into a standalone library in v3.</p>
 </div>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/1395">https://github.com/litestar-org/litestar/pull/1395</a></span></p>
 </div>

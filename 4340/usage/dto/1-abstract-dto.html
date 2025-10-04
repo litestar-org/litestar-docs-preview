@@ -260,11 +260,9 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/connection.html">connection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/htmx.html">HTMX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/mako.html">mako</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/opentelemetry.html">opentelemetry</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/piccolo.html">piccolo_orm</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
@@ -398,6 +396,14 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/1-accessing-the-list.html">Accessing the list</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../tutorials/dto-tutorial/index.html">Data Transfer Object Tutorial</a><ul>
@@ -559,7 +565,7 @@ a DTO for use with a SQLAlchemy model:</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;14e2c208-63aa-405f-b32a-7990523e10ab&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
+</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;aeda8181-a538-43d6-b47b-ffa39837a9a8&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -621,7 +627,7 @@ configuration.</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;1b80c71e-6dc4-4202-b404-062948d5ba2b&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;f53f646b-63a1-44bd-8df1-c47c151911e5&quot;</span>,<span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -767,7 +773,7 @@ type parameter of <code class="docutils literal notranslate"><span class="pre">a
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;5651f9e9-c138-4630-a876-2ccec7e1d693&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;created_at&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;50fb2564-87d0-46bd-a64f-7e65a0ee72b9&quot;</span>,<span class="s2">&quot;userName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -812,7 +818,7 @@ type parameter of <code class="docutils literal notranslate"><span class="pre">a
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span>,<span class="s2">&quot;password&quot;</span>:<span class="s2">&quot;xyz&quot;</span>,<span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;2023-04-24T00:00:00Z&quot;</span><span class="o">}</span>
-</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;d234ba62-1dd0-46f6-adde-ee7c33395f66&quot;</span>,<span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
+</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;createdAt&quot;</span>:<span class="s2">&quot;0001-01-01T00:00:00&quot;</span>,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;edb566cc-6777-4934-883e-bf8da8b65fa3&quot;</span>,<span class="s2">&quot;firstName&quot;</span>:<span class="s2">&quot;Litestar User&quot;</span><span class="o">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -1023,7 +1029,7 @@ handler.</p>
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="w"> </span><span class="s2">&quot;peter@example.com&quot;</span>,<span class="w"> </span><span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
-</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;peter@example.com&quot;</span>,<span class="s2">&quot;age&quot;</span>:41,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;292e6d80-12bd-4e01-8eea-82bc9e0b9331&quot;</span><span class="o">}</span>
+</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;peter@example.com&quot;</span>,<span class="s2">&quot;age&quot;</span>:41,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;34100b3d-edf5-4b4b-832e-35221fb5c684&quot;</span><span class="o">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -1069,7 +1075,7 @@ type of the data that it will contain, and provides useful methods for interacti
 <div class="admonition">
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/users<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="w"> </span><span class="s2">&quot;email&quot;</span>:<span class="w"> </span><span class="s2">&quot;peter@example.com&quot;</span>,<span class="w"> </span><span class="s2">&quot;age&quot;</span>:41<span class="o">}</span>
-</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;peter@example.com&quot;</span>,<span class="s2">&quot;age&quot;</span>:41,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;cc600e01-e62b-41ee-b149-724ace90ffc7&quot;</span><span class="o">}</span>
+</span><span data-line="2"><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;Peter&quot;</span>,<span class="s2">&quot;email&quot;</span>:<span class="s2">&quot;peter@example.com&quot;</span>,<span class="s2">&quot;age&quot;</span>:41,<span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;70071ada-1dda-404d-97c5-567e72c4c15c&quot;</span><span class="o">}</span>
 </span></pre></div>
 </div>
 </div>
