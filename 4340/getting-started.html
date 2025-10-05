@@ -171,6 +171,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="usage/channels.html">Channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/cli.html">CLI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage/databases/index.html">Databases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage/databases/sqlalchemy/index.html">SQLAlchemy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="usage/databases/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="usage/databases/sqlalchemy/plugins/index.html">Plugins</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="usage/databases/piccolo.html">Piccolo ORM</a></li>
 </ul>
 </li>
@@ -419,6 +424,20 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/01-modelling-and-features.html">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/01-modelling-and-features.html#modelling">Modelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/01-modelling-and-features.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/02-repository-introduction.html#working-with-bulk-data-operations">Working with Bulk Data Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/02-repository-introduction.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/03-repository-controller.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/04-repository-other.html#slug-fields">Slug Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorials/repository-tutorial/04-repository-other.html#full-code">Full Code</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -524,7 +543,7 @@ data-aria-dark="Switch to auto color mode">
 <dt><a class="reference internal" href="usage/middleware/builtin-middleware.html#zstd"><span class="std std-ref">Zstd Compression Middleware</span></a></dt><dd><blockquote>
 <div><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[zstd]'</span></code></p>
 </div></blockquote>
-<dl>
+<dl class="simple">
 <dt><a class="reference internal" href="usage/middleware/builtin-middleware.html#client-side-sessions"><span class="std std-ref">Cookie Based Sessions</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[cryptography]'</span></code></p>
 </dd>
 <dt><a class="reference internal" href="usage/security/jwt.html"><span class="doc">JWT</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[jwt]'</span></code></p>
@@ -539,15 +558,7 @@ data-aria-dark="Switch to auto color mode">
 </dd>
 <dt><a class="reference internal" href="usage/metrics/open-telemetry.html"><span class="doc">Open Telemetry Instrumentation</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[opentelemetry]'</span></code></p>
 </dd>
-<dt>SQLAlchemy (via Advanced Alchemy)</dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[sqlalchemy]'</span></code></p>
-</dd>
-<dt><a class="reference internal" href="usage/cli.html"><span class="doc">CLI</span></a></dt><dd><div class="deprecated">
-<p class="sd-card-text"><span class="versionmodified deprecated">Deprecated since version 2.1.1: </span>The <code class="docutils literal notranslate"><span class="pre">litestar</span></code> base installation now includes the CLI dependencies and this group is no longer required
-to use the CLI.
-If you need the optional CLI dependencies, install the <code class="docutils literal notranslate"><span class="pre">standard</span></code> group instead.
-<strong>Will be removed in 3.0</strong></p>
-</div>
-<p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">litestar[cli]</span></code></p>
+<dt><a class="reference internal" href="usage/databases/sqlalchemy/index.html"><span class="doc">SQLAlchemy</span></a> (via <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/">Advanced-Alchemy</a>)</dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[sqlalchemy]'</span></code></p>
 </dd>
 <dt><a class="reference internal" href="usage/templating.html"><span class="doc">Jinja Templating</span></a></dt><dd><p class="sd-card-text"><code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'litestar[jinja]'</span></code></p>
 </dd>

@@ -171,6 +171,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../usage/channels.html">Channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/cli.html">CLI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/databases/index.html">Databases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/databases/sqlalchemy/index.html">SQLAlchemy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/databases/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/databases/sqlalchemy/plugins/index.html">Plugins</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../usage/databases/piccolo.html">Piccolo ORM</a></li>
 </ul>
 </li>
@@ -419,6 +424,20 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html#modelling">Modelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html#working-with-bulk-data-operations">Working with Bulk Data Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/03-repository-controller.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html#slug-fields">Slug Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html#full-code">Full Code</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -535,7 +554,7 @@ data-aria-dark="Switch to auto color mode">
 <span id="openapi"></span><h1>openapi<a class="headerlink" href="#module-litestar.openapi" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.openapi.OpenAPIConfig">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.openapi.</span></span><span class="sig-name descname"><span class="pre">OpenAPIConfig</span></span><a class="headerlink" href="#litestar.openapi.OpenAPIConfig" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.openapi.</span></span><span class="sig-name descname"><span class="pre">OpenAPIConfig</span></span><a class="reference internal" href="../../_modules/litestar/openapi/config.html#OpenAPIConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.openapi.OpenAPIConfig" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Configuration for OpenAPI.</p>
 <p>To enable OpenAPI schema generation and serving, pass an instance of this class to the
@@ -660,7 +679,7 @@ http method and path components.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.openapi.OpenAPIConfig.to_openapi_schema">
-<span class="sig-name descname"><span class="pre">to_openapi_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="spec.html#litestar.openapi.spec.OpenAPI" title="litestar.openapi.spec.open_api.OpenAPI"><span class="pre">OpenAPI</span></a></span></span><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.to_openapi_schema" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_openapi_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="spec.html#litestar.openapi.spec.OpenAPI" title="litestar.openapi.spec.open_api.OpenAPI"><span class="pre">OpenAPI</span></a></span></span><a class="reference internal" href="../../_modules/litestar/openapi/config.html#OpenAPIConfig.to_openapi_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.openapi.OpenAPIConfig.to_openapi_schema" title="Link to this definition">¶</a></dt>
 <dd><p>Return an <code class="docutils literal notranslate"><span class="pre">OpenAPI</span></code> instance from the values stored in <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -711,7 +730,7 @@ http method and path components.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.openapi.ResponseSpec">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.openapi.</span></span><span class="sig-name descname"><span class="pre">ResponseSpec</span></span><a class="headerlink" href="#litestar.openapi.ResponseSpec" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.openapi.</span></span><span class="sig-name descname"><span class="pre">ResponseSpec</span></span><a class="reference internal" href="../../_modules/litestar/openapi/datastructures.html#ResponseSpec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.openapi.ResponseSpec" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Container type of additional responses.</p>
 <dl class="py method">

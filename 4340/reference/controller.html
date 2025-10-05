@@ -171,6 +171,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../usage/channels.html">Channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/cli.html">CLI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/databases/index.html">Databases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/databases/sqlalchemy/index.html">SQLAlchemy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../usage/databases/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../usage/databases/sqlalchemy/plugins/index.html">Plugins</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/databases/piccolo.html">Piccolo ORM</a></li>
 </ul>
 </li>
@@ -419,6 +424,20 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/01-modelling-and-features.html">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/01-modelling-and-features.html#modelling">Modelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/01-modelling-and-features.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/02-repository-introduction.html#working-with-bulk-data-operations">Working with Bulk Data Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/02-repository-introduction.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/03-repository-controller.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/04-repository-other.html#slug-fields">Slug Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/04-repository-other.html#full-code">Full Code</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -530,7 +549,7 @@ data-aria-dark="Switch to auto color mode">
 <span id="controller"></span><h1>controller<a class="headerlink" href="#module-litestar.controller" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.controller.Controller">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.controller.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="headerlink" href="#litestar.controller.Controller" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.controller.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><a class="reference internal" href="../_modules/litestar/controller.html#Controller"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.controller.Controller" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>The Litestar Controller class.</p>
 <p>Subclass this class to create ‘view’ like components and utilize OOP.</p>
@@ -662,7 +681,7 @@ handlers under the controller.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.controller.Controller.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.controller.Controller.__init__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/litestar/controller.html#Controller.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.controller.Controller.__init__" title="Link to this definition">¶</a></dt>
 <dd><p>Initialize a controller.</p>
 <p>Should only be called by routers as part of controller registration.</p>
 </dd></dl>
@@ -720,7 +739,7 @@ error response is returned.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.controller.Controller.get_route_handlers">
-<span class="sig-name descname"><span class="pre">get_route_handlers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="handlers.html#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><span class="pre">BaseRouteHandler</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#litestar.controller.Controller.get_route_handlers" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_route_handlers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="handlers.html#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><span class="pre">BaseRouteHandler</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/litestar/controller.html#Controller.get_route_handlers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.controller.Controller.get_route_handlers" title="Link to this definition">¶</a></dt>
 <dd><p>Get a controller’s route handlers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -731,7 +750,7 @@ error response is returned.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.controller.Controller.validate_route_handlers">
-<span class="sig-name descname"><span class="pre">validate_route_handlers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_handlers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="handlers.html#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><span class="pre">BaseRouteHandler</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.controller.Controller.validate_route_handlers" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">validate_route_handlers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_handlers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="handlers.html#litestar.handlers.BaseRouteHandler" title="litestar.handlers.base.BaseRouteHandler"><span class="pre">BaseRouteHandler</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/litestar/controller.html#Controller.validate_route_handlers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.controller.Controller.validate_route_handlers" title="Link to this definition">¶</a></dt>
 <dd><p>Validate that the combination of path and decorator method or type are unique on the controller.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

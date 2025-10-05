@@ -171,6 +171,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../usage/channels.html">Channels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/cli.html">CLI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/databases/index.html">Databases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/databases/sqlalchemy/index.html">SQLAlchemy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/databases/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/databases/sqlalchemy/plugins/index.html">Plugins</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../usage/databases/piccolo.html">Piccolo ORM</a></li>
 </ul>
 </li>
@@ -419,6 +424,20 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html#modelling">Modelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/01-modelling-and-features.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html#working-with-bulk-data-operations">Working with Bulk Data Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/02-repository-introduction.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/03-repository-controller.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html#slug-fields">Slug Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorials/repository-tutorial/04-repository-other.html#full-code">Full Code</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -505,12 +524,12 @@ data-aria-dark="Switch to auto color mode">
 <span id="picologging"></span><h1>picologging<a class="headerlink" href="#module-litestar.logging.picologging" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="litestar.logging.picologging.QueueListenerHandler">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.logging.picologging.</span></span><span class="sig-name descname"><span class="pre">QueueListenerHandler</span></span><a class="headerlink" href="#litestar.logging.picologging.QueueListenerHandler" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">litestar.logging.picologging.</span></span><span class="sig-name descname"><span class="pre">QueueListenerHandler</span></span><a class="reference internal" href="../../_modules/litestar/logging/picologging.html#QueueListenerHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.logging.picologging.QueueListenerHandler" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://microsoft.github.io/picologging/handlers.html#picologging.handlers.QueueHandler" title="(in picologging)"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a></p>
 <p>Configure queue listener and handler to support non-blocking logging configuration.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="litestar.logging.picologging.QueueListenerHandler.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handlers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#litestar.logging.picologging.QueueListenerHandler.__init__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handlers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/litestar/logging/picologging.html#QueueListenerHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.logging.picologging.QueueListenerHandler.__init__" title="Link to this definition">¶</a></dt>
 <dd><p>Initialize <code class="docutils literal notranslate"><span class="pre">QueueListenerHandler</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
