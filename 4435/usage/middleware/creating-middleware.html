@@ -678,7 +678,7 @@ be the <em>last</em> middleware on the <em>last</em> layer (i.e. the route handl
 <section id="constraints-and-plugins">
 <h4>Constraints and plugins<a class="headerlink" href="#constraints-and-plugins" title="Link to this heading">¶</a></h4>
 <p>When using plugins that add middleware(s), it is important to understand that these
-middleware(s) are added <em>before</em> any user-defined middleware.</p>
+middleware(s) are added <em>after</em> middlewares defined on the application and <em>before</em> middlewares defined on the other layers.</p>
 <p>This means that if you add in a plugin a middleware that has a constraint, the constraint has to be satisfied
 or an error will be raised.</p>
 <p>Most of the time in a plugin you would do <code class="docutils literal notranslate"><span class="pre">app_config.middleware.append(MyCustomMiddleware)</span></code> which will be
