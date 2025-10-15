@@ -679,8 +679,8 @@ be the <em>last</em> middleware on the <em>last</em> layer (i.e. the route handl
 <h4>Constraints and plugins<a class="headerlink" href="#constraints-and-plugins" title="Link to this heading">¶</a></h4>
 <p>When using plugins that add middleware(s), it is important to understand that these
 middleware(s) are added <em>after</em> middlewares defined on the application and <em>before</em> middlewares defined on the other layers.</p>
-<p>This means that even for middlewares added through a plugin, the constraint has to be satisfied
-or an error will be raised.</p>
+<p>Constraints are evaluated after all middlewares have been added though, so an order constraint on a middleware added by
+a plugin, has to take into account the position it is being added to.</p>
 <p>Most of the time in a plugin you would do <code class="docutils literal notranslate"><span class="pre">app_config.middleware.append(MyCustomMiddleware)</span></code> which will be
 ok if it has no constraints attached.</p>
 <p>Now suppose that <code class="docutils literal notranslate"><span class="pre">MyCustomMiddleware</span></code> has the constraint <code class="docutils literal notranslate"><span class="pre">first=True</span></code> then the correct way to add it is to do
