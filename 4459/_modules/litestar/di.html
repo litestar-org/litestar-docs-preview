@@ -573,7 +573,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="59">
 </span><span data-line="60">        <span class="n">is_class_dependency</span> <span class="o">=</span> <span class="n">isclass</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span>
 </span><span data-line="61">        <span class="n">is_function</span> <span class="o">=</span> <span class="n">isfunction</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span>
-</span><span data-line="62">        <span class="n">is_callable_instance</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">is_class_dependency</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_function</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span>
+</span><span data-line="62">        <span class="n">is_callable_instance</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">is_class_dependency</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_function</span>
 </span><span data-line="63">        <span class="k">if</span> <span class="n">is_class_dependency</span> <span class="ow">or</span> <span class="n">is_callable_instance</span><span class="p">:</span>
 </span><span data-line="64">            <span class="n">check_target</span> <span class="o">=</span> <span class="n">dependency</span><span class="o">.</span><span class="fm">__call__</span>  <span class="c1"># type: ignore[operator]</span>
 </span><span data-line="65">        <span class="k">else</span><span class="p">:</span>
