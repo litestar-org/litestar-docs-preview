@@ -136,7 +136,8 @@ and to easily access dependencies from higher levels.
 
         .. code-block:: python
 
-           from litestar import Litestar, Provide, get, Router
+           from litestar import Litestar, get, Router
+           from litestar.di import Provide
 
 
            async def route_dependency() -> bool: ...
@@ -177,7 +178,7 @@ and to easily access dependencies from higher levels.
 Lifespan
 ~~~~~~~~
 
-If you're using an async context manager and pass parameters to it, most likely the order of parameters is inversed between FastAPI and Litestar.
+Litestar uses the same async context manager style as FastAPI, so the code does not need to be changed:
 
 .. tab-set::
 
@@ -188,8 +189,7 @@ If you're using an async context manager and pass parameters to it, most likely 
 
             @asynccontextmanager
             async def lifespan(
-                _app: FastAPI,
-                app_settings: AppSettings,
+                app: FastAPI
             ):
                 # Setup code here
                 yield
@@ -202,8 +202,7 @@ If you're using an async context manager and pass parameters to it, most likely 
 
             @asynccontextmanager
             async def lifespan(
-                app_settings: AppSettings,
-                _app: Litestar,
+                app: Litestar
             ):
                 # Setup code here
                 yield
@@ -334,38 +333,6 @@ Also FastAPI let you pass a dictionary while in Litestar you need to explicitly 
                 return Template(
                     name="uploads.html", context={"debug": app_settings.debug}
                 )
-
-Default handler names
-~~~~~~~~~~~~~~~~~~~~~~~
-
-In FastAPI, the handler name defaults to the local name of the function. In Litestar, you need to explicitly declare the `name` parameter in the route decorator. This is important when using e.g. `url_for`.
-
-.. tab-set::
-
-    .. tab-item:: FastAPI
-        :sync: fastapi
-
-        .. code-block:: python
-
-            @app.get("/blabla")
-            async def blabla() -> str:
-                return "Blabla"
-        .. code-block:: html
-
-            <a href="{{ url_for('blabla') }}">Blabla</a>
-
-    .. tab-item:: Litestar
-        :sync: litestar
-
-        .. code-block:: python
-
-            @get(path="/blabla", name="blabla")
-            async def blabla() -> str:
-                return "Blabla"
-
-        .. code-block:: html
-
-            <a href="{{ url_for('blabla') }}">Blabla</a>
 
 Uploads
 ~~~~~~~
