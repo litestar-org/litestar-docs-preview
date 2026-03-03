@@ -594,92 +594,102 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="83"><span class="w">    </span><span class="sd">&quot;&quot;&quot;URL to page that contains terms of service.&quot;&quot;&quot;</span>
 </span><span data-line="84">    <span class="n">use_handler_docstrings</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span><span data-line="85"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Draw operation description from route handler docstring if not otherwise provided.&quot;&quot;&quot;</span>
-</span><span data-line="86">    <span class="n">webhooks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathItem</span> <span class="o">|</span> <span class="n">Reference</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="87"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A mapping of key to either :class:`PathItem &lt;litestar.openapi.spec.path_item.PathItem&gt;` or.</span>
-</span><span data-line="88">
-</span><span data-line="89"><span class="sd">    :class:`Reference &lt;litestar.openapi.spec.reference.Reference&gt;` objects.</span>
-</span><span data-line="90"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="91">    <span class="n">operation_id_creator</span><span class="p">:</span> <span class="n">OperationIDCreator</span> <span class="o">=</span> <span class="n">default_operation_id_creator</span>
-</span><span data-line="92"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A callable that generates unique operation ids&quot;&quot;&quot;</span>
-</span><span data-line="93">    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/schema&quot;</span>
-</span><span data-line="94"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Base path for the OpenAPI documentation endpoints.</span>
-</span><span data-line="95">
-</span><span data-line="96"><span class="sd">    If no path is provided the default is ``/schema``.</span>
-</span><span data-line="97">
-</span><span data-line="98"><span class="sd">    Ignored if :attr:`openapi_router` is provided.</span>
-</span><span data-line="99"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="100">    <span class="n">render_plugins</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">OpenAPIRenderPlugin</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="n">ScalarRenderPlugin</span><span class="p">(),))</span>
-</span><span data-line="101"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Plugins for rendering OpenAPI documentation UIs.</span>
-</span><span data-line="102">
-</span><span data-line="103"><span class="sd">    .. versionchanged:: 3.0.0</span>
-</span><span data-line="104">
-</span><span data-line="105"><span class="sd">        Default behavior changed to serve only :class:`ScalarRenderPlugin`.</span>
-</span><span data-line="106"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="107">    <span class="n">openapi_router</span><span class="p">:</span> <span class="n">Router</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="108"><span class="w">    </span><span class="sd">&quot;&quot;&quot;An optional router for serving OpenAPI documentation and schema files.</span>
-</span><span data-line="109">
-</span><span data-line="110"><span class="sd">    If provided, ``path`` is ignored.</span>
-</span><span data-line="111">
-</span><span data-line="112"><span class="sd">    :attr:`openapi_router` is not required, but it can be passed to customize the configuration of the router used to</span>
-</span><span data-line="113"><span class="sd">    serve the documentation endpoints. For example, you can add middleware or guards to the router.</span>
+</span><span data-line="86">    <span class="n">auto_detect_exceptions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="87"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatically detect ``HTTPException`` subclasses raised in handler bodies and include</span>
+</span><span data-line="88"><span class="sd">    them in the OpenAPI error responses.</span>
+</span><span data-line="89">
+</span><span data-line="90"><span class="sd">    When enabled, handler source code is scanned at startup to discover ``raise`` statements</span>
+</span><span data-line="91"><span class="sd">    and document the corresponding error status codes.  Only exceptions raised directly inside</span>
+</span><span data-line="92"><span class="sd">    the handler function are detected; guards and dependencies are **not** scanned.</span>
+</span><span data-line="93">
+</span><span data-line="94"><span class="sd">    .. versionadded:: 3.0.0</span>
+</span><span data-line="95"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="96">    <span class="n">webhooks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathItem</span> <span class="o">|</span> <span class="n">Reference</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="97"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A mapping of key to either :class:`PathItem &lt;litestar.openapi.spec.path_item.PathItem&gt;` or.</span>
+</span><span data-line="98">
+</span><span data-line="99"><span class="sd">    :class:`Reference &lt;litestar.openapi.spec.reference.Reference&gt;` objects.</span>
+</span><span data-line="100"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="101">    <span class="n">operation_id_creator</span><span class="p">:</span> <span class="n">OperationIDCreator</span> <span class="o">=</span> <span class="n">default_operation_id_creator</span>
+</span><span data-line="102"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A callable that generates unique operation ids&quot;&quot;&quot;</span>
+</span><span data-line="103">    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/schema&quot;</span>
+</span><span data-line="104"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Base path for the OpenAPI documentation endpoints.</span>
+</span><span data-line="105">
+</span><span data-line="106"><span class="sd">    If no path is provided the default is ``/schema``.</span>
+</span><span data-line="107">
+</span><span data-line="108"><span class="sd">    Ignored if :attr:`openapi_router` is provided.</span>
+</span><span data-line="109"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="110">    <span class="n">render_plugins</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">OpenAPIRenderPlugin</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="n">ScalarRenderPlugin</span><span class="p">(),))</span>
+</span><span data-line="111"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Plugins for rendering OpenAPI documentation UIs.</span>
+</span><span data-line="112">
+</span><span data-line="113"><span class="sd">    .. versionchanged:: 3.0.0</span>
 </span><span data-line="114">
-</span><span data-line="115"><span class="sd">    Handlers to serve the OpenAPI schema and documentation sites are added to this router according to</span>
-</span><span data-line="116"><span class="sd">    :attr:`render_plugins`, so routes shouldn&#39;t be added that conflict with these.</span>
-</span><span data-line="117"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="118">
-</span><span data-line="119">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="120">        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">normalize_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="115"><span class="sd">        Default behavior changed to serve only :class:`ScalarRenderPlugin`.</span>
+</span><span data-line="116"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="117">    <span class="n">openapi_router</span><span class="p">:</span> <span class="n">Router</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="118"><span class="w">    </span><span class="sd">&quot;&quot;&quot;An optional router for serving OpenAPI documentation and schema files.</span>
+</span><span data-line="119">
+</span><span data-line="120"><span class="sd">    If provided, ``path`` is ignored.</span>
 </span><span data-line="121">
-</span><span data-line="122">        <span class="bp">self</span><span class="o">.</span><span class="n">default_plugin</span><span class="p">:</span> <span class="n">OpenAPIRenderPlugin</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="123">        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_plugins</span><span class="p">:</span>
-</span><span data-line="124">            <span class="k">if</span> <span class="n">plugin</span><span class="o">.</span><span class="n">has_path</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
-</span><span data-line="125">                <span class="bp">self</span><span class="o">.</span><span class="n">default_plugin</span> <span class="o">=</span> <span class="n">plugin</span>
-</span><span data-line="126">                <span class="k">break</span>
-</span><span data-line="127">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="128">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_plugins</span><span class="p">:</span>
-</span><span data-line="129">                <span class="bp">self</span><span class="o">.</span><span class="n">default_plugin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_plugins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span data-line="130">
-</span><span data-line="131">    <span class="k">def</span><span class="w"> </span><span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="132">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">openapi_router</span><span class="o">.</span><span class="n">path</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openapi_router</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
-</span><span data-line="133">
+</span><span data-line="122"><span class="sd">    :attr:`openapi_router` is not required, but it can be passed to customize the configuration of the router used to</span>
+</span><span data-line="123"><span class="sd">    serve the documentation endpoints. For example, you can add middleware or guards to the router.</span>
+</span><span data-line="124">
+</span><span data-line="125"><span class="sd">    Handlers to serve the OpenAPI schema and documentation sites are added to this router according to</span>
+</span><span data-line="126"><span class="sd">    :attr:`render_plugins`, so routes shouldn&#39;t be added that conflict with these.</span>
+</span><span data-line="127"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="128">
+</span><span data-line="129">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="130">        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">normalize_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="131">
+</span><span data-line="132">        <span class="bp">self</span><span class="o">.</span><span class="n">default_plugin</span><span class="p">:</span> <span class="n">OpenAPIRenderPlugin</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="133">        <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_plugins</span><span class="p">:</span>
+</span><span data-line="134">            <span class="k">if</span> <span class="n">plugin</span><span class="o">.</span><span class="n">has_path</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+</span><span data-line="135">                <span class="bp">self</span><span class="o">.</span><span class="n">default_plugin</span> <span class="o">=</span> <span class="n">plugin</span>
+</span><span data-line="136">                <span class="k">break</span>
+</span><span data-line="137">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="138">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_plugins</span><span class="p">:</span>
+</span><span data-line="139">                <span class="bp">self</span><span class="o">.</span><span class="n">default_plugin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_plugins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span data-line="140">
+</span><span data-line="141">    <span class="k">def</span><span class="w"> </span><span class="nf">get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="142">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">openapi_router</span><span class="o">.</span><span class="n">path</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openapi_router</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+</span><span data-line="143">
 <div class="viewcode-block" id="OpenAPIConfig.to_openapi_schema">
 <a class="viewcode-back" href="../../../reference/openapi/openapi.html#litestar.app.OpenAPIConfig.to_openapi_schema">[docs]</a>
-</span><span data-line="134">    <span class="k">def</span><span class="w"> </span><span class="nf">to_openapi_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OpenAPI</span><span class="p">:</span>
-</span><span data-line="135"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an ``OpenAPI`` instance from the values stored in ``self``.</span>
-</span><span data-line="136">
-</span><span data-line="137"><span class="sd">        Returns:</span>
-</span><span data-line="138"><span class="sd">            An instance of :class:`OpenAPI &lt;litestar.openapi.spec.open_api.OpenAPI&gt;`.</span>
-</span><span data-line="139"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="140">
-</span><span data-line="141">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-</span><span data-line="142">            <span class="n">merged_components</span> <span class="o">=</span> <span class="n">Components</span><span class="p">()</span>
-</span><span data-line="143">            <span class="k">for</span> <span class="n">components</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
-</span><span data-line="144">                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">(</span><span class="n">components</span><span class="p">)):</span>
-</span><span data-line="145">                    <span class="k">if</span> <span class="n">value</span> <span class="o">:=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-</span><span data-line="146">                        <span class="n">merged_value_dict</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">merged_components</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="p">{})</span> <span class="ow">or</span> <span class="p">{}</span>
-</span><span data-line="147">                        <span class="n">merged_value_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span data-line="148">                        <span class="nb">setattr</span><span class="p">(</span><span class="n">merged_components</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">merged_value_dict</span><span class="p">)</span>
-</span><span data-line="149">
-</span><span data-line="150">            <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">merged_components</span>
-</span><span data-line="151">
-</span><span data-line="152">        <span class="k">return</span> <span class="n">OpenAPI</span><span class="p">(</span>
-</span><span data-line="153">            <span class="n">external_docs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">external_docs</span><span class="p">,</span>
-</span><span data-line="154">            <span class="n">security</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">security</span><span class="p">,</span>
-</span><span data-line="155">            <span class="n">components</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">),</span>  <span class="c1"># deepcopy prevents mutation of the config&#39;s components</span>
-</span><span data-line="156">            <span class="n">servers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">,</span>
-</span><span data-line="157">            <span class="n">tags</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">,</span>
-</span><span data-line="158">            <span class="n">webhooks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">webhooks</span><span class="p">,</span>
-</span><span data-line="159">            <span class="n">info</span><span class="o">=</span><span class="n">Info</span><span class="p">(</span>
-</span><span data-line="160">                <span class="n">title</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
-</span><span data-line="161">                <span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
-</span><span data-line="162">                <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
-</span><span data-line="163">                <span class="n">contact</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">contact</span><span class="p">,</span>
-</span><span data-line="164">                <span class="n">license</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">license</span><span class="p">,</span>
-</span><span data-line="165">                <span class="n">summary</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span>
-</span><span data-line="166">                <span class="n">terms_of_service</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">terms_of_service</span><span class="p">,</span>
-</span><span data-line="167">            <span class="p">),</span>
-</span><span data-line="168">            <span class="n">paths</span><span class="o">=</span><span class="p">{},</span>
-</span><span data-line="169">        <span class="p">)</span></div>
+</span><span data-line="144">    <span class="k">def</span><span class="w"> </span><span class="nf">to_openapi_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OpenAPI</span><span class="p">:</span>
+</span><span data-line="145"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an ``OpenAPI`` instance from the values stored in ``self``.</span>
+</span><span data-line="146">
+</span><span data-line="147"><span class="sd">        Returns:</span>
+</span><span data-line="148"><span class="sd">            An instance of :class:`OpenAPI &lt;litestar.openapi.spec.open_api.OpenAPI&gt;`.</span>
+</span><span data-line="149"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="150">
+</span><span data-line="151">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+</span><span data-line="152">            <span class="n">merged_components</span> <span class="o">=</span> <span class="n">Components</span><span class="p">()</span>
+</span><span data-line="153">            <span class="k">for</span> <span class="n">components</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+</span><span data-line="154">                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">(</span><span class="n">components</span><span class="p">)):</span>
+</span><span data-line="155">                    <span class="k">if</span> <span class="n">value</span> <span class="o">:=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+</span><span data-line="156">                        <span class="n">merged_value_dict</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">merged_components</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="p">{})</span> <span class="ow">or</span> <span class="p">{}</span>
+</span><span data-line="157">                        <span class="n">merged_value_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="158">                        <span class="nb">setattr</span><span class="p">(</span><span class="n">merged_components</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">merged_value_dict</span><span class="p">)</span>
+</span><span data-line="159">
+</span><span data-line="160">            <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">merged_components</span>
+</span><span data-line="161">
+</span><span data-line="162">        <span class="k">return</span> <span class="n">OpenAPI</span><span class="p">(</span>
+</span><span data-line="163">            <span class="n">external_docs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">external_docs</span><span class="p">,</span>
+</span><span data-line="164">            <span class="n">security</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">security</span><span class="p">,</span>
+</span><span data-line="165">            <span class="n">components</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">),</span>  <span class="c1"># deepcopy prevents mutation of the config&#39;s components</span>
+</span><span data-line="166">            <span class="n">servers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">,</span>
+</span><span data-line="167">            <span class="n">tags</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">,</span>
+</span><span data-line="168">            <span class="n">webhooks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">webhooks</span><span class="p">,</span>
+</span><span data-line="169">            <span class="n">info</span><span class="o">=</span><span class="n">Info</span><span class="p">(</span>
+</span><span data-line="170">                <span class="n">title</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+</span><span data-line="171">                <span class="n">version</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+</span><span data-line="172">                <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+</span><span data-line="173">                <span class="n">contact</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">contact</span><span class="p">,</span>
+</span><span data-line="174">                <span class="n">license</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">license</span><span class="p">,</span>
+</span><span data-line="175">                <span class="n">summary</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span>
+</span><span data-line="176">                <span class="n">terms_of_service</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">terms_of_service</span><span class="p">,</span>
+</span><span data-line="177">            <span class="p">),</span>
+</span><span data-line="178">            <span class="n">paths</span><span class="o">=</span><span class="p">{},</span>
+</span><span data-line="179">        <span class="p">)</span></div>
 </div>
 
 </span></pre></div>
