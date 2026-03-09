@@ -687,8 +687,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="175">            <span class="n">tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ping</span><span class="p">,</span> <span class="n">send</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">)</span>
 </span><span data-line="176">
 </span><span data-line="177">            <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">:</span>
-</span><span data-line="178">                <span class="n">payload</span> <span class="o">=</span> <span class="n">chunk</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">chunk</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
-</span><span data-line="179">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+</span><span data-line="178">                <span class="n">data</span> <span class="o">=</span> <span class="n">chunk</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">chunk</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+</span><span data-line="179">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </span><span data-line="180">
 </span><span data-line="181">            <span class="n">stop_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
 </span><span data-line="182">            <span class="n">tg</span><span class="o">.</span><span class="n">cancel_scope</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
@@ -794,22 +794,18 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="273">        <span class="n">cookies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cookies</span> <span class="k">if</span> <span class="n">cookies</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
 </span><span data-line="274">        <span class="n">media_type</span> <span class="o">=</span> <span class="n">get_enum_string_value</span><span class="p">(</span><span class="n">media_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="ow">or</span> <span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">)</span>
 </span><span data-line="275">
-</span><span data-line="276">        <span class="n">iterator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterator</span>
-</span><span data-line="277">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="p">(</span><span class="n">Iterable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">AsyncIterable</span><span class="p">,</span> <span class="n">AsyncIterator</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
-</span><span data-line="278">            <span class="n">iterator</span> <span class="o">=</span> <span class="n">iterator</span><span class="p">()</span>
-</span><span data-line="279">
-</span><span data-line="280">        <span class="k">return</span> <span class="n">ASGIStreamingSSEResponse</span><span class="p">(</span>
-</span><span data-line="281">            <span class="n">ping_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span><span class="p">,</span>
-</span><span data-line="282">            <span class="n">background</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">background</span> <span class="ow">or</span> <span class="n">background</span><span class="p">,</span>
-</span><span data-line="283">            <span class="n">content_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-</span><span data-line="284">            <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
-</span><span data-line="285">            <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-</span><span data-line="286">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</span><span data-line="287">            <span class="n">is_head_response</span><span class="o">=</span><span class="n">is_head_response</span><span class="p">,</span>
-</span><span data-line="288">            <span class="n">iterator</span><span class="o">=</span><span class="n">iterator</span><span class="p">,</span>
-</span><span data-line="289">            <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span><span class="p">,</span>
-</span><span data-line="290">            <span class="n">status_code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">or</span> <span class="n">status_code</span><span class="p">,</span>
-</span><span data-line="291">        <span class="p">)</span></div>
+</span><span data-line="276">        <span class="k">return</span> <span class="n">ASGIStreamingSSEResponse</span><span class="p">(</span>
+</span><span data-line="277">            <span class="n">ping_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span><span class="p">,</span>
+</span><span data-line="278">            <span class="n">background</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">background</span> <span class="ow">or</span> <span class="n">background</span><span class="p">,</span>
+</span><span data-line="279">            <span class="n">content_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="280">            <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
+</span><span data-line="281">            <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+</span><span data-line="282">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span><span data-line="283">            <span class="n">is_head_response</span><span class="o">=</span><span class="n">is_head_response</span><span class="p">,</span>
+</span><span data-line="284">            <span class="n">iterator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">,</span>
+</span><span data-line="285">            <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span><span class="p">,</span>
+</span><span data-line="286">            <span class="n">status_code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">or</span> <span class="n">status_code</span><span class="p">,</span>
+</span><span data-line="287">        <span class="p">)</span></div>
 </div>
 
 </span></pre></div>
