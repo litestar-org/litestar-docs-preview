@@ -769,9 +769,9 @@ calculate the best matching return media type.</p>
 <p class="admonition-title">Run it</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource
 </span><span data-line="2">Hello<span class="w"> </span>World!
-</span><span data-line="3">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource<span class="w"> </span>-H<span class="w"> </span>Accept:<span class="w"> </span>text/html
+</span><span data-line="3">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Accept: text/html&#39;</span>
 </span><span data-line="4">&lt;h1&gt;Hello<span class="w"> </span>World!&lt;/h1&gt;
-</span><span data-line="5">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource<span class="w"> </span>-H<span class="w"> </span>Accept:<span class="w"> </span>application/xml
+</span><span data-line="5">&gt;<span class="w"> </span>curl<span class="w"> </span>http://127.0.0.1:8000/resource<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Accept: application/xml&#39;</span>
 </span><span data-line="6">&lt;xml&gt;&lt;msg&gt;Hello<span class="w"> </span>World!&lt;/msg&gt;&lt;/xml&gt;
 </span></pre></div>
 </div>
@@ -1807,8 +1807,14 @@ specified, and the data will be the yielded value.</p>
 </span><span data-line="8">    <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">generator</span><span class="p">(),</span> <span class="n">ping_interval</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<p>This sends an SSE comment (<code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">ping</span></code>) every 15 seconds to keep the connection alive. SSE comments are invisible to
-<code class="docutils literal notranslate"><span class="pre">EventSource</span></code> clients and will not trigger message events.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ping_interval</span></code> value is in <strong>seconds</strong>. This sends an SSE comment (<code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">ping</span></code>) every 15 seconds to keep the
+connection alive. SSE comments are invisible to <code class="docutils literal notranslate"><span class="pre">EventSource</span></code> clients and will not trigger message events.
+Pings begin after the first interval elapses (no immediate ping on connect).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Common values are 15–30 seconds, depending on your reverse proxy’s idle timeout
+(e.g., nginx defaults to 60 seconds, Telegram Mini Apps time out after 60 seconds).</p>
+</div>
 </section>
 <section id="template-responses">
 <h2>Template Responses<a class="headerlink" href="#template-responses" title="Link to this heading">¶</a></h2>
