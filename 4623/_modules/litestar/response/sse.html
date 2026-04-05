@@ -665,170 +665,172 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="152">
 </span><span data-line="153">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span data-line="154"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Send a body chunk with lock for concurrent ping/stream safety.&quot;&quot;&quot;</span>
-</span><span data-line="155">        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_lock</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>  <span class="c1"># noqa: S101</span>
-</span><span data-line="156">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_lock</span><span class="p">:</span>
-</span><span data-line="157">            <span class="k">await</span> <span class="n">send</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">payload</span><span class="p">,</span> <span class="s2">&quot;more_body&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
-</span><span data-line="158">
-</span><span data-line="159">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">:</span> <span class="n">anyio</span><span class="o">.</span><span class="n">Event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="160"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Send SSE comment keepalive pings at the configured interval.&quot;&quot;&quot;</span>
-</span><span data-line="161">        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ping_interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>  <span class="c1"># noqa: S101</span>
-</span><span data-line="162">        <span class="k">while</span> <span class="ow">not</span> <span class="n">stop_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-</span><span data-line="163">            <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">move_on_after</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ping_interval</span><span class="p">):</span>
-</span><span data-line="164">                <span class="k">await</span> <span class="n">stop_event</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-</span><span data-line="165">            <span class="k">if</span> <span class="ow">not</span> <span class="n">stop_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-</span><span data-line="166">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;: ping</span><span class="se">\r\n\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span data-line="167">
+</span><span data-line="155">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_lock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="156">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;_send called without a send lock; ping_interval must be set&quot;</span><span class="p">)</span>
+</span><span data-line="157">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_lock</span><span class="p">:</span>
+</span><span data-line="158">            <span class="k">await</span> <span class="n">send</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">payload</span><span class="p">,</span> <span class="s2">&quot;more_body&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</span><span data-line="159">
+</span><span data-line="160">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">:</span> <span class="n">anyio</span><span class="o">.</span><span class="n">Event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="161"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Send SSE comment keepalive pings at the configured interval.&quot;&quot;&quot;</span>
+</span><span data-line="162">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ping_interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="163">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;_ping called without a ping interval configured&quot;</span><span class="p">)</span>
+</span><span data-line="164">        <span class="k">while</span> <span class="ow">not</span> <span class="n">stop_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+</span><span data-line="165">            <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">move_on_after</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ping_interval</span><span class="p">):</span>
+</span><span data-line="166">                <span class="k">await</span> <span class="n">stop_event</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</span><span data-line="167">            <span class="k">if</span> <span class="ow">not</span> <span class="n">stop_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+</span><span data-line="168">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;: ping</span><span class="se">\r\n\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="169">
 <div class="viewcode-block" id="ASGIStreamingSSEResponse.send_body">
 <a class="viewcode-back" href="../../../reference/response/sse.html#litestar.response.ASGIStreamingSSEResponse.send_body">[docs]</a>
-</span><span data-line="168">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="169"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Emit the response body, with optional keepalive pings.&quot;&quot;&quot;</span>
-</span><span data-line="170">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ping_interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="171">            <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">send_body</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="n">receive</span><span class="p">)</span>
-</span><span data-line="172">            <span class="k">return</span>
-</span><span data-line="173">
-</span><span data-line="174">        <span class="n">stop_event</span> <span class="o">=</span> <span class="n">anyio</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+</span><span data-line="170">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="171"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Emit the response body, with optional keepalive pings.&quot;&quot;&quot;</span>
+</span><span data-line="172">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ping_interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="173">            <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">send_body</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="n">receive</span><span class="p">)</span>
+</span><span data-line="174">            <span class="k">return</span>
 </span><span data-line="175">
-</span><span data-line="176">        <span class="k">async</span> <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">create_task_group</span><span class="p">()</span> <span class="k">as</span> <span class="n">tg</span><span class="p">:</span>
-</span><span data-line="177">            <span class="n">tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_listen_for_disconnect</span><span class="p">,</span> <span class="n">tg</span><span class="o">.</span><span class="n">cancel_scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">))</span>
-</span><span data-line="178">            <span class="n">tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ping</span><span class="p">,</span> <span class="n">send</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">)</span>
-</span><span data-line="179">
-</span><span data-line="180">            <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">:</span>
-</span><span data-line="181">                <span class="n">data</span> <span class="o">=</span> <span class="n">chunk</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">chunk</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
-</span><span data-line="182">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span data-line="183">
-</span><span data-line="184">            <span class="n">stop_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-</span><span data-line="185">            <span class="n">tg</span><span class="o">.</span><span class="n">cancel_scope</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
-</span><span data-line="186">
-</span><span data-line="187">        <span class="k">await</span> <span class="n">send</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;more_body&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span></div>
+</span><span data-line="176">        <span class="n">stop_event</span> <span class="o">=</span> <span class="n">anyio</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+</span><span data-line="177">
+</span><span data-line="178">        <span class="k">async</span> <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">create_task_group</span><span class="p">()</span> <span class="k">as</span> <span class="n">tg</span><span class="p">:</span>
+</span><span data-line="179">            <span class="n">tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_listen_for_disconnect</span><span class="p">,</span> <span class="n">tg</span><span class="o">.</span><span class="n">cancel_scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">))</span>
+</span><span data-line="180">            <span class="n">tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ping</span><span class="p">,</span> <span class="n">send</span><span class="p">,</span> <span class="n">stop_event</span><span class="p">)</span>
+</span><span data-line="181">
+</span><span data-line="182">            <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">:</span>
+</span><span data-line="183">                <span class="n">data</span> <span class="o">=</span> <span class="n">chunk</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">chunk</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+</span><span data-line="184">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send</span><span class="p">(</span><span class="n">send</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span data-line="185">
+</span><span data-line="186">            <span class="n">stop_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</span><span data-line="187">            <span class="n">tg</span><span class="o">.</span><span class="n">cancel_scope</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</span><span data-line="188">
+</span><span data-line="189">        <span class="k">await</span> <span class="n">send</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;more_body&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span></div>
 </div>
 
-</span><span data-line="188">
-</span><span data-line="189">
+</span><span data-line="190">
+</span><span data-line="191">
 <div class="viewcode-block" id="ServerSentEvent">
 <a class="viewcode-back" href="../../../reference/response/sse.html#litestar.response.ServerSentEvent">[docs]</a>
-</span><span data-line="190"><span class="k">class</span><span class="w"> </span><span class="nc">ServerSentEvent</span><span class="p">(</span><span class="n">Stream</span><span class="p">):</span>
+</span><span data-line="192"><span class="k">class</span><span class="w"> </span><span class="nc">ServerSentEvent</span><span class="p">(</span><span class="n">Stream</span><span class="p">):</span>
 <div class="viewcode-block" id="ServerSentEvent.__init__">
 <a class="viewcode-back" href="../../../reference/response/sse.html#litestar.response.ServerSentEvent.__init__">[docs]</a>
-</span><span data-line="191">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="192">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="193">        <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="n">StreamType</span><span class="p">[</span><span class="n">SSEData</span><span class="p">],</span>
-</span><span data-line="194">        <span class="o">*</span><span class="p">,</span>
-</span><span data-line="195">        <span class="n">background</span><span class="p">:</span> <span class="n">BackgroundTask</span> <span class="o">|</span> <span class="n">BackgroundTasks</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="196">        <span class="n">cookies</span><span class="p">:</span> <span class="n">ResponseCookies</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="197">        <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span>
-</span><span data-line="198">        <span class="n">headers</span><span class="p">:</span> <span class="n">ResponseHeaders</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="199">        <span class="n">event_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="200">        <span class="n">event_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="201">        <span class="n">retry_duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="202">        <span class="n">comment_message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="203">        <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="204">        <span class="n">ping_interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="205">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="206"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the response.</span>
-</span><span data-line="207">
-</span><span data-line="208"><span class="sd">        Args:</span>
-</span><span data-line="209"><span class="sd">            content: Bytes, string or a sync or async iterator or iterable.</span>
-</span><span data-line="210"><span class="sd">            background: A :class:`BackgroundTask &lt;.background_tasks.BackgroundTask&gt;` instance or</span>
-</span><span data-line="211"><span class="sd">                :class:`BackgroundTasks &lt;.background_tasks.BackgroundTasks&gt;` to execute after the response is finished.</span>
-</span><span data-line="212"><span class="sd">                Defaults to None.</span>
-</span><span data-line="213"><span class="sd">            cookies: A list of :class:`Cookie &lt;.datastructures.Cookie&gt;` instances to be set under the response</span>
-</span><span data-line="214"><span class="sd">                ``Set-Cookie`` header.</span>
-</span><span data-line="215"><span class="sd">            encoding: The encoding to be used for the response headers.</span>
-</span><span data-line="216"><span class="sd">            headers: A string keyed dictionary of response headers. Header keys are insensitive.</span>
-</span><span data-line="217"><span class="sd">            status_code: The response status code. Defaults to 200.</span>
-</span><span data-line="218"><span class="sd">            event_type: The type of the SSE event. If given, the browser will sent the event to any &#39;event-listener&#39;</span>
-</span><span data-line="219"><span class="sd">                declared for it (e.g. via &#39;addEventListener&#39; in JS).</span>
-</span><span data-line="220"><span class="sd">            event_id: The event ID. This sets the event source&#39;s &#39;last event id&#39;.</span>
-</span><span data-line="221"><span class="sd">            retry_duration: Retry duration in milliseconds.</span>
-</span><span data-line="222"><span class="sd">            comment_message: A comment message. This value is ignored by clients and is used mostly for pinging.</span>
-</span><span data-line="223"><span class="sd">            ping_interval: Interval in seconds between keepalive pings. When set, an SSE comment</span>
-</span><span data-line="224"><span class="sd">                (``: ping``) is sent at the specified interval to prevent connection timeouts from</span>
-</span><span data-line="225"><span class="sd">                reverse proxies or clients. Defaults to ``None`` (no pings).</span>
-</span><span data-line="226"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="227">        <span class="k">if</span> <span class="n">ping_interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ping_interval</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-</span><span data-line="228">            <span class="k">raise</span> <span class="n">ImproperlyConfiguredException</span><span class="p">(</span><span class="s2">&quot;ping_interval must be a positive number&quot;</span><span class="p">)</span>
-</span><span data-line="229">        <span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span> <span class="o">=</span> <span class="n">ping_interval</span>
-</span><span data-line="230">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="231">            <span class="n">content</span><span class="o">=</span><span class="n">_ServerSentEventIterator</span><span class="p">(</span>
-</span><span data-line="232">                <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
-</span><span data-line="233">                <span class="n">event_type</span><span class="o">=</span><span class="n">event_type</span><span class="p">,</span>
-</span><span data-line="234">                <span class="n">event_id</span><span class="o">=</span><span class="n">event_id</span><span class="p">,</span>
-</span><span data-line="235">                <span class="n">retry_duration</span><span class="o">=</span><span class="n">retry_duration</span><span class="p">,</span>
-</span><span data-line="236">                <span class="n">comment_message</span><span class="o">=</span><span class="n">comment_message</span><span class="p">,</span>
-</span><span data-line="237">            <span class="p">),</span>
-</span><span data-line="238">            <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;text/event-stream&quot;</span><span class="p">,</span>
-</span><span data-line="239">            <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
-</span><span data-line="240">            <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
-</span><span data-line="241">            <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
-</span><span data-line="242">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</span><span data-line="243">            <span class="n">status_code</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span>
-</span><span data-line="244">        <span class="p">)</span>
-</span><span data-line="245">        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;Cache-Control&quot;</span><span class="p">,</span> <span class="s2">&quot;no-cache&quot;</span><span class="p">)</span>
-</span><span data-line="246">        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Connection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;keep-alive&quot;</span>
-</span><span data-line="247">        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;X-Accel-Buffering&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span></div>
+</span><span data-line="193">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="194">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="195">        <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="n">StreamType</span><span class="p">[</span><span class="n">SSEData</span><span class="p">],</span>
+</span><span data-line="196">        <span class="o">*</span><span class="p">,</span>
+</span><span data-line="197">        <span class="n">background</span><span class="p">:</span> <span class="n">BackgroundTask</span> <span class="o">|</span> <span class="n">BackgroundTasks</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="198">        <span class="n">cookies</span><span class="p">:</span> <span class="n">ResponseCookies</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="199">        <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span>
+</span><span data-line="200">        <span class="n">headers</span><span class="p">:</span> <span class="n">ResponseHeaders</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="201">        <span class="n">event_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="202">        <span class="n">event_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="203">        <span class="n">retry_duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="204">        <span class="n">comment_message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="205">        <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="206">        <span class="n">ping_interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="207">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="208"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the response.</span>
+</span><span data-line="209">
+</span><span data-line="210"><span class="sd">        Args:</span>
+</span><span data-line="211"><span class="sd">            content: Bytes, string or a sync or async iterator or iterable.</span>
+</span><span data-line="212"><span class="sd">            background: A :class:`BackgroundTask &lt;.background_tasks.BackgroundTask&gt;` instance or</span>
+</span><span data-line="213"><span class="sd">                :class:`BackgroundTasks &lt;.background_tasks.BackgroundTasks&gt;` to execute after the response is finished.</span>
+</span><span data-line="214"><span class="sd">                Defaults to None.</span>
+</span><span data-line="215"><span class="sd">            cookies: A list of :class:`Cookie &lt;.datastructures.Cookie&gt;` instances to be set under the response</span>
+</span><span data-line="216"><span class="sd">                ``Set-Cookie`` header.</span>
+</span><span data-line="217"><span class="sd">            encoding: The encoding to be used for the response headers.</span>
+</span><span data-line="218"><span class="sd">            headers: A string keyed dictionary of response headers. Header keys are insensitive.</span>
+</span><span data-line="219"><span class="sd">            status_code: The response status code. Defaults to 200.</span>
+</span><span data-line="220"><span class="sd">            event_type: The type of the SSE event. If given, the browser will sent the event to any &#39;event-listener&#39;</span>
+</span><span data-line="221"><span class="sd">                declared for it (e.g. via &#39;addEventListener&#39; in JS).</span>
+</span><span data-line="222"><span class="sd">            event_id: The event ID. This sets the event source&#39;s &#39;last event id&#39;.</span>
+</span><span data-line="223"><span class="sd">            retry_duration: Retry duration in milliseconds.</span>
+</span><span data-line="224"><span class="sd">            comment_message: A comment message. This value is ignored by clients and is used mostly for pinging.</span>
+</span><span data-line="225"><span class="sd">            ping_interval: Interval in seconds between keepalive pings. When set, an SSE comment</span>
+</span><span data-line="226"><span class="sd">                (``: ping``) is sent at the specified interval to prevent connection timeouts from</span>
+</span><span data-line="227"><span class="sd">                reverse proxies or clients. Defaults to ``None`` (no pings).</span>
+</span><span data-line="228"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="229">        <span class="k">if</span> <span class="n">ping_interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ping_interval</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span data-line="230">            <span class="k">raise</span> <span class="n">ImproperlyConfiguredException</span><span class="p">(</span><span class="s2">&quot;ping_interval must be a positive number&quot;</span><span class="p">)</span>
+</span><span data-line="231">        <span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span> <span class="o">=</span> <span class="n">ping_interval</span>
+</span><span data-line="232">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="233">            <span class="n">content</span><span class="o">=</span><span class="n">_ServerSentEventIterator</span><span class="p">(</span>
+</span><span data-line="234">                <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
+</span><span data-line="235">                <span class="n">event_type</span><span class="o">=</span><span class="n">event_type</span><span class="p">,</span>
+</span><span data-line="236">                <span class="n">event_id</span><span class="o">=</span><span class="n">event_id</span><span class="p">,</span>
+</span><span data-line="237">                <span class="n">retry_duration</span><span class="o">=</span><span class="n">retry_duration</span><span class="p">,</span>
+</span><span data-line="238">                <span class="n">comment_message</span><span class="o">=</span><span class="n">comment_message</span><span class="p">,</span>
+</span><span data-line="239">            <span class="p">),</span>
+</span><span data-line="240">            <span class="n">media_type</span><span class="o">=</span><span class="s2">&quot;text/event-stream&quot;</span><span class="p">,</span>
+</span><span data-line="241">            <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
+</span><span data-line="242">            <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
+</span><span data-line="243">            <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+</span><span data-line="244">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span><span data-line="245">            <span class="n">status_code</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span>
+</span><span data-line="246">        <span class="p">)</span>
+</span><span data-line="247">        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;Cache-Control&quot;</span><span class="p">,</span> <span class="s2">&quot;no-cache&quot;</span><span class="p">)</span>
+</span><span data-line="248">        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Connection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;keep-alive&quot;</span>
+</span><span data-line="249">        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;X-Accel-Buffering&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span></div>
 
-</span><span data-line="248">
+</span><span data-line="250">
 <div class="viewcode-block" id="ServerSentEvent.to_asgi_response">
 <a class="viewcode-back" href="../../../reference/response/sse.html#litestar.response.ServerSentEvent.to_asgi_response">[docs]</a>
-</span><span data-line="249">    <span class="k">def</span><span class="w"> </span><span class="nf">to_asgi_response</span><span class="p">(</span>
-</span><span data-line="250">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="251">        <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
-</span><span data-line="252">        <span class="o">*</span><span class="p">,</span>
-</span><span data-line="253">        <span class="n">background</span><span class="p">:</span> <span class="n">BackgroundTask</span> <span class="o">|</span> <span class="n">BackgroundTasks</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="254">        <span class="n">cookies</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Cookie</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="255">        <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="256">        <span class="n">is_head_response</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="257">        <span class="n">media_type</span><span class="p">:</span> <span class="n">MediaType</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="258">        <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="259">        <span class="n">type_encoders</span><span class="p">:</span> <span class="n">TypeEncodersMap</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="260">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIResponse</span><span class="p">:</span>
-</span><span data-line="261"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an ASGI streaming response, with optional keepalive ping support.</span>
-</span><span data-line="262">
-</span><span data-line="263"><span class="sd">        When ``ping_interval`` is set, returns an :class:`ASGIStreamingSSEResponse` that</span>
-</span><span data-line="264"><span class="sd">        sends periodic SSE comment pings. Otherwise delegates to the parent implementation.</span>
-</span><span data-line="265">
-</span><span data-line="266"><span class="sd">        Args:</span>
-</span><span data-line="267"><span class="sd">            background: Background task(s) to be executed after the response is sent.</span>
-</span><span data-line="268"><span class="sd">            cookies: A list of cookies to be set on the response.</span>
-</span><span data-line="269"><span class="sd">            headers: Additional headers to be merged with the response headers. Response headers take precedence.</span>
-</span><span data-line="270"><span class="sd">            is_head_response: Whether the response is a HEAD response.</span>
-</span><span data-line="271"><span class="sd">            media_type: Media type for the response. If ``media_type`` is already set on the response, this is ignored.</span>
-</span><span data-line="272"><span class="sd">            request: The :class:`Request &lt;.connection.Request&gt;` instance.</span>
-</span><span data-line="273"><span class="sd">            status_code: Status code for the response. If ``status_code`` is already set on the response, this is</span>
-</span><span data-line="274"><span class="sd">                ignored.</span>
-</span><span data-line="275"><span class="sd">            type_encoders: A dictionary of type encoders to use for encoding the response content.</span>
-</span><span data-line="276">
-</span><span data-line="277"><span class="sd">        Returns:</span>
-</span><span data-line="278"><span class="sd">            An ASGIStreamingResponse (or ASGIStreamingSSEResponse when ping_interval is set).</span>
-</span><span data-line="279"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="280">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="281">            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_asgi_response</span><span class="p">(</span>
-</span><span data-line="282">                <span class="n">request</span><span class="p">,</span>
-</span><span data-line="283">                <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
-</span><span data-line="284">                <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
-</span><span data-line="285">                <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</span><span data-line="286">                <span class="n">is_head_response</span><span class="o">=</span><span class="n">is_head_response</span><span class="p">,</span>
-</span><span data-line="287">                <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span><span class="p">,</span>
-</span><span data-line="288">                <span class="n">status_code</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span>
-</span><span data-line="289">                <span class="n">type_encoders</span><span class="o">=</span><span class="n">type_encoders</span><span class="p">,</span>
-</span><span data-line="290">            <span class="p">)</span>
-</span><span data-line="291">
-</span><span data-line="292">        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">}</span> <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
-</span><span data-line="293">        <span class="n">cookies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cookies</span> <span class="k">if</span> <span class="n">cookies</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
-</span><span data-line="294">        <span class="n">media_type</span> <span class="o">=</span> <span class="n">get_enum_string_value</span><span class="p">(</span><span class="n">media_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="ow">or</span> <span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">)</span>
-</span><span data-line="295">
-</span><span data-line="296">        <span class="k">return</span> <span class="n">ASGIStreamingSSEResponse</span><span class="p">(</span>
-</span><span data-line="297">            <span class="n">ping_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span><span class="p">,</span>
-</span><span data-line="298">            <span class="n">background</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">background</span> <span class="ow">or</span> <span class="n">background</span><span class="p">,</span>
-</span><span data-line="299">            <span class="n">content_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-</span><span data-line="300">            <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
-</span><span data-line="301">            <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-</span><span data-line="302">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-</span><span data-line="303">            <span class="n">is_head_response</span><span class="o">=</span><span class="n">is_head_response</span><span class="p">,</span>
-</span><span data-line="304">            <span class="n">iterator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">,</span>
-</span><span data-line="305">            <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span><span class="p">,</span>
-</span><span data-line="306">            <span class="n">status_code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">or</span> <span class="n">status_code</span><span class="p">,</span>
-</span><span data-line="307">        <span class="p">)</span></div>
+</span><span data-line="251">    <span class="k">def</span><span class="w"> </span><span class="nf">to_asgi_response</span><span class="p">(</span>
+</span><span data-line="252">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="253">        <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
+</span><span data-line="254">        <span class="o">*</span><span class="p">,</span>
+</span><span data-line="255">        <span class="n">background</span><span class="p">:</span> <span class="n">BackgroundTask</span> <span class="o">|</span> <span class="n">BackgroundTasks</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="256">        <span class="n">cookies</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Cookie</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="257">        <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="258">        <span class="n">is_head_response</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="259">        <span class="n">media_type</span><span class="p">:</span> <span class="n">MediaType</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="260">        <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="261">        <span class="n">type_encoders</span><span class="p">:</span> <span class="n">TypeEncodersMap</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="262">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIResponse</span><span class="p">:</span>
+</span><span data-line="263"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an ASGI streaming response, with optional keepalive ping support.</span>
+</span><span data-line="264">
+</span><span data-line="265"><span class="sd">        When ``ping_interval`` is set, returns an :class:`ASGIStreamingSSEResponse` that</span>
+</span><span data-line="266"><span class="sd">        sends periodic SSE comment pings. Otherwise delegates to the parent implementation.</span>
+</span><span data-line="267">
+</span><span data-line="268"><span class="sd">        Args:</span>
+</span><span data-line="269"><span class="sd">            request: The :class:`Request &lt;.connection.Request&gt;` instance.</span>
+</span><span data-line="270"><span class="sd">            background: Background task(s) to be executed after the response is sent.</span>
+</span><span data-line="271"><span class="sd">            cookies: A list of cookies to be set on the response.</span>
+</span><span data-line="272"><span class="sd">            headers: Additional headers to be merged with the response headers. Response headers take precedence.</span>
+</span><span data-line="273"><span class="sd">            is_head_response: Whether the response is a HEAD response.</span>
+</span><span data-line="274"><span class="sd">            media_type: Media type for the response. If ``media_type`` is already set on the response, this is ignored.</span>
+</span><span data-line="275"><span class="sd">            status_code: Status code for the response. If ``status_code`` is already set on the response, this is</span>
+</span><span data-line="276"><span class="sd">                ignored.</span>
+</span><span data-line="277"><span class="sd">            type_encoders: A dictionary of type encoders to use for encoding the response content.</span>
+</span><span data-line="278">
+</span><span data-line="279"><span class="sd">        Returns:</span>
+</span><span data-line="280"><span class="sd">            An ASGIStreamingResponse (or ASGIStreamingSSEResponse when ping_interval is set).</span>
+</span><span data-line="281"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="282">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="283">            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_asgi_response</span><span class="p">(</span>
+</span><span data-line="284">                <span class="n">request</span><span class="p">,</span>
+</span><span data-line="285">                <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
+</span><span data-line="286">                <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
+</span><span data-line="287">                <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span><span data-line="288">                <span class="n">is_head_response</span><span class="o">=</span><span class="n">is_head_response</span><span class="p">,</span>
+</span><span data-line="289">                <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span><span class="p">,</span>
+</span><span data-line="290">                <span class="n">status_code</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span>
+</span><span data-line="291">                <span class="n">type_encoders</span><span class="o">=</span><span class="n">type_encoders</span><span class="p">,</span>
+</span><span data-line="292">            <span class="p">)</span>
+</span><span data-line="293">
+</span><span data-line="294">        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">}</span> <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+</span><span data-line="295">        <span class="n">cookies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cookies</span> <span class="k">if</span> <span class="n">cookies</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> <span class="n">cookies</span><span class="p">)</span>
+</span><span data-line="296">        <span class="n">media_type</span> <span class="o">=</span> <span class="n">get_enum_string_value</span><span class="p">(</span><span class="n">media_type</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span> <span class="ow">or</span> <span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">)</span>
+</span><span data-line="297">
+</span><span data-line="298">        <span class="k">return</span> <span class="n">ASGIStreamingSSEResponse</span><span class="p">(</span>
+</span><span data-line="299">            <span class="n">ping_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ping_interval</span><span class="p">,</span>
+</span><span data-line="300">            <span class="n">background</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">background</span> <span class="ow">or</span> <span class="n">background</span><span class="p">,</span>
+</span><span data-line="301">            <span class="n">content_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="302">            <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span>
+</span><span data-line="303">            <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+</span><span data-line="304">            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+</span><span data-line="305">            <span class="n">is_head_response</span><span class="o">=</span><span class="n">is_head_response</span><span class="p">,</span>
+</span><span data-line="306">            <span class="n">iterator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iterator</span><span class="p">,</span>
+</span><span data-line="307">            <span class="n">media_type</span><span class="o">=</span><span class="n">media_type</span><span class="p">,</span>
+</span><span data-line="308">            <span class="n">status_code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">or</span> <span class="n">status_code</span><span class="p">,</span>
+</span><span data-line="309">        <span class="p">)</span></div>
 </div>
 
 </span></pre></div>
