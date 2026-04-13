@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Exceptions and exception handling - Litestar Framework</title><link rel="shortcut icon" href="../_static/favicon.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="File Systems" href="file_systems.html" /><link rel="prev" title="Events" href="events.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
-    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=76b6f612" />
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=15352968" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
@@ -24,8 +24,8 @@
 }
 </style>
     <meta property="og:type" content="website"/><meta property="og:title" content="Exceptions and exception handling"/>
-<meta name="twitter:card" content="summary"/>
-<meta property="og:image" content="_static/logo-light.png"/>
+  <meta property="og:image" content="_static/logo-light.png"/>
+    <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="announcement">
     <div class="announcement-inner">
@@ -130,8 +130,8 @@ data-aria-dark="Switch to auto color mode">
 </button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
-          <span class="hamburger_2 -translate-x-2"></span>
-          <span class="hamburger_3 -translate-x-1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
         </div>
       </button>
     </div>
@@ -192,7 +192,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="file_systems.html">File Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="htmx.html">HTMX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lifecycle-hooks.html">Life Cycle Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Request logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics/index.html">Metrics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="metrics/open-telemetry.html">OpenTelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metrics/prometheus.html">Prometheus</a></li>
@@ -292,12 +292,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/exceptions.html">exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/file_system.html">file_system</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/handlers.html">handlers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/logging/index.html">logging</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/logging/config.html">config</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/logging/picologging.html">picologging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/logging/standard.html">standard</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/middleware/index.html">middleware</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/authentication.html">authentication</a></li>
@@ -329,7 +323,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/structlog.html">structlog</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/repository/index.html">repository</a><ul>
@@ -459,6 +452,8 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#configuration-exceptions">Configuration Exceptions</a></li>
 <li><a class="reference internal" href="#application-exceptions">Application Exceptions</a></li>
 <li><a class="reference internal" href="#exception-handling">Exception handling</a><ul>
+<li><a class="reference internal" href="#built-in-exception-handlers">Built-in exception handlers</a></li>
+<li><a class="reference internal" href="#custom-exception-handlers">Custom exception handlers</a></li>
 <li><a class="reference internal" href="#exception-handling-layers">Exception handling layers</a></li>
 </ul>
 </li>
@@ -469,7 +464,10 @@ data-aria-dark="Switch to auto color mode">
     <iconify-icon icon="simple-icons:github"></iconify-icon>
   </span>
   <span class="flex-grow px-2 break-all">
-    <span>litestar-org/litestar</span>
+    
+    
+      <span>litestar</span>
+    
     <span class="flex text-sm repo-stats-count">
       <span class="flex items-center pr-3">
         <iconify-icon icon="lucide:star"></iconify-icon>
@@ -514,8 +512,43 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </div><div class="flex flex-col break-words justify-between">
-      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-        <article class="yue" role="main">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/exceptions.rst.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/exceptions.rst.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/exceptions.rst.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:code-slash"></iconify-icon>
+            <span>View Source</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/exceptions.rst.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/exceptions.rst.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
           <section id="exceptions-and-exception-handling">
 <h1>Exceptions and exception handling<a class="headerlink" href="#exceptions-and-exception-handling" title="Link to this heading">¶</a></h1>
 <p>Litestar defines a base exception called <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.LitestarException" title="litestar.exceptions.LitestarException"><code class="xref py py-class docutils literal notranslate"><span class="pre">LitestarException</span></code></a> which serves
@@ -598,18 +631,39 @@ If this is not your intent, adjust the exception contents.</p>
 </section>
 <section id="exception-handling">
 <h2>Exception handling<a class="headerlink" href="#exception-handling" title="Link to this heading">¶</a></h2>
-<p>Litestar handles all errors by default by transforming them into <strong>JSON responses</strong>. If the errors are <strong>instances of</strong>
-<a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.HTTPException" title="litestar.exceptions.http_exceptions.HTTPException"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPException</span></code></a>, the responses will include the appropriate <code class="docutils literal notranslate"><span class="pre">status_code</span></code>.
-Otherwise, the responses will default to <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">&quot;Internal</span> <span class="pre">Server</span> <span class="pre">Error&quot;</span></code>.</p>
+<p>There are 2 layers of exception handling:</p>
+<ul class="simple">
+<li><p>Built-in exception handlers, for all exceptions deriving from <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.LitestarException" title="litestar.exceptions.LitestarException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LitestarException</span></code></a>
+and <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.HTTPException" title="litestar.exceptions.HTTPException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPException</span></code></a></p></li>
+<li><p>User-defined exception handlers</p></li>
+</ul>
+<p>If an exception is raised, Litestar will first attempt to find a user-defined exception
+handler (traversing all application layers from route handler -&gt; application), defaulting
+to the built-in ones.</p>
+<p>If no exception handler is found, the exception will be re-raised, to be handled by the
+ASGI server.</p>
+<section id="built-in-exception-handlers">
+<h3>Built-in exception handlers<a class="headerlink" href="#built-in-exception-handlers" title="Link to this heading">¶</a></h3>
+<p>Exceptions derived from <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.LitestarException" title="litestar.exceptions.LitestarException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LitestarException</span></code></a> and <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.HTTPException" title="litestar.exceptions.HTTPException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPException</span></code></a> will be
+handled by Litestar’s built-in exception handlers. Error responses for these will
+include the <code class="docutils literal notranslate"><span class="pre">detail</span></code> passed to the exception.</p>
+<p>If a subclass the exception is an <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.HTTPException" title="litestar.exceptions.HTTPException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPException</span></code></a>, the response will have the
+status code set on that exception, and default to <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">&quot;Internal</span> <span class="pre">Server</span> <span class="pre">Error&quot;</span></code>
+otherwise.</p>
+<p>The exception handlers will respect the handler’s media type, and but fall back to JSON.</p>
 <p>The following handler for instance will default to <code class="docutils literal notranslate"><span class="pre">MediaType.TEXT</span></code> so the exception will be raised as text.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span>
-</span><span data-line="2">
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPException</span>
 </span><span data-line="3">
-</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="5"><span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="6">    <span class="k">raise</span> <span class="ne">ValueError</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="nd">@get</span><span class="p">(</span><span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="6"><span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="7">    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="s2">&quot;nope&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
 </span></pre></div>
 </div>
+</section>
+<section id="custom-exception-handlers">
+<h3>Custom exception handlers<a class="headerlink" href="#custom-exception-handlers" title="Link to this heading">¶</a></h3>
 <p>You can customize exception handling by passing a dictionary, mapping either status codes
 or exception classes to callables. For example, if you would like to replace the default
 exception handler with a handler that returns plain-text responses you could do this:</p>
@@ -648,8 +702,9 @@ exception handler with a handler that returns plain-text responses you could do 
 </span></pre></div>
 </div>
 </div>
-<p>The above will define a top level exception handler that will apply the <code class="docutils literal notranslate"><span class="pre">plain_text_exception_handler</span></code> function to all
-exceptions that inherit from <code class="docutils literal notranslate"><span class="pre">HTTPException</span></code>. You could of course be more granular:</p>
+<p>The above will define a top level exception handler that will apply the
+<code class="docutils literal notranslate"><span class="pre">plain_text_exception_handler</span></code> function to all exceptions that inherit from
+<code class="docutils literal notranslate"><span class="pre">HTTPException</span></code>. You could of course be more granular:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">MediaType</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">get</span>
 </span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">ValidationException</span>
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.status_codes</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span>
@@ -715,8 +770,9 @@ exceptions that inherit from <code class="docutils literal notranslate"><span cl
 </span></pre></div>
 </div>
 </div>
-<p>The choice whether to use a single function that has switching logic inside it, or multiple functions depends on your
-specific needs.</p>
+<p>The choice whether to use a single function that has switching logic inside it, or
+multiple functions depends on your specific needs.</p>
+</section>
 <section id="exception-handling-layers">
 <h3>Exception handling layers<a class="headerlink" href="#exception-handling-layers" title="Link to this heading">¶</a></h3>
 <p>Since Litestar allows users to define both exception handlers and middlewares in a layered fashion, i.e. on individual
@@ -849,9 +905,9 @@ the <code class="docutils literal notranslate"><span class="pre">ValidationExcep
       <script>let toggleHintShow = 'Click to show';</script>
       <script>let toggleHintHide = 'Click to hide';</script>
       <script>let toggleOpenOnPrint = 'true';</script>
-      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="../_static/shibuya.js?v=c477d091"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script>
       <script src="../_static/versioning.js?v=9ab184b9"></script></body>
 </html>
