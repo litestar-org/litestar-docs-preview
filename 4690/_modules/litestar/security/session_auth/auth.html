@@ -530,7 +530,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="23"><span class="k">class</span><span class="w"> </span><span class="nc">SessionAuth</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">UserType</span><span class="p">,</span> <span class="n">BaseSessionBackendT</span><span class="p">],</span> <span class="n">AbstractSecurityConfig</span><span class="p">[</span><span class="n">UserType</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
 </span><span data-line="24"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Session Based Security Backend.&quot;&quot;&quot;</span>
 </span><span data-line="25">
-</span><span data-line="26">    <span class="n">session_backend_config</span><span class="p">:</span> <span class="n">BaseBackendConfig</span><span class="p">[</span><span class="n">BaseSessionBackendT</span><span class="p">]</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="26">    <span class="n">session_backend_config</span><span class="p">:</span> <span class="n">BaseBackendConfig</span><span class="p">[</span><span class="n">BaseSessionBackendT</span><span class="p">]</span>
 </span><span data-line="27"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A session backend config.&quot;&quot;&quot;</span>
 </span><span data-line="28">    <span class="n">retrieve_user_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">,</span> <span class="n">ASGIConnection</span><span class="p">],</span> <span class="n">SyncOrAsyncUnion</span><span class="p">[</span><span class="n">Any</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]]</span>
 </span><span data-line="29"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Callable that receives the ``auth`` value from the authentication middleware and returns a ``user`` value.</span>
@@ -543,7 +543,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="36">
 </span><span data-line="37"><span class="sd">    &quot;&quot;&quot;</span>
 </span><span data-line="38">
-</span><span data-line="39">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">SessionAuthMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">SessionAuthMiddleware</span><span class="p">)</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="39">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">SessionAuthMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">SessionAuthMiddleware</span><span class="p">)</span>  <span class="c1"># pyright: ignore[reportIncompatibleVariableOverride]</span>
 </span><span data-line="40"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The authentication middleware class to use.</span>
 </span><span data-line="41">
 </span><span data-line="42"><span class="sd">    Must inherit from :class:`SessionAuthMiddleware &lt;litestar.security.session_auth.middleware.SessionAuthMiddleware&gt;`</span>
@@ -613,7 +613,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="106"><span class="sd">        Returns:</span>
 </span><span data-line="107"><span class="sd">            A subclass of :class:`BaseSessionBackend &lt;litestar.middleware.session.base.BaseSessionBackend&gt;`</span>
 </span><span data-line="108"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="109">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_backend_config</span><span class="o">.</span><span class="n">_backend_class</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">session_backend_config</span><span class="p">)</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="109">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_backend_config</span><span class="o">.</span><span class="n">_backend_class</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">session_backend_config</span><span class="p">)</span>
 </span><span data-line="110">
 </span><span data-line="111">    <span class="nd">@property</span>
 </span><span data-line="112">    <span class="k">def</span><span class="w"> </span><span class="nf">openapi_components</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Components</span><span class="p">:</span>
@@ -627,7 +627,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="120">                <span class="s2">&quot;sessionCookie&quot;</span><span class="p">:</span> <span class="n">SecurityScheme</span><span class="p">(</span>
 </span><span data-line="121">                    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;apiKey&quot;</span><span class="p">,</span>
 </span><span data-line="122">                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">session_backend_config</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
-</span><span data-line="123">                    <span class="n">security_scheme_in</span><span class="o">=</span><span class="s2">&quot;cookie&quot;</span><span class="p">,</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="123">                    <span class="n">security_scheme_in</span><span class="o">=</span><span class="s2">&quot;cookie&quot;</span><span class="p">,</span>
 </span><span data-line="124">                    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Session cookie authentication.&quot;</span><span class="p">,</span>
 </span><span data-line="125">                <span class="p">)</span>
 </span><span data-line="126">            <span class="p">}</span>

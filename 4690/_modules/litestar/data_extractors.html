@@ -503,515 +503,517 @@ data-aria-dark="Switch to auto color mode">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
           <h1>Source code for litestar.data_extractors</h1><div class="highlight"><pre>
-<span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span data-line="1"><span class="c1"># pyright: reportUnnecessaryTypeIgnoreComment=false</span>
 </span><span data-line="2">
-</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">cast</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar._parsers</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_cookie_string</span>
-</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.connection.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">Request</span>
-</span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.datastructures.upload_file</span><span class="w"> </span><span class="kn">import</span> <span class="n">UploadFile</span>
-</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpMethod</span><span class="p">,</span> <span class="n">RequestEncodingType</span>
-</span><span data-line="10">
-</span><span data-line="11"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="12">    <span class="s2">&quot;ConnectionDataExtractor&quot;</span><span class="p">,</span>
-</span><span data-line="13">    <span class="s2">&quot;ExtractedRequestData&quot;</span><span class="p">,</span>
-</span><span data-line="14">    <span class="s2">&quot;ExtractedResponseData&quot;</span><span class="p">,</span>
-</span><span data-line="15">    <span class="s2">&quot;RequestExtractorField&quot;</span><span class="p">,</span>
-</span><span data-line="16">    <span class="s2">&quot;ResponseDataExtractor&quot;</span><span class="p">,</span>
-</span><span data-line="17">    <span class="s2">&quot;ResponseExtractorField&quot;</span><span class="p">,</span>
-</span><span data-line="18"><span class="p">)</span>
-</span><span data-line="19">
-</span><span data-line="20">
-</span><span data-line="21"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-</span><span data-line="22">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Coroutine</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Set</span>
-</span><span data-line="23">
-</span><span data-line="24">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.connection</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASGIConnection</span>
-</span><span data-line="25">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Method</span>
-</span><span data-line="26">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types.asgi_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">,</span> <span class="n">HTTPResponseStartEvent</span>
-</span><span data-line="27">
-</span><span data-line="28">
-</span><span data-line="29"><span class="k">def</span><span class="w"> </span><span class="nf">_obfuscate</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">fields_to_obfuscate</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="30"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Obfuscate values in a dictionary, replacing values with `******`</span>
-</span><span data-line="31">
-</span><span data-line="32"><span class="sd">    Args:</span>
-</span><span data-line="33"><span class="sd">        values: A dictionary of strings</span>
-</span><span data-line="34"><span class="sd">        fields_to_obfuscate: keys to obfuscate</span>
-</span><span data-line="35">
-</span><span data-line="36"><span class="sd">    Returns:</span>
-</span><span data-line="37"><span class="sd">        A dictionary with obfuscated strings</span>
-</span><span data-line="38"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="39">    <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="s2">&quot;*****&quot;</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">fields_to_obfuscate</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-</span><span data-line="40">
-</span><span data-line="41">
-</span><span data-line="42"><span class="n">RequestExtractorField</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span>
-</span><span data-line="43">    <span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;content_type&quot;</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;cookies&quot;</span><span class="p">,</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span> <span class="s2">&quot;path_params&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">,</span> <span class="s2">&quot;scheme&quot;</span><span class="p">,</span> <span class="s2">&quot;client&quot;</span>
-</span><span data-line="44"><span class="p">]</span>
-</span><span data-line="45">
-</span><span data-line="46"><span class="n">ResponseExtractorField</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">,</span> <span class="s2">&quot;cookies&quot;</span><span class="p">]</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">cast</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar._parsers</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_cookie_string</span>
+</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.connection.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">Request</span>
+</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.datastructures.upload_file</span><span class="w"> </span><span class="kn">import</span> <span class="n">UploadFile</span>
+</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpMethod</span><span class="p">,</span> <span class="n">RequestEncodingType</span>
+</span><span data-line="12">
+</span><span data-line="13"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="14">    <span class="s2">&quot;ConnectionDataExtractor&quot;</span><span class="p">,</span>
+</span><span data-line="15">    <span class="s2">&quot;ExtractedRequestData&quot;</span><span class="p">,</span>
+</span><span data-line="16">    <span class="s2">&quot;ExtractedResponseData&quot;</span><span class="p">,</span>
+</span><span data-line="17">    <span class="s2">&quot;RequestExtractorField&quot;</span><span class="p">,</span>
+</span><span data-line="18">    <span class="s2">&quot;ResponseDataExtractor&quot;</span><span class="p">,</span>
+</span><span data-line="19">    <span class="s2">&quot;ResponseExtractorField&quot;</span><span class="p">,</span>
+</span><span data-line="20"><span class="p">)</span>
+</span><span data-line="21">
+</span><span data-line="22">
+</span><span data-line="23"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+</span><span data-line="24">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Coroutine</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Set</span>
+</span><span data-line="25">
+</span><span data-line="26">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.connection</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASGIConnection</span>
+</span><span data-line="27">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Method</span>
+</span><span data-line="28">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types.asgi_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">,</span> <span class="n">HTTPResponseStartEvent</span>
+</span><span data-line="29">
+</span><span data-line="30">
+</span><span data-line="31"><span class="k">def</span><span class="w"> </span><span class="nf">_obfuscate</span><span class="p">(</span><span class="n">values</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">fields_to_obfuscate</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="32"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Obfuscate values in a dictionary, replacing values with `******`</span>
+</span><span data-line="33">
+</span><span data-line="34"><span class="sd">    Args:</span>
+</span><span data-line="35"><span class="sd">        values: A dictionary of strings</span>
+</span><span data-line="36"><span class="sd">        fields_to_obfuscate: keys to obfuscate</span>
+</span><span data-line="37">
+</span><span data-line="38"><span class="sd">    Returns:</span>
+</span><span data-line="39"><span class="sd">        A dictionary with obfuscated strings</span>
+</span><span data-line="40"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="41">    <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="s2">&quot;*****&quot;</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">fields_to_obfuscate</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</span><span data-line="42">
+</span><span data-line="43">
+</span><span data-line="44"><span class="n">RequestExtractorField</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span>
+</span><span data-line="45">    <span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;content_type&quot;</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;cookies&quot;</span><span class="p">,</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span> <span class="s2">&quot;path_params&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">,</span> <span class="s2">&quot;scheme&quot;</span><span class="p">,</span> <span class="s2">&quot;client&quot;</span>
+</span><span data-line="46"><span class="p">]</span>
 </span><span data-line="47">
-</span><span data-line="48">
+</span><span data-line="48"><span class="n">ResponseExtractorField</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">,</span> <span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">,</span> <span class="s2">&quot;cookies&quot;</span><span class="p">]</span>
+</span><span data-line="49">
+</span><span data-line="50">
 <div class="viewcode-block" id="ExtractedRequestData">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ExtractedRequestData">[docs]</a>
-</span><span data-line="49"><span class="k">class</span><span class="w"> </span><span class="nc">ExtractedRequestData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span data-line="50"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary representing extracted request data.&quot;&quot;&quot;</span>
-</span><span data-line="51">
-</span><span data-line="52">    <span class="n">body</span><span class="p">:</span> <span class="n">Coroutine</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</span><span data-line="53">    <span class="n">client</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
-</span><span data-line="54">    <span class="n">content_type</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
-</span><span data-line="55">    <span class="n">cookies</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-</span><span data-line="56">    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-</span><span data-line="57">    <span class="n">method</span><span class="p">:</span> <span class="n">Method</span>
-</span><span data-line="58">    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="59">    <span class="n">path_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</span><span data-line="60">    <span class="n">query</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-</span><span data-line="61">    <span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span></div>
+</span><span data-line="51"><span class="k">class</span><span class="w"> </span><span class="nc">ExtractedRequestData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span data-line="52"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary representing extracted request data.&quot;&quot;&quot;</span>
+</span><span data-line="53">
+</span><span data-line="54">    <span class="n">body</span><span class="p">:</span> <span class="n">Coroutine</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</span><span data-line="55">    <span class="n">client</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+</span><span data-line="56">    <span class="n">content_type</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
+</span><span data-line="57">    <span class="n">cookies</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</span><span data-line="58">    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</span><span data-line="59">    <span class="n">method</span><span class="p">:</span> <span class="n">Method</span>
+</span><span data-line="60">    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="61">    <span class="n">path_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</span><span data-line="62">    <span class="n">query</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</span><span data-line="63">    <span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span></div>
 
-</span><span data-line="62">
-</span><span data-line="63">
+</span><span data-line="64">
+</span><span data-line="65">
 <div class="viewcode-block" id="ConnectionDataExtractor">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor">[docs]</a>
-</span><span data-line="64"><span class="k">class</span><span class="w"> </span><span class="nc">ConnectionDataExtractor</span><span class="p">:</span>
-</span><span data-line="65"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Utility class to extract data from an :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;`,</span>
-</span><span data-line="66"><span class="sd">    :class:`Request &lt;litestar.connection.Request&gt;` or :class:`WebSocket &lt;litestar.connection.WebSocket&gt;` instance.</span>
-</span><span data-line="67"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="68">
-</span><span data-line="69">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="70">        <span class="s2">&quot;connection_extractors&quot;</span><span class="p">,</span>
-</span><span data-line="71">        <span class="s2">&quot;obfuscate_cookies&quot;</span><span class="p">,</span>
-</span><span data-line="72">        <span class="s2">&quot;obfuscate_headers&quot;</span><span class="p">,</span>
-</span><span data-line="73">        <span class="s2">&quot;parse_body&quot;</span><span class="p">,</span>
-</span><span data-line="74">        <span class="s2">&quot;parse_query&quot;</span><span class="p">,</span>
-</span><span data-line="75">        <span class="s2">&quot;request_extractors&quot;</span><span class="p">,</span>
-</span><span data-line="76">        <span class="s2">&quot;skip_parse_malformed_body&quot;</span><span class="p">,</span>
-</span><span data-line="77">    <span class="p">)</span>
-</span><span data-line="78">
+</span><span data-line="66"><span class="k">class</span><span class="w"> </span><span class="nc">ConnectionDataExtractor</span><span class="p">:</span>
+</span><span data-line="67"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Utility class to extract data from an :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;`,</span>
+</span><span data-line="68"><span class="sd">    :class:`Request &lt;litestar.connection.Request&gt;` or :class:`WebSocket &lt;litestar.connection.WebSocket&gt;` instance.</span>
+</span><span data-line="69"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="70">
+</span><span data-line="71">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="72">        <span class="s2">&quot;connection_extractors&quot;</span><span class="p">,</span>
+</span><span data-line="73">        <span class="s2">&quot;obfuscate_cookies&quot;</span><span class="p">,</span>
+</span><span data-line="74">        <span class="s2">&quot;obfuscate_headers&quot;</span><span class="p">,</span>
+</span><span data-line="75">        <span class="s2">&quot;parse_body&quot;</span><span class="p">,</span>
+</span><span data-line="76">        <span class="s2">&quot;parse_query&quot;</span><span class="p">,</span>
+</span><span data-line="77">        <span class="s2">&quot;request_extractors&quot;</span><span class="p">,</span>
+</span><span data-line="78">        <span class="s2">&quot;skip_parse_malformed_body&quot;</span><span class="p">,</span>
+</span><span data-line="79">    <span class="p">)</span>
+</span><span data-line="80">
 <div class="viewcode-block" id="ConnectionDataExtractor.__init__">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.__init__">[docs]</a>
-</span><span data-line="79">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="80">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="81">        <span class="n">extract_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="82">        <span class="n">extract_client</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="83">        <span class="n">extract_content_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="84">        <span class="n">extract_cookies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="85">        <span class="n">extract_headers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="86">        <span class="n">extract_method</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="87">        <span class="n">extract_path</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="88">        <span class="n">extract_path_params</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="89">        <span class="n">extract_query</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="90">        <span class="n">extract_scheme</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="91">        <span class="n">obfuscate_cookies</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="92">        <span class="n">obfuscate_headers</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="93">        <span class="n">parse_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="94">        <span class="n">parse_query</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="95">        <span class="n">skip_parse_malformed_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="96">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="97"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ``ConnectionDataExtractor``</span>
-</span><span data-line="98">
-</span><span data-line="99"><span class="sd">        Args:</span>
-</span><span data-line="100"><span class="sd">            extract_body: Whether to extract body, (for requests only).</span>
-</span><span data-line="101"><span class="sd">            extract_client: Whether to extract the client (host, port) mapping.</span>
-</span><span data-line="102"><span class="sd">            extract_content_type: Whether to extract the content type and any options.</span>
-</span><span data-line="103"><span class="sd">            extract_cookies: Whether to extract cookies.</span>
-</span><span data-line="104"><span class="sd">            extract_headers: Whether to extract headers.</span>
-</span><span data-line="105"><span class="sd">            extract_method: Whether to extract the HTTP method, (for requests only).</span>
-</span><span data-line="106"><span class="sd">            extract_path: Whether to extract the path.</span>
-</span><span data-line="107"><span class="sd">            extract_path_params: Whether to extract path parameters.</span>
-</span><span data-line="108"><span class="sd">            extract_query: Whether to extract query parameters.</span>
-</span><span data-line="109"><span class="sd">            extract_scheme: Whether to extract the http scheme.</span>
-</span><span data-line="110"><span class="sd">            obfuscate_headers: headers keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
-</span><span data-line="111"><span class="sd">            obfuscate_cookies: cookie keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
-</span><span data-line="112"><span class="sd">            parse_body: Whether to parse the body value or return the raw byte string, (for requests only).</span>
-</span><span data-line="113"><span class="sd">            parse_query: Whether to parse query parameters or return the raw byte string.</span>
-</span><span data-line="114"><span class="sd">            skip_parse_malformed_body: Whether to skip parsing the body if it is malformed</span>
-</span><span data-line="115"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="116">        <span class="bp">self</span><span class="o">.</span><span class="n">parse_body</span> <span class="o">=</span> <span class="n">parse_body</span>
-</span><span data-line="117">        <span class="bp">self</span><span class="o">.</span><span class="n">parse_query</span> <span class="o">=</span> <span class="n">parse_query</span>
-</span><span data-line="118">        <span class="bp">self</span><span class="o">.</span><span class="n">skip_parse_malformed_body</span> <span class="o">=</span> <span class="n">skip_parse_malformed_body</span>
-</span><span data-line="119">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_headers</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
-</span><span data-line="120">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_cookies</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
-</span><span data-line="121">        <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="122">        <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">RequestExtractorField</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="123">        <span class="k">if</span> <span class="n">extract_scheme</span><span class="p">:</span>
-</span><span data-line="124">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;scheme&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_scheme</span>
-</span><span data-line="125">        <span class="k">if</span> <span class="n">extract_client</span><span class="p">:</span>
-</span><span data-line="126">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;client&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_client</span>
-</span><span data-line="127">        <span class="k">if</span> <span class="n">extract_path</span><span class="p">:</span>
-</span><span data-line="128">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_path</span>
-</span><span data-line="129">        <span class="k">if</span> <span class="n">extract_headers</span><span class="p">:</span>
-</span><span data-line="130">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_headers</span>
-</span><span data-line="131">        <span class="k">if</span> <span class="n">extract_cookies</span><span class="p">:</span>
-</span><span data-line="132">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;cookies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_cookies</span>
-</span><span data-line="133">        <span class="k">if</span> <span class="n">extract_query</span><span class="p">:</span>
-</span><span data-line="134">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_query</span>
-</span><span data-line="135">        <span class="k">if</span> <span class="n">extract_path_params</span><span class="p">:</span>
-</span><span data-line="136">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;path_params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_path_params</span>
-</span><span data-line="137">        <span class="k">if</span> <span class="n">extract_method</span><span class="p">:</span>
-</span><span data-line="138">            <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_method</span>
-</span><span data-line="139">        <span class="k">if</span> <span class="n">extract_content_type</span><span class="p">:</span>
-</span><span data-line="140">            <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_content_type</span>
-</span><span data-line="141">        <span class="k">if</span> <span class="n">extract_body</span><span class="p">:</span>
-</span><span data-line="142">            <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_body</span></div>
+</span><span data-line="81">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="82">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="83">        <span class="n">extract_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="84">        <span class="n">extract_client</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="85">        <span class="n">extract_content_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="86">        <span class="n">extract_cookies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="87">        <span class="n">extract_headers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="88">        <span class="n">extract_method</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="89">        <span class="n">extract_path</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="90">        <span class="n">extract_path_params</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="91">        <span class="n">extract_query</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="92">        <span class="n">extract_scheme</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="93">        <span class="n">obfuscate_cookies</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="94">        <span class="n">obfuscate_headers</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="95">        <span class="n">parse_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="96">        <span class="n">parse_query</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="97">        <span class="n">skip_parse_malformed_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="98">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="99"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ``ConnectionDataExtractor``</span>
+</span><span data-line="100">
+</span><span data-line="101"><span class="sd">        Args:</span>
+</span><span data-line="102"><span class="sd">            extract_body: Whether to extract body, (for requests only).</span>
+</span><span data-line="103"><span class="sd">            extract_client: Whether to extract the client (host, port) mapping.</span>
+</span><span data-line="104"><span class="sd">            extract_content_type: Whether to extract the content type and any options.</span>
+</span><span data-line="105"><span class="sd">            extract_cookies: Whether to extract cookies.</span>
+</span><span data-line="106"><span class="sd">            extract_headers: Whether to extract headers.</span>
+</span><span data-line="107"><span class="sd">            extract_method: Whether to extract the HTTP method, (for requests only).</span>
+</span><span data-line="108"><span class="sd">            extract_path: Whether to extract the path.</span>
+</span><span data-line="109"><span class="sd">            extract_path_params: Whether to extract path parameters.</span>
+</span><span data-line="110"><span class="sd">            extract_query: Whether to extract query parameters.</span>
+</span><span data-line="111"><span class="sd">            extract_scheme: Whether to extract the http scheme.</span>
+</span><span data-line="112"><span class="sd">            obfuscate_headers: headers keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
+</span><span data-line="113"><span class="sd">            obfuscate_cookies: cookie keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
+</span><span data-line="114"><span class="sd">            parse_body: Whether to parse the body value or return the raw byte string, (for requests only).</span>
+</span><span data-line="115"><span class="sd">            parse_query: Whether to parse query parameters or return the raw byte string.</span>
+</span><span data-line="116"><span class="sd">            skip_parse_malformed_body: Whether to skip parsing the body if it is malformed</span>
+</span><span data-line="117"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="118">        <span class="bp">self</span><span class="o">.</span><span class="n">parse_body</span> <span class="o">=</span> <span class="n">parse_body</span>
+</span><span data-line="119">        <span class="bp">self</span><span class="o">.</span><span class="n">parse_query</span> <span class="o">=</span> <span class="n">parse_query</span>
+</span><span data-line="120">        <span class="bp">self</span><span class="o">.</span><span class="n">skip_parse_malformed_body</span> <span class="o">=</span> <span class="n">skip_parse_malformed_body</span>
+</span><span data-line="121">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_headers</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
+</span><span data-line="122">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_cookies</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
+</span><span data-line="123">        <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="124">        <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">RequestExtractorField</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="125">        <span class="k">if</span> <span class="n">extract_scheme</span><span class="p">:</span>
+</span><span data-line="126">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;scheme&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_scheme</span>
+</span><span data-line="127">        <span class="k">if</span> <span class="n">extract_client</span><span class="p">:</span>
+</span><span data-line="128">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;client&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_client</span>
+</span><span data-line="129">        <span class="k">if</span> <span class="n">extract_path</span><span class="p">:</span>
+</span><span data-line="130">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_path</span>
+</span><span data-line="131">        <span class="k">if</span> <span class="n">extract_headers</span><span class="p">:</span>
+</span><span data-line="132">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_headers</span>
+</span><span data-line="133">        <span class="k">if</span> <span class="n">extract_cookies</span><span class="p">:</span>
+</span><span data-line="134">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;cookies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_cookies</span>
+</span><span data-line="135">        <span class="k">if</span> <span class="n">extract_query</span><span class="p">:</span>
+</span><span data-line="136">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_query</span>
+</span><span data-line="137">        <span class="k">if</span> <span class="n">extract_path_params</span><span class="p">:</span>
+</span><span data-line="138">            <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">[</span><span class="s2">&quot;path_params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_path_params</span>
+</span><span data-line="139">        <span class="k">if</span> <span class="n">extract_method</span><span class="p">:</span>
+</span><span data-line="140">            <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_method</span>
+</span><span data-line="141">        <span class="k">if</span> <span class="n">extract_content_type</span><span class="p">:</span>
+</span><span data-line="142">            <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_content_type</span>
+</span><span data-line="143">        <span class="k">if</span> <span class="n">extract_body</span><span class="p">:</span>
+</span><span data-line="144">            <span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_body</span></div>
 
-</span><span data-line="143">
+</span><span data-line="145">
 <div class="viewcode-block" id="ConnectionDataExtractor.__call__">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.__call__">[docs]</a>
-</span><span data-line="144">    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ExtractedRequestData</span><span class="p">:</span>
-</span><span data-line="145"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract data from the connection, returning a dictionary of values.</span>
-</span><span data-line="146">
-</span><span data-line="147"><span class="sd">        Notes:</span>
-</span><span data-line="148"><span class="sd">            - The value for ``body`` - if present - is an unresolved Coroutine and as such should be awaited by the receiver.</span>
-</span><span data-line="149">
-</span><span data-line="150"><span class="sd">        Args:</span>
-</span><span data-line="151"><span class="sd">            connection: An ASGI connection or its subclasses.</span>
-</span><span data-line="152">
-</span><span data-line="153"><span class="sd">        Returns:</span>
-</span><span data-line="154"><span class="sd">            A string keyed dictionary of extracted values.</span>
-</span><span data-line="155"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="156">        <span class="n">extractors</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="157">            <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">}</span>  <span class="c1"># type: ignore[misc]</span>
-</span><span data-line="158">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">Request</span><span class="p">)</span>
-</span><span data-line="159">            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span>
-</span><span data-line="160">        <span class="p">)</span>
-</span><span data-line="161">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;ExtractedRequestData&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">extractor</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="n">extractors</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
+</span><span data-line="146">    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ExtractedRequestData</span><span class="p">:</span>
+</span><span data-line="147"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract data from the connection, returning a dictionary of values.</span>
+</span><span data-line="148">
+</span><span data-line="149"><span class="sd">        Notes:</span>
+</span><span data-line="150"><span class="sd">            - The value for ``body`` - if present - is an unresolved Coroutine and as such should be awaited by the receiver.</span>
+</span><span data-line="151">
+</span><span data-line="152"><span class="sd">        Args:</span>
+</span><span data-line="153"><span class="sd">            connection: An ASGI connection or its subclasses.</span>
+</span><span data-line="154">
+</span><span data-line="155"><span class="sd">        Returns:</span>
+</span><span data-line="156"><span class="sd">            A string keyed dictionary of extracted values.</span>
+</span><span data-line="157"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="158">        <span class="n">extractors</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="159">            <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">}</span>  <span class="c1"># type: ignore[misc]</span>
+</span><span data-line="160">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">Request</span><span class="p">)</span>
+</span><span data-line="161">            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span>
+</span><span data-line="162">        <span class="p">)</span>
+</span><span data-line="163">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;ExtractedRequestData&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">extractor</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="n">extractors</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
 
-</span><span data-line="162">
-</span><span data-line="163">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span>
-</span><span data-line="164">        <span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span data-line="165">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExtractedRequestData</span><span class="p">:</span>
-</span><span data-line="166">        <span class="n">extractors</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="167">            <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">}</span>  <span class="c1"># type: ignore[misc]</span>
-</span><span data-line="168">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">Request</span><span class="p">)</span>
-</span><span data-line="169">            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span>
-</span><span data-line="170">        <span class="p">)</span>
-</span><span data-line="171">        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="172">        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="n">extractors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="173">            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
-</span><span data-line="174">                <span class="k">continue</span>
-</span><span data-line="175">            <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">extractor</span><span class="p">):</span>
-</span><span data-line="176">                <span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">extractor</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
-</span><span data-line="177">            <span class="k">else</span><span class="p">:</span>
-</span><span data-line="178">                <span class="n">value</span> <span class="o">=</span> <span class="n">extractor</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
-</span><span data-line="179">            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span data-line="180">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;ExtractedRequestData&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span data-line="181">
+</span><span data-line="164">
+</span><span data-line="165">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span>
+</span><span data-line="166">        <span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span data-line="167">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExtractedRequestData</span><span class="p">:</span>
+</span><span data-line="168">        <span class="n">extractors</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="169">            <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">request_extractors</span><span class="p">}</span>  <span class="c1"># type: ignore[misc]</span>
+</span><span data-line="170">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">Request</span><span class="p">)</span>
+</span><span data-line="171">            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_extractors</span>
+</span><span data-line="172">        <span class="p">)</span>
+</span><span data-line="173">        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="174">        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="n">extractors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="175">            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+</span><span data-line="176">                <span class="k">continue</span>
+</span><span data-line="177">            <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">extractor</span><span class="p">):</span>
+</span><span data-line="178">                <span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">extractor</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+</span><span data-line="179">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="180">                <span class="n">value</span> <span class="o">=</span> <span class="n">extractor</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+</span><span data-line="181">            <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="182">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;ExtractedRequestData&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span data-line="183">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_scheme">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_scheme">[docs]</a>
-</span><span data-line="182">    <span class="nd">@staticmethod</span>
-</span><span data-line="183">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_scheme</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="184"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the scheme from an ``ASGIConnection``</span>
-</span><span data-line="185">
-</span><span data-line="186"><span class="sd">        Args:</span>
-</span><span data-line="187"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="188">
-</span><span data-line="189"><span class="sd">        Returns:</span>
-</span><span data-line="190"><span class="sd">            The connection&#39;s scope[&quot;scheme&quot;] value</span>
-</span><span data-line="191"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="192">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;scheme&quot;</span><span class="p">]</span></div>
+</span><span data-line="184">    <span class="nd">@staticmethod</span>
+</span><span data-line="185">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_scheme</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="186"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the scheme from an ``ASGIConnection``</span>
+</span><span data-line="187">
+</span><span data-line="188"><span class="sd">        Args:</span>
+</span><span data-line="189"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="190">
+</span><span data-line="191"><span class="sd">        Returns:</span>
+</span><span data-line="192"><span class="sd">            The connection&#39;s scope[&quot;scheme&quot;] value</span>
+</span><span data-line="193"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="194">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;scheme&quot;</span><span class="p">]</span></div>
 
-</span><span data-line="193">
+</span><span data-line="195">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_client">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_client">[docs]</a>
-</span><span data-line="194">    <span class="nd">@staticmethod</span>
-</span><span data-line="195">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_client</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-</span><span data-line="196"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the client from an ``ASGIConnection``</span>
-</span><span data-line="197">
-</span><span data-line="198"><span class="sd">        Args:</span>
-</span><span data-line="199"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="200">
-</span><span data-line="201"><span class="sd">        Returns:</span>
-</span><span data-line="202"><span class="sd">            The connection&#39;s scope[&quot;client&quot;] value or a default value.</span>
-</span><span data-line="203"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="204">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;client&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+</span><span data-line="196">    <span class="nd">@staticmethod</span>
+</span><span data-line="197">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_client</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span data-line="198"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the client from an ``ASGIConnection``</span>
+</span><span data-line="199">
+</span><span data-line="200"><span class="sd">        Args:</span>
+</span><span data-line="201"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="202">
+</span><span data-line="203"><span class="sd">        Returns:</span>
+</span><span data-line="204"><span class="sd">            The connection&#39;s scope[&quot;client&quot;] value or a default value.</span>
+</span><span data-line="205"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="206">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;client&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
-</span><span data-line="205">
+</span><span data-line="207">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_path">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_path">[docs]</a>
-</span><span data-line="206">    <span class="nd">@staticmethod</span>
-</span><span data-line="207">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_path</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="208"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the path from an ``ASGIConnection``</span>
-</span><span data-line="209">
-</span><span data-line="210"><span class="sd">        Args:</span>
-</span><span data-line="211"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="212">
-</span><span data-line="213"><span class="sd">        Returns:</span>
-</span><span data-line="214"><span class="sd">            The connection&#39;s scope[&quot;path&quot;] value</span>
-</span><span data-line="215"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="216">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span></div>
+</span><span data-line="208">    <span class="nd">@staticmethod</span>
+</span><span data-line="209">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_path</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="210"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the path from an ``ASGIConnection``</span>
+</span><span data-line="211">
+</span><span data-line="212"><span class="sd">        Args:</span>
+</span><span data-line="213"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="214">
+</span><span data-line="215"><span class="sd">        Returns:</span>
+</span><span data-line="216"><span class="sd">            The connection&#39;s scope[&quot;path&quot;] value</span>
+</span><span data-line="217"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="218">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span></div>
 
-</span><span data-line="217">
+</span><span data-line="219">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_headers">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_headers">[docs]</a>
-</span><span data-line="218">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="219"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract headers from an ``ASGIConnection``</span>
-</span><span data-line="220">
-</span><span data-line="221"><span class="sd">        Args:</span>
-</span><span data-line="222"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="223">
-</span><span data-line="224"><span class="sd">        Returns:</span>
-</span><span data-line="225"><span class="sd">            A dictionary with the connection&#39;s headers.</span>
-</span><span data-line="226"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="227">        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">):</span> <span class="n">v</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]}</span>
-</span><span data-line="228">        <span class="k">return</span> <span class="n">_obfuscate</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span> <span class="k">else</span> <span class="n">headers</span></div>
+</span><span data-line="220">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="221"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract headers from an ``ASGIConnection``</span>
+</span><span data-line="222">
+</span><span data-line="223"><span class="sd">        Args:</span>
+</span><span data-line="224"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="225">
+</span><span data-line="226"><span class="sd">        Returns:</span>
+</span><span data-line="227"><span class="sd">            A dictionary with the connection&#39;s headers.</span>
+</span><span data-line="228"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="229">        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">):</span> <span class="n">v</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]}</span>
+</span><span data-line="230">        <span class="k">return</span> <span class="n">_obfuscate</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span> <span class="k">else</span> <span class="n">headers</span></div>
 
-</span><span data-line="229">
+</span><span data-line="231">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_cookies">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_cookies">[docs]</a>
-</span><span data-line="230">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="231"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract cookies from an ``ASGIConnection``</span>
-</span><span data-line="232">
-</span><span data-line="233"><span class="sd">        Args:</span>
-</span><span data-line="234"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="235">
-</span><span data-line="236"><span class="sd">        Returns:</span>
-</span><span data-line="237"><span class="sd">            A dictionary with the connection&#39;s cookies.</span>
-</span><span data-line="238"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="239">        <span class="k">return</span> <span class="n">_obfuscate</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="k">else</span> <span class="n">connection</span><span class="o">.</span><span class="n">cookies</span></div>
+</span><span data-line="232">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="233"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract cookies from an ``ASGIConnection``</span>
+</span><span data-line="234">
+</span><span data-line="235"><span class="sd">        Args:</span>
+</span><span data-line="236"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="237">
+</span><span data-line="238"><span class="sd">        Returns:</span>
+</span><span data-line="239"><span class="sd">            A dictionary with the connection&#39;s cookies.</span>
+</span><span data-line="240"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="241">        <span class="k">return</span> <span class="n">_obfuscate</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">cookies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="k">else</span> <span class="n">connection</span><span class="o">.</span><span class="n">cookies</span></div>
 
-</span><span data-line="240">
+</span><span data-line="242">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_query">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_query">[docs]</a>
-</span><span data-line="241">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="242"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract query from an ``ASGIConnection``</span>
-</span><span data-line="243">
-</span><span data-line="244"><span class="sd">        Args:</span>
-</span><span data-line="245"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="246">
-</span><span data-line="247"><span class="sd">        Returns:</span>
-</span><span data-line="248"><span class="sd">            Either a dictionary with the connection&#39;s parsed query string or the raw query byte-string.</span>
-</span><span data-line="249"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="250">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_query</span> <span class="k">else</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;query_string&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+</span><span data-line="243">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="244"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract query from an ``ASGIConnection``</span>
+</span><span data-line="245">
+</span><span data-line="246"><span class="sd">        Args:</span>
+</span><span data-line="247"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="248">
+</span><span data-line="249"><span class="sd">        Returns:</span>
+</span><span data-line="250"><span class="sd">            Either a dictionary with the connection&#39;s parsed query string or the raw query byte-string.</span>
+</span><span data-line="251"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="252">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_query</span> <span class="k">else</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;query_string&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
 
-</span><span data-line="251">
+</span><span data-line="253">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_path_params">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_path_params">[docs]</a>
-</span><span data-line="252">    <span class="nd">@staticmethod</span>
-</span><span data-line="253">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_path_params</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="254"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the path parameters from an ``ASGIConnection``</span>
-</span><span data-line="255">
-</span><span data-line="256"><span class="sd">        Args:</span>
-</span><span data-line="257"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="258">
-</span><span data-line="259"><span class="sd">        Returns:</span>
-</span><span data-line="260"><span class="sd">            A dictionary with the connection&#39;s path parameters.</span>
-</span><span data-line="261"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="262">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">path_params</span></div>
+</span><span data-line="254">    <span class="nd">@staticmethod</span>
+</span><span data-line="255">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_path_params</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="256"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the path parameters from an ``ASGIConnection``</span>
+</span><span data-line="257">
+</span><span data-line="258"><span class="sd">        Args:</span>
+</span><span data-line="259"><span class="sd">            connection: An :class:`ASGIConnection &lt;litestar.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="260">
+</span><span data-line="261"><span class="sd">        Returns:</span>
+</span><span data-line="262"><span class="sd">            A dictionary with the connection&#39;s path parameters.</span>
+</span><span data-line="263"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="264">        <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="n">path_params</span></div>
 
-</span><span data-line="263">
+</span><span data-line="265">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_method">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_method">[docs]</a>
-</span><span data-line="264">    <span class="nd">@staticmethod</span>
-</span><span data-line="265">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_method</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Method</span><span class="p">:</span>
-</span><span data-line="266"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the method from an ``ASGIConnection``</span>
-</span><span data-line="267">
-</span><span data-line="268"><span class="sd">        Args:</span>
-</span><span data-line="269"><span class="sd">            request: A :class:`Request &lt;litestar.connection.Request&gt;` instance.</span>
-</span><span data-line="270">
-</span><span data-line="271"><span class="sd">        Returns:</span>
-</span><span data-line="272"><span class="sd">            The request&#39;s scope[&quot;method&quot;] value.</span>
-</span><span data-line="273"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="274">        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span></div>
+</span><span data-line="266">    <span class="nd">@staticmethod</span>
+</span><span data-line="267">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_method</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Method</span><span class="p">:</span>
+</span><span data-line="268"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the method from an ``ASGIConnection``</span>
+</span><span data-line="269">
+</span><span data-line="270"><span class="sd">        Args:</span>
+</span><span data-line="271"><span class="sd">            request: A :class:`Request &lt;litestar.connection.Request&gt;` instance.</span>
+</span><span data-line="272">
+</span><span data-line="273"><span class="sd">        Returns:</span>
+</span><span data-line="274"><span class="sd">            The request&#39;s scope[&quot;method&quot;] value.</span>
+</span><span data-line="275"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="276">        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">]</span></div>
 
-</span><span data-line="275">
+</span><span data-line="277">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_content_type">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_content_type">[docs]</a>
-</span><span data-line="276">    <span class="nd">@staticmethod</span>
-</span><span data-line="277">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_content_type</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-</span><span data-line="278"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the content-type from an ``ASGIConnection``</span>
-</span><span data-line="279">
-</span><span data-line="280"><span class="sd">        Args:</span>
-</span><span data-line="281"><span class="sd">            request: A :class:`Request &lt;litestar.connection.Request&gt;` instance.</span>
-</span><span data-line="282">
-</span><span data-line="283"><span class="sd">        Returns:</span>
-</span><span data-line="284"><span class="sd">            A tuple containing the request&#39;s parsed &#39;Content-Type&#39; header.</span>
-</span><span data-line="285"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="286">        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span></div>
+</span><span data-line="278">    <span class="nd">@staticmethod</span>
+</span><span data-line="279">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_content_type</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+</span><span data-line="280"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the content-type from an ``ASGIConnection``</span>
+</span><span data-line="281">
+</span><span data-line="282"><span class="sd">        Args:</span>
+</span><span data-line="283"><span class="sd">            request: A :class:`Request &lt;litestar.connection.Request&gt;` instance.</span>
+</span><span data-line="284">
+</span><span data-line="285"><span class="sd">        Returns:</span>
+</span><span data-line="286"><span class="sd">            A tuple containing the request&#39;s parsed &#39;Content-Type&#39; header.</span>
+</span><span data-line="287"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="288">        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span></div>
 
-</span><span data-line="287">
+</span><span data-line="289">
 <div class="viewcode-block" id="ConnectionDataExtractor.extract_body">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ConnectionDataExtractor.extract_body">[docs]</a>
-</span><span data-line="288">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">extract_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="289"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the body from an ``ASGIConnection``</span>
-</span><span data-line="290">
-</span><span data-line="291"><span class="sd">        Args:</span>
-</span><span data-line="292"><span class="sd">            request: A :class:`Request &lt;litestar.connection.Request&gt;` instance.</span>
-</span><span data-line="293">
-</span><span data-line="294"><span class="sd">        Returns:</span>
-</span><span data-line="295"><span class="sd">            Either the parsed request body or the raw byte-string.</span>
-</span><span data-line="296"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="297">        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="n">HttpMethod</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
-</span><span data-line="298">            <span class="k">return</span> <span class="kc">None</span>
-</span><span data-line="299">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_body</span><span class="p">:</span>
-</span><span data-line="300">            <span class="k">return</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">()</span>
-</span><span data-line="301">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="302">            <span class="n">request_encoding_type</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span data-line="303">            <span class="k">if</span> <span class="n">request_encoding_type</span> <span class="o">==</span> <span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">JSON</span><span class="p">:</span>
-</span><span data-line="304">                <span class="k">return</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</span><span data-line="305">            <span class="n">form_data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">()</span>
-</span><span data-line="306">            <span class="k">if</span> <span class="n">request_encoding_type</span> <span class="o">==</span> <span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">URL_ENCODED</span><span class="p">:</span>
-</span><span data-line="307">                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">form_data</span><span class="p">)</span>
-</span><span data-line="308">            <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="309">                <span class="n">key</span><span class="p">:</span> <span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">UploadFile</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">form_data</span><span class="o">.</span><span class="n">multi_items</span><span class="p">()</span>
-</span><span data-line="310">            <span class="p">}</span>
-</span><span data-line="311">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-</span><span data-line="312">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_parse_malformed_body</span><span class="p">:</span>
-</span><span data-line="313">                <span class="k">return</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">()</span>
-</span><span data-line="314">            <span class="k">raise</span> <span class="n">exc</span></div>
+</span><span data-line="290">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">extract_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="291"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the body from an ``ASGIConnection``</span>
+</span><span data-line="292">
+</span><span data-line="293"><span class="sd">        Args:</span>
+</span><span data-line="294"><span class="sd">            request: A :class:`Request &lt;litestar.connection.Request&gt;` instance.</span>
+</span><span data-line="295">
+</span><span data-line="296"><span class="sd">        Returns:</span>
+</span><span data-line="297"><span class="sd">            Either the parsed request body or the raw byte-string.</span>
+</span><span data-line="298"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="299">        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="n">HttpMethod</span><span class="o">.</span><span class="n">GET</span><span class="p">:</span>
+</span><span data-line="300">            <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="301">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_body</span><span class="p">:</span>
+</span><span data-line="302">            <span class="k">return</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">()</span>
+</span><span data-line="303">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="304">            <span class="n">request_encoding_type</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span data-line="305">            <span class="k">if</span> <span class="n">request_encoding_type</span> <span class="o">==</span> <span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">JSON</span><span class="p">:</span>
+</span><span data-line="306">                <span class="k">return</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span><span data-line="307">            <span class="n">form_data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">()</span>
+</span><span data-line="308">            <span class="k">if</span> <span class="n">request_encoding_type</span> <span class="o">==</span> <span class="n">RequestEncodingType</span><span class="o">.</span><span class="n">URL_ENCODED</span><span class="p">:</span>
+</span><span data-line="309">                <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">form_data</span><span class="p">)</span>
+</span><span data-line="310">            <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="311">                <span class="n">key</span><span class="p">:</span> <span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">UploadFile</span><span class="p">)</span> <span class="k">else</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">form_data</span><span class="o">.</span><span class="n">multi_items</span><span class="p">()</span>
+</span><span data-line="312">            <span class="p">}</span>
+</span><span data-line="313">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+</span><span data-line="314">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_parse_malformed_body</span><span class="p">:</span>
+</span><span data-line="315">                <span class="k">return</span> <span class="k">await</span> <span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">()</span>
+</span><span data-line="316">            <span class="k">raise</span> <span class="n">exc</span></div>
 </div>
 
-</span><span data-line="315">
-</span><span data-line="316">
+</span><span data-line="317">
+</span><span data-line="318">
 <div class="viewcode-block" id="ExtractedResponseData">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ExtractedResponseData">[docs]</a>
-</span><span data-line="317"><span class="k">class</span><span class="w"> </span><span class="nc">ExtractedResponseData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span data-line="318"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary representing extracted response data.&quot;&quot;&quot;</span>
-</span><span data-line="319">
-</span><span data-line="320">    <span class="n">body</span><span class="p">:</span> <span class="nb">bytes</span>
-</span><span data-line="321">    <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span>
-</span><span data-line="322">    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
-</span><span data-line="323">    <span class="n">cookies</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span></div>
+</span><span data-line="319"><span class="k">class</span><span class="w"> </span><span class="nc">ExtractedResponseData</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span data-line="320"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dictionary representing extracted response data.&quot;&quot;&quot;</span>
+</span><span data-line="321">
+</span><span data-line="322">    <span class="n">body</span><span class="p">:</span> <span class="nb">bytes</span>
+</span><span data-line="323">    <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="324">    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</span><span data-line="325">    <span class="n">cookies</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span></div>
 
-</span><span data-line="324">
-</span><span data-line="325">
+</span><span data-line="326">
+</span><span data-line="327">
 <div class="viewcode-block" id="ResponseDataExtractor">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor">[docs]</a>
-</span><span data-line="326"><span class="k">class</span><span class="w"> </span><span class="nc">ResponseDataExtractor</span><span class="p">:</span>
-</span><span data-line="327"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Utility class to extract data from a ``Message``&quot;&quot;&quot;</span>
-</span><span data-line="328">
-</span><span data-line="329">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;extractors&quot;</span><span class="p">,</span> <span class="s2">&quot;obfuscate_cookies&quot;</span><span class="p">,</span> <span class="s2">&quot;obfuscate_headers&quot;</span><span class="p">,</span> <span class="s2">&quot;parse_headers&quot;</span><span class="p">)</span>
+</span><span data-line="328"><span class="k">class</span><span class="w"> </span><span class="nc">ResponseDataExtractor</span><span class="p">:</span>
+</span><span data-line="329"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Utility class to extract data from a ``Message``&quot;&quot;&quot;</span>
 </span><span data-line="330">
+</span><span data-line="331">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;extractors&quot;</span><span class="p">,</span> <span class="s2">&quot;obfuscate_cookies&quot;</span><span class="p">,</span> <span class="s2">&quot;obfuscate_headers&quot;</span><span class="p">,</span> <span class="s2">&quot;parse_headers&quot;</span><span class="p">)</span>
+</span><span data-line="332">
 <div class="viewcode-block" id="ResponseDataExtractor.__init__">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.__init__">[docs]</a>
-</span><span data-line="331">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="332">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="333">        <span class="n">extract_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="334">        <span class="n">extract_cookies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="335">        <span class="n">extract_headers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="336">        <span class="n">extract_status_code</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="337">        <span class="n">obfuscate_cookies</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="338">        <span class="n">obfuscate_headers</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="339">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="340"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ``ResponseDataExtractor`` with options.</span>
-</span><span data-line="341">
-</span><span data-line="342"><span class="sd">        Args:</span>
-</span><span data-line="343"><span class="sd">            extract_body: Whether to extract the body.</span>
-</span><span data-line="344"><span class="sd">            extract_cookies: Whether to extract the cookies.</span>
-</span><span data-line="345"><span class="sd">            extract_headers: Whether to extract the headers.</span>
-</span><span data-line="346"><span class="sd">            extract_status_code: Whether to extract the status code.</span>
-</span><span data-line="347"><span class="sd">            obfuscate_cookies: cookie keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
-</span><span data-line="348"><span class="sd">            obfuscate_headers: headers keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
-</span><span data-line="349"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="350">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_headers</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
-</span><span data-line="351">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_cookies</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
-</span><span data-line="352">        <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span>
-</span><span data-line="353">            <span class="n">ResponseExtractorField</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]</span>
-</span><span data-line="354">        <span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="355">        <span class="k">if</span> <span class="n">extract_body</span><span class="p">:</span>
-</span><span data-line="356">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_response_body</span>
-</span><span data-line="357">        <span class="k">if</span> <span class="n">extract_status_code</span><span class="p">:</span>
-</span><span data-line="358">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_status_code</span>
-</span><span data-line="359">        <span class="k">if</span> <span class="n">extract_headers</span><span class="p">:</span>
-</span><span data-line="360">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_headers</span>
-</span><span data-line="361">        <span class="k">if</span> <span class="n">extract_cookies</span><span class="p">:</span>
-</span><span data-line="362">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;cookies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_cookies</span></div>
+</span><span data-line="333">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="334">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="335">        <span class="n">extract_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="336">        <span class="n">extract_cookies</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="337">        <span class="n">extract_headers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="338">        <span class="n">extract_status_code</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="339">        <span class="n">obfuscate_cookies</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="340">        <span class="n">obfuscate_headers</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="341">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="342"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ``ResponseDataExtractor`` with options.</span>
+</span><span data-line="343">
+</span><span data-line="344"><span class="sd">        Args:</span>
+</span><span data-line="345"><span class="sd">            extract_body: Whether to extract the body.</span>
+</span><span data-line="346"><span class="sd">            extract_cookies: Whether to extract the cookies.</span>
+</span><span data-line="347"><span class="sd">            extract_headers: Whether to extract the headers.</span>
+</span><span data-line="348"><span class="sd">            extract_status_code: Whether to extract the status code.</span>
+</span><span data-line="349"><span class="sd">            obfuscate_cookies: cookie keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
+</span><span data-line="350"><span class="sd">            obfuscate_headers: headers keys to obfuscate. Obfuscated values are replaced with &#39;*****&#39;.</span>
+</span><span data-line="351"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="352">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_headers</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
+</span><span data-line="353">        <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">(</span><span class="n">obfuscate_cookies</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">())}</span>
+</span><span data-line="354">        <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span>
+</span><span data-line="355">            <span class="n">ResponseExtractorField</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">]],</span> <span class="n">Any</span><span class="p">]</span>
+</span><span data-line="356">        <span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="357">        <span class="k">if</span> <span class="n">extract_body</span><span class="p">:</span>
+</span><span data-line="358">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_response_body</span>
+</span><span data-line="359">        <span class="k">if</span> <span class="n">extract_status_code</span><span class="p">:</span>
+</span><span data-line="360">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_status_code</span>
+</span><span data-line="361">        <span class="k">if</span> <span class="n">extract_headers</span><span class="p">:</span>
+</span><span data-line="362">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_headers</span>
+</span><span data-line="363">        <span class="k">if</span> <span class="n">extract_cookies</span><span class="p">:</span>
+</span><span data-line="364">            <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="p">[</span><span class="s2">&quot;cookies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_cookies</span></div>
 
-</span><span data-line="363">
+</span><span data-line="365">
 <div class="viewcode-block" id="ResponseDataExtractor.__call__">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.__call__">[docs]</a>
-</span><span data-line="364">    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ExtractedResponseData</span><span class="p">:</span>
-</span><span data-line="365"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract data from the response, returning a dictionary of values.</span>
-</span><span data-line="366">
-</span><span data-line="367"><span class="sd">        Args:</span>
-</span><span data-line="368"><span class="sd">            messages: A tuple containing</span>
-</span><span data-line="369"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
-</span><span data-line="370"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
-</span><span data-line="371">
-</span><span data-line="372"><span class="sd">        Returns:</span>
-</span><span data-line="373"><span class="sd">            A string keyed dictionary of extracted values.</span>
-</span><span data-line="374"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="375">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;ExtractedResponseData&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">extractor</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
+</span><span data-line="366">    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ExtractedResponseData</span><span class="p">:</span>
+</span><span data-line="367"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract data from the response, returning a dictionary of values.</span>
+</span><span data-line="368">
+</span><span data-line="369"><span class="sd">        Args:</span>
+</span><span data-line="370"><span class="sd">            messages: A tuple containing</span>
+</span><span data-line="371"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
+</span><span data-line="372"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
+</span><span data-line="373">
+</span><span data-line="374"><span class="sd">        Returns:</span>
+</span><span data-line="375"><span class="sd">            A string keyed dictionary of extracted values.</span>
+</span><span data-line="376"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="377">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;ExtractedResponseData&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">extractor</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">extractor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extractors</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
 
-</span><span data-line="376">
+</span><span data-line="378">
 <div class="viewcode-block" id="ResponseDataExtractor.extract_response_body">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.extract_response_body">[docs]</a>
-</span><span data-line="377">    <span class="nd">@staticmethod</span>
-</span><span data-line="378">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_response_body</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-</span><span data-line="379"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the response body from a ``Message``</span>
-</span><span data-line="380">
-</span><span data-line="381"><span class="sd">        Args:</span>
-</span><span data-line="382"><span class="sd">            messages: A tuple containing</span>
-</span><span data-line="383"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
-</span><span data-line="384"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
-</span><span data-line="385">
-</span><span data-line="386"><span class="sd">        Returns:</span>
-</span><span data-line="387"><span class="sd">            The Response&#39;s body as a byte-string.</span>
-</span><span data-line="388"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="389">        <span class="k">return</span> <span class="n">messages</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span></div>
+</span><span data-line="379">    <span class="nd">@staticmethod</span>
+</span><span data-line="380">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_response_body</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+</span><span data-line="381"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract the response body from a ``Message``</span>
+</span><span data-line="382">
+</span><span data-line="383"><span class="sd">        Args:</span>
+</span><span data-line="384"><span class="sd">            messages: A tuple containing</span>
+</span><span data-line="385"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
+</span><span data-line="386"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
+</span><span data-line="387">
+</span><span data-line="388"><span class="sd">        Returns:</span>
+</span><span data-line="389"><span class="sd">            The Response&#39;s body as a byte-string.</span>
+</span><span data-line="390"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="391">        <span class="k">return</span> <span class="n">messages</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;body&quot;</span><span class="p">]</span></div>
 
-</span><span data-line="390">
+</span><span data-line="392">
 <div class="viewcode-block" id="ResponseDataExtractor.extract_status_code">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.extract_status_code">[docs]</a>
-</span><span data-line="391">    <span class="nd">@staticmethod</span>
-</span><span data-line="392">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_status_code</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span data-line="393"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a status code from a ``Message``</span>
-</span><span data-line="394">
-</span><span data-line="395"><span class="sd">        Args:</span>
-</span><span data-line="396"><span class="sd">            messages: A tuple containing</span>
-</span><span data-line="397"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
-</span><span data-line="398"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
-</span><span data-line="399">
-</span><span data-line="400"><span class="sd">        Returns:</span>
-</span><span data-line="401"><span class="sd">            The Response&#39;s status-code.</span>
-</span><span data-line="402"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="403">        <span class="k">return</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span></div>
+</span><span data-line="393">    <span class="nd">@staticmethod</span>
+</span><span data-line="394">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_status_code</span><span class="p">(</span><span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="395"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a status code from a ``Message``</span>
+</span><span data-line="396">
+</span><span data-line="397"><span class="sd">        Args:</span>
+</span><span data-line="398"><span class="sd">            messages: A tuple containing</span>
+</span><span data-line="399"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
+</span><span data-line="400"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
+</span><span data-line="401">
+</span><span data-line="402"><span class="sd">        Returns:</span>
+</span><span data-line="403"><span class="sd">            The Response&#39;s status-code.</span>
+</span><span data-line="404"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="405">        <span class="k">return</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span></div>
 
-</span><span data-line="404">
+</span><span data-line="406">
 <div class="viewcode-block" id="ResponseDataExtractor.extract_headers">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.extract_headers">[docs]</a>
-</span><span data-line="405">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="406"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract headers from a ``Message``</span>
-</span><span data-line="407">
-</span><span data-line="408"><span class="sd">        Args:</span>
-</span><span data-line="409"><span class="sd">            messages: A tuple containing</span>
-</span><span data-line="410"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
-</span><span data-line="411"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
-</span><span data-line="412">
-</span><span data-line="413"><span class="sd">        Returns:</span>
-</span><span data-line="414"><span class="sd">            The Response&#39;s headers dict.</span>
-</span><span data-line="415"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="416">        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="417">            <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">):</span> <span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
-</span><span data-line="418">            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;set-cookie&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;headers&quot;</span><span class="p">])</span>
-</span><span data-line="419">        <span class="p">}</span>
-</span><span data-line="420">        <span class="k">return</span> <span class="p">(</span>
-</span><span data-line="421">            <span class="n">_obfuscate</span><span class="p">(</span>
-</span><span data-line="422">                <span class="n">headers</span><span class="p">,</span>
-</span><span data-line="423">                <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span><span class="p">,</span>
-</span><span data-line="424">            <span class="p">)</span>
-</span><span data-line="425">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span>
-</span><span data-line="426">            <span class="k">else</span> <span class="n">headers</span>
-</span><span data-line="427">        <span class="p">)</span></div>
+</span><span data-line="407">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="408"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract headers from a ``Message``</span>
+</span><span data-line="409">
+</span><span data-line="410"><span class="sd">        Args:</span>
+</span><span data-line="411"><span class="sd">            messages: A tuple containing</span>
+</span><span data-line="412"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
+</span><span data-line="413"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
+</span><span data-line="414">
+</span><span data-line="415"><span class="sd">        Returns:</span>
+</span><span data-line="416"><span class="sd">            The Response&#39;s headers dict.</span>
+</span><span data-line="417"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="418">        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="419">            <span class="n">key</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">):</span> <span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
+</span><span data-line="420">            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;set-cookie&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;headers&quot;</span><span class="p">])</span>
+</span><span data-line="421">        <span class="p">}</span>
+</span><span data-line="422">        <span class="k">return</span> <span class="p">(</span>
+</span><span data-line="423">            <span class="n">_obfuscate</span><span class="p">(</span>
+</span><span data-line="424">                <span class="n">headers</span><span class="p">,</span>
+</span><span data-line="425">                <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span><span class="p">,</span>
+</span><span data-line="426">            <span class="p">)</span>
+</span><span data-line="427">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_headers</span>
+</span><span data-line="428">            <span class="k">else</span> <span class="n">headers</span>
+</span><span data-line="429">        <span class="p">)</span></div>
 
-</span><span data-line="428">
+</span><span data-line="430">
 <div class="viewcode-block" id="ResponseDataExtractor.extract_cookies">
 <a class="viewcode-back" href="../../reference/data_extractors.html#litestar.data_extractors.ResponseDataExtractor.extract_cookies">[docs]</a>
-</span><span data-line="429">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="430"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract cookies from a ``Message``</span>
-</span><span data-line="431">
-</span><span data-line="432"><span class="sd">        Args:</span>
-</span><span data-line="433"><span class="sd">            messages: A tuple containing</span>
-</span><span data-line="434"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
-</span><span data-line="435"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
-</span><span data-line="436">
-</span><span data-line="437"><span class="sd">        Returns:</span>
-</span><span data-line="438"><span class="sd">            The Response&#39;s cookies dict.</span>
-</span><span data-line="439"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="440">        <span class="k">if</span> <span class="n">cookie_string</span> <span class="o">:=</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-</span><span data-line="441">            <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;set-cookie&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;headers&quot;</span><span class="p">])]</span>
-</span><span data-line="442">        <span class="p">):</span>
-</span><span data-line="443">            <span class="n">parsed_cookies</span> <span class="o">=</span> <span class="n">parse_cookie_string</span><span class="p">(</span><span class="n">cookie_string</span><span class="p">)</span>
-</span><span data-line="444">            <span class="k">return</span> <span class="n">_obfuscate</span><span class="p">(</span><span class="n">parsed_cookies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="k">else</span> <span class="n">parsed_cookies</span>
-</span><span data-line="445">        <span class="k">return</span> <span class="p">{}</span></div>
+</span><span data-line="431">    <span class="k">def</span><span class="w"> </span><span class="nf">extract_cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">HTTPResponseStartEvent</span><span class="p">,</span> <span class="n">HTTPResponseBodyEvent</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="432"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract cookies from a ``Message``</span>
+</span><span data-line="433">
+</span><span data-line="434"><span class="sd">        Args:</span>
+</span><span data-line="435"><span class="sd">            messages: A tuple containing</span>
+</span><span data-line="436"><span class="sd">                :class:`HTTPResponseStartEvent &lt;litestar.types.asgi_types.HTTPResponseStartEvent&gt;`</span>
+</span><span data-line="437"><span class="sd">                and :class:`HTTPResponseBodyEvent &lt;litestar.types.asgi_types.HTTPResponseBodyEvent&gt;`.</span>
+</span><span data-line="438">
+</span><span data-line="439"><span class="sd">        Returns:</span>
+</span><span data-line="440"><span class="sd">            The Response&#39;s cookies dict.</span>
+</span><span data-line="441"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="442">        <span class="k">if</span> <span class="n">cookie_string</span> <span class="o">:=</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span><span data-line="443">            <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;set-cookie&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;headers&quot;</span><span class="p">])]</span>
+</span><span data-line="444">        <span class="p">):</span>
+</span><span data-line="445">            <span class="n">parsed_cookies</span> <span class="o">=</span> <span class="n">parse_cookie_string</span><span class="p">(</span><span class="n">cookie_string</span><span class="p">)</span>
+</span><span data-line="446">            <span class="k">return</span> <span class="n">_obfuscate</span><span class="p">(</span><span class="n">parsed_cookies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">obfuscate_cookies</span> <span class="k">else</span> <span class="n">parsed_cookies</span>
+</span><span data-line="447">        <span class="k">return</span> <span class="p">{}</span></div>
 </div>
 
 </span></pre></div>
