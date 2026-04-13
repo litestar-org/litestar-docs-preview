@@ -503,104 +503,106 @@ data-aria-dark="Switch to auto color mode">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
           <h1>Source code for litestar.testing.life_span_handler</h1><div class="highlight"><pre>
-<span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span data-line="1"><span class="c1"># pyright: reportUnnecessaryTypeIgnoreComment=false</span>
 </span><span data-line="2">
-</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">inf</span>
-</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
-</span><span data-line="6">
-</span><span data-line="7"><span class="kn">import</span><span class="w"> </span><span class="nn">anyio</span>
-</span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">anyio</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_memory_object_stream</span>
-</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">anyio.streams.stapled</span><span class="w"> </span><span class="kn">import</span> <span class="n">StapledObjectStream</span>
-</span><span data-line="10">
-</span><span data-line="11"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-</span><span data-line="12">    <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracebackType</span>
-</span><span data-line="13">
-</span><span data-line="14">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span data-line="15">        <span class="n">ASGIApp</span><span class="p">,</span>
-</span><span data-line="16">        <span class="n">LifeSpanReceiveMessage</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
-</span><span data-line="17">        <span class="n">LifeSpanSendMessage</span><span class="p">,</span>
-</span><span data-line="18">        <span class="n">LifeSpanShutdownEvent</span><span class="p">,</span>
-</span><span data-line="19">        <span class="n">LifeSpanStartupEvent</span><span class="p">,</span>
-</span><span data-line="20">    <span class="p">)</span>
-</span><span data-line="21">
-</span><span data-line="22">
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">inf</span>
+</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="kn">import</span><span class="w"> </span><span class="nn">anyio</span>
+</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">anyio</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_memory_object_stream</span>
+</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">anyio.streams.stapled</span><span class="w"> </span><span class="kn">import</span> <span class="n">StapledObjectStream</span>
+</span><span data-line="12">
+</span><span data-line="13"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+</span><span data-line="14">    <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracebackType</span>
+</span><span data-line="15">
+</span><span data-line="16">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="17">        <span class="n">ASGIApp</span><span class="p">,</span>
+</span><span data-line="18">        <span class="n">LifeSpanReceiveMessage</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+</span><span data-line="19">        <span class="n">LifeSpanSendMessage</span><span class="p">,</span>
+</span><span data-line="20">        <span class="n">LifeSpanShutdownEvent</span><span class="p">,</span>
+</span><span data-line="21">        <span class="n">LifeSpanStartupEvent</span><span class="p">,</span>
+</span><span data-line="22">    <span class="p">)</span>
+</span><span data-line="23">
+</span><span data-line="24">
 <div class="viewcode-block" id="LifeSpanHandler">
 <a class="viewcode-back" href="../../../reference/testing.html#litestar.testing.life_span_handler.LifeSpanHandler">[docs]</a>
-</span><span data-line="23"><span class="k">class</span><span class="w"> </span><span class="nc">LifeSpanHandler</span><span class="p">:</span>
+</span><span data-line="25"><span class="k">class</span><span class="w"> </span><span class="nc">LifeSpanHandler</span><span class="p">:</span>
 <div class="viewcode-block" id="LifeSpanHandler.__init__">
 <a class="viewcode-back" href="../../../reference/testing.html#litestar.testing.life_span_handler.LifeSpanHandler.__init__">[docs]</a>
-</span><span data-line="24">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="25">        <span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span> <span class="o">=</span> <span class="n">StapledObjectStream</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;LifeSpanSendMessage&quot;</span><span class="p">]](</span><span class="o">*</span><span class="n">create_memory_object_stream</span><span class="p">(</span><span class="n">inf</span><span class="p">))</span>  <span class="c1"># type: ignore[arg-type]</span>
-</span><span data-line="26">        <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span> <span class="o">=</span> <span class="n">StapledObjectStream</span><span class="p">[</span><span class="s2">&quot;LifeSpanReceiveMessage&quot;</span><span class="p">](</span><span class="o">*</span><span class="n">create_memory_object_stream</span><span class="p">(</span><span class="n">inf</span><span class="p">))</span>  <span class="c1"># type: ignore[arg-type]</span>
-</span><span data-line="27">        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-</span><span data-line="28">        <span class="bp">self</span><span class="o">.</span><span class="n">_exit_stack</span> <span class="o">=</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">AsyncExitStack</span><span class="p">()</span></div>
+</span><span data-line="26">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="27">        <span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span> <span class="o">=</span> <span class="n">StapledObjectStream</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;LifeSpanSendMessage&quot;</span><span class="p">]](</span><span class="o">*</span><span class="n">create_memory_object_stream</span><span class="p">(</span><span class="n">inf</span><span class="p">))</span>  <span class="c1"># type: ignore[arg-type]</span>
+</span><span data-line="28">        <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span> <span class="o">=</span> <span class="n">StapledObjectStream</span><span class="p">[</span><span class="s2">&quot;LifeSpanReceiveMessage&quot;</span><span class="p">](</span><span class="o">*</span><span class="n">create_memory_object_stream</span><span class="p">(</span><span class="n">inf</span><span class="p">))</span>  <span class="c1"># type: ignore[arg-type]</span>
+</span><span data-line="29">        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+</span><span data-line="30">        <span class="bp">self</span><span class="o">.</span><span class="n">_exit_stack</span> <span class="o">=</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">AsyncExitStack</span><span class="p">()</span></div>
 
-</span><span data-line="29">
-</span><span data-line="30">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifeSpanHandler</span><span class="p">:</span>
-</span><span data-line="31">        <span class="k">async</span> <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">AsyncExitStack</span><span class="p">()</span> <span class="k">as</span> <span class="n">exit_stack</span><span class="p">:</span>
-</span><span data-line="32">            <span class="k">await</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_async_context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span><span class="p">)</span>
-</span><span data-line="33">            <span class="k">await</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_async_context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="p">)</span>
-</span><span data-line="34">
-</span><span data-line="35">            <span class="bp">self</span><span class="o">.</span><span class="n">_tg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_async_context</span><span class="p">(</span><span class="n">anyio</span><span class="o">.</span><span class="n">create_task_group</span><span class="p">())</span>
-</span><span data-line="36">            <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">CancelScope</span><span class="p">()</span> <span class="k">as</span> <span class="n">cs</span><span class="p">:</span>
-</span><span data-line="37">                <span class="bp">self</span><span class="o">.</span><span class="n">_tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lifespan</span><span class="p">,</span> <span class="n">cs</span><span class="p">)</span>
-</span><span data-line="38">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">wait_startup</span><span class="p">()</span>
-</span><span data-line="39">            <span class="n">exit_stack</span><span class="o">.</span><span class="n">push_async_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wait_shutdown</span><span class="p">)</span>
-</span><span data-line="40">            <span class="bp">self</span><span class="o">.</span><span class="n">_exit_stack</span> <span class="o">=</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">pop_all</span><span class="p">()</span>
-</span><span data-line="41">        <span class="k">return</span> <span class="bp">self</span>
-</span><span data-line="42">
-</span><span data-line="43">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
-</span><span data-line="44">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="45">        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="46">        <span class="n">exc_value</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="47">        <span class="n">traceback</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="48">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="49">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exit_stack</span><span class="o">.</span><span class="fm">__aexit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
-</span><span data-line="50">
-</span><span data-line="51">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifeSpanSendMessage</span><span class="p">:</span>
-</span><span data-line="52">        <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span data-line="53">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;LifeSpanSendMessage&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-</span><span data-line="54">
-</span><span data-line="55">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wait_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="56">        <span class="n">event</span><span class="p">:</span> <span class="n">LifeSpanStartupEvent</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;lifespan.startup&quot;</span><span class="p">}</span>
-</span><span data-line="57">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-</span><span data-line="58">
-</span><span data-line="59">        <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span data-line="60">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span data-line="61">            <span class="s2">&quot;lifespan.startup.complete&quot;</span><span class="p">,</span>
-</span><span data-line="62">            <span class="s2">&quot;lifespan.startup.failed&quot;</span><span class="p">,</span>
-</span><span data-line="63">        <span class="p">):</span>
-</span><span data-line="64">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-</span><span data-line="65">                <span class="s2">&quot;Received unexpected ASGI message type. Expected &#39;lifespan.startup.complete&#39; or &quot;</span>
-</span><span data-line="66">                <span class="sa">f</span><span class="s2">&quot;&#39;lifespan.startup.failed&#39;. Got </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span data-line="67">            <span class="p">)</span>
-</span><span data-line="68">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;lifespan.startup.failed&quot;</span><span class="p">:</span>
-</span><span data-line="69">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span data-line="70">
-</span><span data-line="71">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wait_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="72">        <span class="n">lifespan_shutdown_event</span><span class="p">:</span> <span class="n">LifeSpanShutdownEvent</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;lifespan.shutdown&quot;</span><span class="p">}</span>
-</span><span data-line="73">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">lifespan_shutdown_event</span><span class="p">)</span>
-</span><span data-line="74">
-</span><span data-line="75">        <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span data-line="76">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span data-line="77">            <span class="s2">&quot;lifespan.shutdown.complete&quot;</span><span class="p">,</span>
-</span><span data-line="78">            <span class="s2">&quot;lifespan.shutdown.failed&quot;</span><span class="p">,</span>
-</span><span data-line="79">        <span class="p">):</span>
-</span><span data-line="80">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-</span><span data-line="81">                <span class="s2">&quot;Received unexpected ASGI message type. Expected &#39;lifespan.shutdown.complete&#39; or &quot;</span>
-</span><span data-line="82">                <span class="sa">f</span><span class="s2">&quot;&#39;lifespan.shutdown.failed&#39;. Got </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span data-line="83">            <span class="p">)</span>
-</span><span data-line="84">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;lifespan.shutdown.failed&quot;</span><span class="p">:</span>
-</span><span data-line="85">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span data-line="86">
-</span><span data-line="87">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cs</span><span class="p">:</span> <span class="n">anyio</span><span class="o">.</span><span class="n">CancelScope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="88">        <span class="n">scope</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;lifespan&quot;</span><span class="p">}</span>
-</span><span data-line="89">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="90">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="o">.</span><span class="n">receive</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span><span class="o">.</span><span class="n">send</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
-</span><span data-line="91">        <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
-</span><span data-line="92">            <span class="n">cs</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
-</span><span data-line="93">            <span class="k">raise</span></div>
+</span><span data-line="31">
+</span><span data-line="32">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifeSpanHandler</span><span class="p">:</span>
+</span><span data-line="33">        <span class="k">async</span> <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">AsyncExitStack</span><span class="p">()</span> <span class="k">as</span> <span class="n">exit_stack</span><span class="p">:</span>
+</span><span data-line="34">            <span class="k">await</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_async_context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span><span class="p">)</span>
+</span><span data-line="35">            <span class="k">await</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_async_context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="p">)</span>
+</span><span data-line="36">
+</span><span data-line="37">            <span class="bp">self</span><span class="o">.</span><span class="n">_tg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_async_context</span><span class="p">(</span><span class="n">anyio</span><span class="o">.</span><span class="n">create_task_group</span><span class="p">())</span>
+</span><span data-line="38">            <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">CancelScope</span><span class="p">()</span> <span class="k">as</span> <span class="n">cs</span><span class="p">:</span>
+</span><span data-line="39">                <span class="bp">self</span><span class="o">.</span><span class="n">_tg</span><span class="o">.</span><span class="n">start_soon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lifespan</span><span class="p">,</span> <span class="n">cs</span><span class="p">)</span>
+</span><span data-line="40">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">wait_startup</span><span class="p">()</span>
+</span><span data-line="41">            <span class="n">exit_stack</span><span class="o">.</span><span class="n">push_async_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wait_shutdown</span><span class="p">)</span>
+</span><span data-line="42">            <span class="bp">self</span><span class="o">.</span><span class="n">_exit_stack</span> <span class="o">=</span> <span class="n">exit_stack</span><span class="o">.</span><span class="n">pop_all</span><span class="p">()</span>
+</span><span data-line="43">        <span class="k">return</span> <span class="bp">self</span>
+</span><span data-line="44">
+</span><span data-line="45">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
+</span><span data-line="46">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="47">        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="48">        <span class="n">exc_value</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="49">        <span class="n">traceback</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="50">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="51">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exit_stack</span><span class="o">.</span><span class="fm">__aexit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
+</span><span data-line="52">
+</span><span data-line="53">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifeSpanSendMessage</span><span class="p">:</span>
+</span><span data-line="54">        <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span data-line="55">        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;LifeSpanSendMessage&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</span><span data-line="56">
+</span><span data-line="57">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wait_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="58">        <span class="n">event</span><span class="p">:</span> <span class="n">LifeSpanStartupEvent</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;lifespan.startup&quot;</span><span class="p">}</span>
+</span><span data-line="59">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+</span><span data-line="60">
+</span><span data-line="61">        <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span data-line="62">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span data-line="63">            <span class="s2">&quot;lifespan.startup.complete&quot;</span><span class="p">,</span>
+</span><span data-line="64">            <span class="s2">&quot;lifespan.startup.failed&quot;</span><span class="p">,</span>
+</span><span data-line="65">        <span class="p">):</span>
+</span><span data-line="66">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+</span><span data-line="67">                <span class="s2">&quot;Received unexpected ASGI message type. Expected &#39;lifespan.startup.complete&#39; or &quot;</span>
+</span><span data-line="68">                <span class="sa">f</span><span class="s2">&quot;&#39;lifespan.startup.failed&#39;. Got </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span data-line="69">            <span class="p">)</span>
+</span><span data-line="70">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;lifespan.startup.failed&quot;</span><span class="p">:</span>
+</span><span data-line="71">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span data-line="72">
+</span><span data-line="73">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wait_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="74">        <span class="n">lifespan_shutdown_event</span><span class="p">:</span> <span class="n">LifeSpanShutdownEvent</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;lifespan.shutdown&quot;</span><span class="p">}</span>
+</span><span data-line="75">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">lifespan_shutdown_event</span><span class="p">)</span>
+</span><span data-line="76">
+</span><span data-line="77">        <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span data-line="78">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span data-line="79">            <span class="s2">&quot;lifespan.shutdown.complete&quot;</span><span class="p">,</span>
+</span><span data-line="80">            <span class="s2">&quot;lifespan.shutdown.failed&quot;</span><span class="p">,</span>
+</span><span data-line="81">        <span class="p">):</span>
+</span><span data-line="82">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+</span><span data-line="83">                <span class="s2">&quot;Received unexpected ASGI message type. Expected &#39;lifespan.shutdown.complete&#39; or &quot;</span>
+</span><span data-line="84">                <span class="sa">f</span><span class="s2">&quot;&#39;lifespan.shutdown.failed&#39;. Got </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span data-line="85">            <span class="p">)</span>
+</span><span data-line="86">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;lifespan.shutdown.failed&quot;</span><span class="p">:</span>
+</span><span data-line="87">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span data-line="88">
+</span><span data-line="89">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cs</span><span class="p">:</span> <span class="n">anyio</span><span class="o">.</span><span class="n">CancelScope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="90">        <span class="n">scope</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;lifespan&quot;</span><span class="p">}</span>
+</span><span data-line="91">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="92">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_receive</span><span class="o">.</span><span class="n">receive</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_send</span><span class="o">.</span><span class="n">send</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
+</span><span data-line="93">        <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+</span><span data-line="94">            <span class="n">cs</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</span><span data-line="95">            <span class="k">raise</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">

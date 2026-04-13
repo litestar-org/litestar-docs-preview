@@ -770,7 +770,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="259">        <span class="bp">self</span><span class="o">.</span><span class="n">_return_dto</span> <span class="o">=</span> <span class="n">return_dto</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_return_dto</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">data_dto</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dto</span><span class="p">)</span>
 </span><span data-line="260">
 </span><span data-line="261">        <span class="c1"># make sure the closure doesn&#39;t capture self._ws_stream / self</span>
-</span><span data-line="262">        <span class="n">send_mode</span><span class="p">:</span> <span class="n">WebSocketMode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws_stream_options</span><span class="o">.</span><span class="n">send_mode</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="262">        <span class="n">send_mode</span><span class="p">:</span> <span class="n">WebSocketMode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws_stream_options</span><span class="o">.</span><span class="n">send_mode</span>  <span class="c1"># pyright: ignore[reportAssignmentType]</span>
 </span><span data-line="263">        <span class="n">listen_for_disconnect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws_stream_options</span><span class="o">.</span><span class="n">listen_for_disconnect</span>
 </span><span data-line="264">        <span class="n">warn_on_data_discard</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws_stream_options</span><span class="o">.</span><span class="n">warn_on_data_discard</span>
 </span><span data-line="265">
@@ -803,23 +803,22 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="292">                <span class="n">send_handler</span><span class="o">=</span><span class="n">send_handler</span><span class="p">,</span>
 </span><span data-line="293">            <span class="p">)</span>
 </span><span data-line="294">
-</span><span data-line="295">        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">handler_fn</span>  <span class="c1"># pyright: ignore</span>
-</span><span data-line="296">
-</span><span data-line="297">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_registration</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+</span><span data-line="295">        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">handler_fn</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+</span><span data-line="296">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_registration</span><span class="p">(</span><span class="n">route</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+</span><span data-line="297">
 </span><span data-line="298">
-</span><span data-line="299">
-</span><span data-line="300"><span class="k">class</span><span class="w"> </span><span class="nc">_WebSocketStreamOptions</span><span class="p">:</span>
-</span><span data-line="301">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="302">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="303">        <span class="n">generator_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
-</span><span data-line="304">        <span class="n">listen_for_disconnect</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-</span><span data-line="305">        <span class="n">warn_on_data_discard</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-</span><span data-line="306">        <span class="n">send_mode</span><span class="p">:</span> <span class="n">WebSocketMode</span><span class="p">,</span>
-</span><span data-line="307">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="308">        <span class="bp">self</span><span class="o">.</span><span class="n">generator_fn</span> <span class="o">=</span> <span class="n">generator_fn</span>
-</span><span data-line="309">        <span class="bp">self</span><span class="o">.</span><span class="n">listen_for_disconnect</span> <span class="o">=</span> <span class="n">listen_for_disconnect</span>
-</span><span data-line="310">        <span class="bp">self</span><span class="o">.</span><span class="n">warn_on_data_discard</span> <span class="o">=</span> <span class="n">warn_on_data_discard</span>
-</span><span data-line="311">        <span class="bp">self</span><span class="o">.</span><span class="n">send_mode</span> <span class="o">=</span> <span class="n">send_mode</span>
+</span><span data-line="299"><span class="k">class</span><span class="w"> </span><span class="nc">_WebSocketStreamOptions</span><span class="p">:</span>
+</span><span data-line="300">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="301">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="302">        <span class="n">generator_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
+</span><span data-line="303">        <span class="n">listen_for_disconnect</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+</span><span data-line="304">        <span class="n">warn_on_data_discard</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+</span><span data-line="305">        <span class="n">send_mode</span><span class="p">:</span> <span class="n">WebSocketMode</span><span class="p">,</span>
+</span><span data-line="306">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="307">        <span class="bp">self</span><span class="o">.</span><span class="n">generator_fn</span> <span class="o">=</span> <span class="n">generator_fn</span>
+</span><span data-line="308">        <span class="bp">self</span><span class="o">.</span><span class="n">listen_for_disconnect</span> <span class="o">=</span> <span class="n">listen_for_disconnect</span>
+</span><span data-line="309">        <span class="bp">self</span><span class="o">.</span><span class="n">warn_on_data_discard</span> <span class="o">=</span> <span class="n">warn_on_data_discard</span>
+</span><span data-line="310">        <span class="bp">self</span><span class="o">.</span><span class="n">send_mode</span> <span class="o">=</span> <span class="n">send_mode</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

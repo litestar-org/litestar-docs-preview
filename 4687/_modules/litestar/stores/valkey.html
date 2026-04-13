@@ -503,244 +503,246 @@ data-aria-dark="Switch to auto color mode">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
           <h1>Source code for litestar.stores.valkey</h1><div class="highlight"><pre>
-<span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+<span></span><span data-line="1"><span class="c1"># pyright: reportUnnecessaryTypeIgnoreComment=false</span>
 </span><span data-line="2">
-</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">valkey.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">Valkey</span>
-</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">valkey.asyncio.connection</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectionPool</span>
-</span><span data-line="8">
-</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImproperlyConfiguredException</span>
-</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">EmptyType</span>
-</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.empty</span><span class="w"> </span><span class="kn">import</span> <span class="n">value_or_default</span>
-</span><span data-line="12">
-</span><span data-line="13"><span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamespacedStore</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">cast</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">valkey.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">Valkey</span>
+</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">valkey.asyncio.connection</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectionPool</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImproperlyConfiguredException</span>
+</span><span data-line="12"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">EmptyType</span>
+</span><span data-line="13"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.empty</span><span class="w"> </span><span class="kn">import</span> <span class="n">value_or_default</span>
 </span><span data-line="14">
-</span><span data-line="15"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-</span><span data-line="16">    <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracebackType</span>
-</span><span data-line="17">
-</span><span data-line="18">
-</span><span data-line="19"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ValkeyStore&quot;</span><span class="p">,)</span>
+</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamespacedStore</span>
+</span><span data-line="16">
+</span><span data-line="17"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+</span><span data-line="18">    <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracebackType</span>
+</span><span data-line="19">
 </span><span data-line="20">
-</span><span data-line="21">
+</span><span data-line="21"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ValkeyStore&quot;</span><span class="p">,)</span>
+</span><span data-line="22">
+</span><span data-line="23">
 <div class="viewcode-block" id="ValkeyStore">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore">[docs]</a>
-</span><span data-line="22"><span class="k">class</span><span class="w"> </span><span class="nc">ValkeyStore</span><span class="p">(</span><span class="n">NamespacedStore</span><span class="p">):</span>
-</span><span data-line="23"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Valkey based, thread and process safe asynchronous key/value store.&quot;&quot;&quot;</span>
-</span><span data-line="24">
-</span><span data-line="25">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="26">        <span class="s2">&quot;_delete_all_script&quot;</span><span class="p">,</span>
-</span><span data-line="27">        <span class="s2">&quot;_get_and_renew_script&quot;</span><span class="p">,</span>
-</span><span data-line="28">        <span class="s2">&quot;_valkey&quot;</span><span class="p">,</span>
-</span><span data-line="29">        <span class="s2">&quot;handle_client_shutdown&quot;</span><span class="p">,</span>
-</span><span data-line="30">    <span class="p">)</span>
-</span><span data-line="31">
+</span><span data-line="24"><span class="k">class</span><span class="w"> </span><span class="nc">ValkeyStore</span><span class="p">(</span><span class="n">NamespacedStore</span><span class="p">):</span>
+</span><span data-line="25"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Valkey based, thread and process safe asynchronous key/value store.&quot;&quot;&quot;</span>
+</span><span data-line="26">
+</span><span data-line="27">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="28">        <span class="s2">&quot;_delete_all_script&quot;</span><span class="p">,</span>
+</span><span data-line="29">        <span class="s2">&quot;_get_and_renew_script&quot;</span><span class="p">,</span>
+</span><span data-line="30">        <span class="s2">&quot;_valkey&quot;</span><span class="p">,</span>
+</span><span data-line="31">        <span class="s2">&quot;handle_client_shutdown&quot;</span><span class="p">,</span>
+</span><span data-line="32">    <span class="p">)</span>
+</span><span data-line="33">
 <div class="viewcode-block" id="ValkeyStore.__init__">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.__init__">[docs]</a>
-</span><span data-line="32">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="33">        <span class="bp">self</span><span class="p">,</span> <span class="n">valkey</span><span class="p">:</span> <span class="n">Valkey</span><span class="p">,</span> <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">EmptyType</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">handle_client_shutdown</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span data-line="34">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="35"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize :class:`ValkeyStore`</span>
-</span><span data-line="36">
-</span><span data-line="37"><span class="sd">        Args:</span>
-</span><span data-line="38"><span class="sd">            valkey: An :class:`valkey.asyncio.Valkey` instance</span>
-</span><span data-line="39"><span class="sd">            namespace: A key prefix to simulate a namespace in valkey. If not given,</span>
-</span><span data-line="40"><span class="sd">                defaults to ``LITESTAR``. Namespacing can be explicitly disabled by passing</span>
-</span><span data-line="41"><span class="sd">                ``None``. This will make :meth:`.delete_all` unavailable.</span>
-</span><span data-line="42"><span class="sd">            handle_client_shutdown: If ``True``, handle the shutdown of the `valkey` instance automatically during the store&#39;s lifespan. Should be set to `True` unless the shutdown is handled externally</span>
-</span><span data-line="43"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="44">        <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span> <span class="o">=</span> <span class="n">valkey</span>
-</span><span data-line="45">        <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">value_or_default</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="s2">&quot;LITESTAR&quot;</span><span class="p">)</span>
-</span><span data-line="46">        <span class="bp">self</span><span class="o">.</span><span class="n">handle_client_shutdown</span> <span class="o">=</span> <span class="n">handle_client_shutdown</span>
-</span><span data-line="47">
-</span><span data-line="48">        <span class="c1"># script to get and renew a key in one atomic step</span>
-</span><span data-line="49">        <span class="bp">self</span><span class="o">.</span><span class="n">_get_and_renew_script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">register_script</span><span class="p">(</span>
-</span><span data-line="50"><span class="w">            </span><span class="sa">b</span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="51"><span class="sd">        local key = KEYS[1]</span>
-</span><span data-line="52"><span class="sd">        local renew = tonumber(ARGV[1])</span>
-</span><span data-line="53">
-</span><span data-line="54"><span class="sd">        local data = server.call(&#39;GET&#39;, key)</span>
-</span><span data-line="55"><span class="sd">        local ttl = server.call(&#39;TTL&#39;, key)</span>
-</span><span data-line="56">
-</span><span data-line="57"><span class="sd">        if ttl &gt; 0 then</span>
-</span><span data-line="58"><span class="sd">            server.call(&#39;EXPIRE&#39;, key, renew)</span>
-</span><span data-line="59"><span class="sd">        end</span>
-</span><span data-line="60">
-</span><span data-line="61"><span class="sd">        return data</span>
-</span><span data-line="62"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="63">        <span class="p">)</span>
-</span><span data-line="64">
-</span><span data-line="65">        <span class="c1"># script to delete all keys in the namespace</span>
-</span><span data-line="66">        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_all_script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">register_script</span><span class="p">(</span>
-</span><span data-line="67"><span class="w">            </span><span class="sa">b</span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="68"><span class="sd">        local cursor = 0</span>
-</span><span data-line="69">
-</span><span data-line="70"><span class="sd">        repeat</span>
-</span><span data-line="71"><span class="sd">            local result = server.call(&#39;SCAN&#39;, cursor, &#39;MATCH&#39;, ARGV[1])</span>
-</span><span data-line="72"><span class="sd">            for _,key in ipairs(result[2]) do</span>
-</span><span data-line="73"><span class="sd">                server.call(&#39;UNLINK&#39;, key)</span>
-</span><span data-line="74"><span class="sd">            end</span>
-</span><span data-line="75"><span class="sd">            cursor = tonumber(result[1])</span>
-</span><span data-line="76"><span class="sd">        until cursor == 0</span>
-</span><span data-line="77"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="78">        <span class="p">)</span></div>
+</span><span data-line="34">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="35">        <span class="bp">self</span><span class="p">,</span> <span class="n">valkey</span><span class="p">:</span> <span class="n">Valkey</span><span class="p">,</span> <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">EmptyType</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">handle_client_shutdown</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="36">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="37"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize :class:`ValkeyStore`</span>
+</span><span data-line="38">
+</span><span data-line="39"><span class="sd">        Args:</span>
+</span><span data-line="40"><span class="sd">            valkey: An :class:`valkey.asyncio.Valkey` instance</span>
+</span><span data-line="41"><span class="sd">            namespace: A key prefix to simulate a namespace in valkey. If not given,</span>
+</span><span data-line="42"><span class="sd">                defaults to ``LITESTAR``. Namespacing can be explicitly disabled by passing</span>
+</span><span data-line="43"><span class="sd">                ``None``. This will make :meth:`.delete_all` unavailable.</span>
+</span><span data-line="44"><span class="sd">            handle_client_shutdown: If ``True``, handle the shutdown of the `valkey` instance automatically during the store&#39;s lifespan. Should be set to `True` unless the shutdown is handled externally</span>
+</span><span data-line="45"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="46">        <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span> <span class="o">=</span> <span class="n">valkey</span>
+</span><span data-line="47">        <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">value_or_default</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="s2">&quot;LITESTAR&quot;</span><span class="p">)</span>
+</span><span data-line="48">        <span class="bp">self</span><span class="o">.</span><span class="n">handle_client_shutdown</span> <span class="o">=</span> <span class="n">handle_client_shutdown</span>
+</span><span data-line="49">
+</span><span data-line="50">        <span class="c1"># script to get and renew a key in one atomic step</span>
+</span><span data-line="51">        <span class="bp">self</span><span class="o">.</span><span class="n">_get_and_renew_script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">register_script</span><span class="p">(</span>
+</span><span data-line="52"><span class="w">            </span><span class="sa">b</span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="53"><span class="sd">        local key = KEYS[1]</span>
+</span><span data-line="54"><span class="sd">        local renew = tonumber(ARGV[1])</span>
+</span><span data-line="55">
+</span><span data-line="56"><span class="sd">        local data = server.call(&#39;GET&#39;, key)</span>
+</span><span data-line="57"><span class="sd">        local ttl = server.call(&#39;TTL&#39;, key)</span>
+</span><span data-line="58">
+</span><span data-line="59"><span class="sd">        if ttl &gt; 0 then</span>
+</span><span data-line="60"><span class="sd">            server.call(&#39;EXPIRE&#39;, key, renew)</span>
+</span><span data-line="61"><span class="sd">        end</span>
+</span><span data-line="62">
+</span><span data-line="63"><span class="sd">        return data</span>
+</span><span data-line="64"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="65">        <span class="p">)</span>
+</span><span data-line="66">
+</span><span data-line="67">        <span class="c1"># script to delete all keys in the namespace</span>
+</span><span data-line="68">        <span class="bp">self</span><span class="o">.</span><span class="n">_delete_all_script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">register_script</span><span class="p">(</span>
+</span><span data-line="69"><span class="w">            </span><span class="sa">b</span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="70"><span class="sd">        local cursor = 0</span>
+</span><span data-line="71">
+</span><span data-line="72"><span class="sd">        repeat</span>
+</span><span data-line="73"><span class="sd">            local result = server.call(&#39;SCAN&#39;, cursor, &#39;MATCH&#39;, ARGV[1])</span>
+</span><span data-line="74"><span class="sd">            for _,key in ipairs(result[2]) do</span>
+</span><span data-line="75"><span class="sd">                server.call(&#39;UNLINK&#39;, key)</span>
+</span><span data-line="76"><span class="sd">            end</span>
+</span><span data-line="77"><span class="sd">            cursor = tonumber(result[1])</span>
+</span><span data-line="78"><span class="sd">        until cursor == 0</span>
+</span><span data-line="79"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="80">        <span class="p">)</span></div>
 
-</span><span data-line="79">
-</span><span data-line="80">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="81">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_client_shutdown</span><span class="p">:</span>
-</span><span data-line="82">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">aclose</span><span class="p">(</span><span class="n">close_connection_pool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="83">
-</span><span data-line="84">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
-</span><span data-line="85">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="86">        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="87">        <span class="n">exc_val</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="88">        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="89">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="90">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown</span><span class="p">()</span>
-</span><span data-line="91">
+</span><span data-line="81">
+</span><span data-line="82">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="83">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_client_shutdown</span><span class="p">:</span>
+</span><span data-line="84">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">aclose</span><span class="p">(</span><span class="n">close_connection_pool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="85">
+</span><span data-line="86">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
+</span><span data-line="87">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="88">        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="89">        <span class="n">exc_val</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="90">        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="91">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="92">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shutdown</span><span class="p">()</span>
+</span><span data-line="93">
 <div class="viewcode-block" id="ValkeyStore.with_client">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.with_client">[docs]</a>
-</span><span data-line="92">    <span class="nd">@classmethod</span>
-</span><span data-line="93">    <span class="k">def</span><span class="w"> </span><span class="nf">with_client</span><span class="p">(</span>
-</span><span data-line="94">        <span class="bp">cls</span><span class="p">,</span>
-</span><span data-line="95">        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;valkey://localhost:6379&quot;</span><span class="p">,</span>
-</span><span data-line="96">        <span class="o">*</span><span class="p">,</span>
-</span><span data-line="97">        <span class="n">db</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="98">        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="99">        <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="100">        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="101">        <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">EmptyType</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span>
-</span><span data-line="102">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValkeyStore</span><span class="p">:</span>
-</span><span data-line="103"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :class:`ValkeyStore` instance with a new class:`valkey.asyncio.Valkey` instance.</span>
-</span><span data-line="104">
-</span><span data-line="105"><span class="sd">        Args:</span>
-</span><span data-line="106"><span class="sd">            url: Valkey URL to connect to</span>
-</span><span data-line="107"><span class="sd">            db: Valkey database to use</span>
-</span><span data-line="108"><span class="sd">            port: Valkey port to use</span>
-</span><span data-line="109"><span class="sd">            username: Valkey username to use</span>
-</span><span data-line="110"><span class="sd">            password: Valkey password to use</span>
-</span><span data-line="111"><span class="sd">            namespace: Virtual key namespace to use</span>
-</span><span data-line="112"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="113">        <span class="n">pool</span><span class="p">:</span> <span class="n">ConnectionPool</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="o">.</span><span class="n">from_url</span><span class="p">(</span>
-</span><span data-line="114">            <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-</span><span data-line="115">            <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
-</span><span data-line="116">            <span class="n">decode_responses</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span data-line="117">            <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
-</span><span data-line="118">            <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span>
-</span><span data-line="119">            <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
-</span><span data-line="120">        <span class="p">)</span>
-</span><span data-line="121">        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span data-line="122">            <span class="n">valkey</span><span class="o">=</span><span class="n">Valkey</span><span class="p">(</span><span class="n">connection_pool</span><span class="o">=</span><span class="n">pool</span><span class="p">),</span>
-</span><span data-line="123">            <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
-</span><span data-line="124">            <span class="n">handle_client_shutdown</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span data-line="125">        <span class="p">)</span></div>
+</span><span data-line="94">    <span class="nd">@classmethod</span>
+</span><span data-line="95">    <span class="k">def</span><span class="w"> </span><span class="nf">with_client</span><span class="p">(</span>
+</span><span data-line="96">        <span class="bp">cls</span><span class="p">,</span>
+</span><span data-line="97">        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;valkey://localhost:6379&quot;</span><span class="p">,</span>
+</span><span data-line="98">        <span class="o">*</span><span class="p">,</span>
+</span><span data-line="99">        <span class="n">db</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="100">        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="101">        <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="102">        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="103">        <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">EmptyType</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span>
+</span><span data-line="104">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValkeyStore</span><span class="p">:</span>
+</span><span data-line="105"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :class:`ValkeyStore` instance with a new class:`valkey.asyncio.Valkey` instance.</span>
+</span><span data-line="106">
+</span><span data-line="107"><span class="sd">        Args:</span>
+</span><span data-line="108"><span class="sd">            url: Valkey URL to connect to</span>
+</span><span data-line="109"><span class="sd">            db: Valkey database to use</span>
+</span><span data-line="110"><span class="sd">            port: Valkey port to use</span>
+</span><span data-line="111"><span class="sd">            username: Valkey username to use</span>
+</span><span data-line="112"><span class="sd">            password: Valkey password to use</span>
+</span><span data-line="113"><span class="sd">            namespace: Virtual key namespace to use</span>
+</span><span data-line="114"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="115">        <span class="n">pool</span><span class="p">:</span> <span class="n">ConnectionPool</span> <span class="o">=</span> <span class="n">ConnectionPool</span><span class="o">.</span><span class="n">from_url</span><span class="p">(</span>
+</span><span data-line="116">            <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+</span><span data-line="117">            <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+</span><span data-line="118">            <span class="n">decode_responses</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span data-line="119">            <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+</span><span data-line="120">            <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span>
+</span><span data-line="121">            <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span>
+</span><span data-line="122">        <span class="p">)</span>
+</span><span data-line="123">        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span data-line="124">            <span class="n">valkey</span><span class="o">=</span><span class="n">Valkey</span><span class="p">(</span><span class="n">connection_pool</span><span class="o">=</span><span class="n">pool</span><span class="p">),</span>
+</span><span data-line="125">            <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+</span><span data-line="126">            <span class="n">handle_client_shutdown</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span data-line="127">        <span class="p">)</span></div>
 
-</span><span data-line="126">
+</span><span data-line="128">
 <div class="viewcode-block" id="ValkeyStore.with_namespace">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.with_namespace">[docs]</a>
-</span><span data-line="127">    <span class="k">def</span><span class="w"> </span><span class="nf">with_namespace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValkeyStore</span><span class="p">:</span>
-</span><span data-line="128"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new :class:`ValkeyStore` with a nested virtual key namespace.</span>
-</span><span data-line="129"><span class="sd">        The current instances namespace will serve as a prefix for the namespace, so it</span>
-</span><span data-line="130"><span class="sd">        can be considered the parent namespace.</span>
-</span><span data-line="131"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="132">        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span>
-</span><span data-line="133">            <span class="n">valkey</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="p">,</span>
-</span><span data-line="134">            <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">namespace</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="k">else</span> <span class="n">namespace</span><span class="p">,</span>
-</span><span data-line="135">            <span class="n">handle_client_shutdown</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_client_shutdown</span><span class="p">,</span>
-</span><span data-line="136">        <span class="p">)</span></div>
+</span><span data-line="129">    <span class="k">def</span><span class="w"> </span><span class="nf">with_namespace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namespace</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValkeyStore</span><span class="p">:</span>
+</span><span data-line="130"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new :class:`ValkeyStore` with a nested virtual key namespace.</span>
+</span><span data-line="131"><span class="sd">        The current instances namespace will serve as a prefix for the namespace, so it</span>
+</span><span data-line="132"><span class="sd">        can be considered the parent namespace.</span>
+</span><span data-line="133"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="134">        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span>
+</span><span data-line="135">            <span class="n">valkey</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="p">,</span>
+</span><span data-line="136">            <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">namespace</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="k">else</span> <span class="n">namespace</span><span class="p">,</span>
+</span><span data-line="137">            <span class="n">handle_client_shutdown</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_client_shutdown</span><span class="p">,</span>
+</span><span data-line="138">        <span class="p">)</span></div>
 
-</span><span data-line="137">
-</span><span data-line="138">    <span class="k">def</span><span class="w"> </span><span class="nf">_make_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="139">        <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">:&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-</span><span data-line="140">        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span>
-</span><span data-line="141">
+</span><span data-line="139">
+</span><span data-line="140">    <span class="k">def</span><span class="w"> </span><span class="nf">_make_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="141">        <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">:&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+</span><span data-line="142">        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span>
+</span><span data-line="143">
 <div class="viewcode-block" id="ValkeyStore.set">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.set">[docs]</a>
-</span><span data-line="142">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">expires_in</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">timedelta</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="143"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a value.</span>
-</span><span data-line="144">
-</span><span data-line="145"><span class="sd">        Args:</span>
-</span><span data-line="146"><span class="sd">            key: Key to associate the value with</span>
-</span><span data-line="147"><span class="sd">            value: Value to store</span>
-</span><span data-line="148"><span class="sd">            expires_in: Time in seconds before the key is considered expired</span>
-</span><span data-line="149">
-</span><span data-line="150"><span class="sd">        Returns:</span>
-</span><span data-line="151"><span class="sd">            ``None``</span>
-</span><span data-line="152"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="153">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span data-line="154">            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-</span><span data-line="155">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">expires_in</span><span class="p">)</span></div>
+</span><span data-line="144">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">expires_in</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">timedelta</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="145"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a value.</span>
+</span><span data-line="146">
+</span><span data-line="147"><span class="sd">        Args:</span>
+</span><span data-line="148"><span class="sd">            key: Key to associate the value with</span>
+</span><span data-line="149"><span class="sd">            value: Value to store</span>
+</span><span data-line="150"><span class="sd">            expires_in: Time in seconds before the key is considered expired</span>
+</span><span data-line="151">
+</span><span data-line="152"><span class="sd">        Returns:</span>
+</span><span data-line="153"><span class="sd">            ``None``</span>
+</span><span data-line="154"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="155">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="156">            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+</span><span data-line="157">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">expires_in</span><span class="p">)</span></div>
 
-</span><span data-line="156">
+</span><span data-line="158">
 <div class="viewcode-block" id="ValkeyStore.get">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.get">[docs]</a>
-</span><span data-line="157">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">renew_for</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">timedelta</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="158"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a value.</span>
-</span><span data-line="159">
-</span><span data-line="160"><span class="sd">        Args:</span>
-</span><span data-line="161"><span class="sd">            key: Key associated with the value</span>
-</span><span data-line="162"><span class="sd">            renew_for: If given and the value had an initial expiry time set, renew the</span>
-</span><span data-line="163"><span class="sd">                expiry time for ``renew_for`` seconds. If the value has not been set</span>
-</span><span data-line="164"><span class="sd">                with an expiry time this is a no-op. Atomicity of this step is guaranteed</span>
-</span><span data-line="165"><span class="sd">                by using a lua script to execute fetch and renewal. If ``renew_for`` is</span>
-</span><span data-line="166"><span class="sd">                not given, the script will be bypassed so no overhead will occur</span>
-</span><span data-line="167">
-</span><span data-line="168"><span class="sd">        Returns:</span>
-</span><span data-line="169"><span class="sd">            The value associated with ``key`` if it exists and is not expired, else</span>
-</span><span data-line="170"><span class="sd">            ``None``</span>
-</span><span data-line="171"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="172">        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="173">        <span class="k">if</span> <span class="n">renew_for</span><span class="p">:</span>
-</span><span data-line="174">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">renew_for</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">):</span>
-</span><span data-line="175">                <span class="n">renew_for</span> <span class="o">=</span> <span class="n">renew_for</span><span class="o">.</span><span class="n">seconds</span>
-</span><span data-line="176">            <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_and_renew_script</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">renew_for</span><span class="p">])</span>
-</span><span data-line="177">            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;bytes | None&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</span><span data-line="178">        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
+</span><span data-line="159">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">renew_for</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">timedelta</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="160"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a value.</span>
+</span><span data-line="161">
+</span><span data-line="162"><span class="sd">        Args:</span>
+</span><span data-line="163"><span class="sd">            key: Key associated with the value</span>
+</span><span data-line="164"><span class="sd">            renew_for: If given and the value had an initial expiry time set, renew the</span>
+</span><span data-line="165"><span class="sd">                expiry time for ``renew_for`` seconds. If the value has not been set</span>
+</span><span data-line="166"><span class="sd">                with an expiry time this is a no-op. Atomicity of this step is guaranteed</span>
+</span><span data-line="167"><span class="sd">                by using a lua script to execute fetch and renewal. If ``renew_for`` is</span>
+</span><span data-line="168"><span class="sd">                not given, the script will be bypassed so no overhead will occur</span>
+</span><span data-line="169">
+</span><span data-line="170"><span class="sd">        Returns:</span>
+</span><span data-line="171"><span class="sd">            The value associated with ``key`` if it exists and is not expired, else</span>
+</span><span data-line="172"><span class="sd">            ``None``</span>
+</span><span data-line="173"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="174">        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="175">        <span class="k">if</span> <span class="n">renew_for</span><span class="p">:</span>
+</span><span data-line="176">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">renew_for</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">):</span>
+</span><span data-line="177">                <span class="n">renew_for</span> <span class="o">=</span> <span class="n">renew_for</span><span class="o">.</span><span class="n">seconds</span>
+</span><span data-line="178">            <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_and_renew_script</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">renew_for</span><span class="p">])</span>
+</span><span data-line="179">            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;bytes | None&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span><span data-line="180">        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
 
-</span><span data-line="179">
+</span><span data-line="181">
 <div class="viewcode-block" id="ValkeyStore.delete">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.delete">[docs]</a>
-</span><span data-line="180">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="181"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a value.</span>
-</span><span data-line="182">
-</span><span data-line="183"><span class="sd">        If no such key exists, this is a no-op.</span>
+</span><span data-line="182">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="183"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a value.</span>
 </span><span data-line="184">
-</span><span data-line="185"><span class="sd">        Args:</span>
-</span><span data-line="186"><span class="sd">            key: Key of the value to delete</span>
-</span><span data-line="187"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="188">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span></div>
+</span><span data-line="185"><span class="sd">        If no such key exists, this is a no-op.</span>
+</span><span data-line="186">
+</span><span data-line="187"><span class="sd">        Args:</span>
+</span><span data-line="188"><span class="sd">            key: Key of the value to delete</span>
+</span><span data-line="189"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="190">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span></div>
 
-</span><span data-line="189">
+</span><span data-line="191">
 <div class="viewcode-block" id="ValkeyStore.delete_all">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.delete_all">[docs]</a>
-</span><span data-line="190">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="191"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete all stored values in the virtual key namespace.</span>
-</span><span data-line="192">
-</span><span data-line="193"><span class="sd">        Raises:</span>
-</span><span data-line="194"><span class="sd">            ImproperlyConfiguredException: If no namespace was configured</span>
-</span><span data-line="195"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="196">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">:</span>
-</span><span data-line="197">            <span class="k">raise</span> <span class="n">ImproperlyConfiguredException</span><span class="p">(</span><span class="s2">&quot;Cannot perform delete operation: No namespace configured&quot;</span><span class="p">)</span>
-</span><span data-line="198">
-</span><span data-line="199">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_all_script</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">*:*&quot;</span><span class="p">])</span></div>
-
+</span><span data-line="192">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="193"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete all stored values in the virtual key namespace.</span>
+</span><span data-line="194">
+</span><span data-line="195"><span class="sd">        Raises:</span>
+</span><span data-line="196"><span class="sd">            ImproperlyConfiguredException: If no namespace was configured</span>
+</span><span data-line="197"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="198">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">:</span>
+</span><span data-line="199">            <span class="k">raise</span> <span class="n">ImproperlyConfiguredException</span><span class="p">(</span><span class="s2">&quot;Cannot perform delete operation: No namespace configured&quot;</span><span class="p">)</span>
 </span><span data-line="200">
+</span><span data-line="201">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_all_script</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">*:*&quot;</span><span class="p">])</span></div>
+
+</span><span data-line="202">
 <div class="viewcode-block" id="ValkeyStore.exists">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.exists">[docs]</a>
-</span><span data-line="201">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="202"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a given ``key`` exists.&quot;&quot;&quot;</span>
-</span><span data-line="203">        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
+</span><span data-line="203">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="204"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a given ``key`` exists.&quot;&quot;&quot;</span>
+</span><span data-line="205">        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span>  <span class="c1"># type: ignore[no-any-return]</span></div>
 
-</span><span data-line="204">
+</span><span data-line="206">
 <div class="viewcode-block" id="ValkeyStore.expires_in">
 <a class="viewcode-back" href="../../../reference/stores/valkey.html#litestar.stores.valkey.ValkeyStore.expires_in">[docs]</a>
-</span><span data-line="205">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">expires_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="206"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the time in seconds ``key`` expires in. If no such ``key`` exists or no</span>
-</span><span data-line="207"><span class="sd">        expiry time was set, return ``None``.</span>
-</span><span data-line="208"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="209">        <span class="n">ttl</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">ttl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-</span><span data-line="210">        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">ttl</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span> <span class="k">else</span> <span class="n">ttl</span></div>
+</span><span data-line="207">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">expires_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="208"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the time in seconds ``key`` expires in. If no such ``key`` exists or no</span>
+</span><span data-line="209"><span class="sd">        expiry time was set, return ``None``.</span>
+</span><span data-line="210"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="211">        <span class="n">ttl</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valkey</span><span class="o">.</span><span class="n">ttl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_make_key</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+</span><span data-line="212">        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">ttl</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span> <span class="k">else</span> <span class="n">ttl</span></div>
 </div>
 
 </span></pre></div>

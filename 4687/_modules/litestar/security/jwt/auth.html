@@ -573,7 +573,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="66"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The value to use for the OpenAPI security scheme and security requirements.&quot;&quot;&quot;</span>
 </span><span data-line="67">    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
 </span><span data-line="68"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Description for the OpenAPI security scheme.&quot;&quot;&quot;</span>
-</span><span data-line="69">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">JWTAuthenticationMiddleware</span><span class="p">]</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="69">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">JWTAuthenticationMiddleware</span><span class="p">]</span>  <span class="c1"># pyright: ignore[reportIncompatibleVariableOverride]</span>
 </span><span data-line="70"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The authentication middleware class to use.</span>
 </span><span data-line="71">
 </span><span data-line="72"><span class="sd">    Must inherit from :class:`JWTAuthenticationMiddleware`</span>
@@ -945,7 +945,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="423"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Controls whether or not a cookie is sent with cross-site requests. Defaults to ``lax``. &quot;&quot;&quot;</span>
 </span><span data-line="424">    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;JWT cookie-based authentication and authorization.&quot;</span><span class="p">)</span>
 </span><span data-line="425"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Description for the OpenAPI security scheme.&quot;&quot;&quot;</span>
-</span><span data-line="426">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">JWTCookieAuthenticationMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="426">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">JWTCookieAuthenticationMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>  <span class="c1"># pyright: ignore[reportIncompatibleVariableOverride]</span>
 </span><span data-line="427">        <span class="n">default</span><span class="o">=</span><span class="n">JWTCookieAuthenticationMiddleware</span>
 </span><span data-line="428">    <span class="p">)</span>
 </span><span data-line="429"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The authentication middleware class to use. Must inherit from :class:`JWTCookieAuthenticationMiddleware`</span>
@@ -1192,7 +1192,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="661"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Controls whether or not a cookie is sent with cross-site requests. Defaults to ``lax``. &quot;&quot;&quot;</span>
 </span><span data-line="662">    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;OAUTH2 password bearer authentication and authorization.&quot;</span><span class="p">)</span>
 </span><span data-line="663"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Description for the OpenAPI security scheme.&quot;&quot;&quot;</span>
-</span><span data-line="664">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">JWTCookieAuthenticationMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>  <span class="c1"># pyright: ignore</span>
+</span><span data-line="664">    <span class="n">authentication_middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">JWTCookieAuthenticationMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>  <span class="c1"># pyright: ignore[reportIncompatibleVariableOverride]</span>
 </span><span data-line="665">        <span class="n">default</span><span class="o">=</span><span class="n">JWTCookieAuthenticationMiddleware</span>
 </span><span data-line="666">    <span class="p">)</span>
 </span><span data-line="667"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The authentication middleware class to use.</span>
@@ -1278,7 +1278,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="747">                    <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;Bearer&quot;</span><span class="p">,</span>
 </span><span data-line="748">                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_header</span><span class="p">,</span>
 </span><span data-line="749">                    <span class="n">security_scheme_in</span><span class="o">=</span><span class="s2">&quot;header&quot;</span><span class="p">,</span>
-</span><span data-line="750">                    <span class="n">flows</span><span class="o">=</span><span class="n">OAuthFlows</span><span class="p">(</span><span class="n">password</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">oauth_flow</span><span class="p">),</span>  <span class="c1"># pyright: ignore[reportGeneralTypeIssues]</span>
+</span><span data-line="750">                    <span class="n">flows</span><span class="o">=</span><span class="n">OAuthFlows</span><span class="p">(</span><span class="n">password</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">oauth_flow</span><span class="p">),</span>
 </span><span data-line="751">                    <span class="n">bearer_format</span><span class="o">=</span><span class="s2">&quot;JWT&quot;</span><span class="p">,</span>
 </span><span data-line="752">                    <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
 </span><span data-line="753">                <span class="p">)</span>
