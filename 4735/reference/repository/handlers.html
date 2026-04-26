@@ -448,7 +448,10 @@ data-aria-dark="Switch to auto color mode">
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-lucide close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#litestar.repository.handlers.on_app_init"><code class="docutils literal notranslate"><span class="pre">on_app_init()</span></code></a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
   data-type="github" data-user="litestar-org" data-repo="litestar">
   <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
     <iconify-icon icon="simple-icons:github"></iconify-icon>
@@ -543,14 +546,15 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </div><article class="yue" role="main">
-          <section id="handlers">
-<h1>handlers<a class="headerlink" href="#handlers" title="Link to this heading">¶</a></h1>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 3.0.0: </span>No direct replacement. Wire the filter signature namespace yourself, or use
-<code class="docutils literal notranslate"><span class="pre">advanced_alchemy.extensions.litestar.SQLAlchemyPlugin</span></code> which registers it
-for you. This module is removed before 3.0.0 GA.</p>
-</div>
-<span class="target" id="module-litestar.repository.handlers"></span></section>
+          <section id="module-litestar.repository.handlers">
+<span id="handlers"></span><h1>handlers<a class="headerlink" href="#module-litestar.repository.handlers" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="litestar.repository.handlers.on_app_init">
+<span class="sig-prename descclassname"><span class="pre">litestar.repository.handlers.</span></span><span class="sig-name descname"><span class="pre">on_app_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../config.html#litestar.config.app.AppConfig" title="litestar.config.app.AppConfig"><span class="pre">AppConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../config.html#litestar.config.app.AppConfig" title="litestar.config.app.AppConfig"><span class="pre">AppConfig</span></a></span></span><a class="reference internal" href="../../_modules/litestar/repository/handlers.html#on_app_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.repository.handlers.on_app_init" title="Link to this definition">¶</a></dt>
+<dd><p>Add custom filters for the application during signature modelling.</p>
+</dd></dl>
+
+</section>
 
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
