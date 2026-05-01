@@ -559,22 +559,24 @@ and <a class="reference internal" href="../../reference/security/jwt.html#litest
 <section id="excluding-routes">
 <h2>Excluding routes<a class="headerlink" href="#excluding-routes" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> argument takes a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code></a> that are interpreted
-as regex patterns. For example, the configuration below would apply authentication to all endpoints except those where
-the route starts with <code class="docutils literal notranslate"><span class="pre">/login</span></code>, <code class="docutils literal notranslate"><span class="pre">/signup</span></code>, or <code class="docutils literal notranslate"><span class="pre">/schema</span></code>. Thus, one does not have to exclude <code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code>
-as well - it is included in the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> pattern.</p>
+as regex patterns matched against the full path. Because the patterns are not implicitly anchored, a pattern like
+<code class="docutils literal notranslate"><span class="pre">/schema</span></code> would match <em>any</em> path containing <code class="docutils literal notranslate"><span class="pre">/schema</span></code>, not just paths that start with it. To match only paths that
+start with a given prefix, anchor the pattern with <code class="docutils literal notranslate"><span class="pre">^</span></code>. For example, the configuration below would apply
+authentication to all endpoints except those where the route starts with <code class="docutils literal notranslate"><span class="pre">/login</span></code>, <code class="docutils literal notranslate"><span class="pre">/signup</span></code>, or <code class="docutils literal notranslate"><span class="pre">/schema</span></code>.
+Thus, one does not have to exclude <code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code> as well — it is covered by the <code class="docutils literal notranslate"><span class="pre">^/schema</span></code> pattern.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>Passing <code class="docutils literal notranslate"><span class="pre">/</span></code> will disable authentication for all routes, since, as a regex, it
 matches <em>every</em> path.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
-</span><span data-line="2"><span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
-</span><span data-line="3"><span class="c1"># we must pass a config for a session backend.</span>
-</span><span data-line="4"><span class="c1"># all session backends are supported</span>
-</span><span data-line="5"><span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
-</span><span data-line="6"><span class="c1"># exclude any URLs that should not have authentication.</span>
-</span><span data-line="7"><span class="c1"># We exclude the documentation URLs, signup and login.</span>
-</span><span data-line="8"><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="s2">&quot;/signup&quot;</span><span class="p">,</span> <span class="s2">&quot;/schema&quot;</span><span class="p">],</span>
+</span><span data-line="2">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
+</span><span data-line="3">    <span class="c1"># we must pass a config for a session backend.</span>
+</span><span data-line="4">    <span class="c1"># all session backends are supported</span>
+</span><span data-line="5">    <span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
+</span><span data-line="6">    <span class="c1"># exclude any URLs that should not have authentication.</span>
+</span><span data-line="7">    <span class="c1"># We exclude the documentation URLs, signup and login.</span>
+</span><span data-line="8">    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^/login&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/signup&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/schema&quot;</span><span class="p">],</span>
 </span><span data-line="9"><span class="p">)</span>
 </span><span data-line="10"><span class="o">...</span>
 </span></pre></div>
@@ -587,13 +589,13 @@ path but the one specified in the pattern will be protected by authentication. I
 under the <code class="docutils literal notranslate"><span class="pre">/secured</span></code> route will require authentication - all other routes do not.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="o">...</span>
 </span><span data-line="2"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
-</span><span data-line="3"><span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
-</span><span data-line="4"><span class="c1"># we must pass a config for a session backend.</span>
-</span><span data-line="5"><span class="c1"># all session backends are supported</span>
-</span><span data-line="6"><span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
-</span><span data-line="7"><span class="c1"># exclude any URLs that should not have authentication.</span>
-</span><span data-line="8"><span class="c1"># We exclude the documentation URLs, signup and login.</span>
-</span><span data-line="9"><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^(?!.*\/secured$).*$&quot;</span><span class="p">],</span>
+</span><span data-line="3">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
+</span><span data-line="4">    <span class="c1"># we must pass a config for a session backend.</span>
+</span><span data-line="5">    <span class="c1"># all session backends are supported</span>
+</span><span data-line="6">    <span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
+</span><span data-line="7">    <span class="c1"># exclude any URLs that should not have authentication.</span>
+</span><span data-line="8">    <span class="c1"># We exclude the documentation URLs, signup and login.</span>
+</span><span data-line="9">    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^(?!.*\/secured$).*$&quot;</span><span class="p">],</span>
 </span><span data-line="10"><span class="p">)</span>
 </span><span data-line="11"><span class="o">...</span>
 </span></pre></div>
@@ -626,14 +628,14 @@ can pass <code class="docutils literal notranslate"><span class="pre">exclude_fr
 </span><span data-line="8">    <span class="o">...</span>
 </span><span data-line="9">
 </span><span data-line="10"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
-</span><span data-line="11"><span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
-</span><span data-line="12"><span class="c1"># we must pass a config for a session backend.</span>
-</span><span data-line="13"><span class="c1"># all session backends are supported</span>
-</span><span data-line="14"><span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
-</span><span data-line="15"><span class="c1"># exclude any URLs that should not have authentication.</span>
-</span><span data-line="16"><span class="c1"># We exclude the documentation URLs, signup and login.</span>
-</span><span data-line="17"><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="s2">&quot;/signup&quot;</span><span class="p">,</span> <span class="s2">&quot;/schema&quot;</span><span class="p">],</span>
-</span><span data-line="18"><span class="n">exclude_opt_key</span><span class="o">=</span><span class="s2">&quot;no_auth&quot;</span>  <span class="c1"># default value is `exclude_from_auth`</span>
+</span><span data-line="11">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
+</span><span data-line="12">    <span class="c1"># we must pass a config for a session backend.</span>
+</span><span data-line="13">    <span class="c1"># all session backends are supported</span>
+</span><span data-line="14">    <span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
+</span><span data-line="15">    <span class="c1"># exclude any URLs that should not have authentication.</span>
+</span><span data-line="16">    <span class="c1"># We exclude the documentation URLs, signup and login.</span>
+</span><span data-line="17">    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^/login&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/signup&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/schema&quot;</span><span class="p">],</span>
+</span><span data-line="18">    <span class="n">exclude_opt_key</span><span class="o">=</span><span class="s2">&quot;no_auth&quot;</span>  <span class="c1"># default value is `exclude_from_auth`</span>
 </span><span data-line="19"><span class="p">)</span>
 </span><span data-line="20"><span class="o">...</span>
 </span></pre></div>
