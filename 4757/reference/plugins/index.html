@@ -194,7 +194,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../usage/lifecycle-hooks.html">Life Cycle Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/logging.html">Request logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../usage/metrics/index.html">Metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../usage/metrics/open-telemetry.html">OpenTelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/metrics/opentelemetry.html">OpenTelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../usage/metrics/prometheus.html">Prometheus</a></li>
 </ul>
 </li>
@@ -266,7 +266,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../contrib/index.html">contrib</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contrib/opentelemetry.html">opentelemetry</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../controller.html">controller</a></li>
@@ -320,6 +319,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flash_messages.html">flash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opentelemetry.html">opentelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="problem_details.html">problem details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pydantic.html">pydantic</a></li>
@@ -850,7 +850,7 @@ returns <code class="docutils literal notranslate"><span class="pre">False</span
 <dt class="sig sig-object py" id="litestar.plugins.OpenAPISpecPlugin.applies_to">
 <span class="sig-name descname"><span class="pre">applies_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">route_handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../handlers.html#litestar.handlers.HTTPRouteHandler" title="litestar.handlers.HTTPRouteHandler"><span class="pre">HTTPRouteHandler</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../../_modules/litestar/plugins/base.html#OpenAPISpecPlugin.applies_to"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.plugins.OpenAPISpecPlugin.applies_to" title="Link to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if this plugin should contribute for <code class="docutils literal notranslate"><span class="pre">route_handler</span></code>.</p>
-<p>The default implementation honors <a class="reference internal" href="../dto/config.html#litestar.dto.config.DTOConfig.include" title="litestar.dto.config.DTOConfig.include"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include</span></code></a> and <a class="reference internal" href="../config.html#litestar.config.allowed_hosts.AllowedHostsConfig.exclude" title="litestar.config.allowed_hosts.AllowedHostsConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> path patterns.
+<p>The default implementation honors <a class="reference internal" href="#litestar.plugins.OpenAPISpecPlugin.params.include" title="litestar.plugins.OpenAPISpecPlugin.params.include"><code class="xref py py-attr docutils literal notranslate"><span class="pre">include</span></code></a> and <a class="reference internal" href="../config.html#litestar.config.allowed_hosts.AllowedHostsConfig.exclude" title="litestar.config.allowed_hosts.AllowedHostsConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> path patterns.
 Subclasses can override this method for custom filtering logic.</p>
 </dd></dl>
 
