@@ -194,7 +194,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../usage/lifecycle-hooks.html">Life Cycle Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/logging.html">Request logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/metrics/index.html">Metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../usage/metrics/open-telemetry.html">OpenTelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/metrics/opentelemetry.html">OpenTelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/metrics/prometheus.html">Prometheus</a></li>
 </ul>
 </li>
@@ -266,7 +266,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/jinja.html">jinja</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
@@ -320,6 +319,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/flash_messages.html">flash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/opentelemetry.html">opentelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
@@ -783,6 +783,25 @@ and <code class="docutils literal notranslate"><span class="pre">litestar_piccol
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4364">https://github.com/litestar-org/litestar/issues/4364</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4363">https://github.com/litestar-org/litestar/pull/4363</a></span></p>
 </div>
 </dd>
+<dt>Move <code class="docutils literal notranslate"><span class="pre">litestar.contrib.opentelemetry</span></code> to <code class="docutils literal notranslate"><span class="pre">litestar.plugins.opentelemetry</span></code> and add upstream parity<a class="headerlink reference internal" href="#3.0.0-move" id="3.0.0-move">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Move the OpenTelemetry integration from <code class="docutils literal notranslate"><span class="pre">litestar.contrib.opentelemetry</span></code> to
+<code class="docutils literal notranslate"><span class="pre">litestar.plugins.opentelemetry</span></code>. Code still using imports from the old
+module should switch to the new path.</p>
+<p><a class="reference internal" href="../reference/plugins/opentelemetry.html#litestar.plugins.opentelemetry.OpenTelemetryConfig" title="litestar.plugins.opentelemetry.OpenTelemetryConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenTelemetryConfig</span></code></a> has been brought
+in line with the upstream
+<code class="docutils literal notranslate"><span class="pre">opentelemetry.instrumentation.asgi.OpenTelemetryMiddleware</span></code> configuration,
+adding <code class="docutils literal notranslate"><span class="pre">client_request_hook_handler</span></code>, <code class="docutils literal notranslate"><span class="pre">client_response_hook_handler</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tracer</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude_urls_env_key</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exclude_spans</span></code>, <code class="docutils literal notranslate"><span class="pre">http_capture_headers_server_request</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_capture_headers_server_response</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">http_capture_headers_sanitize_fields</span></code>.</p>
+<p>Also fixes a <code class="docutils literal notranslate"><span class="pre">KeyError:</span> <span class="pre">'route_handler'</span></code> raised on every request when
+<code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> was set, and corrects the <code class="docutils literal notranslate"><span class="pre">OpenTelemetryHookHandler</span></code>
+signature to accept the span, ASGI scope, and ASGI message as documented by
+upstream.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4466,">https://github.com/litestar-org/litestar/issues/4466,</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4468">https://github.com/litestar-org/litestar/issues/4468</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4691">https://github.com/litestar-org/litestar/pull/4691</a></span></p>
+</div>
+</dd>
 <dt>Zero cost excluded middlewares<a class="headerlink reference internal" href="#3.0.0-zero cost excluded middlewares" id="3.0.0-zero cost excluded middlewares">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Middlewares inheriting from <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.base.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>
 will now have zero runtime cost when they are excluded e.g. via the <code class="docutils literal notranslate"><span class="pre">scope</span></code> or
@@ -834,6 +853,19 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Fix OpenAPI schema incorrectly marking nullable required fields as not required<a class="headerlink reference internal" href="#3.0.0-fix openapi schema incorrectly marking nullable required fields as not required" id="3.0.0-fix openapi schema incorrectly marking nullable required fields as not required">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fields typed as <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">|</span> <span class="pre">None</span></code> (nullable) without a default value are now correctly
+included in the OpenAPI schema’s <code class="docutils literal notranslate"><span class="pre">required</span></code> array. Previously, Litestar conflated
+nullability (the type can be <code class="docutils literal notranslate"><span class="pre">None</span></code>) with optionality (having a default value),
+causing the generated schema to diverge from the OpenAPI 3.1.0 specification.</p>
+<p>This affected all model types: dataclasses, msgspec Structs, attrs classes, and
+Pydantic models. For example, a field <code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span></code> with no default was
+previously excluded from <code class="docutils literal notranslate"><span class="pre">required</span></code>; it is now correctly included.</p>
+<p>Runtime request validation behavior is unchanged — nullable parameters without
+defaults were already enforced as required at the validation layer.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4673">https://github.com/litestar-org/litestar/issues/4673</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4687">https://github.com/litestar-org/litestar/pull/4687</a></span></p>
+</div>
+</dd>
 <dt>Fix <code class="docutils literal notranslate"><span class="pre">raise_server_exceptions</span></code> flag in test clients<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix the <code class="docutils literal notranslate"><span class="pre">raise_server_exceptions</span></code>. This flag has been non-functional (i.e. did
 not change the behaviour at all) since version 1. This is now fixed, and
