@@ -1536,27 +1536,6 @@ document.write(`
                   
   <section id="litestar-2-changelog">
 <h1>Litestar 2 Changelog<a class="headerlink" href="#litestar-2-changelog" title="Link to this heading">#</a></h1>
-<section id="2.22.0">
-<h2>2.22.0<a class="headerlink" href="#2.22.0" title="Link to this heading">#</a></h2>
-<section id="2.22.0-misc">
-<h3>Other changes<a class="headerlink" href="#2.22.0-misc" title="Link to this heading">#</a></h3>
-<dl>
-<dt>Deprecate <code class="docutils literal notranslate"><span class="pre">litestar.repository</span></code> in favor of <code class="docutils literal notranslate"><span class="pre">advanced_alchemy</span></code><a class="headerlink reference internal" href="#2.22.0-deprecate" id="2.22.0-deprecate">#</a></dt><dd><div class="changelog-change docutils container">
-<p>The <code class="docutils literal notranslate"><span class="pre">litestar.repository</span></code> module — including <code class="docutils literal notranslate"><span class="pre">filters</span></code>, <code class="docutils literal notranslate"><span class="pre">exceptions</span></code>,
-<code class="docutils literal notranslate"><span class="pre">handlers</span></code>, <code class="docutils literal notranslate"><span class="pre">abc</span></code>, and <code class="docutils literal notranslate"><span class="pre">testing</span></code> submodules — is deprecated and will
-be removed before 3.0.0. Migrate to <code class="docutils literal notranslate"><span class="pre">advanced_alchemy</span></code>: use
-<code class="docutils literal notranslate"><span class="pre">advanced_alchemy.filters</span></code> for filter types, <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.exceptions</span></code>
-for repository exceptions, and <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.repository.SQLAlchemyAsyncRepository</span></code>
-/ <code class="docutils literal notranslate"><span class="pre">SQLAlchemySyncRepository</span></code> for the abstract base, and
-<code class="docutils literal notranslate"><span class="pre">advanced_alchemy.repository.memory.SQLAlchemyAsyncMockRepository</span></code> /
-<code class="docutils literal notranslate"><span class="pre">SQLAlchemySyncMockRepository</span></code> as the drop-in replacement for the
-generic mock repository under <code class="docutils literal notranslate"><span class="pre">litestar.repository.testing</span></code>.</p>
-<p>References: <span><a class="github reference external" href="https://github.com/litestar-org/litestar/pull/4758">litestar-org/litestar#4758</a></span></p>
-</div>
-</dd>
-</dl>
-</section>
-</section>
 <section id="2.21.1">
 <h2>2.21.1<a class="headerlink" href="#2.21.1" title="Link to this heading">#</a></h2>
 <strong>Released: </strong>2026-03-07<section id="2.21.1-bugfix">
@@ -1596,7 +1575,7 @@ middleware to react to exception, without handling them.</p>
 <h3>Bugfixes<a class="headerlink" href="#2.21.0-bugfix" title="Link to this heading">#</a></h3>
 <dl>
 <dt>DI: Fix handling of bound methods returning (async) generators<a class="headerlink reference internal" href="#2.21.0-di: fix handling of bound methods returning (async) generators" id="2.21.0-di: fix handling of bound methods returning (async) generators">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fix a regression introduced in github.com/litestar-org/litestar/pull/4459, that
+<p>Fix a regression introced in github.com/litestar-org/litestar/pull/4459, that
 would lead to lead to async generators returned from bound methods of DI
 providers being recognised as a synchronous callable, instead of an async
 generator.</p>
@@ -7634,10 +7613,6 @@ the time it takes to <code class="docutils literal notranslate"><span class="pre
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.22.0">2.22.0</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.22.0-misc">Other changes</a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.21.1">2.21.1</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#2.21.1-bugfix">Bugfixes</a></li>
 </ul>
