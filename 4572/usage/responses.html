@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Responses - Litestar Framework</title><link rel="shortcut icon" href="../_static/favicon.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Security" href="security/index.html" /><link rel="prev" title="Problem Details" href="plugins/problem_details.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
-    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=76b6f612" />
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=15352968" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
@@ -24,8 +24,8 @@
 }
 </style>
     <meta property="og:type" content="website"/><meta property="og:title" content="Responses"/>
-<meta name="twitter:card" content="summary"/>
-<meta property="og:image" content="_static/logo-light.png"/>
+  <meta property="og:image" content="_static/logo-light.png"/>
+    <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="announcement">
     <div class="announcement-inner">
@@ -130,8 +130,8 @@ data-aria-dark="Switch to auto color mode">
 </button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
-          <span class="hamburger_2 -translate-x-2"></span>
-          <span class="hamburger_3 -translate-x-1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
         </div>
       </button>
     </div>
@@ -194,7 +194,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="lifecycle-hooks.html">Life Cycle Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Request logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics/index.html">Metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="metrics/open-telemetry.html">OpenTelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics/opentelemetry.html">OpenTelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metrics/prometheus.html">Prometheus</a></li>
 </ul>
 </li>
@@ -263,12 +263,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/jinja.html">jinja</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
@@ -320,6 +315,10 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/flash_messages.html">flash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/minijinja.html">minijinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/opentelemetry.html">opentelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
@@ -524,7 +523,10 @@ data-aria-dark="Switch to auto color mode">
     <iconify-icon icon="simple-icons:github"></iconify-icon>
   </span>
   <span class="flex-grow px-2 break-all">
-    <span>litestar-org/litestar</span>
+    
+    
+      <span>litestar</span>
+    
     <span class="flex text-sm repo-stats-count">
       <span class="flex items-center pr-3">
         <iconify-icon icon="lucide:star"></iconify-icon>
@@ -569,8 +571,43 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </div><div class="flex flex-col break-words justify-between">
-      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-        <article class="yue" role="main">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/responses.rst.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/responses.rst.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/responses.rst.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:code-slash"></iconify-icon>
+            <span>View Source</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/responses.rst.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/responses.rst.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
           <section id="responses">
 <h1>Responses<a class="headerlink" href="#responses" title="Link to this heading">¶</a></h1>
 <p>Litestar allows for several ways in which HTTP responses can be specified and handled, each fitting a different use
@@ -671,23 +708,6 @@ and show up in the generated OpenAPI schema.</p>
 format which can be a time and space efficient alternative to JSON.</p>
 <p>It supports all the same types as JSON serialization. To send a <code class="docutils literal notranslate"><span class="pre">MessagePack</span></code> response,
 simply specify the media type as <code class="docutils literal notranslate"><span class="pre">MediaType.MESSAGEPACK</span></code>:</p>
-<div class="sd-tab-set docutils">
-<input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.8" for="sd-tab-item-0">
-Python 3.8+</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">MediaType</span>
-</span><span data-line="3">
-</span><span data-line="4">
-</span><span data-line="5"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/health-check&quot;</span><span class="p">,</span> <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="o">.</span><span class="n">MESSAGEPACK</span><span class="p">)</span>
-</span><span data-line="6"><span class="k">def</span><span class="w"> </span><span class="nf">health_check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="7">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
-</span></pre></div>
-</div>
-</div>
-<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.9" for="sd-tab-item-1">
-Python 3.9+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">MediaType</span>
 </span><span data-line="2">
 </span><span data-line="3">
@@ -695,8 +715,6 @@ Python 3.9+</label><div class="sd-tab-content docutils">
 </span><span data-line="5"><span class="k">def</span><span class="w"> </span><span class="nf">health_check</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 </span><span data-line="6">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
 </span></pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="plaintext-responses">
@@ -1712,6 +1730,10 @@ supported.</p>
 <h2>Streaming Responses<a class="headerlink" href="#streaming-responses" title="Link to this heading">¶</a></h2>
 <p>To return a streaming response use the <a class="reference internal" href="../reference/response/index.html#litestar.response.Stream" title="litestar.response.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a> class. The class
 receives a single positional arg, that must be an iterator delivering the stream:</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.11" for="sd-tab-item-0">
+Python 3.11+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
 </span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span>
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
@@ -1735,6 +1757,35 @@ receives a single positional arg, that must be an iterator delivering the stream
 </span><span data-line="21"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">stream_time</span><span class="p">])</span>
 </span></pre></div>
 </div>
+</div>
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.13" for="sd-tab-item-1">
+Python 3.13+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stream</span>
+</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">encode_json</span>
+</span><span data-line="8">
+</span><span data-line="9">
+</span><span data-line="10"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
+</span><span data-line="11">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span data-line="12">        <span class="k">await</span> <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</span><span data-line="13">        <span class="k">yield</span> <span class="n">encode_json</span><span class="p">({</span><span class="s2">&quot;current_time&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()})</span>
+</span><span data-line="14">
+</span><span data-line="15">
+</span><span data-line="16"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/time&quot;</span><span class="p">)</span>
+</span><span data-line="17"><span class="k">def</span><span class="w"> </span><span class="nf">stream_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Stream</span><span class="p">:</span>
+</span><span data-line="18">    <span class="k">return</span> <span class="n">Stream</span><span class="p">(</span><span class="n">my_generator</span><span class="p">())</span>
+</span><span data-line="19">
+</span><span data-line="20">
+</span><span data-line="21"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">stream_time</span><span class="p">])</span>
+</span></pre></div>
+</div>
+</div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You can use different kinds of values for the iterator. It can be a callable returning a sync or async generator,
@@ -1747,6 +1798,10 @@ a generator itself, a sync or async iterator class, or an instance of a sync or 
 class. The class receives a content arg. You can additionally specify <code class="docutils literal notranslate"><span class="pre">event_type</span></code>, which is the
 name of the event as declared in the browser, the <code class="docutils literal notranslate"><span class="pre">event_id</span></code>, which sets the event source property, <code class="docutils literal notranslate"><span class="pre">comment_message</span></code>,
 which is used in for sending pings, and <code class="docutils literal notranslate"><span class="pre">retry_duration</span></code>, which dictates the duration for retrying.</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.11" for="sd-tab-item-2">
+Python 3.11+</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
 </span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span>
 </span><span data-line="3">
@@ -1783,6 +1838,48 @@ which is used in for sending pings, and <code class="docutils literal notranslat
 </span><span data-line="34"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">sse_handler</span><span class="p">])</span>
 </span></pre></div>
 </div>
+</div>
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.13" for="sd-tab-item-3">
+Python 3.13+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServerSentEvent</span><span class="p">,</span> <span class="n">ServerSentEventMessage</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SSEData</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_generator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">SSEData</span><span class="p">]:</span>
+</span><span data-line="10">    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="11">    <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+</span><span data-line="12">        <span class="k">await</span> <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</span><span data-line="13">        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="14">        <span class="c1"># In the generator you can yield integers, strings, bytes, dictionaries, or ServerSentEventMessage objects</span>
+</span><span data-line="15">        <span class="c1"># dicts can have the following keys: data, event, id, retry, comment</span>
+</span><span data-line="16">
+</span><span data-line="17">        <span class="c1"># here we yield an integer</span>
+</span><span data-line="18">        <span class="k">yield</span> <span class="n">count</span>
+</span><span data-line="19">        <span class="c1"># here a string</span>
+</span><span data-line="20">        <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</span><span data-line="21">        <span class="c1"># here bytes</span>
+</span><span data-line="22">        <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+</span><span data-line="23">        <span class="c1"># here a dictionary</span>
+</span><span data-line="24">        <span class="k">yield</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">count</span><span class="p">,</span> <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;event2&quot;</span><span class="p">,</span> <span class="s2">&quot;retry&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+</span><span data-line="25">        <span class="c1"># here a ServerSentEventMessage object</span>
+</span><span data-line="26">        <span class="k">yield</span> <span class="n">ServerSentEventMessage</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s2">&quot;something-with-comment&quot;</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;some comment&quot;</span><span class="p">)</span>
+</span><span data-line="27">
+</span><span data-line="28">
+</span><span data-line="29"><span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/count&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="30"><span class="k">def</span><span class="w"> </span><span class="nf">sse_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ServerSentEvent</span><span class="p">:</span>
+</span><span data-line="31">    <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">my_generator</span><span class="p">())</span>
+</span><span data-line="32">
+</span><span data-line="33">
+</span><span data-line="34"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">sse_handler</span><span class="p">])</span>
+</span></pre></div>
+</div>
+</div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You can use different kinds of values for the iterator. It can be a callable returning a sync or async generator,
@@ -1795,6 +1892,25 @@ specified, and the data will be the yielded value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You can further customize all the sse parameters, add comments, and set the retry duration by using the <a class="reference internal" href="../reference/response/index.html#litestar.response.ServerSentEvent" title="litestar.response.ServerSentEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerSentEvent</span></code></a> class directly or by using the <a class="reference internal" href="../reference/response/index.html#litestar.response.ServerSentEventMessage" title="litestar.response.ServerSentEventMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerSentEventMessage</span></code></a> or dictionaries with the appropriate keys.</p>
+</div>
+<p>To prevent reverse proxies or clients from closing idle SSE connections, use the <code class="docutils literal notranslate"><span class="pre">ping_interval</span></code> parameter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/stream&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stream_handler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ServerSentEvent</span><span class="p">:</span>
+</span><span data-line="3">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">generator</span><span class="p">():</span>
+</span><span data-line="4">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span data-line="5">            <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_data</span><span class="p">()</span>
+</span><span data-line="6">            <span class="k">yield</span> <span class="n">data</span>
+</span><span data-line="7">
+</span><span data-line="8">    <span class="k">return</span> <span class="n">ServerSentEvent</span><span class="p">(</span><span class="n">generator</span><span class="p">(),</span> <span class="n">ping_interval</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ping_interval</span></code> value is in <strong>seconds</strong>. This sends an SSE comment (<code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">ping</span></code>) every 15 seconds to keep the
+connection alive. SSE comments are invisible to <code class="docutils literal notranslate"><span class="pre">EventSource</span></code> clients and will not trigger message events.
+Pings begin after the first interval elapses (no immediate ping on connect).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Common values are 15–30 seconds, depending on your reverse proxy’s idle timeout
+(e.g., nginx defaults to 60 seconds, Telegram Mini Apps time out after 60 seconds).</p>
 </div>
 </section>
 <section id="template-responses">
@@ -1866,23 +1982,24 @@ dunder method) that will be called after the response finishes sending the data.
 </span><span data-line="2">
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">get</span>
 </span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.background_tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">BackgroundTask</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-</span><span data-line="7">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 </span><span data-line="8">
-</span><span data-line="9"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logging_task</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="10">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-</span><span data-line="11">
+</span><span data-line="9">
+</span><span data-line="10"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logging_task</span><span class="p">(</span><span class="n">identifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="11">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 </span><span data-line="12">
-</span><span data-line="13"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="14"><span class="k">def</span><span class="w"> </span><span class="nf">greeter</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-</span><span data-line="15">    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span data-line="16">        <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">},</span>
-</span><span data-line="17">        <span class="n">background</span><span class="o">=</span><span class="n">BackgroundTask</span><span class="p">(</span><span class="n">logging_task</span><span class="p">,</span> <span class="s2">&quot;greeter&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;was called with name </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
-</span><span data-line="18">    <span class="p">)</span>
-</span><span data-line="19">
+</span><span data-line="13">
+</span><span data-line="14"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="15"><span class="k">def</span><span class="w"> </span><span class="nf">greeter</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+</span><span data-line="16">    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span data-line="17">        <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">},</span>
+</span><span data-line="18">        <span class="n">background</span><span class="o">=</span><span class="n">BackgroundTask</span><span class="p">(</span><span class="n">logging_task</span><span class="p">,</span> <span class="s2">&quot;greeter&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;was called with name </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+</span><span data-line="19">    <span class="p">)</span>
 </span><span data-line="20">
-</span><span data-line="21"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">greeter</span><span class="p">])</span>
+</span><span data-line="21">
+</span><span data-line="22"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">greeter</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
@@ -1933,33 +2050,34 @@ enabling correct type checking for arguments and keyword arguments passed to it.
 </span><span data-line="2">
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">get</span>
 </span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.background_tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">BackgroundTask</span><span class="p">,</span> <span class="n">BackgroundTasks</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-</span><span data-line="7"><span class="n">greeted</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span data-line="8">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span><span data-line="8"><span class="n">greeted</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 </span><span data-line="9">
-</span><span data-line="10"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logging_task</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="11">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> was greeted&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-</span><span data-line="12">
+</span><span data-line="10">
+</span><span data-line="11"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logging_task</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="12">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> was greeted&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 </span><span data-line="13">
-</span><span data-line="14"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">saving_task</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="15">    <span class="n">greeted</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-</span><span data-line="16">
+</span><span data-line="14">
+</span><span data-line="15"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">saving_task</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="16">    <span class="n">greeted</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </span><span data-line="17">
-</span><span data-line="18"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="19"><span class="k">def</span><span class="w"> </span><span class="nf">greeter</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-</span><span data-line="20">    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-</span><span data-line="21">        <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">},</span>
-</span><span data-line="22">        <span class="n">background</span><span class="o">=</span><span class="n">BackgroundTasks</span><span class="p">(</span>
-</span><span data-line="23">            <span class="p">[</span>
-</span><span data-line="24">                <span class="n">BackgroundTask</span><span class="p">(</span><span class="n">logging_task</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
-</span><span data-line="25">                <span class="n">BackgroundTask</span><span class="p">(</span><span class="n">saving_task</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
-</span><span data-line="26">            <span class="p">]</span>
-</span><span data-line="27">        <span class="p">),</span>
-</span><span data-line="28">    <span class="p">)</span>
-</span><span data-line="29">
+</span><span data-line="18">
+</span><span data-line="19"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="20"><span class="k">def</span><span class="w"> </span><span class="nf">greeter</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+</span><span data-line="21">    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
+</span><span data-line="22">        <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">},</span>
+</span><span data-line="23">        <span class="n">background</span><span class="o">=</span><span class="n">BackgroundTasks</span><span class="p">(</span>
+</span><span data-line="24">            <span class="p">[</span>
+</span><span data-line="25">                <span class="n">BackgroundTask</span><span class="p">(</span><span class="n">logging_task</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
+</span><span data-line="26">                <span class="n">BackgroundTask</span><span class="p">(</span><span class="n">saving_task</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span>
+</span><span data-line="27">            <span class="p">]</span>
+</span><span data-line="28">        <span class="p">),</span>
+</span><span data-line="29">    <span class="p">)</span>
 </span><span data-line="30">
-</span><span data-line="31"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">greeter</span><span class="p">])</span>
+</span><span data-line="31">
+</span><span data-line="32"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">greeter</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
@@ -1987,48 +2105,51 @@ of the box:</p>
 <p>In classic pagination the dataset is divided into pages of a specific size and the consumer then requests a specific page.</p>
 <div class="literal-block-wrapper docutils container" id="id12">
 <div class="code-block-caption"><span class="caption-text">Classic Pagination</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.pydantic_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelFactory</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSyncClassicPaginator</span><span class="p">,</span> <span class="n">ClassicPagination</span>
-</span><span data-line="6">
-</span><span data-line="7">
-</span><span data-line="8"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span data-line="9">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="10">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="11">
-</span><span data-line="12">
-</span><span data-line="13"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">ModelFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="14">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.dataclass_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataclassFactory</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSyncClassicPaginator</span><span class="p">,</span> <span class="n">ClassicPagination</span>
+</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
+</span><span data-line="8">
+</span><span data-line="9">
+</span><span data-line="10"><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+</span><span data-line="11"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+</span><span data-line="12">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="13">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="14">
 </span><span data-line="15">
-</span><span data-line="16">
-</span><span data-line="17"><span class="c1"># we will implement a paginator - the paginator must implement two methods &#39;get_total&#39; and &#39;get_items&#39;</span>
-</span><span data-line="18"><span class="c1"># we would usually use a database for this, but for our case we will &quot;fake&quot; the dataset using a factory.</span>
+</span><span data-line="16"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">DataclassFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
+</span><span data-line="17">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
+</span><span data-line="18">
 </span><span data-line="19">
-</span><span data-line="20">
-</span><span data-line="21"><span class="k">class</span><span class="w"> </span><span class="nc">PersonClassicPaginator</span><span class="p">(</span><span class="n">AbstractSyncClassicPaginator</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="22">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="23">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</span><span data-line="24">
-</span><span data-line="25">    <span class="k">def</span><span class="w"> </span><span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span data-line="26">        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">page_size</span><span class="p">)</span>
+</span><span data-line="20"><span class="c1"># we will implement a paginator - the paginator must implement two methods &#39;get_total&#39; and &#39;get_items&#39;</span>
+</span><span data-line="21"><span class="c1"># we would usually use a database for this, but for our case we will &quot;fake&quot; the dataset using a factory.</span>
+</span><span data-line="22">
+</span><span data-line="23">
+</span><span data-line="24"><span class="k">class</span><span class="w"> </span><span class="nc">PersonClassicPaginator</span><span class="p">(</span><span class="n">AbstractSyncClassicPaginator</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
+</span><span data-line="25">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="26">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 </span><span data-line="27">
-</span><span data-line="28">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
-</span><span data-line="29">        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">page_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="n">page_size</span><span class="p">)][</span><span class="n">current_page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span><span data-line="28">    <span class="k">def</span><span class="w"> </span><span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="29">        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="n">page_size</span><span class="p">)</span>
 </span><span data-line="30">
-</span><span data-line="31">
-</span><span data-line="32"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonClassicPaginator</span><span class="p">()</span>
+</span><span data-line="31">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
+</span><span data-line="32">        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">page_size</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="n">page_size</span><span class="p">)][</span><span class="n">current_page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 </span><span data-line="33">
 </span><span data-line="34">
-</span><span data-line="35"><span class="c1"># we now create a regular handler. The handler will receive two query parameters - &#39;page_size&#39; and &#39;current_page&#39;, which</span>
-</span><span data-line="36"><span class="c1"># we will pass to the paginator.</span>
-</span><span data-line="37"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="38"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span><span class="n">page_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClassicPagination</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
-</span><span data-line="39">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">page_size</span><span class="o">=</span><span class="n">page_size</span><span class="p">,</span> <span class="n">current_page</span><span class="o">=</span><span class="n">current_page</span><span class="p">)</span>
-</span><span data-line="40">
-</span><span data-line="41">
-</span><span data-line="42"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
+</span><span data-line="35"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonClassicPaginator</span><span class="p">()</span>
+</span><span data-line="36">
+</span><span data-line="37">
+</span><span data-line="38"><span class="c1"># we now create a regular handler. The handler will receive two query parameters - &#39;page_size&#39; and &#39;current_page&#39;, which</span>
+</span><span data-line="39"><span class="c1"># we will pass to the paginator.</span>
+</span><span data-line="40"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="41"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span><span class="n">page_size</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">current_page</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ClassicPagination</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
+</span><span data-line="42">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">page_size</span><span class="o">=</span><span class="n">page_size</span><span class="p">,</span> <span class="n">current_page</span><span class="o">=</span><span class="n">current_page</span><span class="p">)</span>
+</span><span data-line="43">
+</span><span data-line="44">
+</span><span data-line="45"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
@@ -2045,50 +2166,52 @@ the <a class="reference internal" href="../reference/pagination.html#litestar.pa
 For example, given a list of 50 items, you could request <code class="docutils literal notranslate"><span class="pre">limit=10</span></code>, <code class="docutils literal notranslate"><span class="pre">offset=39</span></code> to request items 40-50.</p>
 <div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Offset Pagination</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">islice</span>
-</span><span data-line="2">
-</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.pydantic_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelFactory</span>
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">islice</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.dataclass_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataclassFactory</span>
 </span><span data-line="5">
 </span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
 </span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSyncOffsetPaginator</span><span class="p">,</span> <span class="n">OffsetPagination</span>
-</span><span data-line="8">
+</span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
 </span><span data-line="9">
-</span><span data-line="10"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span data-line="11">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="12">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="13">
-</span><span data-line="14">
-</span><span data-line="15"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">ModelFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="16">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
-</span><span data-line="17">
-</span><span data-line="18">
-</span><span data-line="19"><span class="c1"># we will implement a paginator - the paginator must implement two methods &#39;get_total&#39; and &#39;get_items&#39;</span>
-</span><span data-line="20"><span class="c1"># we would usually use a database for this, but for our case we will &quot;fake&quot; the dataset using a factory.</span>
-</span><span data-line="21">
-</span><span data-line="22">
-</span><span data-line="23"><span class="k">class</span><span class="w"> </span><span class="nc">PersonOffsetPaginator</span><span class="p">(</span><span class="n">AbstractSyncOffsetPaginator</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="24">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="25">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</span><span data-line="26">
-</span><span data-line="27">    <span class="k">def</span><span class="w"> </span><span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span data-line="28">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</span><span data-line="29">
-</span><span data-line="30">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
-</span><span data-line="31">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">limit</span><span class="p">))</span>
-</span><span data-line="32">
-</span><span data-line="33">
-</span><span data-line="34"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonOffsetPaginator</span><span class="p">()</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+</span><span data-line="12"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+</span><span data-line="13">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="14">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="15">
+</span><span data-line="16">
+</span><span data-line="17"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">DataclassFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
+</span><span data-line="18">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
+</span><span data-line="19">
+</span><span data-line="20">
+</span><span data-line="21"><span class="c1"># we will implement a paginator - the paginator must implement two methods &#39;get_total&#39; and &#39;get_items&#39;</span>
+</span><span data-line="22"><span class="c1"># we would usually use a database for this, but for our case we will &quot;fake&quot; the dataset using a factory.</span>
+</span><span data-line="23">
+</span><span data-line="24">
+</span><span data-line="25"><span class="k">class</span><span class="w"> </span><span class="nc">PersonOffsetPaginator</span><span class="p">(</span><span class="n">AbstractSyncOffsetPaginator</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
+</span><span data-line="26">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="27">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span><span data-line="28">
+</span><span data-line="29">    <span class="k">def</span><span class="w"> </span><span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="30">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span><span data-line="31">
+</span><span data-line="32">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
+</span><span data-line="33">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">limit</span><span class="p">))</span>
+</span><span data-line="34">
 </span><span data-line="35">
-</span><span data-line="36">
-</span><span data-line="37"><span class="c1"># we now create a regular handler. The handler will receive two query parameters - &#39;limit&#39; and &#39;offset&#39;, which</span>
-</span><span data-line="38"><span class="c1"># we will pass to the paginator.</span>
-</span><span data-line="39"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="40"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span><span class="n">limit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OffsetPagination</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
-</span><span data-line="41">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
-</span><span data-line="42">
-</span><span data-line="43">
-</span><span data-line="44"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
+</span><span data-line="36"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonOffsetPaginator</span><span class="p">()</span>
+</span><span data-line="37">
+</span><span data-line="38">
+</span><span data-line="39"><span class="c1"># we now create a regular handler. The handler will receive two query parameters - &#39;limit&#39; and &#39;offset&#39;, which</span>
+</span><span data-line="40"><span class="c1"># we will pass to the paginator.</span>
+</span><span data-line="41"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="42"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span><span class="n">limit</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">offset</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">OffsetPagination</span><span class="p">[</span><span class="n">Person</span><span class="p">]:</span>
+</span><span data-line="43">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+</span><span data-line="44">
+</span><span data-line="45">
+</span><span data-line="46"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
 </span></pre></div>
 </div>
 </div>
@@ -2108,104 +2231,54 @@ instance to make queries. This can be achieved with <a class="reference internal
 <h3>Cursor Pagination<a class="headerlink" href="#cursor-pagination" title="Link to this heading">¶</a></h3>
 <p>In cursor pagination the consumer requests a number of items specified by <code class="docutils literal notranslate"><span class="pre">results_per_page</span></code> and a <code class="docutils literal notranslate"><span class="pre">cursor</span></code> after which results are given.
 Cursor is unique identifier within the dataset that serves as a way to point the starting position.</p>
-<div class="sd-tab-set docutils">
-<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.8" for="sd-tab-item-2">
-Python 3.8+</label><div class="sd-tab-content docutils">
 <div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">Cursor Pagination</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">dataclasses</span>
 </span><span data-line="2">
-</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.pydantic_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelFactory</span>
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSyncCursorPaginator</span><span class="p">,</span> <span class="n">CursorPagination</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.dataclass_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataclassFactory</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSyncCursorPaginator</span><span class="p">,</span> <span class="n">CursorPagination</span>
+</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
 </span><span data-line="8">
 </span><span data-line="9">
-</span><span data-line="10"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span data-line="11">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="12">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="13">
+</span><span data-line="10"><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+</span><span data-line="11"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+</span><span data-line="12">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="13">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 </span><span data-line="14">
-</span><span data-line="15"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">ModelFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="16">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
-</span><span data-line="17">
-</span><span data-line="18">
-</span><span data-line="19"><span class="c1"># we will implement a paginator - the paginator must implement the method &#39;get_items&#39;.</span>
-</span><span data-line="20">
-</span><span data-line="21">
-</span><span data-line="22"><span class="k">class</span><span class="w"> </span><span class="nc">PersonCursorPaginator</span><span class="p">(</span><span class="n">AbstractSyncCursorPaginator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="23">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="24">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</span><span data-line="25">
-</span><span data-line="26">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-</span><span data-line="27">        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="n">results_per_page</span><span class="p">]</span>
-</span><span data-line="28">        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
-</span><span data-line="29">
-</span><span data-line="30">
-</span><span data-line="31"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonCursorPaginator</span><span class="p">()</span>
-</span><span data-line="32">
-</span><span data-line="33">
-</span><span data-line="34"><span class="c1"># we now create a regular handler. The handler will receive a single query parameter - &#39;cursor&#39;, which</span>
-</span><span data-line="35"><span class="c1"># we will pass to the paginator.</span>
-</span><span data-line="36"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="37"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CursorPagination</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]:</span>
-</span><span data-line="38">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">)</span>
-</span><span data-line="39">
-</span><span data-line="40">
-</span><span data-line="41"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
-</span></pre></div>
-</div>
-</div>
-</div>
-<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
-<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.10" for="sd-tab-item-3">
-Python 3.10+</label><div class="sd-tab-content docutils">
-<div class="literal-block-wrapper docutils container" id="id15">
-<div class="code-block-caption"><span class="caption-text">Cursor Pagination</span><a class="headerlink" href="#id15" title="Link to this code">¶</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">polyfactory.factories.pydantic_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelFactory</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractSyncCursorPaginator</span><span class="p">,</span> <span class="n">CursorPagination</span>
-</span><span data-line="6">
-</span><span data-line="7">
-</span><span data-line="8"><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span data-line="9">    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="10">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="11">
-</span><span data-line="12">
-</span><span data-line="13"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">ModelFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="14">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
 </span><span data-line="15">
-</span><span data-line="16">
-</span><span data-line="17"><span class="c1"># we will implement a paginator - the paginator must implement the method &#39;get_items&#39;.</span>
+</span><span data-line="16"><span class="k">class</span><span class="w"> </span><span class="nc">PersonFactory</span><span class="p">(</span><span class="n">DataclassFactory</span><span class="p">[</span><span class="n">Person</span><span class="p">]):</span>
+</span><span data-line="17">    <span class="n">__model__</span> <span class="o">=</span> <span class="n">Person</span>
 </span><span data-line="18">
 </span><span data-line="19">
-</span><span data-line="20"><span class="k">class</span><span class="w"> </span><span class="nc">PersonCursorPaginator</span><span class="p">(</span><span class="n">AbstractSyncCursorPaginator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]):</span>
-</span><span data-line="21">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="22">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</span><span data-line="23">
-</span><span data-line="24">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">],</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span data-line="25">        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="n">results_per_page</span><span class="p">]</span>
-</span><span data-line="26">        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
-</span><span data-line="27">
-</span><span data-line="28">
-</span><span data-line="29"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonCursorPaginator</span><span class="p">()</span>
+</span><span data-line="20"><span class="c1"># we will implement a paginator - the paginator must implement the method &#39;get_items&#39;.</span>
+</span><span data-line="21">
+</span><span data-line="22">
+</span><span data-line="23"><span class="k">class</span><span class="w"> </span><span class="nc">PersonCursorPaginator</span><span class="p">(</span><span class="n">AbstractSyncCursorPaginator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]):</span>
+</span><span data-line="24">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="25">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">PersonFactory</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span><span data-line="26">
+</span><span data-line="27">    <span class="k">def</span><span class="w"> </span><span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Person</span><span class="p">],</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span data-line="28">        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="n">results_per_page</span><span class="p">]</span>
+</span><span data-line="29">        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
 </span><span data-line="30">
 </span><span data-line="31">
-</span><span data-line="32"><span class="c1"># we now create a regular handler. The handler will receive a single query parameter - &#39;cursor&#39;, which</span>
-</span><span data-line="33"><span class="c1"># we will pass to the paginator.</span>
-</span><span data-line="34"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="35"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">results_per_page</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CursorPagination</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]:</span>
-</span><span data-line="36">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">)</span>
-</span><span data-line="37">
-</span><span data-line="38">
-</span><span data-line="39"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
+</span><span data-line="32"><span class="n">paginator</span> <span class="o">=</span> <span class="n">PersonCursorPaginator</span><span class="p">()</span>
+</span><span data-line="33">
+</span><span data-line="34">
+</span><span data-line="35"><span class="c1"># we now create a regular handler. The handler will receive a single query parameter - &#39;cursor&#39;, which</span>
+</span><span data-line="36"><span class="c1"># we will pass to the paginator.</span>
+</span><span data-line="37"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/people&quot;</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="38"><span class="k">def</span><span class="w"> </span><span class="nf">people_handler</span><span class="p">(</span>
+</span><span data-line="39">    <span class="n">results_per_page</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+</span><span data-line="40">    <span class="n">cursor</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="41"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CursorPagination</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Person</span><span class="p">]:</span>
+</span><span data-line="42">    <span class="k">return</span> <span class="n">paginator</span><span class="p">(</span><span class="n">cursor</span><span class="o">=</span><span class="n">cursor</span><span class="p">,</span> <span class="n">results_per_page</span><span class="o">=</span><span class="n">results_per_page</span><span class="p">)</span>
+</span><span data-line="43">
+</span><span data-line="44">
+</span><span data-line="45"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">people_handler</span><span class="p">])</span>
 </span></pre></div>
-</div>
-</div>
 </div>
 </div>
 <p>The data container for this pagination is called <a class="reference internal" href="../reference/pagination.html#litestar.pagination.CursorPagination" title="litestar.pagination.CursorPagination"><code class="xref py py-class docutils literal notranslate"><span class="pre">CursorPagination</span></code></a>, which is what
@@ -2275,9 +2348,9 @@ the <a class="reference internal" href="../reference/pagination.html#litestar.pa
       <script>let toggleHintShow = 'Click to show';</script>
       <script>let toggleHintHide = 'Click to hide';</script>
       <script>let toggleOpenOnPrint = 'true';</script>
-      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="../_static/shibuya.js?v=c477d091"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script>
       <script src="../_static/versioning.js?v=9ab184b9"></script></body>
 </html>
