@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Plugins - Litestar Framework</title><link rel="shortcut icon" href="../../_static/favicon.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Flash Messages" href="flash_messages.html" /><link rel="prev" title="OpenAPI UI Plugins" href="../openapi/ui_plugins.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=15352968" />
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=470ca8b0" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
@@ -710,7 +710,7 @@ injection by providing information about injectable types.</p>
 <p>Its main purpose it to facilitate the injection of callables with unknown signatures,
 for example Pydantic’s <code class="docutils literal notranslate"><span class="pre">BaseModel</span></code> classes; These are not supported natively since,
 while they are callables, their type information is not contained within their callable
-signature (their <a class="reference internal" href="../../reference/plugins/mako.html#litestar.plugins.mako.MakoTemplate.__init__" title="litestar.plugins.mako.MakoTemplate.__init__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__init__()</span></code></a> method).</p>
+signature (their <a class="reference internal" href="../../reference/app.html#litestar.app.Litestar.__init__" title="litestar.app.Litestar.__init__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__init__()</span></code></a> method).</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Dynamically generating signature information for a custom type</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Signature</span>
@@ -845,6 +845,5 @@ This happens during the application initialization process, after routes are cre
       <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
       <script src="../../_static/design-tabs.js?v=f930bc37"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="../../_static/shibuya.js?v=cac61aee"></script>
-      <script src="../../_static/versioning.js?v=9ab184b9"></script></body>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script></body>
 </html>
