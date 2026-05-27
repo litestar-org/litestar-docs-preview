@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>3.x Changelog - Litestar Framework</title><link rel="shortcut icon" href="../_static/favicon.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
-    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=76b6f612" />
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=470ca8b0" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
@@ -24,12 +24,12 @@
 }
 </style>
     <meta property="og:type" content="website"/><meta property="og:title" content="3.x Changelog"/>
-<meta name="twitter:card" content="summary"/>
-<meta property="og:image" content="_static/logo-light.png"/>
+  <meta property="og:image" content="_static/logo-light.png"/>
+    <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="announcement">
     <div class="announcement-inner">
-      <p>You are viewing the <bold>local</bold> version of the documentation. Click here to go to the latest version.</p>
+      <p>You are viewing the <strong>local</strong> version of the documentation. <a href="/latest/">Click here to go to the latest version.</a></p>
       <button class="announcement-close" aria-label="Close announcement">
         <i class="i-lucide close"></i>
       </button>
@@ -130,8 +130,8 @@ data-aria-dark="Switch to auto color mode">
 </button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
-          <span class="hamburger_2 -translate-x-2"></span>
-          <span class="hamburger_3 -translate-x-1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
         </div>
       </button>
     </div>
@@ -194,7 +194,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../usage/lifecycle-hooks.html">Life Cycle Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/logging.html">Request logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../usage/metrics/index.html">Metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../usage/metrics/open-telemetry.html">OpenTelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/metrics/opentelemetry.html">OpenTelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../usage/metrics/prometheus.html">Prometheus</a></li>
 </ul>
 </li>
@@ -264,12 +264,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/jinja.html">jinja</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/contrib/opentelemetry.html">opentelemetry</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
@@ -321,6 +316,10 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/flash_messages.html">flash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/minijinja.html">minijinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/opentelemetry.html">opentelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
@@ -372,9 +371,9 @@ data-aria-dark="Switch to auto color mode">
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../migration/index.html">Migrating to Litestar</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../migration/flask.html">From Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../migration/fastapi.html">From Starlette / FastAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../onboarding/index.html">Onboarding from other frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../onboarding/fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onboarding/flask.html">Flask</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../topics/index.html">Topics</a><ul>
@@ -462,7 +461,10 @@ data-aria-dark="Switch to auto color mode">
     <iconify-icon icon="simple-icons:github"></iconify-icon>
   </span>
   <span class="flex-grow px-2 break-all">
-    <span>litestar-org/litestar</span>
+    
+    
+      <span>litestar</span>
+    
     <span class="flex text-sm repo-stats-count">
       <span class="flex items-center pr-3">
         <iconify-icon icon="lucide:star"></iconify-icon>
@@ -503,8 +505,43 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </div><div class="flex flex-col break-words justify-between">
-      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-        <article class="yue" role="main">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/release-notes/changelog.rst"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/release-notes/changelog.rst">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/release-notes/changelog.rst" target="_blank" rel="nofollow"><iconify-icon icon="bi:code-slash"></iconify-icon>
+            <span>View Source</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/release-notes/changelog.rst%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/release-notes/changelog.rst%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
           <section id="x-changelog">
 <h1>3.x Changelog<a class="headerlink" href="#x-changelog" title="Link to this heading">¶</a></h1>
 <section id="3.0.0">
@@ -512,6 +549,21 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Drop support for Pydantic 1<a class="headerlink reference internal" href="#3.0.0-drop support for pydantic 1" id="3.0.0-drop support for pydantic 1">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Drop support for Pydantic 1.</p>
+<p>Pydantic 1 is no longer supported or tested against. No changes required for
+applications already using Pydantic 2. Applications using Pydantic 1 or a mix
+between 1 and 2 should upgrade to Pydantic 2.</p>
+<p>References: </p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">ping_interval</span></code> to <code class="docutils literal notranslate"><span class="pre">ServerSentEvent</span></code> for keepalive pings<a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Added optional <code class="docutils literal notranslate"><span class="pre">ping_interval</span></code> parameter to <a class="reference internal" href="../reference/response/index.html#litestar.response.ServerSentEvent" title="litestar.response.ServerSentEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerSentEvent</span></code></a> that
+sends SSE comment keepalive pings at the specified interval to prevent connection timeouts from reverse proxies
+or clients.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4082">https://github.com/litestar-org/litestar/issues/4082</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4623">https://github.com/litestar-org/litestar/pull/4623</a></span></p>
+</div>
+</dd>
 <dt>Remove logging config and related constructs<a class="headerlink reference internal" href="#3.0.0-remove logging config and related constructs" id="3.0.0-remove logging config and related constructs">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Remove Litestar’s logging configuration, and related modules. In particular,
 the following have been removed:</p>
@@ -713,7 +765,7 @@ from this module should switch to using <code class="docutils literal notranslat
 </dd>
 <dt>Add <code class="docutils literal notranslate"><span class="pre">round_trip</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">PydanticPlugin</span></code><a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
 <p>New <code class="docutils literal notranslate"><span class="pre">round_trip:</span> <span class="pre">bool</span></code> parameter
-to <code class="xref py py-class docutils literal notranslate"><span class="pre">PydanticPlugin</span></code> allows
+to <code class="docutils literal notranslate"><span class="pre">PydanticPlugin</span></code> allows
 serializing types like <code class="docutils literal notranslate"><span class="pre">pydanctic.Json</span></code> correctly.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4349">https://github.com/litestar-org/litestar/issues/4349</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4350">https://github.com/litestar-org/litestar/pull/4350</a></span></p>
 </div>
@@ -729,6 +781,25 @@ Instead use a callable that receives the minijinja <code class="docutils literal
 and <code class="docutils literal notranslate"><span class="pre">litestar_piccolo</span></code> plugin instead:
 <a class="reference external" href="https://github.com/litestar-org/litestar-piccolo">https://github.com/litestar-org/litestar-piccolo</a></p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4364">https://github.com/litestar-org/litestar/issues/4364</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4363">https://github.com/litestar-org/litestar/pull/4363</a></span></p>
+</div>
+</dd>
+<dt>Move <code class="docutils literal notranslate"><span class="pre">litestar.contrib.opentelemetry</span></code> to <code class="docutils literal notranslate"><span class="pre">litestar.plugins.opentelemetry</span></code> and add upstream parity<a class="headerlink reference internal" href="#3.0.0-move" id="3.0.0-move">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Move the OpenTelemetry integration from <code class="docutils literal notranslate"><span class="pre">litestar.contrib.opentelemetry</span></code> to
+<code class="docutils literal notranslate"><span class="pre">litestar.plugins.opentelemetry</span></code>. Code still using imports from the old
+module should switch to the new path.</p>
+<p><a class="reference internal" href="../reference/plugins/opentelemetry.html#litestar.plugins.opentelemetry.OpenTelemetryConfig" title="litestar.plugins.opentelemetry.OpenTelemetryConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenTelemetryConfig</span></code></a> has been brought
+in line with the upstream
+<code class="docutils literal notranslate"><span class="pre">opentelemetry.instrumentation.asgi.OpenTelemetryMiddleware</span></code> configuration,
+adding <code class="docutils literal notranslate"><span class="pre">client_request_hook_handler</span></code>, <code class="docutils literal notranslate"><span class="pre">client_response_hook_handler</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tracer</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude_urls_env_key</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exclude_spans</span></code>, <code class="docutils literal notranslate"><span class="pre">http_capture_headers_server_request</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_capture_headers_server_response</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">http_capture_headers_sanitize_fields</span></code>.</p>
+<p>Also fixes a <code class="docutils literal notranslate"><span class="pre">KeyError:</span> <span class="pre">'route_handler'</span></code> raised on every request when
+<code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> was set, and corrects the <code class="docutils literal notranslate"><span class="pre">OpenTelemetryHookHandler</span></code>
+signature to accept the span, ASGI scope, and ASGI message as documented by
+upstream.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4466,">https://github.com/litestar-org/litestar/issues/4466,</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4468">https://github.com/litestar-org/litestar/issues/4468</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4691">https://github.com/litestar-org/litestar/pull/4691</a></span></p>
 </div>
 </dd>
 <dt>Zero cost excluded middlewares<a class="headerlink reference internal" href="#3.0.0-zero cost excluded middlewares" id="3.0.0-zero cost excluded middlewares">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -782,6 +853,19 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Fix OpenAPI schema incorrectly marking nullable required fields as not required<a class="headerlink reference internal" href="#3.0.0-fix openapi schema incorrectly marking nullable required fields as not required" id="3.0.0-fix openapi schema incorrectly marking nullable required fields as not required">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fields typed as <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">|</span> <span class="pre">None</span></code> (nullable) without a default value are now correctly
+included in the OpenAPI schema’s <code class="docutils literal notranslate"><span class="pre">required</span></code> array. Previously, Litestar conflated
+nullability (the type can be <code class="docutils literal notranslate"><span class="pre">None</span></code>) with optionality (having a default value),
+causing the generated schema to diverge from the OpenAPI 3.1.0 specification.</p>
+<p>This affected all model types: dataclasses, msgspec Structs, attrs classes, and
+Pydantic models. For example, a field <code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span></code> with no default was
+previously excluded from <code class="docutils literal notranslate"><span class="pre">required</span></code>; it is now correctly included.</p>
+<p>Runtime request validation behavior is unchanged — nullable parameters without
+defaults were already enforced as required at the validation layer.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4673">https://github.com/litestar-org/litestar/issues/4673</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4687">https://github.com/litestar-org/litestar/pull/4687</a></span></p>
+</div>
+</dd>
 <dt>Fix <code class="docutils literal notranslate"><span class="pre">raise_server_exceptions</span></code> flag in test clients<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix the <code class="docutils literal notranslate"><span class="pre">raise_server_exceptions</span></code>. This flag has been non-functional (i.e. did
 not change the behaviour at all) since version 1. This is now fixed, and
@@ -801,6 +885,11 @@ connection without any indication of an exception</p>
 <p>Now, in the OpenAPI schema, <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> fields with <code class="docutils literal notranslate"><span class="pre">default_factory</span></code> are displayed as non-null and not required.
 Previously, this fields was nullable and not required.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4294">https://github.com/litestar-org/litestar/issues/4294</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4347">https://github.com/litestar-org/litestar/pull/4347</a></span></p>
+</div>
+</dd>
+<dt>Fix KeyError when ClassVar exists on msgspec Struct<a class="headerlink reference internal" href="#3.0.0-fix keyerror when classvar exists on msgspec struct" id="3.0.0-fix keyerror when classvar exists on msgspec struct">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug in <a class="reference internal" href="../reference/dto/msgspec_dto.html#litestar.dto.msgspec_dto.MsgspecDTO" title="litestar.dto.msgspec_dto.MsgspecDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">MsgspecDTO</span></code></a> where a KeyError was raised if a <a class="reference external" href="https://jcristharif.com/msgspec/api.html#msgspec.Struct" title="(in msgspec)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msgspec.Struct</span></code></a> contained a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClassVar</span></code>. ClassVars are now correctly skipped when generating field definitions.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4665">https://github.com/litestar-org/litestar/pull/4665</a></span></p>
 </div>
 </dd>
 </dl>
@@ -843,18 +932,17 @@ Previously, this fields was nullable and not required.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=e67ed9cd"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=8a5a2f34"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/litestar-theme.js?v=ab2dcc9e"></script>
       <script>let toggleHintShow = 'Click to show';</script>
       <script>let toggleHintHide = 'Click to hide';</script>
       <script>let toggleOpenOnPrint = 'true';</script>
-      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="../_static/shibuya.js?v=c477d091"></script>
-      <script src="../_static/versioning.js?v=9ab184b9"></script></body>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
 </html>

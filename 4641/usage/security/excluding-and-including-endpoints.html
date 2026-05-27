@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Excluding and including endpoints - Litestar Framework</title><link rel="shortcut icon" href="../../_static/favicon.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="JWT Security Backends" href="jwt.html" /><link rel="prev" title="Guards" href="guards.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=397bb51e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=76b6f612" />
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=470ca8b0" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
@@ -24,12 +24,12 @@
 }
 </style>
     <meta property="og:type" content="website"/><meta property="og:title" content="Excluding and including endpoints"/>
-<meta name="twitter:card" content="summary"/>
-<meta property="og:image" content="_static/logo-light.png"/>
+  <meta property="og:image" content="_static/logo-light.png"/>
+    <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="announcement">
     <div class="announcement-inner">
-      <p>You are viewing the <bold>local</bold> version of the documentation. Click here to go to the latest version.</p>
+      <p>You are viewing the <strong>local</strong> version of the documentation. <a href="/latest/">Click here to go to the latest version.</a></p>
       <button class="announcement-close" aria-label="Close announcement">
         <i class="i-lucide close"></i>
       </button>
@@ -130,8 +130,8 @@ data-aria-dark="Switch to auto color mode">
 </button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
         <div class="hamburger">
           <span class="hamburger_1"></span>
-          <span class="hamburger_2 -translate-x-2"></span>
-          <span class="hamburger_3 -translate-x-1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
         </div>
       </button>
     </div>
@@ -194,7 +194,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../lifecycle-hooks.html">Life Cycle Hooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../logging.html">Request logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metrics/index.html">Metrics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../metrics/open-telemetry.html">OpenTelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../metrics/opentelemetry.html">OpenTelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../metrics/prometheus.html">Prometheus</a></li>
 </ul>
 </li>
@@ -264,12 +264,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/jinja.html">jinja</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/mako.html">mako</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/contrib/opentelemetry.html">opentelemetry</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
@@ -321,6 +316,10 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/flash_messages.html">flash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/minijinja.html">minijinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/opentelemetry.html">opentelemetry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/problem_details.html">problem details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/prometheus.html">prometheus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/pydantic.html">pydantic</a></li>
@@ -372,9 +371,9 @@ data-aria-dark="Switch to auto color mode">
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../migration/index.html">Migrating to Litestar</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../migration/flask.html">From Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../migration/fastapi.html">From Starlette / FastAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../onboarding/index.html">Onboarding from other frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../onboarding/fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../onboarding/flask.html">Flask</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../topics/index.html">Topics</a><ul>
@@ -460,7 +459,10 @@ data-aria-dark="Switch to auto color mode">
     <iconify-icon icon="simple-icons:github"></iconify-icon>
   </span>
   <span class="flex-grow px-2 break-all">
-    <span>litestar-org/litestar</span>
+    
+    
+      <span>litestar</span>
+    
     <span class="flex text-sm repo-stats-count">
       <span class="flex items-center pr-3">
         <iconify-icon icon="lucide:star"></iconify-icon>
@@ -509,8 +511,43 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </div><div class="flex flex-col break-words justify-between">
-      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-        <article class="yue" role="main">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/security/excluding-and-including-endpoints.rst"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/security/excluding-and-including-endpoints.rst">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/security/excluding-and-including-endpoints.rst" target="_blank" rel="nofollow"><iconify-icon icon="bi:code-slash"></iconify-icon>
+            <span>View Source</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/security/excluding-and-including-endpoints.rst%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/usage/security/excluding-and-including-endpoints.rst%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
           <section id="excluding-and-including-endpoints">
 <h1>Excluding and including endpoints<a class="headerlink" href="#excluding-and-including-endpoints" title="Link to this heading">¶</a></h1>
 <p>Please make sure you read the <a class="reference internal" href="security-backends.html"><span class="doc">security backends documentation</span></a> first for
@@ -522,22 +559,24 @@ and <a class="reference internal" href="../../reference/security/jwt.html#litest
 <section id="excluding-routes">
 <h2>Excluding routes<a class="headerlink" href="#excluding-routes" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> argument takes a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code></a> that are interpreted
-as regex patterns. For example, the configuration below would apply authentication to all endpoints except those where
-the route starts with <code class="docutils literal notranslate"><span class="pre">/login</span></code>, <code class="docutils literal notranslate"><span class="pre">/signup</span></code>, or <code class="docutils literal notranslate"><span class="pre">/schema</span></code>. Thus, one does not have to exclude <code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code>
-as well - it is included in the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> pattern.</p>
+as regex patterns matched against the full path. Because the patterns are not implicitly anchored, a pattern like
+<code class="docutils literal notranslate"><span class="pre">/schema</span></code> would match <em>any</em> path containing <code class="docutils literal notranslate"><span class="pre">/schema</span></code>, not just paths that start with it. To match only paths that
+start with a given prefix, anchor the pattern with <code class="docutils literal notranslate"><span class="pre">^</span></code>. For example, the configuration below would apply
+authentication to all endpoints except those where the route starts with <code class="docutils literal notranslate"><span class="pre">/login</span></code>, <code class="docutils literal notranslate"><span class="pre">/signup</span></code>, or <code class="docutils literal notranslate"><span class="pre">/schema</span></code>.
+Thus, one does not have to exclude <code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code> as well — it is covered by the <code class="docutils literal notranslate"><span class="pre">^/schema</span></code> pattern.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>Passing <code class="docutils literal notranslate"><span class="pre">/</span></code> will disable authentication for all routes, since, as a regex, it
 matches <em>every</em> path.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
-</span><span data-line="2"><span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
-</span><span data-line="3"><span class="c1"># we must pass a config for a session backend.</span>
-</span><span data-line="4"><span class="c1"># all session backends are supported</span>
-</span><span data-line="5"><span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
-</span><span data-line="6"><span class="c1"># exclude any URLs that should not have authentication.</span>
-</span><span data-line="7"><span class="c1"># We exclude the documentation URLs, signup and login.</span>
-</span><span data-line="8"><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="s2">&quot;/signup&quot;</span><span class="p">,</span> <span class="s2">&quot;/schema&quot;</span><span class="p">],</span>
+</span><span data-line="2">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
+</span><span data-line="3">    <span class="c1"># we must pass a config for a session backend.</span>
+</span><span data-line="4">    <span class="c1"># all session backends are supported</span>
+</span><span data-line="5">    <span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
+</span><span data-line="6">    <span class="c1"># exclude any URLs that should not have authentication.</span>
+</span><span data-line="7">    <span class="c1"># We exclude the documentation URLs, signup and login.</span>
+</span><span data-line="8">    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^/login&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/signup&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/schema&quot;</span><span class="p">],</span>
 </span><span data-line="9"><span class="p">)</span>
 </span><span data-line="10"><span class="o">...</span>
 </span></pre></div>
@@ -550,13 +589,13 @@ path but the one specified in the pattern will be protected by authentication. I
 under the <code class="docutils literal notranslate"><span class="pre">/secured</span></code> route will require authentication - all other routes do not.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="o">...</span>
 </span><span data-line="2"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
-</span><span data-line="3"><span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
-</span><span data-line="4"><span class="c1"># we must pass a config for a session backend.</span>
-</span><span data-line="5"><span class="c1"># all session backends are supported</span>
-</span><span data-line="6"><span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
-</span><span data-line="7"><span class="c1"># exclude any URLs that should not have authentication.</span>
-</span><span data-line="8"><span class="c1"># We exclude the documentation URLs, signup and login.</span>
-</span><span data-line="9"><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^(?!.*\/secured$).*$&quot;</span><span class="p">],</span>
+</span><span data-line="3">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
+</span><span data-line="4">    <span class="c1"># we must pass a config for a session backend.</span>
+</span><span data-line="5">    <span class="c1"># all session backends are supported</span>
+</span><span data-line="6">    <span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
+</span><span data-line="7">    <span class="c1"># exclude any URLs that should not have authentication.</span>
+</span><span data-line="8">    <span class="c1"># We exclude the documentation URLs, signup and login.</span>
+</span><span data-line="9">    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^(?!.*\/secured$).*$&quot;</span><span class="p">],</span>
 </span><span data-line="10"><span class="p">)</span>
 </span><span data-line="11"><span class="o">...</span>
 </span></pre></div>
@@ -589,14 +628,14 @@ can pass <code class="docutils literal notranslate"><span class="pre">exclude_fr
 </span><span data-line="8">    <span class="o">...</span>
 </span><span data-line="9">
 </span><span data-line="10"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
-</span><span data-line="11"><span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
-</span><span data-line="12"><span class="c1"># we must pass a config for a session backend.</span>
-</span><span data-line="13"><span class="c1"># all session backends are supported</span>
-</span><span data-line="14"><span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
-</span><span data-line="15"><span class="c1"># exclude any URLs that should not have authentication.</span>
-</span><span data-line="16"><span class="c1"># We exclude the documentation URLs, signup and login.</span>
-</span><span data-line="17"><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="s2">&quot;/signup&quot;</span><span class="p">,</span> <span class="s2">&quot;/schema&quot;</span><span class="p">],</span>
-</span><span data-line="18"><span class="n">exclude_opt_key</span><span class="o">=</span><span class="s2">&quot;no_auth&quot;</span>  <span class="c1"># default value is `exclude_from_auth`</span>
+</span><span data-line="11">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
+</span><span data-line="12">    <span class="c1"># we must pass a config for a session backend.</span>
+</span><span data-line="13">    <span class="c1"># all session backends are supported</span>
+</span><span data-line="14">    <span class="n">session_backend_config</span><span class="o">=</span><span class="n">ServerSideSessionConfig</span><span class="p">(),</span>
+</span><span data-line="15">    <span class="c1"># exclude any URLs that should not have authentication.</span>
+</span><span data-line="16">    <span class="c1"># We exclude the documentation URLs, signup and login.</span>
+</span><span data-line="17">    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;^/login&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/signup&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;^/schema&quot;</span><span class="p">],</span>
+</span><span data-line="18">    <span class="n">exclude_opt_key</span><span class="o">=</span><span class="s2">&quot;no_auth&quot;</span>  <span class="c1"># default value is `exclude_from_auth`</span>
 </span><span data-line="19"><span class="p">)</span>
 </span><span data-line="20"><span class="o">...</span>
 </span></pre></div>
@@ -653,18 +692,17 @@ can pass <code class="docutils literal notranslate"><span class="pre">exclude_fr
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=e67ed9cd"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/documentation_options.js?v=8a5a2f34"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../_static/copybutton.js?v=f281be69"></script>
       <script src="../../_static/litestar-theme.js?v=ab2dcc9e"></script>
       <script>let toggleHintShow = 'Click to show';</script>
       <script>let toggleHintHide = 'Click to hide';</script>
       <script>let toggleOpenOnPrint = 'true';</script>
-      <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
       <script src="../../_static/design-tabs.js?v=f930bc37"></script>
       <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-      <script src="../../_static/shibuya.js?v=c477d091"></script>
-      <script src="../../_static/versioning.js?v=9ab184b9"></script></body>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script></body>
 </html>
