@@ -1676,6 +1676,18 @@ marked as required.</p>
 </div>
 <p>Calling <code class="docutils literal notranslate"><span class="pre">/a</span></code> would work as expected, but calling <code class="docutils literal notranslate"><span class="pre">/b</span></code> would result in a
 <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">-</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> with the info <code class="docutils literal notranslate"><span class="pre">missing</span> <span class="pre">required</span> <span class="pre">query</span> <span class="pre">parameter</span> <span class="pre">'db_session'</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_page</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="n">router_a</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="s2">&quot;/a&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">get_page</span><span class="p">],</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;db_session&quot;</span><span class="p">:</span> <span class="n">provide_session</span><span class="p">})</span>
+<span class="n">router_b</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="s2">&quot;/b&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">get_page</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>With explicit declarations, these can either be detected at startup time, or a specific
+and <em>correct</em> error can be raised; In this case it would be a
+<code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code>, including a more helpful error message in stderr:
+<code class="docutils literal notranslate"><span class="pre">Explicit</span> <span class="pre">dependency</span> <span class="pre">'db_session'</span> <span class="pre">for</span> <span class="pre">'get_page'</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">default</span> <span class="pre">value,</span> <span class="pre">or</span> <span class="pre">provided</span> <span class="pre">dependency.</span></code></p>
 </section>
 <section id="documenting-intent">
 <h3>Documenting intent<a class="headerlink" href="#documenting-intent" title="Link to this heading">#</a></h3>
