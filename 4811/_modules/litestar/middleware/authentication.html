@@ -369,9 +369,9 @@ data-aria-dark="Switch to auto color mode">
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">Guides</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../migration/index.html">Migrating to Litestar</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../migration/flask.html">From Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../migration/fastapi.html">From Starlette / FastAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../onboarding/index.html">Onboarding from other frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../onboarding/fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../onboarding/flask.html">Flask</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../topics/index.html">Topics</a><ul>
@@ -524,7 +524,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="21">
 </span><span data-line="22">
 <div class="viewcode-block" id="AuthenticationResult">
-<a class="viewcode-back" href="../../../reference/middleware/authentication.html#litestar.middleware.authentication.AuthenticationResult">[docs]</a>
+<a class="viewcode-back" href="../../../reference/middleware/index.html#litestar.middleware.authentication.AuthenticationResult">[docs]</a>
 </span><span data-line="23"><span class="nd">@dataclass</span>
 </span><span data-line="24"><span class="k">class</span><span class="w"> </span><span class="nc">AuthenticationResult</span><span class="p">:</span>
 </span><span data-line="25"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass for authentication result.&quot;&quot;&quot;</span>
@@ -539,7 +539,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="33">
 </span><span data-line="34">
 <div class="viewcode-block" id="AbstractAuthenticationMiddleware">
-<a class="viewcode-back" href="../../../reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware">[docs]</a>
+<a class="viewcode-back" href="../../../reference/middleware/index.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware">[docs]</a>
 </span><span data-line="35"><span class="k">class</span><span class="w"> </span><span class="nc">AbstractAuthenticationMiddleware</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 </span><span data-line="36"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract AuthenticationMiddleware that allows users to create their own AuthenticationMiddleware by extending it</span>
 </span><span data-line="37"><span class="sd">    and overriding :meth:`AbstractAuthenticationMiddleware.authenticate_request`.</span>
@@ -554,7 +554,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="46">    <span class="p">)</span>
 </span><span data-line="47">
 <div class="viewcode-block" id="AbstractAuthenticationMiddleware.__init__">
-<a class="viewcode-back" href="../../../reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../reference/middleware/index.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__init__">[docs]</a>
 </span><span data-line="48">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
 </span><span data-line="49">        <span class="bp">self</span><span class="p">,</span>
 </span><span data-line="50">        <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">,</span>
@@ -580,7 +580,7 @@ data-aria-dark="Switch to auto color mode">
 
 </span><span data-line="70">
 <div class="viewcode-block" id="AbstractAuthenticationMiddleware.__call__">
-<a class="viewcode-back" href="../../../reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__">[docs]</a>
+<a class="viewcode-back" href="../../../reference/middleware/index.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.__call__">[docs]</a>
 </span><span data-line="71">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span data-line="72"><span class="w">        </span><span class="sd">&quot;&quot;&quot;ASGI callable.</span>
 </span><span data-line="73">
@@ -606,7 +606,7 @@ data-aria-dark="Switch to auto color mode">
 
 </span><span data-line="93">
 <div class="viewcode-block" id="AbstractAuthenticationMiddleware.authenticate_request">
-<a class="viewcode-back" href="../../../reference/middleware/authentication.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request">[docs]</a>
+<a class="viewcode-back" href="../../../reference/middleware/index.html#litestar.middleware.authentication.AbstractAuthenticationMiddleware.authenticate_request">[docs]</a>
 </span><span data-line="94">    <span class="nd">@abstractmethod</span>
 </span><span data-line="95">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">authenticate_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthenticationResult</span><span class="p">:</span>
 </span><span data-line="96"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Receive the http connection and return an :class:`AuthenticationResult`.</span>
