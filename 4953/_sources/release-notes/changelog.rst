@@ -8,6 +8,7 @@
 
     .. change:: Migrate ``ResponseCacheMiddleware`` to ``ASGIMiddleware``
         :type: feature
+        :pr: 4953
         :issue: 4009
         :breaking:
 
