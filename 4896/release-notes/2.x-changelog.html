@@ -263,7 +263,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
@@ -1542,7 +1541,7 @@ models in the OpenAPI schema.</p>
 <h3>Bugfixes<a class="headerlink" href="#2.4.3-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
 <dt>Fix OpenAPI schema for <code class="docutils literal notranslate"><span class="pre">Literal</span> <span class="pre">|</span> <span class="pre">None</span></code> unions<a class="headerlink reference internal" href="#2.4.3-fix openapi schema for" id="2.4.3-fix openapi schema for">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Fix a bug where an incorrect OpenAPI schema was generated generated when any
+<p>Fix a bug where an incorrect OpenAPI schema was generated when any
 <code class="docutils literal notranslate"><span class="pre">Literal</span> <span class="pre">|</span> <span class="pre">None</span></code>-union was present in an annotation.</p>
 <p>For example</p>
 <div class="sd-tab-set docutils">
@@ -1937,7 +1936,7 @@ cached, or not.</p>
 using <code class="docutils literal notranslate"><span class="pre">litestar</span> <span class="pre">run</span></code>. Uvicorn requires both to be passed (or neither) but
 additional validation was added to generate a more user friendly CLI errors.</p>
 <p>The other SSL-related flags (like password or CA) were not added (yet). See
-<a class="reference external" href="https://www.uvicorn.org/#command-line-options">uvicorn CLI docs</a></p>
+<a class="reference external" href="https://uvicorn.dev/#command-line-options">uvicorn CLI docs</a></p>
 <p><strong>Generating of a self-signed certificate</strong></p>
 <p>One more CLI flag was added (<code class="docutils literal notranslate"><span class="pre">--create-devcert</span></code>) that uses the
 <code class="docutils literal notranslate"><span class="pre">cryptography</span></code> module to generate a self-signed development certificate. Both
@@ -2286,8 +2285,8 @@ This was fixed by leaving the default value as <a class="reference external" hre
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2138">https://github.com/litestar-org/litestar/issues/2138</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2189">https://github.com/litestar-org/litestar/pull/2189</a></span></p>
 </div>
 </dd>
-<dt>Add <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Adds the <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
+<dt>Add <a class="reference internal" href="../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusController.include_in_schema" title="litestar.plugins.prometheus.PrometheusController.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Adds the <a class="reference internal" href="../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusController.include_in_schema" title="litestar.plugins.prometheus.PrometheusController.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
 specific routes from the generated OpenAPI schema.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2267">https://github.com/litestar-org/litestar/issues/2267</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2295">https://github.com/litestar-org/litestar/pull/2295</a></span></p>
 </div>

@@ -263,7 +263,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
@@ -516,17 +515,17 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_async_callable</span>
 </span><span data-line="12"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">unwrap_partial</span>
 </span><span data-line="13"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.predicates</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_async_callable</span>
-</span><span data-line="14"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsedSignature</span>
-</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.warnings</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span data-line="16">    <span class="n">warn_implicit_sync_to_thread</span><span class="p">,</span>
-</span><span data-line="17">    <span class="n">warn_sync_to_thread_with_async_callable</span><span class="p">,</span>
-</span><span data-line="18">    <span class="n">warn_sync_to_thread_with_generator</span><span class="p">,</span>
-</span><span data-line="19"><span class="p">)</span>
-</span><span data-line="20">
-</span><span data-line="21"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-</span><span data-line="22">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar._signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignatureModel</span>
-</span><span data-line="23">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.dto</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractDTO</span>
-</span><span data-line="24">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnyCallable</span>
+</span><span data-line="14"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.warnings</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="15">    <span class="n">warn_implicit_sync_to_thread</span><span class="p">,</span>
+</span><span data-line="16">    <span class="n">warn_sync_to_thread_with_async_callable</span><span class="p">,</span>
+</span><span data-line="17">    <span class="n">warn_sync_to_thread_with_generator</span><span class="p">,</span>
+</span><span data-line="18"><span class="p">)</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+</span><span data-line="21">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar._signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignatureModel</span>
+</span><span data-line="22">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.dto</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractDTO</span>
+</span><span data-line="23">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnyCallable</span>
+</span><span data-line="24">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsedSignature</span>
 </span><span data-line="25">
 </span><span data-line="26">
 </span><span data-line="27"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
@@ -652,55 +651,57 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="142">        <span class="n">type_decoders</span><span class="p">:</span> <span class="n">TypeDecodersSequence</span><span class="p">,</span>
 </span><span data-line="143">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span data-line="144">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_fn_signature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="145">            <span class="n">dependency</span> <span class="o">=</span> <span class="n">unwrap_partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">)</span>
-</span><span data-line="146">            <span class="n">plugin</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
-</span><span data-line="147">                <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plugins</span><span class="o">.</span><span class="n">di</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">DIPlugin</span><span class="p">)</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">has_typed_init</span><span class="p">(</span><span class="n">dependency</span><span class="p">)),</span>
-</span><span data-line="148">                <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="149">            <span class="p">)</span>
-</span><span data-line="150">            <span class="k">if</span> <span class="n">plugin</span><span class="p">:</span>
-</span><span data-line="151">                <span class="n">signature</span><span class="p">,</span> <span class="n">init_type_hints</span> <span class="o">=</span> <span class="n">plugin</span><span class="o">.</span><span class="n">get_typed_init</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span>
-</span><span data-line="152">                <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_fn_signature</span> <span class="o">=</span> <span class="n">ParsedSignature</span><span class="o">.</span><span class="n">from_signature</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">init_type_hints</span><span class="p">)</span>
-</span><span data-line="153">            <span class="k">else</span><span class="p">:</span>
-</span><span data-line="154">                <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_fn_signature</span> <span class="o">=</span> <span class="n">ParsedSignature</span><span class="o">.</span><span class="n">from_fn</span><span class="p">(</span><span class="n">dependency</span><span class="p">,</span> <span class="n">signature_namespace</span><span class="p">)</span>
-</span><span data-line="155">
-</span><span data-line="156">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_signature_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="157">            <span class="kn">from</span><span class="w"> </span><span class="nn">litestar._signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignatureModel</span>
-</span><span data-line="158">
-</span><span data-line="159">            <span class="bp">self</span><span class="o">.</span><span class="n">_signature_model</span> <span class="o">=</span> <span class="n">SignatureModel</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-</span><span data-line="160">                <span class="n">dependency_name_set</span><span class="o">=</span><span class="n">dependency_keys</span><span class="p">,</span>
-</span><span data-line="161">                <span class="n">fn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">,</span>
-</span><span data-line="162">                <span class="n">parsed_signature</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_fn_signature</span><span class="p">,</span>
-</span><span data-line="163">                <span class="n">data_dto</span><span class="o">=</span><span class="n">data_dto</span><span class="p">,</span>
-</span><span data-line="164">                <span class="n">type_decoders</span><span class="o">=</span><span class="n">type_decoders</span><span class="p">,</span>
-</span><span data-line="165">            <span class="p">)</span>
-</span><span data-line="166">
+</span><span data-line="145">            <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsedSignature</span>
+</span><span data-line="146">
+</span><span data-line="147">            <span class="n">dependency</span> <span class="o">=</span> <span class="n">unwrap_partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">)</span>
+</span><span data-line="148">            <span class="n">plugin</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+</span><span data-line="149">                <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plugins</span><span class="o">.</span><span class="n">di</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">DIPlugin</span><span class="p">)</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">has_typed_init</span><span class="p">(</span><span class="n">dependency</span><span class="p">)),</span>
+</span><span data-line="150">                <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="151">            <span class="p">)</span>
+</span><span data-line="152">            <span class="k">if</span> <span class="n">plugin</span><span class="p">:</span>
+</span><span data-line="153">                <span class="n">signature</span><span class="p">,</span> <span class="n">init_type_hints</span> <span class="o">=</span> <span class="n">plugin</span><span class="o">.</span><span class="n">get_typed_init</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span>
+</span><span data-line="154">                <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_fn_signature</span> <span class="o">=</span> <span class="n">ParsedSignature</span><span class="o">.</span><span class="n">from_signature</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">init_type_hints</span><span class="p">)</span>
+</span><span data-line="155">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="156">                <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_fn_signature</span> <span class="o">=</span> <span class="n">ParsedSignature</span><span class="o">.</span><span class="n">from_fn</span><span class="p">(</span><span class="n">dependency</span><span class="p">,</span> <span class="n">signature_namespace</span><span class="p">)</span>
+</span><span data-line="157">
+</span><span data-line="158">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_signature_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="159">            <span class="kn">from</span><span class="w"> </span><span class="nn">litestar._signature</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignatureModel</span>
+</span><span data-line="160">
+</span><span data-line="161">            <span class="bp">self</span><span class="o">.</span><span class="n">_signature_model</span> <span class="o">=</span> <span class="n">SignatureModel</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span><span data-line="162">                <span class="n">dependency_name_set</span><span class="o">=</span><span class="n">dependency_keys</span><span class="p">,</span>
+</span><span data-line="163">                <span class="n">fn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">,</span>
+</span><span data-line="164">                <span class="n">parsed_signature</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_fn_signature</span><span class="p">,</span>
+</span><span data-line="165">                <span class="n">data_dto</span><span class="o">=</span><span class="n">data_dto</span><span class="p">,</span>
+</span><span data-line="166">                <span class="n">type_decoders</span><span class="o">=</span><span class="n">type_decoders</span><span class="p">,</span>
+</span><span data-line="167">            <span class="p">)</span>
+</span><span data-line="168">
 <div class="viewcode-block" id="Provide.__call__">
 <a class="viewcode-back" href="../../reference/di.html#litestar.di.Provide.__call__">[docs]</a>
-</span><span data-line="167">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="168"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Call the provider&#39;s dependency.&quot;&quot;&quot;</span>
-</span><span data-line="169">
-</span><span data-line="170">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cache</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Empty</span><span class="p">:</span>
-</span><span data-line="171">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-</span><span data-line="172">
-</span><span data-line="173">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_sync_callable</span><span class="p">:</span>
-</span><span data-line="174">            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="175">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="176">            <span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="177">
-</span><span data-line="178">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cache</span><span class="p">:</span>
-</span><span data-line="179">            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
-</span><span data-line="180">
-</span><span data-line="181">        <span class="k">return</span> <span class="n">value</span></div>
-
+</span><span data-line="169">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="170"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Call the provider&#39;s dependency.&quot;&quot;&quot;</span>
+</span><span data-line="171">
+</span><span data-line="172">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cache</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Empty</span><span class="p">:</span>
+</span><span data-line="173">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+</span><span data-line="174">
+</span><span data-line="175">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_sync_callable</span><span class="p">:</span>
+</span><span data-line="176">            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="177">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="178">            <span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="179">
+</span><span data-line="180">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cache</span><span class="p">:</span>
+</span><span data-line="181">            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
 </span><span data-line="182">
-</span><span data-line="183">    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="184">        <span class="c1"># check if memory address is identical, otherwise compare attributes</span>
-</span><span data-line="185">        <span class="k">return</span> <span class="n">other</span> <span class="ow">is</span> <span class="bp">self</span> <span class="ow">or</span> <span class="p">(</span>
-</span><span data-line="186">            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
-</span><span data-line="187">            <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">dependency</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span>
-</span><span data-line="188">            <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">use_cache</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cache</span>
-</span><span data-line="189">            <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-</span><span data-line="190">        <span class="p">)</span></div>
+</span><span data-line="183">        <span class="k">return</span> <span class="n">value</span></div>
+
+</span><span data-line="184">
+</span><span data-line="185">    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="186">        <span class="c1"># check if memory address is identical, otherwise compare attributes</span>
+</span><span data-line="187">        <span class="k">return</span> <span class="n">other</span> <span class="ow">is</span> <span class="bp">self</span> <span class="ow">or</span> <span class="p">(</span>
+</span><span data-line="188">            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+</span><span data-line="189">            <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">dependency</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span>
+</span><span data-line="190">            <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">use_cache</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cache</span>
+</span><span data-line="191">            <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+</span><span data-line="192">        <span class="p">)</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
