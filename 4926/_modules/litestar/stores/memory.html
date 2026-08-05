@@ -263,7 +263,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/data_extractors.html">data_extractors</a></li>
@@ -631,28 +630,20 @@ data-aria-dark="Switch to auto color mode">
 <a class="viewcode-back" href="../../../reference/stores/memory.html#litestar.stores.memory.MemoryStore.exists">[docs]</a>
 </span><span data-line="105">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span data-line="106"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a given ``key`` exists.&quot;&quot;&quot;</span>
-</span><span data-line="107">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-</span><span data-line="108">            <span class="n">storage_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="109">
-</span><span data-line="110">            <span class="k">if</span> <span class="ow">not</span> <span class="n">storage_obj</span><span class="p">:</span>
-</span><span data-line="111">                <span class="k">return</span> <span class="kc">False</span>
-</span><span data-line="112">
-</span><span data-line="113">            <span class="k">if</span> <span class="n">storage_obj</span><span class="o">.</span><span class="n">expired</span><span class="p">:</span>
-</span><span data-line="114">                <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="115">                <span class="k">return</span> <span class="kc">False</span>
-</span><span data-line="116">
-</span><span data-line="117">            <span class="k">return</span> <span class="kc">True</span></div>
+</span><span data-line="107">        <span class="c1"># compare against None rather than truth-testing, so a stored empty value</span>
+</span><span data-line="108">        <span class="c1"># is still reported as existing</span>
+</span><span data-line="109">        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
-</span><span data-line="118">
+</span><span data-line="110">
 <div class="viewcode-block" id="MemoryStore.expires_in">
 <a class="viewcode-back" href="../../../reference/stores/memory.html#litestar.stores.memory.MemoryStore.expires_in">[docs]</a>
-</span><span data-line="119">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">expires_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="120"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the time in seconds ``key`` expires in. If no such ``key`` exists or no</span>
-</span><span data-line="121"><span class="sd">        expiry time was set, return ``None``.</span>
-</span><span data-line="122"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="123">        <span class="k">if</span> <span class="n">storage_obj</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-</span><span data-line="124">            <span class="k">return</span> <span class="n">storage_obj</span><span class="o">.</span><span class="n">expires_in</span>
-</span><span data-line="125">        <span class="k">return</span> <span class="kc">None</span></div>
+</span><span data-line="111">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">expires_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="112"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the time in seconds ``key`` expires in. If no such ``key`` exists or no</span>
+</span><span data-line="113"><span class="sd">        expiry time was set, return ``None``.</span>
+</span><span data-line="114"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="115">        <span class="k">if</span> <span class="n">storage_obj</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+</span><span data-line="116">            <span class="k">return</span> <span class="n">storage_obj</span><span class="o">.</span><span class="n">expires_in</span>
+</span><span data-line="117">        <span class="k">return</span> <span class="kc">None</span></div>
 </div>
 
 </span></pre></div>
