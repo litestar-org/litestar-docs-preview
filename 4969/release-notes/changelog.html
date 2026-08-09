@@ -962,6 +962,13 @@ after their backend subscription and requested history are ready.</p>
 <p>References: </p>
 </div>
 </dd>
+<dt>Harden the PsycoPg channels listener<a class="headerlink reference internal" href="#3.0.0-harden the psycopg channels listener" id="3.0.0-harden the psycopg channels listener">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Serialize subscription changes and consume notifications in a background task so
+dynamic <code class="docutils literal notranslate"><span class="pre">LISTEN</span></code> and <code class="docutils literal notranslate"><span class="pre">UNLISTEN</span></code> operations no longer contend with the listener.
+Psycopg 3.2.4 or newer is now required for development and documentation builds.</p>
+<p>References: </p>
+</div>
+</dd>
 <dt>Fix OpenAPI schema incorrectly marking nullable required fields as not required<a class="headerlink reference internal" href="#3.0.0-fix openapi schema incorrectly marking nullable required fields as not required" id="3.0.0-fix openapi schema incorrectly marking nullable required fields as not required">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fields typed as <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">|</span> <span class="pre">None</span></code> (nullable) without a default value are now correctly
 included in the OpenAPI schema’s <code class="docutils literal notranslate"><span class="pre">required</span></code> array. Previously, Litestar conflated
