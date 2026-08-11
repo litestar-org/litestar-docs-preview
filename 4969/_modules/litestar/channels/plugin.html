@@ -63,7 +63,7 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about/organization">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -725,207 +725,197 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="199">            <span class="n">max_backlog</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_backlog</span><span class="p">,</span>
 </span><span data-line="200">            <span class="n">backlog_strategy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_backlog_strategy</span><span class="p">,</span>
 </span><span data-line="201">        <span class="p">)</span>
-</span><span data-line="202">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="203">            <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lifecycle_lock</span><span class="p">:</span>
-</span><span data-line="204">                <span class="n">channels_to_subscribe</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span data-line="205">                <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
-</span><span data-line="206">                    <span class="n">channel_subscribers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span>
-</span><span data-line="207">                    <span class="k">if</span> <span class="ow">not</span> <span class="n">channel_subscribers</span><span class="p">:</span>
-</span><span data-line="208">                        <span class="n">channels_to_subscribe</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-</span><span data-line="209">                    <span class="n">channel_subscribers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
-</span><span data-line="210">
-</span><span data-line="211">                <span class="k">if</span> <span class="n">channels_to_subscribe</span><span class="p">:</span>
-</span><span data-line="212">                    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">channels_to_subscribe</span><span class="p">)</span>
+</span><span data-line="202">        <span class="k">if</span> <span class="n">history</span><span class="p">:</span>
+</span><span data-line="203">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_subscriber_history</span><span class="p">(</span><span class="n">subscriber</span><span class="o">=</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">history</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">)</span>
+</span><span data-line="204">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lifecycle_lock</span><span class="p">:</span>
+</span><span data-line="205">            <span class="n">affected_channels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span data-line="206">            <span class="n">new_channels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span data-line="207">            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+</span><span data-line="208">                <span class="n">channel_subscribers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span>
+</span><span data-line="209">                <span class="k">if</span> <span class="n">subscriber</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">channel_subscribers</span><span class="p">:</span>
+</span><span data-line="210">                    <span class="k">if</span> <span class="ow">not</span> <span class="n">channel_subscribers</span><span class="p">:</span>
+</span><span data-line="211">                        <span class="n">new_channels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span><span data-line="212">                    <span class="n">affected_channels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
 </span><span data-line="213">
-</span><span data-line="214">            <span class="k">if</span> <span class="n">history</span><span class="p">:</span>
-</span><span data-line="215">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_subscriber_history</span><span class="p">(</span><span class="n">subscriber</span><span class="o">=</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">history</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">)</span>
-</span><span data-line="216">        <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
-</span><span data-line="217">            <span class="n">cleanup_task</span> <span class="o">=</span> <span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="p">))</span>
-</span><span data-line="218">            <span class="k">try</span><span class="p">:</span>
-</span><span data-line="219">                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">shield</span><span class="p">(</span><span class="n">cleanup_task</span><span class="p">),</span> <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="220">            <span class="k">except</span> <span class="n">CancelledError</span><span class="p">:</span>
-</span><span data-line="221">                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">cleanup_task</span><span class="p">,</span> <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="222">            <span class="k">raise</span>
-</span><span data-line="223">
-</span><span data-line="224">        <span class="k">return</span> <span class="n">subscriber</span></div>
+</span><span data-line="214">            <span class="k">if</span> <span class="n">new_channels</span><span class="p">:</span>
+</span><span data-line="215">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">new_channels</span><span class="p">)</span>
+</span><span data-line="216">
+</span><span data-line="217">            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">affected_channels</span><span class="p">:</span>
+</span><span data-line="218">                <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
+</span><span data-line="219">
+</span><span data-line="220">        <span class="k">return</span> <span class="n">subscriber</span></div>
 
-</span><span data-line="225">
+</span><span data-line="221">
 <div class="viewcode-block" id="ChannelsPlugin.unsubscribe">
 <a class="viewcode-back" href="../../../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.unsubscribe">[docs]</a>
-</span><span data-line="226">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">:</span> <span class="n">Subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="227"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Unsubscribe a :class:`Subscriber` from ``channels``. If the subscriber has a running sending task, it will</span>
-</span><span data-line="228"><span class="sd">        be stopped.</span>
-</span><span data-line="229">
-</span><span data-line="230"><span class="sd">        Args:</span>
-</span><span data-line="231"><span class="sd">            channels: Channels to unsubscribe from. If ``None``, unsubscribe from all channels</span>
-</span><span data-line="232"><span class="sd">            subscriber: :class:`Subscriber` to unsubscribe</span>
-</span><span data-line="233"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="234">        <span class="k">if</span> <span class="n">channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="235">            <span class="n">requested_channels</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="236">        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span data-line="237">            <span class="n">requested_channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="p">]</span>
-</span><span data-line="238">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="239">            <span class="n">requested_channels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
-</span><span data-line="240">
-</span><span data-line="241">        <span class="n">should_stop</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remove_subscriber</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">requested_channels</span><span class="p">)</span>
-</span><span data-line="242">
-</span><span data-line="243">        <span class="k">if</span> <span class="n">should_stop</span><span class="p">:</span>
-</span><span data-line="244">            <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># this will stop any running task or generator by breaking the inner loop</span>
-</span><span data-line="245">            <span class="k">if</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
-</span><span data-line="246">                <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+</span><span data-line="222">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">unsubscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">:</span> <span class="n">Subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="223"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Unsubscribe a :class:`Subscriber` from ``channels``. If the subscriber has a running sending task, it will</span>
+</span><span data-line="224"><span class="sd">        be stopped.</span>
+</span><span data-line="225">
+</span><span data-line="226"><span class="sd">        Args:</span>
+</span><span data-line="227"><span class="sd">            channels: Channels to unsubscribe from. If ``None``, unsubscribe from all channels</span>
+</span><span data-line="228"><span class="sd">            subscriber: :class:`Subscriber` to unsubscribe</span>
+</span><span data-line="229"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="230">        <span class="k">if</span> <span class="n">channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="231">            <span class="n">requested_channels</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="232">        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="233">            <span class="n">requested_channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="p">]</span>
+</span><span data-line="234">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="235">            <span class="n">requested_channels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+</span><span data-line="236">
+</span><span data-line="237">        <span class="n">should_stop</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remove_subscriber</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">requested_channels</span><span class="p">)</span>
+</span><span data-line="238">
+</span><span data-line="239">        <span class="k">if</span> <span class="n">should_stop</span><span class="p">:</span>
+</span><span data-line="240">            <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># this will stop any running task or generator by breaking the inner loop</span>
+</span><span data-line="241">            <span class="k">if</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+</span><span data-line="242">                <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
 
-</span><span data-line="247">
+</span><span data-line="243">
 <div class="viewcode-block" id="ChannelsPlugin.start_subscription">
 <a class="viewcode-back" href="../../../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.start_subscription">[docs]</a>
-</span><span data-line="248">    <span class="nd">@asynccontextmanager</span>
-</span><span data-line="249">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_subscription</span><span class="p">(</span>
-</span><span data-line="250">        <span class="bp">self</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="251">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">Subscriber</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span data-line="252"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a :class:`Subscriber` and tie its subscriptions to a context manager;</span>
-</span><span data-line="253"><span class="sd">        Upon exiting the context, :meth:`unsubscribe` will be called.</span>
-</span><span data-line="254">
-</span><span data-line="255"><span class="sd">        Args:</span>
-</span><span data-line="256"><span class="sd">            channels: Channel(s) to subscribe to</span>
-</span><span data-line="257"><span class="sd">            history: If a non-negative integer, add this amount of history entries from</span>
-</span><span data-line="258"><span class="sd">                each channel to the subscriber&#39;s event stream. Note that this will wait</span>
-</span><span data-line="259"><span class="sd">                until all history entries are fetched and pushed to the subscriber&#39;s</span>
-</span><span data-line="260"><span class="sd">                stream. For more control use :meth:`put_subscriber_history`.</span>
-</span><span data-line="261">
-</span><span data-line="262"><span class="sd">        Returns:</span>
-</span><span data-line="263"><span class="sd">            A :class:`Subscriber`</span>
-</span><span data-line="264"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="265">        <span class="n">materialized_channels</span> <span class="o">=</span> <span class="n">channels</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
-</span><span data-line="266">        <span class="n">subscriber</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">materialized_channels</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
-</span><span data-line="267">
-</span><span data-line="268">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="269">            <span class="k">yield</span> <span class="n">subscriber</span>
-</span><span data-line="270">        <span class="k">finally</span><span class="p">:</span>
-</span><span data-line="271">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">materialized_channels</span><span class="p">)</span></div>
+</span><span data-line="244">    <span class="nd">@asynccontextmanager</span>
+</span><span data-line="245">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_subscription</span><span class="p">(</span>
+</span><span data-line="246">        <span class="bp">self</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="247">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">Subscriber</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span data-line="248"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a :class:`Subscriber` and tie its subscriptions to a context manager;</span>
+</span><span data-line="249"><span class="sd">        Upon exiting the context, :meth:`unsubscribe` will be called.</span>
+</span><span data-line="250">
+</span><span data-line="251"><span class="sd">        Args:</span>
+</span><span data-line="252"><span class="sd">            channels: Channel(s) to subscribe to</span>
+</span><span data-line="253"><span class="sd">            history: If a non-negative integer, add this amount of history entries from</span>
+</span><span data-line="254"><span class="sd">                each channel to the subscriber&#39;s event stream. Note that this will wait</span>
+</span><span data-line="255"><span class="sd">                until all history entries are fetched and pushed to the subscriber&#39;s</span>
+</span><span data-line="256"><span class="sd">                stream. For more control use :meth:`put_subscriber_history`.</span>
+</span><span data-line="257">
+</span><span data-line="258"><span class="sd">        Returns:</span>
+</span><span data-line="259"><span class="sd">            A :class:`Subscriber`</span>
+</span><span data-line="260"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="261">        <span class="n">materialized_channels</span> <span class="o">=</span> <span class="n">channels</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+</span><span data-line="262">        <span class="n">subscriber</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">materialized_channels</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
+</span><span data-line="263">
+</span><span data-line="264">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="265">            <span class="k">yield</span> <span class="n">subscriber</span>
+</span><span data-line="266">        <span class="k">finally</span><span class="p">:</span>
+</span><span data-line="267">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">materialized_channels</span><span class="p">)</span></div>
 
-</span><span data-line="272">
+</span><span data-line="268">
 <div class="viewcode-block" id="ChannelsPlugin.put_subscriber_history">
 <a class="viewcode-back" href="../../../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.put_subscriber_history">[docs]</a>
-</span><span data-line="273">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">put_subscriber_history</span><span class="p">(</span>
-</span><span data-line="274">        <span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">:</span> <span class="n">Subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="275">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="276"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the history of ``channels`` from the backend and put them in the</span>
-</span><span data-line="277"><span class="sd">        subscriber&#39;s stream</span>
-</span><span data-line="278"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="279">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span data-line="280">            <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="p">]</span>
-</span><span data-line="281">
-</span><span data-line="282">        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
-</span><span data-line="283">            <span class="n">history</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
-</span><span data-line="284">            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
-</span><span data-line="285">                <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span></div>
+</span><span data-line="269">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">put_subscriber_history</span><span class="p">(</span>
+</span><span data-line="270">        <span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">:</span> <span class="n">Subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="271">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="272"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the history of ``channels`` from the backend and put them in the</span>
+</span><span data-line="273"><span class="sd">        subscriber&#39;s stream</span>
+</span><span data-line="274"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="275">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="276">            <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">channels</span><span class="p">]</span>
+</span><span data-line="277">
+</span><span data-line="278">        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+</span><span data-line="279">            <span class="n">history</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+</span><span data-line="280">            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
+</span><span data-line="281">                <span class="k">await</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span></div>
 
-</span><span data-line="286">
-</span><span data-line="287">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_remove_subscriber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">:</span> <span class="n">Subscriber</span><span class="p">,</span> <span class="n">requested_channels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="288">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lifecycle_lock</span><span class="p">:</span>
-</span><span data-line="289">            <span class="n">channels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">)</span> <span class="k">if</span> <span class="n">requested_channels</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">requested_channels</span>
-</span><span data-line="290">            <span class="n">channels_to_unsubscribe</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span data-line="291">            <span class="n">removed_channels</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span data-line="292">            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
-</span><span data-line="293">                <span class="n">channel_subscribers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-</span><span data-line="294">                <span class="k">if</span> <span class="ow">not</span> <span class="n">channel_subscribers</span> <span class="ow">or</span> <span class="n">subscriber</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">channel_subscribers</span><span class="p">:</span>
-</span><span data-line="295">                    <span class="k">continue</span>
-</span><span data-line="296">                <span class="n">channel_subscribers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
-</span><span data-line="297">                <span class="n">removed_channels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-</span><span data-line="298">                <span class="k">if</span> <span class="ow">not</span> <span class="n">channel_subscribers</span><span class="p">:</span>
-</span><span data-line="299">                    <span class="n">channels_to_unsubscribe</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
-</span><span data-line="300">
-</span><span data-line="301">            <span class="k">if</span> <span class="n">channels_to_unsubscribe</span><span class="p">:</span>
-</span><span data-line="302">                <span class="k">try</span><span class="p">:</span>
-</span><span data-line="303">                    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">channels_to_unsubscribe</span><span class="p">)</span>
-</span><span data-line="304">                <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
-</span><span data-line="305">                    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">removed_channels</span><span class="p">:</span>
-</span><span data-line="306">                        <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
-</span><span data-line="307">                    <span class="k">raise</span>
-</span><span data-line="308">                <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels_to_unsubscribe</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configured_channels</span><span class="p">:</span>
-</span><span data-line="309">                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">[</span><span class="n">channel</span><span class="p">]:</span>
-</span><span data-line="310">                        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+</span><span data-line="282">
+</span><span data-line="283">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_remove_subscriber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscriber</span><span class="p">:</span> <span class="n">Subscriber</span><span class="p">,</span> <span class="n">requested_channels</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="284">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lifecycle_lock</span><span class="p">:</span>
+</span><span data-line="285">            <span class="n">channels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">)</span> <span class="k">if</span> <span class="n">requested_channels</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">requested_channels</span>
+</span><span data-line="286">            <span class="n">channels_to_unsubscribe</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span data-line="287">            <span class="n">affected_channels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span data-line="288">            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+</span><span data-line="289">                <span class="n">channel_subscribers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span><span data-line="290">                <span class="k">if</span> <span class="ow">not</span> <span class="n">channel_subscribers</span> <span class="ow">or</span> <span class="n">subscriber</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">channel_subscribers</span><span class="p">:</span>
+</span><span data-line="291">                    <span class="k">continue</span>
+</span><span data-line="292">                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">channel_subscribers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span data-line="293">                    <span class="n">channels_to_unsubscribe</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span><span data-line="294">                <span class="n">affected_channels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+</span><span data-line="295">            <span class="k">if</span> <span class="n">channels_to_unsubscribe</span><span class="p">:</span>
+</span><span data-line="296">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">channels_to_unsubscribe</span><span class="p">)</span>
+</span><span data-line="297">            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">affected_channels</span><span class="p">:</span>
+</span><span data-line="298">                <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
+</span><span data-line="299">            <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">channels_to_unsubscribe</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_configured_channels</span><span class="p">:</span>
+</span><span data-line="300">                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">[</span><span class="n">channel</span><span class="p">]</span>
+</span><span data-line="301">
+</span><span data-line="302">            <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">subscriber</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">subscribers</span> <span class="k">for</span> <span class="n">subscribers</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span><span data-line="303">
+</span><span data-line="304">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_ws_handler_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="305">        <span class="c1"># the ternary operator triggers a mypy bug: https://github.com/python/mypy/issues/10740</span>
+</span><span data-line="306">        <span class="n">on_event</span><span class="p">:</span> <span class="n">EventCallback</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_text</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_socket_send_mode</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span> <span class="k">else</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_bytes</span>  <span class="c1"># type: ignore[assignment]</span>
+</span><span data-line="307">
+</span><span data-line="308">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">(</span><span class="n">channel_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
+</span><span data-line="309">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_should_send_history</span><span class="p">:</span>
+</span><span data-line="310">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_subscriber_history</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_history_limit</span><span class="p">)</span>
 </span><span data-line="311">
-</span><span data-line="312">            <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">subscriber</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">subscribers</span> <span class="k">for</span> <span class="n">subscribers</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span><span data-line="312">            <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </span><span data-line="313">
-</span><span data-line="314">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_ws_handler_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="315">        <span class="c1"># the ternary operator triggers a mypy bug: https://github.com/python/mypy/issues/10740</span>
-</span><span data-line="316">        <span class="n">on_event</span><span class="p">:</span> <span class="n">EventCallback</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_text</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_socket_send_mode</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span> <span class="k">else</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_bytes</span>  <span class="c1"># type: ignore[assignment]</span>
-</span><span data-line="317">
-</span><span data-line="318">        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">(</span><span class="n">channel_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
-</span><span data-line="319">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_should_send_history</span><span class="p">:</span>
-</span><span data-line="320">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">put_subscriber_history</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_history_limit</span><span class="p">)</span>
-</span><span data-line="321">
-</span><span data-line="322">            <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-</span><span data-line="323">
-</span><span data-line="324">            <span class="c1"># use the background task, so we can block on receive(), breaking the loop when a connection closes</span>
-</span><span data-line="325">            <span class="k">async</span> <span class="k">with</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">on_event</span><span class="p">):</span>
-</span><span data-line="326">                <span class="k">while</span> <span class="p">(</span><span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive</span><span class="p">())[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;websocket.disconnect&quot;</span><span class="p">:</span>
-</span><span data-line="327">                    <span class="k">continue</span>
-</span><span data-line="328">
-</span><span data-line="329">    <span class="k">def</span><span class="w"> </span><span class="nf">_create_ws_handler_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">WebSocket</span><span class="p">],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
-</span><span data-line="330">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ws_handler_func</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="331">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws_handler_func</span><span class="p">(</span><span class="n">channel_name</span><span class="o">=</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">socket</span><span class="o">=</span><span class="n">socket</span><span class="p">)</span>
-</span><span data-line="332">
-</span><span data-line="333">        <span class="k">return</span> <span class="n">ws_handler_func</span>
-</span><span data-line="334">
-</span><span data-line="335">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_pub_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="336">        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="p">:</span>
-</span><span data-line="337">            <span class="n">data</span><span class="p">,</span> <span class="n">channels</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</span><span data-line="338">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
-</span><span data-line="339">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
-</span><span data-line="340">
-</span><span data-line="341">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_sub_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="342">        <span class="k">async</span> <span class="k">for</span> <span class="n">channel</span><span class="p">,</span> <span class="n">payload</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">stream_events</span><span class="p">():</span>
-</span><span data-line="343">            <span class="k">for</span> <span class="n">subscriber</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="p">[]):</span>
-</span><span data-line="344">                <span class="n">subscriber</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-</span><span data-line="345">
-</span><span data-line="346">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_on_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="347">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">on_startup</span><span class="p">()</span>
-</span><span data-line="348">        <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
-</span><span data-line="349">        <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span> <span class="o">=</span> <span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pub_worker</span><span class="p">())</span>
-</span><span data-line="350">        <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span> <span class="o">=</span> <span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sub_worker</span><span class="p">())</span>
-</span><span data-line="351">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">:</span>
-</span><span data-line="352">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">))</span>
-</span><span data-line="353">
-</span><span data-line="354">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_on_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="355">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="p">:</span>
-</span><span data-line="356">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</span><span data-line="357">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="358">
-</span><span data-line="359">        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-</span><span data-line="360">            <span class="o">*</span><span class="p">[</span>
-</span><span data-line="361">                <span class="n">subscriber</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">join</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="362">                <span class="k">for</span> <span class="n">subscribers</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-</span><span data-line="363">                <span class="k">for</span> <span class="n">subscriber</span> <span class="ow">in</span> <span class="n">subscribers</span>
-</span><span data-line="364">                <span class="k">if</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">is_running</span>
-</span><span data-line="365">            <span class="p">]</span>
-</span><span data-line="366">        <span class="p">)</span>
-</span><span data-line="367">
-</span><span data-line="368">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span><span class="p">:</span>
-</span><span data-line="369">            <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
-</span><span data-line="370">            <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">CancelledError</span><span class="p">):</span>
-</span><span data-line="371">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span>
-</span><span data-line="372">            <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="373">
-</span><span data-line="374">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span><span class="p">:</span>
-</span><span data-line="375">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
-</span><span data-line="376">            <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">CancelledError</span><span class="p">):</span>
-</span><span data-line="377">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span>
-</span><span data-line="378">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="379">
-</span><span data-line="380">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">on_shutdown</span><span class="p">()</span>
-</span><span data-line="381">
-</span><span data-line="382">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChannelsPlugin</span><span class="p">:</span>
-</span><span data-line="383">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_startup</span><span class="p">()</span>
-</span><span data-line="384">        <span class="k">return</span> <span class="bp">self</span>
-</span><span data-line="385">
-</span><span data-line="386">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
-</span><span data-line="387">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="388">        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="389">        <span class="n">exc_val</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="390">        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="391">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="392">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_shutdown</span><span class="p">()</span></div>
+</span><span data-line="314">            <span class="c1"># use the background task, so we can block on receive(), breaking the loop when a connection closes</span>
+</span><span data-line="315">            <span class="k">async</span> <span class="k">with</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">on_event</span><span class="p">):</span>
+</span><span data-line="316">                <span class="k">while</span> <span class="p">(</span><span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive</span><span class="p">())[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;websocket.disconnect&quot;</span><span class="p">:</span>
+</span><span data-line="317">                    <span class="k">continue</span>
+</span><span data-line="318">
+</span><span data-line="319">    <span class="k">def</span><span class="w"> </span><span class="nf">_create_ws_handler_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">WebSocket</span><span class="p">],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+</span><span data-line="320">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">ws_handler_func</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="321">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws_handler_func</span><span class="p">(</span><span class="n">channel_name</span><span class="o">=</span><span class="n">channel_name</span><span class="p">,</span> <span class="n">socket</span><span class="o">=</span><span class="n">socket</span><span class="p">)</span>
+</span><span data-line="322">
+</span><span data-line="323">        <span class="k">return</span> <span class="n">ws_handler_func</span>
+</span><span data-line="324">
+</span><span data-line="325">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_pub_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="326">        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="p">:</span>
+</span><span data-line="327">            <span class="n">data</span><span class="p">,</span> <span class="n">channels</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</span><span data-line="328">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+</span><span data-line="329">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+</span><span data-line="330">
+</span><span data-line="331">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_sub_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="332">        <span class="k">async</span> <span class="k">for</span> <span class="n">channel</span><span class="p">,</span> <span class="n">payload</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">stream_events</span><span class="p">():</span>
+</span><span data-line="333">            <span class="k">for</span> <span class="n">subscriber</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="p">[]):</span>
+</span><span data-line="334">                <span class="n">subscriber</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span><span data-line="335">
+</span><span data-line="336">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_on_startup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="337">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">on_startup</span><span class="p">()</span>
+</span><span data-line="338">        <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+</span><span data-line="339">        <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span> <span class="o">=</span> <span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pub_worker</span><span class="p">())</span>
+</span><span data-line="340">        <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span> <span class="o">=</span> <span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sub_worker</span><span class="p">())</span>
+</span><span data-line="341">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">:</span>
+</span><span data-line="342">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="p">))</span>
+</span><span data-line="343">
+</span><span data-line="344">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_on_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="345">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="p">:</span>
+</span><span data-line="346">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span data-line="347">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_queue</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="348">
+</span><span data-line="349">        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+</span><span data-line="350">            <span class="o">*</span><span class="p">[</span>
+</span><span data-line="351">                <span class="n">subscriber</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">join</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="352">                <span class="k">for</span> <span class="n">subscribers</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_channels</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</span><span data-line="353">                <span class="k">for</span> <span class="n">subscriber</span> <span class="ow">in</span> <span class="n">subscribers</span>
+</span><span data-line="354">                <span class="k">if</span> <span class="n">subscriber</span><span class="o">.</span><span class="n">is_running</span>
+</span><span data-line="355">            <span class="p">]</span>
+</span><span data-line="356">        <span class="p">)</span>
+</span><span data-line="357">
+</span><span data-line="358">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span><span class="p">:</span>
+</span><span data-line="359">            <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</span><span data-line="360">            <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">CancelledError</span><span class="p">):</span>
+</span><span data-line="361">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span>
+</span><span data-line="362">            <span class="bp">self</span><span class="o">.</span><span class="n">_sub_task</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="363">
+</span><span data-line="364">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span><span class="p">:</span>
+</span><span data-line="365">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</span><span data-line="366">            <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">CancelledError</span><span class="p">):</span>
+</span><span data-line="367">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span>
+</span><span data-line="368">            <span class="bp">self</span><span class="o">.</span><span class="n">_pub_task</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="369">
+</span><span data-line="370">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">on_shutdown</span><span class="p">()</span>
+</span><span data-line="371">
+</span><span data-line="372">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChannelsPlugin</span><span class="p">:</span>
+</span><span data-line="373">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_startup</span><span class="p">()</span>
+</span><span data-line="374">        <span class="k">return</span> <span class="bp">self</span>
+</span><span data-line="375">
+</span><span data-line="376">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span>
+</span><span data-line="377">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="378">        <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="379">        <span class="n">exc_val</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="380">        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="381">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="382">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_shutdown</span><span class="p">()</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
