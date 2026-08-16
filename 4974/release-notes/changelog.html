@@ -548,6 +548,50 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Return HTTP 413 when the multipart form part limit is exceeded<a class="headerlink reference internal" href="#3.0.0-return http 413 when the multipart form part limit is exceeded" id="3.0.0-return http 413 when the multipart form part limit is exceeded">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Exceeding the configured multipart form part limit now returns
+<code class="docutils literal notranslate"><span class="pre">413</span> <span class="pre">Request</span> <span class="pre">Entity</span> <span class="pre">Too</span> <span class="pre">Large</span></code> instead of <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4439">https://github.com/litestar-org/litestar/issues/4439</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4990">https://github.com/litestar-org/litestar/pull/4990</a></span></p>
+</div>
+</dd>
+<dt>Remove the RapiDoc OpenAPI UI plugin<a class="headerlink reference internal" href="#3.0.0-remove the rapidoc openapi ui plugin" id="3.0.0-remove the rapidoc openapi ui plugin">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>The <code class="docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code> has been removed due to lack of upstream maintenance.</p>
+<p>Applications using <code class="docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code> should migrate to another bundled UI
+plugin, such as <code class="docutils literal notranslate"><span class="pre">ScalarRenderPlugin</span></code> (the default), <code class="docutils literal notranslate"><span class="pre">SwaggerRenderPlugin</span></code>,
+<code class="docutils literal notranslate"><span class="pre">RedocRenderPlugin</span></code> or <code class="docutils literal notranslate"><span class="pre">StoplightRenderPlugin</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4977">https://github.com/litestar-org/litestar/pull/4977</a></span></p>
+</div>
+</dd>
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">CORSMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">CORSMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code> base to
+<a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all built-in
+middleware off the legacy bases.</p>
+<p>Applications that configure CORS through
+<a class="reference internal" href="../reference/config.html#litestar.config.cors.CORSConfig" title="litestar.config.cors.CORSConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CORSConfig</span></code></a> are unaffected – Litestar constructs
+the middleware itself.</p>
+<p>Code instantiating the middleware directly must drop the <code class="docutils literal notranslate"><span class="pre">app</span></code> argument, pass
+the settings as keyword arguments rather than a <code class="docutils literal notranslate"><span class="pre">CORSConfig</span></code>, and apply the
+instance to the next ASGI app:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># before</span>
+</span><span data-line="2"><span class="n">middleware</span> <span class="o">=</span> <span class="n">CORSMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">next_app</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">cors_config</span><span class="p">)</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># after</span>
+</span><span data-line="5"><span class="n">middleware</span> <span class="o">=</span> <span class="n">CORSMiddleware</span><span class="p">(</span><span class="n">allow_origins</span><span class="o">=</span><span class="n">cors_config</span><span class="o">.</span><span class="n">allow_origins</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">asgi_app</span> <span class="o">=</span> <span class="n">middleware</span><span class="p">(</span><span class="n">next_app</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>The settings are copied on construction, so mutating <code class="docutils literal notranslate"><span class="pre">CORSConfig</span></code> after the
+application has been created no longer affects the middleware.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware.__call__</span></code> returns a closure rather than the middleware
+instance, a middleware stack can no longer be introspected by walking the <code class="docutils literal notranslate"><span class="pre">.app</span></code>
+attribute of each layer.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/middleware/creating-middleware.html#asgi-middleware-migration"><span class="std std-ref">Migrating from MiddlewareProtocol / AbstractMiddleware</span></a></p>
+</div>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4952">https://github.com/litestar-org/litestar/pull/4952</a></span></p>
+</div>
+</dd>
 <dt>Base the test clients on <code class="docutils literal notranslate"><span class="pre">httpx2</span></code><a class="headerlink reference internal" href="#3.0.0-base the test clients on" id="3.0.0-base the test clients on">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>The <code class="docutils literal notranslate"><span class="pre">litestar[testing]</span></code> extra now installs <a class="reference external" href="https://github.com/pydantic/httpx2">httpx2</a>,
 the fork of <code class="docutils literal notranslate"><span class="pre">httpx</span></code> maintained by Pydantic, instead of <code class="docutils literal notranslate"><span class="pre">httpx</span></code>.</p>
