@@ -567,6 +567,11 @@ plugin, such as <code class="docutils literal notranslate"><span class="pre">Sca
 base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all
 built-in middleware off the legacy bases. It now lives in
 <code class="docutils literal notranslate"><span class="pre">litestar.middleware._internal</span></code>, removing it from the public API.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The move into <code class="docutils literal notranslate"><span class="pre">litestar.middleware._internal</span></code> does not affect usage:
+the middleware was only ever applied internally by Litestar to begin with.</p>
+</div>
 <p>Applications that configure response caching through
 <a class="reference internal" href="../reference/config.html#litestar.config.response_cache.ResponseCacheConfig" title="litestar.config.response_cache.ResponseCacheConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseCacheConfig</span></code></a> and the handler-level
 <code class="docutils literal notranslate"><span class="pre">cache</span></code> argument are unaffected – Litestar constructs the middleware itself.</p>
