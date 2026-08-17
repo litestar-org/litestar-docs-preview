@@ -516,7 +516,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="13"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.scope.state</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScopeState</span>
 </span><span data-line="14">
 </span><span data-line="15"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-</span><span data-line="16">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.compression.facade</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompressionFacade</span>
+</span><span data-line="16">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.config.compression</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompressionConfig</span>
 </span><span data-line="17">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span data-line="18">        <span class="n">ASGIApp</span><span class="p">,</span>
 </span><span data-line="19">        <span class="n">HTTPResponseStartEvent</span><span class="p">,</span>
@@ -544,205 +544,176 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="39">
 <div class="viewcode-block" id="CompressionMiddleware.__init__">
 <a class="viewcode-back" href="../../../../reference/middleware/compression.html#litestar.middleware.compression.CompressionMiddleware.__init__">[docs]</a>
-</span><span data-line="40">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="41">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="42">        <span class="o">*</span><span class="p">,</span>
-</span><span data-line="43">        <span class="n">facade</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">CompressionFacade</span><span class="p">],</span>
-</span><span data-line="44">        <span class="n">backend_config</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="45">        <span class="n">gzip_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="46">        <span class="n">gzip_backend_config</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="47">        <span class="n">minimum_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
-</span><span data-line="48">        <span class="n">exclude</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="49">        <span class="n">exclude_opt_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="50">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="51"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ``CompressionMiddleware``</span>
-</span><span data-line="52">
-</span><span data-line="53"><span class="sd">        Args:</span>
-</span><span data-line="54"><span class="sd">            facade: The compression facade to use for the actual compression.</span>
-</span><span data-line="55"><span class="sd">            backend_config: Configuration specific to the compression backend, passed</span>
-</span><span data-line="56"><span class="sd">                through to the facade.</span>
-</span><span data-line="57"><span class="sd">            gzip_fallback: Use GZIP as a fallback if the facade&#39;s encoding is not</span>
-</span><span data-line="58"><span class="sd">                supported by the client.</span>
-</span><span data-line="59"><span class="sd">            gzip_backend_config: Configuration passed to the GZIP facade when GZIP is</span>
-</span><span data-line="60"><span class="sd">                used as a fallback for a facade with a different encoding.</span>
-</span><span data-line="61"><span class="sd">            minimum_size: Minimum response size (bytes) to enable compression.</span>
-</span><span data-line="62"><span class="sd">            exclude: A pattern or list of patterns to skip in the compression middleware,</span>
-</span><span data-line="63"><span class="sd">                matched against the handler path.</span>
-</span><span data-line="64"><span class="sd">            exclude_opt_key: An identifier to use on routes to disable compression for a</span>
-</span><span data-line="65"><span class="sd">                particular route.</span>
-</span><span data-line="66"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="67">        <span class="bp">self</span><span class="o">.</span><span class="n">facade</span> <span class="o">=</span> <span class="n">facade</span>
-</span><span data-line="68">        <span class="bp">self</span><span class="o">.</span><span class="n">backend_config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">backend_config</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">backend_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">backend_config</span>
-</span><span data-line="69">        <span class="bp">self</span><span class="o">.</span><span class="n">gzip_fallback</span> <span class="o">=</span> <span class="n">gzip_fallback</span>
-</span><span data-line="70">        <span class="bp">self</span><span class="o">.</span><span class="n">gzip_backend_config</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="71">            <span class="nb">dict</span><span class="p">(</span><span class="n">gzip_backend_config</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gzip_backend_config</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">gzip_backend_config</span>
-</span><span data-line="72">        <span class="p">)</span>
-</span><span data-line="73">        <span class="bp">self</span><span class="o">.</span><span class="n">minimum_size</span> <span class="o">=</span> <span class="n">minimum_size</span>
-</span><span data-line="74">        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_path_pattern</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">exclude</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exclude</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">exclude</span>
-</span><span data-line="75">        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span> <span class="o">=</span> <span class="n">exclude_opt_key</span></div>
+</span><span data-line="40">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">CompressionConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="41"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize ``CompressionMiddleware``</span>
+</span><span data-line="42">
+</span><span data-line="43"><span class="sd">        Args:</span>
+</span><span data-line="44"><span class="sd">            config: An instance of CompressionConfig.</span>
+</span><span data-line="45"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="46">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+</span><span data-line="47">        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_path_pattern</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">exclude</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">config</span><span class="o">.</span><span class="n">exclude</span>
+</span><span data-line="48">        <span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">exclude_opt_key</span></div>
 
-</span><span data-line="76">
+</span><span data-line="49">
 <div class="viewcode-block" id="CompressionMiddleware.handle">
 <a class="viewcode-back" href="../../../../reference/middleware/compression.html#litestar.middleware.compression.CompressionMiddleware.handle">[docs]</a>
-</span><span data-line="77">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="78"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle ASGI call.</span>
-</span><span data-line="79">
-</span><span data-line="80"><span class="sd">        Args:</span>
-</span><span data-line="81"><span class="sd">            scope: The ASGI connection scope.</span>
-</span><span data-line="82"><span class="sd">            receive: The ASGI receive function.</span>
-</span><span data-line="83"><span class="sd">            send: The ASGI send function.</span>
-</span><span data-line="84"><span class="sd">            next_app: The next ASGI application in the middleware stack to call.</span>
-</span><span data-line="85">
-</span><span data-line="86"><span class="sd">        Returns:</span>
-</span><span data-line="87"><span class="sd">            None</span>
-</span><span data-line="88"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="89">        <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ScopeType</span><span class="o">.</span><span class="n">HTTP</span><span class="p">:</span>
-</span><span data-line="90">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</span><span data-line="91">            <span class="k">return</span>
-</span><span data-line="92">
-</span><span data-line="93">        <span class="n">accept_encoding</span> <span class="o">=</span> <span class="n">Headers</span><span class="o">.</span><span class="n">from_scope</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;accept-encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span data-line="94">
-</span><span data-line="95">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">facade</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">in</span> <span class="n">accept_encoding</span><span class="p">:</span>
-</span><span data-line="96">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span>
-</span><span data-line="97">                <span class="n">scope</span><span class="p">,</span>
-</span><span data-line="98">                <span class="n">receive</span><span class="p">,</span>
-</span><span data-line="99">                <span class="bp">self</span><span class="o">.</span><span class="n">create_compression_send_wrapper</span><span class="p">(</span><span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">facade</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span><span class="p">),</span>
-</span><span data-line="100">            <span class="p">)</span>
-</span><span data-line="101">            <span class="k">return</span>
-</span><span data-line="102">
-</span><span data-line="103">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gzip_fallback</span> <span class="ow">and</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span> <span class="ow">in</span> <span class="n">accept_encoding</span><span class="p">:</span>
-</span><span data-line="104">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span>
-</span><span data-line="105">                <span class="n">scope</span><span class="p">,</span>
-</span><span data-line="106">                <span class="n">receive</span><span class="p">,</span>
-</span><span data-line="107">                <span class="bp">self</span><span class="o">.</span><span class="n">create_compression_send_wrapper</span><span class="p">(</span>
-</span><span data-line="108">                    <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span>
-</span><span data-line="109">                <span class="p">),</span>
-</span><span data-line="110">            <span class="p">)</span>
-</span><span data-line="111">            <span class="k">return</span>
-</span><span data-line="112">
-</span><span data-line="113">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span></div>
+</span><span data-line="50">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="51"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle ASGI call.</span>
+</span><span data-line="52">
+</span><span data-line="53"><span class="sd">        Args:</span>
+</span><span data-line="54"><span class="sd">            scope: The ASGI connection scope.</span>
+</span><span data-line="55"><span class="sd">            receive: The ASGI receive function.</span>
+</span><span data-line="56"><span class="sd">            send: The ASGI send function.</span>
+</span><span data-line="57"><span class="sd">            next_app: The next ASGI application in the middleware stack to call.</span>
+</span><span data-line="58">
+</span><span data-line="59"><span class="sd">        Returns:</span>
+</span><span data-line="60"><span class="sd">            None</span>
+</span><span data-line="61"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="62">        <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ScopeType</span><span class="o">.</span><span class="n">HTTP</span><span class="p">:</span>
+</span><span data-line="63">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</span><span data-line="64">            <span class="k">return</span>
+</span><span data-line="65">
+</span><span data-line="66">        <span class="n">accept_encoding</span> <span class="o">=</span> <span class="n">Headers</span><span class="o">.</span><span class="n">from_scope</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;accept-encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span data-line="67">        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span>
+</span><span data-line="68">
+</span><span data-line="69">        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">compression_facade</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">in</span> <span class="n">accept_encoding</span><span class="p">:</span>
+</span><span data-line="70">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span>
+</span><span data-line="71">                <span class="n">scope</span><span class="p">,</span>
+</span><span data-line="72">                <span class="n">receive</span><span class="p">,</span>
+</span><span data-line="73">                <span class="bp">self</span><span class="o">.</span><span class="n">create_compression_send_wrapper</span><span class="p">(</span>
+</span><span data-line="74">                    <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">compression_facade</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span>
+</span><span data-line="75">                <span class="p">),</span>
+</span><span data-line="76">            <span class="p">)</span>
+</span><span data-line="77">            <span class="k">return</span>
+</span><span data-line="78">
+</span><span data-line="79">        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">gzip_fallback</span> <span class="ow">and</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span> <span class="ow">in</span> <span class="n">accept_encoding</span><span class="p">:</span>
+</span><span data-line="80">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span>
+</span><span data-line="81">                <span class="n">scope</span><span class="p">,</span>
+</span><span data-line="82">                <span class="n">receive</span><span class="p">,</span>
+</span><span data-line="83">                <span class="bp">self</span><span class="o">.</span><span class="n">create_compression_send_wrapper</span><span class="p">(</span>
+</span><span data-line="84">                    <span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="n">scope</span>
+</span><span data-line="85">                <span class="p">),</span>
+</span><span data-line="86">            <span class="p">)</span>
+</span><span data-line="87">            <span class="k">return</span>
+</span><span data-line="88">
+</span><span data-line="89">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span></div>
 
-</span><span data-line="114">
+</span><span data-line="90">
 <div class="viewcode-block" id="CompressionMiddleware.create_compression_send_wrapper">
 <a class="viewcode-back" href="../../../../reference/middleware/compression.html#litestar.middleware.compression.CompressionMiddleware.create_compression_send_wrapper">[docs]</a>
-</span><span data-line="115">    <span class="k">def</span><span class="w"> </span><span class="nf">create_compression_send_wrapper</span><span class="p">(</span>
-</span><span data-line="116">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="117">        <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span>
-</span><span data-line="118">        <span class="n">compression_encoding</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">BROTLI</span><span class="p">,</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span><span class="p">,</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">ZSTD</span><span class="p">]</span>
-</span><span data-line="119">        <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="120">        <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span>
-</span><span data-line="121">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Send</span><span class="p">:</span>
-</span><span data-line="122"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrap ``send`` to handle brotli compression.</span>
+</span><span data-line="91">    <span class="k">def</span><span class="w"> </span><span class="nf">create_compression_send_wrapper</span><span class="p">(</span>
+</span><span data-line="92">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="93">        <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span>
+</span><span data-line="94">        <span class="n">compression_encoding</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">BROTLI</span><span class="p">,</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span><span class="p">,</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">ZSTD</span><span class="p">]</span>
+</span><span data-line="95">        <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="96">        <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span>
+</span><span data-line="97">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Send</span><span class="p">:</span>
+</span><span data-line="98"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrap ``send`` to handle brotli compression.</span>
+</span><span data-line="99">
+</span><span data-line="100"><span class="sd">        Args:</span>
+</span><span data-line="101"><span class="sd">            send: The ASGI send function.</span>
+</span><span data-line="102"><span class="sd">            compression_encoding: The compression encoding used.</span>
+</span><span data-line="103"><span class="sd">            scope: The ASGI connection scope</span>
+</span><span data-line="104">
+</span><span data-line="105"><span class="sd">        Returns:</span>
+</span><span data-line="106"><span class="sd">            An ASGI send function.</span>
+</span><span data-line="107"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="108">        <span class="n">bytes_buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+</span><span data-line="109">
+</span><span data-line="110">        <span class="c1"># We can&#39;t use `self.config.compression_facade` directly if the compression is `gzip` since</span>
+</span><span data-line="111">        <span class="c1"># it may be being used as a fallback.</span>
+</span><span data-line="112">        <span class="k">if</span> <span class="n">compression_encoding</span> <span class="o">==</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span><span class="p">:</span>
+</span><span data-line="113">            <span class="n">facade</span> <span class="o">=</span> <span class="n">GzipCompression</span><span class="p">(</span><span class="n">buffer</span><span class="o">=</span><span class="n">bytes_buffer</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">compression_encoding</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="114">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="115">            <span class="n">facade</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">compression_facade</span><span class="p">(</span>  <span class="c1"># type: ignore[assignment]</span>
+</span><span data-line="116">                <span class="n">buffer</span><span class="o">=</span><span class="n">bytes_buffer</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">compression_encoding</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span>
+</span><span data-line="117">            <span class="p">)</span>
+</span><span data-line="118">
+</span><span data-line="119">        <span class="n">initial_message</span><span class="p">:</span> <span class="n">HTTPResponseStartEvent</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="120">        <span class="n">started</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="121">
+</span><span data-line="122">        <span class="n">connection_state</span> <span class="o">=</span> <span class="n">ScopeState</span><span class="o">.</span><span class="n">from_scope</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
 </span><span data-line="123">
-</span><span data-line="124"><span class="sd">        Args:</span>
-</span><span data-line="125"><span class="sd">            send: The ASGI send function.</span>
-</span><span data-line="126"><span class="sd">            compression_encoding: The compression encoding used.</span>
-</span><span data-line="127"><span class="sd">            scope: The ASGI connection scope</span>
-</span><span data-line="128">
-</span><span data-line="129"><span class="sd">        Returns:</span>
-</span><span data-line="130"><span class="sd">            An ASGI send function.</span>
-</span><span data-line="131"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="132">        <span class="n">bytes_buffer</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
-</span><span data-line="133">
-</span><span data-line="134">        <span class="c1"># We can&#39;t use `self.facade` directly if the compression is `gzip` since it may be</span>
-</span><span data-line="135">        <span class="c1"># being used as a fallback.</span>
-</span><span data-line="136">        <span class="k">if</span> <span class="n">compression_encoding</span> <span class="o">==</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span><span class="p">:</span>
-</span><span data-line="137">            <span class="n">backend_config</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="138">                <span class="bp">self</span><span class="o">.</span><span class="n">backend_config</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">facade</span><span class="o">.</span><span class="n">encoding</span> <span class="o">==</span> <span class="n">CompressionEncoding</span><span class="o">.</span><span class="n">GZIP</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">gzip_backend_config</span>
-</span><span data-line="139">            <span class="p">)</span>
-</span><span data-line="140">            <span class="n">facade</span> <span class="o">=</span> <span class="n">GzipCompression</span><span class="p">(</span>
-</span><span data-line="141">                <span class="n">buffer</span><span class="o">=</span><span class="n">bytes_buffer</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">compression_encoding</span><span class="p">,</span> <span class="n">backend_config</span><span class="o">=</span><span class="n">backend_config</span>
-</span><span data-line="142">            <span class="p">)</span>
-</span><span data-line="143">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="144">            <span class="n">facade</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">facade</span><span class="p">(</span>  <span class="c1"># type: ignore[assignment]</span>
-</span><span data-line="145">                <span class="n">buffer</span><span class="o">=</span><span class="n">bytes_buffer</span><span class="p">,</span> <span class="n">compression_encoding</span><span class="o">=</span><span class="n">compression_encoding</span><span class="p">,</span> <span class="n">backend_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">backend_config</span>
-</span><span data-line="146">            <span class="p">)</span>
-</span><span data-line="147">
-</span><span data-line="148">        <span class="n">initial_message</span><span class="p">:</span> <span class="n">HTTPResponseStartEvent</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="149">        <span class="n">started</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="124">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_wrapper</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="125"><span class="w">            </span><span class="sd">&quot;&quot;&quot;Handle and compresses the HTTP Message with brotli.</span>
+</span><span data-line="126">
+</span><span data-line="127"><span class="sd">            Args:</span>
+</span><span data-line="128"><span class="sd">                message (Message): An ASGI Message.</span>
+</span><span data-line="129"><span class="sd">            &quot;&quot;&quot;</span>
+</span><span data-line="130">            <span class="k">nonlocal</span> <span class="n">started</span>
+</span><span data-line="131">            <span class="k">nonlocal</span> <span class="n">initial_message</span>
+</span><span data-line="132">
+</span><span data-line="133">            <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.start&quot;</span><span class="p">:</span>
+</span><span data-line="134">                <span class="n">initial_message</span> <span class="o">=</span> <span class="n">message</span>
+</span><span data-line="135">                <span class="k">return</span>
+</span><span data-line="136">
+</span><span data-line="137">            <span class="k">if</span> <span class="n">initial_message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value_or_default</span><span class="p">(</span><span class="n">connection_state</span><span class="o">.</span><span class="n">is_cached</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+</span><span data-line="138">                <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
+</span><span data-line="139">                <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="140">                <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="141">                <span class="k">return</span>
+</span><span data-line="142">
+</span><span data-line="143">            <span class="k">if</span> <span class="n">initial_message</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.disconnect&quot;</span><span class="p">:</span>
+</span><span data-line="144">                <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="145">                <span class="k">return</span>
+</span><span data-line="146">
+</span><span data-line="147">            <span class="k">if</span> <span class="n">initial_message</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">:</span>
+</span><span data-line="148">                <span class="n">body</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span>
+</span><span data-line="149">                <span class="n">more_body</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;more_body&quot;</span><span class="p">)</span>
 </span><span data-line="150">
-</span><span data-line="151">        <span class="n">connection_state</span> <span class="o">=</span> <span class="n">ScopeState</span><span class="o">.</span><span class="n">from_scope</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
-</span><span data-line="152">
-</span><span data-line="153">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_wrapper</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="154"><span class="w">            </span><span class="sd">&quot;&quot;&quot;Handle and compresses the HTTP Message with brotli.</span>
-</span><span data-line="155">
-</span><span data-line="156"><span class="sd">            Args:</span>
-</span><span data-line="157"><span class="sd">                message (Message): An ASGI Message.</span>
-</span><span data-line="158"><span class="sd">            &quot;&quot;&quot;</span>
-</span><span data-line="159">            <span class="k">nonlocal</span> <span class="n">started</span>
-</span><span data-line="160">            <span class="k">nonlocal</span> <span class="n">initial_message</span>
+</span><span data-line="151">                <span class="k">if</span> <span class="ow">not</span> <span class="n">started</span><span class="p">:</span>
+</span><span data-line="152">                    <span class="n">started</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="153">                    <span class="k">if</span> <span class="n">more_body</span><span class="p">:</span>
+</span><span data-line="154">                        <span class="n">headers</span> <span class="o">=</span> <span class="n">MutableScopeHeaders</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
+</span><span data-line="155">                        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression_encoding</span>
+</span><span data-line="156">                        <span class="n">headers</span><span class="o">.</span><span class="n">extend_header_value</span><span class="p">(</span><span class="s2">&quot;vary&quot;</span><span class="p">,</span> <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">)</span>
+</span><span data-line="157">                        <span class="k">del</span> <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">]</span>
+</span><span data-line="158">                        <span class="n">connection_state</span><span class="o">.</span><span class="n">response_compressed</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="159">
+</span><span data-line="160">                        <span class="n">facade</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="ow">not</span> <span class="n">more_body</span><span class="p">)</span>
 </span><span data-line="161">
-</span><span data-line="162">            <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.start&quot;</span><span class="p">:</span>
-</span><span data-line="163">                <span class="n">initial_message</span> <span class="o">=</span> <span class="n">message</span>
-</span><span data-line="164">                <span class="k">return</span>
-</span><span data-line="165">
-</span><span data-line="166">            <span class="k">if</span> <span class="n">initial_message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value_or_default</span><span class="p">(</span><span class="n">connection_state</span><span class="o">.</span><span class="n">is_cached</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span data-line="167">                <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
-</span><span data-line="168">                <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="169">                <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span data-line="170">                <span class="k">return</span>
-</span><span data-line="171">
-</span><span data-line="172">            <span class="k">if</span> <span class="n">initial_message</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.disconnect&quot;</span><span class="p">:</span>
-</span><span data-line="173">                <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span data-line="174">                <span class="k">return</span>
-</span><span data-line="175">
-</span><span data-line="176">            <span class="k">if</span> <span class="n">initial_message</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">:</span>
-</span><span data-line="177">                <span class="n">body</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span>
-</span><span data-line="178">                <span class="n">more_body</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;more_body&quot;</span><span class="p">)</span>
+</span><span data-line="162">                        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</span><span data-line="163">                        <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span data-line="164">                        <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span>
+</span><span data-line="165">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
+</span><span data-line="166">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="167">
+</span><span data-line="168">                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">minimum_size</span><span class="p">:</span>
+</span><span data-line="169">                        <span class="n">facade</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="ow">not</span> <span class="n">more_body</span><span class="p">)</span>
+</span><span data-line="170">                        <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="171">                        <span class="n">body</span> <span class="o">=</span> <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</span><span data-line="172">
+</span><span data-line="173">                        <span class="n">headers</span> <span class="o">=</span> <span class="n">MutableScopeHeaders</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
+</span><span data-line="174">                        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression_encoding</span>
+</span><span data-line="175">                        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+</span><span data-line="176">                        <span class="n">headers</span><span class="o">.</span><span class="n">extend_header_value</span><span class="p">(</span><span class="s2">&quot;vary&quot;</span><span class="p">,</span> <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">)</span>
+</span><span data-line="177">                        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">body</span>
+</span><span data-line="178">                        <span class="n">connection_state</span><span class="o">.</span><span class="n">response_compressed</span> <span class="o">=</span> <span class="kc">True</span>
 </span><span data-line="179">
-</span><span data-line="180">                <span class="k">if</span> <span class="ow">not</span> <span class="n">started</span><span class="p">:</span>
-</span><span data-line="181">                    <span class="n">started</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="182">                    <span class="k">if</span> <span class="n">more_body</span><span class="p">:</span>
-</span><span data-line="183">                        <span class="n">headers</span> <span class="o">=</span> <span class="n">MutableScopeHeaders</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
-</span><span data-line="184">                        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression_encoding</span>
-</span><span data-line="185">                        <span class="n">headers</span><span class="o">.</span><span class="n">extend_header_value</span><span class="p">(</span><span class="s2">&quot;vary&quot;</span><span class="p">,</span> <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">)</span>
-</span><span data-line="186">                        <span class="k">del</span> <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">]</span>
-</span><span data-line="187">                        <span class="n">connection_state</span><span class="o">.</span><span class="n">response_compressed</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="188">
-</span><span data-line="189">                        <span class="n">facade</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="ow">not</span> <span class="n">more_body</span><span class="p">)</span>
-</span><span data-line="190">
-</span><span data-line="191">                        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-</span><span data-line="192">                        <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span data-line="193">                        <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span>
-</span><span data-line="194">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
-</span><span data-line="195">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="196">
-</span><span data-line="197">                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_size</span><span class="p">:</span>
-</span><span data-line="198">                        <span class="n">facade</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="ow">not</span> <span class="n">more_body</span><span class="p">)</span>
-</span><span data-line="199">                        <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span data-line="200">                        <span class="n">body</span> <span class="o">=</span> <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-</span><span data-line="201">
-</span><span data-line="202">                        <span class="n">headers</span> <span class="o">=</span> <span class="n">MutableScopeHeaders</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
-</span><span data-line="203">                        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression_encoding</span>
-</span><span data-line="204">                        <span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
-</span><span data-line="205">                        <span class="n">headers</span><span class="o">.</span><span class="n">extend_header_value</span><span class="p">(</span><span class="s2">&quot;vary&quot;</span><span class="p">,</span> <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">)</span>
-</span><span data-line="206">                        <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">body</span>
-</span><span data-line="207">                        <span class="n">connection_state</span><span class="o">.</span><span class="n">response_compressed</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="208">
-</span><span data-line="209">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
-</span><span data-line="210">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="211">
-</span><span data-line="212">                    <span class="k">else</span><span class="p">:</span>
-</span><span data-line="213">                        <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span data-line="214">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
-</span><span data-line="215">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="216">
-</span><span data-line="217">                <span class="k">else</span><span class="p">:</span>
-</span><span data-line="218">                    <span class="n">facade</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="ow">not</span> <span class="n">more_body</span><span class="p">)</span>
-</span><span data-line="219">                    <span class="k">if</span> <span class="ow">not</span> <span class="n">more_body</span><span class="p">:</span>
-</span><span data-line="220">                        <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span data-line="221">
-</span><span data-line="222">                    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-</span><span data-line="223">
-</span><span data-line="224">                    <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span data-line="225">                    <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span>
-</span><span data-line="226">
-</span><span data-line="227">                    <span class="k">if</span> <span class="ow">not</span> <span class="n">more_body</span><span class="p">:</span>
-</span><span data-line="228">                        <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span data-line="229">
-</span><span data-line="230">                    <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="231">
-</span><span data-line="232">        <span class="k">return</span> <span class="n">send_wrapper</span></div>
+</span><span data-line="180">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
+</span><span data-line="181">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="182">
+</span><span data-line="183">                    <span class="k">else</span><span class="p">:</span>
+</span><span data-line="184">                        <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="185">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">initial_message</span><span class="p">)</span>
+</span><span data-line="186">                        <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="187">
+</span><span data-line="188">                <span class="k">else</span><span class="p">:</span>
+</span><span data-line="189">                    <span class="n">facade</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="ow">not</span> <span class="n">more_body</span><span class="p">)</span>
+</span><span data-line="190">                    <span class="k">if</span> <span class="ow">not</span> <span class="n">more_body</span><span class="p">:</span>
+</span><span data-line="191">                        <span class="n">facade</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="192">
+</span><span data-line="193">                    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+</span><span data-line="194">
+</span><span data-line="195">                    <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span data-line="196">                    <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span>
+</span><span data-line="197">
+</span><span data-line="198">                    <span class="k">if</span> <span class="ow">not</span> <span class="n">more_body</span><span class="p">:</span>
+</span><span data-line="199">                        <span class="n">bytes_buffer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span data-line="200">
+</span><span data-line="201">                    <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="202">
+</span><span data-line="203">        <span class="k">return</span> <span class="n">send_wrapper</span></div>
 </div>
 
 </span></pre></div>
