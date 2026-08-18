@@ -8,6 +8,7 @@
 
     .. change:: Migrate ``PrometheusMiddleware`` to ``ASGIMiddleware``
         :type: feature
+        :pr: 5006
         :issue: 4009
         :breaking:
 
