@@ -8,6 +8,7 @@
 
     .. change:: Migrate ``RateLimitMiddleware`` to ``ASGIMiddleware``
         :type: feature
+        :pr: 5005
         :issue: 4009
         :breaking:
 
@@ -18,7 +19,8 @@
         Applications that configure rate limiting through
         :class:`~litestar.middleware.rate_limit.RateLimitConfig` and its ``middleware``
         property are unaffected: the property now returns a configured
-        ``RateLimitMiddleware`` instance instead of a ``DefineMiddleware``, and
+        ``RateLimitMiddleware`` instance instead of a ``DefineMiddleware``, built via a
+        ``from_config`` classmethod on the middleware, and
         ``middleware=[rate_limit_config.middleware]`` keeps working as before.
 
         Code constructing the middleware directly must drop the ``app`` argument, pass
@@ -38,7 +40,7 @@
             )
             asgi_app = middleware(next_app)
 
-        Two behavioural changes for excluded routes, matching the other migrated
+        Two behavioural changes for excluded routes
         middleware:
 
         - :attr:`~litestar.middleware.rate_limit.RateLimitConfig.exclude` patterns are
@@ -84,6 +86,7 @@
 
     .. change:: Migrate ``AllowedHostsMiddleware`` to ``ASGIMiddleware``
         :type: feature
+        :pr: 5001
         :issue: 4009
         :breaking:
 
@@ -126,6 +129,7 @@
 
     .. change:: Migrate ``CompressionMiddleware`` to ``ASGIMiddleware``
         :type: feature
+        :pr: 4999
         :issue: 4009
         :breaking:
 
@@ -167,6 +171,7 @@
 
     .. change:: Migrate ``CSRFMiddleware`` to ``ASGIMiddleware``
         :type: feature
+        :pr: 4998
         :issue: 4009
         :breaking:
 
@@ -178,7 +183,8 @@
 
         Applications that configure CSRF protection through
         :class:`~litestar.config.csrf.CSRFConfig` are unaffected, since Litestar
-        constructs the middleware itself.
+        constructs the middleware itself, via a ``from_config`` classmethod on the
+        middleware.
 
         Two behavioural changes for excluded routes:
 

@@ -841,8 +841,9 @@ made this move. <code class="docutils literal notranslate"><span class="pre">Res
 into <code class="docutils literal notranslate"><span class="pre">litestar.middleware._internal</span></code>, removing them from the public API; for CSRF this
 includes the <code class="docutils literal notranslate"><span class="pre">litestar.middleware.csrf</span></code> module and its <code class="docutils literal notranslate"><span class="pre">generate_csrf_token</span></code> /
 <code class="docutils literal notranslate"><span class="pre">generate_csrf_hash</span></code> helpers.</p>
-<p>These classes are constructed by Litestar itself from their configuration objects, so
-applications that only configure them - for CORS, via
+<p>These classes are constructed by Litestar itself from their configuration objects (for
+CSRF, via a <code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the middleware), so applications that only
+configure them - for CORS, via
 <a class="reference internal" href="../reference/config.html#litestar.config.cors.CORSConfig" title="litestar.config.cors.CORSConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CORSConfig</span></code></a>, for response caching, via
 <a class="reference internal" href="../reference/config.html#litestar.config.response_cache.ResponseCacheConfig" title="litestar.config.response_cache.ResponseCacheConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseCacheConfig</span></code></a> and the handler-level
 <code class="docutils literal notranslate"><span class="pre">cache</span></code> argument, for CSRF, via <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a>, for
