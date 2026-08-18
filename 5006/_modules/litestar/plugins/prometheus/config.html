@@ -566,33 +566,29 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="61"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an instance of :class:`PrometheusMiddleware &lt;litestar.plugins.prometheus.PrometheusMiddleware&gt;`,</span>
 </span><span data-line="62"><span class="sd">        or a subclass of this middleware, configured from this config instance.</span>
 </span><span data-line="63">
-</span><span data-line="64"><span class="sd">        .. deprecated:: 3.0</span>
-</span><span data-line="65"><span class="sd">            Construct a :class:`~litestar.plugins.prometheus.PrometheusMiddleware` instance directly and</span>
-</span><span data-line="66"><span class="sd">            pass it to the middleware list instead, e.g. ``middleware=[PrometheusMiddleware()]``.</span>
-</span><span data-line="67">
-</span><span data-line="68"><span class="sd">        Returns:</span>
-</span><span data-line="69"><span class="sd">            An instance of :attr:`middleware_class`.</span>
-</span><span data-line="70"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="71">        <span class="n">warn_deprecation</span><span class="p">(</span>
-</span><span data-line="72">            <span class="n">version</span><span class="o">=</span><span class="s2">&quot;3.0&quot;</span><span class="p">,</span>
-</span><span data-line="73">            <span class="n">deprecated_name</span><span class="o">=</span><span class="s2">&quot;PrometheusConfig.middleware&quot;</span><span class="p">,</span>
-</span><span data-line="74">            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
-</span><span data-line="75">            <span class="n">removal_in</span><span class="o">=</span><span class="s2">&quot;4.0&quot;</span><span class="p">,</span>
-</span><span data-line="76">            <span class="n">alternative</span><span class="o">=</span><span class="s2">&quot;PrometheusMiddleware&quot;</span><span class="p">,</span>
-</span><span data-line="77">            <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Construct a PrometheusMiddleware instance directly and pass it to the middleware list&quot;</span><span class="p">,</span>
-</span><span data-line="78">        <span class="p">)</span>
-</span><span data-line="79">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="p">(</span>
-</span><span data-line="80">            <span class="n">app_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span>
-</span><span data-line="81">            <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
-</span><span data-line="82">            <span class="n">labels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
-</span><span data-line="83">            <span class="n">exemplars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exemplars</span><span class="p">,</span>
-</span><span data-line="84">            <span class="n">buckets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buckets</span><span class="p">,</span>
-</span><span data-line="85">            <span class="n">excluded_http_methods</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">excluded_http_methods</span><span class="p">,</span>
-</span><span data-line="86">            <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
-</span><span data-line="87">            <span class="n">exclude_opt_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
-</span><span data-line="88">            <span class="n">scopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scopes</span><span class="p">,</span>
-</span><span data-line="89">            <span class="n">group_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">group_path</span><span class="p">,</span>
-</span><span data-line="90">        <span class="p">)</span></div>
+</span><span data-line="64"><span class="sd">        Returns:</span>
+</span><span data-line="65"><span class="sd">            An instance of :attr:`middleware_class`.</span>
+</span><span data-line="66"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="67">        <span class="n">warn_deprecation</span><span class="p">(</span>
+</span><span data-line="68">            <span class="n">version</span><span class="o">=</span><span class="s2">&quot;3.0&quot;</span><span class="p">,</span>
+</span><span data-line="69">            <span class="n">deprecated_name</span><span class="o">=</span><span class="s2">&quot;PrometheusConfig.middleware&quot;</span><span class="p">,</span>
+</span><span data-line="70">            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
+</span><span data-line="71">            <span class="n">removal_in</span><span class="o">=</span><span class="s2">&quot;4.0&quot;</span><span class="p">,</span>
+</span><span data-line="72">            <span class="n">alternative</span><span class="o">=</span><span class="s2">&quot;PrometheusMiddleware&quot;</span><span class="p">,</span>
+</span><span data-line="73">            <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Construct a PrometheusMiddleware instance directly and pass it to the middleware list&quot;</span><span class="p">,</span>
+</span><span data-line="74">        <span class="p">)</span>
+</span><span data-line="75">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="p">(</span>
+</span><span data-line="76">            <span class="n">app_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span>
+</span><span data-line="77">            <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+</span><span data-line="78">            <span class="n">labels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
+</span><span data-line="79">            <span class="n">exemplars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exemplars</span><span class="p">,</span>
+</span><span data-line="80">            <span class="n">buckets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buckets</span><span class="p">,</span>
+</span><span data-line="81">            <span class="n">excluded_http_methods</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">excluded_http_methods</span><span class="p">,</span>
+</span><span data-line="82">            <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
+</span><span data-line="83">            <span class="n">exclude_opt_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
+</span><span data-line="84">            <span class="n">scopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scopes</span><span class="p">,</span>
+</span><span data-line="85">            <span class="n">group_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">group_path</span><span class="p">,</span>
+</span><span data-line="86">        <span class="p">)</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
