@@ -596,7 +596,7 @@ a whole when any of its paths matches.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5001">https://github.com/litestar-org/litestar/pull/5001</a></span></p>
 </div>
 </dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">CompressionMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -632,7 +632,7 @@ paths matches.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4999">https://github.com/litestar-org/litestar/pull/4999</a></span></p>
 </div>
 </dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">CSRFMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -643,7 +643,8 @@ This removes the <code class="docutils literal notranslate"><span class="pre">li
 <code class="docutils literal notranslate"><span class="pre">generate_csrf_token</span></code> and <code class="docutils literal notranslate"><span class="pre">generate_csrf_hash</span></code> helpers, from the public API.</p>
 <p>Applications that configure CSRF protection through
 <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a> are unaffected, since Litestar
-constructs the middleware itself.</p>
+constructs the middleware itself, via a <code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the
+middleware.</p>
 <p>Two behavioural changes for excluded routes:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are now matched against
@@ -654,7 +655,7 @@ rewritten against the template.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_from_csrf</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4998">https://github.com/litestar-org/litestar/pull/4998</a></span></p>
 </div>
 </dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">ResponseCacheMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
