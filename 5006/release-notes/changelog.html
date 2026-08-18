@@ -554,7 +554,8 @@ built-in middleware off the legacy bases.</p>
 <p>Applications that configure the middleware through
 <a class="reference internal" href="../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusConfig" title="litestar.plugins.prometheus.PrometheusConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrometheusConfig</span></code></a> and its <code class="docutils literal notranslate"><span class="pre">middleware</span></code>
 property are unaffected: the property now returns a configured
-<code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code> instance instead of a <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code> instance instead of a <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code>, built via a
+<code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the middleware, and
 <code class="docutils literal notranslate"><span class="pre">middleware=[prometheus_config.middleware]</span></code> keeps working as before.</p>
 <p>Code constructing the middleware directly must drop the <code class="docutils literal notranslate"><span class="pre">app</span></code> argument, pass
 the settings as keyword arguments rather than a configuration object, and apply
@@ -604,7 +605,8 @@ built-in middleware off the legacy bases.</p>
 <p>Applications that configure rate limiting through
 <a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig" title="litestar.middleware.rate_limit.RateLimitConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitConfig</span></code></a> and its <code class="docutils literal notranslate"><span class="pre">middleware</span></code>
 property are unaffected: the property now returns a configured
-<code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> instance instead of a <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> instance instead of a <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code>, built via a
+<code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the middleware, and
 <code class="docutils literal notranslate"><span class="pre">middleware=[rate_limit_config.middleware]</span></code> keeps working as before.</p>
 <p>Code constructing the middleware directly must drop the <code class="docutils literal notranslate"><span class="pre">app</span></code> argument, pass
 the settings as keyword arguments rather than a configuration object, and apply
@@ -635,7 +637,7 @@ a whole when any of its paths matches.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5005">https://github.com/litestar-org/litestar/pull/5005</a></span></p>
 </div>
 </dd>
 <dt>Return HTTP 413 when the multipart form part limit is exceeded<a class="headerlink reference internal" href="#3.0.0-return http 413 when the multipart form part limit is exceeded" id="3.0.0-return http 413 when the multipart form part limit is exceeded">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -687,7 +689,7 @@ a whole when any of its paths matches.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5001">https://github.com/litestar-org/litestar/pull/5001</a></span></p>
 </div>
 </dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">CompressionMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -723,7 +725,7 @@ paths matches.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4999">https://github.com/litestar-org/litestar/pull/4999</a></span></p>
 </div>
 </dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">CSRFMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -734,7 +736,8 @@ This removes the <code class="docutils literal notranslate"><span class="pre">li
 <code class="docutils literal notranslate"><span class="pre">generate_csrf_token</span></code> and <code class="docutils literal notranslate"><span class="pre">generate_csrf_hash</span></code> helpers, from the public API.</p>
 <p>Applications that configure CSRF protection through
 <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a> are unaffected, since Litestar
-constructs the middleware itself.</p>
+constructs the middleware itself, via a <code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the
+middleware.</p>
 <p>Two behavioural changes for excluded routes:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are now matched against
@@ -745,7 +748,7 @@ rewritten against the template.</p></li>
 <li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_from_csrf</span></code> now bypass the
 middleware entirely at startup rather than per request.</p></li>
 </ul>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4998">https://github.com/litestar-org/litestar/pull/4998</a></span></p>
 </div>
 </dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">ResponseCacheMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">

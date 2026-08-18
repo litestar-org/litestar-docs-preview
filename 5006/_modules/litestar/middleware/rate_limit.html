@@ -628,255 +628,263 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="115">        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">anyio</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span></div>
 
 </span><span data-line="116">
+<div class="viewcode-block" id="RateLimitMiddleware.from_config">
+<a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.from_config">[docs]</a>
+</span><span data-line="117">    <span class="nd">@classmethod</span>
+</span><span data-line="118">    <span class="k">def</span><span class="w"> </span><span class="nf">from_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">RateLimitConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RateLimitMiddleware</span><span class="p">:</span>
+</span><span data-line="119"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an instance from a :class:`RateLimitConfig`.&quot;&quot;&quot;</span>
+</span><span data-line="120">        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span data-line="121">            <span class="n">rate_limit</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">,</span>
+</span><span data-line="122">            <span class="n">store</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">store</span><span class="p">,</span>
+</span><span data-line="123">            <span class="n">identifier_for_request</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">identifier_for_request</span><span class="p">,</span>
+</span><span data-line="124">            <span class="n">check_throttle_handler</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">,</span>
+</span><span data-line="125">            <span class="n">set_rate_limit_headers</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">set_rate_limit_headers</span><span class="p">,</span>
+</span><span data-line="126">            <span class="n">rate_limit_policy_header_key</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">rate_limit_policy_header_key</span><span class="p">,</span>
+</span><span data-line="127">            <span class="n">rate_limit_limit_header_key</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">rate_limit_limit_header_key</span><span class="p">,</span>
+</span><span data-line="128">            <span class="n">rate_limit_remaining_header_key</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">rate_limit_remaining_header_key</span><span class="p">,</span>
+</span><span data-line="129">            <span class="n">rate_limit_reset_header_key</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">rate_limit_reset_header_key</span><span class="p">,</span>
+</span><span data-line="130">            <span class="n">exclude</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
+</span><span data-line="131">            <span class="n">exclude_opt_key</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
+</span><span data-line="132">        <span class="p">)</span></div>
+
+</span><span data-line="133">
 <div class="viewcode-block" id="RateLimitMiddleware.handle">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.handle">[docs]</a>
-</span><span data-line="117">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="118"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle ASGI call.</span>
-</span><span data-line="119">
-</span><span data-line="120"><span class="sd">        Args:</span>
-</span><span data-line="121"><span class="sd">            scope: The ASGI connection scope.</span>
-</span><span data-line="122"><span class="sd">            receive: The ASGI receive function.</span>
-</span><span data-line="123"><span class="sd">            send: The ASGI send function.</span>
-</span><span data-line="124"><span class="sd">            next_app: The next ASGI application in the middleware stack to call.</span>
-</span><span data-line="125">
-</span><span data-line="126"><span class="sd">        Returns:</span>
-</span><span data-line="127"><span class="sd">            None</span>
-</span><span data-line="128"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="129">        <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ScopeType</span><span class="o">.</span><span class="n">HTTP</span><span class="p">:</span>
-</span><span data-line="130">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
-</span><span data-line="131">            <span class="k">return</span>
-</span><span data-line="132">
-</span><span data-line="133">        <span class="n">app</span> <span class="o">=</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;litestar_app&quot;</span><span class="p">]</span>
-</span><span data-line="134">        <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">request_class</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
-</span><span data-line="135">        <span class="n">store</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">stores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span>
-</span><span data-line="136">        <span class="k">if</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">should_check_request</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">):</span>
-</span><span data-line="137">            <span class="n">identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_identifier_for_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-</span><span data-line="138">            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">::</span><span class="si">{</span><span class="n">identifier</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span data-line="139">            <span class="n">route_handler</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;route_handler&quot;</span><span class="p">]</span>
-</span><span data-line="140">            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">route_handler</span><span class="p">,</span> <span class="s2">&quot;is_mount&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span data-line="141">                <span class="n">key</span> <span class="o">+=</span> <span class="s2">&quot;::mount&quot;</span>
+</span><span data-line="134">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="135"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle ASGI call.</span>
+</span><span data-line="136">
+</span><span data-line="137"><span class="sd">        Args:</span>
+</span><span data-line="138"><span class="sd">            scope: The ASGI connection scope.</span>
+</span><span data-line="139"><span class="sd">            receive: The ASGI receive function.</span>
+</span><span data-line="140"><span class="sd">            send: The ASGI send function.</span>
+</span><span data-line="141"><span class="sd">            next_app: The next ASGI application in the middleware stack to call.</span>
 </span><span data-line="142">
-</span><span data-line="143">            <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-</span><span data-line="144">                <span class="n">cache_object</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_cached_history</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">store</span><span class="p">)</span>
-</span><span data-line="145">                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span><span class="p">:</span>
-</span><span data-line="146">                    <span class="k">raise</span> <span class="n">TooManyRequestsException</span><span class="p">(</span>
-</span><span data-line="147">                        <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">create_response_headers</span><span class="p">(</span><span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">)</span>
-</span><span data-line="148">                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_rate_limit_headers</span>
-</span><span data-line="149">                        <span class="k">else</span> <span class="kc">None</span>
-</span><span data-line="150">                    <span class="p">)</span>
-</span><span data-line="151">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_cached_history</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
-</span><span data-line="152">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_rate_limit_headers</span><span class="p">:</span>
-</span><span data-line="153">                <span class="n">send</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_send_wrapper</span><span class="p">(</span><span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">)</span>
-</span><span data-line="154">
-</span><span data-line="155">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span></div>
+</span><span data-line="143"><span class="sd">        Returns:</span>
+</span><span data-line="144"><span class="sd">            None</span>
+</span><span data-line="145"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="146">        <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ScopeType</span><span class="o">.</span><span class="n">HTTP</span><span class="p">:</span>
+</span><span data-line="147">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</span><span data-line="148">            <span class="k">return</span>
+</span><span data-line="149">
+</span><span data-line="150">        <span class="n">app</span> <span class="o">=</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;litestar_app&quot;</span><span class="p">]</span>
+</span><span data-line="151">        <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">request_class</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+</span><span data-line="152">        <span class="n">store</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">stores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span>
+</span><span data-line="153">        <span class="k">if</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">should_check_request</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">):</span>
+</span><span data-line="154">            <span class="n">identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_identifier_for_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span><span data-line="155">            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">::</span><span class="si">{</span><span class="n">identifier</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span data-line="156">            <span class="n">route_handler</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;route_handler&quot;</span><span class="p">]</span>
+</span><span data-line="157">            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">route_handler</span><span class="p">,</span> <span class="s2">&quot;is_mount&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+</span><span data-line="158">                <span class="n">key</span> <span class="o">+=</span> <span class="s2">&quot;::mount&quot;</span>
+</span><span data-line="159">
+</span><span data-line="160">            <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+</span><span data-line="161">                <span class="n">cache_object</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_cached_history</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">store</span><span class="p">)</span>
+</span><span data-line="162">                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span><span class="p">:</span>
+</span><span data-line="163">                    <span class="k">raise</span> <span class="n">TooManyRequestsException</span><span class="p">(</span>
+</span><span data-line="164">                        <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">create_response_headers</span><span class="p">(</span><span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">)</span>
+</span><span data-line="165">                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_rate_limit_headers</span>
+</span><span data-line="166">                        <span class="k">else</span> <span class="kc">None</span>
+</span><span data-line="167">                    <span class="p">)</span>
+</span><span data-line="168">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_cached_history</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
+</span><span data-line="169">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_rate_limit_headers</span><span class="p">:</span>
+</span><span data-line="170">                <span class="n">send</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_send_wrapper</span><span class="p">(</span><span class="n">send</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">)</span>
+</span><span data-line="171">
+</span><span data-line="172">        <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span></div>
 
-</span><span data-line="156">
+</span><span data-line="173">
 <div class="viewcode-block" id="RateLimitMiddleware.create_send_wrapper">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.create_send_wrapper">[docs]</a>
-</span><span data-line="157">    <span class="k">def</span><span class="w"> </span><span class="nf">create_send_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">cache_object</span><span class="p">:</span> <span class="n">CacheObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Send</span><span class="p">:</span>
-</span><span data-line="158"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a ``send`` function that wraps the original send to inject response headers.</span>
-</span><span data-line="159">
-</span><span data-line="160"><span class="sd">        Args:</span>
-</span><span data-line="161"><span class="sd">            send: The ASGI send function.</span>
-</span><span data-line="162"><span class="sd">            cache_object: A StorageObject instance.</span>
-</span><span data-line="163">
-</span><span data-line="164"><span class="sd">        Returns:</span>
-</span><span data-line="165"><span class="sd">            Send wrapper callable.</span>
-</span><span data-line="166"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="167">
-</span><span data-line="168">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_wrapper</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="169"><span class="w">            </span><span class="sd">&quot;&quot;&quot;Wrap the ASGI ``Send`` callable.</span>
-</span><span data-line="170">
-</span><span data-line="171"><span class="sd">            Args:</span>
-</span><span data-line="172"><span class="sd">                message: An ASGI ``Message``</span>
-</span><span data-line="173">
-</span><span data-line="174"><span class="sd">            Returns:</span>
-</span><span data-line="175"><span class="sd">                None</span>
-</span><span data-line="176"><span class="sd">            &quot;&quot;&quot;</span>
-</span><span data-line="177">            <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.start&quot;</span><span class="p">:</span>
-</span><span data-line="178">                <span class="n">message</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="p">[])</span>
-</span><span data-line="179">                <span class="n">headers</span> <span class="o">=</span> <span class="n">MutableScopeHeaders</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="180">                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response_headers</span><span class="p">(</span><span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="181">                    <span class="n">headers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span data-line="182">            <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span data-line="183">
-</span><span data-line="184">        <span class="k">return</span> <span class="n">send_wrapper</span></div>
+</span><span data-line="174">    <span class="k">def</span><span class="w"> </span><span class="nf">create_send_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">cache_object</span><span class="p">:</span> <span class="n">CacheObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Send</span><span class="p">:</span>
+</span><span data-line="175"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a ``send`` function that wraps the original send to inject response headers.</span>
+</span><span data-line="176">
+</span><span data-line="177"><span class="sd">        Args:</span>
+</span><span data-line="178"><span class="sd">            send: The ASGI send function.</span>
+</span><span data-line="179"><span class="sd">            cache_object: A StorageObject instance.</span>
+</span><span data-line="180">
+</span><span data-line="181"><span class="sd">        Returns:</span>
+</span><span data-line="182"><span class="sd">            Send wrapper callable.</span>
+</span><span data-line="183"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="184">
+</span><span data-line="185">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_wrapper</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="186"><span class="w">            </span><span class="sd">&quot;&quot;&quot;Wrap the ASGI ``Send`` callable.</span>
+</span><span data-line="187">
+</span><span data-line="188"><span class="sd">            Args:</span>
+</span><span data-line="189"><span class="sd">                message: An ASGI ``Message``</span>
+</span><span data-line="190">
+</span><span data-line="191"><span class="sd">            Returns:</span>
+</span><span data-line="192"><span class="sd">                None</span>
+</span><span data-line="193"><span class="sd">            &quot;&quot;&quot;</span>
+</span><span data-line="194">            <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.start&quot;</span><span class="p">:</span>
+</span><span data-line="195">                <span class="n">message</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="p">[])</span>
+</span><span data-line="196">                <span class="n">headers</span> <span class="o">=</span> <span class="n">MutableScopeHeaders</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="197">                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_response_headers</span><span class="p">(</span><span class="n">cache_object</span><span class="o">=</span><span class="n">cache_object</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="198">                    <span class="n">headers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="199">            <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span data-line="200">
+</span><span data-line="201">        <span class="k">return</span> <span class="n">send_wrapper</span></div>
 
-</span><span data-line="185">
+</span><span data-line="202">
 <div class="viewcode-block" id="RateLimitMiddleware.retrieve_cached_history">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.retrieve_cached_history">[docs]</a>
-</span><span data-line="186">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_cached_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Store</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CacheObject</span><span class="p">:</span>
-</span><span data-line="187"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a list of time stamps for the given duration unit.</span>
-</span><span data-line="188">
-</span><span data-line="189"><span class="sd">        Args:</span>
-</span><span data-line="190"><span class="sd">            key: Cache key.</span>
-</span><span data-line="191"><span class="sd">            store: A :class:`Store &lt;.stores.base.Store&gt;`</span>
-</span><span data-line="192">
-</span><span data-line="193"><span class="sd">        Returns:</span>
-</span><span data-line="194"><span class="sd">            An :class:`CacheObject`.</span>
-</span><span data-line="195"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="196">        <span class="n">duration</span> <span class="o">=</span> <span class="n">DURATION_VALUES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">]</span>
-</span><span data-line="197">        <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">())</span>
-</span><span data-line="198">        <span class="n">cached_string</span> <span class="o">=</span> <span class="k">await</span> <span class="n">store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="199">        <span class="k">if</span> <span class="n">cached_string</span><span class="p">:</span>
-</span><span data-line="200">            <span class="n">cache_object</span> <span class="o">=</span> <span class="n">CacheObject</span><span class="p">(</span><span class="o">**</span><span class="n">decode_json</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">cached_string</span><span class="p">))</span>
-</span><span data-line="201">            <span class="k">if</span> <span class="n">cache_object</span><span class="o">.</span><span class="n">reset</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="p">:</span>
-</span><span data-line="202">                <span class="k">return</span> <span class="n">CacheObject</span><span class="p">(</span><span class="n">history</span><span class="o">=</span><span class="p">[],</span> <span class="n">reset</span><span class="o">=</span><span class="n">now</span> <span class="o">+</span> <span class="n">duration</span><span class="p">)</span>
-</span><span data-line="203">            <span class="k">return</span> <span class="n">cache_object</span>
-</span><span data-line="204">
-</span><span data-line="205">        <span class="k">return</span> <span class="n">CacheObject</span><span class="p">(</span><span class="n">history</span><span class="o">=</span><span class="p">[],</span> <span class="n">reset</span><span class="o">=</span><span class="n">now</span> <span class="o">+</span> <span class="n">duration</span><span class="p">)</span></div>
+</span><span data-line="203">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_cached_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Store</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CacheObject</span><span class="p">:</span>
+</span><span data-line="204"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve a list of time stamps for the given duration unit.</span>
+</span><span data-line="205">
+</span><span data-line="206"><span class="sd">        Args:</span>
+</span><span data-line="207"><span class="sd">            key: Cache key.</span>
+</span><span data-line="208"><span class="sd">            store: A :class:`Store &lt;.stores.base.Store&gt;`</span>
+</span><span data-line="209">
+</span><span data-line="210"><span class="sd">        Returns:</span>
+</span><span data-line="211"><span class="sd">            An :class:`CacheObject`.</span>
+</span><span data-line="212"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="213">        <span class="n">duration</span> <span class="o">=</span> <span class="n">DURATION_VALUES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">]</span>
+</span><span data-line="214">        <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">())</span>
+</span><span data-line="215">        <span class="n">cached_string</span> <span class="o">=</span> <span class="k">await</span> <span class="n">store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="216">        <span class="k">if</span> <span class="n">cached_string</span><span class="p">:</span>
+</span><span data-line="217">            <span class="n">cache_object</span> <span class="o">=</span> <span class="n">CacheObject</span><span class="p">(</span><span class="o">**</span><span class="n">decode_json</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">cached_string</span><span class="p">))</span>
+</span><span data-line="218">            <span class="k">if</span> <span class="n">cache_object</span><span class="o">.</span><span class="n">reset</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="p">:</span>
+</span><span data-line="219">                <span class="k">return</span> <span class="n">CacheObject</span><span class="p">(</span><span class="n">history</span><span class="o">=</span><span class="p">[],</span> <span class="n">reset</span><span class="o">=</span><span class="n">now</span> <span class="o">+</span> <span class="n">duration</span><span class="p">)</span>
+</span><span data-line="220">            <span class="k">return</span> <span class="n">cache_object</span>
+</span><span data-line="221">
+</span><span data-line="222">        <span class="k">return</span> <span class="n">CacheObject</span><span class="p">(</span><span class="n">history</span><span class="o">=</span><span class="p">[],</span> <span class="n">reset</span><span class="o">=</span><span class="n">now</span> <span class="o">+</span> <span class="n">duration</span><span class="p">)</span></div>
 
-</span><span data-line="206">
+</span><span data-line="223">
 <div class="viewcode-block" id="RateLimitMiddleware.set_cached_history">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.set_cached_history">[docs]</a>
-</span><span data-line="207">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set_cached_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cache_object</span><span class="p">:</span> <span class="n">CacheObject</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Store</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="208"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Store history extended with the current timestamp in cache.</span>
-</span><span data-line="209">
-</span><span data-line="210"><span class="sd">        Args:</span>
-</span><span data-line="211"><span class="sd">            key: Cache key.</span>
-</span><span data-line="212"><span class="sd">            cache_object: A :class:`CacheObject`.</span>
-</span><span data-line="213"><span class="sd">            store: A :class:`Store &lt;.stores.base.Store&gt;`</span>
-</span><span data-line="214">
-</span><span data-line="215"><span class="sd">        Returns:</span>
-</span><span data-line="216"><span class="sd">            None</span>
-</span><span data-line="217"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="218">        <span class="n">cache_object</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">()),</span> <span class="o">*</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">]</span>
-</span><span data-line="219">        <span class="k">await</span> <span class="n">store</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">encode_json</span><span class="p">(</span><span class="n">cache_object</span><span class="p">),</span> <span class="n">expires_in</span><span class="o">=</span><span class="n">DURATION_VALUES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">])</span></div>
+</span><span data-line="224">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">set_cached_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cache_object</span><span class="p">:</span> <span class="n">CacheObject</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">Store</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="225"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Store history extended with the current timestamp in cache.</span>
+</span><span data-line="226">
+</span><span data-line="227"><span class="sd">        Args:</span>
+</span><span data-line="228"><span class="sd">            key: Cache key.</span>
+</span><span data-line="229"><span class="sd">            cache_object: A :class:`CacheObject`.</span>
+</span><span data-line="230"><span class="sd">            store: A :class:`Store &lt;.stores.base.Store&gt;`</span>
+</span><span data-line="231">
+</span><span data-line="232"><span class="sd">        Returns:</span>
+</span><span data-line="233"><span class="sd">            None</span>
+</span><span data-line="234"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="235">        <span class="n">cache_object</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">()),</span> <span class="o">*</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">]</span>
+</span><span data-line="236">        <span class="k">await</span> <span class="n">store</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">encode_json</span><span class="p">(</span><span class="n">cache_object</span><span class="p">),</span> <span class="n">expires_in</span><span class="o">=</span><span class="n">DURATION_VALUES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">])</span></div>
 
-</span><span data-line="220">
+</span><span data-line="237">
 <div class="viewcode-block" id="RateLimitMiddleware.should_check_request">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.should_check_request">[docs]</a>
-</span><span data-line="221">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">should_check_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="222"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a boolean indicating if a request should be checked for rate limiting.</span>
-</span><span data-line="223">
-</span><span data-line="224"><span class="sd">        Args:</span>
-</span><span data-line="225"><span class="sd">            request: A :class:`Request &lt;.connection.Request&gt;` instance.</span>
-</span><span data-line="226">
-</span><span data-line="227"><span class="sd">        Returns:</span>
-</span><span data-line="228"><span class="sd">            Boolean dictating whether the request should be checked for rate-limiting.</span>
-</span><span data-line="229"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="230">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">:</span>
-</span><span data-line="231">            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-</span><span data-line="232">        <span class="k">return</span> <span class="kc">True</span></div>
+</span><span data-line="238">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">should_check_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="239"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a boolean indicating if a request should be checked for rate limiting.</span>
+</span><span data-line="240">
+</span><span data-line="241"><span class="sd">        Args:</span>
+</span><span data-line="242"><span class="sd">            request: A :class:`Request &lt;.connection.Request&gt;` instance.</span>
+</span><span data-line="243">
+</span><span data-line="244"><span class="sd">        Returns:</span>
+</span><span data-line="245"><span class="sd">            Boolean dictating whether the request should be checked for rate-limiting.</span>
+</span><span data-line="246"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="247">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">:</span>
+</span><span data-line="248">            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span><span data-line="249">        <span class="k">return</span> <span class="kc">True</span></div>
 
-</span><span data-line="233">
+</span><span data-line="250">
 <div class="viewcode-block" id="RateLimitMiddleware.create_response_headers">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware.create_response_headers">[docs]</a>
-</span><span data-line="234">    <span class="k">def</span><span class="w"> </span><span class="nf">create_response_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_object</span><span class="p">:</span> <span class="n">CacheObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="235"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create ratelimit response headers.</span>
-</span><span data-line="236">
-</span><span data-line="237"><span class="sd">        Notes:</span>
-</span><span data-line="238"><span class="sd">            * see the `IETF RateLimit draft &lt;https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/&gt;`_</span>
-</span><span data-line="239">
-</span><span data-line="240"><span class="sd">        Args:</span>
-</span><span data-line="241"><span class="sd">            cache_object:A :class:`CacheObject`.</span>
-</span><span data-line="242">
-</span><span data-line="243"><span class="sd">        Returns:</span>
-</span><span data-line="244"><span class="sd">            A dict of http headers.</span>
-</span><span data-line="245"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="246">        <span class="n">remaining_requests</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
-</span><span data-line="247">            <span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span> <span class="k">else</span> <span class="mi">0</span>
-</span><span data-line="248">        <span class="p">)</span>
-</span><span data-line="249">
-</span><span data-line="250">        <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="251">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_policy_header_key</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span><span class="si">}</span><span class="s2">; w=</span><span class="si">{</span><span class="n">DURATION_VALUES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span data-line="252">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_limit_header_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span><span class="p">),</span>
-</span><span data-line="253">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_remaining_header_key</span><span class="p">:</span> <span class="n">remaining_requests</span><span class="p">,</span>
-</span><span data-line="254">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_reset_header_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">reset</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">())),</span>
-</span><span data-line="255">        <span class="p">}</span></div>
+</span><span data-line="251">    <span class="k">def</span><span class="w"> </span><span class="nf">create_response_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_object</span><span class="p">:</span> <span class="n">CacheObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="252"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create ratelimit response headers.</span>
+</span><span data-line="253">
+</span><span data-line="254"><span class="sd">        Notes:</span>
+</span><span data-line="255"><span class="sd">            * see the `IETF RateLimit draft &lt;https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/&gt;`_</span>
+</span><span data-line="256">
+</span><span data-line="257"><span class="sd">        Args:</span>
+</span><span data-line="258"><span class="sd">            cache_object:A :class:`CacheObject`.</span>
+</span><span data-line="259">
+</span><span data-line="260"><span class="sd">        Returns:</span>
+</span><span data-line="261"><span class="sd">            A dict of http headers.</span>
+</span><span data-line="262"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="263">        <span class="n">remaining_requests</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
+</span><span data-line="264">            <span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">history</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span> <span class="k">else</span> <span class="mi">0</span>
+</span><span data-line="265">        <span class="p">)</span>
+</span><span data-line="266">
+</span><span data-line="267">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="268">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_policy_header_key</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span><span class="si">}</span><span class="s2">; w=</span><span class="si">{</span><span class="n">DURATION_VALUES</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span data-line="269">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_limit_header_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_requests</span><span class="p">),</span>
+</span><span data-line="270">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_remaining_header_key</span><span class="p">:</span> <span class="n">remaining_requests</span><span class="p">,</span>
+</span><span data-line="271">            <span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_reset_header_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">cache_object</span><span class="o">.</span><span class="n">reset</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">())),</span>
+</span><span data-line="272">        <span class="p">}</span></div>
 </div>
 
-</span><span data-line="256">
-</span><span data-line="257">
+</span><span data-line="273">
+</span><span data-line="274">
 <div class="viewcode-block" id="RateLimitConfig">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig">[docs]</a>
-</span><span data-line="258"><span class="nd">@dataclass</span>
-</span><span data-line="259"><span class="k">class</span><span class="w"> </span><span class="nc">RateLimitConfig</span><span class="p">:</span>
-</span><span data-line="260"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for ``RateLimitMiddleware``&quot;&quot;&quot;</span>
-</span><span data-line="261">
-</span><span data-line="262">    <span class="n">rate_limit</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">DurationUnit</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
-</span><span data-line="263"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A tuple containing a time unit (second, minute, hour, day) and quantity, e.g. (&quot;day&quot;, 1) or (&quot;minute&quot;, 5).&quot;&quot;&quot;</span>
-</span><span data-line="264">    <span class="n">exclude</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="265"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A pattern or list of patterns to skip in the rate limiting middleware.&quot;&quot;&quot;</span>
-</span><span data-line="266">    <span class="n">exclude_opt_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="267"><span class="w">    </span><span class="sd">&quot;&quot;&quot;An identifier to use on routes to disable rate limiting for a particular route.&quot;&quot;&quot;</span>
-</span><span data-line="268">    <span class="n">identifier_for_request</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_remote_address</span>
-</span><span data-line="269"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="270"><span class="sd">    A callable that receives the request and returns an identifier for which the limit</span>
-</span><span data-line="271"><span class="sd">    should be applied. Defaults to :func:`~litestar.middleware.rate_limit.get_remote_address`, which returns the client&#39;s</span>
-</span><span data-line="272"><span class="sd">    address.</span>
-</span><span data-line="273">
-</span><span data-line="274"><span class="sd">    Note that :func:`~litestar.middleware.rate_limit.get_remote_address` does *NOT* honour ``X-FORWARDED-FOR`` headers, as these cannot be</span>
-</span><span data-line="275"><span class="sd">    trusted implicitly. If running behind a proxy, a secure way of updating the client&#39;s</span>
-</span><span data-line="276"><span class="sd">    address should be implemented, such as uvicorn&#39;s</span>
-</span><span data-line="277"><span class="sd">    `ProxyHeaderMiddleware &lt;https://github.com/encode/uvicorn/blob/master/uvicorn/middleware/proxy_headers.py&gt;`_</span>
-</span><span data-line="278"><span class="sd">    or hypercon&#39;s `ProxyFixMiddleware &lt;https://hypercorn.readthedocs.io/en/latest/how_to_guides/proxy_fix.html&gt;`_ .</span>
-</span><span data-line="279"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="280">    <span class="n">check_throttle_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">SyncOrAsyncUnion</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="281"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Handler callable that receives the request instance, returning a boolean dictating whether or not the request</span>
-</span><span data-line="282"><span class="sd">    should be checked for rate limiting.</span>
-</span><span data-line="283"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="284">    <span class="n">middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">RateLimitMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">RateLimitMiddleware</span><span class="p">)</span>
-</span><span data-line="285"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The middleware class to use.&quot;&quot;&quot;</span>
-</span><span data-line="286">    <span class="n">set_rate_limit_headers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="287"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Boolean dictating whether to set the rate limit headers on the response.&quot;&quot;&quot;</span>
-</span><span data-line="288">    <span class="n">rate_limit_policy_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Policy&quot;</span><span class="p">)</span>
-</span><span data-line="289"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit policy header.&quot;&quot;&quot;</span>
-</span><span data-line="290">    <span class="n">rate_limit_remaining_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Remaining&quot;</span><span class="p">)</span>
-</span><span data-line="291"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit remaining header.&quot;&quot;&quot;</span>
-</span><span data-line="292">    <span class="n">rate_limit_reset_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Reset&quot;</span><span class="p">)</span>
-</span><span data-line="293"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit reset header.&quot;&quot;&quot;</span>
-</span><span data-line="294">    <span class="n">rate_limit_limit_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Limit&quot;</span><span class="p">)</span>
-</span><span data-line="295"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit limit header.&quot;&quot;&quot;</span>
-</span><span data-line="296">    <span class="n">store</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rate_limit&quot;</span>
-</span><span data-line="297"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Name of the :class:`Store &lt;.stores.base.Store&gt;` to use&quot;&quot;&quot;</span>
-</span><span data-line="298">
-</span><span data-line="299">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="300">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">:</span>
-</span><span data-line="301">            <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span> <span class="o">=</span> <span class="n">ensure_async_callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
-</span><span data-line="302">
-</span><span data-line="303">    <span class="nd">@property</span>
-</span><span data-line="304">    <span class="k">def</span><span class="w"> </span><span class="nf">middleware</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RateLimitMiddleware</span><span class="p">:</span>
-</span><span data-line="305"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this property to insert the config into a middleware list on one of the application layers.</span>
-</span><span data-line="306">
-</span><span data-line="307"><span class="sd">        Examples:</span>
-</span><span data-line="308"><span class="sd">            .. code-block::  python</span>
-</span><span data-line="309">
-</span><span data-line="310"><span class="sd">                from litestar import Litestar, Request, get</span>
-</span><span data-line="311"><span class="sd">                from litestar.middleware.rate_limit import RateLimitConfig</span>
-</span><span data-line="312">
-</span><span data-line="313"><span class="sd">                # limit to 10 requests per minute, excluding the schema path</span>
-</span><span data-line="314"><span class="sd">                throttle_config = RateLimitConfig(rate_limit=(&quot;minute&quot;, 10), exclude=[&quot;/schema&quot;])</span>
+</span><span data-line="275"><span class="nd">@dataclass</span>
+</span><span data-line="276"><span class="k">class</span><span class="w"> </span><span class="nc">RateLimitConfig</span><span class="p">:</span>
+</span><span data-line="277"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for ``RateLimitMiddleware``&quot;&quot;&quot;</span>
+</span><span data-line="278">
+</span><span data-line="279">    <span class="n">rate_limit</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">DurationUnit</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+</span><span data-line="280"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A tuple containing a time unit (second, minute, hour, day) and quantity, e.g. (&quot;day&quot;, 1) or (&quot;minute&quot;, 5).&quot;&quot;&quot;</span>
+</span><span data-line="281">    <span class="n">exclude</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="282"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A pattern or list of patterns to skip in the rate limiting middleware.&quot;&quot;&quot;</span>
+</span><span data-line="283">    <span class="n">exclude_opt_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="284"><span class="w">    </span><span class="sd">&quot;&quot;&quot;An identifier to use on routes to disable rate limiting for a particular route.&quot;&quot;&quot;</span>
+</span><span data-line="285">    <span class="n">identifier_for_request</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_remote_address</span>
+</span><span data-line="286"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="287"><span class="sd">    A callable that receives the request and returns an identifier for which the limit</span>
+</span><span data-line="288"><span class="sd">    should be applied. Defaults to :func:`~litestar.middleware.rate_limit.get_remote_address`, which returns the client&#39;s</span>
+</span><span data-line="289"><span class="sd">    address.</span>
+</span><span data-line="290">
+</span><span data-line="291"><span class="sd">    Note that :func:`~litestar.middleware.rate_limit.get_remote_address` does *NOT* honour ``X-FORWARDED-FOR`` headers, as these cannot be</span>
+</span><span data-line="292"><span class="sd">    trusted implicitly. If running behind a proxy, a secure way of updating the client&#39;s</span>
+</span><span data-line="293"><span class="sd">    address should be implemented, such as uvicorn&#39;s</span>
+</span><span data-line="294"><span class="sd">    `ProxyHeaderMiddleware &lt;https://github.com/encode/uvicorn/blob/master/uvicorn/middleware/proxy_headers.py&gt;`_</span>
+</span><span data-line="295"><span class="sd">    or hypercon&#39;s `ProxyFixMiddleware &lt;https://hypercorn.readthedocs.io/en/latest/how_to_guides/proxy_fix.html&gt;`_ .</span>
+</span><span data-line="296"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="297">    <span class="n">check_throttle_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">SyncOrAsyncUnion</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="298"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Handler callable that receives the request instance, returning a boolean dictating whether or not the request</span>
+</span><span data-line="299"><span class="sd">    should be checked for rate limiting.</span>
+</span><span data-line="300"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="301">    <span class="n">middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">RateLimitMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">RateLimitMiddleware</span><span class="p">)</span>
+</span><span data-line="302"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The middleware class to use.&quot;&quot;&quot;</span>
+</span><span data-line="303">    <span class="n">set_rate_limit_headers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="304"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Boolean dictating whether to set the rate limit headers on the response.&quot;&quot;&quot;</span>
+</span><span data-line="305">    <span class="n">rate_limit_policy_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Policy&quot;</span><span class="p">)</span>
+</span><span data-line="306"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit policy header.&quot;&quot;&quot;</span>
+</span><span data-line="307">    <span class="n">rate_limit_remaining_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Remaining&quot;</span><span class="p">)</span>
+</span><span data-line="308"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit remaining header.&quot;&quot;&quot;</span>
+</span><span data-line="309">    <span class="n">rate_limit_reset_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Reset&quot;</span><span class="p">)</span>
+</span><span data-line="310"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit reset header.&quot;&quot;&quot;</span>
+</span><span data-line="311">    <span class="n">rate_limit_limit_header_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;RateLimit-Limit&quot;</span><span class="p">)</span>
+</span><span data-line="312"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Key to use for the rate limit limit header.&quot;&quot;&quot;</span>
+</span><span data-line="313">    <span class="n">store</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rate_limit&quot;</span>
+</span><span data-line="314"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Name of the :class:`Store &lt;.stores.base.Store&gt;` to use&quot;&quot;&quot;</span>
 </span><span data-line="315">
-</span><span data-line="316">
-</span><span data-line="317"><span class="sd">                @get(&quot;/&quot;)</span>
-</span><span data-line="318"><span class="sd">                def my_handler(request: Request) -&gt; None: ...</span>
+</span><span data-line="316">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="317">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">:</span>
+</span><span data-line="318">            <span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span> <span class="o">=</span> <span class="n">ensure_async_callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
 </span><span data-line="319">
-</span><span data-line="320">
-</span><span data-line="321"><span class="sd">                app = Litestar(route_handlers=[my_handler], middleware=[throttle_config.middleware])</span>
-</span><span data-line="322">
-</span><span data-line="323"><span class="sd">        Returns:</span>
-</span><span data-line="324"><span class="sd">            An instance of :attr:`middleware_class`, configured from this config instance.</span>
-</span><span data-line="325"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="326">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="p">(</span>
-</span><span data-line="327">            <span class="n">rate_limit</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit</span><span class="p">,</span>
-</span><span data-line="328">            <span class="n">store</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span>
-</span><span data-line="329">            <span class="n">identifier_for_request</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier_for_request</span><span class="p">,</span>
-</span><span data-line="330">            <span class="n">check_throttle_handler</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">check_throttle_handler</span><span class="p">,</span>
-</span><span data-line="331">            <span class="n">set_rate_limit_headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">set_rate_limit_headers</span><span class="p">,</span>
-</span><span data-line="332">            <span class="n">rate_limit_policy_header_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_policy_header_key</span><span class="p">,</span>
-</span><span data-line="333">            <span class="n">rate_limit_limit_header_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_limit_header_key</span><span class="p">,</span>
-</span><span data-line="334">            <span class="n">rate_limit_remaining_header_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_remaining_header_key</span><span class="p">,</span>
-</span><span data-line="335">            <span class="n">rate_limit_reset_header_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rate_limit_reset_header_key</span><span class="p">,</span>
-</span><span data-line="336">            <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
-</span><span data-line="337">            <span class="n">exclude_opt_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
-</span><span data-line="338">        <span class="p">)</span>
+</span><span data-line="320">    <span class="nd">@property</span>
+</span><span data-line="321">    <span class="k">def</span><span class="w"> </span><span class="nf">middleware</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RateLimitMiddleware</span><span class="p">:</span>
+</span><span data-line="322"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this property to insert the config into a middleware list on one of the application layers.</span>
+</span><span data-line="323">
+</span><span data-line="324"><span class="sd">        Examples:</span>
+</span><span data-line="325"><span class="sd">            .. code-block::  python</span>
+</span><span data-line="326">
+</span><span data-line="327"><span class="sd">                from litestar import Litestar, Request, get</span>
+</span><span data-line="328"><span class="sd">                from litestar.middleware.rate_limit import RateLimitConfig</span>
+</span><span data-line="329">
+</span><span data-line="330"><span class="sd">                # limit to 10 requests per minute, excluding the schema path</span>
+</span><span data-line="331"><span class="sd">                throttle_config = RateLimitConfig(rate_limit=(&quot;minute&quot;, 10), exclude=[&quot;/schema&quot;])</span>
+</span><span data-line="332">
+</span><span data-line="333">
+</span><span data-line="334"><span class="sd">                @get(&quot;/&quot;)</span>
+</span><span data-line="335"><span class="sd">                def my_handler(request: Request) -&gt; None: ...</span>
+</span><span data-line="336">
+</span><span data-line="337">
+</span><span data-line="338"><span class="sd">                app = Litestar(route_handlers=[my_handler], middleware=[throttle_config.middleware])</span>
 </span><span data-line="339">
+</span><span data-line="340"><span class="sd">        Returns:</span>
+</span><span data-line="341"><span class="sd">            An instance of :attr:`middleware_class`, configured from this config instance.</span>
+</span><span data-line="342"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="343">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span data-line="344">
 <div class="viewcode-block" id="RateLimitConfig.get_store_from_app">
 <a class="viewcode-back" href="../../../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig.get_store_from_app">[docs]</a>
-</span><span data-line="340">    <span class="k">def</span><span class="w"> </span><span class="nf">get_store_from_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Litestar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Store</span><span class="p">:</span>
-</span><span data-line="341"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the store defined in :attr:`store` from an :class:`Litestar &lt;.app.Litestar&gt;` instance.&quot;&quot;&quot;</span>
-</span><span data-line="342">        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">stores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span></div>
+</span><span data-line="345">    <span class="k">def</span><span class="w"> </span><span class="nf">get_store_from_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">Litestar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Store</span><span class="p">:</span>
+</span><span data-line="346"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the store defined in :attr:`store` from an :class:`Litestar &lt;.app.Litestar&gt;` instance.&quot;&quot;&quot;</span>
+</span><span data-line="347">        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">stores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span></div>
 </div>
 
 </span></pre></div>

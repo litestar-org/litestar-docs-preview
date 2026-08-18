@@ -568,18 +568,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="63"><span class="sd">        Returns:</span>
 </span><span data-line="64"><span class="sd">            An instance of :attr:`middleware_class`.</span>
 </span><span data-line="65"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="66">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="p">(</span>
-</span><span data-line="67">            <span class="n">app_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span>
-</span><span data-line="68">            <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
-</span><span data-line="69">            <span class="n">labels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
-</span><span data-line="70">            <span class="n">exemplars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exemplars</span><span class="p">,</span>
-</span><span data-line="71">            <span class="n">buckets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buckets</span><span class="p">,</span>
-</span><span data-line="72">            <span class="n">excluded_http_methods</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">excluded_http_methods</span><span class="p">,</span>
-</span><span data-line="73">            <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
-</span><span data-line="74">            <span class="n">exclude_opt_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
-</span><span data-line="75">            <span class="n">scopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scopes</span><span class="p">,</span>
-</span><span data-line="76">            <span class="n">group_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">group_path</span><span class="p">,</span>
-</span><span data-line="77">        <span class="p">)</span></div>
+</span><span data-line="66">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
