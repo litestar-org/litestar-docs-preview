@@ -510,65 +510,89 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.plugins.prometheus.middleware</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span data-line="8">    <span class="n">PrometheusMiddleware</span><span class="p">,</span>
 </span><span data-line="9"><span class="p">)</span>
-</span><span data-line="10">
-</span><span data-line="11"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;PrometheusConfig&quot;</span><span class="p">,)</span>
-</span><span data-line="12">
+</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.utils.deprecation</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn_deprecation</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;PrometheusConfig&quot;</span><span class="p">,)</span>
 </span><span data-line="13">
-</span><span data-line="14"><span class="k">try</span><span class="p">:</span>
-</span><span data-line="15">    <span class="kn">import</span><span class="w"> </span><span class="nn">prometheus_client</span>  <span class="c1"># noqa: F401</span>
-</span><span data-line="16"><span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span data-line="17">    <span class="k">raise</span> <span class="n">MissingDependencyException</span><span class="p">(</span><span class="s2">&quot;prometheus_client&quot;</span><span class="p">,</span> <span class="s2">&quot;prometheus-client&quot;</span><span class="p">,</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-</span><span data-line="18">
+</span><span data-line="14">
+</span><span data-line="15"><span class="k">try</span><span class="p">:</span>
+</span><span data-line="16">    <span class="kn">import</span><span class="w"> </span><span class="nn">prometheus_client</span>  <span class="c1"># noqa: F401</span>
+</span><span data-line="17"><span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="18">    <span class="k">raise</span> <span class="n">MissingDependencyException</span><span class="p">(</span><span class="s2">&quot;prometheus_client&quot;</span><span class="p">,</span> <span class="s2">&quot;prometheus-client&quot;</span><span class="p">,</span> <span class="s2">&quot;prometheus&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 </span><span data-line="19">
-</span><span data-line="20"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-</span><span data-line="21">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
-</span><span data-line="22">
-</span><span data-line="23">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.connection.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">Request</span>
-</span><span data-line="24">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Method</span><span class="p">,</span> <span class="n">Scopes</span>
-</span><span data-line="25">
+</span><span data-line="20">
+</span><span data-line="21"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+</span><span data-line="22">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
+</span><span data-line="23">
+</span><span data-line="24">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.connection.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">Request</span>
+</span><span data-line="25">    <span class="kn">from</span><span class="w"> </span><span class="nn">litestar.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Method</span><span class="p">,</span> <span class="n">Scopes</span>
 </span><span data-line="26">
+</span><span data-line="27">
 <div class="viewcode-block" id="PrometheusConfig">
 <a class="viewcode-back" href="../../../../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusConfig">[docs]</a>
-</span><span data-line="27"><span class="nd">@dataclass</span>
-</span><span data-line="28"><span class="k">class</span><span class="w"> </span><span class="nc">PrometheusConfig</span><span class="p">:</span>
-</span><span data-line="29"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration class for the PrometheusConfig middleware.&quot;&quot;&quot;</span>
-</span><span data-line="30">
-</span><span data-line="31">    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;litestar&quot;</span><span class="p">)</span>
-</span><span data-line="32"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The name of the application to use in the metrics.&quot;&quot;&quot;</span>
-</span><span data-line="33">    <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;litestar&quot;</span>
-</span><span data-line="34"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The prefix to use for the metrics.&quot;&quot;&quot;</span>
-</span><span data-line="35">    <span class="n">labels</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="36"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A mapping of labels to add to the metrics. The values can be either a string or a callable that returns a string.&quot;&quot;&quot;</span>
-</span><span data-line="37">    <span class="n">exemplars</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">],</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="38"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A callable that returns a list of exemplars to add to the metrics. Only supported in opementrics-text exposition format.&quot;&quot;&quot;</span>
-</span><span data-line="39">    <span class="n">buckets</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="40"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of buckets to use for the histogram.&quot;&quot;&quot;</span>
-</span><span data-line="41">    <span class="n">excluded_http_methods</span><span class="p">:</span> <span class="n">Method</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Method</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="42"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of http methods to exclude from the metrics.&quot;&quot;&quot;</span>
-</span><span data-line="43">    <span class="n">exclude_unhandled_paths</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="44"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to ignore requests for unhandled paths from the metrics.&quot;&quot;&quot;</span>
-</span><span data-line="45">    <span class="n">exclude</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="46"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A pattern or list of patterns for routes to exclude from the metrics.&quot;&quot;&quot;</span>
-</span><span data-line="47">    <span class="n">exclude_opt_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="48"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A key or list of keys in ``opt`` with which a route handler can &quot;opt-out&quot; of the middleware.&quot;&quot;&quot;</span>
-</span><span data-line="49">    <span class="n">scopes</span><span class="p">:</span> <span class="n">Scopes</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span data-line="50"><span class="w">    </span><span class="sd">&quot;&quot;&quot;ASGI scopes processed by the middleware, if None both ``http`` and ``websocket`` will be processed.&quot;&quot;&quot;</span>
-</span><span data-line="51">    <span class="n">middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">PrometheusMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">PrometheusMiddleware</span><span class="p">)</span>
-</span><span data-line="52"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The middleware class to use.</span>
-</span><span data-line="53"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="54">    <span class="n">group_path</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="55"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to group paths in the metrics to avoid cardinality explosion.</span>
-</span><span data-line="56"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="57">
-</span><span data-line="58">    <span class="nd">@property</span>
-</span><span data-line="59">    <span class="k">def</span><span class="w"> </span><span class="nf">middleware</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PrometheusMiddleware</span><span class="p">:</span>
-</span><span data-line="60"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an instance of :class:`PrometheusMiddleware &lt;litestar.plugins.prometheus.PrometheusMiddleware&gt;`,</span>
-</span><span data-line="61"><span class="sd">        or a subclass of this middleware, configured from this config instance.</span>
-</span><span data-line="62">
-</span><span data-line="63"><span class="sd">        Returns:</span>
-</span><span data-line="64"><span class="sd">            An instance of :attr:`middleware_class`.</span>
-</span><span data-line="65"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="66">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+</span><span data-line="28"><span class="nd">@dataclass</span>
+</span><span data-line="29"><span class="k">class</span><span class="w"> </span><span class="nc">PrometheusConfig</span><span class="p">:</span>
+</span><span data-line="30"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration class for the PrometheusConfig middleware.&quot;&quot;&quot;</span>
+</span><span data-line="31">
+</span><span data-line="32">    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;litestar&quot;</span><span class="p">)</span>
+</span><span data-line="33"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The name of the application to use in the metrics.&quot;&quot;&quot;</span>
+</span><span data-line="34">    <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;litestar&quot;</span>
+</span><span data-line="35"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The prefix to use for the metrics.&quot;&quot;&quot;</span>
+</span><span data-line="36">    <span class="n">labels</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="37"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A mapping of labels to add to the metrics. The values can be either a string or a callable that returns a string.&quot;&quot;&quot;</span>
+</span><span data-line="38">    <span class="n">exemplars</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Request</span><span class="p">],</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="39"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A callable that returns a list of exemplars to add to the metrics. Only supported in opementrics-text exposition format.&quot;&quot;&quot;</span>
+</span><span data-line="40">    <span class="n">buckets</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="41"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of buckets to use for the histogram.&quot;&quot;&quot;</span>
+</span><span data-line="42">    <span class="n">excluded_http_methods</span><span class="p">:</span> <span class="n">Method</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Method</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="43"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of http methods to exclude from the metrics.&quot;&quot;&quot;</span>
+</span><span data-line="44">    <span class="n">exclude_unhandled_paths</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="45"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to ignore requests for unhandled paths from the metrics.&quot;&quot;&quot;</span>
+</span><span data-line="46">    <span class="n">exclude</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="47"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A pattern or list of patterns for routes to exclude from the metrics.&quot;&quot;&quot;</span>
+</span><span data-line="48">    <span class="n">exclude_opt_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="49"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A key or list of keys in ``opt`` with which a route handler can &quot;opt-out&quot; of the middleware.&quot;&quot;&quot;</span>
+</span><span data-line="50">    <span class="n">scopes</span><span class="p">:</span> <span class="n">Scopes</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span data-line="51"><span class="w">    </span><span class="sd">&quot;&quot;&quot;ASGI scopes processed by the middleware, if None both ``http`` and ``websocket`` will be processed.&quot;&quot;&quot;</span>
+</span><span data-line="52">    <span class="n">middleware_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">PrometheusMiddleware</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">PrometheusMiddleware</span><span class="p">)</span>
+</span><span data-line="53"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The middleware class to use.</span>
+</span><span data-line="54"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="55">    <span class="n">group_path</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="56"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Whether to group paths in the metrics to avoid cardinality explosion.</span>
+</span><span data-line="57"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="58">
+</span><span data-line="59">    <span class="nd">@property</span>
+</span><span data-line="60">    <span class="k">def</span><span class="w"> </span><span class="nf">middleware</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PrometheusMiddleware</span><span class="p">:</span>
+</span><span data-line="61"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an instance of :class:`PrometheusMiddleware &lt;litestar.plugins.prometheus.PrometheusMiddleware&gt;`,</span>
+</span><span data-line="62"><span class="sd">        or a subclass of this middleware, configured from this config instance.</span>
+</span><span data-line="63">
+</span><span data-line="64"><span class="sd">        .. deprecated:: 3.0</span>
+</span><span data-line="65"><span class="sd">            Construct a :class:`~litestar.plugins.prometheus.PrometheusMiddleware` instance directly and</span>
+</span><span data-line="66"><span class="sd">            pass it to the middleware list instead, e.g. ``middleware=[PrometheusMiddleware()]``.</span>
+</span><span data-line="67">
+</span><span data-line="68"><span class="sd">        Returns:</span>
+</span><span data-line="69"><span class="sd">            An instance of :attr:`middleware_class`.</span>
+</span><span data-line="70"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="71">        <span class="n">warn_deprecation</span><span class="p">(</span>
+</span><span data-line="72">            <span class="n">version</span><span class="o">=</span><span class="s2">&quot;3.0&quot;</span><span class="p">,</span>
+</span><span data-line="73">            <span class="n">deprecated_name</span><span class="o">=</span><span class="s2">&quot;PrometheusConfig.middleware&quot;</span><span class="p">,</span>
+</span><span data-line="74">            <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;property&quot;</span><span class="p">,</span>
+</span><span data-line="75">            <span class="n">removal_in</span><span class="o">=</span><span class="s2">&quot;4.0&quot;</span><span class="p">,</span>
+</span><span data-line="76">            <span class="n">alternative</span><span class="o">=</span><span class="s2">&quot;PrometheusMiddleware&quot;</span><span class="p">,</span>
+</span><span data-line="77">            <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Construct a PrometheusMiddleware instance directly and pass it to the middleware list&quot;</span><span class="p">,</span>
+</span><span data-line="78">        <span class="p">)</span>
+</span><span data-line="79">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">middleware_class</span><span class="p">(</span>
+</span><span data-line="80">            <span class="n">app_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span>
+</span><span data-line="81">            <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+</span><span data-line="82">            <span class="n">labels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
+</span><span data-line="83">            <span class="n">exemplars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exemplars</span><span class="p">,</span>
+</span><span data-line="84">            <span class="n">buckets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">buckets</span><span class="p">,</span>
+</span><span data-line="85">            <span class="n">excluded_http_methods</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">excluded_http_methods</span><span class="p">,</span>
+</span><span data-line="86">            <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
+</span><span data-line="87">            <span class="n">exclude_opt_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
+</span><span data-line="88">            <span class="n">scopes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scopes</span><span class="p">,</span>
+</span><span data-line="89">            <span class="n">group_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">group_path</span><span class="p">,</span>
+</span><span data-line="90">        <span class="p">)</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">

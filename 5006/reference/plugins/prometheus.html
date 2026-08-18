@@ -497,7 +497,6 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware"><code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware.__init__"><code class="docutils literal notranslate">__init__()</span></code></a></li>
-<li><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware.from_config"><code class="docutils literal notranslate">from_config()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware.handle"><code class="docutils literal notranslate">handle()</span></code></a></li>
 </ul>
 </li>
@@ -668,6 +667,10 @@ data-aria-dark="Switch to auto color mode">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">middleware</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware" title="litestar.plugins.prometheus.middleware.PrometheusMiddleware"><span class="pre">PrometheusMiddleware</span></a></span><a class="headerlink" href="#litestar.plugins.prometheus.PrometheusConfig.middleware" title="Link to this definition">¶</a></dt>
 <dd><p>Create an instance of <a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware" title="litestar.plugins.prometheus.PrometheusMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code></a>,
 or a subclass of this middleware, configured from this config instance.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.0: </span>Construct a <a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware" title="litestar.plugins.prometheus.PrometheusMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code></a> instance directly and
+pass it to the middleware list instead, e.g. <code class="docutils literal notranslate"><span class="pre">middleware=[PrometheusMiddleware()]</span></code>.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>An instance of <a class="reference internal" href="#litestar.plugins.prometheus.PrometheusConfig.middleware_class" title="litestar.plugins.prometheus.PrometheusConfig.middleware_class"><code class="xref py py-attr docutils literal notranslate"><span class="pre">middleware_class</span></code></a>.</p>
@@ -914,12 +917,6 @@ filtered by scope type.</p></li>
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.plugins.prometheus.PrometheusMiddleware.from_config">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusConfig" title="litestar.plugins.prometheus.PrometheusConfig"><span class="pre">PrometheusConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.plugins.prometheus.PrometheusMiddleware" title="litestar.plugins.prometheus.PrometheusMiddleware"><span class="pre">PrometheusMiddleware</span></a></span></span><a class="reference internal" href="../../_modules/litestar/plugins/prometheus/middleware.html#PrometheusMiddleware.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.plugins.prometheus.PrometheusMiddleware.from_config" title="Link to this definition">¶</a></dt>
-<dd><p>Create an instance from a <a class="reference internal" href="#litestar.plugins.prometheus.PrometheusConfig" title="litestar.plugins.prometheus.PrometheusConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrometheusConfig</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">

@@ -364,12 +364,15 @@ attribute of each layer.
 Subclasses must also rename ``__call__`` to ``handle``, which receives the next ASGI app
 as an additional ``next_app`` argument in place of ``self.app``.
 
-For rate limiting and Prometheus metrics, the ``middleware`` property of
-:class:`~litestar.middleware.rate_limit.RateLimitConfig` and
-:class:`~litestar.plugins.prometheus.PrometheusConfig` now returns a configured
-middleware instance instead of a ``DefineMiddleware`` - applications using
-``middleware=[config.middleware]`` are unaffected. The ``exclude`` patterns of both
-configs are now matched against the **handler's path template** (e.g.
+For rate limiting and Prometheus metrics,
+:class:`~litestar.middleware.rate_limit.RateLimitMiddleware` and
+:class:`~litestar.plugins.prometheus.PrometheusMiddleware` are now directly
+constructible, making the :class:`~litestar.middleware.rate_limit.RateLimitConfig` and
+:class:`~litestar.plugins.prometheus.PrometheusConfig` objects obsolete: their
+``middleware`` properties are deprecated and will be removed in ``4.0``. Pass a
+configured middleware instance to the middleware list instead, e.g.
+``middleware=[RateLimitMiddleware(rate_limit=("minute", 10))]``. The ``exclude``
+patterns of both middleware are now matched against the **handler's path template** (e.g.
 ``/user/{user_id:int}``) at startup, instead of the request path (e.g. ``/user/1``) at
 runtime, and handlers excluded via ``exclude`` or ``exclude_opt_key`` bypass the
 middleware entirely at startup rather than per request.

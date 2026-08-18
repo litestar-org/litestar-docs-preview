@@ -472,7 +472,6 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware"><code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware.scopes"><code class="docutils literal notranslate">scopes</span></code></a></li>
 <li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware.__init__"><code class="docutils literal notranslate">__init__()</span></code></a></li>
-<li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware.from_config"><code class="docutils literal notranslate">from_config()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware.handle"><code class="docutils literal notranslate">handle()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware.create_send_wrapper"><code class="docutils literal notranslate">create_send_wrapper()</span></code></a></li>
 <li><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware.retrieve_cached_history"><code class="docutils literal notranslate">retrieve_cached_history()</span></code></a></li>
@@ -687,23 +686,11 @@ should be checked for rate limiting.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="litestar.middleware.rate_limit.RateLimitConfig.middleware">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">middleware</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><span class="pre">RateLimitMiddleware</span></a></span><a class="headerlink" href="#litestar.middleware.rate_limit.RateLimitConfig.middleware" title="Link to this definition">¶</a></dt>
-<dd><p>Use this property to insert the config into a middleware list on one of the application layers.</p>
-<div class="admonition-examples admonition">
-<p class="admonition-title">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">Request</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitConfig</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="c1"># limit to 10 requests per minute, excluding the schema path</span>
-</span><span data-line="5"><span class="n">throttle_config</span> <span class="o">=</span> <span class="n">RateLimitConfig</span><span class="p">(</span><span class="n">rate_limit</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/schema&quot;</span><span class="p">])</span>
-</span><span data-line="6">
-</span><span data-line="7">
-</span><span data-line="8"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span data-line="9"><span class="k">def</span><span class="w"> </span><span class="nf">my_handler</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-</span><span data-line="10">
-</span><span data-line="11">
-</span><span data-line="12"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">my_handler</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">throttle_config</span><span class="o">.</span><span class="n">middleware</span><span class="p">])</span>
-</span></pre></div>
-</div>
+<dd><p>Create an instance of <a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitConfig.middleware_class" title="litestar.middleware.rate_limit.RateLimitConfig.middleware_class"><code class="xref py py-attr docutils literal notranslate"><span class="pre">middleware_class</span></code></a>, configured from this config instance.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 3.0: </span>Construct a <a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code></a> instance directly and pass it to the
+middleware list instead, e.g.
+<code class="docutils literal notranslate"><span class="pre">middleware=[RateLimitMiddleware(rate_limit=(&quot;minute&quot;,</span> <span class="pre">10),</span> <span class="pre">exclude=[&quot;/schema&quot;])]</span></code>.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -757,12 +744,6 @@ handler path.</p></li>
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="litestar.middleware.rate_limit.RateLimitMiddleware.from_config">
-<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitConfig" title="litestar.middleware.rate_limit.RateLimitConfig"><span class="pre">RateLimitConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><span class="pre">RateLimitMiddleware</span></a></span></span><a class="reference internal" href="../../_modules/litestar/middleware/rate_limit.html#RateLimitMiddleware.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#litestar.middleware.rate_limit.RateLimitMiddleware.from_config" title="Link to this definition">¶</a></dt>
-<dd><p>Create an instance from a <a class="reference internal" href="#litestar.middleware.rate_limit.RateLimitConfig" title="litestar.middleware.rate_limit.RateLimitConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitConfig</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py method">
