@@ -890,15 +890,16 @@ instance, a middleware stack can no longer be introspected by walking the <code 
 attribute of each layer.</p>
 <p>Subclasses must also rename <code class="docutils literal notranslate"><span class="pre">__call__</span></code> to <code class="docutils literal notranslate"><span class="pre">handle</span></code>, which receives the next ASGI app
 as an additional <code class="docutils literal notranslate"><span class="pre">next_app</span></code> argument in place of <code class="docutils literal notranslate"><span class="pre">self.app</span></code>.</p>
-<p>For rate limiting, <a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig.middleware" title="litestar.middleware.rate_limit.RateLimitConfig.middleware"><code class="xref py py-attr docutils literal notranslate"><span class="pre">middleware</span></code></a>
-now returns a configured <a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code></a>
-instance instead of a <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code> - applications using
-<code class="docutils literal notranslate"><span class="pre">middleware=[rate_limit_config.middleware]</span></code> are unaffected. The
-<a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig.exclude" title="litestar.middleware.rate_limit.RateLimitConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are now matched
-against the <strong>handler’s path template</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) at startup,
-instead of the request path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>) at runtime, and handlers excluded via
-<code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> bypass the middleware entirely at startup rather than
-per request.</p>
+<p>For rate limiting, <a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code></a> is now
+directly constructible, making the
+<a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig" title="litestar.middleware.rate_limit.RateLimitConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitConfig</span></code></a> object obsolete: its
+<code class="docutils literal notranslate"><span class="pre">middleware</span></code> property is deprecated and will be removed in <code class="docutils literal notranslate"><span class="pre">4.0</span></code>. Pass a configured
+middleware instance to the middleware list instead, e.g.
+<code class="docutils literal notranslate"><span class="pre">middleware=[RateLimitMiddleware(rate_limit=(&quot;minute&quot;,</span> <span class="pre">10))]</span></code>. The <code class="docutils literal notranslate"><span class="pre">exclude</span></code>
+patterns are now matched against the <strong>handler’s path template</strong> (e.g.
+<code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) at startup, instead of the request path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>) at
+runtime, and handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> bypass the
+middleware entirely at startup rather than per request.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../usage/middleware/creating-middleware.html#asgi-middleware-migration"><span class="std std-ref">Migrating from MiddlewareProtocol / AbstractMiddleware</span></a></p>
