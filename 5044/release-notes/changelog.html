@@ -1050,12 +1050,17 @@ to indicate whether to bypass the middleware for the current request.</p>
 <dt>Remove duplicated JWT token validation<a class="headerlink reference internal" href="#3.0.0-remove duplicated jwt token validation" id="3.0.0-remove duplicated jwt token validation">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p><code class="docutils literal notranslate"><span class="pre">Token.__post_init__</span></code> checked <code class="docutils literal notranslate"><span class="pre">exp</span></code> and <code class="docutils literal notranslate"><span class="pre">iat</span></code> a second time, after PyJWT
 had already checked them while decoding.</p>
-<p>Incoming tokens are now checked by PyJWT only. The check that a new token is not
-already expired moved to <code class="docutils literal notranslate"><span class="pre">Token.validate_issued_claims</span></code>, which is called by
-<code class="docutils literal notranslate"><span class="pre">Token.encode</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Token(sub=...,</span> <span class="pre">exp=&lt;in</span> <span class="pre">the</span> <span class="pre">past&gt;)</span></code> no longer raises an error when it is
-created - it raises from <code class="docutils literal notranslate"><span class="pre">encode()</span></code> instead. Token subclasses that override
-<code class="docutils literal notranslate"><span class="pre">__post_init__</span></code> to issue such tokens must now override <code class="docutils literal notranslate"><span class="pre">validate_issued_claims</span></code>.</p>
+<p>Incoming tokens are now checked by PyJWT. The checks that a new token is not
+already expired, and was not issued in the future, moved to <code class="docutils literal notranslate"><span class="pre">Token.validate_issued_claims</span></code>,
+which is called by <code class="docutils literal notranslate"><span class="pre">Token.encode</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Token(sub=...,</span> <span class="pre">exp=&lt;in</span> <span class="pre">the</span> <span class="pre">past&gt;)</span></code> no longer raises an error when it is created - it
+raises from <code class="docutils literal notranslate"><span class="pre">encode()</span></code> instead. The same is true of <code class="docutils literal notranslate"><span class="pre">Token(sub=...,</span> <span class="pre">iat=&lt;in</span> <span class="pre">the</span> <span class="pre">future&gt;)</span></code>.
+Token subclasses that override <code class="docutils literal notranslate"><span class="pre">__post_init__</span></code> to issue such tokens must now override
+<code class="docutils literal notranslate"><span class="pre">validate_issued_claims</span></code>.</p>
+<p>These changes also fix the <code class="docutils literal notranslate"><span class="pre">verify_expiry</span></code> parameter.</p>
+<p>If you override <code class="docutils literal notranslate"><span class="pre">Token.decode_payload</span></code>, your override is now responsible for the <code class="docutils literal notranslate"><span class="pre">exp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">iat</span></code> and <code class="docutils literal notranslate"><span class="pre">nbf</span></code> claims. Before, <code class="docutils literal notranslate"><span class="pre">__post_init__</span></code> caught an expired token even if the
+override did not.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5044">https://github.com/litestar-org/litestar/pull/5044</a></span></p>
 </div>
 </dd>
