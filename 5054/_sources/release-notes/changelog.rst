@@ -8,7 +8,7 @@
 
     .. change:: Add hash-based storage strategy to ``RedisStore``
         :type: feature
-        :pr: 0000
+        :pr: 5054
         :issue: 4992
         :breaking:
 
