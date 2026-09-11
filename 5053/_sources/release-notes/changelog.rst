@@ -8,7 +8,7 @@
 
     .. change:: Fix ``RedisStore.get`` truncating ``renew_for`` timedeltas of one day or more
         :type: bugfix
-        :pr: 0000
+        :pr: 5053
 
         :meth:`RedisStore.get <litestar.stores.redis.RedisStore.get>` converted a
         :class:`~datetime.timedelta` ``renew_for`` value with ``timedelta.seconds``, which drops the
