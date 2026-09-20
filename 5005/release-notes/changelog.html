@@ -583,6 +583,15 @@ middleware entirely at startup rather than per request.</p></li>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5005">https://github.com/litestar-org/litestar/pull/5005</a></span></p>
 </div>
 </dd>
+<dt>Add support for <code class="docutils literal notranslate"><span class="pre">leeway</span></code> parameter in JWT security backends<a class="headerlink reference internal" href="#3.0.0-add support for" id="3.0.0-add support for">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Add support for <code class="docutils literal notranslate"><span class="pre">leeway</span></code> parameter in JWT security backends, which allows set
+a number of potential seconds as a clock error for expired tokens.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Token.decode</span></code> and <code class="docutils literal notranslate"><span class="pre">Token.decode_payload</span></code> now take a <code class="docutils literal notranslate"><span class="pre">leeway</span></code> argument.
+Custom token classes overriding either method must accept it and forward to
+<code class="docutils literal notranslate"><span class="pre">super()</span></code>, otherwise decoding raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4584">https://github.com/litestar-org/litestar/issues/4584</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5037">https://github.com/litestar-org/litestar/pull/5037</a></span></p>
+</div>
+</dd>
 <dt>Return HTTP 413 when the multipart form part limit is exceeded<a class="headerlink reference internal" href="#3.0.0-return http 413 when the multipart form part limit is exceeded" id="3.0.0-return http 413 when the multipart form part limit is exceeded">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Exceeding the configured multipart form part limit now returns
 <code class="docutils literal notranslate"><span class="pre">413</span> <span class="pre">Request</span> <span class="pre">Entity</span> <span class="pre">Too</span> <span class="pre">Large</span></code> instead of <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code>.</p>
@@ -930,8 +939,8 @@ exception, it will be the ASGI server that creates a
 and <code class="docutils literal notranslate"><span class="pre">litestar.plugins.sqlalchemy</span></code> modules have been completely removed. Users must now
 import directly from <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.extensions.litestar</span></code>.</p>
 <p>Migration:
-- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.contrib.sqlalchemy</span> <span class="pre">import</span> <span class="pre">X</span></code> → <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">X</span></code>
-- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.plugins.sqlalchemy</span> <span class="pre">import</span> <span class="pre">Y</span></code> → <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">Y</span></code></p>
+- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.contrib.sqlalchemy</span> <span class="pre">import</span> <span class="pre">X</span></code> â†’ <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">X</span></code>
+- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.plugins.sqlalchemy</span> <span class="pre">import</span> <span class="pre">Y</span></code> â†’ <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">Y</span></code></p>
 <p>This completes the separation of concerns, with advanced-alchemy being the sole provider
 of SQLAlchemy integration for Litestar.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4340">https://github.com/litestar-org/litestar/pull/4340</a></span></p>
@@ -1205,7 +1214,7 @@ causing the generated schema to diverge from the OpenAPI 3.1.0 specification.</p
 <p>This affected all model types: dataclasses, msgspec Structs, attrs classes, and
 Pydantic models. For example, a field <code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span></code> with no default was
 previously excluded from <code class="docutils literal notranslate"><span class="pre">required</span></code>; it is now correctly included.</p>
-<p>Runtime request validation behavior is unchanged — nullable parameters without
+<p>Runtime request validation behavior is unchanged â€” nullable parameters without
 defaults were already enforced as required at the validation layer.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4673">https://github.com/litestar-org/litestar/issues/4673</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4687">https://github.com/litestar-org/litestar/pull/4687</a></span></p>
 </div>

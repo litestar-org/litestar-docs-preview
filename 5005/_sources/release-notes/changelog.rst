@@ -47,6 +47,19 @@
         - Handlers excluded via ``exclude`` or ``exclude_opt_key`` now bypass the
           middleware entirely at startup rather than per request.
 
+    .. change:: Add support for ``leeway`` parameter in JWT security backends
+        :type: feature
+        :pr: 5037
+        :issue: 4584
+        :breaking:
+
+        Add support for ``leeway`` parameter in JWT security backends, which allows set
+        a number of potential seconds as a clock error for expired tokens.
+
+        ``Token.decode`` and ``Token.decode_payload`` now take a ``leeway`` argument.
+        Custom token classes overriding either method must accept it and forward to
+        ``super()``, otherwise decoding raises ``TypeError``.
+
     .. change:: Fix ``TypeError`` when generating a schema for a union of enums
         :type: bugfix
         :pr: 4997
@@ -418,7 +431,7 @@
         Pydantic models. For example, a field ``name: int | None`` with no default was
         previously excluded from ``required``; it is now correctly included.
 
-        Runtime request validation behavior is unchanged — nullable parameters without
+        Runtime request validation behavior is unchanged â€” nullable parameters without
         defaults were already enforced as required at the validation layer.
 
     .. change:: Drop support for Pydantic 1
@@ -517,8 +530,8 @@
         import directly from ``advanced_alchemy.extensions.litestar``.
 
         Migration:
-        - ``from litestar.contrib.sqlalchemy import X`` → ``from advanced_alchemy.extensions.litestar import X``
-        - ``from litestar.plugins.sqlalchemy import Y`` → ``from advanced_alchemy.extensions.litestar import Y``
+        - ``from litestar.contrib.sqlalchemy import X`` â†’ ``from advanced_alchemy.extensions.litestar import X``
+        - ``from litestar.plugins.sqlalchemy import Y`` â†’ ``from advanced_alchemy.extensions.litestar import Y``
 
         This completes the separation of concerns, with advanced-alchemy being the sole provider
         of SQLAlchemy integration for Litestar.
