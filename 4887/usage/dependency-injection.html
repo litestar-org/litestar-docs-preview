@@ -63,7 +63,7 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about/organization">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -263,7 +263,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
@@ -879,7 +878,7 @@ re-raise</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Exceptions raised during the cleanup step of a dependency will be re-raised in an
-<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ExceptionGroup" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a> (for Python versions &lt; 3.11, the
+<a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ExceptionGroup" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a> (for Python versions &lt; 3.11, the
 <a class="reference external" href="https://github.com/agronholm/exceptiongroup">exceptiongroup</a> will be used). This
 happens after all dependencies have been cleaned up, so exceptions raised during
 cleanup of one dependencies do not affect the cleanup of other dependencies.</p>

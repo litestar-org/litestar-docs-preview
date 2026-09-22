@@ -63,7 +63,7 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about/organization">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -263,7 +263,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/data_extractors.html">data_extractors</a></li>
@@ -658,7 +657,7 @@ indicating what it changes. The style of the PR title should also follow
 Check <a class="reference internal" href="reference/types.html"><span class="doc">types</span></a> if a type alias for your use case already exists</p></li>
 <li><p>If something cannot be typed correctly due to a limitation of the type checkers, you may use <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.cast" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.cast()</span></code></a>
 to rectify the situation. However, you should only use this as a last resort if you’ve exhausted all other options
-of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/library/functions.html#isinstance" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
+of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#isinstance" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
 and <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeGuard">type guards</a>.</p></li>
 <li><p>You may use a properly scoped <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">ignore</span></code> if you ensured that a line is correct, but mypy / pyright has
 issues with it.</p>

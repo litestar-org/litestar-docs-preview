@@ -63,7 +63,7 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about/organization">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -263,7 +263,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../reference/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/config.html">config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/connection.html">connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/contrib/index.html">contrib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/controller.html">controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/concurrency.html">concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/data_extractors.html">data_extractors</a></li>
@@ -625,7 +624,7 @@ framework.</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="../../reference/plugins/index.html#litestar.plugins.SerializationPlugin" title="litestar.plugins.SerializationPlugin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">supports_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">bool:</span></code></a></p></li>
 </ol>
-<p>The method takes a <a class="reference internal" href="../../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance as an argument and returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>
+<p>The method takes a <a class="reference internal" href="../../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance as an argument and returns a <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>
 indicating whether the plugin supports serialization for that type.</p>
 <ol class="arabic simple" start="2">
 <li><p><a class="reference internal" href="../../reference/plugins/index.html#litestar.plugins.SerializationPlugin.create_dto_for_type" title="litestar.plugins.SerializationPlugin.create_dto_for_type"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_dto_for_type(self,</span> <span class="pre">field_definition:</span> <span class="pre">FieldDefinition)</span> <span class="pre">-&gt;</span> <span class="pre">type[AbstractDTO]:</span></code></a></p></li>
@@ -692,7 +691,7 @@ that annotation.</p>
 </span></pre></div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">CompanySerializationPlugin.supports_type()</span></code> returns a <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> indicating whether the plugin should be used for
+<p><code class="docutils literal notranslate"><span class="pre">CompanySerializationPlugin.supports_type()</span></code> returns a <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a> indicating whether the plugin should be used for
 a given type. The example unwraps collection annotations (<code class="docutils literal notranslate"><span class="pre">list[Company]</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple[Company,</span> <span class="pre">...]</span></code>, etc.) so that a
 handler returning either <code class="docutils literal notranslate"><span class="pre">Company</span></code> or a collection of <code class="docutils literal notranslate"><span class="pre">Company</span></code> instances is recognised as the same underlying model.</p>
 <p><code class="docutils literal notranslate"><span class="pre">CompanySerializationPlugin.create_dto_for_type()</span></code> receives the same <a class="reference internal" href="../../reference/typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a>
