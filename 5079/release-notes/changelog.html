@@ -1047,6 +1047,17 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Fix invalid OpenAPI security scheme for <code class="docutils literal notranslate"><span class="pre">JWTCookieAuth</span></code><a class="headerlink reference internal" href="#3.0.0-fix invalid openapi security scheme for" id="3.0.0-fix invalid openapi security scheme for">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">JWTCookieAuth</span></code> generated an OpenAPI security scheme that mixed <code class="docutils literal notranslate"><span class="pre">http</span></code>
+fields (<code class="docutils literal notranslate"><span class="pre">scheme</span></code>, <code class="docutils literal notranslate"><span class="pre">bearerFormat</span></code>) with <code class="docutils literal notranslate"><span class="pre">apiKey</span></code> fields (<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">in</span></code>),
+which is invalid. It is now documented as <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">apiKey</span></code> with <code class="docutils literal notranslate"><span class="pre">in:</span> <span class="pre">cookie</span></code>
+and <code class="docutils literal notranslate"><span class="pre">name</span></code> set to <code class="docutils literal notranslate"><span class="pre">JWTCookieAuth.key</span></code>.</p>
+<p>The default <code class="docutils literal notranslate"><span class="pre">openapi_security_scheme_name</span></code> changed from <code class="docutils literal notranslate"><span class="pre">BearerToken</span></code> to
+<code class="docutils literal notranslate"><span class="pre">CookieToken</span></code>. Set <code class="docutils literal notranslate"><span class="pre">openapi_security_scheme_name=&quot;BearerToken&quot;</span></code> to keep
+the previous name.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5079">https://github.com/litestar-org/litestar/pull/5079</a></span></p>
+</div>
+</dd>
 <dt>Fix <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> when generating a schema for a union of enums<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Annotating a handler with a union whose members are all enums (e.g.
 <code class="docutils literal notranslate"><span class="pre">Color</span> <span class="pre">|</span> <span class="pre">Size</span></code>) crashed schema generation with <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">issubclass()</span>
