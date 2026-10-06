@@ -657,7 +657,7 @@ indicating what it changes. The style of the PR title should also follow
 Check <a class="reference internal" href="reference/types.html"><span class="doc">types</span></a> if a type alias for your use case already exists</p></li>
 <li><p>If something cannot be typed correctly due to a limitation of the type checkers, you may use <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.cast" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.cast()</span></code></a>
 to rectify the situation. However, you should only use this as a last resort if you’ve exhausted all other options
-of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/library/functions.html#isinstance" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
+of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#isinstance" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
 and <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeGuard">type guards</a>.</p></li>
 <li><p>You may use a properly scoped <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">ignore</span></code> if you ensured that a line is correct, but mypy / pyright has
 issues with it.</p>
@@ -709,9 +709,9 @@ enforce type safety. You can run them with:</p>
 </section>
 <section id="project-documentation">
 <h2>Project documentation<a class="headerlink" href="#project-documentation" title="Link to this heading">¶</a></h2>
-<p>The documentation is located in the <code class="docutils literal notranslate"><span class="pre">/docs</span></code> directory and is written  in
-<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a> with the <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>.
-library. If you’re unfamiliar with any of those,
+<p>The documentation is located in the <code class="docutils literal notranslate"><span class="pre">/docs</span></code> directory and is written in
+<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a> with the
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> library. If you’re unfamiliar with any of those,
 <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">reStructuredText primer</a> and
 <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">Sphinx quickstart</a> are recommended reads.</p>
 <section id="docs-theme-and-appearance">
@@ -775,7 +775,7 @@ to test them alongside the rest of the test suite, ensuring they do not become s
 <section id="automatically-execute-examples">
 <h4>Automatically execute examples<a class="headerlink" href="#automatically-execute-examples" title="Link to this heading">¶</a></h4>
 <p>Our docs include a Sphinx extension that can automatically run requests against example apps
-and include their result in the documentation page when its being built. This only requires 2 steps:</p>
+and include their result in the documentation page when it’s being built. This only requires 2 steps:</p>
 <ol class="arabic simple">
 <li><p>Create an example file with an <code class="docutils literal notranslate"><span class="pre">app</span></code> object in it, which is an instance of <code class="docutils literal notranslate"><span class="pre">Litestar</span></code></p></li>
 <li><p>Add a comment in the form of <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">run:</span> <span class="pre">/hello</span></code> to the example file</p></li>
