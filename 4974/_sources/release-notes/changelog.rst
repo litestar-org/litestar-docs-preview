@@ -6,6 +6,74 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
+    .. change:: Remove support for implicitly declared request parameters
+        :type: feature
+        :breaking:
+        :pr:
+
+        Remove the deprecated implicit request parameter declaration. All request
+        parameters must now be explicitly marked (e.g. with
+        :data:`~litestar.params.FromQuery`).
+
+        .. list-table::
+            :header-rows: 1
+            :widths: 45 55
+
+            * - Deprecated
+              - Use instead
+            * - ``def h(name: str)`` *(implicit query parameter)*
+              - ``def h(name: FromQuery[str])``
+            * - ``def h(user_id: int)`` *(implicit path parameter)*
+              - ``def h(user_id: FromPath[int])``
+            * - ``Annotated[str, Parameter(query="alias")]``
+              - ``Annotated[str, QueryParameter(name="alias")]``
+            * - ``Annotated[str, Parameter(header="X-API-KEY")]``
+              - ``Annotated[str, HeaderParameter(name="X-API-KEY")]``
+            * - ``Annotated[str, Parameter(cookie="session")]``
+              - ``Annotated[str, CookieParameter(name="session")]``
+            * - ``name: str = Parameter(...)`` *(default-value style)*
+              - ``name: Annotated[str, QueryParameter(...)]``
+
+        .. seealso::
+            :doc:`/usage/routing/parameters`
+
+    .. change:: Only read parameters marked as path parameters from the path
+        :type: bugfix
+        :pr: 5128
+        :breaking:
+
+        A parameter whose name matched a path segment was read from the path even when it
+        was marked with ``FromQuery``, ``FromHeader``, ``FromCookie`` or the corresponding
+        ``Parameter`` kwarg, and was documented as a path parameter. Such a parameter is
+        now read from, and documented at, the location it is marked with.
+
+        A parameter named like a path segment that declares no location, the deprecated
+        inferred path parameter style, now raises ``ImproperlyConfiguredException`` when
+        the application is created. Declare it with ``FromPath``.
+
+    .. change:: Add support for ``leeway`` parameter in JWT security backends
+        :type: feature
+        :pr: 5037
+        :issue: 4584
+        :breaking:
+
+        Add support for ``leeway`` parameter in JWT security backends, which allows set
+        a number of potential seconds as a clock error for expired tokens.
+
+        ``Token.decode`` and ``Token.decode_payload`` now take a ``leeway`` argument.
+        Custom token classes overriding either method must accept it and forward to
+        ``super()``, otherwise decoding raises ``TypeError``.
+
+    .. change:: Fix ``TypeError`` when generating a schema for a union of enums
+        :type: bugfix
+        :pr: 4997
+
+        Annotating a handler with a union whose members are all enums (e.g.
+        ``Color | Size``) crashed schema generation with ``TypeError: issubclass()
+        arg 1 must be a class``, as the union was dispatched to the enum schema
+        handler. Such unions are now documented as a ``oneOf`` with a component
+        schema per enum.
+
     .. change:: Return HTTP 413 when the multipart form part limit is exceeded
         :type: feature
         :pr: 4990
@@ -25,6 +93,50 @@
         Applications using ``RapidocRenderPlugin`` should migrate to another bundled UI
         plugin, such as ``ScalarRenderPlugin`` (the default), ``SwaggerRenderPlugin``,
         ``RedocRenderPlugin`` or ``StoplightRenderPlugin``.
+
+    .. change:: Migrate ``ResponseCacheMiddleware`` to ``ASGIMiddleware``
+        :type: feature
+        :pr: 4953
+        :issue: 4009
+        :breaking:
+
+        ``ResponseCacheMiddleware`` has been moved from the legacy ``AbstractMiddleware``
+        base to :class:`~litestar.middleware.ASGIMiddleware`, as part of migrating all
+        built-in middleware off the legacy bases. It now lives in
+        ``litestar.middleware._internal``, removing it from the public API.
+
+        .. note::
+            The move into ``litestar.middleware._internal`` does not affect usage:
+            the middleware was only ever applied internally by Litestar to begin with.
+
+        Applications that configure response caching through
+        :class:`~litestar.config.response_cache.ResponseCacheConfig` and the handler-level
+        ``cache`` argument are unaffected -- Litestar constructs the middleware itself.
+
+        Code composing the middleware directly into an ASGI stack must drop the ``app``
+        argument, pass the settings as keyword arguments rather than a
+        ``ResponseCacheConfig``, and apply the instance to the next ASGI app:
+
+        .. code-block:: python
+
+            # before
+            middleware = ResponseCacheMiddleware(app=next_app, config=response_cache_config)
+
+            # after
+            middleware = ResponseCacheMiddleware(
+                default_expiration=response_cache_config.default_expiration,
+                key_builder=response_cache_config.key_builder,
+                store=response_cache_config.store,
+                cache_response_filter=response_cache_config.cache_response_filter,
+            )
+            asgi_app = middleware(next_app)
+
+        Since ``ASGIMiddleware.__call__`` returns a closure rather than the middleware
+        instance, a middleware stack can no longer be introspected by walking the ``.app``
+        attribute of each layer.
+
+        .. seealso::
+            :ref:`asgi-middleware-migration`
 
     .. change:: Migrate ``CORSMiddleware`` to ``ASGIMiddleware``
         :type: feature
@@ -63,6 +175,18 @@
         .. seealso::
             :ref:`asgi-middleware-migration`
 
+    .. change:: Stop caching responses of handlers that do not enable caching
+        :type: bugfix
+        :pr: 4953
+
+        ``ResponseCacheMiddleware`` is applied per route, so a handler that never set
+        ``cache`` still had its responses written to the store when it shared a path with
+        a handler that did -- for example a ``POST`` handler on a path whose ``GET``
+        handler sets ``cache=True``. Those entries were written on every request, without
+        an expiry, and were never read back, since responses are only served from the
+        cache for handlers that enable it.
+
+        The middleware now passes such requests through untouched.
     .. change:: Harden the PsycoPg channels listener
         :type: bugfix
 
