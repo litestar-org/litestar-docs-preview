@@ -547,6 +547,113 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Require “reserved kwargs” to be declared with their type<a class="headerlink reference internal" href="#3.0.0-require &quot;reserved kwargs&quot; to be declared with their type" id="3.0.0-require &quot;reserved kwargs&quot; to be declared with their type">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Declaring the “reserved kwargs” <code class="docutils literal notranslate"><span class="pre">body</span></code>, <code class="docutils literal notranslate"><span class="pre">cookies</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>,
+<code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code>, <code class="docutils literal notranslate"><span class="pre">request</span></code>, <code class="docutils literal notranslate"><span class="pre">scope</span></code> and <code class="docutils literal notranslate"><span class="pre">socket</span></code> without the type
+listed below, or with a different one, raises
+<a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ImproperlyConfiguredException" title="litestar.exceptions.ImproperlyConfiguredException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImproperlyConfiguredException</span></code></a> at startup.</p>
+<p>For this, add the types <a class="reference internal" href="../reference/params.html#litestar.params.RawBody" title="litestar.params.RawBody"><code class="xref py py-data docutils literal notranslate"><span class="pre">RawBody</span></code></a>,
+<a class="reference internal" href="../reference/params.html#litestar.params.QueryParams" title="litestar.params.QueryParams"><code class="xref py py-data docutils literal notranslate"><span class="pre">QueryParams</span></code></a> and <a class="reference internal" href="../reference/params.html#litestar.params.RequestCookies" title="litestar.params.RequestCookies"><code class="xref py py-data docutils literal notranslate"><span class="pre">RequestCookies</span></code></a>,
+and the body marker <a class="reference internal" href="../reference/params.html#litestar.params.RequestBody" title="litestar.params.RequestBody"><code class="xref py py-data docutils literal notranslate"><span class="pre">RequestBody</span></code></a>, which declares a body
+of the default media type, <code class="docutils literal notranslate"><span class="pre">application/json</span></code>.</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">body</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/params.html#litestar.params.RawBody" title="litestar.params.RawBody"><code class="xref py py-data docutils literal notranslate"><span class="pre">RawBody</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cookies</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/params.html#litestar.params.RequestCookies" title="litestar.params.RequestCookies"><code class="xref py py-data docutils literal notranslate"><span class="pre">RequestCookies</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
+<td><p>A body marker, e.g. <a class="reference internal" href="../reference/params.html#litestar.params.JSONBody" title="litestar.params.JSONBody"><code class="xref py py-data docutils literal notranslate"><span class="pre">JSONBody</span></code></a> or
+<a class="reference internal" href="../reference/params.html#litestar.params.RequestBody" title="litestar.params.RequestBody"><code class="xref py py-data docutils literal notranslate"><span class="pre">RequestBody</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">headers</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.Headers" title="litestar.datastructures.Headers"><code class="xref py py-class docutils literal notranslate"><span class="pre">Headers</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">query</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/params.html#litestar.params.QueryParams" title="litestar.params.QueryParams"><code class="xref py py-data docutils literal notranslate"><span class="pre">QueryParams</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">request</span></code></p></td>
+<td><p>The request class configured for the handler, or one of its base classes,
+e.g. <a class="reference internal" href="../reference/connection.html#litestar.connection.Request" title="litestar.connection.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scope</span></code></p></td>
+<td><p><a class="reference internal" href="../reference/types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-data docutils literal notranslate"><span class="pre">Scope</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">socket</span></code></p></td>
+<td><p>The websocket class configured for the handler, or one of its base
+classes, e.g. <a class="reference internal" href="../reference/connection.html#litestar.connection.WebSocket" title="litestar.connection.WebSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebSocket</span></code></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">headers</span></code> receives the request’s <a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.Headers" title="litestar.datastructures.Headers"><code class="xref py py-class docutils literal notranslate"><span class="pre">Headers</span></code></a>.
+Before, <code class="docutils literal notranslate"><span class="pre">headers:</span> <span class="pre">dict[str,</span> <span class="pre">str]</span></code> received a <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> and
+<code class="docutils literal notranslate"><span class="pre">headers:</span> <span class="pre">Headers</span></code> failed validation with a <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">-</span> <span class="pre">Bad</span> <span class="pre">Request</span></code>.</p>
+<p>In route handlers, <code class="docutils literal notranslate"><span class="pre">cookies</span></code>, <code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code> and <code class="docutils literal notranslate"><span class="pre">scope</span></code> can also be
+accessed through the request, e.g. <code class="docutils literal notranslate"><span class="pre">request.headers</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/routing/handlers.html#handler-function-kwargs"><span class="std std-ref">“reserved” keyword arguments</span></a></p>
+</div>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5154">https://github.com/litestar-org/litestar/pull/5154</a></span></p>
+</div>
+</dd>
+<dt>Remove support for implicitly declared request parameters<a class="headerlink reference internal" href="#3.0.0-remove support for implicitly declared request parameters" id="3.0.0-remove support for implicitly declared request parameters">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Remove the deprecated implicit request parameter declaration. All request
+parameters must now be explicitly marked (e.g. with
+<a class="reference internal" href="../reference/params.html#litestar.params.FromQuery" title="litestar.params.FromQuery"><code class="xref py py-data docutils literal notranslate"><span class="pre">FromQuery</span></code></a>).</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 45.0%" />
+<col style="width: 55.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Deprecated</p></th>
+<th class="head"><p>Use instead</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">h(name:</span> <span class="pre">str)</span></code> <em>(implicit query parameter)</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">h(name:</span> <span class="pre">FromQuery[str])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">h(user_id:</span> <span class="pre">int)</span></code> <em>(implicit path parameter)</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">h(user_id:</span> <span class="pre">FromPath[int])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Annotated[str,</span> <span class="pre">Parameter(query=&quot;alias&quot;)]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[str,</span> <span class="pre">QueryParameter(name=&quot;alias&quot;)]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Annotated[str,</span> <span class="pre">Parameter(header=&quot;X-API-KEY&quot;)]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[str,</span> <span class="pre">HeaderParameter(name=&quot;X-API-KEY&quot;)]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Annotated[str,</span> <span class="pre">Parameter(cookie=&quot;session&quot;)]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Annotated[str,</span> <span class="pre">CookieParameter(name=&quot;session&quot;)]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">Parameter(...)</span></code> <em>(default-value style)</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">Annotated[str,</span> <span class="pre">QueryParameter(...)]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/routing/parameters.html"><span class="doc">Parameters</span></a></p>
+</div>
+<p>References: </p>
+</div>
+</dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p><code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code>
 base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all
@@ -939,8 +1046,8 @@ exception, it will be the ASGI server that creates a
 and <code class="docutils literal notranslate"><span class="pre">litestar.plugins.sqlalchemy</span></code> modules have been completely removed. Users must now
 import directly from <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.extensions.litestar</span></code>.</p>
 <p>Migration:
-- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.contrib.sqlalchemy</span> <span class="pre">import</span> <span class="pre">X</span></code> â†’ <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">X</span></code>
-- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.plugins.sqlalchemy</span> <span class="pre">import</span> <span class="pre">Y</span></code> â†’ <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">Y</span></code></p>
+- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.contrib.sqlalchemy</span> <span class="pre">import</span> <span class="pre">X</span></code> → <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">X</span></code>
+- <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">litestar.plugins.sqlalchemy</span> <span class="pre">import</span> <span class="pre">Y</span></code> → <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">advanced_alchemy.extensions.litestar</span> <span class="pre">import</span> <span class="pre">Y</span></code></p>
 <p>This completes the separation of concerns, with advanced-alchemy being the sole provider
 of SQLAlchemy integration for Litestar.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4340">https://github.com/litestar-org/litestar/pull/4340</a></span></p>
@@ -1044,7 +1151,7 @@ from this module should switch to using <code class="docutils literal notranslat
 </dd>
 <dt>Remove deprecated <code class="docutils literal notranslate"><span class="pre">TemplateContext</span></code><a class="headerlink reference internal" href="#3.0.0-remove deprecated" id="3.0.0-remove deprecated">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Remove the deprecated <code class="docutils literal notranslate"><span class="pre">litestar.template.base.TemplateContext</span></code> type. Its usages should be replaced with
-<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Mapping</span></code></a>.</p>
+<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Mapping</span></code></a>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4313">https://github.com/litestar-org/litestar/pull/4313</a></span></p>
 </div>
 </dd>
@@ -1179,6 +1286,25 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Read constraint metadata on <code class="docutils literal notranslate"><span class="pre">data</span></code> as on any other parameter<a class="headerlink reference internal" href="#3.0.0-read constraint metadata on" id="3.0.0-read constraint metadata on">#</a></dt><dd><div class="changelog-change docutils container">
+<p>A <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter annotated with metadata, e.g.
+<code class="docutils literal notranslate"><span class="pre">data:</span> <span class="pre">Annotated[int,</span> <span class="pre">annotated_types.Gt(0)]</span></code>, was interpreted as a request
+body without a body marker, which got around the check of <code class="docutils literal notranslate"><span class="pre">data</span></code> being
+missing a marker</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5157">https://github.com/litestar-org/litestar/pull/5157</a></span></p>
+</div>
+</dd>
+<dt>Only read parameters marked as path parameters from the path<a class="headerlink reference internal" href="#3.0.0-only read parameters marked as path parameters from the path" id="3.0.0-only read parameters marked as path parameters from the path">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>A parameter whose name matched a path segment was read from the path even when it
+was marked with <code class="docutils literal notranslate"><span class="pre">FromQuery</span></code>, <code class="docutils literal notranslate"><span class="pre">FromHeader</span></code>, <code class="docutils literal notranslate"><span class="pre">FromCookie</span></code> or the corresponding
+<code class="docutils literal notranslate"><span class="pre">Parameter</span></code> kwarg, and was documented as a path parameter. Such a parameter is
+now read from, and documented at, the location it is marked with.</p>
+<p>A parameter named like a path segment that declares no location, the deprecated
+inferred path parameter style, now raises <code class="docutils literal notranslate"><span class="pre">ImproperlyConfiguredException</span></code> when
+the application is created. Declare it with <code class="docutils literal notranslate"><span class="pre">FromPath</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5128">https://github.com/litestar-org/litestar/pull/5128</a></span></p>
+</div>
+</dd>
 <dt>Fix <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> when generating a schema for a union of enums<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Annotating a handler with a union whose members are all enums (e.g.
 <code class="docutils literal notranslate"><span class="pre">Color</span> <span class="pre">|</span> <span class="pre">Size</span></code>) crashed schema generation with <code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">issubclass()</span>
@@ -1214,7 +1340,7 @@ causing the generated schema to diverge from the OpenAPI 3.1.0 specification.</p
 <p>This affected all model types: dataclasses, msgspec Structs, attrs classes, and
 Pydantic models. For example, a field <code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span></code> with no default was
 previously excluded from <code class="docutils literal notranslate"><span class="pre">required</span></code>; it is now correctly included.</p>
-<p>Runtime request validation behavior is unchanged â€” nullable parameters without
+<p>Runtime request validation behavior is unchanged — nullable parameters without
 defaults were already enforced as required at the validation layer.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4673">https://github.com/litestar-org/litestar/issues/4673</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4687">https://github.com/litestar-org/litestar/pull/4687</a></span></p>
 </div>

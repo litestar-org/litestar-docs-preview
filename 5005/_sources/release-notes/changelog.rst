@@ -6,6 +6,110 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
+    .. change:: Read constraint metadata on ``data`` as on any other parameter
+        :type: bugfix
+        :pr: 5157
+
+        A ``data`` parameter annotated with metadata, e.g.
+        ``data: Annotated[int, annotated_types.Gt(0)]``, was interpreted as a request
+        body without a body marker, which got around the check of ``data`` being
+        missing a marker
+
+    .. change:: Require "reserved kwargs" to be declared with their type
+        :type: feature
+        :breaking:
+        :pr: 5154
+
+        Declaring the "reserved kwargs" ``body``, ``cookies``, ``data``,
+        ``headers``, ``query``, ``request``, ``scope`` and ``socket`` without the type
+        listed below, or with a different one, raises
+        :class:`~litestar.exceptions.ImproperlyConfiguredException` at startup.
+
+        For this, add the types :data:`~litestar.params.RawBody`,
+        :data:`~litestar.params.QueryParams` and :data:`~litestar.params.RequestCookies`,
+        and the body marker :data:`~litestar.params.RequestBody`, which declares a body
+        of the default media type, ``application/json``.
+
+        .. list-table::
+            :header-rows: 1
+            :widths: 20 80
+
+            * - Parameter
+              - Type
+            * - ``body``
+              - :data:`~litestar.params.RawBody`
+            * - ``cookies``
+              - :data:`~litestar.params.RequestCookies`
+            * - ``data``
+              - A body marker, e.g. :data:`~litestar.params.JSONBody` or
+                :data:`~litestar.params.RequestBody`
+            * - ``headers``
+              - :class:`~litestar.datastructures.Headers`
+            * - ``query``
+              - :data:`~litestar.params.QueryParams`
+            * - ``request``
+              - The request class configured for the handler, or one of its base classes,
+                e.g. :class:`~litestar.connection.Request`
+            * - ``scope``
+              - :data:`~litestar.types.Scope`
+            * - ``socket``
+              - The websocket class configured for the handler, or one of its base
+                classes, e.g. :class:`~litestar.connection.WebSocket`
+
+        ``headers`` receives the request's :class:`~litestar.datastructures.Headers`.
+        Before, ``headers: dict[str, str]`` received a :class:`dict` and
+        ``headers: Headers`` failed validation with a ``400 - Bad Request``.
+
+        In route handlers, ``cookies``, ``headers``, ``query`` and ``scope`` can also be
+        accessed through the request, e.g. ``request.headers``.
+
+        .. seealso:: :ref:`handler-function-kwargs`
+
+    .. change:: Remove support for implicitly declared request parameters
+        :type: feature
+        :breaking:
+        :pr:
+
+        Remove the deprecated implicit request parameter declaration. All request
+        parameters must now be explicitly marked (e.g. with
+        :data:`~litestar.params.FromQuery`).
+
+        .. list-table::
+            :header-rows: 1
+            :widths: 45 55
+
+            * - Deprecated
+              - Use instead
+            * - ``def h(name: str)`` *(implicit query parameter)*
+              - ``def h(name: FromQuery[str])``
+            * - ``def h(user_id: int)`` *(implicit path parameter)*
+              - ``def h(user_id: FromPath[int])``
+            * - ``Annotated[str, Parameter(query="alias")]``
+              - ``Annotated[str, QueryParameter(name="alias")]``
+            * - ``Annotated[str, Parameter(header="X-API-KEY")]``
+              - ``Annotated[str, HeaderParameter(name="X-API-KEY")]``
+            * - ``Annotated[str, Parameter(cookie="session")]``
+              - ``Annotated[str, CookieParameter(name="session")]``
+            * - ``name: str = Parameter(...)`` *(default-value style)*
+              - ``name: Annotated[str, QueryParameter(...)]``
+
+        .. seealso::
+            :doc:`/usage/routing/parameters`
+
+    .. change:: Only read parameters marked as path parameters from the path
+        :type: bugfix
+        :pr: 5128
+        :breaking:
+
+        A parameter whose name matched a path segment was read from the path even when it
+        was marked with ``FromQuery``, ``FromHeader``, ``FromCookie`` or the corresponding
+        ``Parameter`` kwarg, and was documented as a path parameter. Such a parameter is
+        now read from, and documented at, the location it is marked with.
+
+        A parameter named like a path segment that declares no location, the deprecated
+        inferred path parameter style, now raises ``ImproperlyConfiguredException`` when
+        the application is created. Declare it with ``FromPath``.
+
     .. change:: Migrate ``RateLimitMiddleware`` to ``ASGIMiddleware``
         :type: feature
         :pr: 5005
@@ -431,7 +535,7 @@
         Pydantic models. For example, a field ``name: int | None`` with no default was
         previously excluded from ``required``; it is now correctly included.
 
-        Runtime request validation behavior is unchanged â€” nullable parameters without
+        Runtime request validation behavior is unchanged — nullable parameters without
         defaults were already enforced as required at the validation layer.
 
     .. change:: Drop support for Pydantic 1
@@ -530,8 +634,8 @@
         import directly from ``advanced_alchemy.extensions.litestar``.
 
         Migration:
-        - ``from litestar.contrib.sqlalchemy import X`` â†’ ``from advanced_alchemy.extensions.litestar import X``
-        - ``from litestar.plugins.sqlalchemy import Y`` â†’ ``from advanced_alchemy.extensions.litestar import Y``
+        - ``from litestar.contrib.sqlalchemy import X`` → ``from advanced_alchemy.extensions.litestar import X``
+        - ``from litestar.plugins.sqlalchemy import Y`` → ``from advanced_alchemy.extensions.litestar import Y``
 
         This completes the separation of concerns, with advanced-alchemy being the sole provider
         of SQLAlchemy integration for Litestar.
