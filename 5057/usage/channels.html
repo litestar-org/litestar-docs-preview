@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/session/index.html">session</a><ul>
@@ -752,7 +751,7 @@ different approaches exist:</p>
 which can be used to interact with the streams of events subscribed to.</p>
 <p>The context manager should be preferred, since it ensures that channels are being unsubscribed.
 Using the <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.subscribe" title="litestar.channels.plugin.ChannelsPlugin.subscribe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subscribe()</span></code></a> and <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin.unsubscribe" title="litestar.channels.plugin.ChannelsPlugin.unsubscribe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unsubscribe()</span></code></a> methods directly should only be
-one when a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.14)"><span class="xref std std-term">context manager</span></a> cannot be used, e.g., when the <a class="reference internal" href="#term-subscription"><span class="xref std std-term">subscription</span></a>
+one when a <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.15)"><span class="xref std std-term">context manager</span></a> cannot be used, e.g., when the <a class="reference internal" href="#term-subscription"><span class="xref std std-term">subscription</span></a>
 would span different contexts.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Calling the <a class="reference internal" href="#term-subscription"><span class="xref std std-term">subscription</span></a> methods manually</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
@@ -765,7 +764,7 @@ would span different contexts.</p>
 </div>
 </div>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.14)"><span class="xref std std-term">async context manager</span></a></span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.15)"><span class="xref std std-term">async context manager</span></a></span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">([</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
 </span><span data-line="2">    <span class="o">...</span>  <span class="c1"># do some stuff here</span>
 </span></pre></div>
@@ -785,7 +784,7 @@ would span different contexts.</p>
 </div>
 <p>Or, using the context manager</p>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.14)"><span class="xref std std-term">async context manager</span></a> to unsubscribe from a
+<div class="code-block-caption"><span class="caption-text">Using the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.15)"><span class="xref std std-term">async context manager</span></a> to unsubscribe from a
 <a class="reference internal" href="#term-channel"><span class="xref std std-term">channel</span></a></span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">with</span> <span class="n">channels</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">([</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">:</span>
 </span><span data-line="2">    <span class="o">...</span>  <span class="c1"># do some stuff here</span>
@@ -846,11 +845,11 @@ backend into the appropriate subscriber’s streams.</p>
 <p>In addition to being an abstraction of an <a class="reference internal" href="#term-event-stream"><span class="xref std std-term">event stream</span></a>, the <a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber" title="litestar.channels.subscriber.Subscriber"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscriber</span></code></a>
 provides two methods to handle this stream:</p>
 <dl>
-<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a></dt><dd><p>An <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-generator" title="(in Python v3.14)"><span class="xref std std-term">asynchronous generator</span></a>, producing one event from the stream at a time, waiting
+<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a></dt><dd><p>An <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-generator" title="(in Python v3.15)"><span class="xref std std-term">asynchronous generator</span></a>, producing one event from the stream at a time, waiting
 until the next one becomes available</p>
 </dd>
-<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.run_in_background" title="litestar.channels.subscriber.Subscriber.run_in_background"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_in_background</span></code></a></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.14)"><span class="xref std std-term">context manager</span></a>, wrapping an <a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html#asyncio.Task" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a>,
-consuming events yielded by <a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a>, invoking a provided <a class="reference external" href="https://docs.python.org/3/glossary.html#term-callback" title="(in Python v3.14)"><span class="xref std std-term">callback</span></a>
+<dt><a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.run_in_background" title="litestar.channels.subscriber.Subscriber.run_in_background"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_in_background</span></code></a></dt><dd><p>A <a class="reference external" href="https://docs.python.org/3/glossary.html#term-asynchronous-context-manager" title="(in Python v3.15)"><span class="xref std std-term">context manager</span></a>, wrapping an <a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html#asyncio.Task" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a>,
+consuming events yielded by <a class="reference internal" href="../reference/channels/subscriber.html#litestar.channels.subscriber.Subscriber.iter_events" title="litestar.channels.subscriber.Subscriber.iter_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iter_events</span></code></a>, invoking a provided <a class="reference external" href="https://docs.python.org/3/glossary.html#term-callback" title="(in Python v3.15)"><span class="xref std std-term">callback</span></a>
 for each of them. Upon exit, it will attempt a graceful shutdown of the running task, waiting
 for all currently enqueued events in the stream to be processed.
 If the context exits with an error, the task will be cancelled instead.</p>
@@ -912,25 +911,26 @@ providing an opportunity to perform other tasks, such as receiving incoming data
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">WebSocket</span><span class="p">,</span> <span class="n">websocket</span>
 </span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChannelsPlugin</span>
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels.backends.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryChannelsBackend</span>
-</span><span data-line="4">
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span>
 </span><span data-line="5">
-</span><span data-line="6"><span class="nd">@websocket</span><span class="p">(</span><span class="s2">&quot;/ws&quot;</span><span class="p">)</span>
-</span><span data-line="7"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="n">ChannelsPlugin</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="8">    <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-</span><span data-line="9">
-</span><span data-line="10">    <span class="k">async</span> <span class="k">with</span> <span class="p">(</span>
-</span><span data-line="11">        <span class="n">channels</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">([</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">,</span>
-</span><span data-line="12">        <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">),</span>
-</span><span data-line="13">    <span class="p">):</span>
-</span><span data-line="14">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span data-line="15">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
-</span><span data-line="16">            <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</span><span data-line="17">
+</span><span data-line="6">
+</span><span data-line="7"><span class="nd">@websocket</span><span class="p">(</span><span class="s2">&quot;/ws&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">WebSocket</span><span class="p">,</span> <span class="n">channels</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">ChannelsPlugin</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="9">    <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span><span data-line="10">
+</span><span data-line="11">    <span class="k">async</span> <span class="k">with</span> <span class="p">(</span>
+</span><span data-line="12">        <span class="n">channels</span><span class="o">.</span><span class="n">start_subscription</span><span class="p">([</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])</span> <span class="k">as</span> <span class="n">subscriber</span><span class="p">,</span>
+</span><span data-line="13">        <span class="n">subscriber</span><span class="o">.</span><span class="n">run_in_background</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">),</span>
+</span><span data-line="14">    <span class="p">):</span>
+</span><span data-line="15">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span data-line="16">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">receive_text</span><span class="p">()</span>
+</span><span data-line="17">            <span class="k">await</span> <span class="n">socket</span><span class="o">.</span><span class="n">send_text</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </span><span data-line="18">
-</span><span data-line="19"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
-</span><span data-line="20">    <span class="p">[</span><span class="n">handler</span><span class="p">],</span>
-</span><span data-line="21">    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ChannelsPlugin</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">MemoryChannelsBackend</span><span class="p">(),</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])],</span>
-</span><span data-line="22"><span class="p">)</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="21">    <span class="p">[</span><span class="n">handler</span><span class="p">],</span>
+</span><span data-line="22">    <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">ChannelsPlugin</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">MemoryChannelsBackend</span><span class="p">(),</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;some_channel&quot;</span><span class="p">])],</span>
+</span><span data-line="23"><span class="p">)</span>
 </span></pre></div>
 </div>
 </div>
@@ -962,7 +962,7 @@ added while the backlog is full</p></li>
 <div class="literal-block-wrapper docutils container" id="id13">
 <div class="code-block-caption"><span class="caption-text">Backoff strategy</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChannelsPlugin</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryChannelsBackend</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels.backends.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryChannelsBackend</span>
 </span><span data-line="3">
 </span><span data-line="4"><span class="n">channels</span> <span class="o">=</span> <span class="n">ChannelsPlugin</span><span class="p">(</span>
 </span><span data-line="5">    <span class="n">backend</span><span class="o">=</span><span class="n">MemoryChannelsBackend</span><span class="p">(),</span>
@@ -975,7 +975,7 @@ added while the backlog is full</p></li>
 <div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text"><a class="reference internal" href="#term-eviction"><span class="xref std std-term">Eviction</span></a> strategy</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChannelsPlugin</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryChannelsBackend</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.channels.backends.memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryChannelsBackend</span>
 </span><span data-line="3">
 </span><span data-line="4"><span class="n">channels</span> <span class="o">=</span> <span class="n">ChannelsPlugin</span><span class="p">(</span>
 </span><span data-line="5">    <span class="n">backend</span><span class="o">=</span><span class="n">MemoryChannelsBackend</span><span class="p">(),</span>
