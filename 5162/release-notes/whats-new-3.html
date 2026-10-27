@@ -457,6 +457,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#modification-to-root-schema-site-handling">Modification to <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> Handling</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#removal-of-the-dto-codegen-experimental-feature-flag">Removal of the <code class="docutils literal notranslate"><span class="pre">DTO_CODEGEN</span></code> experimental feature flag</a></li>
 <li><a class="reference internal" href="#removal-of-the-rapidoc-openapi-ui-plugin">Removal of the RapiDoc OpenAPI UI plugin</a></li>
 <li><a class="reference internal" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate">to_asgi_response</span></code> has been removed</a></li>
 <li><a class="reference internal" href="#deprecated-scope-state-utilities-removed">Deprecated scope state utilities removed</a></li>
@@ -715,6 +716,13 @@ the root path (<code class="docutils literal notranslate"><span class="pre">/</s
 <p>For those previously using the <code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> attribute, the migration involves ensuring that the UI intended to
 be served at the <code class="docutils literal notranslate"><span class="pre">/schema</span></code> endpoint is the first plugin listed in the <a class="reference internal" href="../reference/openapi/openapi.html#litestar.openapi.OpenAPIConfig.render_plugins" title="litestar.openapi.OpenAPIConfig.render_plugins"><code class="xref py py-attr docutils literal notranslate"><span class="pre">OpenAPIConfig.render_plugins</span></code></a>.</p>
 </section>
+</section>
+<section id="removal-of-the-dto-codegen-experimental-feature-flag">
+<h2>Removal of the <code class="docutils literal notranslate"><span class="pre">DTO_CODEGEN</span></code> experimental feature flag<a class="headerlink" href="#removal-of-the-dto-codegen-experimental-feature-flag" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ExperimentalFeatures.DTO_CODEGEN</span></code> flag has been removed. The DTO codegen backend
+has been enabled by default since <code class="docutils literal notranslate"><span class="pre">2.8.0</span></code>, so the flag had no effect and only emitted a
+warning. Remove it from <code class="docutils literal notranslate"><span class="pre">Litestar(experimental_features=...)</span></code>; the backend can still be
+disabled for a single DTO with <code class="docutils literal notranslate"><span class="pre">DTOConfig(experimental_codegen_backend=False)</span></code>.</p>
 </section>
 <section id="removal-of-the-rapidoc-openapi-ui-plugin">
 <h2>Removal of the RapiDoc OpenAPI UI plugin<a class="headerlink" href="#removal-of-the-rapidoc-openapi-ui-plugin" title="Link to this heading">¶</a></h2>
