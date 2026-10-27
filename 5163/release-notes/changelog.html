@@ -551,8 +551,8 @@ data-aria-dark="Switch to auto color mode">
 <p>Declaring a <code class="docutils literal notranslate"><span class="pre">DTOField</span></code> through Pydantic’s <code class="docutils literal notranslate"><span class="pre">Field.extra</span></code>, that is
 <code class="docutils literal notranslate"><span class="pre">Field(**dto_field(&quot;read-only&quot;))</span></code>, is no longer supported. The mark was already
 ignored in 2.x and only emitted a deprecation warning. Remove the declaration and
-use <code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">DTOField(mark=&quot;read-only&quot;)]</span></code> instead; leaving it in place
-makes OpenAPI schema generation fail for models that are not passed through a DTO.</p>
+use <code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">DTOField(mark=&quot;read-only&quot;)]</span></code> instead; leaving it in place can
+make OpenAPI schema generation fail.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5163">https://github.com/litestar-org/litestar/pull/5163</a></span></p>
 </div>
 </dd>
