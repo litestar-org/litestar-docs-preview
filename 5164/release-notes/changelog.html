@@ -547,13 +547,20 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
-<dt>Default <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> for mounted ASGI apps<a class="headerlink reference internal" href="#3.0.0-default" id="3.0.0-default">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
-<p>An ASGI handler mounted with <code class="docutils literal notranslate"><span class="pre">is_mount=True</span></code> now receives a copy of the ASGI
-<code class="docutils literal notranslate"><span class="pre">scope</span></code>, so mutations made by the mounted application no longer leak into the
-outer scope. The default was <code class="docutils literal notranslate"><span class="pre">None</span></code>, which passed the original scope through and
-emitted a warning when the mounted application mutated it.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">copy_scope=False</span></code> where the mounted application is meant to mutate the
-outer scope.</p>
+<dt>Default <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> for ASGI handlers<a class="headerlink reference internal" href="#3.0.0-default" id="3.0.0-default">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Every <code class="docutils literal notranslate"><span class="pre">asgi</span></code> handler, mounted or not, now receives a copy of the ASGI <code class="docutils literal notranslate"><span class="pre">scope</span></code>,
+so the wrapped application can no longer add or replace top-level scope keys seen
+by the outer application. The default was <code class="docutils literal notranslate"><span class="pre">None</span></code>, which passed the original scope
+through, warned at registration and warned again when the wrapped application
+mutated the scope; both warnings are gone.</p>
+<p>The copy is shallow. Nested values such as <code class="docutils literal notranslate"><span class="pre">scope[&quot;state&quot;]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">scope[&quot;headers&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">scope[&quot;path_params&quot;]</span></code> and <code class="docutils literal notranslate"><span class="pre">scope[&quot;app&quot;]</span></code> are still
+shared with the outer scope.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">copy_scope=False</span></code> where the wrapped application is meant to communicate with
+the outer application through the scope. Symptoms of needing it: a mounted
+application that injects an authenticated user or a request id for outer middleware
+to read, that calls <code class="docutils literal notranslate"><span class="pre">Request.set_session</span></code> or <code class="docutils literal notranslate"><span class="pre">Request.clear_session</span></code>, or that
+sets routing metadata which tracing integrations read after the response.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5164">https://github.com/litestar-org/litestar/pull/5164</a></span></p>
 </div>
 </dd>
