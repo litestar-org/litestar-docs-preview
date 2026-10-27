@@ -9,6 +9,7 @@
     .. change:: Remove the deprecated ``ExperimentalFeatures.DTO_CODEGEN`` flag
         :type: feature
         :breaking:
+        :pr: 5162
 
         The ``DTO_CODEGEN`` experimental feature flag has been removed. The DTO codegen
         backend has been enabled by default since ``2.8.0``, so the flag was a no-op that
