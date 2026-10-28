@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="amber" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Upgrading to 3.0 - Litestar Framework</title><link rel="shortcut icon" href="../_static/favicon.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Onboarding from other frameworks" href="../onboarding/index.html" /><link rel="prev" title="Upgrading from an earlier version" href="index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=470ca8b0" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=44020203" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=326d68a3" />
+    <link rel="stylesheet" type="text/css" href="../_static/litestar-sphinx-theme.css?v=f8f74789" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Upgrading to 3.0"/>
+  <meta property="og:image" content="_static/logo-light.png"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="announcement">
+    <div class="announcement-inner">
+      <p>You are viewing the <strong>local</strong> version of the documentation. <a href="/latest/">Click here to go to the latest version.</a></p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-lucide close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="/">
+      <img class="light-logo" src="../_static/logo-light.png" alt="Litestar" height="28" loading="lazy" />
+      <img class="dark-logo" src="../_static/logo-dark.png" alt="Litestar" height="28" loading="lazy" />
+      <strong>Litestar</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../index.html">Home</a></li>
+      <li class="link"><button class="js-menu" type="button" id="nav-trigger-2" aria-controls="nav-children-2">
+            <span>Community</span>
+            <i class="i-lucide chevron-down"></i>
+          </button>
+        <ul id="nav-children-2" aria-labelledby="nav-trigger-2"><li><a href="../contribution-guide.html">
+                <span>Contributing</span>
+                <small>Learn how to contribute to the Litestar project</small>
+              </a></li><li><a href="https://github.com/litestar-org/.github?tab=coc-ov-file">
+                <span>Code of Conduct</span>
+                <small>Review the etiquette for interacting with the Litestar community</small>
+              </a></li><li><a href="https://github.com/litestar-org/.github?tab=coc-ov-file#security-ov-file">
+                <span>Security</span>
+                <small>Overview of Litestar's security protocols</small>
+              </a></li></ul>
+      </li>
+      <li class="link"><button class="js-menu" type="button" id="nav-trigger-3" aria-controls="nav-children-3">
+            <span>About</span>
+            <i class="i-lucide chevron-down"></i>
+          </button>
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+                <span>Litestar Organization</span>
+                <small>Details about the Litestar organization</small>
+              </a></li><li><a href="https://litestar.dev/about/litestar-releases">
+                <span>Releases</span>
+                <small>Explore the release process, versioning, and deprecation policy for Litestar</small>
+              </a></li></ul>
+      </li>
+      <li class="link"><button class="js-menu" type="button" id="nav-trigger-4" aria-controls="nav-children-4">
+            <span>Release notes</span>
+            <i class="i-lucide chevron-down"></i>
+          </button>
+        <ul id="nav-children-4" aria-labelledby="nav-trigger-4"><li><a href="#">
+                <span>Upgrading to 3.0</span>
+                <small>Upgrade an existing application from 2.x to 3.0</small>
+              </a></li><li><a href="../release-notes/whats-new-3.html">
+                <span>What's new in 3.0</span>
+                <small>Explore the new features in Litestar 3.0</small>
+              </a></li><li><a href="../release-notes/changelog.html">
+                <span>3.x Changelog</span>
+                <small>All changes in the 3.x series</small>
+              </a></li><li><a href="https://docs.litestar.dev/2/release-notes/changelog.html">
+                <span>2.x Changelog</span>
+                <small>All changes in the 2.x series</small>
+              </a></li></ul>
+      </li>
+      <li class="link"><button class="js-menu" type="button" id="nav-trigger-5" aria-controls="nav-children-5">
+            <span>Help</span>
+            <i class="i-lucide chevron-down"></i>
+          </button>
+        <ul id="nav-children-5" aria-labelledby="nav-trigger-5"><li><a href="https://discord.gg/litestar">
+                <span>Discord Help Forum</span>
+                <small>Dedicated Discord help forum</small>
+              </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
+                <span>GitHub Discussions</span>
+                <small>GitHub Discussions</small>
+              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
+                <span>Stack Overflow</span>
+                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
+              </a></li></ul>
+      </li><li class="link">
+          <a href="https://github.com/sponsors/Litestar-Org">
+            <span>Sponsor</span></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">3</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="/latest">latest</a></li><li><a href="/main">v3 (development)</a></li><li><a href="/2">v2</a></li><li><a href="/1">v1</a></li></ul></div>
+  </div><div class="sy-head-socials">
+<a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)">
+  <iconify-icon icon="prime:twitter"></iconify-icon>
+</a>
+  <a href="https://discord.gg/litestar" aria-label="Discord">
+    <iconify-icon icon="simple-icons:discord"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6"><div class="sidebar-links">
+  <ul>
+    <li><a class="icon-link" href="https://github.com/orgs/litestar-org/discussions">
+  <span class="icon">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path fill="var(--accent-9)" fill-rule="evenodd" clip-rule="evenodd" d="M11 5a6 6 0 0 0-4.687 9.746c.215.27.315.62.231.954l-.514 2.058a1 1 0 0 0 1.485 1.1l2.848-1.71c.174-.104.374-.15.576-.148H13a6 6 0 0 0 0-12h-2Z"/>
+      <circle fill="white" cx="12" cy="11" r="1"/>
+      <circle fill="white" cx="9" cy="11" r="1"/>
+      <circle fill="white" cx="15" cy="11" r="1"/>
+    </svg>
+  </span>
+  <span class="text">Discussion</span>
+</a></li>
+  </ul>
+</div>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../usage/applications.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/routing/index.html">Routing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/routing/overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/routing/handlers.html">Route handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/routing/parameters.html">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/requests.html">Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/channels.html">Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/cli.html">CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/databases/index.html">Databases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/databases/sqlalchemy/index.html">SQLAlchemy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../usage/databases/sqlalchemy/models_and_repository.html">SQLAlchemy Models &amp; Repository</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../usage/databases/sqlalchemy/plugins/index.html">Plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/databases/piccolo.html">Piccolo ORM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/dependency-injection.html">Dependency Injection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/dto/index.html">Data Transfer Object (DTO)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/dto/0-basic-use.html">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/dto/1-abstract-dto.html">AbstractDTO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/dto/2-creating-custom-dto-classes.html">Implementing Custom DTO Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/exceptions.html">Exceptions and exception handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/file_systems.html">File Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/htmx.html">HTMX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/lifecycle-hooks.html">Life Cycle Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/logging.html">Request logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/metrics/index.html">Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/metrics/opentelemetry.html">OpenTelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/metrics/prometheus.html">Prometheus</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/middleware/index.html">Middleware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/middleware/using-middleware.html">Using Middleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/middleware/builtin-middleware.html">Built-in middleware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/middleware/creating-middleware.html">Creating Middleware</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/openapi/index.html">OpenAPI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/schema_generation.html">Configuring schema generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/schema_generation.html#configuring-schema-generation-on-a-route-handler">Configuring schema generation on a route handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/schema_generation.html#accessing-the-openapi-schema-in-code">Accessing the OpenAPI schema in code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/schema_generation.html#customizing-pydantic-model-schemas">Customizing Pydantic model schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/schema_generation.html#customizing-operation-class">Customizing <code class="docutils literal notranslate"><span class="pre">Operation</span></code> class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/schema_generation.html#generating-examples">Generating examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html">OpenAPI UI Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#using-openapi-ui-plugins">Using OpenAPI UI Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#configuring-openapi-ui-plugins">Configuring OpenAPI UI Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#configuring-the-openapi-root-path">Configuring the OpenAPI Root Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#building-your-own-openapi-ui-plugin">Building your own OpenAPI UI Plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#interacting-with-the-router">Interacting with the <code class="docutils literal notranslate"><span class="pre">Router</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#oauth2-in-swagger-ui">OAuth2 in Swagger UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/openapi/ui_plugins.html#cdn-and-offline-file-support">CDN and offline file support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/plugins/index.html">Plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/plugins/flash_messages.html">Flash Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/plugins/problem_details.html">Problem Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/responses.html">Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/security/index.html">Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../usage/security/abstract-authentication-middleware.html">Implementing Custom Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/security/security-backends.html">Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/security/guards.html">Guards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/security/excluding-and-including-endpoints.html">Excluding and including endpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/security/jwt.html">JWT Security Backends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../usage/security/secret-datastructures.html">Handling Secrets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/static-files.html">Static files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/custom-types.html">Custom types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/stores.html">Stores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/templating.html">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usage/websockets.html">WebSockets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/background_tasks.html">background_tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/channels/index.html">channels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/channels/plugin.html">plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/channels/subscriber.html">subscriber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/channels/backends/index.html">backends</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/memory.html">memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/redis.html">redis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/psycopg.html">psycopg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/channels/backends/asyncpg.html">asyncpg</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/cli.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/config.html">config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/connection.html">connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/controller.html">controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/concurrency.html">concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/data_extractors.html">data_extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/datastructures/index.html">datastructures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/datastructures/secret_values.html">secret_values</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/di.html">di</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/dto/index.html">dto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/config.html">config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/data_structures.html">data_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/field.html">field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/base_dto.html">base_dto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/msgspec_dto.html">msgspec_dto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/dto/dataclass_dto.html">dataclass_dto</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/enums.html">enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/events.html">events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/exceptions.html">exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/file_system.html">file_system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/handlers.html">handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/middleware/index.html">middleware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/authentication.html">authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/compression.html">compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/rate_limit.html">rate_limit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/session/index.html">session</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/middleware/session/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/middleware/session/client_side.html">client_side</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/middleware/session/server_side.html">server_side</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/constraints.html">constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/openapi/index.html">openapi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/openapi/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/openapi/plugins.html">plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/openapi/spec.html">spec</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/flash_messages.html">flash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/htmx.html">htmx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/jinja.html">jinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/mako.html">mako</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/minijinja.html">minijinja</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/opentelemetry.html">opentelemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/problem_details.html">problem details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/prometheus.html">prometheus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/plugins/pydantic.html">pydantic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/repository/index.html">repository</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/repository/abc.html">abc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/repository/filters.html">filters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/repository/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/repository/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/repository/handlers.html">handlers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/response/index.html">response</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/redirect.html">redirect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/streaming.html">streaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/sse.html">SSE (Server Sent Events)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/response/template.html">template</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/router.html">router</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/routes.html">routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/security/index.html">security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/security/jwt.html">jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/security/session_auth.html">session_auth</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/serialization.html">serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/static_files.html">static_files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/status_codes.html">status_code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/stores/index.html">stores</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/base.html">base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/file.html">file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/memory.html">memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/redis.html">redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/registry.html">registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/stores/valkey.html">valkey</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/template.html">template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/testing.html">testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/types.html">types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/typing.html">typing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Guides</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Upgrading from an earlier version</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Upgrading to 3.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../onboarding/index.html">Onboarding from other frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../onboarding/fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onboarding/flask.html">Flask</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/index.html">Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../topics/sync-vs-async.html">Sync vs. Async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/explicit_declarations.html">Explicit parameter declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/deployment/index.html">Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../topics/deployment/manually-with-asgi-server.html">Manually with ASGI server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topics/deployment/docker.html">Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../topics/deployment/supervisor.html">Supervisor (Linux)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/todo-app/index.html">Developing a basic TODO application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/0-application-basics.html">Application basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/1-accessing-the-list.html">Accessing the list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/2-interacting-with-the-list.html">Making the list interactive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/todo-app/3-assembling-the-app.html">Recap and assembling the final application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/sqlalchemy/index.html">Improving the TODO app with SQLAlchemy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/0-introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/1-provide-session-with-di.html">Providing the session with DI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/2-serialization-plugin.html">Using the serialization plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/3-init-plugin.html">Using the init plugin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/sqlalchemy/4-final-touches-and-recap.html">Final touches and recap</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dto-tutorial/index.html">Data Transfer Object Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/01-simple-dto-exclude.html">Our first DTO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/02-nested-exclude.html">Excluding from nested models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/03-nested-collection-exclude.html">Excluding from collections of nested models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/04-max-nested-depth.html">Max nested depth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/05-renaming-fields.html">Renaming fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/06-receiving-data.html">Receiving data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/07-read-only-fields.html">Read only fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/08-dto-data.html">Accessing the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/09-updating.html">Updating instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/dto-tutorial/10-layered-dto-declarations.html">Declaring DTOs on app layers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/repository-tutorial/index.html">SQLAlchemy Repository Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/01-modelling-and-features.html">Introduction to Database Modelling and Repository Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/01-modelling-and-features.html#modelling">Modelling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/01-modelling-and-features.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/02-repository-introduction.html">Interacting with repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/02-repository-introduction.html#working-with-bulk-data-operations">Working with Bulk Data Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/02-repository-introduction.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/03-repository-controller.html">Working with Controllers and Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/03-repository-controller.html#full-code">Full Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/04-repository-other.html">Adding Additional Features to the Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/04-repository-other.html#slug-fields">Slug Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorials/repository-tutorial/04-repository-other.html#full-code">Full Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Contributing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribution-guide.html">Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/search?q=user%3Alitestar-org+state%3Aopen+label%3A%22good+first+issue%22+++no%3Aassignee+&amp;type=issues=">Available Issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/litestar-org/.github?tab=coc-ov-file#readme">Code of Conduct</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#before-you-start">Before you start</a></li>
+<li><a class="reference internal" href="#request-parameters">Request parameters</a></li>
+<li><a class="reference internal" href="#reserved-keyword-arguments">Reserved keyword arguments</a></li>
+<li><a class="reference internal" href="#dependency-injection">Dependency injection</a></li>
+<li><a class="reference internal" href="#logging">Logging</a></li>
+<li><a class="reference internal" href="#unhandled-exceptions">Unhandled exceptions</a></li>
+<li><a class="reference internal" href="#custom-middleware">Custom middleware</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#static-files">Static files</a></li>
+<li><a class="reference internal" href="#openapi-ui">OpenAPI UI</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#finding-the-rest">Finding the rest</a></li>
+</ul>
+</div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
+  data-type="github" data-user="litestar-org" data-repo="litestar">
+  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </span>
+  <span class="flex-grow px-2 break-all">
+    
+    
+      <span>litestar</span>
+    
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <iconify-icon icon="lucide:star"></iconify-icon>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <iconify-icon icon="lucide:git-fork"></iconify-icon>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/litestar-org/litestar/blob/main/docs/upgrading/v3.rst">Edit this page</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Litestar</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Upgrading from an earlier version</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Upgrading to 3.0</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/upgrading/v3.rst"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/upgrading/v3.rst">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/upgrading/v3.rst" target="_blank" rel="nofollow"><iconify-icon icon="bi:code-slash"></iconify-icon>
+            <span>View Source</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/upgrading/v3.rst%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//raw.githubusercontent.com/litestar-org/litestar/refs/heads/main/docs/upgrading/v3.rst%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="upgrading-to-3-0">
+<h1>Upgrading to 3.0<a class="headerlink" href="#upgrading-to-3-0" title="Link to this heading">¶</a></h1>
+<p>This guide shows what to change in an application written for Litestar 2.x. For a
+per-change reference see <a class="reference internal" href="../release-notes/whats-new-3.html"><span class="doc">What’s changed in 3.0?</span></a>, and for the exhaustive list
+<a class="reference internal" href="../release-notes/changelog.html"><span class="doc">3.x Changelog</span></a>.</p>
+<p>There is no codemod or automated upgrade command. The last 2.x release warns about roughly
+half of what follows; <a class="reference internal" href="#finding-the-rest"><span class="std std-ref">Finding the rest</span></a> explains how to surface those warnings.</p>
+<section id="before-you-start">
+<h2>Before you start<a class="headerlink" href="#before-you-start" title="Link to this heading">¶</a></h2>
+<p><strong>Litestar 3.0 requires Python 3.11 or newer.</strong></p>
+<p>Several packages moved out of the default dependencies. These fail on installation rather
+than at runtime, so declare the extras you need first:</p>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>If your application</p></th>
+<th class="head"><p>Install</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>uses the <code class="docutils literal notranslate"><span class="pre">litestar</span></code> command</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">litestar[cli]</span></code>, or <code class="docutils literal notranslate"><span class="pre">litestar[standard]</span></code> for the CLI plus Jinja</p></td>
+</tr>
+<tr class="row-odd"><td><p>uses <code class="docutils literal notranslate"><span class="pre">litestar.testing</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">litestar[testing]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>serves the OpenAPI schema as YAML</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">litestar[yaml]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>uses the HTMX plugin</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">litestar[htmx]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>uses the <code class="docutils literal notranslate"><span class="pre">polyfactory</span></code> integration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">litestar[polyfactory]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="request-parameters">
+<h2>Request parameters<a class="headerlink" href="#request-parameters" title="Link to this heading">¶</a></h2>
+<p>Every request parameter must now declare where it comes from. An unmarked parameter raises
+at application construction:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">ImproperlyConfiguredException: [paths=&#39;/&#39;, handler=&#39;handler&#39;] Missing declaration for parameter &#39;name&#39;
+</span></pre></div>
+</div>
+<p>Query parameters:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="6">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<p>Path parameters:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users/{user_id:int}&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users/{user_id:int}&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span data-line="6">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">FromHeader</span></code> and <code class="docutils literal notranslate"><span class="pre">FromCookie</span></code> work the same way. They match the Python parameter name
+verbatim, so a header such as <code class="docutils literal notranslate"><span class="pre">api-key</span></code> cannot be expressed as <code class="docutils literal notranslate"><span class="pre">api_key:</span> <span class="pre">FromHeader[str]</span></code>
+and needs <code class="docutils literal notranslate"><span class="pre">HeaderParameter(name=&quot;api-key&quot;)</span></code>.</p>
+<p>An optional parameter is no longer given an implicit default of <code class="docutils literal notranslate"><span class="pre">None</span></code>, so write the
+default out. Without it, a missing value is a validation error rather than <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">q</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromQuery</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">q</span><span class="p">:</span> <span class="n">FromQuery</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span data-line="6">    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="n">q</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parameter</span></code> has been removed. Where it carried a location, use the matching specifier and
+rename <code class="docutils literal notranslate"><span class="pre">query</span></code>/<code class="docutils literal notranslate"><span class="pre">header</span></code>/<code class="docutils literal notranslate"><span class="pre">cookie</span></code> to <code class="docutils literal notranslate"><span class="pre">name</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span>
+</span><span data-line="6">    <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;alias&quot;</span><span class="p">)],</span>
+</span><span data-line="7">    <span class="n">api_key</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="s2">&quot;X-API-KEY&quot;</span><span class="p">)],</span>
+</span><span data-line="8">    <span class="n">session</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">cookie</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)],</span>
+</span><span data-line="9"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">CookieParameter</span><span class="p">,</span> <span class="n">HeaderParameter</span><span class="p">,</span> <span class="n">QueryParameter</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span>
+</span><span data-line="6">    <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QueryParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;alias&quot;</span><span class="p">)],</span>
+</span><span data-line="7">    <span class="n">api_key</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">HeaderParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;X-API-KEY&quot;</span><span class="p">)],</span>
+</span><span data-line="8">    <span class="n">session</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CookieParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)],</span>
+</span><span data-line="9"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<p>Metadata-only use is the case 2.x never warned about. There is no location-less parameter
+specifier anymore, so pick the location explicitly:</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;How many&quot;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="n">count</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">QueryParameter</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;How many&quot;</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="n">count</span>
+</span></pre></div>
+</div>
+</div>
+<p>Declaring metadata as a default value is no longer supported:</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;alias&quot;</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="n">name</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QueryParameter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;alias&quot;</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">2</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="n">name</span>
+</span></pre></div>
+</div>
+</div>
+<p>Ordinary defaults are of course unaffected: <code class="docutils literal notranslate"><span class="pre">name:</span> <span class="pre">FromQuery[str]</span> <span class="pre">=</span> <span class="pre">&quot;anon&quot;</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">QueryParameter</span></code> and its siblings are dataclasses whose first field is <code class="docutils literal notranslate"><span class="pre">examples</span></code>,
+where 2.x <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> took the annotation positionally. <code class="docutils literal notranslate"><span class="pre">QueryParameter(int,</span> <span class="pre">lt=100)</span></code>
+is therefore accepted, serves requests, and fails later during schema generation with
+<code class="docutils literal notranslate"><span class="pre">TypeError:</span> <span class="pre">'type'</span> <span class="pre">object</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">iterable</span></code>. In <code class="docutils literal notranslate"><span class="pre">parameters={...}</span></code> mappings, pass the
+type as <code class="docutils literal notranslate"><span class="pre">annotation=</span></code>.</p>
+</div>
+</section>
+<section id="reserved-keyword-arguments">
+<h2>Reserved keyword arguments<a class="headerlink" href="#reserved-keyword-arguments" title="Link to this heading">¶</a></h2>
+<p>The reserved kwargs must now be declared with their type:</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/info&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">(</span>
+</span><span data-line="3">    <span class="n">data</span><span class="p">:</span> <span class="n">Payload</span><span class="p">,</span>
+</span><span data-line="4">    <span class="n">body</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+</span><span data-line="5">    <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+</span><span data-line="6">    <span class="n">query</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+</span><span data-line="7">    <span class="n">cookies</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+</span><span data-line="8"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id15" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.datastructures</span><span class="w"> </span><span class="kn">import</span> <span class="n">Headers</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONBody</span><span class="p">,</span> <span class="n">QueryParams</span><span class="p">,</span> <span class="n">RawBody</span><span class="p">,</span> <span class="n">RequestCookies</span>
+</span><span data-line="3">
+</span><span data-line="4">
+</span><span data-line="5"><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/info&quot;</span><span class="p">)</span>
+</span><span data-line="6"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">(</span>
+</span><span data-line="7">    <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">Payload</span><span class="p">],</span>
+</span><span data-line="8">    <span class="n">body</span><span class="p">:</span> <span class="n">RawBody</span><span class="p">,</span>
+</span><span data-line="9">    <span class="n">headers</span><span class="p">:</span> <span class="n">Headers</span><span class="p">,</span>
+</span><span data-line="10">    <span class="n">query</span><span class="p">:</span> <span class="n">QueryParams</span><span class="p">,</span>
+</span><span data-line="11">    <span class="n">cookies</span><span class="p">:</span> <span class="n">RequestCookies</span><span class="p">,</span>
+</span><span data-line="12"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">request</span></code>, <code class="docutils literal notranslate"><span class="pre">socket</span></code> and <code class="docutils literal notranslate"><span class="pre">scope</span></code> are unchanged, as long as they are annotated with
+<code class="docutils literal notranslate"><span class="pre">Request</span></code>, <code class="docutils literal notranslate"><span class="pre">WebSocket</span></code> and <code class="docutils literal notranslate"><span class="pre">Scope</span></code> respectively.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code>, <code class="docutils literal notranslate"><span class="pre">cookies</span></code> and <code class="docutils literal notranslate"><span class="pre">scope</span></code> the error message suggests reading
+them off the connection instead, which is often the better fix because it removes the
+parameter altogether:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">Reserved kwarg &#39;headers&#39; declared as &#39;dict[str, str]&#39;. Use &#39;request.headers&#39; instead
+</span></pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">headers</span></code> now receives a <a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.Headers" title="litestar.datastructures.Headers"><code class="xref py py-class docutils literal notranslate"><span class="pre">Headers</span></code></a> instance rather than
+a <code class="docutils literal notranslate"><span class="pre">dict</span></code>. It is immutable, case-insensitive and multi-value aware, so lookups and
+iteration keep working, while <code class="docutils literal notranslate"><span class="pre">headers[&quot;k&quot;]</span> <span class="pre">=</span> <span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">headers.update(...)</span></code> and comparing
+against a plain dict do not.</p>
+</section>
+<section id="dependency-injection">
+<h2>Dependency injection<a class="headerlink" href="#dependency-injection" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Provide</span></code> is unchanged, but the handler consuming a dependency must now mark it. This is
+the most common single edit:</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id16" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_user_id</span><span class="p">)})</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3">    <span class="k">return</span> <span class="n">user_id</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id17" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_user_id</span><span class="p">)})</span>
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="6">    <span class="k">return</span> <span class="n">user_id</span>
+</span></pre></div>
+</div>
+</div>
+<p>Without the marker the application fails to start with a message that does not mention
+dependencies at all:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">ImproperlyConfiguredException: [paths=&#39;/&#39;, handler=&#39;index&#39;] Missing declaration for parameter &#39;user_id&#39;
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">litestar.params.Dependency</span></code> has been removed:</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id18" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">other</span><span class="p">(</span><span class="n">injected</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id19" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">SkipValidation</span>
+</span><span data-line="3">
+</span><span data-line="4">
+</span><span data-line="5"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="6">
+</span><span data-line="7">
+</span><span data-line="8"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">other</span><span class="p">(</span><span class="n">injected</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">SkipValidation</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<p>A default declared on the marker moves to the parameter default, and an optional dependency
+must spell out <code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">None</span></code>. <code class="docutils literal notranslate"><span class="pre">NamedDependency[int</span> <span class="pre">|</span> <span class="pre">None]</span></code> with no default and no provider
+passes startup validation and then fails per request with a bare 500.</p>
+</section>
+<section id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Link to this heading">¶</a></h2>
+<p>Litestar no longer configures logging. <code class="docutils literal notranslate"><span class="pre">LoggingConfig</span></code>, <code class="docutils literal notranslate"><span class="pre">StructlogPlugin</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Litestar.logger</span></code>, <code class="docutils literal notranslate"><span class="pre">Litestar.get_logger</span></code> and <code class="docutils literal notranslate"><span class="pre">ASGIConnection.logger</span></code> are gone, and
+there is no replacement configuration object — use the standard library directly. On 2.x a
+bare <code class="docutils literal notranslate"><span class="pre">Litestar(...)</span></code> installed a logging config for you, so <code class="docutils literal notranslate"><span class="pre">INFO</span></code> messages appeared
+without any setup; they now go nowhere unless you configure logging yourself.</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id20" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="3">    <span class="n">request</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;inside a request&quot;</span><span class="p">)</span>
+</span><span data-line="4">
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="n">logging_config</span><span class="o">=</span><span class="n">LoggingConfig</span><span class="p">())</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id21" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span><span data-line="6">
+</span><span data-line="7">
+</span><span data-line="8"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span data-line="9"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="10">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;inside a request&quot;</span><span class="p">)</span>
+</span><span data-line="11">
+</span><span data-line="12">
+</span><span data-line="13"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">])</span>
+</span></pre></div>
+</div>
+</div>
+<p>Structlog users configure structlog themselves and pass the logger to the request logging
+middleware, which replaces <code class="docutils literal notranslate"><span class="pre">LoggingMiddlewareConfig</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id22" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="n">plugins</span><span class="o">=</span><span class="p">[</span><span class="n">StructlogPlugin</span><span class="p">()])</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id23" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">structlog</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoggingMiddleware</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">LoggingMiddleware</span><span class="p">(</span><span class="n">structlog</span><span class="o">.</span><span class="n">get_logger</span><span class="p">(),</span> <span class="n">log_structured</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">LoggingMiddleware</span></code> takes its logger as a required first argument, and it logs fewer
+fields by default than 2.x did: requests log <code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code>, <code class="docutils literal notranslate"><span class="pre">content_type</span></code>,
+<code class="docutils literal notranslate"><span class="pre">query</span></code> and <code class="docutils literal notranslate"><span class="pre">path_params</span></code>, and responses log only <code class="docutils literal notranslate"><span class="pre">status_code</span></code>. Pass
+<code class="docutils literal notranslate"><span class="pre">request_log_fields</span></code> and <code class="docutils literal notranslate"><span class="pre">response_log_fields</span></code> to restore the rest.</p>
+<p>Litestar also no longer logs exceptions, so <code class="docutils literal notranslate"><span class="pre">log_exceptions</span></code>, <code class="docutils literal notranslate"><span class="pre">disable_stack_trace</span></code> and
+<code class="docutils literal notranslate"><span class="pre">traceback_line_limit</span></code> have no equivalent. Use the <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hook:</p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id24" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">log_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Uncaught exception&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">exc</span><span class="p">)</span>
+</span><span data-line="3">
+</span><span data-line="4">
+</span><span data-line="5"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="n">after_exception</span><span class="o">=</span><span class="p">[</span><span class="n">log_exception</span><span class="p">])</span>
+</span></pre></div>
+</div>
+</div>
+</section>
+<section id="unhandled-exceptions">
+<h2>Unhandled exceptions<a class="headerlink" href="#unhandled-exceptions" title="Link to this heading">¶</a></h2>
+<p>An exception that no handler catches now propagates to the ASGI server instead of being
+turned into a 500 response. To restore the 2.x behaviour, register a handler for
+<code class="docutils literal notranslate"><span class="pre">HTTP_500_INTERNAL_SERVER_ERROR</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id25" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_exception_response</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.status_codes</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="5">    <span class="p">[</span><span class="n">handler</span><span class="p">],</span>
+</span><span data-line="6">    <span class="n">exception_handlers</span><span class="o">=</span><span class="p">{</span><span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span><span class="p">:</span> <span class="n">create_exception_response</span><span class="p">},</span>
+</span><span data-line="7"><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">create_exception_response</span></code> reproduces the 2.x response body exactly. Prefer the status
+code as the key over <code class="docutils literal notranslate"><span class="pre">Exception</span></code>: the latter is found through the exception’s MRO and
+therefore also intercepts <code class="docutils literal notranslate"><span class="pre">HTTPException</span></code>s such as 404s.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Exception handlers must be synchronous. An <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code> handler fails with
+<code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'coroutine'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'to_asgi_response'</span></code>.</p>
+</div>
+</section>
+<section id="custom-middleware">
+<h2>Custom middleware<a class="headerlink" href="#custom-middleware" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code> is deprecated in favour of
+<a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>. The middleware is now instantiated by you and
+receives the next application per call, instead of wrapping it at construction:</p>
+<div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id26" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware</span><span class="w"> </span><span class="kn">import</span> <span class="n">AbstractMiddleware</span><span class="p">,</span> <span class="n">DefineMiddleware</span>
+</span><span data-line="2">
+</span><span data-line="3">
+</span><span data-line="4"><span class="k">class</span><span class="w"> </span><span class="nc">TimeoutMiddleware</span><span class="p">(</span><span class="n">AbstractMiddleware</span><span class="p">):</span>
+</span><span data-line="5">    <span class="n">exclude</span> <span class="o">=</span> <span class="s2">&quot;^/health$&quot;</span>
+</span><span data-line="6">
+</span><span data-line="7">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="8">        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+</span><span data-line="9">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+</span><span data-line="10">
+</span><span data-line="11">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="12">        <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">move_on_after</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">):</span>
+</span><span data-line="13">            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</span><span data-line="14">
+</span><span data-line="15">
+</span><span data-line="16"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">DefineMiddleware</span><span class="p">(</span><span class="n">TimeoutMiddleware</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)])</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id27">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id27" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScopeType</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASGIMiddleware</span>
+</span><span data-line="3">
+</span><span data-line="4">
+</span><span data-line="5"><span class="k">class</span><span class="w"> </span><span class="nc">TimeoutMiddleware</span><span class="p">(</span><span class="n">ASGIMiddleware</span><span class="p">):</span>
+</span><span data-line="6">    <span class="n">scopes</span> <span class="o">=</span> <span class="p">(</span><span class="n">ScopeType</span><span class="o">.</span><span class="n">HTTP</span><span class="p">,)</span>
+</span><span data-line="7">    <span class="n">exclude_path_pattern</span> <span class="o">=</span> <span class="s2">&quot;^/health$&quot;</span>
+</span><span data-line="8">
+</span><span data-line="9">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="10">        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+</span><span data-line="11">
+</span><span data-line="12">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">,</span> <span class="n">next_app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="13">        <span class="k">with</span> <span class="n">anyio</span><span class="o">.</span><span class="n">move_on_after</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">):</span>
+</span><span data-line="14">            <span class="k">await</span> <span class="n">next_app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+</span><span data-line="15">
+</span><span data-line="16">
+</span><span data-line="17"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">TimeoutMiddleware</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)])</span>
+</span></pre></div>
+</div>
+</div>
+<p>Instances are created once and shared across requests, so per-connection state must live
+inside <code class="docutils literal notranslate"><span class="pre">handle</span></code>. <code class="docutils literal notranslate"><span class="pre">exclude</span></code> becomes <code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code> and takes a string or a
+tuple; it is matched against the handler’s path template at startup, not the request path,
+so patterns written against expanded path parameters need rewriting. For genuinely dynamic
+bypassing, use <code class="docutils literal notranslate"><span class="pre">should_bypass_for_scope</span></code>.</p>
+<p>Two other middleware forms were dropped. The Starlette-style tuple is no longer accepted:</p>
+<div class="literal-block-wrapper docutils container" id="id28">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id28" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">middleware</span><span class="o">=</span><span class="p">[(</span><span class="n">MyMiddleware</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">})])</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id29">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id29" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">MyMiddleware</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)])</span>
+</span></pre></div>
+</div>
+</div>
+<p>And middleware factories are now called positionally, so a keyword-only <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter
+no longer works:</p>
+<div class="literal-block-wrapper docutils container" id="id30">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id30" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">middleware_factory</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id31">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id31" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">middleware_factory</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> is now async-native. Plain requests are unchanged, but websocket
+sessions became asynchronous:</p>
+<div class="literal-block-wrapper docutils container" id="id32">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id32" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">with</span> <span class="n">create_async_test_client</span><span class="p">([</span><span class="n">handler</span><span class="p">])</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="2">    <span class="k">with</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">websocket_connect</span><span class="p">(</span><span class="s2">&quot;/ws&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ws</span><span class="p">:</span>
+</span><span data-line="3">        <span class="n">ws</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+</span><span data-line="4">        <span class="k">assert</span> <span class="n">ws</span><span class="o">.</span><span class="n">receive_json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id33">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id33" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">with</span> <span class="p">(</span>
+</span><span data-line="2">    <span class="n">create_async_test_client</span><span class="p">([</span><span class="n">handler</span><span class="p">])</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span>
+</span><span data-line="3">    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">websocket_connect</span><span class="p">(</span><span class="s2">&quot;/ws&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ws</span><span class="p">,</span>
+</span><span data-line="4"><span class="p">):</span>
+</span><span data-line="5">    <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">})</span>
+</span><span data-line="6">    <span class="k">assert</span> <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">receive_json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;hello&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">backend</span></code> and <code class="docutils literal notranslate"><span class="pre">backend_options</span></code> were removed from <code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> and
+<code class="docutils literal notranslate"><span class="pre">create_async_test_client</span></code>, since the application now runs on the caller’s event loop, and
+<code class="docutils literal notranslate"><span class="pre">timeout</span></code> narrowed to <code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span></code>. Use the client inline inside the test rather than
+yielding it from an async generator fixture.</p>
+<p>Two default values changed, and they are the most likely cause of existing tests failing:
+<code class="docutils literal notranslate"><span class="pre">raise_server_exceptions</span></code> is now <code class="docutils literal notranslate"><span class="pre">False</span></code> (it had no effect at all in 2.x), and
+<code class="docutils literal notranslate"><span class="pre">create_test_client</span></code> no longer defaults to <code class="docutils literal notranslate"><span class="pre">debug=True</span></code>. Combined with unhandled
+exceptions no longer being converted into a response, a handler that raises now produces a
+plain-text <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> where 2.x produced a JSON body:</p>
+<div class="literal-block-wrapper docutils container" id="id34">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id34" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">with</span> <span class="n">create_test_client</span><span class="p">([</span><span class="n">boom</span><span class="p">],</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boom&quot;</span><span class="p">)</span>
+</span><span data-line="3">    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;Internal Server Error&quot;</span><span class="p">}</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id35">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id35" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">with</span> <span class="n">create_test_client</span><span class="p">([</span><span class="n">boom</span><span class="p">],</span> <span class="n">raise_server_exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="2">    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+</span><span data-line="3">        <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boom&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</section>
+<section id="static-files">
+<h2>Static files<a class="headerlink" href="#static-files" title="Link to this heading">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id36">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id36" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">static_files_config</span><span class="o">=</span><span class="p">[</span><span class="n">StaticFilesConfig</span><span class="p">(</span><span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;assets&quot;</span><span class="p">],</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="p">)])</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id37">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id37" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.static_files</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_static_files_router</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">create_static_files_router</span><span class="p">(</span><span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;assets&quot;</span><span class="p">],</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/static&quot;</span><span class="p">)])</span>
+</span></pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Litestar.url_for_static_asset</span></code> and <code class="docutils literal notranslate"><span class="pre">Request.url_for_static_asset</span></code> are gone; use
+<code class="docutils literal notranslate"><span class="pre">url_for(&quot;static&quot;,</span> <span class="pre">file_path=...)</span></code>, where <code class="docutils literal notranslate"><span class="pre">static</span></code> is the router’s <code class="docutils literal notranslate"><span class="pre">name</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">resolve_symlinks</span></code> parameter was replaced by <code class="docutils literal notranslate"><span class="pre">allow_symlinks_outside_directory</span></code>, which
+defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code> where the old one defaulted to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</section>
+<section id="openapi-ui">
+<h2>OpenAPI UI<a class="headerlink" href="#openapi-ui" title="Link to this heading">¶</a></h2>
+<p>The OpenAPI controller was replaced by render plugins:</p>
+<div class="literal-block-wrapper docutils container" id="id38">
+<div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id38" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="2">    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+</span><span data-line="3">        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My API&quot;</span><span class="p">,</span>
+</span><span data-line="4">        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+</span><span data-line="5">        <span class="n">openapi_controller</span><span class="o">=</span><span class="n">MyOpenAPIController</span><span class="p">,</span>
+</span><span data-line="6">        <span class="n">root_schema_site</span><span class="o">=</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span>
+</span><span data-line="7">        <span class="n">enabled_endpoints</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;swagger&quot;</span><span class="p">,</span> <span class="s2">&quot;openapi.json&quot;</span><span class="p">},</span>
+</span><span data-line="8">    <span class="p">)</span>
+</span><span data-line="9"><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id39">
+<div class="code-block-caption"><span class="caption-text">3.x</span><a class="headerlink" href="#id39" title="Link to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.openapi.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">SwaggerRenderPlugin</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="4">    <span class="n">openapi_config</span><span class="o">=</span><span class="n">OpenAPIConfig</span><span class="p">(</span>
+</span><span data-line="5">        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My API&quot;</span><span class="p">,</span>
+</span><span data-line="6">        <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+</span><span data-line="7">        <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/api-docs&quot;</span><span class="p">,</span>
+</span><span data-line="8">        <span class="n">render_plugins</span><span class="o">=</span><span class="p">[</span><span class="n">SwaggerRenderPlugin</span><span class="p">()],</span>
+</span><span data-line="9">    <span class="p">)</span>
+</span><span data-line="10"><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<p>The first plugin in <code class="docutils literal notranslate"><span class="pre">render_plugins</span></code> is served at the configuration root, which is how
+<code class="docutils literal notranslate"><span class="pre">root_schema_site</span></code> is expressed now.</p>
+<p>The default set of endpoints also shrank: a plain <code class="docutils literal notranslate"><span class="pre">OpenAPIConfig(...)</span></code> served Redoc at
+<code class="docutils literal notranslate"><span class="pre">/schema</span></code> plus Swagger, Elements, RapiDoc and the YAML schema in 2.x, and now serves
+<code class="docutils literal notranslate"><span class="pre">openapi.json</span></code> and Scalar only. Add <code class="docutils literal notranslate"><span class="pre">SwaggerRenderPlugin</span></code>, <code class="docutils literal notranslate"><span class="pre">RedocRenderPlugin</span></code>,
+<code class="docutils literal notranslate"><span class="pre">StoplightRenderPlugin</span></code> or <code class="docutils literal notranslate"><span class="pre">YamlRenderPlugin</span></code> for the others; <code class="docutils literal notranslate"><span class="pre">RapidocRenderPlugin</span></code>
+was removed with no replacement. <code class="docutils literal notranslate"><span class="pre">litestar</span> <span class="pre">routes</span></code> is the quickest way to diff the route
+table before and after.</p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">litestar.contrib</span></code> namespace was removed. Every module warned on 2.x with its
+replacement, and the full mapping is in
+<a class="reference internal" href="../release-notes/whats-new-3.html#imports"><span class="std std-ref">the import table</span></a>. Since those warnings fire once
+per process and only if your warning filters are installed first, a plain
+<code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-rn</span> <span class="pre">&quot;litestar\.contrib&quot;</span> <span class="pre">.</span></code> over your project is a more reliable check.</p>
+</section>
+<section id="finding-the-rest">
+<span id="id1"></span><h2>Finding the rest<a class="headerlink" href="#finding-the-rest" title="Link to this heading">¶</a></h2>
+<p>The last 2.x release warns about many of the changes above. Litestar’s deprecations use
+<code class="docutils literal notranslate"><span class="pre">LitestarDeprecationWarning</span></code>, which subclasses <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code>, but some
+upgrade-relevant warnings use <code class="docutils literal notranslate"><span class="pre">LitestarWarning</span></code>, which subclasses <code class="docutils literal notranslate"><span class="pre">UserWarning</span></code> instead,
+so configure all three categories:</p>
+<div class="literal-block-wrapper docutils container" id="id40">
+<div class="code-block-caption"><span class="caption-text">pyproject.toml</span><a class="headerlink" href="#id40" title="Link to this code">¶</a></div>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[tool.pytest.ini_options]</span>
+</span><span data-line="2"><span class="n">filterwarnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="3"><span class="w">  </span><span class="s2">&quot;error::DeprecationWarning&quot;</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">  </span><span class="s2">&quot;error::PendingDeprecationWarning&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">  </span><span class="s2">&quot;error::litestar.exceptions.LitestarWarning&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="p">]</span>
+</span></pre></div>
+</div>
+</div>
+<p>Prefer this over <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-W</span> <span class="pre">error::DeprecationWarning</span></code>: pytest applies its
+<code class="docutils literal notranslate"><span class="pre">filterwarnings</span></code> configuration after <code class="docutils literal notranslate"><span class="pre">-W</span></code>, so an existing block in your project silently
+overrides the command line.</p>
+<p>Most of these warnings are emitted while the application is being constructed, not while a
+request is handled, because they come from route and signature processing. A test suite that
+only calls handler functions directly will surface almost nothing, so make sure your tests
+build a <code class="docutils literal notranslate"><span class="pre">Litestar</span></code> instance. Finally, unset <code class="docutils literal notranslate"><span class="pre">LITESTAR_WARN_IMPLICIT_SYNC_TO_THREAD</span></code>,
+<code class="docutils literal notranslate"><span class="pre">LITESTAR_WARN_SYNC_TO_THREAD_WITH_ASYNC</span></code>, <code class="docutils literal notranslate"><span class="pre">LITESTAR_WARN_SYNC_TO_THREAD_WITH_GENERATOR</span></code>
+and <code class="docutils literal notranslate"><span class="pre">LITESTAR_WARN_SIGNATURE_NAMESPACE_OVERRIDE</span></code> while you work through them.</p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Upgrading from an earlier version</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../onboarding/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Onboarding from other frameworks</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Litestar Organization</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://twitter.com/LitestarAPI" aria-label="X (Twitter)">
+  <iconify-icon icon="prime:twitter"></iconify-icon>
+</a>
+<a href="https://discord.gg/litestar" aria-label="Discord">
+  <iconify-icon icon="simple-icons:discord"></iconify-icon>
+</a>
+<a href="https://www.reddit.com/r/LitestarAPI" aria-label="Reddit">
+  <iconify-icon icon="simple-icons:reddit"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=8a5a2f34"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/litestar-theme.js?v=ab2dcc9e"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>
