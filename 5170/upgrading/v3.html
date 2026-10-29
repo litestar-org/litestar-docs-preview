@@ -455,9 +455,12 @@ data-aria-dark="Switch to auto color mode">
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
 <li><a class="reference internal" href="#before-you-start">Before you start</a></li>
+<li><a class="reference internal" href="#explicit-declarations">Explicit declarations</a><ul>
 <li><a class="reference internal" href="#request-parameters">Request parameters</a></li>
 <li><a class="reference internal" href="#reserved-keyword-arguments">Reserved keyword arguments</a></li>
 <li><a class="reference internal" href="#dependency-injection">Dependency injection</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#logging">Logging</a></li>
 <li><a class="reference internal" href="#unhandled-exceptions">Unhandled exceptions</a></li>
 <li><a class="reference internal" href="#custom-middleware">Custom middleware</a></li>
@@ -601,8 +604,20 @@ than at runtime, so declare the extras you need first:</p>
 </table>
 </div>
 </section>
+<section id="explicit-declarations">
+<h2>Explicit declarations<a class="headerlink" href="#explicit-declarations" title="Link to this heading">¶</a></h2>
+<p>Litestar now requires every handler and dependency parameter to declare where its value
+comes from. The three sections below are one change seen from different angles: request
+parameters, the reserved keyword arguments, and injected dependencies. A parameter that
+declares no source is an error when the application is created, instead of a source
+inferred from the surrounding context at request time.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../topics/explicit_declarations.html"><span class="doc">Explicit parameter declarations</span></a> for the reasoning behind this, and
+<a class="reference internal" href="../usage/routing/parameters.html"><span class="doc">Parameters</span></a> for the markers themselves.</p>
+</div>
 <section id="request-parameters">
-<h2>Request parameters<a class="headerlink" href="#request-parameters" title="Link to this heading">¶</a></h2>
+<h3>Request parameters<a class="headerlink" href="#request-parameters" title="Link to this heading">¶</a></h3>
 <p>Every request parameter must now declare where it comes from. An unmarked parameter raises
 at application construction:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">ImproperlyConfiguredException: [paths=&#39;/&#39;, handler=&#39;handler&#39;] Missing declaration for parameter &#39;name&#39;
@@ -748,7 +763,7 @@ type as <code class="docutils literal notranslate"><span class="pre">annotation=
 </div>
 </section>
 <section id="reserved-keyword-arguments">
-<h2>Reserved keyword arguments<a class="headerlink" href="#reserved-keyword-arguments" title="Link to this heading">¶</a></h2>
+<h3>Reserved keyword arguments<a class="headerlink" href="#reserved-keyword-arguments" title="Link to this heading">¶</a></h3>
 <p>The reserved kwargs must now be declared with their type:</p>
 <div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
@@ -794,7 +809,7 @@ iteration keep working, while <code class="docutils literal notranslate"><span c
 against a plain dict do not.</p>
 </section>
 <section id="dependency-injection">
-<h2>Dependency injection<a class="headerlink" href="#dependency-injection" title="Link to this heading">¶</a></h2>
+<h3>Dependency injection<a class="headerlink" href="#dependency-injection" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Provide</span></code> is unchanged, but the handler consuming a dependency must now mark it. This is
 the most common single edit:</p>
 <div class="literal-block-wrapper docutils container" id="id16">
@@ -847,6 +862,7 @@ dependencies at all:</p>
 <p>A default declared on the marker moves to the parameter default, and an optional dependency
 must spell out <code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">None</span></code>. <code class="docutils literal notranslate"><span class="pre">NamedDependency[int</span> <span class="pre">|</span> <span class="pre">None]</span></code> with no default and no provider
 passes startup validation and then fails per request with a bare 500.</p>
+</section>
 </section>
 <section id="logging">
 <h2>Logging<a class="headerlink" href="#logging" title="Link to this heading">¶</a></h2>
@@ -1028,8 +1044,27 @@ no longer works:</p>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> is now async-native. Plain requests are unchanged, but websocket
-sessions became asynchronous:</p>
+<p><code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> is now async-native: in 2.x it ran the application in a separate
+thread with its own event loop and bridged every call through a blocking portal, and it now
+runs the application on the caller’s event loop, the same one the test runs on.</p>
+<p>In practice that means:</p>
+<ul class="simple">
+<li><p>The client has to be entered with <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">with</span></code> from an asynchronous test. There is no
+implicit startup.</p></li>
+<li><p>Websocket sessions are asynchronous. <code class="docutils literal notranslate"><span class="pre">websocket_connect</span></code> returns an
+<code class="docutils literal notranslate"><span class="pre">AsyncWebSocketTestSession</span></code>, so the session is entered with <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">with</span></code> and every
+<code class="docutils literal notranslate"><span class="pre">send_*</span></code>, <code class="docutils literal notranslate"><span class="pre">receive_*</span></code> and <code class="docutils literal notranslate"><span class="pre">close</span></code> call is awaited.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">backend</span></code> and <code class="docutils literal notranslate"><span class="pre">backend_options</span></code> were removed from <code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> and
+<code class="docutils literal notranslate"><span class="pre">create_async_test_client</span></code>, since there is no longer a separate loop to configure.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timeout</span></code> narrowed to <code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span></code>, so <code class="docutils literal notranslate"><span class="pre">httpx.Timeout</span></code> objects no longer apply.</p></li>
+<li><p>The application shares the test’s event loop, so blocking that loop in a test also blocks
+the application.</p></li>
+<li><p>Use the client inline in the test. Yielding it from an async generator fixture requires
+anyio’s pytest plugin; under <code class="docutils literal notranslate"><span class="pre">pytest-asyncio</span></code> setup and teardown run in different tasks
+and teardown fails with <code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">Attempted</span> <span class="pre">to</span> <span class="pre">exit</span> <span class="pre">cancel</span> <span class="pre">scope</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">different</span>
+<span class="pre">task</span> <span class="pre">than</span> <span class="pre">it</span> <span class="pre">was</span> <span class="pre">entered</span> <span class="pre">in</span></code>.</p></li>
+</ul>
+<p>Plain requests need no changes, but websocket sessions do:</p>
 <div class="literal-block-wrapper docutils container" id="id32">
 <div class="code-block-caption"><span class="caption-text">2.x</span><a class="headerlink" href="#id32" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">async</span> <span class="k">with</span> <span class="n">create_async_test_client</span><span class="p">([</span><span class="n">handler</span><span class="p">])</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
