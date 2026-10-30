@@ -1180,10 +1180,17 @@ to indicate whether to bypass the middleware for the current request.</p>
 <p>A mount matched any path merely <em>starting with</em> its path string, so a mount on
 <code class="docutils literal notranslate"><span class="pre">/admin</span></code> served <code class="docutils literal notranslate"><span class="pre">/administrator</span></code>, handing the mounted app <code class="docutils literal notranslate"><span class="pre">istrator/</span></code> as its
 path. A mount now matches only its own path and sub-paths of it, <code class="docutils literal notranslate"><span class="pre">/admin</span></code> and
-<code class="docutils literal notranslate"><span class="pre">/admin/...</span></code>, and <code class="docutils literal notranslate"><span class="pre">/</span></code> still mounts everything no more specific mount claims.</p>
-<p>This also fixes mounts with a shared or nested prefix shadowing one another, and
-mount paths containing regex metacharacters, which raised
-<code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> or failed application startup.</p>
+<code class="docutils literal notranslate"><span class="pre">/admin/...</span></code>, and <code class="docutils literal notranslate"><span class="pre">/</span></code> still mounts everything that no more specific mount
+claims.</p>
+<p>Of several mounts matching a path, the longest one now receives the request, so a
+mount nested under another, e.g. <code class="docutils literal notranslate"><span class="pre">/admin/inner</span></code> under <code class="docutils literal notranslate"><span class="pre">/admin</span></code>, is reachable.
+This also fixes mounts sharing a prefix shadowing one another, and mount paths
+containing regex metacharacters, which raised <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> or
+failed application startup.</p>
+<p>An application relying on a mount absorbing sibling paths that merely share its
+prefix now receives <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">-</span> <span class="pre">Not</span> <span class="pre">Found</span></code> for them. Mount the application one path
+segment higher, or declare the sibling path as a further path of the mount, e.g.
+<code class="docutils literal notranslate"><span class="pre">&#64;asgi([&quot;/admin&quot;,</span> <span class="pre">&quot;/administrator&quot;],</span> <span class="pre">is_mount=True)</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5173">https://github.com/litestar-org/litestar/issues/5173</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5178">https://github.com/litestar-org/litestar/pull/5178</a></span></p>
 </div>
 </dd>
