@@ -547,6 +547,21 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Default <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> for ASGI handlers<a class="headerlink reference internal" href="#3.0.0-default" id="3.0.0-default">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Every <code class="docutils literal notranslate"><span class="pre">asgi</span></code> handler, mounted or not, now receives a copy of the ASGI <code class="docutils literal notranslate"><span class="pre">scope</span></code>,
+so the wrapped application can no longer add, replace or remove top-level scope
+keys seen by the outer application. The default was <code class="docutils literal notranslate"><span class="pre">None</span></code>, which passed the
+original scope through, warned at registration and warned again when the wrapped
+application mutated the scope; both warnings are gone.</p>
+<p>The copy is shallow, so nested values such as <code class="docutils literal notranslate"><span class="pre">scope[&quot;state&quot;]</span></code> are still shared
+with the outer scope.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">copy_scope=False</span></code> where the wrapped application is meant to communicate with
+the outer application through the scope, for example by writing <code class="docutils literal notranslate"><span class="pre">scope[&quot;user&quot;]</span></code>
+for outer middleware to read, or by calling <code class="docutils literal notranslate"><span class="pre">Request.set_session</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Request.clear_session</span></code>. All of these now fail silently.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5164">https://github.com/litestar-org/litestar/pull/5164</a></span></p>
+</div>
+</dd>
 <dt>Require “reserved kwargs” to be declared with their type<a class="headerlink reference internal" href="#3.0.0-require &quot;reserved kwargs&quot; to be declared with their type" id="3.0.0-require &quot;reserved kwargs&quot; to be declared with their type">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Declaring the “reserved kwargs” <code class="docutils literal notranslate"><span class="pre">body</span></code>, <code class="docutils literal notranslate"><span class="pre">cookies</span></code>, <code class="docutils literal notranslate"><span class="pre">data</span></code>,
 <code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">query</span></code>, <code class="docutils literal notranslate"><span class="pre">request</span></code>, <code class="docutils literal notranslate"><span class="pre">scope</span></code> and <code class="docutils literal notranslate"><span class="pre">socket</span></code> without the type
@@ -1176,6 +1191,60 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Fix <code class="docutils literal notranslate"><span class="pre">Optional</span></code> / <code class="docutils literal notranslate"><span class="pre">Any</span></code> + <code class="docutils literal notranslate"><span class="pre">required=False</span></code> + without default parameters receiving <code class="docutils literal notranslate"><span class="pre">Empty</span></code><a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would cause a request parameter typed <code class="docutils literal notranslate"><span class="pre">Optional</span></code> or <code class="docutils literal notranslate"><span class="pre">Any</span></code>,
+<em>and</em> declared without a default <em>and</em> annotated as <code class="docutils literal notranslate"><span class="pre">required=False</span></code> to
+receive the <code class="docutils literal notranslate"><span class="pre">Empty</span></code> sentinel when that parameter was missing from the request.</p>
+<p>A parameter annotated <code class="docutils literal notranslate"><span class="pre">required=False</span></code> that is consumed by any handler or
+dependency, and does not have a default, now raises
+<a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ImproperlyConfiguredException" title="litestar.exceptions.ImproperlyConfiguredException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImproperlyConfiguredException</span></code></a> at startup.</p>
+<p>This includes a marker for a parameter also declared as a layer parameter
+with <code class="docutils literal notranslate"><span class="pre">required=False</span></code>. Layer parameters that are <em>not</em> consumed are not
+affected by this.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5185">https://github.com/litestar-org/litestar/pull/5185</a></span></p>
+</div>
+</dd>
+<dt>Fix <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code> when Pydantic or attrs are not installed<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would raise <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ModuleNotFoundError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a> when attrs or Pydantic
+were not installed.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5142">https://github.com/litestar-org/litestar/issues/5142</a></span></p>
+</div>
+</dd>
+<dt>ServerSideSessionBackend: Prevent storing empty sessions and session cookies for every request<a class="headerlink reference internal" href="#3.0.0-serversidesessionbackend: prevent storing empty sessions and session cookies for every request" id="3.0.0-serversidesessionbackend: prevent storing empty sessions and session cookies for every request">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug where <code class="docutils literal notranslate"><span class="pre">ServerSideSessionBackend</span></code> would store an empty session under
+a new session ID and set a session cookie for every request, even when that
+request did not have a session cookie attached.</p>
+<p>The fixed backend will now only store a session if the client has a session
+cookie set. Empty sessions for a request with a session cookie will now also
+be deleted reliably.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5182">https://github.com/litestar-org/litestar/issues/5182</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5172">https://github.com/litestar-org/litestar/pull/5172</a></span></p>
+</div>
+</dd>
+<dt>Apply <code class="docutils literal notranslate"><span class="pre">allow_symlinks_outside_directory=False</span></code> to every part of a static file’s path<a class="headerlink reference internal" href="#3.0.0-apply" id="3.0.0-apply">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would resolve symlinks only for the directory path, not the file
+path, when <code class="docutils literal notranslate"><span class="pre">allow_symlinks_outside_directory=False</span></code>. The whole path is now
+always resolved.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5181">https://github.com/litestar-org/litestar/pull/5181</a></span></p>
+</div>
+</dd>
+<dt>Match mounted ASGI apps on path segments<a class="headerlink reference internal" href="#3.0.0-match mounted asgi apps on path segments" id="3.0.0-match mounted asgi apps on path segments">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>A mount matched any path merely <em>starting with</em> its path string, so a mount on
+<code class="docutils literal notranslate"><span class="pre">/admin</span></code> served <code class="docutils literal notranslate"><span class="pre">/administrator</span></code>, handing the mounted app <code class="docutils literal notranslate"><span class="pre">istrator/</span></code> as its
+path. A mount now matches only its own path and sub-paths of it, <code class="docutils literal notranslate"><span class="pre">/admin</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/admin/...</span></code>, and <code class="docutils literal notranslate"><span class="pre">/</span></code> still mounts everything that no more specific mount
+claims.</p>
+<p>Of several mounts matching a path, the longest one now receives the request, so a
+mount nested under another, e.g. <code class="docutils literal notranslate"><span class="pre">/admin/inner</span></code> under <code class="docutils literal notranslate"><span class="pre">/admin</span></code>, is reachable.
+This also fixes mounts sharing a prefix shadowing one another, and mount paths
+containing regex metacharacters, which raised <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">-</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> or
+failed application startup.</p>
+<p>An application relying on a mount absorbing sibling paths that merely share its
+prefix now receives <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">-</span> <span class="pre">Not</span> <span class="pre">Found</span></code> for them. Mount the application one path
+segment higher, or declare the sibling path as a further path of the mount, e.g.
+<code class="docutils literal notranslate"><span class="pre">&#64;asgi([&quot;/admin&quot;,</span> <span class="pre">&quot;/administrator&quot;],</span> <span class="pre">is_mount=True)</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5173">https://github.com/litestar-org/litestar/issues/5173</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5178">https://github.com/litestar-org/litestar/pull/5178</a></span></p>
+</div>
+</dd>
 <dt>Declare <code class="docutils literal notranslate"><span class="pre">socket</span></code> in the original signature of a <code class="docutils literal notranslate"><span class="pre">websocket_stream</span></code> handler<a class="headerlink reference internal" href="#3.0.0-declare" id="3.0.0-declare">#</a></dt><dd><div class="changelog-change docutils container">
 <p>A <code class="docutils literal notranslate"><span class="pre">websocket_stream</span></code> handler whose function takes no <code class="docutils literal notranslate"><span class="pre">socket</span></code> parameter adds
 one to its <code class="docutils literal notranslate"><span class="pre">parsed_fn_signature</span></code>, but only to its <code class="docutils literal notranslate"><span class="pre">parameters</span></code>, so its

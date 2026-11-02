@@ -1432,7 +1432,7 @@ stream and psycopg backends were not affected.</p>
 <p>Performance of threaded synchronous code was improved by using the async
 library’s native threading helpers instead of anyio. On asyncio,
 <a class="reference external" href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor" title="(in Python v3.15)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.loop.run_in_executor()</span></code></a> is now used and on trio
-<a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync" title="(in Trio v0.34.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">trio.to_thread.run_sync()</span></code></a>.</p>
+<a class="reference external" href="https://trio.readthedocs.io/en/stable/reference-core.html#trio.to_thread.run_sync" title="(in Trio v0.35.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">trio.to_thread.run_sync()</span></code></a>.</p>
 <p>Beneficiaries of these performance improvements are:</p>
 <ul class="simple">
 <li><p>Synchronous route handlers making use of <code class="docutils literal notranslate"><span class="pre">sync_to_thread=True</span></code></p></li>
@@ -2284,8 +2284,8 @@ This was fixed by leaving the default value as <a class="reference external" hre
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2138">https://github.com/litestar-org/litestar/issues/2138</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2189">https://github.com/litestar-org/litestar/pull/2189</a></span></p>
 </div>
 </dd>
-<dt>Add <a class="reference internal" href="../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusController.include_in_schema" title="litestar.plugins.prometheus.PrometheusController.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Adds the <a class="reference internal" href="../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusController.include_in_schema" title="litestar.plugins.prometheus.PrometheusController.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
+<dt>Add <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option for all layers<a class="headerlink reference internal" href="#2.1.0-add" id="2.1.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Adds the <a class="reference internal" href="../reference/app.html#litestar.app.Litestar.params.include_in_schema" title="litestar.app.Litestar.params.include_in_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_in_schema()</span></code></a> option to all layers, allowing to include/exclude
 specific routes from the generated OpenAPI schema.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/2267">https://github.com/litestar-org/litestar/issues/2267</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/2295">https://github.com/litestar-org/litestar/pull/2295</a></span></p>
 </div>
