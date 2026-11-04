@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/session/index.html">session</a><ul>
@@ -462,6 +461,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate">to_asgi_response</span></code> has been removed</a></li>
 <li><a class="reference internal" href="#deprecated-scope-state-utilities-removed">Deprecated scope state utilities removed</a></li>
 <li><a class="reference internal" href="#deprecated-utility-function-is-sync-or-async-generator-removed">Deprecated utility function <code class="docutils literal notranslate"><span class="pre">is_sync_or_async_generator</span></code> removed</a></li>
+<li><a class="reference internal" href="#deprecated-dtofield-declaration-via-pydantic-s-field-extra-removed">Deprecated <code class="docutils literal notranslate"><span class="pre">DTOField</span></code> declaration via Pydantic&#8217;s <code class="docutils literal notranslate">extra</span></code> removed</a></li>
 <li><a class="reference internal" href="#removal-of-semantic-http-route-handler-classes">Removal of semantic HTTP route handler classes</a></li>
 <li><a class="reference internal" href="#id1">Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate">to_asgi_response</span></code> has been removed</a></li>
 <li><a class="reference internal" href="#removal-of-deprecated-litestar-middleware-exceptions-module-and-exceptionhandlermiddleware">Removal of deprecated <code class="docutils literal notranslate">middleware.exceptions</span></code> module and <code class="docutils literal notranslate"><span class="pre">ExceptionHandlerMiddleware</span></code></a></li>
@@ -483,6 +483,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#improved-file-system-handling-fsspec-integration">Improved file system handling / fsspec integration</a></li>
 <li><a class="reference internal" href="#removal-of-resolve-symlinks-parameter-to-create-static-files-router">Removal of <code class="docutils literal notranslate"><span class="pre">resolve_symlinks</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">create_static_files_router</span></code></a></li>
 <li><a class="reference internal" href="#middleware-configuration-constraints">Middleware configuration constraints</a></li>
+<li><a class="reference internal" href="#copy-scope-defaults-to-true-for-asgi-handlers"><code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> for ASGI handlers</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
   data-type="github" data-user="litestar-org" data-repo="litestar">
@@ -753,6 +754,36 @@ using a namespace that is unique to your application and unlikely to conflict wi
 </span></pre></div>
 </div>
 </section>
+<section id="deprecated-dtofield-declaration-via-pydantic-s-field-extra-removed">
+<h2>Deprecated <code class="docutils literal notranslate"><span class="pre">DTOField</span></code> declaration via Pydantic’s <code class="docutils literal notranslate"><span class="pre">Field.extra</span></code> removed<a class="headerlink" href="#deprecated-dtofield-declaration-via-pydantic-s-field-extra-removed" title="Link to this heading">¶</a></h2>
+<p>Declaring a <a class="reference internal" href="../reference/dto/field.html#litestar.dto.field.DTOField" title="litestar.dto.field.DTOField"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOField</span></code></a> through Pydantic’s <code class="docutils literal notranslate"><span class="pre">Field.extra</span></code>, that is
+<code class="docutils literal notranslate"><span class="pre">Field(**dto_field(&quot;read-only&quot;))</span></code>, is no longer supported. The mark was already being
+ignored in 2.x and only produced a deprecation warning.</p>
+<p>Remove the declaration: it leaves an internal key in the field’s <code class="docutils literal notranslate"><span class="pre">json_schema_extra</span></code>,
+which can make OpenAPI schema generation fail.</p>
+<p>Before:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.dto</span><span class="w"> </span><span class="kn">import</span> <span class="n">dto_field</span>
+</span><span data-line="4">
+</span><span data-line="5">
+</span><span data-line="6"><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span data-line="7">    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="o">**</span><span class="n">dto_field</span><span class="p">(</span><span class="s2">&quot;read-only&quot;</span><span class="p">))</span>
+</span></pre></div>
+</div>
+<p>After:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.dto</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTOField</span>
+</span><span data-line="6">
+</span><span data-line="7">
+</span><span data-line="8"><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">pydantic</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span data-line="9">    <span class="nb">id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">DTOField</span><span class="p">(</span><span class="n">mark</span><span class="o">=</span><span class="s2">&quot;read-only&quot;</span><span class="p">)]</span>
+</span></pre></div>
+</div>
+</section>
 <section id="removal-of-semantic-http-route-handler-classes">
 <h2>Removal of semantic HTTP route handler classes<a class="headerlink" href="#removal-of-semantic-http-route-handler-classes" title="Link to this heading">¶</a></h2>
 <p>The semantic <code class="docutils literal notranslate"><span class="pre">HTTPRouteHandler</span></code> classes have been removed in favour of functional
@@ -852,14 +883,22 @@ callable as its only argument and returns another ASGI callable:</p>
 <h2>Built-in middleware migrated to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink" href="#built-in-middleware-migrated-to-asgimiddleware" title="Link to this heading">¶</a></h2>
 <p>Litestar’s built-in middleware are being moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code> and
 <code class="docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code> bases onto <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>.
-<code class="docutils literal notranslate"><span class="pre">CORSMiddleware</span></code> and <code class="docutils literal notranslate"><span class="pre">ResponseCacheMiddleware</span></code> have made this move.
-<code class="docutils literal notranslate"><span class="pre">ResponseCacheMiddleware</span></code> has also been moved into
-<code class="docutils literal notranslate"><span class="pre">litestar.middleware._internal</span></code>, removing it from the public API.</p>
-<p>These classes are constructed by Litestar itself from their configuration objects, so
-applications that only configure them - for CORS, via
-<a class="reference internal" href="../reference/config.html#litestar.config.cors.CORSConfig" title="litestar.config.cors.CORSConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CORSConfig</span></code></a>, and for response caching, via
+<code class="docutils literal notranslate"><span class="pre">CORSMiddleware</span></code>, <code class="docutils literal notranslate"><span class="pre">ResponseCacheMiddleware</span></code> and <code class="docutils literal notranslate"><span class="pre">CSRFMiddleware</span></code> have made this
+move. <code class="docutils literal notranslate"><span class="pre">ResponseCacheMiddleware</span></code> and <code class="docutils literal notranslate"><span class="pre">CSRFMiddleware</span></code> have also been moved into
+<code class="docutils literal notranslate"><span class="pre">litestar.middleware._internal</span></code>, removing them from the public API; for CSRF this
+includes the <code class="docutils literal notranslate"><span class="pre">litestar.middleware.csrf</span></code> module and its <code class="docutils literal notranslate"><span class="pre">generate_csrf_token</span></code> /
+<code class="docutils literal notranslate"><span class="pre">generate_csrf_hash</span></code> helpers.</p>
+<p>These classes are constructed by Litestar itself from their configuration objects (for
+CSRF, via a <code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the middleware), so applications that only
+configure them - for CORS, via
+<a class="reference internal" href="../reference/config.html#litestar.config.cors.CORSConfig" title="litestar.config.cors.CORSConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CORSConfig</span></code></a>, for response caching, via
 <a class="reference internal" href="../reference/config.html#litestar.config.response_cache.ResponseCacheConfig" title="litestar.config.response_cache.ResponseCacheConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseCacheConfig</span></code></a> and the handler-level
-<code class="docutils literal notranslate"><span class="pre">cache</span></code> argument - are unaffected.</p>
+<code class="docutils literal notranslate"><span class="pre">cache</span></code> argument, and for CSRF, via <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a> - are
+unaffected, with one exception: <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a>
+patterns are now matched against the <strong>handler’s path template</strong>
+(e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) at startup, instead of the request path
+(e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>) at runtime. Patterns targeting literal paths keep working; patterns
+written to match expanded path parameters must be rewritten against the template.</p>
 <p>Code that composed one of them directly into an ASGI stack must drop the <code class="docutils literal notranslate"><span class="pre">app</span></code>
 argument, pass the settings as keyword arguments rather than a configuration object, and
 apply the instance to the next ASGI app:</p>
@@ -1018,6 +1057,37 @@ startup.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../usage/middleware/creating-middleware.html#configuration-constraints"><span class="std std-ref">Configuration constraints</span></a></p>
+</div>
+</section>
+<section id="copy-scope-defaults-to-true-for-asgi-handlers">
+<h2><code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> for ASGI handlers<a class="headerlink" href="#copy-scope-defaults-to-true-for-asgi-handlers" title="Link to this heading">¶</a></h2>
+<p>Every <a class="reference internal" href="../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">asgi()</span></code></a> handler, mounted or not, now receives a copy of the ASGI
+<code class="docutils literal notranslate"><span class="pre">scope</span></code>, so the wrapped application can no longer add, replace or remove top-level scope
+keys seen by the outer application. In 2.x the default was <code class="docutils literal notranslate"><span class="pre">None</span></code>, which passed the
+original scope through, warned at registration and warned again when the wrapped
+application mutated the scope. Both warnings are gone.</p>
+<p>The copy is shallow, so nested values such as <code class="docutils literal notranslate"><span class="pre">scope[&quot;state&quot;]</span></code> are still shared with the
+outer scope.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">copy_scope=False</span></code> where the wrapped application is meant to communicate with the
+outer application through the scope:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nd">@asgi</span><span class="p">(</span><span class="s2">&quot;/some/sub-path&quot;</span><span class="p">,</span> <span class="n">is_mount</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy_scope</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_asgi_app</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span></pre></div>
+</div>
+<p>You need the opt-out if the wrapped application writes a top-level scope key the outer
+application reads, such as <code class="docutils literal notranslate"><span class="pre">scope[&quot;user&quot;]</span></code>, or calls
+<a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection.set_session" title="litestar.connection.ASGIConnection.set_session"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_session()</span></code></a> or
+<a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection.clear_session" title="litestar.connection.ASGIConnection.clear_session"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clear_session()</span></code></a>, both of which rebind
+<code class="docutils literal notranslate"><span class="pre">scope[&quot;session&quot;]</span></code>. A mounted Starlette or FastAPI application also sets
+<code class="docutils literal notranslate"><span class="pre">scope[&quot;endpoint&quot;]</span></code> and <code class="docutils literal notranslate"><span class="pre">scope[&quot;route&quot;]</span></code>, which outer Sentry or OpenTelemetry layers
+read after the response to name the transaction. All of these now fail silently.</p>
+<p><code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> is set per handler; there is no router- or application-level equivalent, so
+an application with several mounts opts out on each handler. A <code class="docutils literal notranslate"><span class="pre">handler_class</span></code> subclass
+that pinned <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> by passing it to <code class="docutils literal notranslate"><span class="pre">super().__init__()</span></code> must now accept it as a
+parameter and forward it, because <a class="reference internal" href="../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">asgi()</span></code></a> always passes it.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/routing/handlers.html#asgi-route-handler-considerations"><span class="std std-ref">ASGI route handler considerations</span></a></p>
 </div>
 </section>
 </section>
