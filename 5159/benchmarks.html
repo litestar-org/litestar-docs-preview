@@ -458,7 +458,6 @@ data-aria-dark="Switch to auto color mode">
 </ul>
 </li>
 <li><a class="reference internal" href="#interpreting-the-results">Interpreting the results</a></li>
-<li><a class="reference internal" href="#continuous-benchmarks">Continuous benchmarks</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
   data-type="github" data-user="litestar-org" data-repo="litestar">
@@ -672,15 +671,6 @@ For almost any test you can probably write an app that performs better or worse 
 representation of how a real world application behaves and performs, where, aside from the workload, many other factors
 come into play. These tests were mainly written to be used internally for Litestar development, to help us locate and
 track performance regressions and improvements.</p>
-</section>
-<section id="continuous-benchmarks">
-<h2>Continuous benchmarks<a class="headerlink" href="#continuous-benchmarks" title="Link to this heading">¶</a></h2>
-<p>In addition to the throughput comparison above, Litestar tracks the CPU cost of its own
-request path, serialization and application startup with
-<a class="reference external" href="https://codspeed.io/litestar-org/litestar">CodSpeed</a> on every pull request that touches the
-library (<code class="docutils literal notranslate"><span class="pre">litestar/</span></code>, the benchmarks, <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> or <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>). These benchmarks
-live in <code class="docutils literal notranslate"><span class="pre">tests/benchmarks</span></code> in the repository and compare each change against the latest
-<code class="docutils literal notranslate"><span class="pre">main</span></code> commit, so regressions are visible before they are merged.</p>
 </section>
 </section>
 

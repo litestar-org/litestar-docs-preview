@@ -697,21 +697,13 @@ straightforward. For debugging, it’s recommended to run the tests individually
 <section id="benchmarks">
 <h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Link to this heading">¶</a></h3>
 <p>Benchmarks live in <code class="docutils literal notranslate"><span class="pre">tests/benchmarks</span></code> and are measured by
-<a class="reference external" href="https://codspeed.io/litestar-org/litestar">CodSpeed</a> on every pull request that touches the
-library (<code class="docutils literal notranslate"><span class="pre">litestar/</span></code>, the benchmarks, <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> or <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>). They are ordinary pytest tests
-marked with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.benchmark</span></code>, so <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> runs each of them once as a smoke
-test. The measurement itself only happens in CI, where CodSpeed counts instructions under
-Valgrind and compares them against <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
-<p>The CodSpeed check on a pull request is informational. A reported regression is a prompt
-to look at the flame graph linked from the CodSpeed comment, not a merge blocker; results
-can shift by a few percent for reasons unrelated to a change.</p>
-<p>When adding a benchmark, keep the measured call free of I/O and <code class="docutils literal notranslate"><span class="pre">TestClient</span></code> (drive the
-app with <code class="docutils literal notranslate"><span class="pre">ASGIRunner.request_many</span></code> from <code class="docutils literal notranslate"><span class="pre">tests/benchmarks/helpers.py</span></code>, which sends 10
-requests per measured call so the event-loop entry does not dominate), start the app with
-<code class="docutils literal notranslate"><span class="pre">ASGIRunner.lifespan</span></code> as the existing app fixtures do, make it do at least ~100 µs of
-work, and assert on its result so it keeps working as a regular test.
-Pass positional arguments or wrap the call in a <code class="docutils literal notranslate"><span class="pre">lambda</span></code>: <code class="docutils literal notranslate"><span class="pre">pytest-codspeed</span></code> forwards
-keyword arguments to its own measuring function, so a keyword named <code class="docutils literal notranslate"><span class="pre">fn</span></code> collides with it.</p>
+<a class="reference external" href="https://codspeed.io/litestar-org/litestar">CodSpeed</a> in CI. They are ordinary pytest
+tests, so <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> runs each of them once.</p>
+<p>When adding one, drive the app with <code class="docutils literal notranslate"><span class="pre">ASGIRunner</span></code> from <code class="docutils literal notranslate"><span class="pre">tests/benchmarks/helpers.py</span></code>
+rather than <code class="docutils literal notranslate"><span class="pre">TestClient</span></code>, and assert on the result so it keeps working as a test.
+<code class="docutils literal notranslate"><span class="pre">pytest-codspeed</span></code> forwards keyword arguments to its own measuring function, so pass the
+call’s arguments positionally or wrap it in a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> – a keyword named <code class="docutils literal notranslate"><span class="pre">target</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fn</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">uri</span></code> or <code class="docutils literal notranslate"><span class="pre">marker_options</span></code> collides with it.</p>
 </section>
 <section id="running-type-checkers">
 <h3>Running type checkers<a class="headerlink" href="#running-type-checkers" title="Link to this heading">¶</a></h3>
