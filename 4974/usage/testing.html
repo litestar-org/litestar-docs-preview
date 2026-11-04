@@ -921,7 +921,8 @@ be cleaned up properly without issues.</p>
 </section>
 <section id="testing-websockets">
 <h3>Testing websockets<a class="headerlink" href="#testing-websockets" title="Link to this heading">¶</a></h3>
-<p>Litestar’s test client enhances the httpx2 client to support websockets. To test a websocket endpoint, you can use the
+<p>Litestar’s test client adds websocket support that routes through the ASGI app rather than over a real connection, so
+<code class="docutils literal notranslate"><span class="pre">httpx2</span></code>’s own <code class="docutils literal notranslate"><span class="pre">websocket()</span></code> method does not apply. To test a websocket endpoint, use the
 <a class="reference internal" href="../reference/testing.html#litestar.testing.TestClient.websocket_connect" title="litestar.testing.TestClient.websocket_connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">websocket_connect</span></code></a> method on the test client. The method returns
 a websocket connection object that you can use to send and receive messages, see an example below for json:</p>
 <p>For more information, see also the <a class="reference internal" href="../reference/connection.html#litestar.connection.WebSocket" title="litestar.connection.WebSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebSocket</span></code></a> class in the API documentation and
@@ -1162,17 +1163,17 @@ in isolation.</p>
 </section>
 <section id="running-a-live-server">
 <h2>Running a live server<a class="headerlink" href="#running-a-live-server" title="Link to this heading">¶</a></h2>
-<p>The test clients make use of HTTPX’s ability to directly call into an ASGI app, without
+<p>The test clients make use of <code class="docutils literal notranslate"><span class="pre">httpx2</span></code>’s ability to directly call into an ASGI app, without
 having to run an actual server. In most cases this is sufficient but there are some
 exceptions where this won’t work, due to the limitations of the emulated client-server
 communication.</p>
 <p>For example, when using server-sent events with an infinite generator, it will lock up
-the test client, since HTTPX tries to consume the full response before returning a
+the test client, since <code class="docutils literal notranslate"><span class="pre">httpx2</span></code> tries to consume the full response before returning a
 request.</p>
 <p>Litestar offers two helper functions,
 <a class="reference internal" href="../reference/testing.html#litestar.testing.subprocess_sync_client" title="litestar.testing.subprocess_sync_client"><code class="xref py py-func docutils literal notranslate"><span class="pre">litestar.testing.subprocess_sync_client()</span></code></a> and
 <a class="reference internal" href="../reference/testing.html#litestar.testing.subprocess_async_client" title="litestar.testing.subprocess_async_client"><code class="xref py py-func docutils literal notranslate"><span class="pre">litestar.testing.subprocess_async_client()</span></code></a> that will
-launch a Litestar instance with in a subprocess and set up an httpx2 client for running
+launch a Litestar instance with in a subprocess and set up an <code class="docutils literal notranslate"><span class="pre">httpx2</span></code> client for running
 tests. You can either load your actual app file or create subsets from it as you would
 with the regular test client setup:</p>
 <div class="sd-tab-set docutils">
