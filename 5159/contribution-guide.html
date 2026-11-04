@@ -458,7 +458,7 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#guidelines-for-writing-code">Guidelines for writing code</a><ul>
 <li><a class="reference internal" href="#writing-and-running-tests">Writing and running tests</a></li>
-<li><a class="reference internal" href="#running-benchmarks">Running benchmarks</a></li>
+<li><a class="reference internal" href="#benchmarks">Benchmarks</a></li>
 <li><a class="reference internal" href="#running-type-checkers">Running type checkers</a></li>
 </ul>
 </li>
@@ -694,21 +694,22 @@ or <code class="docutils literal notranslate"><span class="pre">make</span> <spa
 straightforward. For debugging, it’s recommended to run the tests individually with
 <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">&lt;test</span> <span class="pre">name&gt;</span></code> or via an IDE, which will skip <code class="docutils literal notranslate"><span class="pre">pytest-xdist</span></code>.</p>
 </section>
-<section id="running-benchmarks">
-<h3>Running benchmarks<a class="headerlink" href="#running-benchmarks" title="Link to this heading">¶</a></h3>
-<p>Micro-benchmarks live in <code class="docutils literal notranslate"><span class="pre">tests/benchmarks</span></code> and are measured by
+<section id="benchmarks">
+<h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Link to this heading">¶</a></h3>
+<p>Benchmarks live in <code class="docutils literal notranslate"><span class="pre">tests/benchmarks</span></code> and are measured by
 <a class="reference external" href="https://codspeed.io/litestar-org/litestar">CodSpeed</a> on every pull request that touches the
 library (<code class="docutils literal notranslate"><span class="pre">litestar/</span></code>, the benchmarks, <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> or <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>). They are ordinary pytest tests
-marked with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.benchmark</span></code>: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> runs each of them once as a smoke
-test, and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">benchmark</span></code> runs them through <code class="docutils literal notranslate"><span class="pre">pytest-codspeed</span></code> and prints timings.
-Timings measured locally are wall-clock and noisy; CI measures instruction counts under
-Valgrind, which is deterministic enough to compare against <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+marked with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.benchmark</span></code>, so <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> runs each of them once as a smoke
+test. The measurement itself only happens in CI, where CodSpeed counts instructions under
+Valgrind and compares them against <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
 <p>The CodSpeed check on a pull request is informational. A reported regression is a prompt
 to look at the flame graph linked from the CodSpeed comment, not a merge blocker; results
 can shift by a few percent for reasons unrelated to a change.</p>
 <p>When adding a benchmark, keep the measured call free of I/O and <code class="docutils literal notranslate"><span class="pre">TestClient</span></code> (drive the
-app with the <code class="docutils literal notranslate"><span class="pre">ASGIRunner</span></code> helper from <code class="docutils literal notranslate"><span class="pre">tests/benchmarks/helpers.py</span></code>), make it do at
-least ~100 µs of work, and assert on its result so it keeps working as a regular test.
+app with <code class="docutils literal notranslate"><span class="pre">ASGIRunner.request_many</span></code> from <code class="docutils literal notranslate"><span class="pre">tests/benchmarks/helpers.py</span></code>, which sends 10
+requests per measured call so the event-loop entry does not dominate), start the app with
+<code class="docutils literal notranslate"><span class="pre">ASGIRunner.lifespan</span></code> as the existing app fixtures do, make it do at least ~100 µs of
+work, and assert on its result so it keeps working as a regular test.
 Pass positional arguments or wrap the call in a <code class="docutils literal notranslate"><span class="pre">lambda</span></code>: <code class="docutils literal notranslate"><span class="pre">pytest-codspeed</span></code> forwards
 keyword arguments to its own measuring function, so a keyword named <code class="docutils literal notranslate"><span class="pre">fn</span></code> collides with it.</p>
 </section>
