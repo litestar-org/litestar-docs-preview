@@ -1200,20 +1200,13 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
-<dt>Fix <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> raised by the codegen DTO backend for deeply nested models<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
+<dt>Fix <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> raised by the codegen DTO backend for nested models<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
 <p>An application failed to start with a <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#SyntaxError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> when a DTO nested models
 more than one level deep, since the codegen backend - the default backend - derived
 a local variable name from an access expression without stripping the attribute and
-item access syntax from it.</p>
-<p>Reproducing it took a <a class="reference internal" href="../reference/dto/config.html#litestar.dto.config.DTOConfig" title="litestar.dto.config.DTOConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOConfig</span></code></a> with a
-<code class="docutils literal notranslate"><span class="pre">max_nested_depth</span></code> of <code class="docutils literal notranslate"><span class="pre">2</span></code> or more, an innermost model holding two or more fields
-and an intermediate model holding exactly one. A DTO declaring a custom
-<code class="docutils literal notranslate"><span class="pre">attribute_accessor</span></code> was hit whatever the intermediate model held, since an
-accessor call carries no attribute or item access syntax of its own.</p>
-<p>The same derivation raised a <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> instead, at the default
-<code class="docutils literal notranslate"><span class="pre">max_nested_depth</span></code> of <code class="docutils literal notranslate"><span class="pre">1</span></code>, for a model holding a field whose name is a valid
-Python identifier but carries a character that is not a word character, such as
-<code class="docutils literal notranslate"><span class="pre">a·b</span></code>.</p>
+item access syntax from it. The same derivation raised a <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> for a
+model holding a field whose name carries a character that is not a word character,
+such as <code class="docutils literal notranslate"><span class="pre">a·b</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4670">https://github.com/litestar-org/litestar/pull/4670</a></span></p>
 </div>
 </dd>
