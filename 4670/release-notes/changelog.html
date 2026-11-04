@@ -1200,13 +1200,14 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
-<dt>Fix <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code> raised by the codegen DTO backend for nested models<a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a></dt><dd><div class="changelog-change docutils container">
+<dt>Fix the codegen DTO backend crashing for nested models<a class="headerlink reference internal" href="#3.0.0-fix the codegen dto backend crashing for nested models" id="3.0.0-fix the codegen dto backend crashing for nested models">#</a></dt><dd><div class="changelog-change docutils container">
 <p>An application failed to start with a <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#SyntaxError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> when a DTO nested models
-more than one level deep, since the codegen backend - the default backend - derived
-a local variable name from an access expression without stripping the attribute and
-item access syntax from it. The same derivation raised a <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> for a
-model holding a field whose name carries a character that is not a word character,
-such as <code class="docutils literal notranslate"><span class="pre">a·b</span></code>.</p>
+more than one level deep behind an intermediate model holding a single field, or
+behind any intermediate model when it declared a custom <code class="docutils literal notranslate"><span class="pre">attribute_accessor</span></code>. The
+codegen backend – the default backend – derived a local variable name from an
+access expression without stripping the attribute and item access syntax from it,
+and raised a <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> instead for a field name holding a character that is
+not a word character, such as <code class="docutils literal notranslate"><span class="pre">a·b</span></code>.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4670">https://github.com/litestar-org/litestar/pull/4670</a></span></p>
 </div>
 </dd>
