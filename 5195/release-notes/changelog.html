@@ -1205,7 +1205,14 @@ to indicate whether to bypass the middleware for the current request.</p>
 <code class="docutils literal notranslate"><span class="pre">Missing</span> <span class="pre">declaration</span> <span class="pre">for</span> <span class="pre">parameter</span></code> for each of its fields without a marker,
 since <code class="docutils literal notranslate"><span class="pre">PydanticDIPlugin</span></code> marked them as dependencies only in the signature,
 not in the type hints used by the rest of the machinery.</p>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/XXXX">https://github.com/litestar-org/litestar/pull/XXXX</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5195">https://github.com/litestar-org/litestar/pull/5195</a></span></p>
+</div>
+</dd>
+<dt>DI: Correctly set <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> dependency fields as required without a default<a class="headerlink reference internal" href="#3.0.0-di: correctly set" id="3.0.0-di: correctly set">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would implicitly give a field of an <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> used as
+a dependency a default of <code class="docutils literal notranslate"><span class="pre">msgspec.NODEFAULT</span></code> and mark it as optional.
+Struct fields without a default are now correctly marked as required.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5194">https://github.com/litestar-org/litestar/pull/5194</a></span></p>
 </div>
 </dd>
 <dt>Parse every <code class="docutils literal notranslate"><span class="pre">cookie</span></code> header of a request<a class="headerlink reference internal" href="#3.0.0-parse every" id="3.0.0-parse every">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
