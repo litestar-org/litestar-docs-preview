@@ -546,6 +546,21 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Remove the <code class="docutils literal notranslate"><span class="pre">litestar.pagination</span></code> module<a class="headerlink reference internal" href="#3.0.0-remove the" id="3.0.0-remove the">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>The <code class="docutils literal notranslate"><span class="pre">ClassicPagination</span></code>, <code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code> and <code class="docutils literal notranslate"><span class="pre">CursorPagination</span></code> containers,
+the six abstract paginator base classes and the internal OpenAPI schema plugin for
+the containers have been removed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code> was re-exported from <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.service</span></code> whenever that
+package was installed, so import it from there instead; applications that did not
+install the <code class="docutils literal notranslate"><span class="pre">advanced-alchemy</span></code> extra now need it as a dependency. The other two
+containers and the paginator bases have no replacement; declare the container you
+need as a generic dataclass of your own. A
+handler returning Advanced Alchemy’s <code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code> keeps working, but its
+OpenAPI schema is now a <code class="docutils literal notranslate"><span class="pre">$ref</span></code> component with <code class="docutils literal notranslate"><span class="pre">required</span></code> fields and without the
+plugin’s per-field descriptions.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5199">https://github.com/litestar-org/litestar/pull/5199</a></span></p>
+</div>
+</dd>
 <dt>Default <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> for ASGI handlers<a class="headerlink reference internal" href="#3.0.0-default" id="3.0.0-default">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Every <code class="docutils literal notranslate"><span class="pre">asgi</span></code> handler, mounted or not, now receives a copy of the ASGI <code class="docutils literal notranslate"><span class="pre">scope</span></code>,
 so the wrapped application can no longer add, replace or remove top-level scope
