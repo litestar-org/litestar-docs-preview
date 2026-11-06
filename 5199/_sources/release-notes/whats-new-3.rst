@@ -251,17 +251,22 @@ schema plugin that gave its containers a schema of their own:
 - ``AbstractAsyncCursorPaginator``
 
 ``OffsetPagination`` has a direct replacement: Litestar re-exported Advanced Alchemy's
-container whenever the package was installed, so the class is the same one and only the
-import changes, to ``from advanced_alchemy.service import OffsetPagination``. It is
-exported from ``advanced_alchemy.service``, not from
-``advanced_alchemy.extensions.litestar``. Applications that did not install the
-``advanced-alchemy`` extra need it as a dependency now.
+container whenever the package was installed, so for an application that already depended
+on it the class is the same one and only the import changes, to
+``from advanced_alchemy.service import OffsetPagination``. It is exported from
+``advanced_alchemy.service``, not from ``advanced_alchemy.extensions.litestar``. An
+application that did not depend on Advanced Alchemy has to add it, directly or through the
+``litestar[sqlalchemy]`` extra, or declare the same four-field container itself --
+``items``, ``limit``, ``offset`` and ``total`` -- which serialises identically. Note that
+Advanced Alchemy declares ``items`` as a ``Sequence[T]``, where the removed fallback
+declared it as a ``list[T]``.
 
 The other two containers and the six paginator base classes have no replacement in
 Litestar or in Advanced Alchemy. Declare the container you need as a generic dataclass of
-your own, and implement the paginating logic in the handler or in a dependency. OpenAPI
-schema generation resolves a generic dataclass wrapping a collection the same way, and
-DTOs still apply to the models it holds.
+your own, and implement the paginating logic in the handler, or in a dependency whose
+parameter is marked with :data:`~litestar.di.NamedDependency`. OpenAPI schema generation
+resolves a generic dataclass wrapping a collection the same way, and DTOs still apply to
+the models it holds.
 
 .. code-block:: python
 
@@ -278,17 +283,27 @@ DTOs still apply to the models it holds.
         current_page: int
         total_pages: int
 
-``CursorPagination`` was generic over two parameters -- the cursor type, constrained to
-``int``, ``str`` or ``UUID``, and the item type -- with ``items: list[T]``,
-``results_per_page: int`` and ``cursor: Optional[C]`` fields, in that order.
+``CursorPagination`` was generic over the cursor type first and the item type second, so a
+handler annotated it as ``CursorPagination[str, Person]``:
 
-The OpenAPI document changes even for applications that never imported
-``litestar.pagination``, because the removed plugin matched Advanced Alchemy's
-``OffsetPagination`` as well. A handler returning it now gets a reusable component
-referenced with ``$ref`` instead of a schema inlined per handler, with a ``required``
-entry for each of its four fields and without the per-field descriptions the plugin
-wrote. Behaviour and the response body are unchanged, but regenerate any client generated
-from the document.
+.. code-block:: python
+
+    C = TypeVar("C", int, str, UUID)
+
+
+    @dataclass
+    class CursorPagination(Generic[C, T]):
+        items: list[T]
+        results_per_page: int
+        cursor: Optional[C]
+
+The OpenAPI document changes for every paginated handler, including those of applications
+that never imported ``litestar.pagination``, since the removed plugin matched Advanced
+Alchemy's ``OffsetPagination`` as well. The response schema is now a reusable component
+referenced with ``$ref``, named after the container and its type argument, instead of a
+schema inlined per handler, with a ``required`` entry for each field and without the
+per-field descriptions the plugin wrote. Behaviour and the response body are unchanged,
+but regenerate any client generated from the document.
 
 
 Removal of semantic HTTP route handler classes
@@ -531,13 +546,14 @@ naming the extra to install:
     pip install 'litestar[cli]'
 
 
-``httpx`` package removed from default dependencies
-----------------------------------------------------
+Test clients are based on ``httpx2``, installed via the ``testing`` extra
+-------------------------------------------------------------------------
 
-The `httpx <https://www.python-httpx.org/>`_ library, on which the
-:doc:`test clients </usage/testing>` are based, has been moved from the default
-dependencies to the ``litestar[testing]`` package extra. It is also included in
-``litestar[full]``.
+The :doc:`test clients </usage/testing>` were based on
+`httpx <https://www.python-httpx.org/>`_, which was a default dependency. In 3.0 they
+are based on `httpx2 <https://pydantic.dev/docs/httpx2/>`_, the fork of ``httpx``
+maintained by Pydantic, and it is installed by the ``litestar[testing]`` extra rather
+than by default.
 
 Importing anything from :mod:`litestar.testing` without the extra installed raises a
 :class:`MissingDependencyException <litestar.exceptions.MissingDependencyException>`
@@ -547,6 +563,49 @@ naming the extra to install:
     :caption: Install the testing extra
 
     pip install 'litestar[testing]'
+
+``httpx2`` keeps the public API of ``httpx`` 0.28.1, but it is a distinct module, so
+every reference in a test suite has to be renamed:
+
+.. code-block:: python
+
+    # before
+    response: httpx.Response = client.get("/")
+    with pytest.raises(httpx.HTTPStatusError):
+        response.raise_for_status()
+
+    # after
+    response: httpx2.Response = client.get("/")
+    with pytest.raises(httpx2.HTTPStatusError):
+        response.raise_for_status()
+
+If you cannot rename a test suite yet, ``httpx2.alias_httpx()`` makes ``import httpx``
+resolve to ``httpx2`` process-wide. It has to be called before anything imports
+``httpx`` or ``httpcore``, and raises :exc:`RuntimeError` otherwise. Litestar never
+calls it for you.
+
+Beyond the rename, these are worth checking:
+
+- :class:`~litestar.testing.TestClient` and
+  :class:`~litestar.testing.AsyncTestClient` now subclass ``httpx2.Client`` and
+  ``httpx2.AsyncClient``, and :func:`~litestar.testing.subprocess_sync_client` /
+  :func:`~litestar.testing.subprocess_async_client` return ``httpx2`` clients.
+- ``httpx2`` raises its own exceptions, which do not inherit from the ``httpx`` ones.
+  An ``except httpx.HTTPError`` around a test client call stops matching, and does so
+  silently if ``httpx`` is still installed for other reasons.
+- The logger is named ``httpx2``. Logging configuration and ``caplog`` assertions
+  that reference the ``httpx`` logger need updating.
+- The clients inherit ``httpx2``'s ``sse()``, which works through the test transport,
+  so ``httpx-sse`` is no longer needed. The inherited ``websocket()`` does not work
+  against the test transport; use
+  :meth:`websocket_connect <litestar.testing.TestClient.websocket_connect>` instead.
+- :func:`~litestar.testing.subprocess_sync_client` and
+  :func:`~litestar.testing.subprocess_async_client` send
+  ``User-Agent: python-httpx2/<version>``. :class:`~litestar.testing.TestClient` and
+  :class:`~litestar.testing.AsyncTestClient` keep sending ``testclient``.
+- The extra pulls ``anyio>=4.10`` and ``idna>=3.18``, neither of which can be
+  satisfied alongside a lower pin. TLS verification uses the operating system trust
+  store via ``truststore`` rather than ``certifi``.
 
 
 ``rich-click>=1.9`` is now required by the CLI

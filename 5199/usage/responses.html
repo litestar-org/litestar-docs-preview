@@ -505,6 +505,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#executing-multiple-background-tasks">Executing Multiple Background Tasks</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#pagination">Pagination</a></li>
 </ul>
 </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/litestar-org/litestar"
   data-type="github" data-user="litestar-org" data-repo="litestar">
@@ -2082,6 +2083,73 @@ allows background tasks to run concurrently, using an <a class="reference extern
 <p>Setting <code class="docutils literal notranslate"><span class="pre">run_in_task_group</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> will not preserve execution order.</p>
 </div>
 </section>
+</section>
+<section id="pagination">
+<h2>Pagination<a class="headerlink" href="#pagination" title="Link to this heading">¶</a></h2>
+<p>Litestar does not provide pagination containers or paginator base classes. Return a
+generic container of your own – a dataclass, a <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> or a Pydantic model –
+whose collection field holds the current page, and compute the page in the handler or in a
+<a class="reference internal" href="dependency-injection.html"><span class="doc">dependency</span></a>:</p>
+<div class="sd-tab-set docutils">
+<input id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.11" for="sd-tab-item-4">
+Python 3.11+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="nd">@dataclass</span>
+</span><span data-line="10"><span class="k">class</span><span class="w"> </span><span class="nc">Page</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+</span><span data-line="11">    <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+</span><span data-line="12">    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="13">    <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="14">    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="15">
+</span><span data-line="16">
+</span><span data-line="17"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">)</span>
+</span><span data-line="18"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Page</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+</span><span data-line="19">    <span class="n">users</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="k">await</span> <span class="n">fetch_users</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+</span><span data-line="20">    <span class="k">return</span> <span class="n">Page</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">users</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="3.12" for="sd-tab-item-5">
+Python 3.12+</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span><span data-line="9"><span class="nd">@dataclass</span>
+</span><span data-line="10"><span class="k">class</span><span class="w"> </span><span class="nc">Page</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+</span><span data-line="11">    <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+</span><span data-line="12">    <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="13">    <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="14">    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span>
+</span><span data-line="15">
+</span><span data-line="16">
+</span><span data-line="17"><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/users&quot;</span><span class="p">)</span>
+</span><span data-line="18"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Page</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span>
+</span><span data-line="19">    <span class="n">users</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="k">await</span> <span class="n">fetch_users</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
+</span><span data-line="20">    <span class="k">return</span> <span class="n">Page</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="n">users</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>The container is resolved like any other generic wrapper, so its schema is included in the
+OpenAPI document and a <a class="reference internal" href="dto/index.html"><span class="doc">DTO</span></a> declared on the handler applies to the
+models held in the collection field.</p>
+<p>Applications using <a class="reference internal" href="databases/sqlalchemy/index.html"><span class="doc">Advanced Alchemy</span></a> can return
+its <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.service.OffsetPagination</span></code> instead, which declares the same four
+fields.</p>
 </section>
 </section>
 
