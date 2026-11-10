@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/attrs.html">attrs</a></li>
@@ -527,7 +526,6 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#helper-types">Helper Types</a><ul>
 <li><a class="reference internal" href="#litestar.types.SyncOrAsyncUnion"><code class="docutils literal notranslate"><span class="pre">SyncOrAsyncUnion</span></code></a></li>
-<li><a class="reference internal" href="#litestar.types.AnyIOBackend"><code class="docutils literal notranslate"><span class="pre">AnyIOBackend</span></code></a></li>
 <li><a class="reference internal" href="#litestar.types.OptionalSequence"><code class="docutils literal notranslate"><span class="pre">OptionalSequence</span></code></a></li>
 <li><a class="reference internal" href="#litestar.types.internal_types.PathParameterDefinition"><code class="docutils literal notranslate"><span class="pre">PathParameterDefinition</span></code></a><ul>
 <li><a class="reference internal" href="#litestar.types.internal_types.PathParameterDefinition.name"><code class="docutils literal notranslate">name</span></code></a></li>
@@ -1014,12 +1012,6 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="litestar.types.SyncOrAsyncUnion">
 <span class="property"><span class="k"><span class="pre">type</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">litestar.types.</span></span><span class="sig-name descname"><span class="pre">SyncOrAsyncUnion</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">litestar.types.helper_types.T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Awaitable" title="(in Python v3.15)"><span class="pre">collections.abc.Awaitable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">litestar.types.helper_types.T</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#litestar.types.SyncOrAsyncUnion" title="Link to this definition">¶</a></dt>
 <dd><p>Types ‘T’ as a union of T and awaitable T.</p>
-</dd></dl>
-
-<dl class="py type">
-<dt class="sig sig-object py" id="litestar.types.AnyIOBackend">
-<span class="property"><span class="k"><span class="pre">type</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">litestar.types.</span></span><span class="sig-name descname"><span class="pre">AnyIOBackend</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'asyncio'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'trio'</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#litestar.types.AnyIOBackend" title="Link to this definition">¶</a></dt>
-<dd><p>Anyio backend names.</p>
 </dd></dl>
 
 <dl class="py type">

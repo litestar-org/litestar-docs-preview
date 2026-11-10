@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
@@ -637,7 +636,7 @@ that annotation.</p>
 <section id="id2">
 <h3>Example<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>The following example shows a minimal <code class="docutils literal notranslate"><span class="pre">SerializationPlugin</span></code> implementation that mirrors the pattern used by
-<code class="docutils literal notranslate"><span class="pre">advanced-alchemy</span></code>’s <a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemySerializationPlugin" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>:</p>
+<code class="docutils literal notranslate"><span class="pre">advanced-alchemy</span></code>’s <a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemySerializationPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>:</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">SerializationPlugin</span></code> implementation example</span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
@@ -709,7 +708,7 @@ injection by providing information about injectable types.</p>
 <p>Its main purpose it to facilitate the injection of callables with unknown signatures,
 for example Pydantic’s <code class="docutils literal notranslate"><span class="pre">BaseModel</span></code> classes; These are not supported natively since,
 while they are callables, their type information is not contained within their callable
-signature (their <a class="reference internal" href="../../reference/plugins/jinja.html#litestar.plugins.jinja.JinjaTemplateEngine.__init__" title="litestar.plugins.jinja.JinjaTemplateEngine.__init__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__init__()</span></code></a> method).</p>
+signature (their <a class="reference internal" href="../../reference/app.html#litestar.app.Litestar.__init__" title="litestar.app.Litestar.__init__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__init__()</span></code></a> method).</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Dynamically generating signature information for a custom type</span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">inspect</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Signature</span>
