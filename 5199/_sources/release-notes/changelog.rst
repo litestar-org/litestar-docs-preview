@@ -6,6 +6,29 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
+    .. change:: Call ``after_exception`` hooks once for an exception on a route with middleware
+        :type: bugfix
+        :pr: 5203
+
+        Fix a bug that, on a route with middleware, an exception that no exception
+        handler creates a response for, ``after_exception`` hooks and
+        ``pdb_on_exception`` would be called multiple times (once by the exception
+        handling layer of the middleware and once by the application's).
+
+        They are called exactly once per exception instance now.
+
+    .. change:: Remove support for trio
+        :type: feature
+        :breaking:
+        :pr: XXXX
+
+        Trio is no longer supported. ``set_trio_capacity_limiter`` and
+        ``get_trio_capacity_limiter`` are removed from :mod:`litestar.concurrency`, along with
+        ``litestar.types.AnyIOBackend`` and the ``backend`` parameter of
+        :class:`~litestar.testing.TestClient` and :func:`~litestar.testing.create_test_client`.
+        :func:`~litestar.concurrency.sync_to_thread` raises ``RuntimeError`` when called from
+        trio. ``sniffio`` is no longer a dependency.
+
     .. change:: Remove the ``litestar.pagination`` module
         :type: feature
         :breaking:

@@ -546,6 +546,16 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Remove support for trio<a class="headerlink reference internal" href="#3.0.0-remove support for trio" id="3.0.0-remove support for trio">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Trio is no longer supported. <code class="docutils literal notranslate"><span class="pre">set_trio_capacity_limiter</span></code> and
+<code class="docutils literal notranslate"><span class="pre">get_trio_capacity_limiter</span></code> are removed from <a class="reference internal" href="../reference/concurrency.html#module-litestar.concurrency" title="litestar.concurrency"><code class="xref py py-mod docutils literal notranslate"><span class="pre">litestar.concurrency</span></code></a>, along with
+<code class="docutils literal notranslate"><span class="pre">litestar.types.AnyIOBackend</span></code> and the <code class="docutils literal notranslate"><span class="pre">backend</span></code> parameter of
+<a class="reference internal" href="../reference/testing.html#litestar.testing.TestClient" title="litestar.testing.TestClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestClient</span></code></a> and <a class="reference internal" href="../reference/testing.html#litestar.testing.create_test_client" title="litestar.testing.create_test_client"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_test_client()</span></code></a>.
+<a class="reference internal" href="../reference/concurrency.html#litestar.concurrency.sync_to_thread" title="litestar.concurrency.sync_to_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">sync_to_thread()</span></code></a> raises <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code> when called from
+trio. <code class="docutils literal notranslate"><span class="pre">sniffio</span></code> is no longer a dependency.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/XXXX">https://github.com/litestar-org/litestar/pull/XXXX</a></span></p>
+</div>
+</dd>
 <dt>Remove the <code class="docutils literal notranslate"><span class="pre">litestar.pagination</span></code> module<a class="headerlink reference internal" href="#3.0.0-remove the" id="3.0.0-remove the">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>The <code class="docutils literal notranslate"><span class="pre">ClassicPagination</span></code>, <code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code> and <code class="docutils literal notranslate"><span class="pre">CursorPagination</span></code> containers,
 the six abstract paginator base classes and the internal OpenAPI schema plugin for
@@ -1249,6 +1259,15 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Call <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hooks once for an exception on a route with middleware<a class="headerlink reference internal" href="#3.0.0-call" id="3.0.0-call">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that, on a route with middleware, an exception that no exception
+handler creates a response for, <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hooks and
+<code class="docutils literal notranslate"><span class="pre">pdb_on_exception</span></code> would be called multiple times (once by the exception
+handling layer of the middleware and once by the application’s).</p>
+<p>They are called exactly once per exception instance now.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5203">https://github.com/litestar-org/litestar/pull/5203</a></span></p>
+</div>
+</dd>
 <dt>DI: Correctly set Pydantic dependency fields as required without a default<a class="headerlink reference internal" href="#3.0.0-di: correctly set pydantic dependency fields as required without a default" id="3.0.0-di: correctly set pydantic dependency fields as required without a default">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug, causing a Pydantic model used as a dependency to fail at startup with
 <code class="docutils literal notranslate"><span class="pre">Missing</span> <span class="pre">declaration</span> <span class="pre">for</span> <span class="pre">parameter</span></code> for each of its fields without a marker,
