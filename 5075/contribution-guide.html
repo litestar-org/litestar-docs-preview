@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/middleware/session/index.html">session</a><ul>
@@ -308,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/attrs.html">attrs</a></li>
@@ -459,6 +457,7 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#guidelines-for-writing-code">Guidelines for writing code</a><ul>
 <li><a class="reference internal" href="#writing-and-running-tests">Writing and running tests</a></li>
+<li><a class="reference internal" href="#benchmarks">Benchmarks</a></li>
 <li><a class="reference internal" href="#running-type-checkers">Running type checkers</a></li>
 </ul>
 </li>
@@ -655,9 +654,9 @@ indicating what it changes. The style of the PR title should also follow
 <ul>
 <li><p>When requiring complex types, use a <a class="reference external" href="https://docs.python.org/3/library/typing.html#type-aliases">type alias</a>.
 Check <a class="reference internal" href="reference/types.html"><span class="doc">types</span></a> if a type alias for your use case already exists</p></li>
-<li><p>If something cannot be typed correctly due to a limitation of the type checkers, you may use <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.cast" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.cast()</span></code></a>
+<li><p>If something cannot be typed correctly due to a limitation of the type checkers, you may use <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.cast" title="(in Python v3.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">typing.cast()</span></code></a>
 to rectify the situation. However, you should only use this as a last resort if you’ve exhausted all other options
-of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#isinstance" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
+of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/type_narrowing.html">type narrowing</a>, such as <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#isinstance" title="(in Python v3.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> checks
 and <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeGuard">type guards</a>.</p></li>
 <li><p>You may use a properly scoped <code class="docutils literal notranslate"><span class="pre">type:</span> <span class="pre">ignore</span></code> if you ensured that a line is correct, but mypy / pyright has
 issues with it.</p>
@@ -694,6 +693,17 @@ or <code class="docutils literal notranslate"><span class="pre">make</span> <spa
 straightforward. For debugging, it’s recommended to run the tests individually with
 <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">&lt;test</span> <span class="pre">name&gt;</span></code> or via an IDE, which will skip <code class="docutils literal notranslate"><span class="pre">pytest-xdist</span></code>.</p>
 </section>
+<section id="benchmarks">
+<h3>Benchmarks<a class="headerlink" href="#benchmarks" title="Link to this heading">¶</a></h3>
+<p>Benchmarks live in <code class="docutils literal notranslate"><span class="pre">tests/benchmarks</span></code> and are measured by
+<a class="reference external" href="https://codspeed.io/litestar-org/litestar">CodSpeed</a> in CI. They are ordinary pytest
+tests, so <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> runs each of them once.</p>
+<p>When adding one, drive the app with <code class="docutils literal notranslate"><span class="pre">ASGIRunner</span></code> from <code class="docutils literal notranslate"><span class="pre">tests/benchmarks/helpers.py</span></code>
+rather than <code class="docutils literal notranslate"><span class="pre">TestClient</span></code>, and assert on the result so it keeps working as a test.
+<code class="docutils literal notranslate"><span class="pre">pytest-codspeed</span></code> forwards keyword arguments to its own measuring function, so pass the
+call’s arguments positionally or wrap it in a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> – a keyword named <code class="docutils literal notranslate"><span class="pre">target</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fn</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">uri</span></code> or <code class="docutils literal notranslate"><span class="pre">marker_options</span></code> collides with it.</p>
+</section>
 <section id="running-type-checkers">
 <h3>Running type checkers<a class="headerlink" href="#running-type-checkers" title="Link to this heading">¶</a></h3>
 <p>We use <a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> and <a class="reference external" href="https://github.com/microsoft/pyright/">pyright</a> to
@@ -709,9 +719,9 @@ enforce type safety. You can run them with:</p>
 </section>
 <section id="project-documentation">
 <h2>Project documentation<a class="headerlink" href="#project-documentation" title="Link to this heading">¶</a></h2>
-<p>The documentation is located in the <code class="docutils literal notranslate"><span class="pre">/docs</span></code> directory and is written  in
-<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a> with the <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>.
-library. If you’re unfamiliar with any of those,
+<p>The documentation is located in the <code class="docutils literal notranslate"><span class="pre">/docs</span></code> directory and is written in
+<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a> with the
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> library. If you’re unfamiliar with any of those,
 <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">reStructuredText primer</a> and
 <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">Sphinx quickstart</a> are recommended reads.</p>
 <section id="docs-theme-and-appearance">
@@ -775,7 +785,7 @@ to test them alongside the rest of the test suite, ensuring they do not become s
 <section id="automatically-execute-examples">
 <h4>Automatically execute examples<a class="headerlink" href="#automatically-execute-examples" title="Link to this heading">¶</a></h4>
 <p>Our docs include a Sphinx extension that can automatically run requests against example apps
-and include their result in the documentation page when its being built. This only requires 2 steps:</p>
+and include their result in the documentation page when it’s being built. This only requires 2 steps:</p>
 <ol class="arabic simple">
 <li><p>Create an example file with an <code class="docutils literal notranslate"><span class="pre">app</span></code> object in it, which is an instance of <code class="docutils literal notranslate"><span class="pre">Litestar</span></code></p></li>
 <li><p>Add a comment in the form of <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">run:</span> <span class="pre">/hello</span></code> to the example file</p></li>

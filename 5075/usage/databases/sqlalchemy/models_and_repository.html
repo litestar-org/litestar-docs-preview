@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/middleware/session/index.html">session</a><ul>
@@ -308,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../reference/plugins/attrs.html">attrs</a></li>
@@ -554,7 +552,7 @@ data-aria-dark="Switch to auto color mode">
           <section id="sqlalchemy-models-repository">
 <h1>SQLAlchemy Models &amp; Repository<a class="headerlink" href="#sqlalchemy-models-repository" title="Link to this heading">¶</a></h1>
 <p>Litestar comes with a built-in repository class
-(<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>)
+(<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>)
 for <a class="reference external" href="https://docs.sqlalchemy.org/">SQLAlchemy</a> to make CRUD operations easier.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
@@ -581,20 +579,20 @@ an optional version with audit columns.</p></li>
 </section>
 <section id="basic-use">
 <h2>Basic Use<a class="headerlink" href="#basic-use" title="Link to this heading">¶</a></h2>
-<p>To use the <a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>
+<p>To use the <a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/repository.html#advanced_alchemy.repository.SQLAlchemyAsyncRepository" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepository</span></code></a>
 repository, you must first define your models using one of the included built-in <code class="docutils literal notranslate"><span class="pre">DeclarativeBase</span></code> ORM base
 implementations:</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code></p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></p></li>
+<li><p><a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/base.html#advanced_alchemy.base.UUIDBase" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code></a></p></li>
+<li><p><a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/base.html#advanced_alchemy.base.UUIDAuditBase" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p></li>
 </ul>
 <p>Both include a <code class="docutils literal notranslate"><span class="pre">UUID</span></code> based primary key
 and <code class="docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code> includes <code class="docutils literal notranslate"><span class="pre">updated_at</span></code> and <code class="docutils literal notranslate"><span class="pre">created_at</span></code> timestamp columns.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">UUID</span></code> will be a native <code class="docutils literal notranslate"><span class="pre">UUID</span></code>/<code class="docutils literal notranslate"><span class="pre">GUID</span></code> type on databases that support it such as Postgres.  For other engines without
 a native UUID data type, the UUID is stored as a 16-byte <code class="docutils literal notranslate"><span class="pre">BYTES</span></code> or <code class="docutils literal notranslate"><span class="pre">RAW</span></code> field.</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntBase</span></code></p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code></p></li>
+<li><p><a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/base.html#advanced_alchemy.base.BigIntBase" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntBase</span></code></a></p></li>
+<li><p><a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/base.html#advanced_alchemy.base.BigIntAuditBase" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code></a></p></li>
 </ul>
 <p>Both include a <code class="docutils literal notranslate"><span class="pre">BigInteger</span></code> based primary key
 and <code class="docutils literal notranslate"><span class="pre">BigIntAuditBase</span></code> includes <code class="docutils literal notranslate"><span class="pre">updated_at</span></code> and <code class="docutils literal notranslate"><span class="pre">created_at</span></code> timestamp columns.</p>
@@ -698,17 +696,17 @@ your controllers and function based routes.</p>
 </span><span data-line="12">    <span class="n">filters</span><span class="p">,</span>
 </span><span data-line="13">    <span class="n">repository</span><span class="p">,</span>
 </span><span data-line="14"><span class="p">)</span>
-</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span> <span class="k">as</span> <span class="n">_BaseModel</span>
-</span><span data-line="16"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeAdapter</span>
-</span><span data-line="17"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">select</span>
-</span><span data-line="18"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">selectinload</span>
-</span><span data-line="19">
-</span><span data-line="20"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="21"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span>
-</span><span data-line="22"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">Provide</span>
-</span><span data-line="23"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.handlers.http_handlers.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">delete</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="24"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">OffsetPagination</span>
-</span><span data-line="25"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathParameter</span><span class="p">,</span> <span class="n">QueryParameter</span>
+</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.service</span><span class="w"> </span><span class="kn">import</span> <span class="n">OffsetPagination</span>
+</span><span data-line="16"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span> <span class="k">as</span> <span class="n">_BaseModel</span>
+</span><span data-line="17"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeAdapter</span>
+</span><span data-line="18"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">select</span>
+</span><span data-line="19"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">selectinload</span>
+</span><span data-line="20">
+</span><span data-line="21"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+</span><span data-line="22"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span>
+</span><span data-line="23"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span><span class="p">,</span> <span class="n">Provide</span>
+</span><span data-line="24"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.handlers.http_handlers.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">delete</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span>
+</span><span data-line="25"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONBody</span><span class="p">,</span> <span class="n">PathParameter</span><span class="p">,</span> <span class="n">QueryParameter</span>
 </span><span data-line="26">
 </span><span data-line="27"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
 </span><span data-line="28">    <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncSession</span>
@@ -765,14 +763,14 @@ your controllers and function based routes.</p>
 </span><span data-line="79">    <span class="n">model_type</span> <span class="o">=</span> <span class="n">AuthorModel</span>
 </span><span data-line="80">
 </span><span data-line="81">
-</span><span data-line="82"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_authors_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
+</span><span data-line="82"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_authors_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
 </span><span data-line="83"><span class="w">    </span><span class="sd">&quot;&quot;&quot;This provides the default Authors repository.&quot;&quot;&quot;</span>
 </span><span data-line="84">    <span class="k">return</span> <span class="n">AuthorRepository</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">)</span>
 </span><span data-line="85">
 </span><span data-line="86">
 </span><span data-line="87"><span class="c1"># we can optionally override the default `select` used for the repository to pass in</span>
 </span><span data-line="88"><span class="c1"># specific SQL options such as join details</span>
-</span><span data-line="89"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_author_details_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
+</span><span data-line="89"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_author_details_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
 </span><span data-line="90"><span class="w">    </span><span class="sd">&quot;&quot;&quot;This provides a simple example demonstrating how to override the join options for the repository.&quot;&quot;&quot;</span>
 </span><span data-line="91">    <span class="k">return</span> <span class="n">AuthorRepository</span><span class="p">(</span>
 </span><span data-line="92">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">AuthorModel</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">selectinload</span><span class="p">(</span><span class="n">AuthorModel</span><span class="o">.</span><span class="n">books</span><span class="p">)),</span>
@@ -806,8 +804,8 @@ your controllers and function based routes.</p>
 </span><span data-line="120">    <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors&quot;</span><span class="p">)</span>
 </span><span data-line="121">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_authors</span><span class="p">(</span>
 </span><span data-line="122">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="123">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
-</span><span data-line="124">        <span class="n">limit_offset</span><span class="p">:</span> <span class="n">filters</span><span class="o">.</span><span class="n">LimitOffset</span><span class="p">,</span>
+</span><span data-line="123">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
+</span><span data-line="124">        <span class="n">limit_offset</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">filters</span><span class="o">.</span><span class="n">LimitOffset</span><span class="p">],</span>
 </span><span data-line="125">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OffsetPagination</span><span class="p">[</span><span class="n">Author</span><span class="p">]:</span>
 </span><span data-line="126"><span class="w">        </span><span class="sd">&quot;&quot;&quot;List authors.&quot;&quot;&quot;</span>
 </span><span data-line="127">        <span class="n">results</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="k">await</span> <span class="n">authors_repo</span><span class="o">.</span><span class="n">list_and_count</span><span class="p">(</span><span class="n">limit_offset</span><span class="p">)</span>
@@ -822,8 +820,8 @@ your controllers and function based routes.</p>
 </span><span data-line="136">    <span class="nd">@post</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors&quot;</span><span class="p">)</span>
 </span><span data-line="137">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_author</span><span class="p">(</span>
 </span><span data-line="138">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="139">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
-</span><span data-line="140">        <span class="n">data</span><span class="p">:</span> <span class="n">AuthorCreate</span><span class="p">,</span>
+</span><span data-line="139">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
+</span><span data-line="140">        <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">AuthorCreate</span><span class="p">],</span>
 </span><span data-line="141">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Author</span><span class="p">:</span>
 </span><span data-line="142"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new author.&quot;&quot;&quot;</span>
 </span><span data-line="143">        <span class="n">obj</span> <span class="o">=</span> <span class="k">await</span> <span class="n">authors_repo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
@@ -836,7 +834,7 @@ your controllers and function based routes.</p>
 </span><span data-line="150">    <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors/{author_id:uuid}&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;authors_repo&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_author_details_repo</span><span class="p">)})</span>
 </span><span data-line="151">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_author</span><span class="p">(</span>
 </span><span data-line="152">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="153">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
+</span><span data-line="153">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
 </span><span data-line="154">        <span class="n">author_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
 </span><span data-line="155">            <span class="n">UUID</span><span class="p">,</span>
 </span><span data-line="156">            <span class="n">PathParameter</span><span class="p">(</span>
@@ -855,8 +853,8 @@ your controllers and function based routes.</p>
 </span><span data-line="169">    <span class="p">)</span>
 </span><span data-line="170">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">update_author</span><span class="p">(</span>
 </span><span data-line="171">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="172">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
-</span><span data-line="173">        <span class="n">data</span><span class="p">:</span> <span class="n">AuthorUpdate</span><span class="p">,</span>
+</span><span data-line="172">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
+</span><span data-line="173">        <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">AuthorUpdate</span><span class="p">],</span>
 </span><span data-line="174">        <span class="n">author_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
 </span><span data-line="175">            <span class="n">UUID</span><span class="p">,</span>
 </span><span data-line="176">            <span class="n">PathParameter</span><span class="p">(</span>
@@ -875,7 +873,7 @@ your controllers and function based routes.</p>
 </span><span data-line="189">    <span class="nd">@delete</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors/{author_id:uuid}&quot;</span><span class="p">)</span>
 </span><span data-line="190">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_author</span><span class="p">(</span>
 </span><span data-line="191">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="192">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
+</span><span data-line="192">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
 </span><span data-line="193">        <span class="n">author_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
 </span><span data-line="194">            <span class="n">UUID</span><span class="p">,</span>
 </span><span data-line="195">            <span class="n">PathParameter</span><span class="p">(</span>
@@ -927,17 +925,17 @@ your controllers and function based routes.</p>
 </span><span data-line="11">    <span class="n">repository</span><span class="p">,</span>
 </span><span data-line="12"><span class="p">)</span>
 </span><span data-line="13"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">LimitOffset</span>
-</span><span data-line="14"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span> <span class="k">as</span> <span class="n">_BaseModel</span>
-</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeAdapter</span>
-</span><span data-line="16"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">select</span>
-</span><span data-line="17"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">selectinload</span>
-</span><span data-line="18">
-</span><span data-line="19"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="20"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span>
-</span><span data-line="21"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">Provide</span>
-</span><span data-line="22"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.handlers.http_handlers.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">delete</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span>
-</span><span data-line="23"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.pagination</span><span class="w"> </span><span class="kn">import</span> <span class="n">OffsetPagination</span>
-</span><span data-line="24"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathParameter</span><span class="p">,</span> <span class="n">QueryParameter</span>
+</span><span data-line="14"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.service</span><span class="w"> </span><span class="kn">import</span> <span class="n">OffsetPagination</span>
+</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span> <span class="k">as</span> <span class="n">_BaseModel</span>
+</span><span data-line="16"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeAdapter</span>
+</span><span data-line="17"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">select</span>
+</span><span data-line="18"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">selectinload</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
+</span><span data-line="21"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span>
+</span><span data-line="22"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span><span class="p">,</span> <span class="n">Provide</span>
+</span><span data-line="23"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.handlers.http_handlers.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">delete</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">post</span>
+</span><span data-line="24"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONBody</span><span class="p">,</span> <span class="n">PathParameter</span><span class="p">,</span> <span class="n">QueryParameter</span>
 </span><span data-line="25">
 </span><span data-line="26"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
 </span><span data-line="27">    <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
@@ -994,14 +992,14 @@ your controllers and function based routes.</p>
 </span><span data-line="78">    <span class="n">model_type</span> <span class="o">=</span> <span class="n">AuthorModel</span>
 </span><span data-line="79">
 </span><span data-line="80">
-</span><span data-line="81"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_authors_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
+</span><span data-line="81"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_authors_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">Session</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
 </span><span data-line="82"><span class="w">    </span><span class="sd">&quot;&quot;&quot;This provides the default Authors repository.&quot;&quot;&quot;</span>
 </span><span data-line="83">    <span class="k">return</span> <span class="n">AuthorRepository</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">)</span>
 </span><span data-line="84">
 </span><span data-line="85">
 </span><span data-line="86"><span class="c1"># we can optionally override the default `select` used for the repository to pass in</span>
 </span><span data-line="87"><span class="c1"># specific SQL options such as join details</span>
-</span><span data-line="88"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_author_details_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">Session</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
+</span><span data-line="88"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provide_author_details_repo</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">Session</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AuthorRepository</span><span class="p">:</span>
 </span><span data-line="89"><span class="w">    </span><span class="sd">&quot;&quot;&quot;This provides a simple example demonstrating how to override the join options</span>
 </span><span data-line="90"><span class="sd">    for the repository.&quot;&quot;&quot;</span>
 </span><span data-line="91">    <span class="k">return</span> <span class="n">AuthorRepository</span><span class="p">(</span>
@@ -1036,8 +1034,8 @@ your controllers and function based routes.</p>
 </span><span data-line="120">    <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors&quot;</span><span class="p">)</span>
 </span><span data-line="121">    <span class="k">def</span><span class="w"> </span><span class="nf">list_authors</span><span class="p">(</span>
 </span><span data-line="122">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="123">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
-</span><span data-line="124">        <span class="n">limit_offset</span><span class="p">:</span> <span class="n">LimitOffset</span><span class="p">,</span>
+</span><span data-line="123">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
+</span><span data-line="124">        <span class="n">limit_offset</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">LimitOffset</span><span class="p">],</span>
 </span><span data-line="125">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OffsetPagination</span><span class="p">[</span><span class="n">Author</span><span class="p">]:</span>
 </span><span data-line="126"><span class="w">        </span><span class="sd">&quot;&quot;&quot;List authors.&quot;&quot;&quot;</span>
 </span><span data-line="127">        <span class="n">results</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">authors_repo</span><span class="o">.</span><span class="n">list_and_count</span><span class="p">(</span><span class="n">limit_offset</span><span class="p">)</span>
@@ -1052,8 +1050,8 @@ your controllers and function based routes.</p>
 </span><span data-line="136">    <span class="nd">@post</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors&quot;</span><span class="p">)</span>
 </span><span data-line="137">    <span class="k">def</span><span class="w"> </span><span class="nf">create_author</span><span class="p">(</span>
 </span><span data-line="138">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="139">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
-</span><span data-line="140">        <span class="n">data</span><span class="p">:</span> <span class="n">AuthorCreate</span><span class="p">,</span>
+</span><span data-line="139">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
+</span><span data-line="140">        <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">AuthorCreate</span><span class="p">],</span>
 </span><span data-line="141">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Author</span><span class="p">:</span>
 </span><span data-line="142"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new author.&quot;&quot;&quot;</span>
 </span><span data-line="143">        <span class="n">obj</span> <span class="o">=</span> <span class="n">authors_repo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
@@ -1069,7 +1067,7 @@ your controllers and function based routes.</p>
 </span><span data-line="153">    <span class="p">)</span>
 </span><span data-line="154">    <span class="k">def</span><span class="w"> </span><span class="nf">get_author</span><span class="p">(</span>
 </span><span data-line="155">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="156">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
+</span><span data-line="156">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
 </span><span data-line="157">        <span class="n">author_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
 </span><span data-line="158">            <span class="n">UUID</span><span class="p">,</span>
 </span><span data-line="159">            <span class="n">PathParameter</span><span class="p">(</span>
@@ -1088,8 +1086,8 @@ your controllers and function based routes.</p>
 </span><span data-line="172">    <span class="p">)</span>
 </span><span data-line="173">    <span class="k">def</span><span class="w"> </span><span class="nf">update_author</span><span class="p">(</span>
 </span><span data-line="174">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="175">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
-</span><span data-line="176">        <span class="n">data</span><span class="p">:</span> <span class="n">AuthorUpdate</span><span class="p">,</span>
+</span><span data-line="175">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
+</span><span data-line="176">        <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">AuthorUpdate</span><span class="p">],</span>
 </span><span data-line="177">        <span class="n">author_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
 </span><span data-line="178">            <span class="n">UUID</span><span class="p">,</span>
 </span><span data-line="179">            <span class="n">PathParameter</span><span class="p">(</span>
@@ -1108,7 +1106,7 @@ your controllers and function based routes.</p>
 </span><span data-line="192">    <span class="nd">@delete</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/authors/{author_id:uuid}&quot;</span><span class="p">)</span>
 </span><span data-line="193">    <span class="k">def</span><span class="w"> </span><span class="nf">delete_author</span><span class="p">(</span>
 </span><span data-line="194">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="195">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">AuthorRepository</span><span class="p">,</span>
+</span><span data-line="195">        <span class="n">authors_repo</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AuthorRepository</span><span class="p">],</span>
 </span><span data-line="196">        <span class="n">author_id</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
 </span><span data-line="197">            <span class="n">UUID</span><span class="p">,</span>
 </span><span data-line="198">            <span class="n">PathParameter</span><span class="p">(</span>
