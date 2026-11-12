@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
@@ -652,8 +651,8 @@ how to test</label><div class="sd-tab-content docutils">
 </span><span data-line="3">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">})</span>
 </span><span data-line="4">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
 </span><span data-line="5">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">}</span>
-</span><span data-line="6">        <span class="n">schema</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/schema/openapi.json&quot;</span><span class="p">)</span>
-</span><span data-line="7">        <span class="k">assert</span> <span class="s2">&quot;Create a new user.&quot;</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;components&quot;</span><span class="p">][</span><span class="s2">&quot;schemas&quot;</span><span class="p">][</span><span class="s2">&quot;User&quot;</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+</span><span data-line="6">        <span class="n">schema</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/schema/openapi.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span><span data-line="7">        <span class="n">request_body_schema</span> <span class="o">=</span> <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;paths&quot;</span><span class="p">][</span><span class="s2">&quot;/&quot;</span><span class="p">][</span><span class="s2">&quot;post&quot;</span><span class="p">][</span><span class="s2">&quot;requestBody&quot;</span><span class="p">][</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;application/json&quot;</span><span class="p">][</span><span class="s2">&quot;schema&quot;</span><span class="p">]</span>
 </span></pre></div>
 </div>
 </div>
@@ -701,8 +700,6 @@ how to test</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">test_request_data_4</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span data-line="2">    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app_4</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 </span><span data-line="3">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">})</span>
-</span><span data-line="4">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
-</span><span data-line="5">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -769,8 +766,6 @@ how to test</label><div class="sd-tab-content docutils">
 </span><span data-line="10">            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 </span><span data-line="11">            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">,</span>
 </span><span data-line="12">            <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;filename&quot;</span><span class="p">,</span>
-</span><span data-line="13">            <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;file content&quot;</span><span class="p">),</span>
-</span><span data-line="14">        <span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -820,8 +815,6 @@ how to test</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">test_request_data_6</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span data-line="2">    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app_6</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 </span><span data-line="3">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;upload&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;world&quot;</span><span class="p">)})</span>
-</span><span data-line="4">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
-</span><span data-line="5">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="sa">f</span><span class="s2">&quot;hello,length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;world&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 </div>
 </div>
@@ -856,8 +849,6 @@ how to test</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">test_request_data_7</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span data-line="2">    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app_7</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 </span><span data-line="3">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;upload&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;world&quot;</span><span class="p">)})</span>
-</span><span data-line="4">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
-</span><span data-line="5">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="sa">f</span><span class="s2">&quot;hello,length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;world&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 </div>
 </div>
@@ -912,8 +903,6 @@ how to test</label><div class="sd-tab-content docutils">
 </span><span data-line="3">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
 </span><span data-line="4">            <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cv&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;cv.odf&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;very impressive&quot;</span><span class="p">),</span> <span class="s2">&quot;diploma&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;diploma.pdf&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;the best&quot;</span><span class="p">)}</span>
 </span><span data-line="5">        <span class="p">)</span>
-</span><span data-line="6">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
-</span><span data-line="7">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;cv&quot;</span><span class="p">:</span> <span class="s2">&quot;very impressive&quot;</span><span class="p">,</span> <span class="s2">&quot;diploma&quot;</span><span class="p">:</span> <span class="s2">&quot;the best&quot;</span><span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -956,8 +945,6 @@ how to test</label><div class="sd-tab-content docutils">
 </span><span data-line="4">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
 </span><span data-line="5">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span>
 </span><span data-line="6">            <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;there&quot;</span><span class="p">),</span>
-</span><span data-line="7">            <span class="s2">&quot;another_filename&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;steve&quot;</span><span class="p">),</span>
-</span><span data-line="8">        <span class="p">}</span>
 </span></pre></div>
 </div>
 </div>
@@ -1026,8 +1013,6 @@ how to test</label><div class="sd-tab-content docutils">
 </span><span data-line="30">        <span class="c1"># finally you can specify headers like so</span>
 </span><span data-line="31">        <span class="c1">#     # (filename, file (or bytes), content_type, headers)</span>
 </span><span data-line="32">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-</span><span data-line="33">            <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">),</span> <span class="s2">&quot;application/x-bittorrent&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;X-Foo&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">})}</span>
-</span><span data-line="34">        <span class="p">)</span>
 </span></pre></div>
 </div>
 </div>
@@ -1064,12 +1049,10 @@ example</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-19" name="sd-tab-set-9" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-19">
 how to test</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;application/x-bittorrent&quot;</span>
-</span><span data-line="2">        <span class="k">assert</span> <span class="p">(</span><span class="s2">&quot;X-Foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="3">
-</span><span data-line="4">
-</span><span data-line="5"><span class="k">def</span><span class="w"> </span><span class="nf">test_msgpack_app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="6">    <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Moishe Zuchmir&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;programmer&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span>
+</span><span data-line="2">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</span><span data-line="3">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;application/x-bittorrent&quot;</span>
+</span><span data-line="4">        <span class="k">assert</span> <span class="p">(</span><span class="s2">&quot;X-Foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
 </span></pre></div>
 </div>
 </div>
@@ -1136,8 +1119,9 @@ example</label><div class="sd-tab-content docutils">
 <input id="sd-tab-item-21" name="sd-tab-set-10" type="radio">
 <label class="sd-tab-label" for="sd-tab-item-21">
 how to test</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">encode_msgpack</span><span class="p">(</span><span class="n">test_data</span><span class="p">))</span>
-</span><span data-line="2">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="n">test_data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1">    <span class="k">with</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">msgpack_app</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span data-line="2">        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">encode_msgpack</span><span class="p">(</span><span class="n">test_data</span><span class="p">))</span>
+</span><span data-line="3">        <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="n">test_data</span>
 </span></pre></div>
 </div>
 </div>

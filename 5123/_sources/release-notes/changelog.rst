@@ -6,6 +6,118 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
+    .. change:: Fix the paths of the ``OPTIONS`` handler added under an app with a ``path``
+        :type: bugfix
+        :pr: 5208
+
+        Fix a bug that gave the ``OPTIONS`` handler Litestar adds to a route the app's
+        ``path`` twice in its ``paths``, e.g. ``/api/api/members`` on an app with
+        ``path="/api"``. The handler was served under the correct path.
+
+    .. change:: Call ``after_exception`` hooks once for an exception on a route with middleware
+        :type: bugfix
+        :pr: 5203
+
+        Fix a bug that, on a route with middleware, an exception that no exception
+        handler creates a response for, ``after_exception`` hooks and
+        ``pdb_on_exception`` would be called multiple times (once by the exception
+        handling layer of the middleware and once by the application's).
+
+        They are called exactly once per exception instance now.
+
+    .. change:: Remove support for trio
+        :type: feature
+        :breaking:
+        :pr: 5201
+
+        Trio is no longer supported. ``set_trio_capacity_limiter`` and
+        ``get_trio_capacity_limiter`` are removed from :mod:`litestar.concurrency`, along with
+        ``litestar.types.AnyIOBackend`` and the ``backend`` parameter of
+        :class:`~litestar.testing.TestClient` and :func:`~litestar.testing.create_test_client`.
+        :func:`~litestar.concurrency.sync_to_thread` raises ``RuntimeError`` when called from
+        trio. ``sniffio`` is no longer a dependency.
+
+    .. change:: Remove the ``litestar.pagination`` module
+        :type: feature
+        :breaking:
+        :pr: 5199
+        :issue: 4009
+
+        The ``ClassicPagination``, ``OffsetPagination`` and ``CursorPagination`` containers,
+        the six abstract paginator base classes and the internal OpenAPI schema plugin for
+        the containers have been removed.
+
+        ``OffsetPagination`` was re-exported from ``advanced_alchemy.service`` whenever that
+        package was installed, so import it from there instead, adding Advanced Alchemy as a
+        dependency if the application did not already have it. The other two containers and
+        the paginator bases have no replacement; declare the container you need as a generic
+        dataclass of your own. Every paginated handler's OpenAPI schema is now a ``$ref``
+        component with ``required`` fields and without the plugin's per-field descriptions,
+        so regenerate any client generated from the document.
+
+    .. change:: DI: Correctly set Pydantic dependency fields as required without a default
+        :type: bugfix
+        :pr: 5195
+
+        Fix a bug, causing a Pydantic model used as a dependency to fail at startup with
+        ``Missing declaration for parameter`` for each of its fields without a marker,
+        since ``PydanticDIPlugin`` marked them as dependencies only in the signature,
+        not in the type hints used by the rest of the machinery.
+
+    .. change:: DI: Correctly set ``msgspec.Struct`` dependency fields as required without a default
+        :type: bugfix
+        :pr: 5194
+
+        Fix a bug that would implicitly give a field of an ``msgspec.Struct`` used as
+        a dependency a default of ``msgspec.NODEFAULT`` and mark it as optional.
+        Struct fields without a default are now correctly marked as required.
+
+    .. change:: Parse every ``cookie`` header of a request
+        :type: bugfix
+        :breaking:
+        :issue: 5177
+
+        Only the first ``cookie`` header was parsed into
+        :attr:`~litestar.connection.ASGIConnection.cookies`. Over HTTP/2 and HTTP/3 the
+        header may repeat, and browsers send one per cookie, so every cookie but those in
+        the first header went missing. All ``cookie`` headers are now parsed, joined with
+        the ``"; "`` delimiter :rfc:`9113` and :rfc:`9114` prescribe.
+
+        A cookie name sent more than once now keeps its first value, where it kept its last
+        one before, following the :rfc:`6265` ordering that serialises the cookie of the
+        longer path first. Scope a cookie holding a session or a CSRF token with the
+        ``__Host-`` prefix so that a cookie of the same name, set under a longer path,
+        cannot take precedence over it. ``cookies`` of
+        :class:`~litestar.middleware.logging.LoggingMiddleware`'s response log likewise
+        holds the first of several ``set-cookie`` headers of one name, not the last.
+
+    .. change:: Restore a session split across several cookies over HTTP/2 and HTTP/3
+        :type: bugfix
+        :issue: 5177
+
+        A session too large for one cookie is stored across several, named ``session-0``,
+        ``session-1`` and so on. Over HTTP/2 and HTTP/3 only the chunks carried by the first
+        ``cookie`` header were read, and
+        :class:`~litestar.middleware.session.client_side.ClientSideSessionBackend` yields an
+        empty session when it cannot decode the value in full, so such a session was
+        silently dropped and the user logged out. Every chunk is now read.
+
+    .. change:: Send repeated headers separately from the test client
+        :type: bugfix
+        :breaking:
+        :issue: 5177
+
+        The test client merged headers of the same name into one comma-joined header, which
+        is invalid for ``cookie``, and left a request carrying a repeated header impossible
+        to simulate. Repeated headers now reach the application as they were given, on
+        requests and on :meth:`~litestar.testing.TestClient.websocket_connect`, which
+        dropped all but the last of them.
+
+        A test passing a header of the same name twice is affected: the application now
+        receives the two values it was given, rather than one comma-joined value. Header
+        values are also passed on as the bytes they were given in, where they were decoded
+        and re-encoded as UTF-8 before.
+
     .. change:: Fix ``Optional`` / ``Any`` + ``required=False`` + without default parameters receiving ``Empty``
         :type: bugfix
         :breaking:
@@ -92,6 +204,17 @@
         the outer application through the scope, for example by writing ``scope["user"]``
         for outer middleware to read, or by calling ``Request.set_session`` or
         ``Request.clear_session``. All of these now fail silently.
+
+    .. change:: Remove support for declaring ``DTOField`` via Pydantic's ``Field.extra``
+        :type: feature
+        :breaking:
+        :pr: 5163
+
+        Declaring a ``DTOField`` through Pydantic's ``Field.extra``, that is
+        ``Field(**dto_field("read-only"))``, is no longer supported. The mark was already
+        ignored in 2.x and only emitted a deprecation warning. Remove the declaration and
+        use ``Annotated[int, DTOField(mark="read-only")]`` instead; leaving it in place can
+        make OpenAPI schema generation fail.
 
     .. change:: Declare ``socket`` in the original signature of a ``websocket_stream`` handler
         :type: bugfix
@@ -376,13 +499,51 @@
         dynamic ``LISTEN`` and ``UNLISTEN`` operations no longer contend with the listener.
         Psycopg 3.2.4 or newer is now required for development and documentation builds.
 
+    .. change:: Base the test clients on ``httpx2``
+        :type: feature
+        :pr: 4974
+        :breaking:
+
+        The ``litestar[testing]`` extra now installs `httpx2 <https://pydantic.dev/docs/httpx2/>`_,
+        the fork of ``httpx`` maintained by Pydantic, instead of ``httpx``.
+
+        ``httpx2`` keeps the public API of ``httpx`` 0.28.1, but it is a distinct module,
+        so every ``httpx`` reference in a test suite has to be renamed, including
+        annotations such as ``response: httpx.Response``. Its exceptions no longer
+        inherit from the ``httpx`` ones, so an ``except httpx.HTTPError`` around a test
+        client call stops matching, silently where ``httpx`` remains installed for other
+        reasons. Beyond the rename:
+
+        - ``TestClient`` and ``AsyncTestClient`` now subclass ``httpx2.Client`` and
+          ``httpx2.AsyncClient``, and ``subprocess_sync_client`` /
+          ``subprocess_async_client`` return ``httpx2`` clients.
+        - The logger is named ``httpx2``, which affects logging configuration and
+          ``caplog`` assertions that reference the ``httpx`` logger.
+        - The clients inherit ``httpx2``'s ``sse()``, so ``httpx-sse`` is no longer
+          needed. The inherited ``websocket()`` does not work against the test
+          transport; use :meth:`~litestar.testing.TestClient.websocket_connect` instead.
+        - The subprocess clients send ``User-Agent: python-httpx2/<version>``;
+          ``TestClient`` and ``AsyncTestClient`` keep sending ``testclient``.
+        - The extra pulls ``anyio>=4.10`` and ``idna>=3.18``, neither of which can be
+          satisfied alongside a lower pin, and verifies TLS against the operating system
+          trust store via ``truststore`` rather than ``certifi``.
+
+        ``httpx2.alias_httpx()``, which must run before anything imports ``httpx`` or
+        ``httpcore``, makes ``import httpx`` resolve to ``httpx2`` process-wide for
+        suites that cannot be renamed yet. Litestar never calls it.
+
+        .. seealso::
+            :doc:`/usage/testing`
+
     .. change:: Move ``httpx`` to the ``testing`` extra
         :type: feature
         :pr: 4950
         :breaking:
 
         ``httpx``, used by the test clients, has been moved from the default dependencies
-        to the ``litestar[testing]`` extra. It remains included in ``litestar[full]``.
+        to the ``litestar[testing]`` extra, which is included in ``litestar[full]``. The
+        extra went on to replace ``httpx`` with ``httpx2`` altogether, so 3.0 ships no
+        dependency on ``httpx``.
 
         Importing anything from ``litestar.testing`` without the extra installed now
         raises a ``MissingDependencyException`` naming the extra to install.

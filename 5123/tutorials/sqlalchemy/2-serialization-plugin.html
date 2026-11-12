@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
@@ -548,7 +547,7 @@ data-aria-dark="Switch to auto color mode">
           <section id="using-the-serialization-plugin">
 <h1>Using the serialization plugin<a class="headerlink" href="#using-the-serialization-plugin" title="Link to this heading">¶</a></h1>
 <p>Our next improvement is to leverage the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code>
+<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemySerializationPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>
 so that we can receive and return our SQLAlchemy models directly to and from our handlers.</p>
 <p>Here’s the code:</p>
 <div class="sd-tab-set docutils">
@@ -878,7 +877,7 @@ Before</label><div class="sd-tab-content docutils">
 <h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
 <p>In our application, we’ve had to build a bit of scaffolding to integrate SQLAlchemy with our application. We’ve had to
 define the <code class="docutils literal notranslate"><span class="pre">db_connection()</span></code> lifespan context manager, and the <code class="docutils literal notranslate"><span class="pre">provide_transaction()</span></code> dependency provider.</p>
-<p>Next we’ll look at how the <code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code> can
+<p>Next we’ll look at how the <a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemyInitPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> can
 help us.</p>
 </section>
 </section>

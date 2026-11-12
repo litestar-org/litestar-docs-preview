@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="plugins/attrs.html">attrs</a></li>
@@ -525,7 +524,6 @@ data-aria-dark="Switch to auto color mode">
 </li>
 <li><a class="reference internal" href="#helper-types">Helper Types</a><ul>
 <li><a class="reference internal" href="#litestar.types.SyncOrAsyncUnion"><code class="docutils literal notranslate"><span class="pre">SyncOrAsyncUnion</span></code></a></li>
-<li><a class="reference internal" href="#litestar.types.AnyIOBackend"><code class="docutils literal notranslate"><span class="pre">AnyIOBackend</span></code></a></li>
 <li><a class="reference internal" href="#litestar.types.OptionalSequence"><code class="docutils literal notranslate"><span class="pre">OptionalSequence</span></code></a></li>
 </ul>
 </li>
@@ -1099,12 +1097,6 @@ errors defaults to ‘strict’.</p>
 <dt class="sig sig-object py" id="litestar.types.SyncOrAsyncUnion">
 <span class="sig-prename descclassname"><span class="pre">litestar.types.</span></span><span class="sig-name descname"><span class="pre">SyncOrAsyncUnion</span></span><a class="headerlink" href="#litestar.types.SyncOrAsyncUnion" title="Link to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code> | <a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Awaitable" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Awaitable</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="litestar.types.AnyIOBackend">
-<span class="sig-prename descclassname"><span class="pre">litestar.types.</span></span><span class="sig-name descname"><span class="pre">AnyIOBackend</span></span><a class="headerlink" href="#litestar.types.AnyIOBackend" title="Link to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘asyncio’, ‘trio’]</p>
 </dd></dl>
 
 <dl class="py attribute">

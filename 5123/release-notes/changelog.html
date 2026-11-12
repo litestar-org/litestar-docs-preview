@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
@@ -547,6 +546,30 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Remove support for trio<a class="headerlink reference internal" href="#3.0.0-remove support for trio" id="3.0.0-remove support for trio">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Trio is no longer supported. <code class="docutils literal notranslate"><span class="pre">set_trio_capacity_limiter</span></code> and
+<code class="docutils literal notranslate"><span class="pre">get_trio_capacity_limiter</span></code> are removed from <a class="reference internal" href="../reference/concurrency.html#module-litestar.concurrency" title="litestar.concurrency"><code class="xref py py-mod docutils literal notranslate"><span class="pre">litestar.concurrency</span></code></a>, along with
+<code class="docutils literal notranslate"><span class="pre">litestar.types.AnyIOBackend</span></code> and the <code class="docutils literal notranslate"><span class="pre">backend</span></code> parameter of
+<a class="reference internal" href="../reference/testing.html#litestar.testing.TestClient" title="litestar.testing.TestClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">TestClient</span></code></a> and <a class="reference internal" href="../reference/testing.html#litestar.testing.create_test_client" title="litestar.testing.create_test_client"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_test_client()</span></code></a>.
+<a class="reference internal" href="../reference/concurrency.html#litestar.concurrency.sync_to_thread" title="litestar.concurrency.sync_to_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">sync_to_thread()</span></code></a> raises <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code> when called from
+trio. <code class="docutils literal notranslate"><span class="pre">sniffio</span></code> is no longer a dependency.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5201">https://github.com/litestar-org/litestar/pull/5201</a></span></p>
+</div>
+</dd>
+<dt>Remove the <code class="docutils literal notranslate"><span class="pre">litestar.pagination</span></code> module<a class="headerlink reference internal" href="#3.0.0-remove the" id="3.0.0-remove the">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>The <code class="docutils literal notranslate"><span class="pre">ClassicPagination</span></code>, <code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code> and <code class="docutils literal notranslate"><span class="pre">CursorPagination</span></code> containers,
+the six abstract paginator base classes and the internal OpenAPI schema plugin for
+the containers have been removed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OffsetPagination</span></code> was re-exported from <code class="docutils literal notranslate"><span class="pre">advanced_alchemy.service</span></code> whenever that
+package was installed, so import it from there instead, adding Advanced Alchemy as a
+dependency if the application did not already have it. The other two containers and
+the paginator bases have no replacement; declare the container you need as a generic
+dataclass of your own. Every paginated handler’s OpenAPI schema is now a <code class="docutils literal notranslate"><span class="pre">$ref</span></code>
+component with <code class="docutils literal notranslate"><span class="pre">required</span></code> fields and without the plugin’s per-field descriptions,
+so regenerate any client generated from the document.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5199">https://github.com/litestar-org/litestar/pull/5199</a></span></p>
+</div>
+</dd>
 <dt>Default <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> for ASGI handlers<a class="headerlink reference internal" href="#3.0.0-default" id="3.0.0-default">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Every <code class="docutils literal notranslate"><span class="pre">asgi</span></code> handler, mounted or not, now receives a copy of the ASGI <code class="docutils literal notranslate"><span class="pre">scope</span></code>,
 so the wrapped application can no longer add, replace or remove top-level scope
@@ -560,6 +583,15 @@ the outer application through the scope, for example by writing <code class="doc
 for outer middleware to read, or by calling <code class="docutils literal notranslate"><span class="pre">Request.set_session</span></code> or
 <code class="docutils literal notranslate"><span class="pre">Request.clear_session</span></code>. All of these now fail silently.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5164">https://github.com/litestar-org/litestar/pull/5164</a></span></p>
+</div>
+</dd>
+<dt>Remove support for declaring <code class="docutils literal notranslate"><span class="pre">DTOField</span></code> via Pydantic’s <code class="docutils literal notranslate"><span class="pre">Field.extra</span></code><a class="headerlink reference internal" href="#3.0.0-remove support for declaring" id="3.0.0-remove support for declaring">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Declaring a <code class="docutils literal notranslate"><span class="pre">DTOField</span></code> through Pydantic’s <code class="docutils literal notranslate"><span class="pre">Field.extra</span></code>, that is
+<code class="docutils literal notranslate"><span class="pre">Field(**dto_field(&quot;read-only&quot;))</span></code>, is no longer supported. The mark was already
+ignored in 2.x and only emitted a deprecation warning. Remove the declaration and
+use <code class="docutils literal notranslate"><span class="pre">Annotated[int,</span> <span class="pre">DTOField(mark=&quot;read-only&quot;)]</span></code> instead; leaving it in place can
+make OpenAPI schema generation fail.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5163">https://github.com/litestar-org/litestar/pull/5163</a></span></p>
 </div>
 </dd>
 <dt>Require “reserved kwargs” to be declared with their type<a class="headerlink reference internal" href="#3.0.0-require &quot;reserved kwargs&quot; to be declared with their type" id="3.0.0-require &quot;reserved kwargs&quot; to be declared with their type">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -784,9 +816,45 @@ attribute of each layer.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4952">https://github.com/litestar-org/litestar/pull/4952</a></span></p>
 </div>
 </dd>
+<dt>Base the test clients on <code class="docutils literal notranslate"><span class="pre">httpx2</span></code><a class="headerlink reference internal" href="#3.0.0-base the test clients on" id="3.0.0-base the test clients on">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>The <code class="docutils literal notranslate"><span class="pre">litestar[testing]</span></code> extra now installs <a class="reference external" href="https://pydantic.dev/docs/httpx2/">httpx2</a>,
+the fork of <code class="docutils literal notranslate"><span class="pre">httpx</span></code> maintained by Pydantic, instead of <code class="docutils literal notranslate"><span class="pre">httpx</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">httpx2</span></code> keeps the public API of <code class="docutils literal notranslate"><span class="pre">httpx</span></code> 0.28.1, but it is a distinct module,
+so every <code class="docutils literal notranslate"><span class="pre">httpx</span></code> reference in a test suite has to be renamed, including
+annotations such as <code class="docutils literal notranslate"><span class="pre">response:</span> <span class="pre">httpx.Response</span></code>. Its exceptions no longer
+inherit from the <code class="docutils literal notranslate"><span class="pre">httpx</span></code> ones, so an <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">httpx.HTTPError</span></code> around a test
+client call stops matching, silently where <code class="docutils literal notranslate"><span class="pre">httpx</span></code> remains installed for other
+reasons. Beyond the rename:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TestClient</span></code> and <code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> now subclass <code class="docutils literal notranslate"><span class="pre">httpx2.Client</span></code> and
+<code class="docutils literal notranslate"><span class="pre">httpx2.AsyncClient</span></code>, and <code class="docutils literal notranslate"><span class="pre">subprocess_sync_client</span></code> /
+<code class="docutils literal notranslate"><span class="pre">subprocess_async_client</span></code> return <code class="docutils literal notranslate"><span class="pre">httpx2</span></code> clients.</p></li>
+<li><p>The logger is named <code class="docutils literal notranslate"><span class="pre">httpx2</span></code>, which affects logging configuration and
+<code class="docutils literal notranslate"><span class="pre">caplog</span></code> assertions that reference the <code class="docutils literal notranslate"><span class="pre">httpx</span></code> logger.</p></li>
+<li><p>The clients inherit <code class="docutils literal notranslate"><span class="pre">httpx2</span></code>’s <code class="docutils literal notranslate"><span class="pre">sse()</span></code>, so <code class="docutils literal notranslate"><span class="pre">httpx-sse</span></code> is no longer
+needed. The inherited <code class="docutils literal notranslate"><span class="pre">websocket()</span></code> does not work against the test
+transport; use <a class="reference internal" href="../reference/testing.html#litestar.testing.TestClient.websocket_connect" title="litestar.testing.TestClient.websocket_connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">websocket_connect()</span></code></a> instead.</p></li>
+<li><p>The subprocess clients send <code class="docutils literal notranslate"><span class="pre">User-Agent:</span> <span class="pre">python-httpx2/&lt;version&gt;</span></code>;
+<code class="docutils literal notranslate"><span class="pre">TestClient</span></code> and <code class="docutils literal notranslate"><span class="pre">AsyncTestClient</span></code> keep sending <code class="docutils literal notranslate"><span class="pre">testclient</span></code>.</p></li>
+<li><p>The extra pulls <code class="docutils literal notranslate"><span class="pre">anyio&gt;=4.10</span></code> and <code class="docutils literal notranslate"><span class="pre">idna&gt;=3.18</span></code>, neither of which can be
+satisfied alongside a lower pin, and verifies TLS against the operating system
+trust store via <code class="docutils literal notranslate"><span class="pre">truststore</span></code> rather than <code class="docutils literal notranslate"><span class="pre">certifi</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">httpx2.alias_httpx()</span></code>, which must run before anything imports <code class="docutils literal notranslate"><span class="pre">httpx</span></code> or
+<code class="docutils literal notranslate"><span class="pre">httpcore</span></code>, makes <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">httpx</span></code> resolve to <code class="docutils literal notranslate"><span class="pre">httpx2</span></code> process-wide for
+suites that cannot be renamed yet. Litestar never calls it.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/testing.html"><span class="doc">Testing</span></a></p>
+</div>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4974">https://github.com/litestar-org/litestar/pull/4974</a></span></p>
+</div>
+</dd>
 <dt>Move <code class="docutils literal notranslate"><span class="pre">httpx</span></code> to the <code class="docutils literal notranslate"><span class="pre">testing</span></code> extra<a class="headerlink reference internal" href="#3.0.0-move" id="3.0.0-move">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p><code class="docutils literal notranslate"><span class="pre">httpx</span></code>, used by the test clients, has been moved from the default dependencies
-to the <code class="docutils literal notranslate"><span class="pre">litestar[testing]</span></code> extra. It remains included in <code class="docutils literal notranslate"><span class="pre">litestar[full]</span></code>.</p>
+to the <code class="docutils literal notranslate"><span class="pre">litestar[testing]</span></code> extra, which is included in <code class="docutils literal notranslate"><span class="pre">litestar[full]</span></code>. The
+extra went on to replace <code class="docutils literal notranslate"><span class="pre">httpx</span></code> with <code class="docutils literal notranslate"><span class="pre">httpx2</span></code> altogether, so 3.0 ships no
+dependency on <code class="docutils literal notranslate"><span class="pre">httpx</span></code>.</p>
 <p>Importing anything from <code class="docutils literal notranslate"><span class="pre">litestar.testing</span></code> without the extra installed now
 raises a <code class="docutils literal notranslate"><span class="pre">MissingDependencyException</span></code> naming the extra to install.</p>
 <div class="admonition seealso">
@@ -1191,6 +1259,76 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Fix the paths of the <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> handler added under an app with a <code class="docutils literal notranslate"><span class="pre">path</span></code><a class="headerlink reference internal" href="#3.0.0-fix the paths of the" id="3.0.0-fix the paths of the">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that gave the <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> handler Litestar adds to a route the app’s
+<code class="docutils literal notranslate"><span class="pre">path</span></code> twice in its <code class="docutils literal notranslate"><span class="pre">paths</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">/api/api/members</span></code> on an app with
+<code class="docutils literal notranslate"><span class="pre">path=&quot;/api&quot;</span></code>. The handler was served under the correct path.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5208">https://github.com/litestar-org/litestar/pull/5208</a></span></p>
+</div>
+</dd>
+<dt>Call <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hooks once for an exception on a route with middleware<a class="headerlink reference internal" href="#3.0.0-call" id="3.0.0-call">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that, on a route with middleware, an exception that no exception
+handler creates a response for, <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hooks and
+<code class="docutils literal notranslate"><span class="pre">pdb_on_exception</span></code> would be called multiple times (once by the exception
+handling layer of the middleware and once by the application’s).</p>
+<p>They are called exactly once per exception instance now.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5203">https://github.com/litestar-org/litestar/pull/5203</a></span></p>
+</div>
+</dd>
+<dt>DI: Correctly set Pydantic dependency fields as required without a default<a class="headerlink reference internal" href="#3.0.0-di: correctly set pydantic dependency fields as required without a default" id="3.0.0-di: correctly set pydantic dependency fields as required without a default">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug, causing a Pydantic model used as a dependency to fail at startup with
+<code class="docutils literal notranslate"><span class="pre">Missing</span> <span class="pre">declaration</span> <span class="pre">for</span> <span class="pre">parameter</span></code> for each of its fields without a marker,
+since <code class="docutils literal notranslate"><span class="pre">PydanticDIPlugin</span></code> marked them as dependencies only in the signature,
+not in the type hints used by the rest of the machinery.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5195">https://github.com/litestar-org/litestar/pull/5195</a></span></p>
+</div>
+</dd>
+<dt>DI: Correctly set <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> dependency fields as required without a default<a class="headerlink reference internal" href="#3.0.0-di: correctly set" id="3.0.0-di: correctly set">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would implicitly give a field of an <code class="docutils literal notranslate"><span class="pre">msgspec.Struct</span></code> used as
+a dependency a default of <code class="docutils literal notranslate"><span class="pre">msgspec.NODEFAULT</span></code> and mark it as optional.
+Struct fields without a default are now correctly marked as required.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5194">https://github.com/litestar-org/litestar/pull/5194</a></span></p>
+</div>
+</dd>
+<dt>Parse every <code class="docutils literal notranslate"><span class="pre">cookie</span></code> header of a request<a class="headerlink reference internal" href="#3.0.0-parse every" id="3.0.0-parse every">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Only the first <code class="docutils literal notranslate"><span class="pre">cookie</span></code> header was parsed into
+<a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection.cookies" title="litestar.connection.ASGIConnection.cookies"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cookies</span></code></a>. Over HTTP/2 and HTTP/3 the
+header may repeat, and browsers send one per cookie, so every cookie but those in
+the first header went missing. All <code class="docutils literal notranslate"><span class="pre">cookie</span></code> headers are now parsed, joined with
+the <code class="docutils literal notranslate"><span class="pre">&quot;;</span> <span class="pre">&quot;</span></code> delimiter <span class="target" id="index-0"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc9113.html"><strong>RFC 9113</strong></a> and <span class="target" id="index-1"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc9114.html"><strong>RFC 9114</strong></a> prescribe.</p>
+<p>A cookie name sent more than once now keeps its first value, where it kept its last
+one before, following the <span class="target" id="index-2"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6265.html"><strong>RFC 6265</strong></a> ordering that serialises the cookie of the
+longer path first. Scope a cookie holding a session or a CSRF token with the
+<code class="docutils literal notranslate"><span class="pre">__Host-</span></code> prefix so that a cookie of the same name, set under a longer path,
+cannot take precedence over it. <code class="docutils literal notranslate"><span class="pre">cookies</span></code> of
+<a class="reference internal" href="../reference/middleware/logging.html#litestar.middleware.logging.LoggingMiddleware" title="litestar.middleware.logging.LoggingMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingMiddleware</span></code></a>’s response log likewise
+holds the first of several <code class="docutils literal notranslate"><span class="pre">set-cookie</span></code> headers of one name, not the last.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5177">https://github.com/litestar-org/litestar/issues/5177</a></span></p>
+</div>
+</dd>
+<dt>Restore a session split across several cookies over HTTP/2 and HTTP/3<a class="headerlink reference internal" href="#3.0.0-restore a session split across several cookies over http/2 and http/3" id="3.0.0-restore a session split across several cookies over http/2 and http/3">#</a></dt><dd><div class="changelog-change docutils container">
+<p>A session too large for one cookie is stored across several, named <code class="docutils literal notranslate"><span class="pre">session-0</span></code>,
+<code class="docutils literal notranslate"><span class="pre">session-1</span></code> and so on. Over HTTP/2 and HTTP/3 only the chunks carried by the first
+<code class="docutils literal notranslate"><span class="pre">cookie</span></code> header were read, and
+<a class="reference internal" href="../reference/middleware/session/client_side.html#litestar.middleware.session.client_side.ClientSideSessionBackend" title="litestar.middleware.session.client_side.ClientSideSessionBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClientSideSessionBackend</span></code></a> yields an
+empty session when it cannot decode the value in full, so such a session was
+silently dropped and the user logged out. Every chunk is now read.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5177">https://github.com/litestar-org/litestar/issues/5177</a></span></p>
+</div>
+</dd>
+<dt>Send repeated headers separately from the test client<a class="headerlink reference internal" href="#3.0.0-send repeated headers separately from the test client" id="3.0.0-send repeated headers separately from the test client">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>The test client merged headers of the same name into one comma-joined header, which
+is invalid for <code class="docutils literal notranslate"><span class="pre">cookie</span></code>, and left a request carrying a repeated header impossible
+to simulate. Repeated headers now reach the application as they were given, on
+requests and on <a class="reference internal" href="../reference/testing.html#litestar.testing.TestClient.websocket_connect" title="litestar.testing.TestClient.websocket_connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">websocket_connect()</span></code></a>, which
+dropped all but the last of them.</p>
+<p>A test passing a header of the same name twice is affected: the application now
+receives the two values it was given, rather than one comma-joined value. Header
+values are also passed on as the bytes they were given in, where they were decoded
+and re-encoded as UTF-8 before.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5177">https://github.com/litestar-org/litestar/issues/5177</a></span></p>
+</div>
+</dd>
 <dt>Fix <code class="docutils literal notranslate"><span class="pre">Optional</span></code> / <code class="docutils literal notranslate"><span class="pre">Any</span></code> + <code class="docutils literal notranslate"><span class="pre">required=False</span></code> + without default parameters receiving <code class="docutils literal notranslate"><span class="pre">Empty</span></code><a class="headerlink reference internal" href="#3.0.0-fix" id="3.0.0-fix">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that would cause a request parameter typed <code class="docutils literal notranslate"><span class="pre">Optional</span></code> or <code class="docutils literal notranslate"><span class="pre">Any</span></code>,
 <em>and</em> declared without a default <em>and</em> annotated as <code class="docutils literal notranslate"><span class="pre">required=False</span></code> to
