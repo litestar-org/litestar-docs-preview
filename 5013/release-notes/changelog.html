@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -1259,6 +1259,29 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Keep publishing channel messages after a backend error<a class="headerlink reference internal" href="#3.0.0-keep publishing channel messages after a backend error" id="3.0.0-keep publishing channel messages after a backend error">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that stopped <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin" title="litestar.channels.plugin.ChannelsPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelsPlugin</span></code></a> from publishing
+any further messages after the backend raised an error for one of them, for
+example a payload over the PostgreSQL <code class="docutils literal notranslate"><span class="pre">NOTIFY</span></code> size limit. Messages were
+queued but never sent, and shutting down the application hung. The error is
+now logged and publishing continues.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5213">https://github.com/litestar-org/litestar/pull/5213</a></span></p>
+</div>
+</dd>
+<dt>Do not cache parsed url-encoded form bodies<a class="headerlink reference internal" href="#3.0.0-do not cache parsed url-encoded form bodies" id="3.0.0-do not cache parsed url-encoded form bodies">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that kept up to 1024 url-encoded request bodies and their parsed
+values in memory, so distinct large form submissions could grow memory until
+the process ran out. Url-encoded bodies are no longer cached.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5212">https://github.com/litestar-org/litestar/pull/5212</a></span></p>
+</div>
+</dd>
+<dt>Fix the paths of the <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> handler added under an app with a <code class="docutils literal notranslate"><span class="pre">path</span></code><a class="headerlink reference internal" href="#3.0.0-fix the paths of the" id="3.0.0-fix the paths of the">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that gave the <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> handler Litestar adds to a route the app’s
+<code class="docutils literal notranslate"><span class="pre">path</span></code> twice in its <code class="docutils literal notranslate"><span class="pre">paths</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">/api/api/members</span></code> on an app with
+<code class="docutils literal notranslate"><span class="pre">path=&quot;/api&quot;</span></code>. The handler was served under the correct path.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5208">https://github.com/litestar-org/litestar/pull/5208</a></span></p>
+</div>
+</dd>
 <dt>Call <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hooks once for an exception on a route with middleware<a class="headerlink reference internal" href="#3.0.0-call" id="3.0.0-call">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that, on a route with middleware, an exception that no exception
 handler creates a response for, <code class="docutils literal notranslate"><span class="pre">after_exception</span></code> hooks and

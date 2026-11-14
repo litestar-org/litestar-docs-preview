@@ -6,6 +6,32 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
+    .. change:: Keep publishing channel messages after a backend error
+        :type: bugfix
+        :pr: 5213
+
+        Fix a bug that stopped :class:`~litestar.channels.plugin.ChannelsPlugin` from publishing
+        any further messages after the backend raised an error for one of them, for
+        example a payload over the PostgreSQL ``NOTIFY`` size limit. Messages were
+        queued but never sent, and shutting down the application hung. The error is
+        now logged and publishing continues.
+
+    .. change:: Do not cache parsed url-encoded form bodies
+        :type: bugfix
+        :pr: 5212
+
+        Fix a bug that kept up to 1024 url-encoded request bodies and their parsed
+        values in memory, so distinct large form submissions could grow memory until
+        the process ran out. Url-encoded bodies are no longer cached.
+
+    .. change:: Fix the paths of the ``OPTIONS`` handler added under an app with a ``path``
+        :type: bugfix
+        :pr: 5208
+
+        Fix a bug that gave the ``OPTIONS`` handler Litestar adds to a route the app's
+        ``path`` twice in its ``paths``, e.g. ``/api/api/members`` on an app with
+        ``path="/api"``. The handler was served under the correct path.
+
     .. change:: Call ``after_exception`` hooks once for an exception on a route with middleware
         :type: bugfix
         :pr: 5203

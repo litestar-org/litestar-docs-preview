@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -1551,9 +1551,10 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="1013">    <span class="n">handler_methods</span> <span class="o">=</span> <span class="p">{</span><span class="n">method</span> <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">http_handlers</span> <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">handler</span><span class="o">.</span><span class="n">http_methods</span><span class="p">}</span>
 </span><span data-line="1014">    <span class="k">if</span> <span class="s2">&quot;OPTIONS&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">handler_methods</span><span class="p">:</span>
 </span><span data-line="1015">        <span class="n">options_handler</span> <span class="o">=</span> <span class="n">create_options_handler</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">allow_methods</span><span class="o">=</span><span class="p">{</span><span class="o">*</span><span class="n">handler_methods</span><span class="p">,</span> <span class="s2">&quot;OPTIONS&quot;</span><span class="p">})</span>  <span class="c1"># pyright: ignore[reportArgumentType]</span>
-</span><span data-line="1016">        <span class="n">options_handler</span> <span class="o">=</span> <span class="n">options_handler</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-</span><span data-line="1017">        <span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="n">http_handlers</span><span class="p">,</span> <span class="n">options_handler</span><span class="p">]</span>
-</span><span data-line="1018">    <span class="k">return</span> <span class="n">http_handlers</span>
+</span><span data-line="1016">        <span class="c1"># merging prepends the root&#39;s path, which &#39;path&#39; already starts with</span>
+</span><span data-line="1017">        <span class="n">options_handler</span> <span class="o">=</span> <span class="n">options_handler</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">_with_changes</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="1018">        <span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="n">http_handlers</span><span class="p">,</span> <span class="n">options_handler</span><span class="p">]</span>
+</span><span data-line="1019">    <span class="k">return</span> <span class="n">http_handlers</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
