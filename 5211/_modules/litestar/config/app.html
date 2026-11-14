@@ -722,35 +722,31 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="218"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The maximal number of allowed parts in a multipart/formdata request. This limit is intended to protect from</span>
 </span><span data-line="219"><span class="sd">    DoS attacks.&quot;&quot;&quot;</span>
 </span><span data-line="220">    <span class="n">multipart_form_allowed_charsets</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">DEFAULT_MULTIPART_FORM_ALLOWED_CHARSETS</span><span class="p">)</span>
-</span><span data-line="221"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Charsets accepted for text fields of a multipart/formdata request. A text field declaring any other charset is</span>
-</span><span data-line="222"><span class="sd">    rejected with a 400 response. Fields without a charset are decoded as UTF-8. Allowing a codec that decodes in</span>
-</span><span data-line="223"><span class="sd">    super-linear time, such as ``punycode``, exposes the application to denial of service.</span>
+</span><span data-line="221"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Charsets accepted for multipart/formdata text fields; others are rejected with a 400. Fields without a charset</span>
+</span><span data-line="222"><span class="sd">    are decoded as UTF-8.&quot;&quot;&quot;</span>
+</span><span data-line="223">    <span class="n">experimental_features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ExperimentalFeatures</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span data-line="224">
-</span><span data-line="225"><span class="sd">    .. versionadded:: 3.0.0</span>
-</span><span data-line="226"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="227">    <span class="n">experimental_features</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ExperimentalFeatures</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="228">
 <div class="viewcode-block" id="AppConfig.__post_init__">
 <a class="viewcode-back" href="../../../reference/config.html#litestar.config.app.AppConfig.__post_init__">[docs]</a>
-</span><span data-line="229">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="230"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize the allowed hosts to be a config or None.</span>
-</span><span data-line="231">
-</span><span data-line="232"><span class="sd">        Returns:</span>
-</span><span data-line="233"><span class="sd">            Optional config.</span>
-</span><span data-line="234"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="235">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-</span><span data-line="236">            <span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span> <span class="o">=</span> <span class="n">AllowedHostsConfig</span><span class="p">(</span><span class="n">allowed_hosts</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span><span class="p">)</span></div>
+</span><span data-line="225">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="226"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize the allowed hosts to be a config or None.</span>
+</span><span data-line="227">
+</span><span data-line="228"><span class="sd">        Returns:</span>
+</span><span data-line="229"><span class="sd">            Optional config.</span>
+</span><span data-line="230"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="231">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+</span><span data-line="232">            <span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span> <span class="o">=</span> <span class="n">AllowedHostsConfig</span><span class="p">(</span><span class="n">allowed_hosts</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed_hosts</span><span class="p">)</span></div>
 </div>
 
-</span><span data-line="237">
-</span><span data-line="238">
+</span><span data-line="233">
+</span><span data-line="234">
 <div class="viewcode-block" id="ExperimentalFeatures">
 <a class="viewcode-back" href="../../../reference/config.html#litestar.config.app.ExperimentalFeatures">[docs]</a>
-</span><span data-line="239"><span class="k">class</span><span class="w"> </span><span class="nc">ExperimentalFeatures</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">StrEnum</span><span class="p">):</span>
-</span><span data-line="240">    <span class="n">DTO_CODEGEN</span> <span class="o">=</span> <span class="s2">&quot;DTO_CODEGEN&quot;</span>
-</span><span data-line="241"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Enable DTO codegen.&quot;&quot;&quot;</span>
-</span><span data-line="242">    <span class="n">FUTURE</span> <span class="o">=</span> <span class="s2">&quot;FUTURE&quot;</span>
-</span><span data-line="243"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Enable future features that may be considered breaking or changing.&quot;&quot;&quot;</span></div>
+</span><span data-line="235"><span class="k">class</span><span class="w"> </span><span class="nc">ExperimentalFeatures</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">StrEnum</span><span class="p">):</span>
+</span><span data-line="236">    <span class="n">DTO_CODEGEN</span> <span class="o">=</span> <span class="s2">&quot;DTO_CODEGEN&quot;</span>
+</span><span data-line="237"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Enable DTO codegen.&quot;&quot;&quot;</span>
+</span><span data-line="238">    <span class="n">FUTURE</span> <span class="o">=</span> <span class="s2">&quot;FUTURE&quot;</span>
+</span><span data-line="239"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Enable future features that may be considered breaking or changing.&quot;&quot;&quot;</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">

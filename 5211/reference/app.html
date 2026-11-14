@@ -647,14 +647,8 @@ Can be overridden by route handlers.</p></li>
 <li><p><span class="target" id="litestar.app.Litestar.params.middleware"></span><strong>middleware</strong><a class="paramlink headerlink reference internal" href="#litestar.app.Litestar.params.middleware">¶</a> – A sequence of <a class="reference internal" href="types.html#litestar.types.Middleware" title="litestar.types.Middleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">Middleware</span></code></a>.</p></li>
 <li><p><span class="target" id="litestar.app.Litestar.params.multipart_form_part_limit"></span><strong>multipart_form_part_limit</strong><a class="paramlink headerlink reference internal" href="#litestar.app.Litestar.params.multipart_form_part_limit">¶</a> – The maximal number of allowed parts in a multipart/formdata request. This limit
 is intended to protect from DoS attacks.</p></li>
-<li><p><span class="target" id="litestar.app.Litestar.params.multipart_form_allowed_charsets"></span><strong>multipart_form_allowed_charsets</strong><a class="paramlink headerlink reference internal" href="#litestar.app.Litestar.params.multipart_form_allowed_charsets">¶</a> – <p>Charsets accepted for text fields of a multipart/formdata request. A
-text field declaring any other charset is rejected with a 400 response. Fields without a charset are
-decoded as UTF-8. Allowing a codec that decodes in super-linear time, such as <code class="docutils literal notranslate"><span class="pre">punycode</span></code>, exposes
-the application to denial of service.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">Added in version 3.0.0.</span></p>
-</div>
-</p></li>
+<li><p><span class="target" id="litestar.app.Litestar.params.multipart_form_allowed_charsets"></span><strong>multipart_form_allowed_charsets</strong><a class="paramlink headerlink reference internal" href="#litestar.app.Litestar.params.multipart_form_allowed_charsets">¶</a> – Charsets accepted for multipart/formdata text fields; others are
+rejected with a 400. Fields without a charset are decoded as UTF-8.</p></li>
 <li><p><span class="target" id="litestar.app.Litestar.params.on_app_init"></span><strong>on_app_init</strong><a class="paramlink headerlink reference internal" href="#litestar.app.Litestar.params.on_app_init">¶</a> – A sequence of <a class="reference internal" href="types.html#litestar.types.OnAppInitHandler" title="litestar.types.OnAppInitHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">OnAppInitHandler</span></code></a> instances. Handlers receive
 an instance of <a class="reference internal" href="config.html#litestar.config.app.AppConfig" title="litestar.config.app.AppConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></a> that will have been initially populated with
 the parameters passed to <a class="reference internal" href="#litestar.app.Litestar" title="litestar.app.Litestar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Litestar</span></code></a>, and must return an instance of same.

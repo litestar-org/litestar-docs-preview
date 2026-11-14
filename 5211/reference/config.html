@@ -1064,12 +1064,8 @@ DoS attacks.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="litestar.config.app.AppConfig.multipart_form_allowed_charsets">
 <span class="sig-name descname"><span class="pre">multipart_form_allowed_charsets</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('utf-8',</span> <span class="pre">'us-ascii',</span> <span class="pre">'iso-8859-1')</span></span><a class="headerlink" href="#litestar.config.app.AppConfig.multipart_form_allowed_charsets" title="Link to this definition">¶</a></dt>
-<dd><p>Charsets accepted for text fields of a multipart/formdata request. A text field declaring any other charset is
-rejected with a 400 response. Fields without a charset are decoded as UTF-8. Allowing a codec that decodes in
-super-linear time, such as <code class="docutils literal notranslate"><span class="pre">punycode</span></code>, exposes the application to denial of service.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">Added in version 3.0.0.</span></p>
-</div>
+<dd><p>Charsets accepted for multipart/formdata text fields; others are rejected with a 400. Fields without a charset
+are decoded as UTF-8.</p>
 </dd></dl>
 
 <dl class="py method">
