@@ -8,6 +8,7 @@
 
     .. change:: Clean up generator dependencies when a later dependency fails
         :type: bugfix
+        :pr: 5220
 
         Fix a bug where generator dependencies were not cleaned up if a dependency
         resolved after them raised an exception or failed validation, or if a websocket
