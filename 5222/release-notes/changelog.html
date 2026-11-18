@@ -1271,6 +1271,14 @@ route matches, following OpenTelemetry HTTP semantic conventions.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5120">https://github.com/litestar-org/litestar/issues/5120</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5222">https://github.com/litestar-org/litestar/pull/5222</a></span></p>
 </div>
 </dd>
+<dt>Set the mount path as <code class="docutils literal notranslate"><span class="pre">path_template</span></code> for mounted ASGI apps<a class="headerlink reference internal" href="#3.0.0-set the mount path as" id="3.0.0-set the mount path as">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that left <code class="docutils literal notranslate"><span class="pre">scope[&quot;path_template&quot;]</span></code> empty for requests routed to a
+mounted ASGI app. It now holds the mount path, e.g. <code class="docutils literal notranslate"><span class="pre">/mount</span></code>, which also
+changes the <code class="docutils literal notranslate"><span class="pre">path</span></code> label of Prometheus metrics with <code class="docutils literal notranslate"><span class="pre">group_path=True</span></code> for
+these requests.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5222">https://github.com/litestar-org/litestar/pull/5222</a></span></p>
+</div>
+</dd>
 <dt>Keep publishing channel messages after a backend error<a class="headerlink reference internal" href="#3.0.0-keep publishing channel messages after a backend error" id="3.0.0-keep publishing channel messages after a backend error">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that stopped <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin" title="litestar.channels.plugin.ChannelsPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelsPlugin</span></code></a> from publishing
 any further messages after the backend raised an error for one of them, for
