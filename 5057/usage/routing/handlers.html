@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
@@ -956,6 +955,10 @@ a <code class="docutils literal notranslate"><span class="pre">method</span></co
 <p>Additionally, ASGI route handler functions <strong>must</strong> be <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#async-def" title="(in Python v3.15)"><span class="xref std std-ref">async functions</span></a>.
 This is enforced using inspection, and if the function is not an <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html#async-def" title="(in Python v3.15)"><span class="xref std std-ref">async function</span></a>,
 an informative exception will be raised.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">scope</span></code> the handler receives is a copy, whether or not the handler is a mount, so top-level keys the wrapped
+application adds, replaces or removes are not seen by the outer application. The copy is shallow, so nested values such
+as <code class="docutils literal notranslate"><span class="pre">scope[&quot;state&quot;]</span></code> are still shared. Pass <code class="docutils literal notranslate"><span class="pre">copy_scope=False</span></code> if the wrapped application is meant to communicate with
+the outer application through the scope.</p>
 <p>See the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.ASGIRouteHandler" title="litestar.handlers.asgi_handlers.ASGIRouteHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIRouteHandler</span> <span class="pre">API</span> <span class="pre">reference</span> <span class="pre">documentation</span></code></a> for full
 details on the <a class="reference internal" href="../../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;asgi()</span></code></a> <a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator" title="(in Python v3.15)"><span class="xref std std-term">decorator</span></a> and the <a class="reference external" href="https://docs.python.org/3/glossary.html#term-argument" title="(in Python v3.15)"><span class="xref std std-term">kwargs</span></a> it accepts.</p>
 </section>
