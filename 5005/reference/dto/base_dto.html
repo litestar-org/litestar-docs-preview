@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/attrs.html">attrs</a></li>
@@ -665,7 +664,8 @@ defined factory class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.field_definition"></span><strong>field_definition</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.field_definition">¶</a> – A <a class="reference internal" href="../typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance.</p></li>
+<li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.field_definition"></span><strong>field_definition</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.field_definition">¶</a> – A <a class="reference internal" href="../typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance. Declared as a
+body, e.g. <code class="docutils literal notranslate"><span class="pre">JSONBody[Model]</span></code>, it is the data the handler receives, otherwise the data it returns.</p></li>
 <li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.handler_id"></span><strong>handler_id</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.handler_id">¶</a> – ID of the route handler for which to create a DTO instance.</p></li>
 <li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.backend_cls"></span><strong>backend_cls</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_for_field_definition.params.backend_cls">¶</a> – Alternative DTO backend class to use</p></li>
 </ul>
@@ -683,7 +683,9 @@ defined factory class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.field_definition"></span><strong>field_definition</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.field_definition">¶</a> – A parsed type annotation that represents the annotation used on the handler.</p></li>
+<li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.field_definition"></span><strong>field_definition</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.field_definition">¶</a> – A parsed type annotation that represents the annotation used on the handler. Declared
+as a body, e.g. <code class="docutils literal notranslate"><span class="pre">JSONBody[Model]</span></code>, it is the data the handler receives, otherwise the data it
+returns.</p></li>
 <li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.handler_id"></span><strong>handler_id</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.handler_id">¶</a> – ID of the route handler for which to create a DTO instance.</p></li>
 <li><p><span class="target" id="litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.schema_creator"></span><strong>schema_creator</strong><a class="paramlink headerlink reference internal" href="#litestar.dto.base_dto.AbstractDTO.create_openapi_schema.params.schema_creator">¶</a> – A factory for creating schemas. Has a <code class="docutils literal notranslate"><span class="pre">for_field_definition()</span></code> method that accepts a
 <a class="reference internal" href="../typing.html#litestar.typing.FieldDefinition" title="litestar.typing.FieldDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldDefinition</span></code></a> instance.</p></li>
