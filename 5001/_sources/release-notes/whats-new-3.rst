@@ -446,15 +446,11 @@ configure them - for CORS, via
 ``cache`` argument, for CSRF, via :class:`~litestar.config.csrf.CSRFConfig`, for
 compression, via :class:`~litestar.config.compression.CompressionConfig`, and for
 allowed hosts, via :class:`~litestar.config.allowed_hosts.AllowedHostsConfig` - are
-unaffected, with one exception: the ``exclude`` patterns of ``CSRFConfig``,
-``CompressionConfig`` and ``AllowedHostsConfig`` are now matched against the
-**handler's path template**
-(e.g. ``/user/{user_id:int}``) at startup, instead of the request path
-(e.g. ``/user/1``) at runtime. Patterns targeting literal handler paths keep working;
-patterns written to match expanded path parameters must be rewritten against the
-template. For mounted ASGI apps, patterns match the mount path only, not sub-paths, and
-a handler registered on multiple paths is excluded as a whole when any of its paths
-matches.
+unaffected. Their ``exclude`` patterns are still matched against the request path;
+``CSRFConfig``, ``CompressionConfig`` and ``AllowedHostsConfig`` additionally accept
+``exclude_path_pattern``, which is matched against the handler's path (e.g.
+``/user/{user_id:int}``) at startup,
+as described in :attr:`~litestar.middleware.ASGIMiddleware.exclude_path_pattern`.
 
 ``CompressionMiddleware`` keeps its ``CompressionConfig``-based constructor (minus the
 ``app`` argument), since the config remains part of the public ``CompressionFacade``
