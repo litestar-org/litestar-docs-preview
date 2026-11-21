@@ -752,9 +752,8 @@ must be updated:</p>
 </span><span data-line="8"><span class="n">backend</span> <span class="o">=</span> <span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">backend</span>
 </span></pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">exclude</span></code> patterns are still matched against the request path. The new
-<code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code> option of the session configurations matches against
-the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead; handlers excluded this
+<p>The new <code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code> option of the session configurations matches
+against the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>); handlers excluded this
 way, or via <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware entirely at startup rather
 than per request.</p>
 <p>Since <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware.__call__</span></code> returns a closure rather than the middleware
