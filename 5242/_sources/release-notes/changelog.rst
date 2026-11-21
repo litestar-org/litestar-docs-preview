@@ -9,7 +9,7 @@
     .. change:: DTO: Identify the data a handler receives through its body marker
         :type: misc
         :breaking:
-        :pr: TBD
+        :pr: 5242
 
         Refactor :meth:`~litestar.dto.base_dto.AbstractDTO.create_for_field_definition`
         and :meth:`~litestar.dto.base_dto.AbstractDTO.create_openapi_schema` to identify
