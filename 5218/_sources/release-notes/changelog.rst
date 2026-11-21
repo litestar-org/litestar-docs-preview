@@ -6,6 +6,183 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
+    .. change:: DTO: Identify the data a handler receives through its body marker
+        :type: misc
+        :breaking:
+        :pr: 5242
+
+        Refactor :meth:`~litestar.dto.base_dto.AbstractDTO.create_for_field_definition`
+        and :meth:`~litestar.dto.base_dto.AbstractDTO.create_openapi_schema` to identify
+        request vs. response body by the markers on the parameter itself, instead of its
+        name (``data``).
+
+    .. change:: Apply the DTO of a handler to a request body declared only in a dependency provider
+        :type: bugfix
+        :breaking:
+        :pr: 5241
+
+        Fix a bug that occurred when a request body was only declared in a dependency
+        provider of a handler, with that handler setting a ``dto=``. The request body
+        would not be decoded by the DTO, and would receive the raw DTO data, e.g. a
+        ``dict``. The DTO will now always be taken into consideration, independent of
+        the point the request body is declared.
+
+    .. change:: Deprecate request parameters ``Headers``, ``QueryParams``, ``RequestCookies`` and ``Scope``
+        :type: feature
+        :pr: 5238
+
+        Deprecate
+        :class:`~litestar.datastructures.Headers`, :data:`~litestar.params.QueryParams`,
+        :data:`~litestar.params.RequestCookies`, and :data:`~litestar.types.Scope` as
+        request parameters.
+
+        :class:`~litestar.connection.ASGIConnection`\ 's ``headers``, ``query_params``,
+        ``cookies``, or ``scope`` attributes should be used instead.
+
+    .. change:: Apply the constraints of a layer parameter to corresponding handler / DI parameters
+        :type: bugfix
+        :breaking:
+        :pr: 5227
+
+        Fix a bug that would cause the constraints of a layer parameter, e.g.
+        ``parameters={"limit": QueryParameter(gt=0)}``, to not be applied for a
+        corresponding handler or dependency parameter.
+
+    .. change:: Apply the ``type_decoders`` of a handler to that handler only
+        :type: bugfix
+        :pr: 5227
+
+        Fix a bug that would leak the type decoder of a request parameter to other
+        handlers without that decoder.
+
+    .. change:: Run all parts of sync generator dependencies in a worker threads
+        :type: bugfix
+        :breaking:
+        :pr: 5227
+
+        Run all code of a synchronous generator dependency in threads. Previously, code
+        up until the first ``yield`` would run on the main thread.
+
+        All of the generator's code runs in a shared :class:`contextvars.Context`.
+
+    .. change:: Drop reserved keyword arguments in handlers and DI
+        :type: feature
+        :breaking:
+        :pr: 5227
+
+        Drop the special meaning of the "reserved keyword arguments" in handlers and DI
+        providers.
+
+        The parameter names can now freely be used and assigned, as their meaning is
+        derived from their respective annotation:
+
+        - ``data``
+        - ``body``
+        - ``request``
+        - ``socket``
+        - ``state``
+
+        ``litestar.constants.RESERVED_KWARGS``, ``litestar.constants.SKIP_VALIDATION_NAMES``,
+        ``FieldDefinition.is_non_marker_parameter_field`` and ``ParameterKwarg.is_marker``
+        are removed.
+
+    .. change:: Don't overwrite a handler parameter with a dependency of the same name
+        :type: bugfix
+        :breaking:
+        :pr: 5227
+
+        Fix a bug that would overwrite a request parameter in a handler with
+        dependency of the same name. Request parameters now follow the same rule as
+        dependencies: Last declared wins. Since a parameter in a handler is always
+        declared last, it will always win against a dependency of the same name.
+
+        The OpenAPI schema already documented this correctly.
+
+    .. change:: OpenAPI: Exclude a layer parameter with ``include_in_schema=False`` from the schema
+        :type: bugfix
+        :pr: 5227
+
+        Fix a bug that would cause a layer parameter declared with
+        ``include_in_schema=False`` to still be included in the OpenAPI schema, if it
+        was also consumed by a handler of a dependency of that handler.
+
+    .. change:: OpenAPI: Include a layer parameter defined next to a handler parameter of the same name that doesn't bind it
+        :type: bugfix
+        :pr: 5227
+
+        A handler parameter named like a layer parameter, with a marker that sets a field, is a
+        parameter of its own, e.g. ``limit: Annotated[int, QueryParameter(ge=1)]`` under a layer
+        parameter ``limit`` declared with ``name="page-limit"``. The OpenAPI schema documents
+        both. Previously, it documented only the handler parameter.
+
+    .. change:: OpenAPI: Document header parameters case insensitively across handlers and dependencies
+        :type: bugfix
+        :pr: 5227
+
+        Fix a bug that would cause header parameters declared with different casings
+        (e.g. ``X-Token`` and ``x-token``) to be documented as two distinct parameters,
+        if one of them was declared in a dependency and one in a handler.
+
+    .. change:: OpenAPI: Fix schema generation for request body declared only in a dependency provider and a DTO set
+        :type: bugfix
+        :pr: 5227
+
+        Fix a bug that occurred when a request body was only declared in a dependency
+        provider of a handler, with that handler setting a ``dto=``. The schema would be
+        generated from the raw model, not the DTO transformed one. The schema now takes
+        the DTO into consideration, independent of the point the request body is
+        declared.
+
+    .. change:: OpenAPI: Document the default of a handler parameter that's also a layer parameter
+        :type: bugfix
+        :pr: 5227
+
+        Fix a bug that would document a handler / DI parameter declared with a default,
+        *and* corresponding to a layer parameter *without a default*, as required and
+        without a default.
+
+        The parameter is now correctly documented as not required, and with its default.
+
+    .. change:: Raise an exception at startup for variadic handler / DI parameters
+        :type: bugfix
+        :pr: 5227
+
+        Raise an exception at startup if a handler or DI provider declares variadic
+        parameters (``*args`` or ``**kwargs``).
+
+        Previously, ``*args`` would fail every request with a ``500`` error, and
+        ``**kwargs`` would implicitly declare a query parameter named ``kwargs``.
+
+    .. change:: Raise an exception if a generator dependency yields more than once
+        :type: bugfix
+        :breaking:
+        :pr: 5227
+
+        Raise an exception if a generator dependency ``yield``\ s more than once.
+        Previously, no exception was raised, and the code after the second ``yield``
+        never ran.
+
+    .. change:: Raise a startup exception if an unmarked handler parameter is named like a layer parameter
+        :type: bugfix
+        :breaking:
+        :pr: 5227
+
+        A handler parameter without a marker raises
+        :class:`~litestar.exceptions.ImproperlyConfiguredException` at startup. Ensure
+        this is also the case if it is named like a layer parameter.
+
+    .. change:: Raise a startup exception if a request body is declared in a ``GET`` or websocket handler, or any of its dependencies
+        :type: bugfix
+        :breaking:
+        :pr: 5227
+
+        Raise a startup exception if a ``GET`` HTTP or a WebSocket handler, or any of
+        their dependencies declare a request body.
+
+        Previously, declaring a body for such handlers in a dependency would work, and
+        the body would be passed as ``b""``, ignoring a possible default. Requests to
+        a WebSocket handler with such a declaration would fail.
+
     .. change:: Fix channel subscriptions hanging after a send error or a full backlog
         :type: bugfix
         :pr: 5218
@@ -376,6 +553,83 @@
         inferred path parameter style, now raises ``ImproperlyConfiguredException`` when
         the application is created. Declare it with ``FromPath``.
 
+    .. change:: Migrate ``PrometheusMiddleware`` to ``ASGIMiddleware``
+        :type: feature
+        :pr: 5006
+        :issue: 4009
+        :breaking:
+
+        ``PrometheusMiddleware`` has been moved from the legacy ``AbstractMiddleware``
+        base to :class:`~litestar.middleware.ASGIMiddleware`, as part of migrating all
+        built-in middleware off the legacy bases.
+
+        Since the middleware is now directly constructible, the
+        :class:`~litestar.plugins.prometheus.PrometheusConfig` configuration object is
+        obsolete and its ``middleware`` property is deprecated; it will be removed in
+        ``4.0``. Pass a configured ``PrometheusMiddleware`` instance to the middleware
+        list instead:
+
+        .. code-block:: python
+
+            # before
+            config = PrometheusConfig(app_name="my-app", group_path=True)
+            app = Litestar(..., middleware=[config.middleware])
+
+            # after
+            app = Litestar(
+                ...,
+                middleware=[PrometheusMiddleware(app_name="my-app", group_path=True)],
+            )
+
+        Subclasses of ``PrometheusMiddleware`` must rename ``__call__`` to ``handle``,
+        which receives the next ASGI app as an additional ``next_app`` argument in place
+        of ``self.app``, and read settings from the corresponding instance attributes
+        instead of the removed private ``self._config``.
+
+        ``exclude`` patterns are still matched against the request path. The new
+        ``exclude_path_pattern`` argument matches against the handler's path (e.g.
+        ``/user/{user_id:int}``) instead; handlers excluded this way, or via
+        ``exclude_opt_key``, bypass the middleware entirely at startup rather than per
+        request.
+
+        Mounted ASGI apps stay wrapped regardless of the configured ``scopes``, with
+        their connections filtered by scope type at runtime, so restricting the
+        middleware to e.g. ``{"websocket"}`` also holds for connections through mounts.
+
+    .. change:: Migrate ``RateLimitMiddleware`` to ``ASGIMiddleware``
+        :type: feature
+        :pr: 5005
+        :issue: 4009
+        :breaking:
+
+        ``RateLimitMiddleware`` has been moved from the legacy ``AbstractMiddleware``
+        base to :class:`~litestar.middleware.ASGIMiddleware`, as part of migrating all
+        built-in middleware off the legacy bases.
+
+        Since the middleware is now directly constructible, the
+        :class:`~litestar.middleware.rate_limit.RateLimitConfig` configuration object is
+        obsolete and its ``middleware`` property is deprecated; it will be removed in
+        ``4.0``. Pass a configured ``RateLimitMiddleware`` instance to the middleware
+        list instead:
+
+        .. code-block:: python
+
+            # before
+            config = RateLimitConfig(rate_limit=("minute", 10), exclude=["/schema"])
+            app = Litestar(..., middleware=[config.middleware])
+
+            # after
+            app = Litestar(
+                ...,
+                middleware=[RateLimitMiddleware(rate_limit=("minute", 10), exclude=["/schema"])],
+            )
+
+        ``exclude`` patterns are still matched against the request path. The new
+        ``exclude_path_pattern`` argument matches against the handler's path (e.g.
+        ``/user/{user_id:int}``) instead; handlers excluded this way, or via
+        ``exclude_opt_key``, bypass the middleware entirely at startup rather than per
+        request.
+
     .. change:: Add support for ``leeway`` parameter in JWT security backends
         :type: feature
         :pr: 5037
@@ -419,6 +673,81 @@
         plugin, such as ``ScalarRenderPlugin`` (the default), ``SwaggerRenderPlugin``,
         ``RedocRenderPlugin`` or ``StoplightRenderPlugin``.
 
+    .. change:: Migrate ``AllowedHostsMiddleware`` to ``ASGIMiddleware``
+        :type: feature
+        :pr: 5001
+        :issue: 4009
+        :breaking:
+
+        ``AllowedHostsMiddleware`` has been moved from the legacy ``AbstractMiddleware``
+        base to :class:`~litestar.middleware.ASGIMiddleware`, as part of migrating all
+        built-in middleware off the legacy bases.
+
+        Applications that configure allowed hosts through
+        :class:`~litestar.config.allowed_hosts.AllowedHostsConfig` or the
+        ``allowed_hosts`` argument are unaffected, since Litestar constructs the
+        middleware itself. The constructor takes keyword arguments now instead of an
+        ``app`` and an ``AllowedHostsConfig``:
+
+        .. code-block:: python
+
+            # before
+            middleware = AllowedHostsMiddleware(app=next_app, config=config)
+
+            # after
+            middleware = AllowedHostsMiddleware(
+                allowed_hosts=config.allowed_hosts,
+                exclude=config.exclude,
+                exclude_opt_key=config.exclude_opt_key,
+                scopes=config.scopes,
+                www_redirect=config.www_redirect,
+            )
+            asgi_app = middleware(next_app)
+
+        :attr:`~litestar.config.allowed_hosts.AllowedHostsConfig.exclude` patterns are
+        still matched against the request path. The new
+        :attr:`~litestar.config.allowed_hosts.AllowedHostsConfig.exclude_path_pattern`
+        matches against the handler's path (e.g. ``/user/{user_id:int}``) instead;
+        handlers excluded this way, or via ``exclude_opt_key``, bypass the middleware
+        entirely at startup rather than per request.
+
+    .. change:: Migrate ``CompressionMiddleware`` to ``ASGIMiddleware``
+        :type: feature
+        :pr: 4999
+        :issue: 4009
+        :breaking:
+
+        ``CompressionMiddleware`` has been moved from the legacy ``AbstractMiddleware``
+        base to :class:`~litestar.middleware.ASGIMiddleware`, as part of migrating all
+        built-in middleware off the legacy bases.
+
+        Applications that configure compression through
+        :class:`~litestar.config.compression.CompressionConfig` are unaffected, since
+        Litestar constructs the middleware itself. The middleware still takes the
+        ``CompressionConfig`` - which the ``CompressionFacade`` protocol continues to
+        receive unchanged - but no longer wraps an ``app``:
+
+        .. code-block:: python
+
+            # before
+            middleware = CompressionMiddleware(app=next_app, config=config)
+
+            # after
+            middleware = CompressionMiddleware(config=config)
+            asgi_app = middleware(next_app)
+
+        Subclasses set via
+        :attr:`~litestar.config.compression.CompressionConfig.middleware_class` must
+        rename ``__call__`` to ``handle``, which receives the next ASGI app as an
+        additional ``next_app`` argument in place of ``self.app``.
+
+        :attr:`~litestar.config.compression.CompressionConfig.exclude` patterns are still
+        matched against the request path. The new
+        :attr:`~litestar.config.compression.CompressionConfig.exclude_path_pattern`
+        matches against the handler's path (e.g. ``/user/{user_id:int}``) instead;
+        handlers excluded this way, or via ``exclude_opt_key``, bypass the middleware
+        entirely at startup rather than per request.
+
     .. change:: Migrate ``CSRFMiddleware`` to ``ASGIMiddleware``
         :type: feature
         :pr: 4998
@@ -436,15 +765,12 @@
         constructs the middleware itself, via a ``from_config`` classmethod on the
         middleware.
 
-        Two behavioural changes for excluded routes:
-
-        - :attr:`~litestar.config.csrf.CSRFConfig.exclude` patterns are now matched against
-          the **handler's path template** (e.g. ``/user/{user_id:int}``) at startup, instead
-          of the request path (e.g. ``/user/1``) at runtime. Patterns targeting literal
-          paths keep working; patterns written to match expanded path parameters must be
-          rewritten against the template.
-        - Handlers excluded via ``exclude`` or ``exclude_from_csrf`` now bypass the
-          middleware entirely at startup rather than per request.
+        :attr:`~litestar.config.csrf.CSRFConfig.exclude` patterns are still matched
+        against the request path. The new
+        :attr:`~litestar.config.csrf.CSRFConfig.exclude_path_pattern` matches against the
+        handler's path (e.g. ``/user/{user_id:int}``) instead; handlers excluded this way,
+        or via ``exclude_from_csrf``, bypass the middleware entirely at startup rather
+        than per request.
 
     .. change:: Migrate ``ResponseCacheMiddleware`` to ``ASGIMiddleware``
         :type: feature
