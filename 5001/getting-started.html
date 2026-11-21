@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/plugins/attrs.html">attrs</a></li>
@@ -689,33 +688,34 @@ you should see the responses of your two endpoints:</p>
 <p><strong>Define a Controller for your data model:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Controller</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">delete</span>
 </span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.dto</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTOData</span>
-</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">UUID4</span>
-</span><span data-line="4">
-</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">my_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">PartialUserDTO</span>
-</span><span data-line="6">
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">JSONBody</span>
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">UUID4</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">my_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">PartialUserDTO</span>
 </span><span data-line="7">
-</span><span data-line="8"><span class="k">class</span><span class="w"> </span><span class="nc">UserController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
-</span><span data-line="9">    <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/users&quot;</span>
-</span><span data-line="10">
-</span><span data-line="11">    <span class="nd">@post</span><span class="p">()</span>
-</span><span data-line="12">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
-</span><span data-line="13">
-</span><span data-line="14">    <span class="nd">@get</span><span class="p">()</span>
-</span><span data-line="15">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span> <span class="o">...</span>
-</span><span data-line="16">
-</span><span data-line="17">    <span class="nd">@patch</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">PartialUserDTO</span><span class="p">)</span>
-</span><span data-line="18">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">partial_update_user</span><span class="p">(</span>
-</span><span data-line="19">        <span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID4</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DTOData</span><span class="p">[</span><span class="n">User</span><span class="p">]</span>
-</span><span data-line="20">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
-</span><span data-line="21">
-</span><span data-line="22">    <span class="nd">@put</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">)</span>
-</span><span data-line="23">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">update_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID4</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
-</span><span data-line="24">
-</span><span data-line="25">    <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">)</span>
-</span><span data-line="26">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
-</span><span data-line="27">
-</span><span data-line="28">    <span class="nd">@delete</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">)</span>
-</span><span data-line="29">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">UUID4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="k">class</span><span class="w"> </span><span class="nc">UserController</span><span class="p">(</span><span class="n">Controller</span><span class="p">):</span>
+</span><span data-line="10">    <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/users&quot;</span>
+</span><span data-line="11">
+</span><span data-line="12">    <span class="nd">@post</span><span class="p">()</span>
+</span><span data-line="13">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="14">
+</span><span data-line="15">    <span class="nd">@get</span><span class="p">()</span>
+</span><span data-line="16">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">User</span><span class="p">]:</span> <span class="o">...</span>
+</span><span data-line="17">
+</span><span data-line="18">    <span class="nd">@patch</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">,</span> <span class="n">dto</span><span class="o">=</span><span class="n">PartialUserDTO</span><span class="p">)</span>
+</span><span data-line="19">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">partial_update_user</span><span class="p">(</span>
+</span><span data-line="20">        <span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="n">UUID4</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">DTOData</span><span class="p">[</span><span class="n">User</span><span class="p">]]</span>
+</span><span data-line="21">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="22">
+</span><span data-line="23">    <span class="nd">@put</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">)</span>
+</span><span data-line="24">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">update_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="n">UUID4</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="25">
+</span><span data-line="26">    <span class="nd">@get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">)</span>
+</span><span data-line="27">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="n">UUID4</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span> <span class="o">...</span>
+</span><span data-line="28">
+</span><span data-line="29">    <span class="nd">@delete</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/{user_id:uuid}&quot;</span><span class="p">)</span>
+</span><span data-line="30">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">delete_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="n">UUID4</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 </span></pre></div>
 </div>
 <p>When instantiating your app, import your <em>controller</em> into your application’s
@@ -997,9 +997,6 @@ Django” (for example, it will never feature its own ORM), but its scope is not
 <section id="example-applications">
 <h2>Example Applications<a class="headerlink" href="#example-applications" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/litestar-org/litestar-pg-redis-docker">litestar-pg-redis-docker</a> : In addition to Litestar, this
-demonstrates a pattern of application modularity, SQLAlchemy 2.0 ORM, Redis cache connectivity, and more. Like all
-Litestar projects, this application is open to contributions, big and small.</p></li>
 <li><p><a class="reference external" href="https://github.com/litestar-org/litestar-fullstack">litestar-fullstack</a> : A fully-capable, production-ready fullstack
 Litestar web application configured with best practices. It includes SQLAlchemy 2.0, ReactJS, <a class="reference external" href="https://vitejs.dev/">Vite</a>,
 <a class="reference external" href="https://saq-py.readthedocs.io/en/latest/">SAQ job queue</a>, <code class="docutils literal notranslate"><span class="pre">Jinja</span></code> templates and more.

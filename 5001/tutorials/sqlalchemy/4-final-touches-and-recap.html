@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -307,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
@@ -547,10 +546,10 @@ data-aria-dark="Switch to auto color mode">
           <section id="final-touches-and-recap">
 <h1>Final touches and recap<a class="headerlink" href="#final-touches-and-recap" title="Link to this heading">¶</a></h1>
 <p>There is one more improvement that we can make to our application. Currently, we utilize both the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code> and the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code>, but there
+<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemyInitPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyInitPlugin</span></code></a> and the
+<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemySerializationPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemySerializationPlugin</span></code></a>, but there
 is a shortcut for this configuration: the
-<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyPlugin" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyPlugin</span></code></a> is a combination of the two, so we
+<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemyPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyPlugin</span></code></a> is a combination of the two, so we
 can simplify our configuration by using it instead.</p>
 <p>Here is our final application:</p>
 <div class="sd-tab-set docutils">
@@ -568,7 +567,7 @@ Python 3.11+</label><div class="sd-tab-content docutils">
 </span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
 </span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span>
 </span><span data-line="11"><span class="hll"><span class="linenos">11</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
-</span></span><span data-line="12"><span class="linenos">12</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">FromQuery</span>
+</span></span><span data-line="12"><span class="linenos">12</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">FromQuery</span><span class="p">,</span> <span class="n">JSONBody</span>
 </span><span data-line="13"><span class="linenos">13</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.status_codes</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
 </span><span data-line="14"><span class="linenos">14</span>
 </span><span data-line="15"><span class="linenos">15</span>
@@ -617,14 +616,14 @@ Python 3.11+</label><div class="sd-tab-content docutils">
 </span><span data-line="58"><span class="linenos">58</span>
 </span><span data-line="59"><span class="linenos">59</span>
 </span><span data-line="60"><span class="linenos">60</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span data-line="61"><span class="linenos">61</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+</span><span data-line="61"><span class="linenos">61</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">],</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
 </span><span data-line="62"><span class="linenos">62</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </span><span data-line="63"><span class="linenos">63</span>    <span class="k">return</span> <span class="n">data</span>
 </span><span data-line="64"><span class="linenos">64</span>
 </span><span data-line="65"><span class="linenos">65</span>
 </span><span data-line="66"><span class="linenos">66</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
 </span><span data-line="67"><span class="linenos">67</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">update_item</span><span class="p">(</span>
-</span><span data-line="68"><span class="linenos">68</span>    <span class="n">item_title</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span>
+</span><span data-line="68"><span class="linenos">68</span>    <span class="n">item_title</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">],</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span>
 </span><span data-line="69"><span class="linenos">69</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
 </span><span data-line="70"><span class="linenos">70</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
 </span><span data-line="71"><span class="linenos">71</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
@@ -661,7 +660,7 @@ Python 3.13+</label><div class="sd-tab-content docutils">
 </span><span data-line="9"><span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
 </span><span data-line="10"><span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span>
 </span><span data-line="11"><span class="hll"><span class="linenos">11</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClientException</span><span class="p">,</span> <span class="n">NotFoundException</span>
-</span></span><span data-line="12"><span class="linenos">12</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">FromQuery</span>
+</span></span><span data-line="12"><span class="linenos">12</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">FromQuery</span><span class="p">,</span> <span class="n">JSONBody</span>
 </span><span data-line="13"><span class="linenos">13</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.status_codes</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span>
 </span><span data-line="14"><span class="linenos">14</span>
 </span><span data-line="15"><span class="linenos">15</span>
@@ -710,14 +709,14 @@ Python 3.13+</label><div class="sd-tab-content docutils">
 </span><span data-line="58"><span class="linenos">58</span>
 </span><span data-line="59"><span class="linenos">59</span>
 </span><span data-line="60"><span class="linenos">60</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span data-line="61"><span class="linenos">61</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+</span><span data-line="61"><span class="linenos">61</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">],</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
 </span><span data-line="62"><span class="linenos">62</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </span><span data-line="63"><span class="linenos">63</span>    <span class="k">return</span> <span class="n">data</span>
 </span><span data-line="64"><span class="linenos">64</span>
 </span><span data-line="65"><span class="linenos">65</span>
 </span><span data-line="66"><span class="linenos">66</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
 </span><span data-line="67"><span class="linenos">67</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">update_item</span><span class="p">(</span>
-</span><span data-line="68"><span class="linenos">68</span>    <span class="n">item_title</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span>
+</span><span data-line="68"><span class="linenos">68</span>    <span class="n">item_title</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">],</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span>
 </span><span data-line="69"><span class="linenos">69</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
 </span><span data-line="70"><span class="linenos">70</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
 </span><span data-line="71"><span class="linenos">71</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
@@ -843,7 +842,7 @@ Python 3.13+</label><div class="sd-tab-content docutils">
 </span><span data-line="2"><span class="linenos"> 2</span>
 </span><span data-line="3"><span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">put</span>
 </span><span data-line="4"><span class="linenos"> 4</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedDependency</span>
-</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">FromQuery</span>
+</span><span data-line="5"><span class="linenos"> 5</span><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">FromPath</span><span class="p">,</span> <span class="n">FromQuery</span><span class="p">,</span> <span class="n">JSONBody</span>
 </span><span data-line="6"><span class="linenos"> 6</span>
 </span><span data-line="7"><span class="linenos"> 7</span>
 </span><span data-line="8"><span class="linenos"> 8</span><span class="nd">@get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
@@ -852,14 +851,14 @@ Python 3.13+</label><div class="sd-tab-content docutils">
 </span><span data-line="11"><span class="linenos">11</span>
 </span><span data-line="12"><span class="linenos">12</span>
 </span><span data-line="13"><span class="linenos">13</span><span class="nd">@post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-</span><span data-line="14"><span class="linenos">14</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
+</span><span data-line="14"><span class="linenos">14</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">],</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
 </span><span data-line="15"><span class="linenos">15</span>    <span class="n">transaction</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </span><span data-line="16"><span class="linenos">16</span>    <span class="k">return</span> <span class="n">data</span>
 </span><span data-line="17"><span class="linenos">17</span>
 </span><span data-line="18"><span class="linenos">18</span>
 </span><span data-line="19"><span class="linenos">19</span><span class="nd">@put</span><span class="p">(</span><span class="s2">&quot;/{item_title:str}&quot;</span><span class="p">)</span>
 </span><span data-line="20"><span class="linenos">20</span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">update_item</span><span class="p">(</span>
-</span><span data-line="21"><span class="linenos">21</span>    <span class="n">item_title</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">TodoItem</span><span class="p">,</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span>
+</span><span data-line="21"><span class="linenos">21</span>    <span class="n">item_title</span><span class="p">:</span> <span class="n">FromPath</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">data</span><span class="p">:</span> <span class="n">JSONBody</span><span class="p">[</span><span class="n">TodoItem</span><span class="p">],</span> <span class="n">transaction</span><span class="p">:</span> <span class="n">NamedDependency</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span>
 </span><span data-line="22"><span class="linenos">22</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TodoItem</span><span class="p">:</span>
 </span><span data-line="23"><span class="linenos">23</span>    <span class="n">todo_item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_todo_by_title</span><span class="p">(</span><span class="n">item_title</span><span class="p">,</span> <span class="n">transaction</span><span class="p">)</span>
 </span><span data-line="24"><span class="linenos">24</span>    <span class="n">todo_item</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">title</span>
@@ -868,7 +867,7 @@ Python 3.13+</label><div class="sd-tab-content docutils">
 </span></pre></div>
 </div>
 <p>Finally, we define our application, using the
-<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/index.html#advanced_alchemy.extensions.litestar.SQLAlchemyPlugin" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyPlugin</span></code></a> to configure SQLAlchemy and manage the
+<a class="reference external" href="https://advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/plugins.html#advanced_alchemy.extensions.litestar.plugins.SQLAlchemyPlugin" title="(in Advanced Alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyPlugin</span></code></a> to configure SQLAlchemy and manage the
 engine and session lifecycle, and register our <code class="docutils literal notranslate"><span class="pre">transaction</span></code> dependency.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.extensions.litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemyPlugin</span>
 </span><span data-line="2"><span class="linenos">2</span>
