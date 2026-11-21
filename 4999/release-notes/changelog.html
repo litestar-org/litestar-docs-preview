@@ -553,7 +553,7 @@ data-aria-dark="Switch to auto color mode">
 request parameters.</p>
 <p><a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection" title="litestar.connection.ASGIConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIConnection</span></code></a>‘s <code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">query_params</span></code>,
 <code class="docutils literal notranslate"><span class="pre">cookies</span></code>, or <code class="docutils literal notranslate"><span class="pre">scope</span></code> attributes should be used instead.</p>
-<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/TBD">https://github.com/litestar-org/litestar/pull/TBD</a></span></p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5238">https://github.com/litestar-org/litestar/pull/5238</a></span></p>
 </div>
 </dd>
 <dt>Drop reserved keyword arguments in handlers and DI<a class="headerlink reference internal" href="#3.0.0-drop reserved keyword arguments in handlers and di" id="3.0.0-drop reserved keyword arguments in handlers and di">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
@@ -773,18 +773,12 @@ receive unchanged - but no longer wraps an <code class="docutils literal notrans
 <a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.middleware_class" title="litestar.config.compression.CompressionConfig.middleware_class"><code class="xref py py-attr docutils literal notranslate"><span class="pre">middleware_class</span></code></a> must
 rename <code class="docutils literal notranslate"><span class="pre">__call__</span></code> to <code class="docutils literal notranslate"><span class="pre">handle</span></code>, which receives the next ASGI app as an
 additional <code class="docutils literal notranslate"><span class="pre">next_app</span></code> argument in place of <code class="docutils literal notranslate"><span class="pre">self.app</span></code>.</p>
-<p>Two behavioural changes for excluded routes, matching the other migrated
-middleware:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.exclude" title="litestar.config.compression.CompressionConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are now
-matched against the <strong>handler’s path template</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>)
-at startup, instead of the request path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>) at runtime. For
-mounted ASGI apps, patterns match the mount path only, not sub-paths, and a
-handler registered on multiple paths is excluded as a whole when any of its
-paths matches.</p></li>
-<li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code> now bypass the
-middleware entirely at startup rather than per request.</p></li>
-</ul>
+<p><a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.exclude" title="litestar.config.compression.CompressionConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are still
+matched against the request path. The new
+<a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.exclude_path_pattern" title="litestar.config.compression.CompressionConfig.exclude_path_pattern"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code></a>
+matches against the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead;
+handlers excluded this way, or via <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware
+entirely at startup rather than per request.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4999">https://github.com/litestar-org/litestar/pull/4999</a></span></p>
 </div>
 </dd>
@@ -798,16 +792,12 @@ This removes the <code class="docutils literal notranslate"><span class="pre">li
 <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a> are unaffected, since Litestar
 constructs the middleware itself, via a <code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the
 middleware.</p>
-<p>Two behavioural changes for excluded routes:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are now matched against
-the <strong>handler’s path template</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) at startup, instead
-of the request path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>) at runtime. Patterns targeting literal
-paths keep working; patterns written to match expanded path parameters must be
-rewritten against the template.</p></li>
-<li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_from_csrf</span></code> now bypass the
-middleware entirely at startup rather than per request.</p></li>
-</ul>
+<p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are still matched
+against the request path. The new
+<a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude_path_pattern" title="litestar.config.csrf.CSRFConfig.exclude_path_pattern"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code></a> matches against the
+handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead; handlers excluded this way,
+or via <code class="docutils literal notranslate"><span class="pre">exclude_from_csrf</span></code>, bypass the middleware entirely at startup rather
+than per request.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4998">https://github.com/litestar-org/litestar/pull/4998</a></span></p>
 </div>
 </dd>
@@ -1323,6 +1313,15 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Apply the DTO of a handler to a request body declared only in a dependency provider<a class="headerlink reference internal" href="#3.0.0-apply the dto of a handler to a request body declared only in a dependency provider" id="3.0.0-apply the dto of a handler to a request body declared only in a dependency provider">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that occurred when a request body was only declared in a dependency
+provider of a handler, with that handler setting a <code class="docutils literal notranslate"><span class="pre">dto=</span></code>. The request body
+would not be decoded by the DTO, and would receive the raw DTO data, e.g. a
+<code class="docutils literal notranslate"><span class="pre">dict</span></code>. The DTO will now always be taken into consideration, independent of
+the point the request body is declared.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5241">https://github.com/litestar-org/litestar/pull/5241</a></span></p>
+</div>
+</dd>
 <dt>Apply the constraints of a layer parameter to corresponding handler / DI parameters<a class="headerlink reference internal" href="#3.0.0-apply the constraints of a layer parameter to corresponding handler / di parameters" id="3.0.0-apply the constraints of a layer parameter to corresponding handler / di parameters">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that would cause the constraints of a layer parameter, e.g.
 <code class="docutils literal notranslate"><span class="pre">parameters={&quot;limit&quot;:</span> <span class="pre">QueryParameter(gt=0)}</span></code>, to not be applied for a
