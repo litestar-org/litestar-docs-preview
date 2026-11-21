@@ -1368,6 +1368,29 @@ the model’s own field information.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5237">https://github.com/litestar-org/litestar/pull/5237</a></span></p>
 </div>
 </dd>
+<dt>OpenAPI: Document IP networks and interfaces with the <code class="docutils literal notranslate"><span class="pre">ipv4-cidr</span></code> and <code class="docutils literal notranslate"><span class="pre">ipv6-cidr</span></code> formats<a class="headerlink reference internal" href="#3.0.0-openapi: document ip networks and interfaces with the" id="3.0.0-openapi: document ip networks and interfaces with the">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Network" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ipaddress.IPv4Network</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv4Interface" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ipaddress.IPv4Interface</span></code></a>,
+<a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Network" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ipaddress.IPv6Network</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/ipaddress.html#ipaddress.IPv6Interface" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ipaddress.IPv6Interface</span></code></a> were documented
+with the <code class="docutils literal notranslate"><span class="pre">ipv4</span></code> and <code class="docutils literal notranslate"><span class="pre">ipv6</span></code> formats, which their values, such as <code class="docutils literal notranslate"><span class="pre">192.168.0.0/24</span></code>,
+do not satisfy. They are now documented with the <code class="docutils literal notranslate"><span class="pre">ipv4-cidr</span></code> and <code class="docutils literal notranslate"><span class="pre">ipv6-cidr</span></code>
+formats of the OpenAPI format registry, available as <code class="docutils literal notranslate"><span class="pre">OpenAPIFormat.IPV4_CIDR</span></code> and
+<code class="docutils literal notranslate"><span class="pre">OpenAPIFormat.IPV6_CIDR</span></code>, including in pydantic models, whose schemas would
+otherwise carry pydantic’s own <code class="docutils literal notranslate"><span class="pre">ipv4network</span></code> and <code class="docutils literal notranslate"><span class="pre">ipv4interface</span></code> formats. In
+pydantic models and parameters, pydantic’s <code class="docutils literal notranslate"><span class="pre">IPvAnyAddress</span></code>, <code class="docutils literal notranslate"><span class="pre">IPvAnyInterface</span></code> and
+<code class="docutils literal notranslate"><span class="pre">IPvAnyNetwork</span></code> are documented as an <code class="docutils literal notranslate"><span class="pre">anyOf</span></code> of the IPv4 and IPv6 formats instead
+of pydantic’s <code class="docutils literal notranslate"><span class="pre">ipvany*</span></code> formats. <code class="docutils literal notranslate"><span class="pre">PydanticDTO</span></code> still documents these three types
+as strings without a format.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/5049">https://github.com/litestar-org/litestar/issues/5049</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5237">https://github.com/litestar-org/litestar/pull/5237</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI: Document DTOs that forbid unknown fields with <code class="docutils literal notranslate"><span class="pre">additionalProperties:</span> <span class="pre">false</span></code><a class="headerlink reference internal" href="#3.0.0-openapi: document dtos that forbid unknown fields with" id="3.0.0-openapi: document dtos that forbid unknown fields with">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>The schemas of DTOs configured with <code class="docutils literal notranslate"><span class="pre">forbid_unknown_fields=True</span></code>, including
+<code class="docutils literal notranslate"><span class="pre">PydanticDTO</span></code> over a model with <code class="docutils literal notranslate"><span class="pre">extra=&quot;forbid&quot;</span></code>, did not state that unknown fields
+are rejected. Their component schemas now set <code class="docutils literal notranslate"><span class="pre">additionalProperties</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>,
+like those of the models they are generated from.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5237">https://github.com/litestar-org/litestar/pull/5237</a></span></p>
+</div>
+</dd>
 <dt>Apply the constraints of a layer parameter to corresponding handler / DI parameters<a class="headerlink reference internal" href="#3.0.0-apply the constraints of a layer parameter to corresponding handler / di parameters" id="3.0.0-apply the constraints of a layer parameter to corresponding handler / di parameters">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that would cause the constraints of a layer parameter, e.g.
 <code class="docutils literal notranslate"><span class="pre">parameters={&quot;limit&quot;:</span> <span class="pre">QueryParameter(gt=0)}</span></code>, to not be applied for a

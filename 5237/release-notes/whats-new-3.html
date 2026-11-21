@@ -743,6 +743,11 @@ of <a class="reference internal" href="../reference/plugins/pydantic.html#litest
 documents only sets the field’s <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code> and <code class="docutils literal notranslate"><span class="pre">examples</span></code>; constraints
 such as <code class="docutils literal notranslate"><span class="pre">ge</span></code> or <code class="docutils literal notranslate"><span class="pre">max_length</span></code> are no longer documented, since the server does not enforce
 them on these fields.</p>
+<p>IP networks and interfaces are documented with the <code class="docutils literal notranslate"><span class="pre">ipv4-cidr</span></code> and <code class="docutils literal notranslate"><span class="pre">ipv6-cidr</span></code> formats
+instead of <code class="docutils literal notranslate"><span class="pre">ipv4</span></code> and <code class="docutils literal notranslate"><span class="pre">ipv6</span></code>. Pydantic’s <code class="docutils literal notranslate"><span class="pre">IPvAny*</span></code> types are documented as an
+<code class="docutils literal notranslate"><span class="pre">anyOf</span></code> of the IPv4 and IPv6 formats, except through <code class="docutils literal notranslate"><span class="pre">PydanticDTO</span></code>, which documents them
+as plain strings. Component schemas of DTOs that forbid unknown fields set
+<code class="docutils literal notranslate"><span class="pre">additionalProperties</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
 </section>
 <section id="deprecated-app-parameter-for-response-to-asgi-response-has-been-removed">
 <h2>Deprecated <code class="docutils literal notranslate"><span class="pre">app</span></code> parameter for <code class="docutils literal notranslate"><span class="pre">Response.to_asgi_response</span></code> has been removed<a class="headerlink" href="#deprecated-app-parameter-for-response-to-asgi-response-has-been-removed" title="Link to this heading">¶</a></h2>

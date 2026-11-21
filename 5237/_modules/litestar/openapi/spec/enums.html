@@ -522,32 +522,34 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="18">    <span class="n">IDN_HOST_NAME</span> <span class="o">=</span> <span class="s2">&quot;idn-hostname&quot;</span>
 </span><span data-line="19">    <span class="n">IPV4</span> <span class="o">=</span> <span class="s2">&quot;ipv4&quot;</span>
 </span><span data-line="20">    <span class="n">IPV6</span> <span class="o">=</span> <span class="s2">&quot;ipv6&quot;</span>
-</span><span data-line="21">    <span class="n">URI</span> <span class="o">=</span> <span class="s2">&quot;uri&quot;</span>
-</span><span data-line="22">    <span class="n">URI_REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;uri-reference&quot;</span>
-</span><span data-line="23">    <span class="n">URI_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;uri-template&quot;</span>
-</span><span data-line="24">    <span class="n">JSON_POINTER</span> <span class="o">=</span> <span class="s2">&quot;json-pointer&quot;</span>
-</span><span data-line="25">    <span class="n">RELATIVE_JSON_POINTER</span> <span class="o">=</span> <span class="s2">&quot;relative-json-pointer&quot;</span>
-</span><span data-line="26">    <span class="n">IRI</span> <span class="o">=</span> <span class="s2">&quot;iri&quot;</span>
-</span><span data-line="27">    <span class="n">IRI_REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;iri-reference&quot;</span>
-</span><span data-line="28">    <span class="n">UUID</span> <span class="o">=</span> <span class="s2">&quot;uuid&quot;</span>
-</span><span data-line="29">    <span class="n">REGEX</span> <span class="o">=</span> <span class="s2">&quot;regex&quot;</span>
-</span><span data-line="30">    <span class="n">BINARY</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span></div>
+</span><span data-line="21">    <span class="n">IPV4_CIDR</span> <span class="o">=</span> <span class="s2">&quot;ipv4-cidr&quot;</span>
+</span><span data-line="22">    <span class="n">IPV6_CIDR</span> <span class="o">=</span> <span class="s2">&quot;ipv6-cidr&quot;</span>
+</span><span data-line="23">    <span class="n">URI</span> <span class="o">=</span> <span class="s2">&quot;uri&quot;</span>
+</span><span data-line="24">    <span class="n">URI_REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;uri-reference&quot;</span>
+</span><span data-line="25">    <span class="n">URI_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;uri-template&quot;</span>
+</span><span data-line="26">    <span class="n">JSON_POINTER</span> <span class="o">=</span> <span class="s2">&quot;json-pointer&quot;</span>
+</span><span data-line="27">    <span class="n">RELATIVE_JSON_POINTER</span> <span class="o">=</span> <span class="s2">&quot;relative-json-pointer&quot;</span>
+</span><span data-line="28">    <span class="n">IRI</span> <span class="o">=</span> <span class="s2">&quot;iri&quot;</span>
+</span><span data-line="29">    <span class="n">IRI_REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;iri-reference&quot;</span>
+</span><span data-line="30">    <span class="n">UUID</span> <span class="o">=</span> <span class="s2">&quot;uuid&quot;</span>
+</span><span data-line="31">    <span class="n">REGEX</span> <span class="o">=</span> <span class="s2">&quot;regex&quot;</span>
+</span><span data-line="32">    <span class="n">BINARY</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span></div>
 
-</span><span data-line="31">
-</span><span data-line="32">
+</span><span data-line="33">
+</span><span data-line="34">
 <div class="viewcode-block" id="OpenAPIType">
 <a class="viewcode-back" href="../../../../reference/openapi/spec.html#litestar.openapi.spec.OpenAPIType">[docs]</a>
-</span><span data-line="33"><span class="nd">@unique</span>
-</span><span data-line="34"><span class="k">class</span><span class="w"> </span><span class="nc">OpenAPIType</span><span class="p">(</span><span class="n">StrEnum</span><span class="p">):</span>
-</span><span data-line="35"><span class="w">    </span><span class="sd">&quot;&quot;&quot;An OopenAPI type.&quot;&quot;&quot;</span>
-</span><span data-line="36">
-</span><span data-line="37">    <span class="n">ARRAY</span> <span class="o">=</span> <span class="s2">&quot;array&quot;</span>
-</span><span data-line="38">    <span class="n">BOOLEAN</span> <span class="o">=</span> <span class="s2">&quot;boolean&quot;</span>
-</span><span data-line="39">    <span class="n">INTEGER</span> <span class="o">=</span> <span class="s2">&quot;integer&quot;</span>
-</span><span data-line="40">    <span class="n">NULL</span> <span class="o">=</span> <span class="s2">&quot;null&quot;</span>
-</span><span data-line="41">    <span class="n">NUMBER</span> <span class="o">=</span> <span class="s2">&quot;number&quot;</span>
-</span><span data-line="42">    <span class="n">OBJECT</span> <span class="o">=</span> <span class="s2">&quot;object&quot;</span>
-</span><span data-line="43">    <span class="n">STRING</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span></div>
+</span><span data-line="35"><span class="nd">@unique</span>
+</span><span data-line="36"><span class="k">class</span><span class="w"> </span><span class="nc">OpenAPIType</span><span class="p">(</span><span class="n">StrEnum</span><span class="p">):</span>
+</span><span data-line="37"><span class="w">    </span><span class="sd">&quot;&quot;&quot;An OopenAPI type.&quot;&quot;&quot;</span>
+</span><span data-line="38">
+</span><span data-line="39">    <span class="n">ARRAY</span> <span class="o">=</span> <span class="s2">&quot;array&quot;</span>
+</span><span data-line="40">    <span class="n">BOOLEAN</span> <span class="o">=</span> <span class="s2">&quot;boolean&quot;</span>
+</span><span data-line="41">    <span class="n">INTEGER</span> <span class="o">=</span> <span class="s2">&quot;integer&quot;</span>
+</span><span data-line="42">    <span class="n">NULL</span> <span class="o">=</span> <span class="s2">&quot;null&quot;</span>
+</span><span data-line="43">    <span class="n">NUMBER</span> <span class="o">=</span> <span class="s2">&quot;number&quot;</span>
+</span><span data-line="44">    <span class="n">OBJECT</span> <span class="o">=</span> <span class="s2">&quot;object&quot;</span>
+</span><span data-line="45">    <span class="n">STRING</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
