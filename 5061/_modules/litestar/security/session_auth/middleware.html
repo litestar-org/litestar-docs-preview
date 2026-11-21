@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/middleware/session/index.html">session</a><ul>
@@ -308,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/plugins/attrs.html">attrs</a></li>
@@ -539,68 +537,73 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="31">        <span class="n">exclude_opt_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 </span><span data-line="32">        <span class="n">retrieve_user_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">SyncOrAsyncUnion</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
 </span><span data-line="33">        <span class="n">scopes</span><span class="p">:</span> <span class="n">Scopes</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="34">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="35"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Session based authentication middleware.</span>
-</span><span data-line="36">
-</span><span data-line="37"><span class="sd">        Args:</span>
-</span><span data-line="38"><span class="sd">            exclude: A pattern or list of patterns to skip in the authentication middleware.</span>
-</span><span data-line="39"><span class="sd">            exclude_http_methods: A sequence of http methods that do not require authentication.</span>
-</span><span data-line="40"><span class="sd">            exclude_opt_key: An identifier to use on routes to disable authentication and authorization checks for a particular route.</span>
-</span><span data-line="41"><span class="sd">            scopes: ASGI scopes processed by the authentication middleware.</span>
-</span><span data-line="42"><span class="sd">            retrieve_user_handler: Callable that receives the ``session`` value from the authentication middleware and returns a ``user`` value.</span>
-</span><span data-line="43"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="44">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="45">            <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span>
-</span><span data-line="46">            <span class="n">exclude_from_auth_key</span><span class="o">=</span><span class="n">exclude_opt_key</span><span class="p">,</span>
-</span><span data-line="47">            <span class="n">exclude_http_methods</span><span class="o">=</span><span class="n">exclude_http_methods</span><span class="p">,</span>
-</span><span data-line="48">            <span class="n">scopes</span><span class="o">=</span><span class="n">scopes</span><span class="p">,</span>
-</span><span data-line="49">        <span class="p">)</span>
-</span><span data-line="50">        <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_user_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="51">            <span class="n">ensure_async_callable</span><span class="p">(</span><span class="n">retrieve_user_handler</span><span class="p">)</span>
-</span><span data-line="52">        <span class="p">)</span></div>
+</span><span data-line="34">        <span class="n">exclude_path_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="35">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="36"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Session based authentication middleware.</span>
+</span><span data-line="37">
+</span><span data-line="38"><span class="sd">        Args:</span>
+</span><span data-line="39"><span class="sd">            exclude: A pattern or list of patterns to skip in the authentication middleware, matched against the</span>
+</span><span data-line="40"><span class="sd">                request path.</span>
+</span><span data-line="41"><span class="sd">            exclude_path_pattern: A pattern or list of patterns to skip in the authentication middleware, matched</span>
+</span><span data-line="42"><span class="sd">                against the handler path at startup.</span>
+</span><span data-line="43"><span class="sd">            exclude_http_methods: A sequence of http methods that do not require authentication.</span>
+</span><span data-line="44"><span class="sd">            exclude_opt_key: An identifier to use on routes to disable authentication and authorization checks for a particular route.</span>
+</span><span data-line="45"><span class="sd">            scopes: ASGI scopes processed by the authentication middleware.</span>
+</span><span data-line="46"><span class="sd">            retrieve_user_handler: Callable that receives the ``session`` value from the authentication middleware and returns a ``user`` value.</span>
+</span><span data-line="47"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="48">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="49">            <span class="n">exclude</span><span class="o">=</span><span class="n">exclude</span><span class="p">,</span>
+</span><span data-line="50">            <span class="n">exclude_path_pattern</span><span class="o">=</span><span class="n">exclude_path_pattern</span><span class="p">,</span>
+</span><span data-line="51">            <span class="n">exclude_from_auth_key</span><span class="o">=</span><span class="n">exclude_opt_key</span><span class="p">,</span>
+</span><span data-line="52">            <span class="n">exclude_http_methods</span><span class="o">=</span><span class="n">exclude_http_methods</span><span class="p">,</span>
+</span><span data-line="53">            <span class="n">scopes</span><span class="o">=</span><span class="n">scopes</span><span class="p">,</span>
+</span><span data-line="54">        <span class="p">)</span>
+</span><span data-line="55">        <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_user_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="56">            <span class="n">ensure_async_callable</span><span class="p">(</span><span class="n">retrieve_user_handler</span><span class="p">)</span>
+</span><span data-line="57">        <span class="p">)</span></div>
 
-</span><span data-line="53">
+</span><span data-line="58">
 <div class="viewcode-block" id="SessionAuthMiddleware.__call__">
 <a class="viewcode-back" href="../../../../reference/security/session_auth.html#litestar.security.session_auth.SessionAuthMiddleware.__call__">[docs]</a>
-</span><span data-line="54">    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span>
-</span><span data-line="55"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrap the authentication middleware in an exception handler, so that a failed authentication is turned into a</span>
-</span><span data-line="56"><span class="sd">        response by the session middleware&#39;s send wrapper and the session gets cleared.</span>
-</span><span data-line="57">
-</span><span data-line="58"><span class="sd">        Args:</span>
-</span><span data-line="59"><span class="sd">            app: The next ASGI application in the middleware stack.</span>
-</span><span data-line="60">
-</span><span data-line="61"><span class="sd">        Returns:</span>
-</span><span data-line="62"><span class="sd">            The wrapped ASGI application.</span>
-</span><span data-line="63"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="64">        <span class="k">return</span> <span class="n">ExceptionHandlerMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">app</span><span class="p">))</span></div>
-
+</span><span data-line="59">    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span>
+</span><span data-line="60"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrap the authentication middleware in an exception handler, so that a failed authentication is turned into a</span>
+</span><span data-line="61"><span class="sd">        response by the session middleware&#39;s send wrapper and the session gets cleared.</span>
+</span><span data-line="62">
+</span><span data-line="63"><span class="sd">        Args:</span>
+</span><span data-line="64"><span class="sd">            app: The next ASGI application in the middleware stack.</span>
 </span><span data-line="65">
+</span><span data-line="66"><span class="sd">        Returns:</span>
+</span><span data-line="67"><span class="sd">            The wrapped ASGI application.</span>
+</span><span data-line="68"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="69">        <span class="k">return</span> <span class="n">ExceptionHandlerMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">app</span><span class="p">))</span></div>
+
+</span><span data-line="70">
 <div class="viewcode-block" id="SessionAuthMiddleware.authenticate_request">
 <a class="viewcode-back" href="../../../../reference/security/session_auth.html#litestar.security.session_auth.SessionAuthMiddleware.authenticate_request">[docs]</a>
-</span><span data-line="66">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">authenticate_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AuthenticationResult</span><span class="p">:</span>
-</span><span data-line="67"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Authenticate an incoming connection.</span>
-</span><span data-line="68">
-</span><span data-line="69"><span class="sd">        Args:</span>
-</span><span data-line="70"><span class="sd">            connection: An :class:`ASGIConnection &lt;.connection.ASGIConnection&gt;` instance.</span>
-</span><span data-line="71">
-</span><span data-line="72"><span class="sd">        Raises:</span>
-</span><span data-line="73"><span class="sd">            NotAuthorizedException: if session data is empty or user is not found.</span>
-</span><span data-line="74">
-</span><span data-line="75"><span class="sd">        Returns:</span>
-</span><span data-line="76"><span class="sd">            :class:`AuthenticationResult &lt;.middleware.authentication.AuthenticationResult&gt;`</span>
-</span><span data-line="77"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="78">        <span class="k">if</span> <span class="ow">not</span> <span class="n">connection</span><span class="o">.</span><span class="n">session</span> <span class="ow">or</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="n">Empty</span><span class="p">:</span>
-</span><span data-line="79">            <span class="c1"># the assignment of &#39;Empty&#39; forces the session middleware to clear session data.</span>
-</span><span data-line="80">            <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Empty</span>
-</span><span data-line="81">            <span class="k">raise</span> <span class="n">NotAuthorizedException</span><span class="p">(</span><span class="s2">&quot;no session data found&quot;</span><span class="p">)</span>
-</span><span data-line="82">
-</span><span data-line="83">        <span class="n">user</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_user_handler</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
-</span><span data-line="84">
-</span><span data-line="85">        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
-</span><span data-line="86">            <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Empty</span>
-</span><span data-line="87">            <span class="k">raise</span> <span class="n">NotAuthorizedException</span><span class="p">(</span><span class="s2">&quot;no user correlating to session found&quot;</span><span class="p">)</span>
-</span><span data-line="88">
-</span><span data-line="89">        <span class="k">return</span> <span class="n">AuthenticationResult</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">connection</span><span class="o">.</span><span class="n">session</span><span class="p">)</span></div>
+</span><span data-line="71">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">authenticate_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">:</span> <span class="n">ASGIConnection</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">AuthenticationResult</span><span class="p">:</span>
+</span><span data-line="72"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Authenticate an incoming connection.</span>
+</span><span data-line="73">
+</span><span data-line="74"><span class="sd">        Args:</span>
+</span><span data-line="75"><span class="sd">            connection: An :class:`ASGIConnection &lt;.connection.ASGIConnection&gt;` instance.</span>
+</span><span data-line="76">
+</span><span data-line="77"><span class="sd">        Raises:</span>
+</span><span data-line="78"><span class="sd">            NotAuthorizedException: if session data is empty or user is not found.</span>
+</span><span data-line="79">
+</span><span data-line="80"><span class="sd">        Returns:</span>
+</span><span data-line="81"><span class="sd">            :class:`AuthenticationResult &lt;.middleware.authentication.AuthenticationResult&gt;`</span>
+</span><span data-line="82"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="83">        <span class="k">if</span> <span class="ow">not</span> <span class="n">connection</span><span class="o">.</span><span class="n">session</span> <span class="ow">or</span> <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="n">Empty</span><span class="p">:</span>
+</span><span data-line="84">            <span class="c1"># the assignment of &#39;Empty&#39; forces the session middleware to clear session data.</span>
+</span><span data-line="85">            <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Empty</span>
+</span><span data-line="86">            <span class="k">raise</span> <span class="n">NotAuthorizedException</span><span class="p">(</span><span class="s2">&quot;no session data found&quot;</span><span class="p">)</span>
+</span><span data-line="87">
+</span><span data-line="88">        <span class="n">user</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_user_handler</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
+</span><span data-line="89">
+</span><span data-line="90">        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+</span><span data-line="91">            <span class="n">connection</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;session&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Empty</span>
+</span><span data-line="92">            <span class="k">raise</span> <span class="n">NotAuthorizedException</span><span class="p">(</span><span class="s2">&quot;no user correlating to session found&quot;</span><span class="p">)</span>
+</span><span data-line="93">
+</span><span data-line="94">        <span class="k">return</span> <span class="n">AuthenticationResult</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">connection</span><span class="o">.</span><span class="n">session</span><span class="p">)</span></div>
 </div>
 
 </span></pre></div>

@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/session/index.html">session</a><ul>
@@ -308,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
@@ -557,12 +555,10 @@ below use <a class="reference internal" href="../../reference/security/session_a
 and <a class="reference internal" href="../../reference/security/jwt.html#litestar.security.jwt.JWTCookieAuth" title="litestar.security.jwt.auth.JWTCookieAuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">JWTCookieAuth</span></code></a>.</p>
 <section id="excluding-routes">
 <h2>Excluding routes<a class="headerlink" href="#excluding-routes" title="Link to this heading">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> argument takes a <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a> or <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code></a> that are interpreted
-as regex patterns matched against the handler’s path template (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>), not against the request
-path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>). Because the patterns are not implicitly anchored, a pattern like
+<p>The <code class="docutils literal notranslate"><span class="pre">exclude</span></code> argument takes a <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code></a> or <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code></a> that are interpreted
+as regex patterns matched against the full path. Because the patterns are not implicitly anchored, a pattern like
 <code class="docutils literal notranslate"><span class="pre">/schema</span></code> would match <em>any</em> path containing <code class="docutils literal notranslate"><span class="pre">/schema</span></code>, not just paths that start with it. To match only paths that
-start with a given prefix, anchor the pattern with <code class="docutils literal notranslate"><span class="pre">^</span></code>. Since the template includes the names and types of path
-parameters, an unanchored pattern such as <code class="docutils literal notranslate"><span class="pre">id</span></code> would also exclude <code class="docutils literal notranslate"><span class="pre">/items/{item_id:int}</span></code>. For example, the configuration below would apply
+start with a given prefix, anchor the pattern with <code class="docutils literal notranslate"><span class="pre">^</span></code>. For example, the configuration below would apply
 authentication to all endpoints except those where the route starts with <code class="docutils literal notranslate"><span class="pre">/login</span></code>, <code class="docutils literal notranslate"><span class="pre">/signup</span></code>, or <code class="docutils literal notranslate"><span class="pre">/schema</span></code>.
 Thus, one does not have to exclude <code class="docutils literal notranslate"><span class="pre">/schema/swagger</span></code> as well — it is covered by the <code class="docutils literal notranslate"><span class="pre">^/schema</span></code> pattern.</p>
 <div class="admonition danger">
@@ -570,6 +566,8 @@ Thus, one does not have to exclude <code class="docutils literal notranslate"><s
 <p>Passing <code class="docutils literal notranslate"><span class="pre">/</span></code> will disable authentication for all routes, since, as a regex, it
 matches <em>every</em> path.</p>
 </div>
+<p>To match against the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead of the request path, use
+<code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code>. Handlers excluded this way are skipped at startup and incur no cost per request.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">session_auth</span> <span class="o">=</span> <span class="n">SessionAuth</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">ServerSideSessionBackend</span><span class="p">](</span>
 </span><span data-line="2">    <span class="n">retrieve_user_handler</span><span class="o">=</span><span class="n">retrieve_user_handler</span><span class="p">,</span>
 </span><span data-line="3">    <span class="c1"># we must pass a config for a session backend.</span>
