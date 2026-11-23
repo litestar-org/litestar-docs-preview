@@ -43,6 +43,44 @@
         attributes have been removed, and ``scopes`` is now a tuple that also includes
         ``ScopeType.ASGI``.
 
+    .. change:: Add option to run the ASGI lifespan protocol for ``asgi`` handlers
+        :type: feature
+
+        Add a flag ``lifespan`` to :func:`~litestar.handlers.asgi`, defaulting to
+        ``False``. When set to ``True``, the ASGI lifespan protocol will be ran for the
+        handler, after the host app's ``on_startup`` hooks.
+
+    .. change:: Add ``copy_state`` option to ASGI route handlers
+        :type: feature
+
+        Add a ``copy_state`` flag to :func:`~litestar.handlers.asgi`, defaulting to
+        ``False``. It works similar to ``copy_scope``, and, if set, the mounted
+        application will receive a shallow copy of ``scope["state"]``, so values it sets
+        there are not seen by the outer application.
+
+    .. change:: Don't allow layer parameters without an associated type
+        :type: bugfix
+        :breaking:
+        :pr: 5247
+
+        Fix a bug that would cause the constraints of a layer parameter, e.g.
+        ``parameters={"limit": QueryParameter(gt=0)}``, to be silently ignored if no
+        type information was associated with it. That is, it was declared without an
+        explicit ``annotation=`` and did not correspond to any declared parameter in a
+        handler or dependency provider.
+
+        Since these cases are ambiguous (no type declared anywhere means there's no
+        type to provide in the OpenAPI schema, and no type to validate against), they
+        will now raise an :exc:`ImproperlyConfiguredException`.
+
+    .. change:: Add ``documentation_only`` to parameter declarations
+        :type: feature
+        :pr: 5247
+
+        Add :attr:`~litestar.params.ParameterKwarg.documentation_only`. If set, the
+        constraints of a parameter are included in the OpenAPI schema, but not applied
+        to the value of a request.
+
     .. change:: DTO: Identify the data a handler receives through its body marker
         :type: misc
         :breaking:

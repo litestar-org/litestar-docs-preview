@@ -578,6 +578,28 @@ attributes have been removed, and <code class="docutils literal notranslate"><sp
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span></p>
 </div>
 </dd>
+<dt>Add option to run the ASGI lifespan protocol for <code class="docutils literal notranslate"><span class="pre">asgi</span></code> handlers<a class="headerlink reference internal" href="#3.0.0-add option to run the asgi lifespan protocol for" id="3.0.0-add option to run the asgi lifespan protocol for">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add a flag <code class="docutils literal notranslate"><span class="pre">lifespan</span></code> to <a class="reference internal" href="../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">asgi()</span></code></a>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">False</span></code>. When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the ASGI lifespan protocol will be ran for the
+handler, after the host app’s <code class="docutils literal notranslate"><span class="pre">on_startup</span></code> hooks.</p>
+<p>References: </p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">copy_state</span></code> option to ASGI route handlers<a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add a <code class="docutils literal notranslate"><span class="pre">copy_state</span></code> flag to <a class="reference internal" href="../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">asgi()</span></code></a>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">False</span></code>. It works similar to <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code>, and, if set, the mounted
+application will receive a shallow copy of <code class="docutils literal notranslate"><span class="pre">scope[&quot;state&quot;]</span></code>, so values it sets
+there are not seen by the outer application.</p>
+<p>References: </p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">documentation_only</span></code> to parameter declarations<a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add <a class="reference internal" href="../reference/params.html#litestar.params.ParameterKwarg.documentation_only" title="litestar.params.ParameterKwarg.documentation_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">documentation_only</span></code></a>. If set, the
+constraints of a parameter are included in the OpenAPI schema, but not applied
+to the value of a request.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5247">https://github.com/litestar-org/litestar/pull/5247</a></span></p>
+</div>
+</dd>
 <dt>Deprecate request parameters <code class="docutils literal notranslate"><span class="pre">Headers</span></code>, <code class="docutils literal notranslate"><span class="pre">QueryParams</span></code>, <code class="docutils literal notranslate"><span class="pre">RequestCookies</span></code> and <code class="docutils literal notranslate"><span class="pre">Scope</span></code><a class="headerlink reference internal" href="#3.0.0-deprecate request parameters" id="3.0.0-deprecate request parameters">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Deprecate
 <a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.Headers" title="litestar.datastructures.Headers"><code class="xref py py-class docutils literal notranslate"><span class="pre">Headers</span></code></a>, <a class="reference internal" href="../reference/params.html#litestar.params.QueryParams" title="litestar.params.QueryParams"><code class="xref py py-data docutils literal notranslate"><span class="pre">QueryParams</span></code></a>,
@@ -1535,6 +1557,18 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Don’t allow layer parameters without an associated type<a class="headerlink reference internal" href="#3.0.0-don't allow layer parameters without an associated type" id="3.0.0-don't allow layer parameters without an associated type">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would cause the constraints of a layer parameter, e.g.
+<code class="docutils literal notranslate"><span class="pre">parameters={&quot;limit&quot;:</span> <span class="pre">QueryParameter(gt=0)}</span></code>, to be silently ignored if no
+type information was associated with it. That is, it was declared without an
+explicit <code class="docutils literal notranslate"><span class="pre">annotation=</span></code> and did not correspond to any declared parameter in a
+handler or dependency provider.</p>
+<p>Since these cases are ambiguous (no type declared anywhere means there’s no
+type to provide in the OpenAPI schema, and no type to validate against), they
+will now raise an <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ImproperlyConfiguredException" title="litestar.exceptions.ImproperlyConfiguredException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImproperlyConfiguredException</span></code></a>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5247">https://github.com/litestar-org/litestar/pull/5247</a></span></p>
+</div>
+</dd>
 <dt>Apply the DTO of a handler to a request body declared only in a dependency provider<a class="headerlink reference internal" href="#3.0.0-apply the dto of a handler to a request body declared only in a dependency provider" id="3.0.0-apply the dto of a handler to a request body declared only in a dependency provider">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that occurred when a request body was only declared in a dependency
 provider of a handler, with that handler setting a <code class="docutils literal notranslate"><span class="pre">dto=</span></code>. The request body
