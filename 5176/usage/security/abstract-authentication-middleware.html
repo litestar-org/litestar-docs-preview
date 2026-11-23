@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -630,7 +630,7 @@ For the sake of this example here let us say it is a dataclass:</p>
 </span><span data-line="5"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
 </span><span data-line="6">    <span class="n">route_handlers</span><span class="o">=</span><span class="p">[</span><span class="n">site_index</span><span class="p">,</span> <span class="n">my_http_handler</span><span class="p">,</span> <span class="n">my_ws_handler</span><span class="p">],</span>
 </span><span data-line="7">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">auth_mw</span><span class="p">],</span>
-</span><span data-line="8">    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_dependency&quot;</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">my_dependency</span><span class="p">)},</span>
+</span><span data-line="8">    <span class="n">dependencies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_dependency&quot;</span><span class="p">:</span> <span class="n">my_dependency</span><span class="p">},</span>
 </span><span data-line="9"><span class="p">)</span>
 </span></pre></div>
 </div>

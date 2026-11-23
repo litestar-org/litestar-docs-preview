@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -713,6 +713,17 @@ Daphne</label><div class="sd-tab-content docutils">
 <div class="code-block-caption"><span class="caption-text">Console Output</span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="go">INFO - 2023-11-12 23:31:51,571 - daphne.cli - cli - Starting server at tcp:port=8000:interface=127.0.0.1</span>
 </span><span data-line="2"><span class="go">INFO - 2023-11-12 23:31:51,572 - daphne.server - server - Listening on TCP address 127.0.0.1:8000</span>
+</span></pre></div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Daphne does not support the ASGI lifespan protocol. Litestar requires the
+lifespan protocol to support app-scoped dependencies, and the app will fail
+to start if the lifespan does not run. To fix this, create ann app without
+the <code class="docutils literal notranslate"><span class="pre">app</span></code> dependency scope, and make sure to not use any dependency
+providers with that scope.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">dependency_scopes</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;request&quot;</span><span class="p">,</span> <span class="s2">&quot;handler&quot;</span><span class="p">))</span>
 </span></pre></div>
 </div>
 </div>
