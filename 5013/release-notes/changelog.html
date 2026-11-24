@@ -449,6 +449,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#3.0.0">3.0.0</a><ul>
 <li><a class="reference internal" href="#3.0.0-feature">Features</a></li>
 <li><a class="reference internal" href="#3.0.0-bugfix">Bugfixes</a></li>
+<li><a class="reference internal" href="#3.0.0-misc">Other changes</a></li>
 </ul>
 </li>
 </ul>
@@ -546,6 +547,56 @@ data-aria-dark="Switch to auto color mode">
 <strong>Released: </strong>2364-01-27<section id="3.0.0-feature">
 <h3>Features<a class="headerlink" href="#3.0.0-feature" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Add option to run the ASGI lifespan protocol for <code class="docutils literal notranslate"><span class="pre">asgi</span></code> handlers<a class="headerlink reference internal" href="#3.0.0-add option to run the asgi lifespan protocol for" id="3.0.0-add option to run the asgi lifespan protocol for">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add a flag <code class="docutils literal notranslate"><span class="pre">lifespan</span></code> to <a class="reference internal" href="../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">asgi()</span></code></a>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">False</span></code>. When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the ASGI lifespan protocol will be ran for the
+handler, after the host app’s <code class="docutils literal notranslate"><span class="pre">on_startup</span></code> hooks.</p>
+<p>References: </p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">copy_state</span></code> option to ASGI route handlers<a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add a <code class="docutils literal notranslate"><span class="pre">copy_state</span></code> flag to <a class="reference internal" href="../reference/handlers.html#litestar.handlers.asgi" title="litestar.handlers.asgi"><code class="xref py py-func docutils literal notranslate"><span class="pre">asgi()</span></code></a>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">False</span></code>. It works similar to <code class="docutils literal notranslate"><span class="pre">copy_scope</span></code>, and, if set, the mounted
+application will receive a shallow copy of <code class="docutils literal notranslate"><span class="pre">scope[&quot;state&quot;]</span></code>, so values it sets
+there are not seen by the outer application.</p>
+<p>References: </p>
+</div>
+</dd>
+<dt>Add <code class="docutils literal notranslate"><span class="pre">documentation_only</span></code> to parameter declarations<a class="headerlink reference internal" href="#3.0.0-add" id="3.0.0-add">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Add <a class="reference internal" href="../reference/params.html#litestar.params.ParameterKwarg.documentation_only" title="litestar.params.ParameterKwarg.documentation_only"><code class="xref py py-attr docutils literal notranslate"><span class="pre">documentation_only</span></code></a>. If set, the
+constraints of a parameter are included in the OpenAPI schema, but not applied
+to the value of a request.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5247">https://github.com/litestar-org/litestar/pull/5247</a></span></p>
+</div>
+</dd>
+<dt>Deprecate request parameters <code class="docutils literal notranslate"><span class="pre">Headers</span></code>, <code class="docutils literal notranslate"><span class="pre">QueryParams</span></code>, <code class="docutils literal notranslate"><span class="pre">RequestCookies</span></code> and <code class="docutils literal notranslate"><span class="pre">Scope</span></code><a class="headerlink reference internal" href="#3.0.0-deprecate request parameters" id="3.0.0-deprecate request parameters">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Deprecate
+<a class="reference internal" href="../reference/datastructures/index.html#litestar.datastructures.Headers" title="litestar.datastructures.Headers"><code class="xref py py-class docutils literal notranslate"><span class="pre">Headers</span></code></a>, <a class="reference internal" href="../reference/params.html#litestar.params.QueryParams" title="litestar.params.QueryParams"><code class="xref py py-data docutils literal notranslate"><span class="pre">QueryParams</span></code></a>,
+<a class="reference internal" href="../reference/params.html#litestar.params.RequestCookies" title="litestar.params.RequestCookies"><code class="xref py py-data docutils literal notranslate"><span class="pre">RequestCookies</span></code></a>, and <a class="reference internal" href="../reference/types.html#litestar.types.Scope" title="litestar.types.Scope"><code class="xref py py-data docutils literal notranslate"><span class="pre">Scope</span></code></a> as
+request parameters.</p>
+<p><a class="reference internal" href="../reference/connection.html#litestar.connection.ASGIConnection" title="litestar.connection.ASGIConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIConnection</span></code></a>‘s <code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">query_params</span></code>,
+<code class="docutils literal notranslate"><span class="pre">cookies</span></code>, or <code class="docutils literal notranslate"><span class="pre">scope</span></code> attributes should be used instead.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5238">https://github.com/litestar-org/litestar/pull/5238</a></span></p>
+</div>
+</dd>
+<dt>Drop reserved keyword arguments in handlers and DI<a class="headerlink reference internal" href="#3.0.0-drop reserved keyword arguments in handlers and di" id="3.0.0-drop reserved keyword arguments in handlers and di">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Drop the special meaning of the “reserved keyword arguments” in handlers and DI
+providers.</p>
+<p>The parameter names can now freely be used and assigned, as their meaning is
+derived from their respective annotation:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">request</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">socket</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">litestar.constants.RESERVED_KWARGS</span></code>, <code class="docutils literal notranslate"><span class="pre">litestar.constants.SKIP_VALIDATION_NAMES</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FieldDefinition.is_non_marker_parameter_field</span></code> and <code class="docutils literal notranslate"><span class="pre">ParameterKwarg.is_marker</span></code>
+are removed.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
 <dt>Remove support for trio<a class="headerlink reference internal" href="#3.0.0-remove support for trio" id="3.0.0-remove support for trio">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Trio is no longer supported. <code class="docutils literal notranslate"><span class="pre">set_trio_capacity_limiter</span></code> and
 <code class="docutils literal notranslate"><span class="pre">get_trio_capacity_limiter</span></code> are removed from <a class="reference internal" href="../reference/concurrency.html#module-litestar.concurrency" title="litestar.concurrency"><code class="xref py py-mod docutils literal notranslate"><span class="pre">litestar.concurrency</span></code></a>, along with
@@ -701,6 +752,105 @@ parameters must now be explicitly marked (e.g. with
 <p>References: </p>
 </div>
 </dd>
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">SessionMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><a class="reference internal" href="../reference/middleware/session/base.html#litestar.middleware.session.base.SessionMiddleware" title="litestar.middleware.session.base.SessionMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionMiddleware</span></code></a> has been moved from the
+legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code> base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>,
+as part of migrating all built-in middleware off the legacy bases.</p>
+<p>The middleware still takes a session backend, which keeps receiving its
+configuration unchanged, but no longer wraps an <code class="docutils literal notranslate"><span class="pre">app</span></code>. The <code class="docutils literal notranslate"><span class="pre">middleware</span></code>
+property of <a class="reference internal" href="../reference/middleware/session/server_side.html#litestar.middleware.session.server_side.ServerSideSessionConfig" title="litestar.middleware.session.server_side.ServerSideSessionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ServerSideSessionConfig</span></code></a>
+and <a class="reference internal" href="../reference/middleware/session/client_side.html#litestar.middleware.session.client_side.CookieBackendConfig" title="litestar.middleware.session.client_side.CookieBackendConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieBackendConfig</span></code></a> now returns
+a <code class="docutils literal notranslate"><span class="pre">SessionMiddleware</span></code> instance instead of a <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code> wrapping it, so
+applications using <code class="docutils literal notranslate"><span class="pre">middleware=[session_config.middleware]</span></code> are unaffected. Code
+that constructed the middleware directly, or introspected the <code class="docutils literal notranslate"><span class="pre">DefineMiddleware</span></code>,
+must be updated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># before</span>
+</span><span data-line="2"><span class="n">middleware</span> <span class="o">=</span> <span class="n">SessionMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">next_app</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">backend</span> <span class="o">=</span> <span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;backend&quot;</span><span class="p">]</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># after</span>
+</span><span data-line="6"><span class="n">middleware</span> <span class="o">=</span> <span class="n">SessionMiddleware</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+</span><span data-line="7"><span class="n">asgi_app</span> <span class="o">=</span> <span class="n">middleware</span><span class="p">(</span><span class="n">next_app</span><span class="p">)</span>
+</span><span data-line="8"><span class="n">backend</span> <span class="o">=</span> <span class="n">session_config</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">backend</span>
+</span></pre></div>
+</div>
+<p>The new <code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code> option of the session configurations matches
+against the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>); handlers excluded this
+way, or via <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware entirely at startup rather
+than per request.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware.__call__</span></code> returns a closure rather than the middleware
+instance, a middleware stack can no longer be introspected by walking the <code class="docutils literal notranslate"><span class="pre">.app</span></code>
+attribute of each layer.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../usage/middleware/creating-middleware.html#asgi-middleware-migration"><span class="std std-ref">Migrating from MiddlewareProtocol / AbstractMiddleware</span></a></p>
+</div>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5060">https://github.com/litestar-org/litestar/pull/5060</a></span></p>
+</div>
+</dd>
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code>
+base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all
+built-in middleware off the legacy bases.</p>
+<p>Since the middleware is now directly constructible, the
+<a class="reference internal" href="../reference/plugins/prometheus.html#litestar.plugins.prometheus.PrometheusConfig" title="litestar.plugins.prometheus.PrometheusConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrometheusConfig</span></code></a> configuration object is
+obsolete and its <code class="docutils literal notranslate"><span class="pre">middleware</span></code> property is deprecated; it will be removed in
+<code class="docutils literal notranslate"><span class="pre">4.0</span></code>. Pass a configured <code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code> instance to the middleware
+list instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># before</span>
+</span><span data-line="2"><span class="n">config</span> <span class="o">=</span> <span class="n">PrometheusConfig</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span> <span class="n">group_path</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="p">])</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># after</span>
+</span><span data-line="6"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="7">    <span class="o">...</span><span class="p">,</span>
+</span><span data-line="8">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">PrometheusMiddleware</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span> <span class="n">group_path</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span>
+</span><span data-line="9"><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Subclasses of <code class="docutils literal notranslate"><span class="pre">PrometheusMiddleware</span></code> must rename <code class="docutils literal notranslate"><span class="pre">__call__</span></code> to <code class="docutils literal notranslate"><span class="pre">handle</span></code>,
+which receives the next ASGI app as an additional <code class="docutils literal notranslate"><span class="pre">next_app</span></code> argument in place
+of <code class="docutils literal notranslate"><span class="pre">self.app</span></code>, and read settings from the corresponding instance attributes
+instead of the removed private <code class="docutils literal notranslate"><span class="pre">self._config</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">exclude</span></code> patterns are still matched against the request path. The new
+<code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code> argument matches against the handler’s path (e.g.
+<code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead; handlers excluded this way, or via
+<code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware entirely at startup rather than per
+request.</p>
+<p>Mounted ASGI apps stay wrapped regardless of the configured <code class="docutils literal notranslate"><span class="pre">scopes</span></code>, with
+their connections filtered by scope type at runtime, so restricting the
+middleware to e.g. <code class="docutils literal notranslate"><span class="pre">{&quot;websocket&quot;}</span></code> also holds for connections through mounts.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5006">https://github.com/litestar-org/litestar/pull/5006</a></span></p>
+</div>
+</dd>
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code>
+base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all
+built-in middleware off the legacy bases.</p>
+<p>Since the middleware is now directly constructible, the
+<a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitConfig" title="litestar.middleware.rate_limit.RateLimitConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitConfig</span></code></a> configuration object is
+obsolete and its <code class="docutils literal notranslate"><span class="pre">middleware</span></code> property is deprecated; it will be removed in
+<code class="docutils literal notranslate"><span class="pre">4.0</span></code>. Pass a configured <code class="docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code> instance to the middleware
+list instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># before</span>
+</span><span data-line="2"><span class="n">config</span> <span class="o">=</span> <span class="n">RateLimitConfig</span><span class="p">(</span><span class="n">rate_limit</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/schema&quot;</span><span class="p">])</span>
+</span><span data-line="3"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">middleware</span><span class="p">])</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># after</span>
+</span><span data-line="6"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span data-line="7">    <span class="o">...</span><span class="p">,</span>
+</span><span data-line="8">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">RateLimitMiddleware</span><span class="p">(</span><span class="n">rate_limit</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;minute&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;/schema&quot;</span><span class="p">])],</span>
+</span><span data-line="9"><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">exclude</span></code> patterns are still matched against the request path. The new
+<code class="docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code> argument matches against the handler’s path (e.g.
+<code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead; handlers excluded this way, or via
+<code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware entirely at startup rather than per
+request.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5005">https://github.com/litestar-org/litestar/pull/5005</a></span></p>
+</div>
+</dd>
 <dt>Add support for <code class="docutils literal notranslate"><span class="pre">leeway</span></code> parameter in JWT security backends<a class="headerlink reference internal" href="#3.0.0-add support for" id="3.0.0-add support for">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Add support for <code class="docutils literal notranslate"><span class="pre">leeway</span></code> parameter in JWT security backends, which allows set
 a number of potential seconds as a clock error for expired tokens.</p>
@@ -724,6 +874,68 @@ plugin, such as <code class="docutils literal notranslate"><span class="pre">Sca
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4977">https://github.com/litestar-org/litestar/pull/4977</a></span></p>
 </div>
 </dd>
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">AllowedHostsMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">AllowedHostsMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code>
+base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all
+built-in middleware off the legacy bases.</p>
+<p>Applications that configure allowed hosts through
+<a class="reference internal" href="../reference/config.html#litestar.config.allowed_hosts.AllowedHostsConfig" title="litestar.config.allowed_hosts.AllowedHostsConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AllowedHostsConfig</span></code></a> or the
+<code class="docutils literal notranslate"><span class="pre">allowed_hosts</span></code> argument are unaffected, since Litestar constructs the
+middleware itself. The constructor takes keyword arguments now instead of an
+<code class="docutils literal notranslate"><span class="pre">app</span></code> and an <code class="docutils literal notranslate"><span class="pre">AllowedHostsConfig</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># before</span>
+</span><span data-line="2"><span class="n">middleware</span> <span class="o">=</span> <span class="n">AllowedHostsMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">next_app</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># after</span>
+</span><span data-line="5"><span class="n">middleware</span> <span class="o">=</span> <span class="n">AllowedHostsMiddleware</span><span class="p">(</span>
+</span><span data-line="6">    <span class="n">allowed_hosts</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">allowed_hosts</span><span class="p">,</span>
+</span><span data-line="7">    <span class="n">exclude</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">exclude</span><span class="p">,</span>
+</span><span data-line="8">    <span class="n">exclude_opt_key</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">exclude_opt_key</span><span class="p">,</span>
+</span><span data-line="9">    <span class="n">scopes</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">scopes</span><span class="p">,</span>
+</span><span data-line="10">    <span class="n">www_redirect</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">www_redirect</span><span class="p">,</span>
+</span><span data-line="11"><span class="p">)</span>
+</span><span data-line="12"><span class="n">asgi_app</span> <span class="o">=</span> <span class="n">middleware</span><span class="p">(</span><span class="n">next_app</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><a class="reference internal" href="../reference/config.html#litestar.config.allowed_hosts.AllowedHostsConfig.exclude" title="litestar.config.allowed_hosts.AllowedHostsConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are
+still matched against the request path. The new
+<a class="reference internal" href="../reference/config.html#litestar.config.allowed_hosts.AllowedHostsConfig.exclude_path_pattern" title="litestar.config.allowed_hosts.AllowedHostsConfig.exclude_path_pattern"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code></a>
+matches against the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead;
+handlers excluded this way, or via <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware
+entirely at startup rather than per request.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5001">https://github.com/litestar-org/litestar/pull/5001</a></span></p>
+</div>
+</dd>
+<dt>Migrate <code class="docutils literal notranslate"><span class="pre">CompressionMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">CompressionMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">AbstractMiddleware</span></code>
+base to <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all
+built-in middleware off the legacy bases.</p>
+<p>Applications that configure compression through
+<a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig" title="litestar.config.compression.CompressionConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CompressionConfig</span></code></a> are unaffected, since
+Litestar constructs the middleware itself. The middleware still takes the
+<code class="docutils literal notranslate"><span class="pre">CompressionConfig</span></code> - which the <code class="docutils literal notranslate"><span class="pre">CompressionFacade</span></code> protocol continues to
+receive unchanged - but no longer wraps an <code class="docutils literal notranslate"><span class="pre">app</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># before</span>
+</span><span data-line="2"><span class="n">middleware</span> <span class="o">=</span> <span class="n">CompressionMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">next_app</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># after</span>
+</span><span data-line="5"><span class="n">middleware</span> <span class="o">=</span> <span class="n">CompressionMiddleware</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">asgi_app</span> <span class="o">=</span> <span class="n">middleware</span><span class="p">(</span><span class="n">next_app</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Subclasses set via
+<a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.middleware_class" title="litestar.config.compression.CompressionConfig.middleware_class"><code class="xref py py-attr docutils literal notranslate"><span class="pre">middleware_class</span></code></a> must
+rename <code class="docutils literal notranslate"><span class="pre">__call__</span></code> to <code class="docutils literal notranslate"><span class="pre">handle</span></code>, which receives the next ASGI app as an
+additional <code class="docutils literal notranslate"><span class="pre">next_app</span></code> argument in place of <code class="docutils literal notranslate"><span class="pre">self.app</span></code>.</p>
+<p><a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.exclude" title="litestar.config.compression.CompressionConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are still
+matched against the request path. The new
+<a class="reference internal" href="../reference/config.html#litestar.config.compression.CompressionConfig.exclude_path_pattern" title="litestar.config.compression.CompressionConfig.exclude_path_pattern"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code></a>
+matches against the handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead;
+handlers excluded this way, or via <code class="docutils literal notranslate"><span class="pre">exclude_opt_key</span></code>, bypass the middleware
+entirely at startup rather than per request.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4999">https://github.com/litestar-org/litestar/pull/4999</a></span></p>
+</div>
+</dd>
 <dt>Migrate <code class="docutils literal notranslate"><span class="pre">CSRFMiddleware</span></code> to <code class="docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code><a class="headerlink reference internal" href="#3.0.0-migrate" id="3.0.0-migrate">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p><code class="docutils literal notranslate"><span class="pre">CSRFMiddleware</span></code> has been moved from the legacy <code class="docutils literal notranslate"><span class="pre">MiddlewareProtocol</span></code> base to
 <a class="reference internal" href="../reference/middleware/index.html#litestar.middleware.ASGIMiddleware" title="litestar.middleware.ASGIMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">ASGIMiddleware</span></code></a>, as part of migrating all built-in
@@ -734,16 +946,12 @@ This removes the <code class="docutils literal notranslate"><span class="pre">li
 <a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig" title="litestar.config.csrf.CSRFConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CSRFConfig</span></code></a> are unaffected, since Litestar
 constructs the middleware itself, via a <code class="docutils literal notranslate"><span class="pre">from_config</span></code> classmethod on the
 middleware.</p>
-<p>Two behavioural changes for excluded routes:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are now matched against
-the <strong>handler’s path template</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) at startup, instead
-of the request path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/1</span></code>) at runtime. Patterns targeting literal
-paths keep working; patterns written to match expanded path parameters must be
-rewritten against the template.</p></li>
-<li><p>Handlers excluded via <code class="docutils literal notranslate"><span class="pre">exclude</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_from_csrf</span></code> now bypass the
-middleware entirely at startup rather than per request.</p></li>
-</ul>
+<p><a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude" title="litestar.config.csrf.CSRFConfig.exclude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude</span></code></a> patterns are still matched
+against the request path. The new
+<a class="reference internal" href="../reference/config.html#litestar.config.csrf.CSRFConfig.exclude_path_pattern" title="litestar.config.csrf.CSRFConfig.exclude_path_pattern"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exclude_path_pattern</span></code></a> matches against the
+handler’s path (e.g. <code class="docutils literal notranslate"><span class="pre">/user/{user_id:int}</span></code>) instead; handlers excluded this way,
+or via <code class="docutils literal notranslate"><span class="pre">exclude_from_csrf</span></code>, bypass the middleware entirely at startup rather
+than per request.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4998">https://github.com/litestar-org/litestar/pull/4998</a></span></p>
 </div>
 </dd>
@@ -1259,6 +1467,137 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>Don’t allow layer parameters without an associated type<a class="headerlink reference internal" href="#3.0.0-don't allow layer parameters without an associated type" id="3.0.0-don't allow layer parameters without an associated type">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would cause the constraints of a layer parameter, e.g.
+<code class="docutils literal notranslate"><span class="pre">parameters={&quot;limit&quot;:</span> <span class="pre">QueryParameter(gt=0)}</span></code>, to be silently ignored if no
+type information was associated with it. That is, it was declared without an
+explicit <code class="docutils literal notranslate"><span class="pre">annotation=</span></code> and did not correspond to any declared parameter in a
+handler or dependency provider.</p>
+<p>Since these cases are ambiguous (no type declared anywhere means there’s no
+type to provide in the OpenAPI schema, and no type to validate against), they
+will now raise an <a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ImproperlyConfiguredException" title="litestar.exceptions.ImproperlyConfiguredException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImproperlyConfiguredException</span></code></a>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5247">https://github.com/litestar-org/litestar/pull/5247</a></span></p>
+</div>
+</dd>
+<dt>Apply the DTO of a handler to a request body declared only in a dependency provider<a class="headerlink reference internal" href="#3.0.0-apply the dto of a handler to a request body declared only in a dependency provider" id="3.0.0-apply the dto of a handler to a request body declared only in a dependency provider">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that occurred when a request body was only declared in a dependency
+provider of a handler, with that handler setting a <code class="docutils literal notranslate"><span class="pre">dto=</span></code>. The request body
+would not be decoded by the DTO, and would receive the raw DTO data, e.g. a
+<code class="docutils literal notranslate"><span class="pre">dict</span></code>. The DTO will now always be taken into consideration, independent of
+the point the request body is declared.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5241">https://github.com/litestar-org/litestar/pull/5241</a></span></p>
+</div>
+</dd>
+<dt>Apply the constraints of a layer parameter to corresponding handler / DI parameters<a class="headerlink reference internal" href="#3.0.0-apply the constraints of a layer parameter to corresponding handler / di parameters" id="3.0.0-apply the constraints of a layer parameter to corresponding handler / di parameters">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would cause the constraints of a layer parameter, e.g.
+<code class="docutils literal notranslate"><span class="pre">parameters={&quot;limit&quot;:</span> <span class="pre">QueryParameter(gt=0)}</span></code>, to not be applied for a
+corresponding handler or dependency parameter.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Apply the <code class="docutils literal notranslate"><span class="pre">type_decoders</span></code> of a handler to that handler only<a class="headerlink reference internal" href="#3.0.0-apply the" id="3.0.0-apply the">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would leak the type decoder of a request parameter to other
+handlers without that decoder.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Run all parts of sync generator dependencies in a worker threads<a class="headerlink reference internal" href="#3.0.0-run all parts of sync generator dependencies in a worker threads" id="3.0.0-run all parts of sync generator dependencies in a worker threads">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Run all code of a synchronous generator dependency in threads. Previously, code
+up until the first <code class="docutils literal notranslate"><span class="pre">yield</span></code> would run on the main thread.</p>
+<p>All of the generator’s code runs in a shared <a class="reference external" href="https://docs.python.org/3/library/contextvars.html#contextvars.Context" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code></a>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Don’t overwrite a handler parameter with a dependency of the same name<a class="headerlink reference internal" href="#3.0.0-don't overwrite a handler parameter with a dependency of the same name" id="3.0.0-don't overwrite a handler parameter with a dependency of the same name">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would overwrite a request parameter in a handler with
+dependency of the same name. Request parameters now follow the same rule as
+dependencies: Last declared wins. Since a parameter in a handler is always
+declared last, it will always win against a dependency of the same name.</p>
+<p>The OpenAPI schema already documented this correctly.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI: Exclude a layer parameter with <code class="docutils literal notranslate"><span class="pre">include_in_schema=False</span></code> from the schema<a class="headerlink reference internal" href="#3.0.0-openapi: exclude a layer parameter with" id="3.0.0-openapi: exclude a layer parameter with">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would cause a layer parameter declared with
+<code class="docutils literal notranslate"><span class="pre">include_in_schema=False</span></code> to still be included in the OpenAPI schema, if it
+was also consumed by a handler of a dependency of that handler.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI: Include a layer parameter defined next to a handler parameter of the same name that doesn’t bind it<a class="headerlink reference internal" href="#3.0.0-openapi: include a layer parameter defined next to a handler parameter of the same name that doesn't bind it" id="3.0.0-openapi: include a layer parameter defined next to a handler parameter of the same name that doesn't bind it">#</a></dt><dd><div class="changelog-change docutils container">
+<p>A handler parameter named like a layer parameter, with a marker that sets a field, is a
+parameter of its own, e.g. <code class="docutils literal notranslate"><span class="pre">limit:</span> <span class="pre">Annotated[int,</span> <span class="pre">QueryParameter(ge=1)]</span></code> under a layer
+parameter <code class="docutils literal notranslate"><span class="pre">limit</span></code> declared with <code class="docutils literal notranslate"><span class="pre">name=&quot;page-limit&quot;</span></code>. The OpenAPI schema documents
+both. Previously, it documented only the handler parameter.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI: Document header parameters case insensitively across handlers and dependencies<a class="headerlink reference internal" href="#3.0.0-openapi: document header parameters case insensitively across handlers and dependencies" id="3.0.0-openapi: document header parameters case insensitively across handlers and dependencies">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would cause header parameters declared with different casings
+(e.g. <code class="docutils literal notranslate"><span class="pre">X-Token</span></code> and <code class="docutils literal notranslate"><span class="pre">x-token</span></code>) to be documented as two distinct parameters,
+if one of them was declared in a dependency and one in a handler.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI: Fix schema generation for request body declared only in a dependency provider and a DTO set<a class="headerlink reference internal" href="#3.0.0-openapi: fix schema generation for request body declared only in a dependency provider and a dto set" id="3.0.0-openapi: fix schema generation for request body declared only in a dependency provider and a dto set">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that occurred when a request body was only declared in a dependency
+provider of a handler, with that handler setting a <code class="docutils literal notranslate"><span class="pre">dto=</span></code>. The schema would be
+generated from the raw model, not the DTO transformed one. The schema now takes
+the DTO into consideration, independent of the point the request body is
+declared.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>OpenAPI: Document the default of a handler parameter that’s also a layer parameter<a class="headerlink reference internal" href="#3.0.0-openapi: document the default of a handler parameter that's also a layer parameter" id="3.0.0-openapi: document the default of a handler parameter that's also a layer parameter">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug that would document a handler / DI parameter declared with a default,
+<em>and</em> corresponding to a layer parameter <em>without a default</em>, as required and
+without a default.</p>
+<p>The parameter is now correctly documented as not required, and with its default.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Raise an exception at startup for variadic handler / DI parameters<a class="headerlink reference internal" href="#3.0.0-raise an exception at startup for variadic handler / di parameters" id="3.0.0-raise an exception at startup for variadic handler / di parameters">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Raise an exception at startup if a handler or DI provider declares variadic
+parameters (<code class="docutils literal notranslate"><span class="pre">*args</span></code> or <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>).</p>
+<p>Previously, <code class="docutils literal notranslate"><span class="pre">*args</span></code> would fail every request with a <code class="docutils literal notranslate"><span class="pre">500</span></code> error, and
+<code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> would implicitly declare a query parameter named <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Raise an exception if a generator dependency yields more than once<a class="headerlink reference internal" href="#3.0.0-raise an exception if a generator dependency yields more than once" id="3.0.0-raise an exception if a generator dependency yields more than once">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Raise an exception if a generator dependency <code class="docutils literal notranslate"><span class="pre">yield</span></code>s more than once.
+Previously, no exception was raised, and the code after the second <code class="docutils literal notranslate"><span class="pre">yield</span></code>
+never ran.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Raise a startup exception if an unmarked handler parameter is named like a layer parameter<a class="headerlink reference internal" href="#3.0.0-raise a startup exception if an unmarked handler parameter is named like a layer parameter" id="3.0.0-raise a startup exception if an unmarked handler parameter is named like a layer parameter">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>A handler parameter without a marker raises
+<a class="reference internal" href="../reference/exceptions.html#litestar.exceptions.ImproperlyConfiguredException" title="litestar.exceptions.ImproperlyConfiguredException"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImproperlyConfiguredException</span></code></a> at startup. Ensure
+this is also the case if it is named like a layer parameter.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Raise a startup exception if a request body is declared in a <code class="docutils literal notranslate"><span class="pre">GET</span></code> or websocket handler, or any of its dependencies<a class="headerlink reference internal" href="#3.0.0-raise a startup exception if a request body is declared in a" id="3.0.0-raise a startup exception if a request body is declared in a">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Raise a startup exception if a <code class="docutils literal notranslate"><span class="pre">GET</span></code> HTTP or a WebSocket handler, or any of
+their dependencies declare a request body.</p>
+<p>Previously, declaring a body for such handlers in a dependency would work, and
+the body would be passed as <code class="docutils literal notranslate"><span class="pre">b&quot;&quot;</span></code>, ignoring a possible default. Requests to
+a WebSocket handler with such a declaration would fail.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5227">https://github.com/litestar-org/litestar/pull/5227</a></span></p>
+</div>
+</dd>
+<dt>Fix channel subscriptions hanging after a send error or a full backlog<a class="headerlink reference internal" href="#3.0.0-fix channel subscriptions hanging after a send error or a full backlog" id="3.0.0-fix channel subscriptions hanging after a send error or a full backlog">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug where a channel subscription could hang forever, keeping the
+subscriber registered: after an error while sending an event (for example to a
+disconnected WebSocket client), after a <code class="docutils literal notranslate"><span class="pre">dropleft</span></code> backlog had overflowed,
+when unsubscribing or replaying history with a full <code class="docutils literal notranslate"><span class="pre">backoff</span></code> backlog, or when
+a WebSocket client stopped reading before disconnecting. The send error is now
+logged, a full backlog no longer blocks, and the WebSocket handler no longer
+waits to send queued events after the client disconnects.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5218">https://github.com/litestar-org/litestar/pull/5218</a></span></p>
+</div>
+</dd>
 <dt>Keep publishing channel messages after a backend error<a class="headerlink reference internal" href="#3.0.0-keep publishing channel messages after a backend error" id="3.0.0-keep publishing channel messages after a backend error">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug that stopped <a class="reference internal" href="../reference/channels/plugin.html#litestar.channels.plugin.ChannelsPlugin" title="litestar.channels.plugin.ChannelsPlugin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelsPlugin</span></code></a> from publishing
 any further messages after the backend raised an error for one of them, for
@@ -1504,6 +1843,28 @@ Previously, this fields was nullable and not required.</p>
 <dt>Fix KeyError when ClassVar exists on msgspec Struct<a class="headerlink reference internal" href="#3.0.0-fix keyerror when classvar exists on msgspec struct" id="3.0.0-fix keyerror when classvar exists on msgspec struct">#</a></dt><dd><div class="changelog-change docutils container">
 <p>Fix a bug in <a class="reference internal" href="../reference/dto/msgspec_dto.html#litestar.dto.msgspec_dto.MsgspecDTO" title="litestar.dto.msgspec_dto.MsgspecDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">MsgspecDTO</span></code></a> where a KeyError was raised if a <a class="reference external" href="https://msgspec.dev/api.html#msgspec.Struct" title="(in msgspec)"><code class="xref py py-class docutils literal notranslate"><span class="pre">msgspec.Struct</span></code></a> contained a <code class="xref py py-class docutils literal notranslate"><span class="pre">ClassVar</span></code>. ClassVars are now correctly skipped when generating field definitions.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/4665">https://github.com/litestar-org/litestar/pull/4665</a></span></p>
+</div>
+</dd>
+</dl>
+</section>
+<section id="3.0.0-misc">
+<h3>Other changes<a class="headerlink" href="#3.0.0-misc" title="Link to this heading">¶</a></h3>
+<dl>
+<dt>Remove <code class="docutils literal notranslate"><span class="pre">__future__.annotations</span></code> from core modules, handlers and types<a class="headerlink reference internal" href="#3.0.0-remove" id="3.0.0-remove">#</a></dt><dd><div class="changelog-change docutils container">
+<p>Remove <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">annotations</span></code> from top-level <code class="docutils literal notranslate"><span class="pre">litestar</span></code>
+modules, <code class="docutils literal notranslate"><span class="pre">litestar.handlers</span></code> and <code class="docutils literal notranslate"><span class="pre">litestar.types</span></code>. Annotations in these
+modules now use runtime types and explicit quoted forward references.
+Convert documented type aliases in <code class="docutils literal notranslate"><span class="pre">litestar.types</span></code> to <code class="docutils literal notranslate"><span class="pre">TypeAliasType</span></code>
+and update their API documentation.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/4009">https://github.com/litestar-org/litestar/issues/4009</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5013">https://github.com/litestar-org/litestar/pull/5013</a></span></p>
+</div>
+</dd>
+<dt>DTO: Identify the data a handler receives through its body marker<a class="headerlink reference internal" href="#3.0.0-dto: identify the data a handler receives through its body marker" id="3.0.0-dto: identify the data a handler receives through its body marker">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Refactor <a class="reference internal" href="../reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_for_field_definition" title="litestar.dto.base_dto.AbstractDTO.create_for_field_definition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_for_field_definition()</span></code></a>
+and <a class="reference internal" href="../reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_openapi_schema" title="litestar.dto.base_dto.AbstractDTO.create_openapi_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_openapi_schema()</span></code></a> to identify
+request vs. response body by the markers on the parameter itself, instead of its
+name (<code class="docutils literal notranslate"><span class="pre">data</span></code>).</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5242">https://github.com/litestar-org/litestar/pull/5242</a></span></p>
 </div>
 </dd>
 </dl>
