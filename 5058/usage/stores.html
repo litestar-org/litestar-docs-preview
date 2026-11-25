@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../reference/middleware/session/index.html">session</a><ul>
@@ -308,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../reference/plugins/attrs.html">attrs</a></li>
@@ -726,13 +724,13 @@ This means that every time a new instance of this store is created, it will star
 </section>
 <section id="what-can-be-stored">
 <h3>What can be stored<a class="headerlink" href="#what-can-be-stored" title="Link to this heading">¶</a></h3>
-<p>Stores generally operate on <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>; They accept bytes to store, and will return bytes. For convenience, the
+<p>Stores generally operate on <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#bytes" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>; They accept bytes to store, and will return bytes. For convenience, the
 <a class="reference internal" href="../reference/stores/base.html#litestar.stores.base.Store.set" title="litestar.stores.base.Store.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set</span></code></a> method also allows to pass in strings, which will be UTF-8 encoded before being stored.
 This means that <a class="reference internal" href="../reference/stores/base.html#litestar.stores.base.Store.get" title="litestar.stores.base.Store.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get</span></code></a> will return bytes even when a string has been passed to
 <a class="reference internal" href="../reference/stores/base.html#litestar.stores.base.Store.set" title="litestar.stores.base.Store.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set</span></code></a>.</p>
 <p>The reason for this limitation is simple: Different backends used to store the data offer vastly different encoding,
 storage, and (de)serialization capacities. Since stores are designed to be interchangeable, this means settling for a
-common denominator, a type that all backends will support. <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> meet these requirements and make it possible
+common denominator, a type that all backends will support. <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#bytes" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> meet these requirements and make it possible
 to store a very wide variety of data.</p>
 <div class="admonition-technical-details admonition">
 <p class="admonition-title">Technical details</p>
@@ -817,9 +815,9 @@ features or third party integrations.</p>
 <p>In the following example, the store set up by the
 <a class="reference internal" href="../reference/middleware/rate_limit.html#litestar.middleware.rate_limit.RateLimitMiddleware" title="litestar.middleware.rate_limit.RateLimitMiddleware"><code class="xref py py-class docutils literal notranslate"><span class="pre">RateLimitMiddleware</span></code></a> is accessed via the registry:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitConfig</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitMiddleware</span>
 </span><span data-line="3">
-</span><span data-line="4"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">RateLimitConfig</span><span class="p">((</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">middleware</span><span class="p">])</span>
+</span><span data-line="4"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span><span class="n">middleware</span><span class="o">=</span><span class="p">[</span><span class="n">RateLimitMiddleware</span><span class="p">((</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))])</span>
 </span><span data-line="5"><span class="n">rate_limit_store</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">stores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rate_limit&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
@@ -829,7 +827,7 @@ its store internally via <code class="docutils literal notranslate"><span class=
 <h3>The default factory<a class="headerlink" href="#the-default-factory" title="Link to this heading">¶</a></h3>
 <p>The pattern above is made possible by using the registry’s default factory; A callable that gets invoked
 every time a store is requested that hasn’t been registered yet. It’s similar to the <code class="docutils literal notranslate"><span class="pre">default</span></code> argument to
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict.get" title="(in Python v3.14)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dict.get()</span></code></a>.</p>
+<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict.get" title="(in Python v3.15)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dict.get()</span></code></a>.</p>
 <p>By default, the default factory is a function that returns a new
 <a class="reference internal" href="../reference/stores/memory.html#litestar.stores.memory.MemoryStore" title="litestar.stores.memory.MemoryStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryStore</span></code></a> instance. This behaviour can be changed by supplying a
 custom <code class="docutils literal notranslate"><span class="pre">default_factory</span></code> method to the registry.</p>
@@ -877,7 +875,7 @@ values. Adjusting those default values allows to easily reuse stores, without th
 </span><span data-line="2">
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span>
 </span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.config.response_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResponseCacheConfig</span>
-</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitConfig</span>
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitMiddleware</span>
 </span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.session.server_side</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServerSideSessionConfig</span>
 </span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.stores.file</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileStore</span>
 </span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.stores.redis</span><span class="w"> </span><span class="kn">import</span> <span class="n">RedisStore</span>
@@ -887,7 +885,7 @@ values. Adjusting those default values allows to easily reuse stores, without th
 </span><span data-line="12">    <span class="n">response_cache_config</span><span class="o">=</span><span class="n">ResponseCacheConfig</span><span class="p">(</span><span class="n">store</span><span class="o">=</span><span class="s2">&quot;redis&quot;</span><span class="p">),</span>
 </span><span data-line="13">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span>
 </span><span data-line="14">        <span class="n">ServerSideSessionConfig</span><span class="p">(</span><span class="n">store</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">middleware</span><span class="p">,</span>
-</span><span data-line="15">        <span class="n">RateLimitConfig</span><span class="p">(</span><span class="n">rate_limit</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">store</span><span class="o">=</span><span class="s2">&quot;redis&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">middleware</span><span class="p">,</span>
+</span><span data-line="15">        <span class="n">RateLimitMiddleware</span><span class="p">(</span><span class="n">rate_limit</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">store</span><span class="o">=</span><span class="s2">&quot;redis&quot;</span><span class="p">),</span>
 </span><span data-line="16">    <span class="p">],</span>
 </span><span data-line="17"><span class="p">)</span>
 </span></pre></div>
@@ -900,7 +898,7 @@ values. Adjusting those default values allows to easily reuse stores, without th
 <p>The default factory can be used in conjunction with <a class="reference internal" href="#namespacing">namespacing</a> to create isolated, hierarchically organized stores,
 with minimal boilerplate:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar</span><span class="w"> </span><span class="kn">import</span> <span class="n">Litestar</span><span class="p">,</span> <span class="n">get</span>
-</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitConfig</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.rate_limit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RateLimitMiddleware</span>
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.middleware.session.server_side</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServerSideSessionConfig</span>
 </span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.stores.redis</span><span class="w"> </span><span class="kn">import</span> <span class="n">RedisStore</span>
 </span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.stores.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">StoreRegistry</span>
@@ -918,7 +916,7 @@ with minimal boilerplate:</p>
 </span><span data-line="17">    <span class="p">[</span><span class="n">cached_handler</span><span class="p">],</span>
 </span><span data-line="18">    <span class="n">stores</span><span class="o">=</span><span class="n">StoreRegistry</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">root_store</span><span class="o">.</span><span class="n">with_namespace</span><span class="p">),</span>
 </span><span data-line="19">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span>
-</span><span data-line="20">        <span class="n">RateLimitConfig</span><span class="p">((</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">middleware</span><span class="p">,</span>
+</span><span data-line="20">        <span class="n">RateLimitMiddleware</span><span class="p">((</span><span class="s2">&quot;second&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
 </span><span data-line="21">        <span class="n">ServerSideSessionConfig</span><span class="p">()</span><span class="o">.</span><span class="n">middleware</span><span class="p">,</span>
 </span><span data-line="22">    <span class="p">],</span>
 </span><span data-line="23"><span class="p">)</span>

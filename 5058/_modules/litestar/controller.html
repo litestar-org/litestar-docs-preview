@@ -63,7 +63,10 @@
             <span>About</span>
             <i class="i-lucide chevron-down"></i>
           </button>
-        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev/about">
+        <ul id="nav-children-3" aria-labelledby="nav-trigger-3"><li><a href="https://litestar.dev">
+                <span>Official Website</span>
+                <small>The Litestar project website</small>
+              </a></li><li><a href="https://litestar.dev/about">
                 <span>Litestar Organization</span>
                 <small>Details about the Litestar organization</small>
               </a></li><li><a href="https://litestar.dev/about/litestar-releases">
@@ -96,9 +99,6 @@
               </a></li><li><a href="https://github.com/orgs/litestar-org/discussions">
                 <span>GitHub Discussions</span>
                 <small>GitHub Discussions</small>
-              </a></li><li><a href="https://stackoverflow.com/questions/tagged/litestar">
-                <span>Stack Overflow</span>
-                <small>We monitor the <code><b>litestar</b></code> tag on Stack Overflow</small>
               </a></li></ul>
       </li><li class="link">
           <a href="https://github.com/sponsors/Litestar-Org">
@@ -290,7 +290,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/allowed_hosts.html">allowed_hosts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/authentication.html">authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/compression.html">compression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/csrf.html">csrf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/logging.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/rate_limit.html">rate_limit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/middleware/session/index.html">session</a><ul>
@@ -308,7 +307,6 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../reference/openapi/spec.html">spec</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../reference/pagination.html">pagination</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/params.html">params</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../reference/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../reference/plugins/attrs.html">attrs</a></li>
@@ -607,7 +605,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="101"><span class="sd">    Can be overridden by route handlers.</span>
 </span><span data-line="102"><span class="sd">    &quot;&quot;&quot;</span>
 </span><span data-line="103">    <span class="n">dependencies</span><span class="p">:</span> <span class="n">Dependencies</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span data-line="104"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A string keyed dictionary of dependency :class:`Provider &lt;.di.Provide&gt;` instances.&quot;&quot;&quot;</span>
+</span><span data-line="104"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A sequence of :class:`Provider &lt;.di.Provider&gt;` instances, or a mapping of names or types to providers, :class:`Provide &lt;.di.Provide&gt;` instances or callables.&quot;&quot;&quot;</span>
 </span><span data-line="105">    <span class="n">dto</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">AbstractDTO</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">EmptyType</span>
 </span><span data-line="106"><span class="w">    </span><span class="sd">&quot;&quot;&quot;:class:`AbstractDTO &lt;.dto.base_dto.AbstractDTO&gt;` to use for (de)serializing and validation of request data.&quot;&quot;&quot;</span>
 </span><span data-line="107">    <span class="n">etag</span><span class="p">:</span> <span class="n">ETag</span> <span class="o">|</span> <span class="kc">None</span>
@@ -628,7 +626,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="122"><span class="sd">    have access to :class:`Request &lt;.connection.Request&gt;` or :class:`ASGI Scope &lt;.types.Scope&gt;`.</span>
 </span><span data-line="123"><span class="sd">    &quot;&quot;&quot;</span>
 </span><span data-line="124">    <span class="n">parameters</span><span class="p">:</span> <span class="n">ParametersMap</span> <span class="o">|</span> <span class="kc">None</span>
-</span><span data-line="125"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A mapping of :class:`Parameter &lt;.params.Parameter&gt;` definitions available to all application paths.&quot;&quot;&quot;</span>
+</span><span data-line="125"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A mapping of :class:`Parameter &lt;.params.ParameterKwarg&gt;` definitions available to all application paths.&quot;&quot;&quot;</span>
 </span><span data-line="126">    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span>
 </span><span data-line="127"><span class="w">    </span><span class="sd">&quot;&quot;&quot;A path fragment for the controller.</span>
 </span><span data-line="128">
