@@ -560,24 +560,24 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="56">
 </span><span data-line="57">    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
 </span><span data-line="58">        <span class="s2">&quot;_dto&quot;</span><span class="p">,</span>
-</span><span data-line="59">        <span class="s2">&quot;_injection_setup&quot;</span><span class="p">,</span>
-</span><span data-line="60">        <span class="s2">&quot;_parameter_field_definitions&quot;</span><span class="p">,</span>
-</span><span data-line="61">        <span class="s2">&quot;_parsed_data_field&quot;</span><span class="p">,</span>
-</span><span data-line="62">        <span class="s2">&quot;_parsed_fn_signature&quot;</span><span class="p">,</span>
-</span><span data-line="63">        <span class="s2">&quot;_parsed_return_field&quot;</span><span class="p">,</span>
-</span><span data-line="64">        <span class="s2">&quot;_return_dto&quot;</span><span class="p">,</span>
-</span><span data-line="65">        <span class="s2">&quot;_validate_request_parameters&quot;</span><span class="p">,</span>
-</span><span data-line="66">        <span class="s2">&quot;data_backend&quot;</span><span class="p">,</span>
-</span><span data-line="67">        <span class="s2">&quot;dependencies&quot;</span><span class="p">,</span>
-</span><span data-line="68">        <span class="s2">&quot;exception_handlers&quot;</span><span class="p">,</span>
-</span><span data-line="69">        <span class="s2">&quot;fn&quot;</span><span class="p">,</span>
-</span><span data-line="70">        <span class="s2">&quot;guards&quot;</span><span class="p">,</span>
-</span><span data-line="71">        <span class="s2">&quot;middleware&quot;</span><span class="p">,</span>
-</span><span data-line="72">        <span class="s2">&quot;name&quot;</span><span class="p">,</span>
-</span><span data-line="73">        <span class="s2">&quot;opt&quot;</span><span class="p">,</span>
-</span><span data-line="74">        <span class="s2">&quot;parameters&quot;</span><span class="p">,</span>
-</span><span data-line="75">        <span class="s2">&quot;paths&quot;</span><span class="p">,</span>
-</span><span data-line="76">        <span class="s2">&quot;return_backend&quot;</span><span class="p">,</span>
+</span><span data-line="59">        <span class="s2">&quot;_dto_data_backend&quot;</span><span class="p">,</span>
+</span><span data-line="60">        <span class="s2">&quot;_dto_return_backend&quot;</span><span class="p">,</span>
+</span><span data-line="61">        <span class="s2">&quot;_injection_setup&quot;</span><span class="p">,</span>
+</span><span data-line="62">        <span class="s2">&quot;_parameter_field_definitions&quot;</span><span class="p">,</span>
+</span><span data-line="63">        <span class="s2">&quot;_parsed_data_field&quot;</span><span class="p">,</span>
+</span><span data-line="64">        <span class="s2">&quot;_parsed_fn_signature&quot;</span><span class="p">,</span>
+</span><span data-line="65">        <span class="s2">&quot;_parsed_return_field&quot;</span><span class="p">,</span>
+</span><span data-line="66">        <span class="s2">&quot;_return_dto&quot;</span><span class="p">,</span>
+</span><span data-line="67">        <span class="s2">&quot;_validate_request_parameters&quot;</span><span class="p">,</span>
+</span><span data-line="68">        <span class="s2">&quot;dependencies&quot;</span><span class="p">,</span>
+</span><span data-line="69">        <span class="s2">&quot;exception_handlers&quot;</span><span class="p">,</span>
+</span><span data-line="70">        <span class="s2">&quot;fn&quot;</span><span class="p">,</span>
+</span><span data-line="71">        <span class="s2">&quot;guards&quot;</span><span class="p">,</span>
+</span><span data-line="72">        <span class="s2">&quot;middleware&quot;</span><span class="p">,</span>
+</span><span data-line="73">        <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+</span><span data-line="74">        <span class="s2">&quot;opt&quot;</span><span class="p">,</span>
+</span><span data-line="75">        <span class="s2">&quot;parameters&quot;</span><span class="p">,</span>
+</span><span data-line="76">        <span class="s2">&quot;paths&quot;</span><span class="p">,</span>
 </span><span data-line="77">        <span class="s2">&quot;signature_namespace&quot;</span><span class="p">,</span>
 </span><span data-line="78">        <span class="s2">&quot;type_decoders&quot;</span><span class="p">,</span>
 </span><span data-line="79">        <span class="s2">&quot;type_encoders&quot;</span><span class="p">,</span>
@@ -592,10 +592,10 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="88"><span class="sd">    there are none. Set on registration</span>
 </span><span data-line="89"><span class="sd">    &quot;&quot;&quot;</span>
 </span><span data-line="90">
-</span><span data-line="91">    <span class="n">data_backend</span><span class="p">:</span> <span class="n">DTOBackend</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span data-line="91">    <span class="n">_dto_data_backend</span><span class="p">:</span> <span class="n">DTOBackend</span> <span class="o">|</span> <span class="kc">None</span>
 </span><span data-line="92"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The backend of the handler&#39;s data DTO. Set on registration&quot;&quot;&quot;</span>
 </span><span data-line="93">
-</span><span data-line="94">    <span class="n">return_backend</span><span class="p">:</span> <span class="n">DTOBackend</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span data-line="94">    <span class="n">_dto_return_backend</span><span class="p">:</span> <span class="n">DTOBackend</span> <span class="o">|</span> <span class="kc">None</span>
 </span><span data-line="95"><span class="w">    </span><span class="sd">&quot;&quot;&quot;The backend of the handler&#39;s return DTO. Set on registration&quot;&quot;&quot;</span>
 </span><span data-line="96">
 <div class="viewcode-block" id="BaseRouteHandler.__init__">
@@ -653,8 +653,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="147">        <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_return_field</span><span class="p">:</span> <span class="n">FieldDefinition</span> <span class="o">|</span> <span class="n">EmptyType</span> <span class="o">=</span> <span class="n">Empty</span>
 </span><span data-line="148">        <span class="bp">self</span><span class="o">.</span><span class="n">_parsed_data_field</span><span class="p">:</span> <span class="n">FieldDefinition</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span data-line="149">        <span class="bp">self</span><span class="o">.</span><span class="n">_parameter_field_definitions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FieldDefinition</span><span class="p">]</span> <span class="o">|</span> <span class="n">EmptyType</span> <span class="o">=</span> <span class="n">Empty</span>
-</span><span data-line="150">        <span class="bp">self</span><span class="o">.</span><span class="n">data_backend</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="151">        <span class="bp">self</span><span class="o">.</span><span class="n">return_backend</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="150">        <span class="bp">self</span><span class="o">.</span><span class="n">_dto_data_backend</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="151">        <span class="bp">self</span><span class="o">.</span><span class="n">_dto_return_backend</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span data-line="152">
 </span><span data-line="153">        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="n">narrow_dependencies</span><span class="p">(</span><span class="n">dependencies</span><span class="p">)</span>
 </span><span data-line="154">        <span class="bp">self</span><span class="o">.</span><span class="n">_dto</span> <span class="o">=</span> <span class="n">dto</span>
@@ -937,8 +937,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="409">        <span class="p">):</span>
 </span><span data-line="410">            <span class="n">data_dto</span> <span class="o">=</span> <span class="n">plugin_for_data_type</span><span class="o">.</span><span class="n">create_dto_for_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_data_field</span><span class="p">)</span>
 </span><span data-line="411">
-</span><span data-line="412">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsed_data_field</span> <span class="ow">and</span> <span class="n">data_dto</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="413">            <span class="bp">self</span><span class="o">.</span><span class="n">data_backend</span> <span class="o">=</span> <span class="n">data_dto</span><span class="o">.</span><span class="n">create_for_field_definition</span><span class="p">(</span>
+</span><span data-line="412">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsed_data_field</span> <span class="ow">and</span> <span class="n">data_dto</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dto_data_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="413">            <span class="bp">self</span><span class="o">.</span><span class="n">_dto_data_backend</span> <span class="o">=</span> <span class="n">data_dto</span><span class="o">.</span><span class="n">create_for_field_definition</span><span class="p">(</span>
 </span><span data-line="414">                <span class="n">field_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_data_field</span><span class="p">,</span>
 </span><span data-line="415">                <span class="n">handler_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handler_id</span><span class="p">,</span>
 </span><span data-line="416">            <span class="p">)</span>
@@ -980,8 +980,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="452">            <span class="n">return_dto</span> <span class="o">=</span> <span class="n">data_dto</span>
 </span><span data-line="453">
 </span><span data-line="454">        <span class="k">if</span> <span class="n">return_dto</span> <span class="ow">and</span> <span class="n">return_dto</span><span class="o">.</span><span class="n">is_supported_model_type_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_return_field</span><span class="p">):</span>
-</span><span data-line="455">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="456">                <span class="bp">self</span><span class="o">.</span><span class="n">return_backend</span> <span class="o">=</span> <span class="n">return_dto</span><span class="o">.</span><span class="n">create_for_field_definition</span><span class="p">(</span>
+</span><span data-line="455">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dto_return_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="456">                <span class="bp">self</span><span class="o">.</span><span class="n">_dto_return_backend</span> <span class="o">=</span> <span class="n">return_dto</span><span class="o">.</span><span class="n">create_for_field_definition</span><span class="p">(</span>
 </span><span data-line="457">                    <span class="n">field_definition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_return_field</span><span class="p">,</span>
 </span><span data-line="458">                    <span class="n">handler_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handler_id</span><span class="p">,</span>
 </span><span data-line="459">                <span class="p">)</span>

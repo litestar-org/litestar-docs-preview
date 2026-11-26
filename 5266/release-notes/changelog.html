@@ -1851,8 +1851,8 @@ Previously, this fields was nullable and not required.</p>
 <h3>Other changes<a class="headerlink" href="#3.0.0-misc" title="Link to this heading">¶</a></h3>
 <dl>
 <dt>DTO: Store DTO backends on the route handler<a class="headerlink reference internal" href="#3.0.0-dto: store dto backends on the route handler" id="3.0.0-dto: store dto backends on the route handler">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
-<p>A route handler keeps the backends of its DTOs in <code class="docutils literal notranslate"><span class="pre">data_backend</span></code> and
-<code class="docutils literal notranslate"><span class="pre">return_backend</span></code>. <code class="docutils literal notranslate"><span class="pre">AbstractDTO.create_for_field_definition</span></code> returns the backend
+<p>A route handler keeps the backends of its DTOs.
+<code class="docutils literal notranslate"><span class="pre">AbstractDTO.create_for_field_definition</span></code> returns the backend
 it builds instead of storing it on the DTO class, and
 <code class="docutils literal notranslate"><span class="pre">AbstractDTO.create_openapi_schema</span></code> takes the <code class="docutils literal notranslate"><span class="pre">route_handler</span></code> instead of a
 <code class="docutils literal notranslate"><span class="pre">handler_id</span></code>.</p>
