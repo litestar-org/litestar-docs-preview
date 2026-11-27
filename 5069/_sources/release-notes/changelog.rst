@@ -6,15 +6,47 @@
 .. changelog:: 3.0.0
     :date: 2364-01-27
 
-    .. change:: Keep nested ``DTOData`` models as dicts until ``create_instance()``
+    .. change:: DTO: Keep nested ``DTOData`` models as dicts until ``create_instance()``
         :type: bugfix
+        :breaking:
         :pr: 5069
         :issue: 3620
 
-        Previously, nested models inside collections, mappings, and unions were
-        instantiated during decode even when wrapped in ``DTOData``. They now stay as
-        plain ``dict`` values until ``create_instance()`` is called, deferring nested
-        model construction and validation to match top-level ``DTOData`` behaviour.
+        Fix a bug where nested models inside collections, mappings and unions were
+        instantiated while decoding the request body, even when the handler received
+        :class:`~litestar.dto.data_structures.DTOData`. Nested values now stay plain
+        ``dict`` values until
+        :meth:`~litestar.dto.data_structures.DTOData.create_instance` is called,
+        matching how the top-level model is handled.
+
+        As a result,
+        :meth:`~litestar.dto.data_structures.DTOData.as_builtins` returns ``dict``
+        values instead of model instances for nested models, and validation of nested
+        models, e.g. Pydantic constraints, runs when
+        :meth:`~litestar.dto.data_structures.DTOData.create_instance` is called instead
+        of while decoding the request. Invalid nested data no longer results in a
+        ``400`` response before the handler is called.
+
+    .. change:: DTO: Store DTO backends on the route handler
+        :type: misc
+        :breaking:
+        :pr: 5266
+
+        A route handler keeps the backends of its DTOs, instead of the DTO class keeping
+        them for every handler. This changes two methods that custom DTOs may override
+        or call:
+        :meth:`~litestar.dto.base_dto.AbstractDTO.create_for_field_definition` returns
+        the backend it builds, where it returned ``None``, and
+        :meth:`~litestar.dto.base_dto.AbstractDTO.create_openapi_schema` takes the
+        ``route_handler`` instead of a ``handler_id``.
+
+    .. change:: DTO: Remove the non-codegen DTO backend
+        :type: misc
+        :breaking:
+
+        DTOs always transfer data through the codegen backend, the default since
+        ``2.8.0``. The ``DTOConfig.experimental_codegen_backend`` option and the private
+        ``DTOCodegenBackend`` class are removed.
 
     .. change:: Add option to run the ASGI lifespan protocol for ``asgi`` handlers
         :type: feature

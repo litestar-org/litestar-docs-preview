@@ -1467,11 +1467,20 @@ to indicate whether to bypass the middleware for the current request.</p>
 <section id="3.0.0-bugfix">
 <h3>Bugfixes<a class="headerlink" href="#3.0.0-bugfix" title="Link to this heading">¶</a></h3>
 <dl>
-<dt>Keep nested <code class="docutils literal notranslate"><span class="pre">DTOData</span></code> models as dicts until <code class="docutils literal notranslate"><span class="pre">create_instance()</span></code><a class="headerlink reference internal" href="#3.0.0-keep nested" id="3.0.0-keep nested">#</a></dt><dd><div class="changelog-change docutils container">
-<p>Previously, nested models inside collections, mappings, and unions were
-instantiated during decode even when wrapped in <code class="docutils literal notranslate"><span class="pre">DTOData</span></code>. They now stay as
-plain <code class="docutils literal notranslate"><span class="pre">dict</span></code> values until <code class="docutils literal notranslate"><span class="pre">create_instance()</span></code> is called, deferring nested
-model construction and validation to match top-level <code class="docutils literal notranslate"><span class="pre">DTOData</span></code> behaviour.</p>
+<dt>DTO: Keep nested <code class="docutils literal notranslate"><span class="pre">DTOData</span></code> models as dicts until <code class="docutils literal notranslate"><span class="pre">create_instance()</span></code><a class="headerlink reference internal" href="#3.0.0-dto: keep nested" id="3.0.0-dto: keep nested">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>Fix a bug where nested models inside collections, mappings and unions were
+instantiated while decoding the request body, even when the handler received
+<a class="reference internal" href="../reference/dto/data_structures.html#litestar.dto.data_structures.DTOData" title="litestar.dto.data_structures.DTOData"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOData</span></code></a>. Nested values now stay plain
+<code class="docutils literal notranslate"><span class="pre">dict</span></code> values until
+<a class="reference internal" href="../reference/dto/data_structures.html#litestar.dto.data_structures.DTOData.create_instance" title="litestar.dto.data_structures.DTOData.create_instance"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_instance()</span></code></a> is called,
+matching how the top-level model is handled.</p>
+<p>As a result,
+<a class="reference internal" href="../reference/dto/data_structures.html#litestar.dto.data_structures.DTOData.as_builtins" title="litestar.dto.data_structures.DTOData.as_builtins"><code class="xref py py-meth docutils literal notranslate"><span class="pre">as_builtins()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">dict</span></code>
+values instead of model instances for nested models, and validation of nested
+models, e.g. Pydantic constraints, runs when
+<a class="reference internal" href="../reference/dto/data_structures.html#litestar.dto.data_structures.DTOData.create_instance" title="litestar.dto.data_structures.DTOData.create_instance"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_instance()</span></code></a> is called instead
+of while decoding the request. Invalid nested data no longer results in a
+<code class="docutils literal notranslate"><span class="pre">400</span></code> response before the handler is called.</p>
 <p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/issues/3620">https://github.com/litestar-org/litestar/issues/3620</a></span>, <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5069">https://github.com/litestar-org/litestar/pull/5069</a></span></p>
 </div>
 </dd>
@@ -1858,6 +1867,24 @@ Previously, this fields was nullable and not required.</p>
 <section id="3.0.0-misc">
 <h3>Other changes<a class="headerlink" href="#3.0.0-misc" title="Link to this heading">¶</a></h3>
 <dl>
+<dt>DTO: Store DTO backends on the route handler<a class="headerlink reference internal" href="#3.0.0-dto: store dto backends on the route handler" id="3.0.0-dto: store dto backends on the route handler">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>A route handler keeps the backends of its DTOs, instead of the DTO class keeping
+them for every handler. This changes two methods that custom DTOs may override
+or call:
+<a class="reference internal" href="../reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_for_field_definition" title="litestar.dto.base_dto.AbstractDTO.create_for_field_definition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_for_field_definition()</span></code></a> returns
+the backend it builds, where it returned <code class="docutils literal notranslate"><span class="pre">None</span></code>, and
+<a class="reference internal" href="../reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_openapi_schema" title="litestar.dto.base_dto.AbstractDTO.create_openapi_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_openapi_schema()</span></code></a> takes the
+<code class="docutils literal notranslate"><span class="pre">route_handler</span></code> instead of a <code class="docutils literal notranslate"><span class="pre">handler_id</span></code>.</p>
+<p>References: <span><a class="reference external" href="https://github.com/litestar-org/litestar/pull/5266">https://github.com/litestar-org/litestar/pull/5266</a></span></p>
+</div>
+</dd>
+<dt>DTO: Remove the non-codegen DTO backend<a class="headerlink reference internal" href="#3.0.0-dto: remove the non-codegen dto backend" id="3.0.0-dto: remove the non-codegen dto backend">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
+<p>DTOs always transfer data through the codegen backend, the default since
+<code class="docutils literal notranslate"><span class="pre">2.8.0</span></code>. The <code class="docutils literal notranslate"><span class="pre">DTOConfig.experimental_codegen_backend</span></code> option and the private
+<code class="docutils literal notranslate"><span class="pre">DTOCodegenBackend</span></code> class are removed.</p>
+<p>References: </p>
+</div>
+</dd>
 <dt>DTO: Identify the data a handler receives through its body marker<a class="headerlink reference internal" href="#3.0.0-dto: identify the data a handler receives through its body marker" id="3.0.0-dto: identify the data a handler receives through its body marker">#</a><span class="breaking-change">breaking</span></dt><dd><div class="changelog-change docutils container">
 <p>Refactor <a class="reference internal" href="../reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_for_field_definition" title="litestar.dto.base_dto.AbstractDTO.create_for_field_definition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_for_field_definition()</span></code></a>
 and <a class="reference internal" href="../reference/dto/base_dto.html#litestar.dto.base_dto.AbstractDTO.create_openapi_schema" title="litestar.dto.base_dto.AbstractDTO.create_openapi_schema"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_openapi_schema()</span></code></a> to identify
